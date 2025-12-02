@@ -365,6 +365,22 @@
   transition: opacity 0.4s ease-in, visibility 0.4s ease-in !important;
 }
 
+/* Hover lines - hidden by default */
+#brain-gears [id^="hover-line-"],
+#brain-gears-copy [id^="hover-line-"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Hover lines - show when gear is active (opacity controlled by JS) */
+#brain-gears .gear-main--active [id^="hover-line-"],
+#brain-gears-copy .gear-main--active [id^="hover-line-"] {
+  visibility: visible !important;
+  pointer-events: none !important;
+  /* Opacity will be controlled by JavaScript animation - no !important to allow JS override */
+}
+
 /* Line drawing animation - slow and smooth, final opacity 0.5 (like background gears) */
 @keyframes line-draw-path {
   from {

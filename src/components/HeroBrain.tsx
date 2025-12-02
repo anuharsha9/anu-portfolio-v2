@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import BrainGears from '@/assets/brain-gears.svg'
 import VideoModal from '@/components/video/VideoModal'
 import { GEAR_LABELS } from '@/data/gear-labels-preserved'
@@ -13,6 +13,12 @@ export function HeroBrain() {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
   const svgRootRef = useRef<SVGSVGElement | null>(null)
+  const [hoverText, setHoverText] = useState<string | null>(null)
+
+  // Debug: Log hoverText changes
+  useEffect(() => {
+    console.log('HeroBrain: hoverText changed to:', hoverText, 'Type:', typeof hoverText, 'Length:', hoverText?.length)
+  }, [hoverText])
 
   useEffect(() => {
     const container = containerRef.current
@@ -147,6 +153,9 @@ export function HeroBrain() {
       }
 
       const setupHoverListeners = () => {
+        // Track all hover timeouts to clear them when entering a new gear
+        const allHoverTimeouts = new Map<string, NodeJS.Timeout | null>()
+        
         GEAR_IDS.forEach((gearId) => {
           const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
           if (!gearGroup) return
@@ -201,34 +210,102 @@ export function HeroBrain() {
             }
           } catch (e) {
             console.warn(`HeroBrain: Could not create hover overlay for ${gearId}:`, e)
+            // Continue anyway - try fallback event attachment
+          }
+          
+          // Log if gear doesn't have a label
+          if (!GEAR_LABELS[gearId]) {
+            console.warn(`HeroBrain: No label found for gear ${gearId}`)
           }
 
           // Add debouncing to prevent rapid toggling on edges
           let hoverTimeout: NodeJS.Timeout | null = null
           let isHovering = false
+          allHoverTimeouts.set(gearId, null)
 
           const handleEnter = () => {
+            // Clear ALL pending leave timeouts from all gears immediately
+            // This ensures instant text updates when moving between gears
+            allHoverTimeouts.forEach((timeout, id) => {
+              if (timeout) {
+                clearTimeout(timeout)
+                allHoverTimeouts.set(id, null)
+              }
+            })
+            
+            // Clear this gear's timeout
             if (hoverTimeout) {
               clearTimeout(hoverTimeout)
               hoverTimeout = null
+              allHoverTimeouts.set(gearId, null)
             }
-            if (!isHovering) {
-              isHovering = true
-              // Simply add active class - CSS will handle showing hover gear and hiding base gear
-              gearGroup.classList.add('gear-main--active')
+            
+            // Remove active class from ALL other gears first to prevent multiple active gears
+            GEAR_IDS.forEach((otherGearId) => {
+              if (otherGearId !== gearId) {
+                const otherGearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${otherGearId}`)
+                if (otherGearGroup) {
+                  otherGearGroup.classList.remove('gear-main--active')
+                }
+              }
+            })
+            
+            // Always update hover state and text immediately, even if already hovering
+            // This ensures text updates instantly when moving between gears
+            isHovering = true
+            gearGroup.classList.add('gear-main--active')
+
+            // Get the label for this gear and display it in the center
+            const label = GEAR_LABELS[gearId] || ''
+            if (!label) {
+              console.warn(`HeroBrain: No label found for gear ${gearId}. Available keys:`, Object.keys(GEAR_LABELS))
+              return
+            }
+            // Convert multi-line label to single line for display
+            const singleLineLabel = label.replace(/\n/g, ' • ')
+            // Update text immediately - no debouncing on enter
+            if (singleLineLabel.trim()) {
+              console.log(`HeroBrain: Setting hover text for ${gearId}:`, singleLineLabel)
+              setHoverText(singleLineLabel)
+            } else {
+              console.warn(`HeroBrain: Empty label for gear ${gearId}`)
             }
           }
 
           const handleLeave = () => {
+            // Clear any pending timeout
+            if (hoverTimeout) {
+              clearTimeout(hoverTimeout)
+              hoverTimeout = null
+              allHoverTimeouts.set(gearId, null)
+            }
+            
+            // Mark as not hovering immediately
+            isHovering = false
+            
             // Small delay to prevent flickering when mouse moves quickly across edges
             hoverTimeout = setTimeout(() => {
-              if (isHovering) {
-                isHovering = false
-                // Remove active class - CSS will handle hiding hover gear and showing base gear
-                gearGroup.classList.remove('gear-main--active')
-              }
+              // Always remove active class from this gear when leaving
+              gearGroup.classList.remove('gear-main--active')
+              
+              // Use requestAnimationFrame to ensure DOM has updated before checking
+              requestAnimationFrame(() => {
+                // Check if any gear is currently active (another gear might have been entered)
+                const activeGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active'))
+                const isAnyGearActive = activeGears.length > 0
+                
+                // Only clear hover text if no other gear is active
+                if (!isAnyGearActive) {
+                  // Clear hover text immediately - this will show the welcome text instantly
+                  setHoverText(null)
+                }
+              })
+              
               hoverTimeout = null
-            }, 50) // 50ms delay to prevent rapid toggling
+              allHoverTimeouts.set(gearId, null)
+            }, 10) // Reduced delay to 10ms for instant placeholder appearance
+            
+            allHoverTimeouts.set(gearId, hoverTimeout)
           }
 
           // Attach events ONLY to overlay (it covers the entire gear area including internal gaps)
@@ -239,10 +316,16 @@ export function HeroBrain() {
             overlay.addEventListener('touchstart', handleEnter, { passive: true })
           } else {
             // Fallback: attach to gear group if overlay creation failed
+            // Re-enable pointer events for the gear group
             gearGroup.style.pointerEvents = 'auto'
+            // Also enable for gear hover element
+            if (gearHover) {
+              gearHover.style.pointerEvents = 'auto'
+            }
             gearGroup.addEventListener('mouseenter', handleEnter)
             gearGroup.addEventListener('mouseleave', handleLeave)
             gearGroup.addEventListener('touchstart', handleEnter, { passive: true })
+            console.warn(`HeroBrain: Using fallback hover for ${gearId} (overlay creation failed)`)
           }
         })
       }
@@ -292,63 +375,235 @@ export function HeroBrain() {
           </motion.div>
 
           {/* Text content - centered inside brain */}
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10" style={{ transform: 'translateY(40px)' }}>
+            {/* Text container - contains welcome text and hover text */}
+            <motion.div
+              className="mb-16"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transform: 'translateY(40px)', // Moved up another 10px
+                minHeight: '120px', // Fixed height to prevent layout shift
+                width: '100%',
+                maxWidth: '600px',
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 40 }}
+              transition={{
+                duration: 4,
+                delay: 3.5, // After gears fade in, before subtext
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {hoverText && typeof hoverText === 'string' && hoverText.trim() ? (
+                  <motion.div
+                    key={`hover-text-${hoverText}`}
+                    className="text-xl md:text-2xl text-white leading-relaxed text-center px-6"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      maxWidth: '100%',
+                      position: 'relative',
+                      zIndex: 20,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div style={{ position: 'relative', display: 'inline-block', paddingLeft: '1.2em', paddingRight: '1.2em' }}>
+                      {/* Opening quote icon */}
+                      <svg
+                        style={{
+                          position: 'absolute',
+                          left: '0',
+                          top: '-0.2em',
+                          width: '1.2em',
+                          height: '1.2em',
+                          color: 'var(--accent-teal)',
+                        }}
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.433.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.995 3.638-3.995 5.849h3.983v10h-9.984z"/>
+                      </svg>
+                      {(() => {
+                        // Check if text contains ' • ' separator (old format) or is a single thought
+                        const parts = hoverText.split(' • ')
+                        if (parts.length > 1) {
+                          // Old format with label and description
+                          const label = parts[0].replace(/::/g, ':')
+                          const labelWithColon = label.endsWith(':') ? label : `${label}:`
+                          const rest = parts.slice(1).join(' • ')
+                          return (
+                            <>
+                              <span>{labelWithColon}</span>
+                              <br />
+                              <span>{rest}</span>
+                            </>
+                          )
+                        } else {
+                          // New format: single thought, split at natural break point if long
+                          const thought = hoverText.trim()
+                          // Try to split at comma or semicolon for two lines, otherwise wrap naturally
+                          const splitPoint = thought.match(/[,;]/)
+                          if (splitPoint && splitPoint.index && splitPoint.index > 20) {
+                            const firstPart = thought.substring(0, splitPoint.index + 1)
+                            const secondPart = thought.substring(splitPoint.index + 1).trim()
+                            return (
+                              <>
+                                <span>{firstPart}</span>
+                                <br />
+                                <span>{secondPart}</span>
+                              </>
+                            )
+                          } else {
+                            // Display as single line or wrap at middle if very long
+                            const midPoint = Math.floor(thought.length / 2)
+                            const spaceIndex = thought.lastIndexOf(' ', midPoint)
+                            if (spaceIndex > 0 && thought.length > 50) {
+                              const firstPart = thought.substring(0, spaceIndex)
+                              const secondPart = thought.substring(spaceIndex + 1)
+                              return (
+                                <>
+                                  <span>{firstPart}</span>
+                                  <br />
+                                  <span>{secondPart}</span>
+                                </>
+                              )
+                            } else {
+                              return <span>{thought}</span>
+                            }
+                          }
+                        }
+                      })()}
+                      {/* Closing quote icon */}
+                      <svg
+                        style={{
+                          position: 'absolute',
+                          right: '0',
+                          bottom: '-0.2em',
+                          width: '1.2em',
+                          height: '1.2em',
+                          color: 'var(--accent-teal)',
+                        }}
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.996-2.151c2.433-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.995-3.638 3.995-5.849h-3.983v-10h9.983z"/>
+                      </svg>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="welcome-content"
+                    className="flex flex-col items-center justify-center"
+                    style={{ position: 'relative', zIndex: 10 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {/* First line - Welcome to my mind */}
+                    <motion.p
+                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-6"
+                      style={{
+                        fontSize: '3.5em', // 2x larger (was 1.75em)
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      Welcome to my mind
+                    </motion.p>
+
+                    {/* Second line - Placeholder */}
+                    <motion.p
+                      className="text-center px-6"
+                      style={{
+                        fontSize: '1.3em', // 15% larger than 1.125em
+                        lineHeight: '1.4',
+                        color: 'var(--accent-teal)',
+                        fontFamily: 'var(--font-sans)', // Inter Tight
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2, delay: 0.1 }}
+                    >
+                      Hover on the gears to see what's on it
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
             {/* Text stack - centered with max width */}
             <motion.div
               className="max-w-2xl space-y-6"
-              initial={{ opacity: 0, scale: 0.85, y: -40 }}
-              animate={{ opacity: 1, scale: 1.0, y: 0 }}
+              style={{ marginTop: '10px' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{
-                duration: 2.5,
-                ease: [0.25, 0.1, 0.25, 1], // Smoother Apple-style easing
-                delay: 1.5 // Starts 1.5s earlier, while gears are still fading in
+                duration: 4,
+                ease: [0.22, 1, 0.36, 1], // Apple-style easing
+                delay: 3.8 // After placeholder text starts
               }}
             >
-              {/* Main Title - Slower fade (2x slower) */}
-              <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-[var(--text-primary-dark)]"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                Welcome to my mind
-              </motion.h1>
-
               {/* Subtitle - Slower fade (2x slower) */}
               <motion.p
-                className="text-lg md:text-xl text-[var(--text-muted-dark)] leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
+                className="text-base md:text-lg text-[var(--text-muted-dark)] leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
+                {(() => {
+                  const text = "It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions."
+                  const words = text.split(' ')
+                  const totalWords = words.length
+                  // If odd number, first line gets more words; if even, split evenly
+                  const firstLineWords = Math.ceil(totalWords / 2)
+                  const firstLine = words.slice(0, firstLineWords).join(' ')
+                  const secondLine = words.slice(firstLineWords).join(' ')
+                  return (
+                    <>
+                      {firstLine}
+                      <br />
+                      {secondLine}
+                    </>
+                  )
+                })()}
               </motion.p>
 
               {/* Buttons - Slower fade (2x slower) */}
-              <div className="pt-4 flex items-center justify-center gap-3">
-                <motion.a
+              <motion.div 
+                className="pt-4 flex items-center justify-center gap-3"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 4, delay: 5.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <a
                   href="#work-overview"
                   className="pointer-events-auto inline-flex items-center rounded-full border border-white/20 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 4, delay: 5, ease: [0.22, 1, 0.36, 1] }}
                 >
                   View my work
-                </motion.a>
+                </a>
 
-                <motion.button
+                <button
                   onClick={() => setShowVideoModal(true)}
                   className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 4, delay: 5.4, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                   <span>Portfolio teaser</span>
-                </motion.button>
-              </div>
+                </button>
+              </motion.div>
             </motion.div>
           </div>
 
