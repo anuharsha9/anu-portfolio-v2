@@ -35,7 +35,9 @@ export default function SocialShareButtons({
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      console.error('Failed to copy:', err)
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+        console.error('Failed to copy:', err)
+      }
     }
   }
 

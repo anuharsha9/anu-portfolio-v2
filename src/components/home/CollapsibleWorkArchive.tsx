@@ -1,11 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import MotionSection from '@/components/ui/MotionSection'
 import { SignatureLogo } from '@/components/brand'
+import PDFPreviewModal from '@/components/ui/PDFPreviewModal'
 
 interface ArchiveTile {
   title: string
@@ -85,6 +85,12 @@ const eraGroups: EraGroup[] = [
 
 export default function CollapsibleWorkArchive() {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [selectedPDF, setSelectedPDF] = useState<{
+    title: string
+    description: string
+    pdfUrl: string
+    thumbnailUrl?: string
+  } | null>(null)
 
   return (
     <MotionSection id="work-archive" className="surface-dark-alt py-12 md:py-16 relative">
@@ -94,7 +100,7 @@ export default function CollapsibleWorkArchive() {
           <SignatureLogo className="w-full h-full text-white" />
         </div>
       </div>
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
           whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}
@@ -193,10 +199,13 @@ export default function CollapsibleWorkArchive() {
                             }}
                             className="flex"
                           >
-                            <Link
-                              href={tile.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                            <button
+                              onClick={() => setSelectedPDF({
+                                title: tile.title,
+                                description: tile.description,
+                                pdfUrl: tile.href,
+                                thumbnailUrl: tile.image,
+                              })}
                               className="group relative flex flex-col h-full w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_8px_24px_rgba(13,148,136,0.15)] hover:border-[rgba(13,148,136,0.5)] hover:bg-white/8"
                             >
                               {/* Accent indicator */}
@@ -224,12 +233,12 @@ export default function CollapsibleWorkArchive() {
                                 </p>
                                 <div className="pt-2 mt-auto">
                                   <span className="inline-flex items-center gap-x-2 rounded-full border border-white/20 text-white px-4 py-2 text-sm font-medium transition-all duration-300 group-hover:border-[var(--accent-teal)] group-hover:bg-[var(--accent-teal)]/10 group-hover:text-[var(--accent-teal)]">
-                                    Open PDF
+                                    Preview
                                     <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
                                   </span>
                                 </div>
                               </div>
-                            </Link>
+                            </button>
                           </motion.div>
                         ))}
                       </div>
@@ -241,6 +250,18 @@ export default function CollapsibleWorkArchive() {
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* PDF Preview Modal */}
+      {selectedPDF && (
+        <PDFPreviewModal
+          isOpen={!!selectedPDF}
+          onClose={() => setSelectedPDF(null)}
+          title={selectedPDF.title}
+          description={selectedPDF.description}
+          pdfUrl={selectedPDF.pdfUrl}
+          thumbnailUrl={selectedPDF.thumbnailUrl}
+        />
+      )}
     </MotionSection>
   )
 }

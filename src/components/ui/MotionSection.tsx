@@ -15,13 +15,13 @@ const MotionSection = forwardRef<HTMLElement, MotionSectionProps>(
   ({ id, className, children, style }, ref) => {
     // Optimized viewport config to prevent flickering
     // once: true ensures animation only triggers once
-    // amount: 0.15 provides better threshold for detection
-    const viewportConfig = { 
+    // amount: 0.1 provides better threshold for mobile detection
+    const viewportConfig = {
       once: true, // Critical: only animate once
-      amount: 0.15, // 15% of element must be visible
-      margin: '0px 0px -50px 0px' // Trigger slightly before entering viewport
+      amount: 0.1, // 10% of element must be visible (lower for mobile)
+      margin: '0px 0px -100px 0px' // Trigger earlier to ensure mobile visibility
     }
-    
+
     try {
       return (
         <motion.section
@@ -38,33 +38,17 @@ const MotionSection = forwardRef<HTMLElement, MotionSectionProps>(
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-          // Prevent re-triggering on scroll
-          onViewportEnter={() => {
-            // Ensure element stays visible after animation
-            if (id && typeof window !== 'undefined') {
-              const element = document.getElementById(id)
-              if (element) {
-                element.style.willChange = 'auto' // Reset after animation
-                element.style.visibility = 'visible' // Ensure visible after animation
-              }
-            }
-          }}
-          onAnimationStart={(definition) => {
-            // Make visible when animation starts
-            if (ref && 'current' in ref && ref.current) {
-              if (definition === 'visible') {
-                ref.current.style.visibility = 'visible'
-                ref.current.setAttribute('data-visible', 'true')
-              }
-            }
-          }}
+        // Prevent re-triggering on scroll - let Framer Motion handle visibility
+        // Removed direct DOM manipulation to prevent conflicts
         >
           {children}
         </motion.section>
       )
     } catch (error) {
       // Fallback to regular section with CSS animation if framer-motion fails
-      console.warn('MotionSection: Falling back to regular section due to error:', error)
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+        console.warn('MotionSection: Falling back to regular section due to error:', error)
+      }
       return (
         <section
           ref={ref}

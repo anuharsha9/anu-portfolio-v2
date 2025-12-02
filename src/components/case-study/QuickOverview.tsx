@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { QuickOverview as QuickOverviewType } from '@/types/caseStudy'
 import UnifiedSubsystemsVisual from './UnifiedSubsystemsVisual'
 import ImpactMetricsChart from './ImpactMetricsChart'
@@ -15,17 +16,29 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
     : data.subtitle
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 w-full min-h-[200px]">
       {/* Header */}
-      <div className="space-y-3 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1, margin: '0px 0px -100px 0px' }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="space-y-3 text-center"
+      >
         <h2 className="text-[#1A1A1A] text-2xl md:text-3xl font-serif leading-tight">{data.title}</h2>
         <p className="text-[#666666] text-lg leading-relaxed max-w-3xl mx-auto">{combinedSubtitle}</p>
-      </div>
+      </motion.div>
 
       {/* Context Cards - Structured Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* What the system was */}
-        <div className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+        >
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
@@ -55,10 +68,16 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* My role */}
-        <div className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+        >
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
@@ -68,11 +87,17 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
             <h3 className="text-[#1A1A1A] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">My role</h3>
             <p className="text-[#666666] text-sm md:text-base leading-relaxed">{data.myRole}</p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Key Actions - Structured List */}
-      <div className="space-y-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="space-y-4"
+      >
         <div className="flex items-center gap-3">
           <h3 className="text-[#1A1A1A] text-xl font-semibold">Key actions</h3>
           <div className="h-px flex-1 bg-black/10"></div>
@@ -93,7 +118,7 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Unified Subsystems Visual (combines FiveSubsystemsBreakdown and VisualSystemMap) - ReportCaster only */}
       {caseStudySlug === 'reportcaster' && (

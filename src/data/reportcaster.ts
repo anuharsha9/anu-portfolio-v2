@@ -52,7 +52,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     publicDemoLabel: 'ReportCaster Public Demo',
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/webfocus-report-caster-data-sheet.pdf',
     dataSheetLabel: 'View ReportCaster Data Sheet',
-    demoVideoUrl: 'https://www.youtube.com/watch?v=oPFKkcgNCbo',
+    demoVideoUrl: 'https://www.youtube.com/watch?v=NvNFN6sz41M',
     demoVideoLabel: 'ReportCaster Public Demo',
   },
   // ----------------------------
@@ -180,7 +180,7 @@ This wasn't just a design project — it was an archaeological dig. I was revers
           caption: 'RC legacy access list UI: Access control in a separate interface — part of the fragmented system architecture.',
         },
         {
-          src: '/images/case-study/ReportCaster/RC legacy distribution ui in basic schedule.png',
+          src: '/images/case-study/ReportCaster/RC legacy distrubtion ui in basic schedule.png',
           alt: 'RC legacy distribution UI in basic schedule',
           caption: 'RC legacy distribution UI in basic schedule: Distribution settings embedded inconsistently in the basic schedule dialog — showing how subsystems were mixed together without clear patterns.',
         },

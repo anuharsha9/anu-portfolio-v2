@@ -48,10 +48,10 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* SECTION 1 — HERO WITH SIGNATURE */}
-      <MotionSection className="surface-dark py-16 md:py-20 border-t border-white/5 relative overflow-hidden">
+      <MotionSection className="surface-dark py-12 xs:py-14 sm:py-16 md:py-20 border-t border-white/5 relative overflow-hidden">
         {/* Animated Logo Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[400px] h-[500px] md:w-[500px] md:h-[600px]">
+          <div className="w-[250px] h-[300px] xs:w-[300px] xs:h-[350px] sm:w-[350px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px]">
             <AnimatedSignatureLogo
               className="w-full h-full text-white opacity-[0.05]"
               duration={50000}
@@ -60,7 +60,7 @@ export default function AboutPage() {
             />
           </div>
         </div>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8 relative z-10">
+        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 2 — ORIGIN STORY */}
-      <MotionSection className="surface-dark-alt py-24 md:py-32 border-t border-white/5">
+      <MotionSection className="surface-dark-alt py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-white/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -156,7 +156,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 3 — WHAT I'M KNOWN FOR & HOW I THINK */}
-      <MotionSection className="surface-light py-24 md:py-32 border-t border-black/5">
+      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -240,7 +240,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 4 — DESIGN WRITING & ARTICLES */}
-      <MotionSection className="surface-light py-24 md:py-32 border-t border-black/5">
+      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -260,11 +260,10 @@ export default function AboutPage() {
                 Design writing & essays
               </h2>
               <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
-                I write about my design journeys, the complex problems I&apos;ve tackled, and the insights I&apos;ve learned along the way. 
-                These articles explore the thinking behind my work, the challenges of enterprise UX, and how I approach systems thinking in practice.
+                I write about design and what it&apos;s like to be a designer.
               </p>
               <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed italic">
-                Featured below are articles I authored for the WebFOCUS community, sharing design insights and UX principles with the broader platform ecosystem.
+                Featured below are articles I authored for the WebFOCUS community.
               </p>
             </div>
 
@@ -422,7 +421,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 5 — OUTSIDE OF WORK */}
-      <MotionSection className="surface-light py-24 md:py-32 border-t border-black/5">
+      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -542,7 +541,7 @@ export default function AboutPage() {
           <div className="w-full max-w-4xl h-full bg-gradient-radial from-white/5 via-white/2 to-transparent blur-3xl opacity-50" />
         </div>
 
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8 relative z-10">
+        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -588,15 +587,6 @@ export default function AboutPage() {
                 className="text-white text-base md:text-lg font-medium transition-all duration-300 hover:text-[var(--accent-teal)]"
               >
                 LinkedIn
-              </a>
-              <span className="text-white/40">·</span>
-              <a
-                href="https://calendly.com/anu-anuja"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white text-base md:text-lg font-medium transition-all duration-300 hover:text-[var(--accent-teal)]"
-              >
-                Schedule a Conversation
               </a>
             </div>
           </motion.div>

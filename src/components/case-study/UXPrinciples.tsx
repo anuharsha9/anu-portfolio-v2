@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { UXPrinciple } from '@/types/caseStudy'
 
 interface UXPrinciplesProps {
@@ -10,16 +11,26 @@ export default function UXPrinciples({ title, intro, principles }: UXPrinciplesP
   return (
     <div className="space-y-12">
       {/* Header */}
-      <div className="space-y-3 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="space-y-3 text-center"
+      >
         <h2 className="text-white text-3xl md:text-4xl font-serif leading-tight">{title}</h2>
         {intro && <p className="text-white/70 text-lg leading-relaxed max-w-3xl mx-auto">{intro}</p>}
-      </div>
+      </motion.div>
 
       {/* Principles Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {principles.map((principle, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
           >
             <div className="space-y-4">
@@ -36,7 +47,7 @@ export default function UXPrinciples({ title, intro, principles }: UXPrinciplesP
               <h3 className="text-white text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">{principle.title}</h3>
               <p className="text-white/70 text-sm md:text-base leading-relaxed">{principle.description}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

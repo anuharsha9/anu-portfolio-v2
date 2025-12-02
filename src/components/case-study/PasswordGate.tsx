@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 
 interface PasswordGateProps {
   onPasswordCorrect: () => void
@@ -8,6 +9,7 @@ interface PasswordGateProps {
   description?: string
   learnItems?: string[]
   caseStudySlug?: string
+  redirectToPrototype?: boolean
 }
 
 export default function PasswordGate({
@@ -16,6 +18,7 @@ export default function PasswordGate({
   description,
   learnItems,
   caseStudySlug = 'default',
+  redirectToPrototype = false,
 }: PasswordGateProps) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -42,8 +45,9 @@ export default function PasswordGate({
     'Behind-the-scenes notes and team alignment process',
   ]
 
-  const defaultDescription =
-    'To view the full case study (workflows, alternatives, detailed rationale, and reflections), enter the password below.'
+  const defaultDescription = redirectToPrototype
+    ? 'Enter the password below to unlock the case study and view the prototype walkthrough.'
+    : 'To view the full case study (workflows, alternatives, detailed rationale, and reflections), enter the password below.'
 
   const itemsToShow = learnItems || defaultLearnItems
   const descriptionText = description || defaultDescription
@@ -68,10 +72,16 @@ export default function PasswordGate({
   }
 
   return (
-    <section className="surface-dark py-20 md:py-32 border-t border-white/5">
+    <section id="password-gate" className="surface-dark py-20 md:py-32 border-t border-white/5">
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
         <div className="max-w-2xl mx-auto text-center space-y-6">
-          <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-6"
+          >
             <div className="space-y-4">
               <h2 className="text-white text-2xl md:text-3xl font-serif">
                 Deeper dive (password required)
@@ -95,9 +105,16 @@ export default function PasswordGate({
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            onSubmit={handleSubmit}
+            className="space-y-4"
+          >
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <input
                 type="password"
@@ -114,14 +131,14 @@ export default function PasswordGate({
                 type="submit"
                 className="px-8 py-3 rounded-full border border-white/20 text-white hover:border-white/40 hover:bg-white/10 transition-all duration-300 whitespace-nowrap group inline-flex items-center gap-2"
               >
-                Unlock full case study
+                {redirectToPrototype ? 'Unlock and view prototype' : 'Unlock full case study'}
                 <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
               </button>
             </div>
             {error && (
               <p className="text-red-400 text-sm">{error}</p>
             )}
-          </form>
+          </motion.form>
 
           <div className="pt-4">
             <a

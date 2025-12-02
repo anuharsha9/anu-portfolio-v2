@@ -17,7 +17,7 @@ const initiatives = [
       'Reduced complexity eliminated common support pain points',
       '5 legacy subsystems → 1 unified hub-native experience',
     ],
-    impact: 'Revamping a 40-year-old scheduler powering 20M+ automated reports annually.',
+    impact: 'Revamping a 40-year-old scheduler powering 20 million schedules run every week.',
     ctaText: 'View ReportCaster Case Study',
     ctaHref: '/work/reportcaster',
     hoverMicrocopy: 'Redesigned a 40-year-old scheduler into a unified, hub-native experience.',
@@ -60,14 +60,14 @@ const initiatives = [
 
 export default function WebFOCUSOverview() {
   return (
-    <MotionSection id="work-overview" className="surface-light py-20 md:py-28 relative">
+    <MotionSection id="work-overview" className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 relative">
       {/* Subtle Logo Watermark - Top Right Corner */}
       <div className="absolute top-8 right-8 opacity-[0.02] pointer-events-none hidden lg:block">
         <div className="w-24 h-24">
           <SignatureLogo className="w-full h-full text-black" />
         </div>
       </div>
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Intro Block */}
         <motion.div
           initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
@@ -78,13 +78,13 @@ export default function WebFOCUSOverview() {
           className="space-y-8"
         >
           <div className="space-y-6">
-            <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif text-center relative">
+            <h2 className="text-[var(--text-primary-light)] text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
               Modernizing WebFOCUS at Cloud Software Group
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
             </h2>
             
-            {/* Company Logo */}
-            <div className="flex justify-center pt-2">
+            {/* Company Logo & Case Study Links */}
+            <div className="flex justify-center items-center gap-3 pt-2 flex-wrap">
               <a
                 href="https://www.ibi.com/products/ibi-webfocus"
                 target="_blank"
@@ -104,6 +104,27 @@ export default function WebFOCUSOverview() {
                     strokeLinejoin="round"
                     strokeWidth={2}
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+              <span className="text-[var(--text-muted-light)]/40">·</span>
+              <a
+                href="/work/reportcaster"
+                className="flex items-center gap-2 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-300 group"
+                aria-label="View ReportCaster case study"
+              >
+                <span className="text-sm font-medium">ReportCaster Case Study</span>
+                <svg
+                  className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
                   />
                 </svg>
               </a>
@@ -131,13 +152,16 @@ export default function WebFOCUSOverview() {
               My work focused on restoring clarity, reducing cognitive load, and unifying UI patterns across the platform—turning deeply embedded legacy workflows into predictable, scalable, hub-native experiences. The ReportCaster redesign I led is now part of WebFOCUS 9.3, introducing a comprehensive redesign that makes scheduling and distribution incredibly easy to use.
             </p>
 
-            {/* Virtual User Group Link - Subtle */}
-            <div className="pt-2">
+            {/* Virtual User Group Link with Context */}
+            <div className="pt-4 space-y-3">
+              <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed italic">
+                I led this Virtual User Group Session at Cloud Software Group for our enterprise customers — alongside the Senior PM of the WebFOCUS HUB.
+              </p>
               <a
-                href="https://www.linkedin.com/in/anu159/overlay/experience/2020032167/multiple-media-viewer/?profileId=ACoAABR8zjABe5XDQhA_MpOk7wAKInEIzZtudnQ&treasuryMediaId=1750717562289"
+                href="https://www.youtube.com/watch?v=NnMGjEJFIX4"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm"
+                className="inline-flex items-center gap-2 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
                 aria-label="Watch Virtual User Group session"
               >
                 <svg

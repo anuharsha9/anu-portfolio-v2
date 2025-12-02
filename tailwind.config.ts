@@ -39,7 +39,13 @@ const config: Config = {
         'content-container': 'calc(1200px + 2rem)',
       },
       screens: {
-        'xl': '1280px',
+        'xs': '475px',   // Extra small devices
+        'sm': '640px',   // Small devices (default Tailwind)
+        'md': '768px',   // Medium devices (default Tailwind)
+        'lg': '1024px',  // Large devices (default Tailwind)
+        'xl': '1280px',  // Extra large devices (default Tailwind)
+        '2xl': '1536px', // 2X large devices (default Tailwind)
+        '3xl': '1920px', // Ultra wide screens
       },
     },
   },

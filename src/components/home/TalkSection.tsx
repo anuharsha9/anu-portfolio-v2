@@ -15,7 +15,6 @@ const contactLinks: ContactLink[] = [
   { label: '+1 781-354-7394', href: 'tel:+17813547394' },
   { label: 'anu.anuja@outlook.com', href: 'mailto:anu.anuja@outlook.com' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/anu159', isExternal: true },
-  { label: 'Schedule a Conversation', href: 'https://calendly.com/anu-anuja', isExternal: true },
 ]
 
 export default function TalkSection() {
@@ -25,11 +24,11 @@ export default function TalkSection() {
   return (
     <section
       id="contact"
-      className="surface-dark relative overflow-visible py-40 md:py-[12.5rem] border-t border-white/5"
+      className="surface-dark relative overflow-visible py-20 xs:py-24 sm:py-32 md:py-40 lg:py-[12.5rem] border-t border-white/5"
     >
       {/* Animated Logo Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[400px] h-[500px] md:w-[500px] md:h-[600px]">
+        <div className="w-[250px] h-[300px] xs:w-[300px] xs:h-[350px] sm:w-[350px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px]">
           <AnimatedSignatureLogo
             className="w-full h-full text-white opacity-[0.05]"
             duration={50000}
@@ -40,7 +39,7 @@ export default function TalkSection() {
       </div>
 
       {/* Content container */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
           whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}

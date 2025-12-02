@@ -27,6 +27,22 @@
   }
 }
 
+/* Floating animation for laptop/hero images - combined with scale */
+/* Scale is applied via CSS variable to combine with translateY */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(var(--laptop-scale, 1.95));
+  }
+  50% {
+    transform: translateY(-10px) scale(var(--laptop-scale, 1.95));
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+  transform-origin: center center;
+}
+
 @layer base {
   body {
     background-color: var(--bg-dark);
@@ -78,6 +94,58 @@
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+
+  /* Responsive typography utilities */
+  .text-responsive {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+  }
+
+  .text-responsive-xl {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .text-responsive-2xl {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .text-responsive-3xl {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  /* Responsive spacing utilities */
+  .container-responsive {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-responsive {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-responsive {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-responsive {
+      max-width: 1200px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   /* Focus visible styles for keyboard navigation */
@@ -176,7 +244,8 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   contain: layout style paint;
-  filter: none !important;
+  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
+  /* filter: none !important; */
   /* Fade in with rotation (3s), then continuous slow rotation */
   animation:
     gear-fade-in-main 3s linear forwards,
@@ -196,7 +265,8 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   contain: layout style paint;
-  filter: none !important;
+  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
+  /* filter: none !important; */
   /* Fade in with rotation (3s) at same speed as all gears, then very slow continuous rotation (1/3 speed of main gears) */
   animation:
     gear-fade-in-bg 3s linear forwards,
@@ -216,7 +286,8 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   contain: layout style paint;
-  filter: none !important;
+  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
+  /* filter: none !important; */
   /* Same rotation animation as base gear - variables inherited from parent gear group */
   animation:
     gear-fade-in-main 3s linear forwards,
@@ -281,20 +352,15 @@
   perspective: 1000px;
 }
 
-/* Disable filters on ALL rotating gears for better performance */
+/* Performance optimizations for rotating gears - but allow drop shadows on child elements */
+/* Only apply filter: none to the rotating containers themselves, not their children */
 #brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"] *,
 #brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"] *,
 #brain-gears #gears-background [id^="bg-gear-"],
-#brain-gears #gears-background [id^="bg-gear-"] *,
 #brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"] *,
 #brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"] *,
-#brain-gears-copy #gears-background [id^="bg-gear-"],
-#brain-gears-copy #gears-background [id^="bg-gear-"] * {
-  filter: none !important;
+#brain-gears-copy #gears-background [id^="bg-gear-"] {
+  /* Allow drop shadows - don't disable filters on child elements */
   will-change: transform, opacity;
   transform: translateZ(0);
   contain: layout style paint;
@@ -383,11 +449,14 @@
 
 /* Line drawing animation - slow and smooth, final opacity 0.5 (like background gears) */
 @keyframes line-draw-path {
-  from {
+  0% {
     stroke-dashoffset: var(--path-length, 1000);
     opacity: 0;
   }
-  to {
+  10% {
+    opacity: 0.5; /* Fade in quickly at start */
+  }
+  100% {
     stroke-dashoffset: 0;
     opacity: 0.5;
   }
@@ -614,12 +683,13 @@ section[data-framer-component],
   /* Framer Motion will handle opacity and visibility via variants */
 }
 
-/* CRITICAL: All motion.div elements start hidden */
+/* CRITICAL: All motion.div elements start hidden - but let Framer Motion control it */
+/* Removed !important to prevent conflicts with Framer Motion state management */
 [data-framer-component][data-initial="hidden"],
 motion.div[data-initial="hidden"],
 motion.section[data-initial="hidden"] {
-  opacity: 0 !important;
-  visibility: hidden !important;
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Loading screen gear animation */
@@ -636,9 +706,10 @@ motion.section[data-initial="hidden"] {
   animation: gear-rotate 9s linear infinite; /* 3x slower (was 3s, now 9s) */
 }
 
-/* Prevent layout shifts during animations */
-motion.section,
-motion.div {
+/* Prevent layout shifts during animations - but be careful with contain */
+/* Only apply contain to specific cases to avoid conflicts */
+motion.section[data-visible="true"],
+motion.div[data-visible="true"] {
   contain: layout style paint;
 }
 

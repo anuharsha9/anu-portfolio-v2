@@ -128,6 +128,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   const [expandedDetailImages, setExpandedDetailImages] = useState(false)
   const [expandedSubsections, setExpandedSubsections] = useState<Set<number>>(new Set()) // All subsections collapsed by default
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption?: string } | null>(null)
+  const [lightboxImages, setLightboxImages] = useState<Array<{ src: string; alt: string; caption?: string }>>([])
+  const [lightboxCurrentIndex, setLightboxCurrentIndex] = useState(0)
   const [showAllLegacyImages, setShowAllLegacyImages] = useState(false) // For Section 01 collapsible gallery
   const [showAllScheduleDialogImages, setShowAllScheduleDialogImages] = useState(false) // For Schedule Dialog collapsible gallery
 
@@ -175,8 +177,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     return null
   }
 
-  const openLightbox = (src: string, alt: string, caption?: string) => {
+  const openLightbox = (src: string, alt: string, caption?: string, images?: Array<{ src: string; alt: string; caption?: string }>, index?: number) => {
     setLightboxImage({ src, alt, caption })
+    if (images && typeof index === 'number') {
+      setLightboxImages(images)
+      setLightboxCurrentIndex(index)
+    } else {
+      setLightboxImages([])
+      setLightboxCurrentIndex(0)
+    }
   }
 
   const closeLightbox = () => {
@@ -369,7 +378,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                     <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                       <div
                                         className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                                        onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                                        onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
                                       >
                                         <Image
                                           src={image.src}
@@ -481,7 +490,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                     <div key={`sub-img-${subIndex}-${imgIndex + startIndex}`} className="group space-y-2">
                                       <div
                                         className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.03] hover:shadow-xl bg-black/5`}
-                                        onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                                        onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
                                       >
                                         <Image
                                           src={image.src}
@@ -1348,6 +1357,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
           imageSrc={lightboxImage.src}
           imageAlt={lightboxImage.alt}
           imageCaption={lightboxImage.caption}
+          images={lightboxImages.length > 0 ? lightboxImages : undefined}
+          currentIndex={lightboxCurrentIndex}
+          onNavigate={(index) => {
+            if (lightboxImages[index]) {
+              const img = lightboxImages[index]
+              setLightboxImage({ src: img.src, alt: img.alt, caption: img.caption })
+              setLightboxCurrentIndex(index)
+            }
+          }}
         />
       )}
     </div>

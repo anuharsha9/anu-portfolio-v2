@@ -166,7 +166,9 @@ export default function WorkflowPrototype({
 
   // Safety check: ensure steps array is valid and not empty
   if (!steps || !Array.isArray(steps) || steps.length === 0) {
-    console.warn('WorkflowPrototype: Invalid steps array', { steps, isArray: Array.isArray(steps), length: steps?.length })
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+      console.warn('WorkflowPrototype: Invalid steps array', { steps, isArray: Array.isArray(steps), length: steps?.length })
+    }
     return (
       <div className="p-4 border border-red-500 rounded-lg">
         <p className="text-red-500 text-sm">Workflow prototype has no valid steps</p>

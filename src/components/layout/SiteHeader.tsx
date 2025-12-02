@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { AnimatedSignatureLogo } from '@/components/brand'
 import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
+import { useScrollManager } from '@/hooks/useScrollManager'
 import MobileMenu from './MobileMenu'
 
 export default function SiteHeader() {
   const pathname = usePathname()
   const [isVisible, setIsVisible] = useState(false)
   const isLandingPage = pathname === '/'
-  
+
   // Always show header on /me page, otherwise use scroll behavior
   const alwaysVisible = pathname === '/me'
 
@@ -28,50 +29,43 @@ export default function SiteHeader() {
       return
     }
 
-    const handleScroll = () => {
-      // Show header when user scrolls down more than 100px
-      if (window.scrollY > 100) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
-    }
-
-    // Check initial scroll position
-    handleScroll()
-
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', () => {
+    const handleResize = () => {
       const isMobileNow = window.innerWidth < 1024
       if (isMobileNow) {
         setIsVisible(true)
-      } else {
-        handleScroll()
       }
-    })
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
     }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [alwaysVisible])
+
+  // Use centralized scroll manager
+  useScrollManager((scrollY) => {
+    if (alwaysVisible || (typeof window !== 'undefined' && window.innerWidth < 1024)) return
+    // Show header when user scrolls down more than 100px
+    setIsVisible(scrollY > 100)
   }, [alwaysVisible])
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-50 bg-[var(--bg-dark)] backdrop-blur-md shadow-lg transition-all duration-500 ${
-        isVisible 
-          ? 'opacity-100 translate-y-0 border-b border-white/10 h-auto' 
+      className={`fixed top-0 left-0 right-0 bg-[var(--bg-dark)] backdrop-blur-md shadow-lg transition-all duration-500 ${isVisible
+          ? 'opacity-100 translate-y-0 border-b border-white/10 h-auto'
           : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden border-b border-transparent'
-      }`}
+        }`}
+      style={{ zIndex: 10000, isolation: 'isolate', position: 'fixed' }}
     >
-      <nav className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8 py-4 flex items-center justify-between">
+      <nav className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4 flex items-center justify-between">
         <Link
           href="/"
           className="flex items-center transition-colors group"
         >
           <div className="w-7 h-7 text-white/90 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300">
-            <AnimatedSignatureLogo 
-              className="w-full h-full" 
+            <AnimatedSignatureLogo
+              className="w-full h-full"
               duration={8000}
               pauseDuration={2000}
             />
@@ -81,8 +75,21 @@ export default function SiteHeader() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-4 md:gap-6">
             <Link
-              href="/#selected-work"
+              href="/#work-overview"
               className="text-white transition-colors"
+              onClick={(e) => {
+                e.preventDefault()
+                if (pathname === '/') {
+                  // Already on homepage, just scroll
+                  const section = document.getElementById('work-overview')
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' })
+                  }
+                } else {
+                  // On other pages (case studies, /me), navigate to home with hash
+                  window.location.href = '/#work-overview'
+                }
+              }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = 'var(--accent-teal)'
               }}
@@ -105,8 +112,21 @@ export default function SiteHeader() {
               Me
             </Link>
             <Link
-              href="/#contact"
+              href="/#lets-talk"
               className="text-white transition-colors"
+              onClick={(e) => {
+                e.preventDefault()
+                if (pathname === '/') {
+                  // Already on homepage, just scroll
+                  const section = document.getElementById('lets-talk')
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' })
+                  }
+                } else {
+                  // On other pages (case studies, /me), navigate to home with hash
+                  window.location.href = '/#lets-talk'
+                }
+              }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = 'var(--accent-teal)'
               }}

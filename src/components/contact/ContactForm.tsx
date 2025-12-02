@@ -115,7 +115,9 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
         }
       }, 500)
     } catch (error) {
-      console.error('Form submission error:', error)
+      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+        console.error('Form submission error:', error)
+      }
       setSubmitStatus('error')
       setErrorMessage('Something went wrong. Please try again or email directly at anu.anuja@outlook.com')
       setIsSubmitting(false)

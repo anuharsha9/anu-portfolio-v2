@@ -12,10 +12,12 @@ interface PrototypeBlockProps {
     videoUrl?: string // Self-hosted video URL (MP4)
     videoPoster?: string // Poster/thumbnail for self-hosted videos
   }
+  caseStudySlug?: string
 }
 
 export default function PrototypeBlock({
   prototypeMedia,
+  caseStudySlug,
 }: PrototypeBlockProps) {
   if (!prototypeMedia) {
     return null

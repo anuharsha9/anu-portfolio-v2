@@ -17,12 +17,28 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
+      // Store current scroll position
+      const scrollY = window.scrollY
       document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = '100%'
     } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top
       document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
     return () => {
       document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
     }
   }, [isOpen])
 
@@ -44,9 +60,9 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
   const isOnLandingPage = pathname === '/'
 
   const mainNavLinks = [
-    { label: 'Work', href: '/#selected-work' },
+    { label: 'Work', href: '/#work-overview' },
     { label: 'Me', href: '/me' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'Contact', href: '/#lets-talk' },
   ]
 
   const toggleMenu = () => {
@@ -55,30 +71,26 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
 
   return (
     <>
-      {/* Hamburger Button */}
-      <button
-        onClick={toggleMenu}
-        className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 z-[60] relative pointer-events-auto"
-        aria-label={isOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={isOpen}
-        type="button"
-      >
-        <motion.span
-          className="w-6 h-0.5 bg-white rounded-full"
-          animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-          transition={{ duration: 0.3 }}
-        />
-        <motion.span
-          className="w-6 h-0.5 bg-white rounded-full"
-          animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: 0.2 }}
-        />
-        <motion.span
-          className="w-6 h-0.5 bg-white rounded-full"
-          animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-          transition={{ duration: 0.3 }}
-        />
-      </button>
+      {/* Hamburger Button - Hide when menu is open */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            onClick={toggleMenu}
+            className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 relative pointer-events-auto"
+            style={{ zIndex: 10001 }}
+            aria-label="Open menu"
+            aria-expanded={false}
+            type="button"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="w-6 h-0.5 bg-white rounded-full" />
+            <span className="w-6 h-0.5 bg-white rounded-full" />
+            <span className="w-6 h-0.5 bg-white rounded-full" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Overlay */}
       <AnimatePresence>
@@ -86,7 +98,16 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[70] lg:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm lg:hidden"
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 9998,
+                isolation: 'isolate'
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -96,7 +117,16 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
 
             {/* Menu Panel */}
             <motion.div
-              className="fixed top-0 right-0 h-screen w-80 max-w-[85vw] bg-[var(--bg-dark)] border-l border-white/10 z-[80] lg:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[var(--bg-dark)] border-l border-white/10 lg:hidden flex flex-col"
+              style={{
+                height: '100vh',
+                maxHeight: '100vh',
+                zIndex: 9999,
+                position: 'fixed',
+                top: 0,
+                right: 0,
+                isolation: 'isolate'
+              }}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -133,50 +163,50 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
               </div>
 
               {/* Navigation Links - Scrollable */}
-              <nav className="flex-1 overflow-y-auto p-6 space-y-1">
-                  {/* Main Navigation */}
-                  <div className="mb-6">
-                    <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
-                      Navigation
-                    </p>
-                    {mainNavLinks.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className="block px-4 py-3 rounded-lg text-white hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                    <a
-                      href="/assets/Anuja-Nimmagadda-2025.pdf"
-                      download="Anuja-Nimmagadda-Resume-2025.pdf"
+              <nav className="flex-1 overflow-y-auto overflow-x-hidden p-6 space-y-1" style={{ minHeight: 0 }}>
+                {/* Main Navigation */}
+                <div className="mb-6">
+                  <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
+                    Navigation
+                  </p>
+                  {mainNavLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
                       onClick={() => setIsOpen(false)}
                       className="block px-4 py-3 rounded-lg text-white hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
                     >
-                      Resume
-                    </a>
-                  </div>
+                      {link.label}
+                    </Link>
+                  ))}
+                  <a
+                    href="/assets/Anuja-Nimmagadda-2025.pdf"
+                    download="Anuja-Nimmagadda-Resume-2025.pdf"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-4 py-3 rounded-lg text-white hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
+                  >
+                    Resume
+                  </a>
+                </div>
 
-                  {/* Landing Page Sections */}
-                  {isOnLandingPage && (
-                    <div>
-                      <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
-                        Sections
-                      </p>
-                      {landingPageSections.map((section) => (
-                        <Link
-                          key={section.href}
-                          href={section.href}
-                          onClick={() => setIsOpen(false)}
-                          className="block px-4 py-3 rounded-lg text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
-                        >
-                          {section.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                {/* Landing Page Sections */}
+                {isOnLandingPage && (
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
+                      Sections
+                    </p>
+                    {landingPageSections.map((section) => (
+                      <Link
+                        key={section.href}
+                        href={section.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block px-4 py-3 rounded-lg text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
+                      >
+                        {section.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </nav>
 
               {/* Footer */}

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import PageShell from '@/components/layout/PageShell'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
@@ -87,6 +88,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Viewport meta for responsive design */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         {/* Favicon - Signature Logo */}
         <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
@@ -103,7 +106,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <LoadingScreen />
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         <StructuredData type="website" />
         <StructuredData type="person" />
         <PageShell>{children}</PageShell>

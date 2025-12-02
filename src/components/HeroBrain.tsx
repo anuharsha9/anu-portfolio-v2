@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import BrainGears from '@/assets/brain-gears.svg'
+import TopQuoteIcon from '@/assets/top-quote.svg'
+import BottomQuoteIcon from '@/assets/bottom-quote.svg'
 import VideoModal from '@/components/video/VideoModal'
 import { GEAR_LABELS } from '@/data/gear-labels-preserved'
 
@@ -15,10 +17,6 @@ export function HeroBrain() {
   const svgRootRef = useRef<SVGSVGElement | null>(null)
   const [hoverText, setHoverText] = useState<string | null>(null)
 
-  // Debug: Log hoverText changes
-  useEffect(() => {
-    console.log('HeroBrain: hoverText changed to:', hoverText, 'Type:', typeof hoverText, 'Length:', hoverText?.length)
-  }, [hoverText])
 
   useEffect(() => {
     const container = containerRef.current
@@ -38,7 +36,6 @@ export function HeroBrain() {
         brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
       }
       if (!brainGearsGroup) {
-        console.warn('HeroBrain: brain-gears group not found')
         return
       }
 
@@ -47,11 +44,17 @@ export function HeroBrain() {
         const fadeInSpeedMultiplier = 1.125 // 12.5% faster (middle of 10-15%)
         const fadeInDuration = 3 // seconds
 
-        // Main gears
+        // Cache all gear groups upfront to avoid repeated DOM queries
+        const gearGroups = new Map<string, SVGGElement>()
         GEAR_IDS.forEach((gearId) => {
           const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
-          if (!gearGroup) return
+          if (gearGroup) {
+            gearGroups.set(gearId, gearGroup)
+          }
+        })
 
+        // Main gears - use cached references
+        gearGroups.forEach((gearGroup, gearId) => {
           const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
           if (!gearBase) return
 
@@ -121,6 +124,11 @@ export function HeroBrain() {
           path.setAttribute('opacity', '0')
         })
 
+        // Duration per line - much slower for noticeable drawing effect
+        const durationPerLine = 24000 // 24 seconds per line (much slower, more noticeable)
+        // Start delay after gears fade in
+        const initialDelay = 3000 // 3 seconds (after gear fade-in)
+
         paths.forEach((path, index) => {
           setTimeout(() => {
             requestAnimationFrame(() => {
@@ -136,12 +144,10 @@ export function HeroBrain() {
                     path.style.opacity = '0'
                     path.setAttribute('opacity', '0')
 
-                    // Much slower animation - 8-12 seconds per line
-                    const duration = 8000 + Math.random() * 4000
-                    // Staggered delay - starts after gear fade-in (3s), then 100ms apart
-                    const delay = 3000 + index * 100
+                    // All lines draw at the same time - same delay for all
+                    const delay = initialDelay
 
-                    path.style.animation = `line-draw-path ${duration}ms ease-out ${delay}ms forwards`
+                    path.style.animation = `line-draw-path ${durationPerLine}ms ease-out ${delay}ms forwards`
                   }
                 } catch (e) {
                   // Silent fail
@@ -155,7 +161,9 @@ export function HeroBrain() {
       const setupHoverListeners = () => {
         // Track all hover timeouts to clear them when entering a new gear
         const allHoverTimeouts = new Map<string, NodeJS.Timeout | null>()
-        
+        // Track event listeners for cleanup
+        const eventListeners = new Map<string, { element: Element; type: string; handler: EventListener }[]>()
+
         GEAR_IDS.forEach((gearId) => {
           const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
           if (!gearGroup) return
@@ -209,13 +217,12 @@ export function HeroBrain() {
               }
             }
           } catch (e) {
-            console.warn(`HeroBrain: Could not create hover overlay for ${gearId}:`, e)
             // Continue anyway - try fallback event attachment
           }
-          
-          // Log if gear doesn't have a label
+
+          // Skip if gear doesn't have a label
           if (!GEAR_LABELS[gearId]) {
-            console.warn(`HeroBrain: No label found for gear ${gearId}`)
+            return
           }
 
           // Add debouncing to prevent rapid toggling on edges
@@ -232,24 +239,23 @@ export function HeroBrain() {
                 allHoverTimeouts.set(id, null)
               }
             })
-            
+
             // Clear this gear's timeout
             if (hoverTimeout) {
               clearTimeout(hoverTimeout)
               hoverTimeout = null
               allHoverTimeouts.set(gearId, null)
             }
-            
+
             // Remove active class from ALL other gears first to prevent multiple active gears
-            GEAR_IDS.forEach((otherGearId) => {
-              if (otherGearId !== gearId) {
-                const otherGearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${otherGearId}`)
-                if (otherGearGroup) {
-                  otherGearGroup.classList.remove('gear-main--active')
-                }
+            // Optimized: Use querySelectorAll to get all active gears at once instead of looping
+            const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
+            allActiveGears.forEach((activeGear) => {
+              if (activeGear.id !== gearId) {
+                activeGear.classList.remove('gear-main--active')
               }
             })
-            
+
             // Always update hover state and text immediately, even if already hovering
             // This ensures text updates instantly when moving between gears
             isHovering = true
@@ -258,17 +264,13 @@ export function HeroBrain() {
             // Get the label for this gear and display it in the center
             const label = GEAR_LABELS[gearId] || ''
             if (!label) {
-              console.warn(`HeroBrain: No label found for gear ${gearId}. Available keys:`, Object.keys(GEAR_LABELS))
               return
             }
             // Convert multi-line label to single line for display
             const singleLineLabel = label.replace(/\n/g, ' • ')
             // Update text immediately - no debouncing on enter
             if (singleLineLabel.trim()) {
-              console.log(`HeroBrain: Setting hover text for ${gearId}:`, singleLineLabel)
               setHoverText(singleLineLabel)
-            } else {
-              console.warn(`HeroBrain: Empty label for gear ${gearId}`)
             }
           }
 
@@ -279,41 +281,48 @@ export function HeroBrain() {
               hoverTimeout = null
               allHoverTimeouts.set(gearId, null)
             }
-            
+
             // Mark as not hovering immediately
             isHovering = false
-            
+
             // Small delay to prevent flickering when mouse moves quickly across edges
             hoverTimeout = setTimeout(() => {
               // Always remove active class from this gear when leaving
               gearGroup.classList.remove('gear-main--active')
-              
+
               // Use requestAnimationFrame to ensure DOM has updated before checking
               requestAnimationFrame(() => {
                 // Check if any gear is currently active (another gear might have been entered)
                 const activeGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active'))
                 const isAnyGearActive = activeGears.length > 0
-                
+
                 // Only clear hover text if no other gear is active
                 if (!isAnyGearActive) {
                   // Clear hover text immediately - this will show the welcome text instantly
                   setHoverText(null)
                 }
               })
-              
+
               hoverTimeout = null
               allHoverTimeouts.set(gearId, null)
             }, 10) // Reduced delay to 10ms for instant placeholder appearance
-            
+
             allHoverTimeouts.set(gearId, hoverTimeout)
           }
 
           // Attach events ONLY to overlay (it covers the entire gear area including internal gaps)
           const overlay = gearGroup.querySelector<SVGCircleElement>('.gear-hover-overlay')
+          const listeners: { element: Element; type: string; handler: EventListener }[] = []
+
           if (overlay) {
             overlay.addEventListener('mouseenter', handleEnter)
             overlay.addEventListener('mouseleave', handleLeave)
             overlay.addEventListener('touchstart', handleEnter, { passive: true })
+            listeners.push(
+              { element: overlay, type: 'mouseenter', handler: handleEnter },
+              { element: overlay, type: 'mouseleave', handler: handleLeave },
+              { element: overlay, type: 'touchstart', handler: handleEnter }
+            )
           } else {
             // Fallback: attach to gear group if overlay creation failed
             // Re-enable pointer events for the gear group
@@ -325,19 +334,42 @@ export function HeroBrain() {
             gearGroup.addEventListener('mouseenter', handleEnter)
             gearGroup.addEventListener('mouseleave', handleLeave)
             gearGroup.addEventListener('touchstart', handleEnter, { passive: true })
-            console.warn(`HeroBrain: Using fallback hover for ${gearId} (overlay creation failed)`)
+            listeners.push(
+              { element: gearGroup, type: 'mouseenter', handler: handleEnter },
+              { element: gearGroup, type: 'mouseleave', handler: handleLeave },
+              { element: gearGroup, type: 'touchstart', handler: handleEnter }
+            )
           }
+
+          eventListeners.set(gearId, listeners)
         })
+
+        return () => {
+          // Cleanup: clear all timeouts
+          allHoverTimeouts.forEach((timeout) => {
+            if (timeout) clearTimeout(timeout)
+          })
+          allHoverTimeouts.clear()
+
+          // Cleanup: remove all event listeners
+          eventListeners.forEach((listeners) => {
+            listeners.forEach(({ element, type, handler }) => {
+              element.removeEventListener(type, handler)
+            })
+          })
+          eventListeners.clear()
+        }
       }
 
       setTransformOrigins()
       setTimeout(setTransformOrigins, 200)
       setupGearRotations()
       setupLineDrawing()
-      setupHoverListeners()
+      const hoverCleanup = setupHoverListeners()
 
       cleanup = () => {
-        // Cleanup will be handled by component unmount
+        // Cleanup hover listeners
+        if (hoverCleanup) hoverCleanup()
       }
     }
 
@@ -352,12 +384,12 @@ export function HeroBrain() {
     <>
       <section
         id="hero-brain"
-        className="surface-dark relative flex flex-col items-center justify-center overflow-visible px-6 pt-24 pb-6 border-t border-white/5 min-h-screen"
+        className="surface-dark relative flex flex-col items-center justify-center overflow-visible px-4 md:px-6 pt-4 md:pt-16 pb-6 border-t border-white/5 min-h-screen"
       >
-        {/* SVG Container */}
+        {/* SVG Container - on mobile this is at top, on desktop it's positioned normally */}
         <div
           ref={containerRef}
-          className="relative w-full max-w-[1200px] overflow-visible"
+          className="relative w-full max-w-[1200px] overflow-visible md:mt-0 -mt-12"
           style={{ aspectRatio: '1943.4 / 1835' }}
         >
           {/* Brain SVG - gears fade in while rotating */}
@@ -374,8 +406,8 @@ export function HeroBrain() {
             />
           </motion.div>
 
-          {/* Text content - centered inside brain */}
-          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10" style={{ transform: 'translateY(40px)' }}>
+          {/* Desktop: Text content overlaid on SVG */}
+          <div className="pointer-events-none hidden md:flex absolute inset-0 flex-col items-center justify-center text-center px-4 z-10" style={{ transform: 'translateY(40px)' }}>
             {/* Text container - contains welcome text and hover text */}
             <motion.div
               className="mb-16"
@@ -384,8 +416,8 @@ export function HeroBrain() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transform: 'translateY(40px)', // Moved up another 10px
-                minHeight: '120px', // Fixed height to prevent layout shift
+                transform: 'translateY(20px)',
+                minHeight: '100px',
                 width: '100%',
                 maxWidth: '600px',
               }}
@@ -417,21 +449,16 @@ export function HeroBrain() {
                   >
                     <div style={{ position: 'relative', display: 'inline-block', paddingLeft: '1.2em', paddingRight: '1.2em' }}>
                       {/* Opening quote icon */}
-                      <svg
+                      <TopQuoteIcon
                         style={{
                           position: 'absolute',
                           left: '0',
                           top: '-0.2em',
                           width: '1.2em',
                           height: '1.2em',
-                          color: 'var(--accent-teal)',
                         }}
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.433.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.995 3.638-3.995 5.849h3.983v10h-9.984z"/>
-                      </svg>
+                        className="text-[var(--accent-teal)]"
+                      />
                       {(() => {
                         // Check if text contains ' • ' separator (old format) or is a single thought
                         const parts = hoverText.split(' • ')
@@ -483,21 +510,16 @@ export function HeroBrain() {
                         }
                       })()}
                       {/* Closing quote icon */}
-                      <svg
+                      <BottomQuoteIcon
                         style={{
                           position: 'absolute',
                           right: '0',
                           bottom: '-0.2em',
                           width: '1.2em',
                           height: '1.2em',
-                          color: 'var(--accent-teal)',
                         }}
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.996-2.151c2.433-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.57-9 10.609l-.996-2.151c2.433-.917 3.995-3.638 3.995-5.849h-3.983v-10h9.983z"/>
-                      </svg>
+                        className="text-[var(--accent-teal)]"
+                      />
                     </div>
                   </motion.div>
                 ) : (
@@ -512,31 +534,29 @@ export function HeroBrain() {
                   >
                     {/* First line - Welcome to my mind */}
                     <motion.p
-                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-6"
+                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-3 md:px-6"
                       style={{
-                        fontSize: '3.5em', // 2x larger (was 1.75em)
+                        fontSize: 'clamp(1.75rem, 8vw, 3.5rem)', // Responsive: smaller on mobile
                       }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     >
                       Welcome to my mind
                     </motion.p>
 
                     {/* Second line - Placeholder */}
                     <motion.p
-                      className="text-center px-6"
+                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 md:px-6 font-semibold"
                       style={{
-                        fontSize: '1.3em', // 15% larger than 1.125em
-                        lineHeight: '1.4',
-                        color: 'var(--accent-teal)',
-                        fontFamily: 'var(--font-sans)', // Inter Tight
+                        letterSpacing: '0.05em',
+                        fontSize: 'clamp(0.75rem, 3vw, 0.9rem)', // Responsive: smaller on mobile
                       }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.2, delay: 0.1 }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      Hover on the gears to see what's on it
+                      HOVER ON THE GEARS TO SEE WHAT&apos;S ON IT
                     </motion.p>
                   </motion.div>
                 )}
@@ -545,7 +565,7 @@ export function HeroBrain() {
 
             {/* Text stack - centered with max width */}
             <motion.div
-              className="max-w-2xl space-y-6"
+              className="max-w-2xl space-y-4 md:space-y-6 px-3 md:px-0"
               style={{ marginTop: '10px' }}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -557,7 +577,7 @@ export function HeroBrain() {
             >
               {/* Subtitle - Slower fade (2x slower) */}
               <motion.p
-                className="text-base md:text-lg text-[var(--text-muted-dark)] leading-relaxed"
+                className="text-sm md:text-base lg:text-lg text-[var(--text-muted-dark)] leading-relaxed"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -581,24 +601,24 @@ export function HeroBrain() {
               </motion.p>
 
               {/* Buttons - Slower fade (2x slower) */}
-              <motion.div 
-                className="pt-4 flex items-center justify-center gap-3"
+              <motion.div
+                className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 w-full"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 4, delay: 5.2, ease: [0.22, 1, 0.36, 1] }}
               >
                 <a
                   href="#work-overview"
-                  className="pointer-events-auto inline-flex items-center rounded-full border border-white/20 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10"
+                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 w-full sm:w-auto"
                 >
                   View my work
                 </a>
 
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group"
+                  className="pointer-events-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group w-full sm:w-auto"
                 >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                   <span>Portfolio teaser</span>
@@ -607,17 +627,211 @@ export function HeroBrain() {
             </motion.div>
           </div>
 
-          {/* Scroll Hint */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-none"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, delay: 6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="text-xs text-[var(--text-muted-dark)] uppercase tracking-wider">
-              Scroll to see what my mind built
-            </p>
-          </motion.div>
+          {/* Mobile: Text content below SVG */}
+          <div className="pointer-events-none md:hidden flex flex-col items-center justify-center text-center px-3 z-10" style={{ paddingTop: 'calc(100% * 1943.4 / 1835 + 1.5rem)' }}>
+            {/* Text container - contains welcome text and hover text */}
+            <motion.div
+              className="mb-8 w-full"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100px',
+                maxWidth: '600px',
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 4,
+                delay: 3.5,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {hoverText && typeof hoverText === 'string' && hoverText.trim() ? (
+                  <motion.div
+                    key={`hover-text-mobile-${hoverText}`}
+                    className="text-xl text-white leading-relaxed text-center px-6"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      maxWidth: '100%',
+                      position: 'relative',
+                      zIndex: 20,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div style={{ position: 'relative', display: 'inline-block', paddingLeft: '1.2em', paddingRight: '1.2em' }}>
+                      <TopQuoteIcon
+                        style={{
+                          position: 'absolute',
+                          left: '0',
+                          top: '-0.2em',
+                          width: '1.2em',
+                          height: '1.2em',
+                        }}
+                        className="text-[var(--accent-teal)]"
+                      />
+                      {(() => {
+                        const parts = hoverText.split(' • ')
+                        if (parts.length > 1) {
+                          const label = parts[0].replace(/::/g, ':')
+                          const labelWithColon = label.endsWith(':') ? label : `${label}:`
+                          const rest = parts.slice(1).join(' • ')
+                          return (
+                            <>
+                              <span>{labelWithColon}</span>
+                              <br />
+                              <span>{rest}</span>
+                            </>
+                          )
+                        } else {
+                          const thought = hoverText.trim()
+                          const splitPoint = thought.match(/[,;]/)
+                          if (splitPoint && splitPoint.index && splitPoint.index > 20) {
+                            const firstPart = thought.substring(0, splitPoint.index + 1)
+                            const secondPart = thought.substring(splitPoint.index + 1).trim()
+                            return (
+                              <>
+                                <span>{firstPart}</span>
+                                <br />
+                                <span>{secondPart}</span>
+                              </>
+                            )
+                          } else {
+                            const midPoint = Math.floor(thought.length / 2)
+                            const spaceIndex = thought.lastIndexOf(' ', midPoint)
+                            if (spaceIndex > 0 && thought.length > 50) {
+                              const firstPart = thought.substring(0, spaceIndex)
+                              const secondPart = thought.substring(spaceIndex + 1)
+                              return (
+                                <>
+                                  <span>{firstPart}</span>
+                                  <br />
+                                  <span>{secondPart}</span>
+                                </>
+                              )
+                            } else {
+                              return <span>{thought}</span>
+                            }
+                          }
+                        }
+                      })()}
+                      <BottomQuoteIcon
+                        style={{
+                          position: 'absolute',
+                          right: '0',
+                          bottom: '-0.2em',
+                          width: '1.2em',
+                          height: '1.2em',
+                        }}
+                        className="text-[var(--accent-teal)]"
+                      />
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="welcome-content-mobile"
+                    className="flex flex-col items-center justify-center"
+                    style={{ position: 'relative', zIndex: 10 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <motion.p
+                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-3"
+                      style={{
+                        fontSize: 'clamp(1.75rem, 8vw, 3.5rem)',
+                      }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      Welcome to my mind
+                    </motion.p>
+                    <motion.p
+                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 font-semibold"
+                      style={{
+                        letterSpacing: '0.05em',
+                        fontSize: 'clamp(0.75rem, 3vw, 0.9rem)',
+                      }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      HOVER ON THE GEARS TO SEE WHAT&apos;S ON IT
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Text stack - centered with max width */}
+            <motion.div
+              className="max-w-2xl space-y-4 px-3 w-full"
+              style={{ marginTop: '10px' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 4,
+                ease: [0.22, 1, 0.36, 1],
+                delay: 3.8
+              }}
+            >
+              <motion.p
+                className="text-sm text-[var(--text-muted-dark)] leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {(() => {
+                  const text = "It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions."
+                  const words = text.split(' ')
+                  const totalWords = words.length
+                  const firstLineWords = Math.ceil(totalWords / 2)
+                  const firstLine = words.slice(0, firstLineWords).join(' ')
+                  const secondLine = words.slice(firstLineWords).join(' ')
+                  return (
+                    <>
+                      {firstLine}
+                      <br />
+                      {secondLine}
+                    </>
+                  )
+                })()}
+              </motion.p>
+
+              <motion.div
+                className="pt-4 flex flex-col items-center justify-center gap-3 w-full"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 4, delay: 5.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <a
+                  href="#work-overview"
+                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 w-full"
+                >
+                  View my work
+                </a>
+                <button
+                  onClick={() => setShowVideoModal(true)}
+                  className="pointer-events-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group w-full"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>Portfolio teaser</span>
+                </button>
+              </motion.div>
+            </motion.div>
+          </div>
+
         </div>
       </section>
 

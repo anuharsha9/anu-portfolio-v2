@@ -210,62 +210,72 @@ export interface Recommendation {
   name: string
   role: string
   company: string
+  relationship: string
 }
 
 export const recommendations: Recommendation[] = [
   {
-    quote: 'Anuja made a significant impact modernizing UX across our legacy enterprise products. She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams. Anuja is bold in her ideas and consistently proactive in turning complex problems into practical, user-centered solutions.',
-    name: 'Vijay Raman',
-    role: 'VP of Product Management',
-    company: 'Cloud Software Group',
-  },
-  {
-    quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive and has greatly contributed to the success of our products. Her design solutions are rooted in a deep understanding of the purpose of the product, always leading to clean designs and products that are a genuine joy to use.',
-    name: 'Marcus Horbach',
-    role: 'Principal Data Scientist',
-    company: 'Cloud Software Group',
-  },
-  {
-    quote: 'During a User Acceptance Test session, Anuja observed me navigating the screen, asking targeted questions about my workflow choices and tracking my visual focus. I was highly impressed with Anuja\'s approach. Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels.',
-    name: 'Anita George',
-    role: 'Principal Account Technology Strategist',
-    company: 'Cloud Software Group',
-  },
-  {
-    quote: 'Anuja demonstrated exceptional ability to understand intricate workflows and translate them into elegant, user-centric designs that elevated the product\'s usability and visual appeal. Her strong command of design principles, attention to detail, and clear communication made collaboration seamless and productive.',
-    name: 'Aniket Awchare',
-    role: 'Senior Product Manager',
-    company: 'Cloud Software Group',
-  },
-  {
-    quote: 'Anuja brings energy and determination to tackling complex design challenges. She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Her enthusiasm for design and willingness to engage with stakeholders made her a valuable part of the team.',
-    name: 'Dave Pfeiffer',
-    role: 'Director of Design',
-    company: 'Cloud Software Group',
-  },
-  {
-    quote: 'She impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design. Beyond her technical and design talent, she\'s a collaborative, thoughtful teammate who makes every project better.',
+    quote: 'From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design.',
     name: 'Yingchun Chen',
     role: 'Principal System Software Engineer',
     company: 'Cloud Software Group',
+    relationship: 'I worked closely with Yingchun on ReportCaster, where he was my engineering partner helping me understand the complex legacy system architecture.',
   },
   {
-    quote: 'Anuja led UX design initiatives with remarkable creativity, empathy, and precision. She consistently demonstrated a deep understanding of user-centered design and the ability to translate complex product requirements into intuitive and visually engaging experiences. What truly stands out is her collaborative spirit and problem-solving mindset.',
+    quote: 'She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams.',
+    name: 'Vijay Raman',
+    role: 'VP of Product Management',
+    company: 'Cloud Software Group',
+    relationship: 'Vijay was the main leadership figure at my workplace, overseeing product strategy across the organization.',
+  },
+  {
+    quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions.',
+    name: 'Dave Pfeiffer',
+    role: 'Director of Design',
+    company: 'Cloud Software Group',
+    relationship: 'Dave was my manager for over 3 years and I collaborated with him closely every single day I was at the company.',
+  },
+  {
+    quote: 'Anticipating the next move of the user, that is next level UI!',
+    name: 'Anita George',
+    role: 'Principal Account Technology Strategist',
+    company: 'Cloud Software Group',
+    relationship: 'Anita was my favorite reliable SME and customer representative for ML Functions and IQ Plugin, providing invaluable user insights.',
+  },
+  {
+    quote: 'Her design thinking workshops and prototype walkthroughs often became the foundation for key product decisions, driving clarity and alignment across cross-functional teams.',
     name: 'Karishma Khadge',
     role: 'Senior Product Manager',
     company: 'Cloud Software Group',
+    relationship: 'Karishma was the PM I collaborated with on ML Functions and IQ Plugin. We had extremely close collaboration—a true partnership.',
   },
   {
-    quote: 'I worked with her on a couple of projects where her design was impactful. She is a collaborative teammate, strong advocate for user research and great designer. Any team would be lucky to have her.',
-    name: 'Shay Bagwell',
-    role: 'Lead Customer Marketing Manager',
+    quote: 'Anuja demonstrated exceptional ability to understand intricate workflows and translate them into elegant, user-centric designs that elevated the product\'s usability and visual appeal.',
+    name: 'Aniket Awchare',
+    role: 'Senior Product Manager',
     company: 'Cloud Software Group',
+    relationship: 'Aniket partnered with me on ML Functions and IQ Plugin after Karishma left the org. We had the same close partnership dynamic.',
   },
   {
-    quote: 'Anu joined us as an intern when she was just starting out, and even then it was clear she had something rare. She grew with us—from learning the basics to independently designing full mobile apps, branding systems, illustrations, and UI/UX for client projects. Her output was massive, her quality was reliable, and she quickly became the designer we trusted for everything. By the time she moved on, she was operating at a level far beyond her experience, ready for enterprise-grade work. Watching her grow into the designer she is today has been incredible, but the foundation was already there from the beginning: talent, drive, and an instinct for great design.',
+    quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive and has greatly contributed to the success of our products.',
+    name: 'Marcus Horbach',
+    role: 'Principal Data Scientist',
+    company: 'Cloud Software Group',
+    relationship: 'I won Marcus\'s trust with ML Functions when I was trying to understand and learn ML. He was the data scientist I collaborated with closely on ML initiatives.',
+  },
+  {
+    quote: 'She quickly became the designer we trusted for everything. By the time she moved on, she was operating at a level far beyond her experience, ready for enterprise-grade work.',
     name: 'Vikram Patel',
     role: 'Co-Founder',
     company: '9P Studioz',
+    relationship: 'Vikram was my first ever boss and my first design job, where I learned the fundamentals of design and client work.',
+  },
+  {
+    quote: 'She is a collaborative teammate, strong advocate for user research and great designer.',
+    name: 'Shay Bagwell',
+    role: 'Lead Customer Marketing Manager',
+    company: 'Cloud Software Group',
+    relationship: 'Shay worked with me on several projects where my design made an impact.',
   },
 ]
 

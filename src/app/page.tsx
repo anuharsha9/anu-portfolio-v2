@@ -3,7 +3,6 @@ import WebFOCUSOverview from '@/components/home/WebFOCUSOverview'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TestimonialsWall from '@/components/home/TestimonialsWall'
 import TalkSection from '@/components/home/TalkSection'
-import CredibilityStrip from '@/components/home/CredibilityStrip'
 import ExecutiveSummary from '@/components/home/ExecutiveSummary'
 import { recommendations } from '@/data/home'
 
@@ -44,7 +43,6 @@ export default function Home() {
     <>
       <HeroBrain />
       <ExecutiveSummary />
-      <CredibilityStrip />
       <WebFOCUSOverview />
       <TestimonialsWall recommendations={recommendations} />
       <CollapsibleWorkArchive />

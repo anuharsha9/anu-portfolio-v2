@@ -2,15 +2,15 @@
 
 import { motion } from 'framer-motion'
 import MotionSection from '@/components/ui/MotionSection'
-import { SectionDivider } from '@/components/brand'
+import { SectionDivider, SignatureLogo } from '@/components/brand'
 
 export default function ExecutiveSummary() {
   return (
-    <MotionSection id="executive-summary" className="surface-dark-alt py-20 md:py-28 border-t border-white/5">
-      {/* Section Divider */}
-      <SectionDivider isLightBackground={false} />
+    <MotionSection id="executive-summary" className="surface-dark-alt py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 border-t border-white/5 relative overflow-hidden">
+      {/* Section Divider - No logo, just spacing */}
+      <div className="flex justify-center pt-0 pb-8 md:pb-12"></div>
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
           whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}
@@ -20,16 +20,24 @@ export default function ExecutiveSummary() {
           className="space-y-12 md:space-y-16"
         >
           {/* Header */}
-          <div className="text-center space-y-6 max-w-3xl mx-auto">
-            <div className="space-y-4">
-              <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-serif leading-tight">
+          <div className="text-center space-y-6 max-w-3xl mx-auto relative">
+            {/* Watermark Logo Above Title - Single watermark, half size */}
+            <div className="absolute -top-[135px] left-1/2 -translate-x-1/2 pointer-events-none hidden lg:block z-0">
+              <motion.div
+                className="w-24 h-24"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.15, scale: 1 }}
+                transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <SignatureLogo className="w-full h-full text-white" />
+              </motion.div>
+            </div>
+            <div className="space-y-4 relative z-10">
+              <h2 className="text-white text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-serif leading-tight">
                 Why I&apos;m an Asset to Your Team
               </h2>
               <p className="text-[var(--accent-teal)] text-base md:text-lg font-medium leading-relaxed">
                 Principal UX Designer transforming complex enterprise systems into intuitive experiences
-              </p>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed">
-                With over a decade of experience across startups, agencies, enterprise products, and freelance consulting, I bring both breadth and depth to every project.
               </p>
             </div>
           </div>
@@ -45,7 +53,7 @@ export default function ExecutiveSummary() {
             {[
               {
                 title: 'Versatile Across Every Space',
-                description: '13 years across startups, agencies, enterprise BI, freelance, mobile, web, branding, and ML/AI. I adapt fast and can design anything from zero.',
+                description: '13 years across startups, agencies, enterprise products, freelance consulting, mobile, web, branding, and ML/AI. I adapt fast, bring both breadth and depth to every project, and can design anything from zero.',
               },
               {
                 title: 'Impact Measured in Millions',

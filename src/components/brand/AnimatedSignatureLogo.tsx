@@ -40,7 +40,9 @@ export default function AnimatedSignatureLogo({
       // Calculate path length
       pathLength = path.getTotalLength()
       if (!pathLength || pathLength === 0 || isNaN(pathLength)) {
-        console.warn('AnimatedSignatureLogo: Invalid path length')
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+          console.warn('AnimatedSignatureLogo: Invalid path length')
+        }
         return
       }
 

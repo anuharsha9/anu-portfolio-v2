@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { CaseStudySection } from '@/types/caseStudy'
+import { useScrollManager } from '@/hooks/useScrollManager'
 
 interface SectionNavProps {
   sections: CaseStudySection[]
@@ -13,66 +14,44 @@ export default function SectionNav({ sections }: SectionNavProps) {
   const observerRef = useRef<IntersectionObserver | null>(null)
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
 
-  useEffect(() => {
+  // Use centralized scroll manager
+  useScrollManager((scrollY) => {
     // Show/hide nav based on scroll position
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 400)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll() // Initial check
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 250 // Offset for header and some padding
-      
-      // Find the section that's currently at or just past the scroll position
-      let currentSection = ''
-      
-      // Check sections in reverse order (from bottom to top)
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i].id)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          const elementTop = window.scrollY + rect.top
-          
-          // If this section's top is above or at our scroll position, it's the active one
-          if (elementTop <= scrollPosition) {
-            currentSection = sections[i].id
-            break
-          }
+    setIsVisible(scrollY > 400)
+    
+    // Update active section
+    const scrollPosition = scrollY + 250 // Offset for header and some padding
+    
+    // Find the section that's currently at or just past the scroll position
+    let currentSection = ''
+    
+    // Check sections in reverse order (from bottom to top)
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const element = document.getElementById(sections[i].id)
+      if (element) {
+        const rect = element.getBoundingClientRect()
+        const elementTop = scrollY + rect.top
+        
+        // If this section's top is above or at our scroll position, it's the active one
+        if (elementTop <= scrollPosition) {
+          currentSection = sections[i].id
+          break
         }
       }
-      
-      // If no section found, use the first one
-      if (!currentSection && sections.length > 0) {
-        currentSection = sections[0].id
-      }
-      
-      setActiveSection(currentSection)
     }
-
-    // Initial update
-    updateActiveSection()
-
-    // Update on scroll with throttling
-    let ticking = false
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection()
-          ticking = false
-        })
-        ticking = true
-      }
+    
+    // If no section found, use the first one
+    if (!currentSection && sections.length > 0) {
+      currentSection = sections[0].id
     }
+    
+    setActiveSection(currentSection)
+  }, [sections])
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
+  useEffect(() => {
 
-    // Also use Intersection Observer as a backup to catch edge cases
+    // Use Intersection Observer as primary method (more performant than scroll listener)
+    // Only use scroll listener for show/hide nav visibility
     const observerOptions = {
       root: null,
       rootMargin: '-150px 0px -50% 0px',
@@ -115,7 +94,6 @@ export default function SectionNav({ sections }: SectionNavProps) {
 
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       observerRef.current?.disconnect()
     }
   }, [sections])

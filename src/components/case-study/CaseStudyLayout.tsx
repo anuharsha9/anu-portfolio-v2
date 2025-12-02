@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { CaseStudyData } from '@/types/caseStudy'
 import MotionSection from '@/components/ui/MotionSection'
@@ -11,49 +12,51 @@ import SectionBlock from './SectionBlock'
 import PrototypeBlock from './PrototypeBlock'
 import PasswordGate from './PasswordGate'
 import FinalSummary from './FinalSummary'
-import ProcessTimelineNav from './ProcessTimelineNav'
-import ImpactVisual from './ImpactVisual'
-import ResearchMethods from './ResearchMethods'
-import PersonaCards from './PersonaCards'
-import ChallengeBreakdown from './ChallengeBreakdown'
-import TeamOnboardingProcess from './TeamOnboardingProcess'
-import SystemMappingBreakdown from './SystemMappingBreakdown'
-import LearningAndTransformation from './LearningAndTransformation'
-import VersionIteration from './VersionIteration'
-import TestimonialCard from './TestimonialCard'
-import PatternConnections from './PatternConnections'
-import ReadingProgress from './ReadingProgress'
-import StructuredData from '@/components/structured-data/StructuredData'
-import MLChallengeBreakdown from './MLChallengeBreakdown'
-import MLLearningJourney from './MLLearningJourney'
-import CompetitiveAnalysisBreakdown from './CompetitiveAnalysisBreakdown'
-import MLWorkflowMapping from './MLWorkflowMapping'
-import ThreeCriticalPivots from './ThreeCriticalPivots'
-import MLTeamCollaboration from './MLTeamCollaboration'
-import LayeredDisclosureVisual from './LayeredDisclosureVisual'
-import FourStepFlowBreakdown from './FourStepFlowBreakdown'
-import EntryPointTransformation from './EntryPointTransformation'
-import MLImpactMetrics from './MLImpactMetrics'
-import SMEValidationQuotes from './SMEValidationQuotes'
-import MLLearningTransformation from './MLLearningTransformation'
-import MLPatternConnections from './MLPatternConnections'
-import MLPersonaCards from './MLPersonaCards'
-import MLRecommendations from './MLRecommendations'
-import IQChallengeBreakdown from './IQChallengeBreakdown'
-import IQPersonaCards from './IQPersonaCards'
-import IQCompetitiveAnalysis from './IQCompetitiveAnalysis'
-import IQDualPersonaJourney from './IQDualPersonaJourney'
-import IQFourPillarsBreakdown from './IQFourPillarsBreakdown'
-import IQChallengesBreakdown from './IQChallengesBreakdown'
-import IQLearningTransformation from './IQLearningTransformation'
-import IQValidationSources from './IQValidationSources'
-import IQPatternConnections from './IQPatternConnections'
 import { CaseStudySignatureBadge, SignatureLogo, SectionDivider } from '@/components/brand'
 import Breadcrumbs from '@/components/navigation/Breadcrumbs'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
 import RelatedCaseStudies from './RelatedCaseStudies'
 import SectionNav from './SectionNav'
 import CaseStudyNav from './CaseStudyNav'
+import StructuredData from '@/components/structured-data/StructuredData'
+
+// Dynamic imports for heavy components - loaded on demand
+const ProcessTimelineNav = dynamic(() => import('./ProcessTimelineNav'), { ssr: false })
+const ImpactVisual = dynamic(() => import('./ImpactVisual'), { ssr: false })
+const ResearchMethods = dynamic(() => import('./ResearchMethods'), { ssr: false })
+const PersonaCards = dynamic(() => import('./PersonaCards'), { ssr: false })
+const ChallengeBreakdown = dynamic(() => import('./ChallengeBreakdown'), { ssr: false })
+const TeamOnboardingProcess = dynamic(() => import('./TeamOnboardingProcess'), { ssr: false })
+const SystemMappingBreakdown = dynamic(() => import('./SystemMappingBreakdown'), { ssr: false })
+const LearningAndTransformation = dynamic(() => import('./LearningAndTransformation'), { ssr: false })
+const VersionIteration = dynamic(() => import('./VersionIteration'), { ssr: false })
+const TestimonialCard = dynamic(() => import('./TestimonialCard'), { ssr: false })
+const PatternConnections = dynamic(() => import('./PatternConnections'), { ssr: false })
+const ReadingProgress = dynamic(() => import('./ReadingProgress'), { ssr: false })
+const MLChallengeBreakdown = dynamic(() => import('./MLChallengeBreakdown'), { ssr: false })
+const MLLearningJourney = dynamic(() => import('./MLLearningJourney'), { ssr: false })
+const CompetitiveAnalysisBreakdown = dynamic(() => import('./CompetitiveAnalysisBreakdown'), { ssr: false })
+const MLWorkflowMapping = dynamic(() => import('./MLWorkflowMapping'), { ssr: false })
+const ThreeCriticalPivots = dynamic(() => import('./ThreeCriticalPivots'), { ssr: false })
+const MLTeamCollaboration = dynamic(() => import('./MLTeamCollaboration'), { ssr: false })
+const LayeredDisclosureVisual = dynamic(() => import('./LayeredDisclosureVisual'), { ssr: false })
+const FourStepFlowBreakdown = dynamic(() => import('./FourStepFlowBreakdown'), { ssr: false })
+const EntryPointTransformation = dynamic(() => import('./EntryPointTransformation'), { ssr: false })
+const MLImpactMetrics = dynamic(() => import('./MLImpactMetrics'), { ssr: false })
+const SMEValidationQuotes = dynamic(() => import('./SMEValidationQuotes'), { ssr: false })
+const MLLearningTransformation = dynamic(() => import('./MLLearningTransformation'), { ssr: false })
+const MLPatternConnections = dynamic(() => import('./MLPatternConnections'), { ssr: false })
+const MLPersonaCards = dynamic(() => import('./MLPersonaCards'), { ssr: false })
+const MLRecommendations = dynamic(() => import('./MLRecommendations'), { ssr: false })
+const IQChallengeBreakdown = dynamic(() => import('./IQChallengeBreakdown'), { ssr: false })
+const IQPersonaCards = dynamic(() => import('./IQPersonaCards'), { ssr: false })
+const IQCompetitiveAnalysis = dynamic(() => import('./IQCompetitiveAnalysis'), { ssr: false })
+const IQDualPersonaJourney = dynamic(() => import('./IQDualPersonaJourney'), { ssr: false })
+const IQFourPillarsBreakdown = dynamic(() => import('./IQFourPillarsBreakdown'), { ssr: false })
+const IQChallengesBreakdown = dynamic(() => import('./IQChallengesBreakdown'), { ssr: false })
+const IQLearningTransformation = dynamic(() => import('./IQLearningTransformation'), { ssr: false })
+const IQValidationSources = dynamic(() => import('./IQValidationSources'), { ssr: false })
+const IQPatternConnections = dynamic(() => import('./IQPatternConnections'), { ssr: false })
 
 interface CaseStudyLayoutProps {
   data: CaseStudyData
@@ -86,6 +89,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
     if (typeof window !== 'undefined') {
       const storageKey = `case-study-unlocked-${data.slug}`
       sessionStorage.setItem(storageKey, 'true')
+
+      // Check if user wants to go to prototype after unlocking
+      const redirectToPrototype = sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'
+      if (redirectToPrototype) {
+        // Clear the flag
+        sessionStorage.removeItem(`redirect-to-prototype-${data.slug}`)
+        // Wait a bit for content to render, then scroll to prototype
+        setTimeout(() => {
+          const prototypeSection = document.getElementById('prototype')
+          if (prototypeSection) {
+            prototypeSection.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 300)
+      }
     }
     setShowPasswordContent(true)
   }
@@ -98,12 +115,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
       {/* Table of Contents - Sticky Navigation */}
       {/* Only show SectionNav if ProcessTimelineNav is not configured (i.e., not for RC, ML, or IQ) */}
-      {data.sections && data.sections.length > 3 && 
-       data.slug !== 'reportcaster' && 
-       data.slug !== 'ml-functions' && 
-       data.slug !== 'iq-plugin' && (
-        <SectionNav sections={data.sections} />
-      )}
+      {data.sections && data.sections.length > 3 &&
+        data.slug !== 'reportcaster' &&
+        data.slug !== 'ml-functions' &&
+        data.slug !== 'iq-plugin' && (
+          <SectionNav sections={data.sections} />
+        )}
 
       {/* ============================================
           PUBLIC SECTION (Visible by default)
@@ -111,18 +128,18 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
       {/* Hero - Dark Immersive Background */}
       <section className="relative surface-dark border-t border-white/5 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 xl:px-20">
+        <div className="max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
           {/* Breadcrumbs */}
           <div className="pt-8 pb-4">
             <Breadcrumbs
               items={[
                 { label: 'Home', href: '/' },
-                { label: 'Work', href: '/#selected-work' },
+                { label: 'Work', href: '/#work-overview' },
                 { label: data.heroTitle },
               ]}
             />
           </div>
-          
+
           {/* Social Share Buttons */}
           <div className="pb-4">
             <SocialShareButtons
@@ -154,15 +171,15 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       </section>
 
       {/* Quick Overview - light background */}
-      <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5 relative">
+      <MotionSection className="surface-light py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 border-t border-black/5 relative">
         {/* Subtle Logo Watermark - Top Left Corner */}
         <div className="absolute top-8 left-8 opacity-[0.02] pointer-events-none hidden lg:block">
           <div className="w-24 h-24">
             <SignatureLogo className="w-full h-full text-black" />
           </div>
         </div>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-                <QuickOverview data={data.quickOverview} heroSubtitle={data.heroSubtitle} caseStudySlug={data.slug} />
+        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+          <QuickOverview data={data.quickOverview} heroSubtitle={data.heroSubtitle} caseStudySlug={data.slug} />
         </div>
       </MotionSection>
 
@@ -170,15 +187,15 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       {data.uxPrinciples && (
         <>
           <SectionDivider isLightBackground={false} />
-        <MotionSection className="surface-dark-alt py-16 md:py-24 border-t border-white/5">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-            <UXPrinciples
-              title={data.uxPrinciples.title}
-              intro={data.uxPrinciples.intro}
-              principles={data.uxPrinciples.principles}
-            />
-          </div>
-        </MotionSection>
+          <MotionSection className="surface-dark-alt py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 border-t border-white/5">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+              <UXPrinciples
+                title={data.uxPrinciples.title}
+                intro={data.uxPrinciples.intro}
+                principles={data.uxPrinciples.principles}
+              />
+            </div>
+          </MotionSection>
         </>
       )}
 
@@ -196,13 +213,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
           return (
             <div key={section.id}>
-            <MotionSection
-              className={`${sectionBg} py-16 md:py-24 border-t ${borderClass}`}
-            >
-              <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+              <MotionSection
+                className={`${sectionBg} py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 border-t ${borderClass}`}
+              >
+                <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                   <SectionBlock section={section} isLightBackground={sectionBg === 'surface-light'} caseStudySlug={data.slug} />
-              </div>
-            </MotionSection>
+                </div>
+              </MotionSection>
 
             </div>
           )
@@ -218,6 +235,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           description={data.passwordGate?.description}
           learnItems={data.passwordGate?.learnItems}
           caseStudySlug={data.slug}
+          redirectToPrototype={typeof window !== 'undefined' && sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'}
         />
       )}
 
@@ -269,7 +287,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
           {/* Gated Header */}
           <MotionSection className="surface-dark py-16 md:py-24 border-t border-white/5">
-            <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
               <div className="space-y-4 text-center">
                 <h2 className="text-white text-3xl md:text-4xl font-serif">
                   Full in-depth Case study
@@ -308,7 +326,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               }
 
               const borderClass = sectionBg.includes('dark') ? 'border-white/5' : 'border-black/5'
-              const paddingClass = 'py-16 md:py-24'
+              const paddingClass = 'py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24'
 
               return (
                 <div key={section.id}>
@@ -318,7 +336,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       id={section.id}
                       className={`${sectionBg} ${paddingClass} border-t ${borderClass}`}
                     >
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <VersionIteration
                           v1={(section as any).v1Data}
                           v2={(section as any).v2Data}
@@ -329,12 +347,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </MotionSection>
                   ) : (
                     <>
-                  {/* Each section */}
+                      {/* Each section */}
                       <MotionSection
                         id={section.id}
                         className={`${sectionBg} ${paddingClass} border-t ${borderClass}`}
                       >
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <SectionBlock section={section} isLightBackground={sectionBg === 'surface-light'} caseStudySlug={data.slug} />
                         </div>
                       </MotionSection>
@@ -344,7 +362,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* Insert System Mapping Breakdown after section 2 - ReportCaster only */}
                   {isSectionTwo && data.slug === 'reportcaster' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <SystemMappingBreakdown isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -354,12 +372,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {isSectionTwo && data.slug === 'reportcaster' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <ResearchMethods isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <PersonaCards isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -369,7 +387,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* ML Functions Visuals - Section 01 */}
                   {section.id === 'section-01' && data.slug === 'ml-functions' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <MLChallengeBreakdown isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -379,18 +397,18 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {isSectionTwo && data.slug === 'ml-functions' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLLearningJourney isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <CompetitiveAnalysisBreakdown isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-                          <IQPersonaCards 
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <IQPersonaCards
                             isLightBackground={true}
                             title="User Personas"
                             description="Four distinct personas with different needs drove the design. The central tension: How do you keep the depth technical users need without overwhelming everyone else?"
@@ -404,12 +422,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-03' && data.slug === 'ml-functions' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLWorkflowMapping isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <ThreeCriticalPivots isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -419,7 +437,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* ML Functions Visuals - Section 04 */}
                   {section.id === 'section-04' && data.slug === 'ml-functions' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <MLTeamCollaboration isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -428,7 +446,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* ML Functions Visuals - Section 05 */}
                   {section.id === 'section-05' && data.slug === 'ml-functions' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LayeredDisclosureVisual isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -445,13 +463,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-07' && data.slug === 'reportcaster' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <ImpactVisual isLightBackground={true} />
                         </div>
                       </MotionSection>
                       {/* Testimonials - ReportCaster only */}
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <div className="space-y-6">
                             <h3 className="text-[#1A1A1A] text-xl md:text-2xl font-serif text-center">
                               Validation from the Team
@@ -482,12 +500,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-07' && data.slug === 'ml-functions' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLImpactMetrics isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLRecommendations isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -498,13 +516,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-08' && data.slug === 'reportcaster' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <LearningAndTransformation isLightBackground={true} />
                         </div>
                       </MotionSection>
                       {/* Pattern Connections Visual - ReportCaster only */}
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <PatternConnections isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -515,12 +533,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-08' && data.slug === 'ml-functions' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLLearningTransformation isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <MLPatternConnections isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -530,7 +548,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* IQ Plugin Visuals - Section 01 */}
                   {section.id === 'section-01' && data.slug === 'iq-plugin' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQChallengeBreakdown isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -539,7 +557,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* IQ Plugin Visuals - Section 02 */}
                   {section.id === 'section-02' && data.slug === 'iq-plugin' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQCompetitiveAnalysis isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -549,12 +567,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-03' && data.slug === 'iq-plugin' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <IQPersonaCards isLightBackground={true} />
                         </div>
                       </MotionSection>
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <IQDualPersonaJourney isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -564,7 +582,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* IQ Plugin Visuals - Section 05 */}
                   {section.id === 'section-05' && data.slug === 'iq-plugin' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQFourPillarsBreakdown isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -573,16 +591,16 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* IQ Plugin Visuals - Section 06 */}
                   {section.id === 'section-06' && data.slug === 'iq-plugin' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                    <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQChallengesBreakdown isLightBackground={true} />
-                    </div>
-                  </MotionSection>
+                      </div>
+                    </MotionSection>
                   )}
 
                   {/* IQ Plugin Visuals - Section 07 */}
                   {section.id === 'section-07' && data.slug === 'iq-plugin' && (
                     <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQValidationSources isLightBackground={true} />
                       </div>
                     </MotionSection>
@@ -592,13 +610,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-08' && data.slug === 'iq-plugin' && (
                     <>
                       <MotionSection className="surface-light py-16 md:py-24">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <IQLearningTransformation isLightBackground={true} />
                         </div>
                       </MotionSection>
                       {/* Pattern Connections Visual - IQ Plugin */}
                       <MotionSection className="surface-light py-16 md:py-24 border-t border-black/5">
-                        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+                        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <IQPatternConnections isLightBackground={true} />
                         </div>
                       </MotionSection>
@@ -608,8 +626,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* Insert PrototypeBlock after version-iteration (ReportCaster) */}
                   {section.id === 'version-iteration' && data.slug === 'reportcaster' && (
                     <MotionSection className="surface-dark py-16 md:py-24 border-t border-white/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-                        <PrototypeBlock prototypeMedia={data.prototypeMedia} />
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <PrototypeBlock prototypeMedia={data.prototypeMedia} caseStudySlug={data.slug} />
                       </div>
                     </MotionSection>
                   )}
@@ -617,17 +635,17 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* Insert PrototypeBlock after Section 05 (IQ Plugin) */}
                   {section.id === 'section-05' && data.slug === 'iq-plugin' && data.prototypeMedia && (
                     <MotionSection id="prototype" className="surface-dark py-16 md:py-24 border-t border-white/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-                        <PrototypeBlock prototypeMedia={data.prototypeMedia} />
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <PrototypeBlock prototypeMedia={data.prototypeMedia} caseStudySlug={data.slug} />
                       </div>
                     </MotionSection>
                   )}
 
-                  {/* Insert PrototypeBlock after Section 05 (ML Functions) */}
-                  {section.id === 'section-05' && data.slug === 'ml-functions' && data.prototypeMedia && (
+                  {/* Insert PrototypeBlock after Section 06 (ML Functions) */}
+                  {section.id === 'section-06' && data.slug === 'ml-functions' && data.prototypeMedia && (
                     <MotionSection id="prototype" className="surface-dark py-16 md:py-24 border-t border-white/5">
-                      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-                        <PrototypeBlock prototypeMedia={data.prototypeMedia} />
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <PrototypeBlock prototypeMedia={data.prototypeMedia} caseStudySlug={data.slug} />
                       </div>
                     </MotionSection>
                   )}
@@ -645,12 +663,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
           {/* Case Study Signature Badge */}
           <MotionSection className="surface-light py-8 md:py-12 border-t border-black/5">
-              <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
               <div className="flex justify-center">
                 <CaseStudySignatureBadge />
               </div>
-              </div>
-            </MotionSection>
+            </div>
+          </MotionSection>
         </>
       )}
 

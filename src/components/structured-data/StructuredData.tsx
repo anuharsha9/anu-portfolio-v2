@@ -96,21 +96,37 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
 
     return {
       '@context': 'https://schema.org',
-      '@type': 'CreativeWork',
-      name: data.heroTitle,
-      description: data.heroSubheading,
+      '@type': 'Article',
+      headline: data.heroTitle,
+      description: data.heroSubtitle || data.heroSubheading,
       author: {
         '@type': 'Person',
         name: 'Anuja Harsha Nimmagadda',
+        url: siteUrl,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Anuja Harsha Nimmagadda',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${siteUrl}/images/og-image.jpg`,
+        },
       },
       image: data.coverImage
-        ? `${siteUrl}${data.coverImage}`
+        ? `${siteUrl}${data.coverImage.src}`
         : `${siteUrl}/images/og-image.jpg`,
       url: `${siteUrl}/work/${data.slug}/`,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `${siteUrl}/work/${data.slug}/`,
+      },
+      datePublished: data.publishedDate || new Date().toISOString(),
+      dateModified: data.updatedDate || new Date().toISOString(),
       about: {
         '@type': 'Thing',
-        name: (data as any).tags?.join(', ') || 'UX Design',
+        name: data.scope?.join(', ') || 'UX Design',
       },
+      keywords: data.scope?.join(', ') || 'UX Design, Enterprise Design',
     }
   }
 

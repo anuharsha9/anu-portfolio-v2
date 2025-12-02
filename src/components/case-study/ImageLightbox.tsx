@@ -5,12 +5,21 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 
+interface ImageItem {
+  src: string
+  alt: string
+  caption?: string
+}
+
 interface ImageLightboxProps {
   isOpen: boolean
   onClose: () => void
   imageSrc: string
   imageAlt: string
   imageCaption?: string
+  images?: ImageItem[] // Array of all images in the current set
+  currentIndex?: number // Current image index in the array
+  onNavigate?: (index: number) => void // Callback for navigation
 }
 
 export default function ImageLightbox({
@@ -19,30 +28,54 @@ export default function ImageLightbox({
   imageSrc,
   imageAlt,
   imageCaption,
+  images,
+  currentIndex = 0,
+  onNavigate,
 }: ImageLightboxProps) {
   const containerRef = useFocusTrap(isOpen)
 
-  // Close on ESC key
-  useEffect(() => {
-    if (!isOpen) return
+  // Determine if navigation is available
+  const hasNavigation = images && images.length > 1 && onNavigate
+  const canGoPrev = hasNavigation && currentIndex > 0
+  const canGoNext = hasNavigation && currentIndex < images.length - 1
 
-    const handleEscape = (e: KeyboardEvent) => {
+  // Handle keyboard navigation
+  useEffect(() => {
+    if (!isOpen || !hasNavigation) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
+      } else if (e.key === 'ArrowLeft' && canGoPrev) {
+        onNavigate(currentIndex - 1)
+      } else if (e.key === 'ArrowRight' && canGoNext) {
+        onNavigate(currentIndex + 1)
       }
     }
 
-    document.addEventListener('keydown', handleEscape)
+    document.addEventListener('keydown', handleKeyDown)
     // Prevent body scroll when lightbox is open
     document.body.style.overflow = 'hidden'
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = 'unset'
     }
-  }, [isOpen, onClose])
+  }, [isOpen, hasNavigation, canGoPrev, canGoNext, currentIndex, onNavigate, onClose])
 
   if (!isOpen) return null
+
+  const handlePrev = () => {
+    if (canGoPrev && onNavigate) {
+      onNavigate(currentIndex - 1)
+    }
+  }
+
+  const handleNext = () => {
+    if (canGoNext && onNavigate) {
+      onNavigate(currentIndex + 1)
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -93,6 +126,52 @@ export default function ImageLightbox({
                 </svg>
               </button>
 
+              {/* Previous Button */}
+              {hasNavigation && canGoPrev && (
+                <button
+                  onClick={handlePrev}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full backdrop-blur-sm"
+                  aria-label="Previous image"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+              )}
+
+              {/* Next Button */}
+              {hasNavigation && canGoNext && (
+                <button
+                  onClick={handleNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full backdrop-blur-sm"
+                  aria-label="Next image"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              )}
+
               {/* Image Container */}
               <div className="relative flex-1 w-full bg-black/20 rounded-lg overflow-hidden">
                 <div className="relative w-full h-full min-h-[400px]">
@@ -107,6 +186,13 @@ export default function ImageLightbox({
                   />
                 </div>
               </div>
+
+              {/* Image Counter */}
+              {hasNavigation && (
+                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm">
+                  {currentIndex + 1} / {images.length}
+                </div>
+              )}
 
               {/* Caption */}
               {imageCaption && (
@@ -130,7 +216,7 @@ export default function ImageLightbox({
                 className="mt-2 text-center"
               >
                 <p className="text-white/40 text-xs">
-                  Press ESC to close
+                  {hasNavigation ? 'Press ESC to close • Use arrow keys to navigate' : 'Press ESC to close'}
                 </p>
               </motion.div>
             </motion.div>
@@ -140,4 +226,3 @@ export default function ImageLightbox({
     </AnimatePresence>
   )
 }
-
