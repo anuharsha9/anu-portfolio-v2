@@ -1,13 +1,16 @@
 'use client'
 
 import MotionSection from '@/components/ui/MotionSection'
+import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 
 interface PrototypeBlockProps {
   prototypeMedia?: {
     title: string
     description?: string
     figmaEmbedUrl?: string
-    videoEmbedUrl?: string
+    videoEmbedUrl?: string // YouTube embed URL
+    videoUrl?: string // Self-hosted video URL (MP4)
+    videoPoster?: string // Poster/thumbnail for self-hosted videos
   }
 }
 
@@ -20,42 +23,66 @@ export default function PrototypeBlock({
 
   return (
     <MotionSection id="prototype" className="space-y-8">
-      <div>
-        <h2 className="text-text text-3xl font-serif">{prototypeMedia.title}</h2>
+      <div className="space-y-4">
+        <h2 className="text-white text-3xl md:text-4xl font-serif">{prototypeMedia.title}</h2>
         {prototypeMedia.description && (
-          <p className="text-muted mt-4 max-w-2xl leading-relaxed">
+          <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
             {prototypeMedia.description}
           </p>
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
-        {prototypeMedia.figmaEmbedUrl && (
-          <div className="space-y-4">
-            <h3 className="text-text text-sm font-medium">
-              Interactive Prototype
-            </h3>
-            <iframe
-              src={prototypeMedia.figmaEmbedUrl}
-              className="w-full h-[420px] md:h-[520px] rounded-2xl border border-white/10 bg-[var(--color-surface)]"
-              allowFullScreen
-            />
+      {/* Self-hosted video */}
+      {prototypeMedia.videoUrl && (
+        <div className="space-y-4 mt-8">
+          <div className="space-y-2">
+            <h3 className="text-white text-lg font-semibold">Video Walkthrough</h3>
+            {prototypeMedia.description ? (
+              <p className="text-white/60 text-sm max-w-2xl">{prototypeMedia.description}</p>
+            ) : (
+              <p className="text-white/60 text-sm max-w-2xl">
+                Watch the walkthrough to see how the final design works in practice.
+              </p>
+            )}
           </div>
-        )}
+          <div className="max-w-[1200px] mx-auto">
+            <div className="relative w-full aspect-video rounded-2xl border border-white/10 bg-[var(--bg-dark-alt)] overflow-hidden">
+              <CustomVideoPlayer
+                src={prototypeMedia.videoUrl}
+                poster={prototypeMedia.videoPoster}
+                className="rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
-        {prototypeMedia.videoEmbedUrl && (
-          <div className="space-y-4">
-            <h3 className="text-text text-sm font-medium">
-              Prototype Walkthrough
-            </h3>
-            <iframe
-              src={prototypeMedia.videoEmbedUrl}
-              className="w-full h-[420px] md:h-[520px] rounded-2xl border border-white/10 bg-[var(--color-surface)]"
-              allowFullScreen
-            />
+      {/* YouTube embed */}
+      {prototypeMedia.videoEmbedUrl && !prototypeMedia.videoUrl && (
+        <div className="space-y-4 mt-8">
+          <div className="space-y-2">
+            <h3 className="text-white text-lg font-semibold">Video Walkthrough</h3>
+            {prototypeMedia.description ? (
+              <p className="text-white/60 text-sm max-w-2xl">{prototypeMedia.description}</p>
+            ) : (
+              <p className="text-white/60 text-sm max-w-2xl">
+                Watch the walkthrough to see how the final design works in practice.
+              </p>
+            )}
           </div>
-        )}
-      </div>
+          <div className="max-w-[1200px] mx-auto">
+            <div className="relative w-full aspect-video rounded-2xl border border-white/10 bg-[var(--bg-dark-alt)] overflow-hidden">
+              <iframe
+                src={prototypeMedia.videoEmbedUrl}
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Video Walkthrough"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </MotionSection>
   )
 }

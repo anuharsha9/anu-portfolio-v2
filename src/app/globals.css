@@ -4,10 +4,668 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer base {
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--bg-dark);
+    color: var(--text-primary-dark);
     font-family: var(--font-sans);
   }
+}
+
+@layer components {
+  .surface-dark {
+    background: var(--bg-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .surface-dark-alt {
+    background: var(--bg-dark-alt);
+    color: var(--text-primary-dark);
+  }
+
+  .surface-light {
+    background: var(--bg-light);
+    color: var(--text-primary-light);
+  }
+
+  .surface-light-alt {
+    background: var(--bg-light-alt);
+    color: var(--text-primary-light);
+  }
+
+  /* Accessibility: Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only.focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Focus visible styles for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Print stylesheet */
+@media print {
+  /* Hide non-essential elements */
+  header,
+  footer,
+  nav,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Ensure content is visible */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Optimize for printing */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+
+  /* Links */
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Images */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+}
+
+/* ============================================
+   BRAIN GEARS ANIMATIONS
+   ============================================ */
+
+/* Main gears: fade in (opacity only) + rotate continuously */
+/* Simplified: All gears fade in with rotation (3s), then main gears rotate continuously, background gears stop */
+
+/* Main gears: full opacity (100%), rotate continuously after fade-in */
+/* Matches: gear-base, gear-base_2, gear-base_3, etc. */
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
+#brain-gears [id^="gear-"]:not(#gears-background) g[id^="gear-base"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) g[id^="gear-base"] {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: layout style paint;
+  filter: none !important;
+  /* Fade in with rotation (3s), then continuous slow rotation */
+  animation:
+    gear-fade-in-main 3s linear forwards,
+    gear-rotate-continuous var(--rotation-duration, 30s) linear infinite 3s;
+}
+
+/* Background gears: fade in with rotation, then very slow continuous rotation */
+#brain-gears #gears-background [id^="bg-gear-"],
+#brain-gears #gears-background g[id^="bg-gear-"],
+#brain-gears #gears-background [id^="gear-base"],
+#brain-gears #gears-background g[id^="gear-base"],
+#brain-gears-copy #gears-background [id^="bg-gear-"],
+#brain-gears-copy #gears-background g[id^="bg-gear-"] {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: layout style paint;
+  filter: none !important;
+  /* Fade in with rotation (3s) at same speed as all gears, then very slow continuous rotation (1/3 speed of main gears) */
+  animation:
+    gear-fade-in-bg 3s linear forwards,
+    gear-rotate-bg-slow var(--rotation-duration, 90s) linear infinite 3s;
+}
+
+/* Hover layer hidden by default - matches base gear rotation */
+/* Matches: gear-hover, gear-hover_2, gear-hover_3, etc. */
+/* Hover gears inherit rotation variables from parent gear group to match base gear */
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+#brain-gears [id^="gear-"]:not(#gears-background) g[id^="gear-hover"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) g[id^="gear-hover"] {
+  transform-origin: center;
+  transform-box: fill-box;
+  opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  contain: layout style paint;
+  filter: none !important;
+  /* Same rotation animation as base gear - variables inherited from parent gear group */
+  animation:
+    gear-fade-in-main 3s linear forwards,
+    gear-rotate-continuous var(--rotation-duration, 30s) linear infinite 3s;
+}
+
+/* Main gears: fade in with rotation (3s), then continuous rotation starts */
+/* During fade-in: rotate at same speed as after fade-in, but 10-15% faster */
+@keyframes gear-fade-in-main {
+  0% {
+    opacity: 0;
+    transform: translateZ(0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
+  }
+}
+
+/* Background gears: fade in with rotation (3s), then very slow continuous rotation */
+/* Background gears have 50% opacity (half of main gears) */
+@keyframes gear-fade-in-bg {
+  0% {
+    opacity: 0;
+    transform: translateZ(0) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0.5;
+    transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
+  }
+}
+
+/* Very slow continuous rotation for background gears (3-4x slower than main gears) */
+@keyframes gear-rotate-bg-slow {
+  from {
+    transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
+  }
+
+  to {
+    transform: translateZ(0) rotate(calc(var(--fade-in-rotation, 0deg) + var(--rotation-amount, 360deg)));
+  }
+}
+
+/* Continuous slow rotation for main gears - varying speeds and directions */
+@keyframes gear-rotate-continuous {
+  from {
+    transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
+  }
+
+  to {
+    transform: translateZ(0) rotate(calc(var(--fade-in-rotation, 0deg) + var(--rotation-amount, 360deg)));
+  }
+}
+
+/* Use GPU acceleration for smoother animations */
+#brain-gears,
+#brain-gears-copy {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Disable filters on ALL rotating gears for better performance */
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"] *,
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"] *,
+#brain-gears #gears-background [id^="bg-gear-"],
+#brain-gears #gears-background [id^="bg-gear-"] *,
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"] *,
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"] *,
+#brain-gears-copy #gears-background [id^="bg-gear-"],
+#brain-gears-copy #gears-background [id^="bg-gear-"] * {
+  filter: none !important;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  contain: layout style paint;
+}
+
+/* Transition for hover interactions - slow and smooth (4x slower) */
+/* Hover lines - hidden by default */
+#brain-gears #hover-lines,
+#brain-gears-copy #hover-lines {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#brain-gears #hover-lines path,
+#brain-gears-copy #hover-lines path {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  stroke: #2C2C2C;
+  stroke-width: 3;
+}
+
+/* Hover gears - hidden by default */
+#brain-gears [id^="gear-hover"],
+#brain-gears g[id^="gear-hover"],
+#brain-gears-copy [id^="gear-hover"],
+#brain-gears-copy g[id^="gear-hover"] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* Hover overlay - ensures full gear area is hoverable (including empty spaces inside) */
+#brain-gears .gear-hover-overlay,
+#brain-gears-copy .gear-hover-overlay {
+  pointer-events: auto !important;
+  cursor: pointer;
+  fill: transparent !important;
+  stroke: none !important;
+  /* Ensure overlay captures all hover events and is on top */
+  z-index: 1000;
+  /* Prevent any interference from other elements */
+  isolation: isolate;
+}
+
+/* Base gear - hide when hover gear is active */
+#brain-gears .gear-main--active [id^="gear-base"],
+#brain-gears .gear-main--active g[id^="gear-base"],
+#brain-gears-copy .gear-main--active [id^="gear-base"],
+#brain-gears-copy .gear-main--active g[id^="gear-base"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s ease-out, visibility 0.4s ease-out !important;
+}
+
+/* Hover gear - show when active */
+#brain-gears .gear-main--active [id^="gear-hover"],
+#brain-gears .gear-main--active g[id^="gear-hover"],
+#brain-gears-copy .gear-main--active [id^="gear-hover"],
+#brain-gears-copy .gear-main--active g[id^="gear-hover"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transition: opacity 0.4s ease-in, visibility 0.4s ease-in !important;
+}
+
+/* Line drawing animation - slow and smooth, final opacity 0.5 (like background gears) */
+@keyframes line-draw-path {
+  from {
+    stroke-dashoffset: var(--path-length, 1000);
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+}
+
+/* Ensure lines start invisible */
+#brain-gears #lines-background path,
+#brain-gears-copy #lines-background path {
+  opacity: 0;
+}
+
+/* Line drawing animation keyframe only */
+
+/* Hover line animation */
+@keyframes line-draw-hover {
+  from {
+    stroke-dashoffset: var(--path-length, 1000);
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Make gears interactive (when gear-main class exists) */
+#brain-gears .gear-main {
+  cursor: pointer;
+  pointer-events: auto;
+  /* Better touch target size on mobile */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Button fill animation - only on hover */
+@keyframes button-fill-sweep {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Button with hover fill animation */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  /* No default animations */
+}
+
+/* Fill overlay - completely hidden by default, fills on hover */
+.btn-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.2) 100%);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Fill animation from left to right on hover */
+.btn-animated:hover::before {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Optional: Add a subtle scale effect on hover for extra polish */
+.btn-animated:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure button text/content is above fill and maintains z-index */
+.btn-animated>*,
+.btn-animated {
+  position: relative;
+  z-index: 2;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+  /* Disable all gear rotations for users who prefer reduced motion */
+  #brain-gears [id^="gear-base"],
+  #brain-gears [id^="bg-gear-"],
+  #brain-gears [id^="gear-hover"] {
+    animation: none !important;
+  }
+
+  /* Show lines fully drawn instead of animating */
+  #brain-gears #lines-background path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  /* Keep fade-in but make it instant */
+  #brain-gears [id^="gear-base"],
+  #brain-gears [id^="bg-gear-"] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  /* Disable button animations for reduced motion */
+  .btn-animated {
+    animation: none !important;
+  }
+
+  .btn-animated::before {
+    display: none !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+
+  /* Reduce animation complexity on mobile for better performance */
+  #brain-gears #lines-background path {
+    /* Limit animated paths on mobile */
+    animation-duration: 30s !important;
+  }
+
+  /* Ensure touch targets are large enough */
+  #brain-gears .gear-main {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ============================================
+   Apple-like Animation System
+   ============================================ */
+
+/* Apple's signature easing curves */
+:root {
+  --ease-apple-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-apple-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-apple-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-apple-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --duration-fast: 0.2s;
+  --duration-standard: 0.3s;
+  --duration-medium: 0.4s;
+  --duration-slow: 0.6s;
+  --duration-slower: 0.8s;
+}
+
+/* ============================================
+   GLOBAL TRANSITIONS
+   ============================================ */
+
+/* Smooth transitions for all interactive elements */
+a,
+button,
+[role="button"] {
+  transition:
+    color var(--duration-standard) var(--ease-apple-standard),
+    background-color var(--duration-standard) var(--ease-apple-standard),
+    border-color var(--duration-standard) var(--ease-apple-standard),
+    transform var(--duration-standard) var(--ease-apple-spring),
+    opacity var(--duration-standard) var(--ease-apple-standard);
+}
+
+/* Cards and containers */
+.card,
+[class*="card"],
+article,
+section {
+  transition:
+    transform var(--duration-standard) var(--ease-apple-spring),
+    opacity var(--duration-medium) var(--ease-apple-standard),
+    box-shadow var(--duration-standard) var(--ease-apple-standard);
+}
+
+/* Images */
+img {
+  transition:
+    transform var(--duration-medium) var(--ease-apple-standard),
+    opacity var(--duration-medium) var(--ease-apple-standard);
+  /* Prevent layout shifts */
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent flickering on animated elements */
+[data-framer-component],
+[data-framer-name] {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize motion sections and prevent flickering - CRITICAL FIX */
+section[data-framer-component],
+[data-framer-name],
+.motion-section-hidden {
+  will-change: opacity, transform;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRITICAL: Ensure motion sections start hidden to prevent flash */
+/* Motion sections start hidden - but let Framer Motion control visibility */
+.motion-section-hidden {
+  /* Don't force hidden with !important - let Framer Motion variants control it */
+  /* Framer Motion will handle opacity and visibility via variants */
+}
+
+/* CRITICAL: All motion.div elements start hidden */
+[data-framer-component][data-initial="hidden"],
+motion.div[data-initial="hidden"],
+motion.section[data-initial="hidden"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Loading screen gear animation */
+@keyframes gear-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gear-loading {
+  animation: gear-rotate 9s linear infinite; /* 3x slower (was 3s, now 9s) */
+}
+
+/* Prevent layout shifts during animations */
+motion.section,
+motion.div {
+  contain: layout style paint;
+}
+
+/* Optimize all animated elements */
+[style*="will-change"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================
+   MICRO-INTERACTIONS
+   ============================================ */
+
+/* Hover lift effect (Apple-like) */
+.hover-lift {
+  transition: transform var(--duration-standard) var(--ease-apple-spring);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* Hover scale effect */
+.hover-scale {
+  transition: transform var(--duration-standard) var(--ease-apple-spring);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Tap scale effect */
+.tap-scale:active {
+  transform: scale(0.98);
+  transition: transform var(--duration-fast) var(--ease-apple-spring);
+}
+
+/* Smooth opacity transitions */
+.fade-in {
+  opacity: 0;
+  transition: opacity var(--duration-medium) var(--ease-apple-standard);
+}
+
+.fade-in.visible {
+  opacity: 1;
 }

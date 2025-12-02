@@ -1,6 +1,11 @@
 import { ReactNode } from 'react'
 import SiteHeader from './SiteHeader'
 import SiteFooter from './SiteFooter'
+import SkipToContent from '@/components/accessibility/SkipToContent'
+import ReadingProgress from '@/components/case-study/ReadingProgress'
+import BackToTop from '@/components/navigation/BackToTop'
+import LandingPageSectionNav from '@/components/navigation/LandingPageSectionNav'
+import URLHashSync from '@/components/navigation/URLHashSync'
 
 interface PageShellProps {
   children: ReactNode
@@ -9,12 +14,16 @@ interface PageShellProps {
 export default function PageShell({ children }: PageShellProps) {
   return (
     <>
+      <SkipToContent />
+      <ReadingProgress />
       <SiteHeader />
-      <main className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 xl:px-24 pt-12 pb-24">
+      <LandingPageSectionNav />
+      <URLHashSync />
+      <main id="main-content">
         {children}
       </main>
+      <BackToTop />
       <SiteFooter />
     </>
   )
 }
-

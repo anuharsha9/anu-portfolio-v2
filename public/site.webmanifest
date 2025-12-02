@@ -1,0 +1,23 @@
+{
+  "name": "Anuja Harsha Nimmagadda - Principal UX Designer",
+  "short_name": "Anuja Harsha",
+  "description": "Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX",
+  "icons": [
+    {
+      "src": "/images/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1A1B1E",
+  "background_color": "#1A1B1E",
+  "display": "standalone",
+  "start_url": "/"
+}
+
+

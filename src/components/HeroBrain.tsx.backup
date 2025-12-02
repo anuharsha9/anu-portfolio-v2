@@ -1,0 +1,1071 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import BrainGears from '@/assets/brain-gears.svg'
+import VideoModal from '@/components/video/VideoModal'
+import { GEAR_LABELS } from '@/data/gear-labels-preserved'
+
+type HoverInfo = {
+  id: string
+  label: string
+  labelLines?: string[] // For multi-line labels
+  x1: number
+  y1: number
+  x2: number
+  y2: number
+  jointX: number
+  jointY: number
+  textX: number // Text position (offset from line end for spacing)
+  textY: number
+}
+
+// Configuration for line directions based on visual
+// Each gear has a specific direction: 'top-left', 'top-right', 'right', 'bottom-left', etc.
+const GEAR_LINE_DIRECTIONS: Record<string, 'top-left' | 'top-right' | 'right' | 'bottom-left' | 'left' | 'top' | 'bottom'> = {
+  'gear-scattered-workflows': 'top-left',
+  'gear-fragmented-ui': 'top-left',
+  'gear-legacy-systems': 'top-left',
+  'gear-missing-briefs': 'top-right',
+  'gear-conflicting-teams': 'right',
+  'gear-shifting-priorities': 'right',
+  'gear-motherhood': 'right',
+  'gear-career-ambition': 'right',
+  'gear-life': 'top-left', // Default, update based on visual
+}
+
+export function HeroBrain() {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [showVideoModal, setShowVideoModal] = useState(false)
+  const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null)
+  const rotationSyncRef = useRef<Map<string, number>>(new Map()) // Store rotation sync animation IDs per gear
+  const activeGearRef = useRef<string | null>(null) // Track which gear is currently active (for mobile tap)
+  const isPageVisibleRef = useRef(true) // Track page visibility for pausing animations
+  const animationPausedRef = useRef(false) // Track if animations are paused
+
+  // Attach hover directly to gears in the SVG
+  useEffect(() => {
+    const container = containerRef.current
+
+    if (!container) {
+      return
+    }
+
+    let timeoutId: NodeJS.Timeout | null = null
+    const animationFrameIds: Set<number> = new Set()
+    let cleanups: Array<() => void> = []
+    let intersectionObserver: IntersectionObserver | null = null
+
+    // Simplified: Assign rotation properties to gears (varying speeds and directions)
+    const setupGearRotations = (brainGearsGroup: SVGGElement) => {
+      // Main gears: continuous slow rotation with varying speeds and directions
+      const mainGearBases = Array.from(
+        brainGearsGroup.querySelectorAll<SVGGElement>('[id^="gear-"]:not(#gears-background) [id^="gear-base"]')
+      )
+      
+      // Background gears: rotate during fade-in, then stop
+      const bgGears = Array.from(
+        brainGearsGroup.querySelectorAll<SVGGElement>('#gears-background [id^="bg-gear-"]')
+      )
+      
+      // Setup main gears: varying speeds (20-40s per rotation) and random directions
+      mainGearBases.forEach((gear) => {
+        const isClockwise = Math.random() > 0.5
+        const rotationSpeed = 20 + Math.random() * 20 // 20-40 seconds per full rotation
+        const fadeInRotation = isClockwise ? 90 : -90 // Rotate 90deg during 3s fade-in
+        
+        gear.style.setProperty('--fade-in-rotation', `${fadeInRotation}deg`)
+        gear.style.setProperty('--rotation-duration', `${rotationSpeed}s`)
+        gear.style.setProperty('--rotation-amount', isClockwise ? '360deg' : '-360deg')
+        
+        // Trigger reflow for SVG element
+        if (gear instanceof HTMLElement) {
+          void gear.offsetHeight
+        } else {
+          // For SVG elements, force style recalculation by accessing computed style
+          void window.getComputedStyle(gear).transform
+        }
+      })
+      
+      // Setup background gears: rotate during fade-in, then stop
+      bgGears.forEach((gear) => {
+        const isClockwise = Math.random() > 0.5
+        const fadeInRotation = isClockwise ? 90 : -90 // Rotate 90deg during 3s fade-in
+        
+        gear.style.setProperty('--fade-in-rotation', `${fadeInRotation}deg`)
+        
+        // Trigger reflow for SVG element
+        if (gear instanceof HTMLElement) {
+          void gear.offsetHeight
+        } else {
+          // For SVG elements, force style recalculation by accessing computed style
+          void window.getComputedStyle(gear).transform
+        }
+      })
+    }
+
+    // Function to find SVG and attach event listeners
+    const attachGearListeners = () => {
+      // Find the SVG root element
+      let svgRoot = container.querySelector<SVGSVGElement>('svg')
+      
+      if (!svgRoot) {
+        // SVG might not be rendered yet, try again after a short delay (max 2 seconds)
+        const retryCount = (attachGearListeners as any).retryCount || 0
+        if (retryCount < 20) {
+          (attachGearListeners as any).retryCount = retryCount + 1
+          timeoutId = setTimeout(attachGearListeners, 100)
+        } else {
+          console.warn('HeroBrain: SVG root not found after multiple retries')
+        }
+        return
+      }
+
+      // Find the brain-gears group inside the SVG
+      const brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
+      
+      if (!brainGearsGroup) {
+        console.warn('HeroBrain: brain-gears group not found inside SVG')
+        return
+      }
+
+      // SVG found, proceed with setup
+
+      // Function to set transform-origin for all rotating gears
+      const setGearTransformOrigins = () => {
+        // Set transform-origin for all main gear-base elements to rotate around their own center
+        // This fixes the "orbiting in a circle" issue where gears were rotating around SVG center
+        const allGearBases = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="gear-base"]')
+        allGearBases.forEach((gearBase) => {
+          try {
+            const bbox = gearBase.getBBox()
+            if (bbox.width > 0 && bbox.height > 0) {
+              const centerX = bbox.x + bbox.width / 2
+              const centerY = bbox.y + bbox.height / 2
+              gearBase.style.transformOrigin = `${centerX}px ${centerY}px`
+            }
+          } catch (e) {
+            // If getBBox fails (element not rendered), try again or fall back to CSS
+            console.warn('HeroBrain: Could not get bounding box for gear-base:', e)
+          }
+        })
+
+        // Set transform-origin for all background gears (bg-gear-1 through bg-gear-20)
+        const allBgGears = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
+        allBgGears.forEach((bgGear) => {
+          try {
+            const bbox = bgGear.getBBox()
+            if (bbox.width > 0 && bbox.height > 0) {
+              const centerX = bbox.x + bbox.width / 2
+              const centerY = bbox.y + bbox.height / 2
+              bgGear.style.transformOrigin = `${centerX}px ${centerY}px`
+            }
+          } catch (e) {
+            // If getBBox fails (element not rendered), try again or fall back to CSS
+            console.warn('HeroBrain: Could not get bounding box for bg-gear:', e)
+          }
+        })
+      }
+
+      // Set transform-origins immediately, then retry after a short delay to ensure SVG is fully rendered
+      setGearTransformOrigins()
+      setTimeout(setGearTransformOrigins, 100)
+
+      // Setup gear rotations IMMEDIATELY so fade-in rotation works
+      // Don't delay - gears need rotation properties set before fade-in animation starts
+      setupGearRotations(brainGearsGroup)
+
+      // Set up continuous drawing animation for background lines
+      const setupLineDrawing = () => {
+        const linesBackground = brainGearsGroup.querySelector<SVGGElement>('#lines-background')
+        if (!linesBackground) {
+          console.warn('HeroBrain: lines-background not found')
+          return
+        }
+
+        const paths = linesBackground.querySelectorAll<SVGPathElement>('path')
+        
+        // Limit to first 12 paths for better performance (reduced from 20)
+        const maxPaths = Math.min(paths.length, 12)
+        const pathsToAnimate = Array.from(paths).slice(0, maxPaths)
+        
+        pathsToAnimate.forEach((path, index) => {
+          try {
+            // Remove any CSS classes that might interfere (cls-82 sets fill:#2d2d2d)
+            path.classList.remove('cls-82')
+            
+            // Force remove fill attribute completely
+            path.removeAttribute('fill')
+            
+            // Set stroke attributes - use original stroke color and opacity
+            const strokeColor = 'rgba(255, 255, 255, 0.06)' // Original opacity
+            path.setAttribute('fill', 'none')
+            path.setAttribute('stroke', strokeColor)
+            path.setAttribute('stroke-width', '1.5')
+            path.setAttribute('stroke-linecap', 'round')
+            path.setAttribute('stroke-linejoin', 'round')
+            
+            // Use inline style with !important to override any CSS
+            path.style.setProperty('fill', 'none', 'important')
+            path.style.setProperty('stroke', strokeColor, 'important')
+            path.style.setProperty('stroke-width', '1.5', 'important')
+            path.style.setProperty('stroke-linecap', 'round', 'important')
+            path.style.setProperty('stroke-linejoin', 'round', 'important')
+            path.style.setProperty('opacity', '1', 'important')
+            path.style.setProperty('visibility', 'visible', 'important')
+            // CRITICAL: Remove ALL transitions and animations
+            path.style.setProperty('transition', 'none', 'important')
+            path.style.setProperty('animation', 'none', 'important')
+            
+            // CRITICAL: Hide path immediately using setProperty with important
+            // Set a temporary large dasharray and dashoffset to hide the path
+            path.style.setProperty('stroke-dasharray', '100000', 'important')
+            path.style.setProperty('stroke-dashoffset', '100000', 'important')
+            path.setAttribute('stroke-dasharray', '100000')
+            path.setAttribute('stroke-dashoffset', '100000')
+            
+            // Wait for SVG to be fully rendered before calculating path length
+            setTimeout(() => {
+              requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                  try {
+                    // Calculate actual path length - for very large paths this might take time
+                    let pathLength = path.getTotalLength()
+                    
+                    // If length is invalid or 0, try to estimate or skip
+                    if (!pathLength || pathLength === 0 || isNaN(pathLength)) {
+                      console.error(`HeroBrain: Path ${index} has invalid length: ${pathLength}, skipping animation`)
+                      // Keep path hidden
+                      path.style.strokeDashoffset = '100000'
+                      path.setAttribute('stroke-dashoffset', '100000')
+                      return
+                    }
+                    
+                    // CRITICAL: Set stroke-dasharray and stroke-dashoffset BEFORE starting animation
+                    // Both must be set for the drawing effect to work
+                    // Use setProperty with important to override any CSS
+                    path.style.setProperty('stroke-dasharray', `${pathLength}`, 'important')
+                    path.style.setProperty('stroke-dashoffset', `${pathLength}`, 'important') // Start hidden
+                    path.setAttribute('stroke-dasharray', `${pathLength}`)
+                    path.setAttribute('stroke-dashoffset', `${pathLength}`)
+                    
+                    // Force a reflow to ensure the browser applies these styles
+                    void window.getComputedStyle(path).transform
+                    
+                    // Small delay to ensure styles are applied before starting animation
+                    setTimeout(() => {
+                      // Continuous drawing animation using requestAnimationFrame
+                      let isAnimating = true
+                      let cycleStart: number | null = null
+                      const drawDuration = 25000 // 25 seconds to draw - much slower for visible drawing effect
+                      const pauseDuration = 2000 // 2 second pause before restart
+                      
+                      // Use throttling to reduce frame updates for performance (20fps for better performance)
+                      let lastUpdateTime = 0
+                      const throttleMs = 50 // ~20fps for better performance with many paths
+                      
+                      const animateLine = (timestamp: number) => {
+                        if (!isAnimating) return
+                        
+                        // Initialize cycle start time
+                        if (cycleStart === null) {
+                          cycleStart = timestamp
+                        }
+                        
+                        // Throttle updates to reduce reflows
+                        if (timestamp - lastUpdateTime < throttleMs) {
+                          if (isAnimating) {
+                            const frameId = requestAnimationFrame(animateLine)
+                            animationFrameIds.add(frameId)
+                          }
+                          return
+                        }
+                        lastUpdateTime = timestamp
+                        
+                        const elapsed = timestamp - (cycleStart || timestamp)
+                        const cycleTime = drawDuration + pauseDuration
+                        const cycleProgress = elapsed % cycleTime
+                        
+                        if (cycleProgress <= drawDuration) {
+                          // Drawing phase - animate stroke-dashoffset from pathLength to 0
+                          const progress = Math.min(cycleProgress / drawDuration, 1)
+                          
+                          // Smooth easing function for better animation feel
+                          const easeOut = 1 - Math.pow(1 - progress, 3)
+                          
+                          // Calculate offset: when progress = 0, offset = pathLength (hidden)
+                          // when progress = 1, offset = 0 (fully visible)
+                          const currentOffset = pathLength * (1 - easeOut)
+                          
+                          // Only update if value changed significantly to reduce reflows
+                          const currentValue = parseFloat(path.style.strokeDashoffset || path.getAttribute('stroke-dashoffset') || String(pathLength))
+                          if (Math.abs(currentValue - currentOffset) > 2) {
+                            path.style.setProperty('stroke-dashoffset', `${currentOffset}`, 'important')
+                          }
+                        } else {
+                          // Pause phase - line fully drawn (offset = 0)
+                          path.style.setProperty('stroke-dashoffset', '0', 'important')
+                        }
+                        
+                        // When cycle completes, reset for continuous loop
+                        // The modulo operator ensures continuous looping
+                        if (cycleProgress >= cycleTime - 50 && cycleStart !== null) {
+                          // Reset cycle start time for next loop
+                          cycleStart = timestamp - (cycleProgress - cycleTime)
+                        }
+                        
+                        // Continue animation loop
+                        if (isAnimating) {
+                          const frameId = requestAnimationFrame(animateLine)
+                          animationFrameIds.add(frameId)
+                        }
+                      }
+                      
+                      // Store cleanup function for this path
+                      cleanups.push(() => {
+                        isAnimating = false
+                      })
+                      
+                      // Start animation with stagger for multiple paths (reduces initial load)
+                      // Stagger by 100ms per path to spread out the animation start times
+                      setTimeout(() => {
+                        const frameId = requestAnimationFrame(animateLine)
+                        animationFrameIds.add(frameId)
+                      }, 50 + (index * 100)) // Stagger each path by 100ms
+                      
+                    }, 50) // Small delay to ensure initial state is set
+                    
+                  } catch (e) {
+                    console.error(`HeroBrain: Error animating path ${index}:`, e)
+                  }
+                })
+              })
+            }, 500 + (index * 100)) // Wait longer for SVG to render, then stagger
+          } catch (e) {
+            console.warn('HeroBrain: Could not setup line drawing for path:', e)
+          }
+        })
+      }
+
+      // Setup line drawing immediately so it animates during the initial fade-in
+      // Start right away so lines draw while gears fade in (3 second fade-in period)
+      setTimeout(setupLineDrawing, 100) // Small delay just to ensure DOM is ready
+
+      // Found the SVG, now attach listeners
+      const foundGears: string[] = []
+      const missingGears: string[] = []
+
+      Object.keys(GEAR_LABELS).forEach((gearId) => {
+        const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
+        if (!gearGroup) {
+          missingGears.push(gearId)
+          return
+        }
+
+        foundGears.push(gearId)
+
+        // Enable pointer events on the gear group
+        gearGroup.style.pointerEvents = 'auto'
+        gearGroup.style.cursor = 'pointer'
+        
+        // Ensure all child elements can also receive pointer events
+        const allChildren = gearGroup.querySelectorAll('*')
+        allChildren.forEach((child) => {
+          if (child instanceof SVGElement) {
+            child.style.pointerEvents = 'auto'
+          }
+        })
+        
+        // Add a transparent overlay circle to cover the entire gear area (including empty centers)
+        // This ensures hover works even when mouse is in empty space within the gear
+        try {
+          const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
+          if (gearBase) {
+            const bbox = gearBase.getBBox()
+            if (bbox.width > 0 && bbox.height > 0) {
+              const centerX = bbox.x + bbox.width / 2
+              const centerY = bbox.y + bbox.height / 2
+              const radius = Math.max(bbox.width, bbox.height) / 2
+              
+              // Check if overlay already exists
+              let overlay = gearGroup.querySelector<SVGCircleElement>('.gear-hover-overlay')
+              if (!overlay) {
+                // Create a transparent circle that covers the entire gear area
+                overlay = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+                overlay.setAttribute('class', 'gear-hover-overlay')
+                overlay.setAttribute('cx', String(centerX))
+                overlay.setAttribute('cy', String(centerY))
+                overlay.setAttribute('r', String(radius))
+                overlay.setAttribute('fill', 'transparent')
+                overlay.setAttribute('stroke', 'none')
+                overlay.style.pointerEvents = 'auto'
+                overlay.style.cursor = 'pointer'
+                
+                // Insert at the beginning so it's behind the gear but still captures hover
+                gearGroup.insertBefore(overlay, gearGroup.firstChild)
+              }
+            }
+          }
+        } catch (e) {
+          console.warn(`HeroBrain: Could not create hover overlay for ${gearId}:`, e)
+        }
+
+        const handleEnter = (e: MouseEvent | TouchEvent) => {
+          e.stopPropagation()
+          e.preventDefault()
+          
+          // Find the SVG element to get its viewBox
+          const svgRoot = container.querySelector<SVGSVGElement>('svg')
+          if (!svgRoot) return
+          
+          // Get SVG viewBox dimensions
+          const viewBox = svgRoot.viewBox.baseVal
+          const svgWidth = viewBox.width || 923 // fallback to known dimensions
+          const svgHeight = viewBox.height || 871
+          const svgCenterX = svgWidth / 2
+          const svgCenterY = svgHeight / 2
+          
+          // Get gear position in SVG coordinates
+          const gearRect = gearGroup.getBoundingClientRect()
+          const containerRect = container.getBoundingClientRect()
+          
+          // Calculate gear center in container coordinates
+          const gearCenterX = gearRect.left + gearRect.width / 2 - containerRect.left
+          const gearCenterY = gearRect.top + gearRect.height / 2 - containerRect.top
+          
+          // Get gear's actual size to calculate edge point
+          const gearBaseForRadius = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
+          let gearRadius = Math.max(gearRect.width, gearRect.height) / 2 // Fallback to bounding rect
+          
+          if (gearBaseForRadius) {
+            try {
+              const bbox = gearBaseForRadius.getBBox()
+              gearRadius = Math.max(bbox.width, bbox.height) / 2
+            } catch (e) {
+              // Use fallback
+            }
+          }
+          
+          // Convert to SVG coordinates (assuming container maintains aspect ratio)
+          const containerWidth = containerRect.width
+          const containerHeight = containerRect.height
+          const scaleX = svgWidth / containerWidth
+          const scaleY = svgHeight / containerHeight
+          
+          const gearSvgX = gearCenterX * scaleX
+          const gearSvgY = gearCenterY * scaleY
+          const gearSvgRadius = gearRadius * scaleX // Use scaleX for radius (assuming uniform scaling)
+          
+          // Calculate distances to each edge
+          const distToLeft = gearSvgX
+          const distToRight = svgWidth - gearSvgX
+          const distToTop = gearSvgY
+          const distToBottom = svgHeight - gearSvgY
+          
+          // Find the closest edge (direction to exit SVG)
+          const minDist = Math.min(distToLeft, distToRight, distToTop, distToBottom)
+          
+          // Determine direction based on visual configuration or closest edge
+          const lineDirection = GEAR_LINE_DIRECTIONS[gearId] || 
+            (minDist === distToLeft ? 'left' : 
+             minDist === distToRight ? 'right' : 
+             minDist === distToTop ? 'top' : 'bottom')
+          
+          // Calculate edge point (where line starts from gear edge)
+          let edgeStartX: number
+          let edgeStartY: number
+          
+          // Calculate line with joint (angled + horizontal segment) based on specific direction
+          let jointX: number // End of angled segment
+          let jointY: number
+          let lineEndX: number // End of horizontal segment (where text sits)
+          let lineEndY: number
+          const angledLength = 80 // Length of angled segment in SVG coordinates
+          const horizontalLength = 60 // Length of horizontal segment in SVG coordinates
+          
+          switch (lineDirection) {
+            case 'top-left':
+              // Edge point: top-left of gear
+              edgeStartX = gearSvgX - gearSvgRadius * 0.707 // cos(45deg) = 0.707
+              edgeStartY = gearSvgY - gearSvgRadius * 0.707 // sin(45deg) = 0.707
+              // Angled up-left, then horizontal left
+              jointX = edgeStartX - angledLength * 0.7
+              jointY = edgeStartY - angledLength * 0.7
+              lineEndX = jointX - horizontalLength
+              lineEndY = jointY
+              break
+            case 'top-right':
+              // Edge point: top-right of gear
+              edgeStartX = gearSvgX + gearSvgRadius * 0.707
+              edgeStartY = gearSvgY - gearSvgRadius * 0.707
+              // Angled up-right, then horizontal right
+              jointX = edgeStartX + angledLength * 0.7
+              jointY = edgeStartY - angledLength * 0.7
+              lineEndX = jointX + horizontalLength
+              lineEndY = jointY
+              break
+            case 'right':
+              // Edge point: right edge of gear
+              edgeStartX = gearSvgX + gearSvgRadius
+              edgeStartY = gearSvgY
+              // Angled right, then horizontal right
+              jointX = edgeStartX + angledLength
+              jointY = edgeStartY
+              lineEndX = jointX + horizontalLength
+              lineEndY = jointY
+              break
+            case 'bottom-left':
+              // Edge point: bottom-left of gear
+              edgeStartX = gearSvgX - gearSvgRadius * 0.707
+              edgeStartY = gearSvgY + gearSvgRadius * 0.707
+              // Angled down-left, then horizontal left
+              jointX = edgeStartX - angledLength * 0.7
+              jointY = edgeStartY + angledLength * 0.7
+              lineEndX = jointX - horizontalLength
+              lineEndY = jointY
+              break
+            case 'left':
+              // Edge point: left edge of gear
+              edgeStartX = gearSvgX - gearSvgRadius
+              edgeStartY = gearSvgY
+              // Angled left, then horizontal left
+              jointX = edgeStartX - angledLength
+              jointY = edgeStartY
+              lineEndX = jointX - horizontalLength
+              lineEndY = jointY
+              break
+            case 'top':
+              // Edge point: top edge of gear
+              edgeStartX = gearSvgX
+              edgeStartY = gearSvgY - gearSvgRadius
+              // Angled up, then horizontal
+              jointX = edgeStartX
+              jointY = edgeStartY - angledLength
+              lineEndX = jointX
+              lineEndY = jointY - horizontalLength
+              break
+            case 'bottom':
+              // Edge point: bottom edge of gear
+              edgeStartX = gearSvgX
+              edgeStartY = gearSvgY + gearSvgRadius
+              // Angled down, then horizontal
+              jointX = edgeStartX
+              jointY = edgeStartY + angledLength
+              lineEndX = jointX
+              lineEndY = jointY + horizontalLength
+              break
+            default:
+              // Fallback to closest edge
+              if (minDist === distToLeft) {
+                edgeStartX = gearSvgX - gearSvgRadius
+                edgeStartY = gearSvgY
+                jointX = edgeStartX - angledLength
+                jointY = edgeStartY
+                lineEndX = jointX - horizontalLength
+                lineEndY = jointY
+              } else if (minDist === distToRight) {
+                edgeStartX = gearSvgX + gearSvgRadius
+                edgeStartY = gearSvgY
+                jointX = edgeStartX + angledLength
+                jointY = edgeStartY
+                lineEndX = jointX + horizontalLength
+                lineEndY = jointY
+              } else if (minDist === distToTop) {
+                edgeStartX = gearSvgX
+                edgeStartY = gearSvgY - gearSvgRadius
+                jointX = edgeStartX
+                jointY = edgeStartY - angledLength
+                lineEndX = jointX
+                lineEndY = jointY - horizontalLength
+              } else {
+                edgeStartX = gearSvgX
+                edgeStartY = gearSvgY + gearSvgRadius
+                jointX = edgeStartX
+                jointY = edgeStartY + angledLength
+                lineEndX = jointX
+                lineEndY = jointY + horizontalLength
+              }
+          }
+          
+          // Add spacing between line end and text (in SVG coordinates)
+          const textSpacing = 30 // pixels in SVG space - increased for better spacing
+          let textX = lineEndX
+          let textY = lineEndY
+          
+          // Offset text position based on line direction to add spacing
+          switch (lineDirection) {
+            case 'top-left':
+            case 'left':
+              textX = lineEndX - textSpacing // Move left
+              break
+            case 'top-right':
+            case 'right':
+              textX = lineEndX + textSpacing // Move right
+              break
+            case 'top':
+              textY = lineEndY - textSpacing // Move up
+              break
+            case 'bottom':
+            case 'bottom-left':
+              textY = lineEndY + textSpacing // Move down
+              break
+            default:
+              // Default: move right if horizontal, down if vertical
+              if (Math.abs(lineEndX - jointX) > Math.abs(lineEndY - jointY)) {
+                textX = lineEndX + textSpacing
+              } else {
+                textY = lineEndY + textSpacing
+              }
+              break
+          }
+          
+          // Convert back to container coordinates for rendering
+          const x1 = edgeStartX / scaleX
+          const y1 = edgeStartY / scaleY
+          const jointXContainer = jointX / scaleX
+          const jointYContainer = jointY / scaleY
+          const x2 = lineEndX / scaleX
+          const y2 = lineEndY / scaleY
+          const textXContainer = textX / scaleX
+          const textYContainer = textY / scaleY
+          
+          // Reorder elements so gear-hover appears above gear-base
+          // In SVG, elements that come later in DOM appear on top
+          const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
+          const gearHover = gearGroup.querySelector<SVGGElement>('[id^="gear-hover"]')
+          
+          if (gearBase && gearHover && gearGroup.contains(gearBase) && gearGroup.contains(gearHover)) {
+            // Check if gear-hover comes before gear-base in DOM
+            const allChildren = Array.from(gearGroup.children)
+            const baseIndex = allChildren.indexOf(gearBase)
+            const hoverIndex = allChildren.indexOf(gearHover)
+            
+            if (hoverIndex < baseIndex) {
+              // Move gear-hover after gear-base so it appears on top
+              gearBase.parentNode?.insertBefore(gearHover, gearBase.nextSibling)
+            }
+            
+            // Align gear-hover exactly on top of gear-base and apply same animation
+            try {
+              const baseBbox = gearBase.getBBox()
+              const hoverBbox = gearHover.getBBox()
+              
+              if (baseBbox.width > 0 && baseBbox.height > 0 && hoverBbox.width > 0 && hoverBbox.height > 0) {
+                // Calculate center for gear-base (this is what gear-base rotates around)
+                const baseCenterX = baseBbox.x + baseBbox.width / 2
+                const baseCenterY = baseBbox.y + baseBbox.height / 2
+                
+                // Calculate center for gear-hover
+                const hoverCenterX = hoverBbox.x + hoverBbox.width / 2
+                const hoverCenterY = hoverBbox.y + hoverBbox.height / 2
+                
+                // Set transform-origin to gear-base's center so rotation happens around same point
+                gearHover.style.transformOrigin = `${baseCenterX}px ${baseCenterY}px`
+                
+                // Calculate offset to align gear-hover's center with gear-base's center
+                const offsetX = baseCenterX - hoverCenterX
+                const offsetY = baseCenterY - hoverCenterY
+                
+                // Get rotation properties from gear-base to apply EXACT same animation to hover gear
+                const rotationDuration = gearBase.style.getPropertyValue('--rotation-duration') || '30s'
+                const rotationAmount = gearBase.style.getPropertyValue('--rotation-amount') || '360deg'
+                const fadeInRotation = gearBase.style.getPropertyValue('--fade-in-rotation') || '0deg'
+                
+                // Get current rotation of gear-base to sync hover gear's starting position
+                const getCurrentRotation = () => {
+                  const computedTransform = window.getComputedStyle(gearBase).transform
+                  if (computedTransform && computedTransform !== 'none') {
+                    const matrixMatch = computedTransform.match(/matrix\(([^)]+)\)/)
+                    if (matrixMatch) {
+                      const values = matrixMatch[1].split(',').map(v => parseFloat(v.trim()))
+                      if (values.length >= 4) {
+                        // Calculate rotation from matrix: atan2(b, a)
+                        return Math.atan2(values[1], values[0]) * (180 / Math.PI)
+                      }
+                    }
+                  }
+                  // Fallback to fade-in-rotation
+                  return parseFloat(fadeInRotation.replace('deg', '')) || 0
+                }
+                
+                // Get current rotation and set it as starting point for hover gear
+                const currentRotation = getCurrentRotation()
+                
+                // Apply EXACT same rotation properties to hover gear
+                gearHover.style.setProperty('--fade-in-rotation', `${currentRotation}deg`)
+                gearHover.style.setProperty('--rotation-duration', rotationDuration)
+                gearHover.style.setProperty('--rotation-amount', rotationAmount)
+                
+                // Apply translation AND initial rotation in a single transform
+                // This aligns the hover gear with the base gear and sets the starting rotation
+                gearHover.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${currentRotation}deg)`
+                
+                // Use ONLY the continuous rotation animation (skip fade-in) to match base gear's pace exactly
+                // This ensures the hover gear rotates at the EXACT same speed and direction as the base gear
+                gearHover.style.animation = `gear-rotate-continuous ${rotationDuration} linear infinite`
+              }
+            } catch (err) {
+              console.warn('HeroBrain: Could not align gear-hover with gear-base:', err)
+            }
+          }
+
+          // Check if label should be split into multiple lines (all two-word labels)
+          const label = GEAR_LABELS[gearId]
+          let labelLines: string[] | undefined
+          
+          // Split multi-line labels
+          if (label.includes('\n')) {
+            labelLines = label.split('\n')
+          }
+          
+          setHoverInfo({
+            id: gearId,
+            label,
+            labelLines,
+            x1,
+            y1,
+            x2,
+            y2,
+            jointX: jointXContainer,
+            jointY: jointYContainer,
+            textX: textXContainer,
+            textY: textYContainer,
+          })
+
+          gearGroup.classList.add('gear-main--active')
+        }
+
+        const handleLeave = (e: MouseEvent | TouchEvent) => {
+          e.stopPropagation()
+          e.preventDefault()
+          
+          // Stop any rotation sync animation if it exists
+          const syncFrameId = rotationSyncRef.current.get(gearId)
+          if (syncFrameId) {
+            cancelAnimationFrame(syncFrameId)
+            rotationSyncRef.current.delete(gearId)
+          }
+          
+          // Clear hover info first (line and text will fade out)
+          setHoverInfo((prev) => (prev?.id === gearId ? null : prev))
+          
+          // Remove active class - CSS transitions will handle smooth fade
+          // The base gear will fade in smoothly, hover gear will fade out smoothly
+          gearGroup.classList.remove('gear-main--active')
+          
+          // Clean up hover gear animation after transition completes
+          const gearHover = gearGroup.querySelector<SVGGElement>('[id^="gear-hover"]')
+          if (gearHover) {
+            // Wait for transition to complete before clearing animation
+            setTimeout(() => {
+              gearHover.style.animation = 'none'
+              gearHover.style.transform = ''
+            }, 400) // Match transition duration
+          }
+        }
+
+        // Desktop: hover interactions
+        gearGroup.addEventListener('mouseenter', handleEnter)
+        gearGroup.addEventListener('mouseleave', handleLeave)
+        
+        // Mobile: tap interactions
+        const handleTouchStart = (e: TouchEvent) => {
+          e.stopPropagation()
+          // If another gear is active, close it first
+          if (activeGearRef.current && activeGearRef.current !== gearId) {
+            const prevGear = brainGearsGroup.querySelector<SVGGElement>(`#${activeGearRef.current}`)
+            if (prevGear) {
+              prevGear.classList.remove('gear-main--active')
+              setHoverInfo(null)
+            }
+          }
+          
+          // Toggle current gear
+          if (activeGearRef.current === gearId) {
+            // Close if already open
+            activeGearRef.current = null
+            gearGroup.classList.remove('gear-main--active')
+            setHoverInfo(null)
+          } else {
+            // Open this gear
+            activeGearRef.current = gearId
+            handleEnter(e)
+          }
+        }
+        
+        const handleClick = (e: MouseEvent) => {
+          // For devices that support both mouse and touch, prefer hover on desktop
+          // Only use click as fallback if hover didn't work
+          if (window.matchMedia('(hover: hover)').matches) {
+            // Desktop with mouse - hover should handle it
+            return
+          }
+          // Mobile/tablet - treat as tap
+          handleTouchStart(e as any)
+        }
+        
+        gearGroup.addEventListener('touchstart', handleTouchStart, { passive: false })
+        gearGroup.addEventListener('click', handleClick)
+
+        cleanups.push(() => {
+          gearGroup.removeEventListener('mouseenter', handleEnter)
+          gearGroup.removeEventListener('mouseleave', handleLeave)
+          gearGroup.removeEventListener('touchstart', handleTouchStart)
+          gearGroup.removeEventListener('click', handleClick)
+          // Clean up rotation sync animation
+          const syncFrameId = rotationSyncRef.current.get(gearId)
+          if (syncFrameId) {
+            cancelAnimationFrame(syncFrameId)
+            rotationSyncRef.current.delete(gearId)
+          }
+        })
+      }) // Close forEach loop
+
+      // Log which gears were found/missing
+      if (foundGears.length > 0) {
+        // Gears configured successfully
+      }
+      if (missingGears.length > 0) {
+        console.warn(
+          `HeroBrain: Missing ${missingGears.length} gear IDs in SVG:`,
+          missingGears
+        )
+      }
+    }
+
+    // Start trying to attach listeners after a brief delay to ensure SVG is rendered
+    timeoutId = setTimeout(attachGearListeners, 200)
+
+    // Recalculate on resize
+    const handleResize = () => {
+      setHoverInfo(null)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      // Run cleanups first (stops animations)
+      cleanups.forEach((fn) => fn())
+      // Then cancel all animation frames
+      animationFrameIds.forEach(id => cancelAnimationFrame(id))
+      animationFrameIds.clear()
+      rotationSyncRef.current.forEach(id => cancelAnimationFrame(id))
+      rotationSyncRef.current.clear()
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  return (
+    <>
+      <section
+        id="hero-brain"
+        className="relative w-full flex items-center justify-center overflow-visible surface-dark"
+        style={{ 
+          minHeight: '100vh',
+          paddingTop: '2rem',
+          paddingBottom: '4rem',
+          marginBottom: '4rem'
+        }}
+      >
+        {/* Brain container - original size */}
+        <div
+          ref={containerRef}
+          className="relative w-full max-w-[1200px] overflow-visible"
+          style={{ aspectRatio: '1943.4 / 1835' }}
+        >
+          {/* Brain SVG - gears fade in while rotating */}
+          <motion.div
+            className="absolute inset-0 pointer-events-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }} // Full opacity for SVG container
+            transition={{ duration: 3, ease: 'easeOut' }}
+          >
+            <BrainGears 
+              className="h-full w-full" 
+              style={{ pointerEvents: 'auto', opacity: 1 }} // Full opacity for SVG
+              id="brain-gears-svg"
+            />
+          </motion.div>
+
+          {/* Text content - centered inside brain */}
+          <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+            {/* Text stack - centered with max width */}
+            <motion.div
+              className="max-w-2xl space-y-6"
+              initial={{ opacity: 0, scale: 0.85, y: -40 }}
+              animate={{ opacity: 1, scale: 1.0, y: 0 }}
+              transition={{ 
+                duration: 2.5,
+                ease: [0.25, 0.1, 0.25, 1], // Smoother Apple-style easing
+                delay: 1.5 // Starts 1.5s earlier, while gears are still fading in
+              }}
+            >
+              {/* Main hero text - "Welcome to my mind" */}
+              <motion.h1
+                className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-[var(--text-primary-dark)]"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 4, delay: 3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Welcome to my mind
+              </motion.h1>
+
+              {/* Subheading */}
+              <motion.p
+                className="text-lg md:text-xl text-[var(--text-muted-dark)] leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 4, delay: 4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
+              </motion.p>
+
+              {/* CTA buttons */}
+              <div className="pt-4 flex items-center justify-center gap-3">
+                <motion.a
+                  href="#work-overview"
+                  className="pointer-events-auto inline-flex items-center rounded-full border border-white/20 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 4, delay: 5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  View my work
+                </motion.a>
+
+                <motion.button
+                  onClick={() => setShowVideoModal(true)}
+                  className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-6 py-3 text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 4, delay: 5.4, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>Portfolio teaser</span>
+                </motion.button>
+              </div>
+
+              {/* Hover discoverability hint - appears right after main text */}
+              <motion.p
+                className="text-xs text-[var(--text-muted-dark)] uppercase tracking-wider pb-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 1.5, 
+                  delay: 4.0, // Appears right after "Welcome to my mind" finishes animating (1.5s delay + 2.5s duration)
+                  ease: [0.25, 0.1, 0.25, 1] // Matching smooth easing
+                }}
+              >
+                Hover over the rotating gears to explore
+              </motion.p>
+            </motion.div>
+          </div>
+
+          {/* Scroll cue at bottom center */}
+          <motion.div
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 5.0 }}
+          >
+            <p className="text-xs text-[var(--text-muted-dark)] uppercase tracking-wider">
+              Scroll to see what my mind built
+            </p>
+          </motion.div>
+
+          {/* Hover label overlay (line + word) - can extend outside SVG bounds */}
+          {hoverInfo && (
+            <motion.svg
+              className="pointer-events-none absolute"
+              style={{ 
+                zIndex: 10,
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                overflow: 'visible'
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* Animated line drawing from gear to outside with joint */}
+              <motion.path
+                d={`M ${hoverInfo.x1} ${hoverInfo.y1} L ${hoverInfo.x1} ${hoverInfo.y1}`}
+                stroke="rgba(255, 255, 255, 1)"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                initial={{ pathLength: 0 }}
+                animate={{ 
+                  pathLength: 1,
+                  // Line with joint: angled segment from gear to joint, then horizontal to end
+                  d: `M ${hoverInfo.x1} ${hoverInfo.y1} L ${hoverInfo.jointX} ${hoverInfo.jointY} L ${hoverInfo.x2} ${hoverInfo.y2}`
+                }}
+                transition={{ 
+                  duration: 0.4, 
+                  ease: 'easeOut' 
+                }}
+              />
+              {/* Small circle at joint point */}
+              <motion.circle
+                cx={hoverInfo.jointX}
+                cy={hoverInfo.jointY}
+                r={0}
+                fill="rgba(255, 255, 255, 1)"
+                initial={{ r: 0 }}
+                animate={{ r: 2 }}
+                transition={{ delay: 0.4, duration: 0.2 }}
+              />
+              {/* Text at end of horizontal segment - positioned with spacing from line */}
+              <motion.text
+                x={hoverInfo.textX}
+                y={hoverInfo.textY}
+                dy={hoverInfo.textY > hoverInfo.jointY ? (hoverInfo.labelLines ? -14 : 10) : hoverInfo.textY < hoverInfo.jointY ? (hoverInfo.labelLines ? 14 : -10) : 0}
+                textAnchor={hoverInfo.textX > hoverInfo.jointX ? 'start' : hoverInfo.textX < hoverInfo.jointX ? 'end' : 'middle'}
+                fill="rgba(255, 255, 255, 1)"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.2 }}
+                style={{
+                  fontSize: '28px', // 2x larger (was 14px)
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  fontWeight: '500',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {hoverInfo.labelLines ? (
+                  // Multi-line text using tspan elements
+                  hoverInfo.labelLines.map((line, index) => (
+                    <tspan
+                      key={index}
+                      x={hoverInfo.textX}
+                      dy={index === 0 ? 0 : 44} // Increased line spacing (28px font + 16px gap for better readability)
+                      textAnchor={hoverInfo.textX > hoverInfo.jointX ? 'start' : hoverInfo.textX < hoverInfo.jointX ? 'end' : 'middle'}
+                    >
+                      {line}
+                    </tspan>
+                  ))
+                ) : (
+                  hoverInfo.label || 'Placeholder Text'
+                )}
+              </motion.text>
+            </motion.svg>
+          )}
+        </div>
+      </section>
+
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={showVideoModal}
+        onClose={() => setShowVideoModal(false)}
+        videoSrc="/videos/portfolio-teaser.mp4"
+      />
+    </>
+  )
+}

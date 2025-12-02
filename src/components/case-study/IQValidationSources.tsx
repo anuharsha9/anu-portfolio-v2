@@ -1,0 +1,79 @@
+'use client'
+
+interface IQValidationSourcesProps {
+  isLightBackground?: boolean
+}
+
+export default function IQValidationSources({ isLightBackground = false }: IQValidationSourcesProps) {
+  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
+  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
+  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
+  const accentColor = 'var(--accent-teal)'
+
+  const sources = [
+    {
+      source: 'Internal Usability Tests',
+      description: 'Internal usability tests highlighted how much easier it was to find and understand DSML features when everything lived in one place. Users who had to navigate between three different systems could now access everything from a single entry point.',
+      icon: '🧪',
+    },
+    {
+      source: 'Stakeholder Feedback',
+      description: 'Stakeholders and internal teams called out the clarity of the workflows and the balance between depth and simplicity. The dual-persona approach resonated — technical users felt empowered, non-technical users felt supported.',
+      icon: '💬',
+    },
+    {
+      source: 'Learning Curve Reduction',
+      description: 'The learning curve dropped: new users needed fewer explanations to get started, and non-technical users were more willing to try features they previously avoided. IQ demonstrated that DSML features could be both powerful and approachable.',
+      icon: '📉',
+    },
+  ]
+
+  return (
+    <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
+      <div className="space-y-8">
+        {/* Header */}
+        <div className="text-center space-y-3">
+          <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>
+            Impact & Validation
+          </h3>
+          <p className={`${mutedColor} text-base md:text-lg max-w-3xl mx-auto`}>
+            Even before full production rollout (scheduled for summer 2026), IQ showed strong promise. The validation came from multiple sources, demonstrating that thoughtful UX architecture could serve both technical experts and everyday business users.
+          </p>
+        </div>
+
+        {/* Validation Sources Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {sources.map((item, index) => (
+            <div
+              key={index}
+              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
+              style={{ borderColor: accentColor + '40' }}
+            >
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-2xl flex-shrink-0"
+                    style={{ backgroundColor: accentColor + '20' }}
+                  >
+                    {item.icon}
+                  </div>
+                  <h4 className={`${textColor} text-lg font-semibold`}>{item.source}</h4>
+                </div>
+                <p className={`${mutedColor} text-sm leading-relaxed`}>{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Note */}
+        <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-6 border-l-4 mt-8`} style={{ borderLeftColor: accentColor }}>
+          <p className={`${textColor} text-base leading-relaxed text-center`}>
+            <span className="font-semibold" style={{ color: accentColor }}>The result:</span> IQ demonstrated that we didn&apos;t have to choose between depth and simplicity — we could design for both through thoughtful UX architecture. The patterns I developed became part of my design vocabulary and directly influenced how I approach complex, multi-persona design challenges.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
