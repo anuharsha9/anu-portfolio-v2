@@ -107,11 +107,29 @@ export default function SiteHeader() {
               onClick={(e) => {
                 e.preventDefault()
                 if (pathname === '/') {
-                  // Already on homepage, just scroll
-                  const section = document.getElementById('work-overview')
-                  if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  // Already on homepage, wait a bit then scroll with proper offset
+                  setTimeout(() => {
+                    const section = document.getElementById('work-overview')
+                    if (section) {
+                      // Account for both main nav (60px) and section nav (60px) if visible
+                      const mainNavHeight = 60
+                      const sectionNavHeight = 60
+                      const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
+                      const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
+                      const offset = totalNavHeight + 20 // Extra padding
+                      
+                      const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+                      const offsetPosition = Math.max(0, elementPosition - offset)
+
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth',
+                      })
+                      
+                      // Update URL hash
+                      window.history.pushState(null, '', '#work-overview')
+                    }
+                  }, 100)
                 } else {
                   // On other pages (case studies, /me), navigate to home with hash
                   window.location.href = '/#work-overview'
@@ -144,11 +162,29 @@ export default function SiteHeader() {
               onClick={(e) => {
                 e.preventDefault()
                 if (pathname === '/') {
-                  // Already on homepage, just scroll
-                  const section = document.getElementById('lets-talk')
-                  if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  // Already on homepage, wait a bit then scroll with proper offset
+                  setTimeout(() => {
+                    const section = document.getElementById('lets-talk')
+                    if (section) {
+                      // Account for both main nav (60px) and section nav (60px) if visible
+                      const mainNavHeight = 60
+                      const sectionNavHeight = 60
+                      const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
+                      const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
+                      const offset = totalNavHeight + 20 // Extra padding
+                      
+                      const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+                      const offsetPosition = Math.max(0, elementPosition - offset)
+
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth',
+                      })
+                      
+                      // Update URL hash
+                      window.history.pushState(null, '', '#lets-talk')
+                    }
+                  }, 100)
                 } else {
                   // On other pages (case studies, /me), navigate to home with hash
                   window.location.href = '/#lets-talk'

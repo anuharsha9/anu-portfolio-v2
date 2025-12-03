@@ -9,7 +9,7 @@ const landingPageSections = [
   'work-overview',
   'testimonials',
   'work-archive',
-  'contact',
+  'lets-talk',
 ]
 
 export default function URLHashSync() {
@@ -19,8 +19,33 @@ export default function URLHashSync() {
     // Only run on landing page
     if (pathname !== '/') return
 
-    // Always start at top on initial load, regardless of hash
-    // Clear any hash and scroll to top
+    // Check if there's a hash in the URL (user navigated from another page)
+    const hash = window.location.hash.slice(1) // Remove the #
+    if (hash && landingPageSections.includes(hash)) {
+      // User navigated from another page with a hash - scroll to that section
+      setTimeout(() => {
+        const section = document.getElementById(hash)
+        if (section) {
+          // Account for both main nav (60px) and section nav (60px) if visible
+          const mainNavHeight = 60
+          const sectionNavHeight = 60
+          const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
+          const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
+          const offset = totalNavHeight + 20 // Extra padding
+          
+          const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+          const offsetPosition = Math.max(0, elementPosition - offset)
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          })
+        }
+      }, 500) // Wait for page to fully render
+      return // Don't clear hash or scroll to top
+    }
+
+    // No hash - always start at top on initial load
     window.history.replaceState(null, '', window.location.pathname)
     window.scrollTo({ top: 0, behavior: 'instant' })
 

@@ -161,7 +161,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     }
   }, [])
   
-  // Use global unlock or prop unlock
+  // For sensitive images, always check unlock status (don't rely on isUnlocked prop)
+  // The isUnlocked prop is for password-gated case studies, but individual images can be locked independently
   const actuallyUnlocked = isUnlocked || globalUnlocked
   
   // Calculate if section should be locked entirely (if >50% of content is sensitive)
@@ -519,55 +520,93 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {subsection.images
                                   .filter(img => !img.fullWidth)
-                                  .map((image, imgIndex) => (
-                                    <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
-                                      <div
-                                        className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                                        onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
-                                      >
-                                        <Image
-                                          src={image.src}
-                                          alt={image.alt}
-                                          width={1200}
-                                          height={800}
-                                          className="w-full h-auto object-contain"
-                                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                          loading="lazy"
-                                        />
+                                  .map((image, imgIndex) => {
+                                    const imageContent = (
+                                      <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
+                                        <div
+                                          className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                          onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
+                                        >
+                                          <Image
+                                            src={image.src}
+                                            alt={image.alt}
+                                            width={1200}
+                                            height={800}
+                                            className="w-full h-auto object-contain"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            loading="lazy"
+                                          />
+                                        </div>
+                                        {image.caption && (
+                                          <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                                            {image.caption}
+                                          </p>
+                                        )}
                                       </div>
-                                      {image.caption && (
-                                        <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                                          {image.caption}
-                                        </p>
-                                      )}
-                                    </div>
-                                  ))}
+                                    )
+
+                                    if (image.sensitive) {
+                                      return (
+                                        <LockedContent
+                                          key={`sub-img-${subIndex}-${imgIndex}`}
+                                          isUnlocked={false}
+                                          password={password}
+                                          caseStudySlug={caseStudySlug}
+                                          isLightBackground={isLightBackground}
+                                          unlockMessage="Password required to view this image"
+                                        >
+                                          {imageContent}
+                                        </LockedContent>
+                                      )
+                                    }
+
+                                    return imageContent
+                                  })}
                               </div>
                             )}
                             {/* Full width images below the grid */}
-                            {subsection.images.filter(img => img.fullWidth).map((image, imgIndex) => (
-                              <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
-                                <div
-                                  className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                                  onClick={() => openLightbox(image.src, image.alt, image.caption)}
-                                >
-                                  <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    width={1200}
-                                    height={800}
-                                    className="w-full h-auto object-contain"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                                    loading="lazy"
-                                  />
+                            {subsection.images.filter(img => img.fullWidth).map((image, imgIndex) => {
+                              const imageContent = (
+                                <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
+                                  <div
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                                  >
+                                    <Image
+                                      src={image.src}
+                                      alt={image.alt}
+                                      width={1200}
+                                      height={800}
+                                      className="w-full h-auto object-contain"
+                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                  {image.caption && (
+                                    <p className={`${mutedColor} text-sm text-center mt-3 px-6`}>
+                                      {image.caption}
+                                    </p>
+                                  )}
                                 </div>
-                                {image.caption && (
-                                  <p className={`${mutedColor} text-sm text-center mt-3 px-6`}>
-                                    {image.caption}
-                                  </p>
-                                )}
-                              </div>
-                            ))}
+                              )
+
+                              if (image.sensitive) {
+                                return (
+                                  <LockedContent
+                                    key={`sub-img-full-${subIndex}-${imgIndex}`}
+                                    isUnlocked={false}
+                                    password={password}
+                                    caseStudySlug={caseStudySlug}
+                                    isLightBackground={isLightBackground}
+                                    unlockMessage="Password required to view this image"
+                                  >
+                                    {imageContent}
+                                  </LockedContent>
+                                )
+                              }
+
+                              return imageContent
+                            })}
                           </>
                         )}
                         {/* For Schedule Dialog: Compact gallery with expand option */}
@@ -681,29 +720,48 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         {/* For Distribution List and Access List: 2x2 grid */}
                         {use2x2Grid && subsection.images && (
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {subsection.images.map((image, imgIndex) => (
-                              <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
-                                <div
-                                  className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                                  onClick={() => openLightbox(image.src, image.alt, image.caption)}
-                                >
-                                  <Image
-                                    src={image.src}
-                                    alt={image.alt}
-                                    width={1200}
-                                    height={800}
-                                    className="w-full h-auto object-contain"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                                    loading="lazy"
-                                  />
+                            {subsection.images.map((image, imgIndex) => {
+                              const imageContent = (
+                                <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
+                                  <div
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                                  >
+                                    <Image
+                                      src={image.src}
+                                      alt={image.alt}
+                                      width={1200}
+                                      height={800}
+                                      className="w-full h-auto object-contain"
+                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                  {image.caption && (
+                                    <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                                      {image.caption}
+                                    </p>
+                                  )}
                                 </div>
-                                {image.caption && (
-                                  <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                                    {image.caption}
-                                  </p>
-                                )}
-                              </div>
-                            ))}
+                              )
+
+                              if (image.sensitive && !actuallyUnlocked) {
+                                return (
+                                  <LockedContent
+                                    key={`sub-img-${subIndex}-${imgIndex}`}
+                                    isUnlocked={actuallyUnlocked}
+                                    password={password}
+                                    caseStudySlug={caseStudySlug}
+                                    isLightBackground={isLightBackground}
+                                    unlockMessage="Password required to view this image"
+                                  >
+                                    {imageContent}
+                                  </LockedContent>
+                                )
+                              }
+
+                              return imageContent
+                            })}
                           </div>
                         )}
                         {/* For other always-open subsections: default grid */}
@@ -838,14 +896,30 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         {/* Entry Point Transformation for ML Functions Section 06 */}
                         {section.id === 'section-06' && subsection.title === 'Multiple ways to launch ML Functions from the HUB' && caseStudySlug === 'ml-functions' && (
                           <div className="pt-4">
-                            <EntryPointTransformation isLightBackground={isLightBackground} />
+                            <LockedContent
+                              isUnlocked={false}
+                              password={password}
+                              caseStudySlug={caseStudySlug}
+                              isLightBackground={isLightBackground}
+                              unlockMessage="Password required to view new workflow entry points"
+                            >
+                              <EntryPointTransformation isLightBackground={isLightBackground} />
+                            </LockedContent>
                           </div>
                         )}
 
                         {/* Four Step Flow Breakdown for ML Functions Section 06 - The main step workflow UI */}
                         {section.id === 'section-06' && subsection.title === 'The main step workflow UI' && caseStudySlug === 'ml-functions' && (
                           <div className="pt-4 pb-4">
-                            <FourStepFlowBreakdown isLightBackground={isLightBackground} />
+                            <LockedContent
+                              isUnlocked={false}
+                              password={password}
+                              caseStudySlug={caseStudySlug}
+                              isLightBackground={isLightBackground}
+                              unlockMessage="Password required to view new 4-step guided workflow"
+                            >
+                              <FourStepFlowBreakdown isLightBackground={isLightBackground} />
+                            </LockedContent>
                           </div>
                         )}
 
@@ -880,8 +954,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                       ? 'md:grid-cols-2'
                                       : 'md:grid-cols-2 lg:grid-cols-3'
                             } gap-6`}>
-                            {subsection.images.map((image, imgIndex) =>
-                              image.fullWidth ? (
+                            {subsection.images.map((image, imgIndex) => {
+                              const imageContent = image.fullWidth ? (
                                 <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="col-span-full space-y-2 p-2">
                                   <div
                                     className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
@@ -924,7 +998,24 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                   )}
                                 </div>
                               )
-                            )}
+
+                              if (image.sensitive && !actuallyUnlocked) {
+                                return (
+                                  <LockedContent
+                                    key={`sub-img-${subIndex}-${imgIndex}`}
+                                    isUnlocked={actuallyUnlocked}
+                                    password={password}
+                                    caseStudySlug={caseStudySlug}
+                                    isLightBackground={isLightBackground}
+                                    unlockMessage="Password required to view this image"
+                                  >
+                                    {imageContent}
+                                  </LockedContent>
+                                )
+                              }
+
+                              return imageContent
+                            })}
                           </div>
                         )}
                       </div>
@@ -970,7 +1061,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {section.beforeAfter && (
         <div className="space-y-4">
           <LockedContent
-            isUnlocked={isUnlocked}
+            isUnlocked={section.beforeAfter.before.sensitive === true ? false : isUnlocked}
             password={password}
             caseStudySlug={caseStudySlug}
             unlockMessage="Password required to view before/after comparison"
@@ -1020,42 +1111,61 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               {/* Image Grid */}
               <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 transition-all duration-500 ${showAllLegacyImages ? 'opacity-100' : 'opacity-100'
                 }`}>
-                {(showAllLegacyImages ? images : images.slice(0, 4)).map((image, index) => (
-                  <div
-                    key={`legacy-img-${index}`}
-                    className="group space-y-2"
-                  >
+                {(showAllLegacyImages ? images : images.slice(0, 4)).map((image, index) => {
+                  const imageContent = (
                     <div
-                      className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.03] hover:shadow-xl bg-black/5`}
-                      onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                      key={`legacy-img-${index}`}
+                      className="group space-y-2"
                     >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
-                        loading="lazy"
-                      />
-                      {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                        <svg
-                          className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                        </svg>
+                      <div
+                        className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.03] hover:shadow-xl bg-black/5`}
+                        onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                      >
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 300px"
+                          loading="lazy"
+                        />
+                        {/* Overlay on hover */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                          <svg
+                            className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                          </svg>
+                        </div>
                       </div>
+                      {image.caption && (
+                        <p className={`${mutedColor} text-xs leading-relaxed line-clamp-2`}>
+                          {image.caption.split(':')[0]}
+                        </p>
+                      )}
                     </div>
-                    {image.caption && (
-                      <p className={`${mutedColor} text-xs leading-relaxed line-clamp-2`}>
-                        {image.caption.split(':')[0]}
-                      </p>
-                    )}
-                  </div>
-                ))}
+                  )
+
+                  if (image.sensitive) {
+                    return (
+                      <LockedContent
+                        key={`legacy-img-${index}`}
+                        isUnlocked={false}
+                        password={password}
+                        caseStudySlug={caseStudySlug}
+                        isLightBackground={isLightBackground}
+                        unlockMessage="Password required to view this image"
+                      >
+                        {imageContent}
+                      </LockedContent>
+                    )
+                  }
+
+                  return imageContent
+                })}
               </div>
 
               {/* Expand hint */}
@@ -1068,57 +1178,33 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               )}
             </div>
           ) : images.length === 1 ? (
-            section.images![0].fullWidth ? (
-              <div className="w-screen relative left-[calc(50%-50vw)]">
-                <div
-                  className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
-                  onClick={() => openLightbox(section.images![0].src, section.images![0].alt, section.images![0].caption)}
-                >
-                  <Image
-                    src={section.images![0].src}
-                    alt={section.images![0].alt}
-                    width={1920}
-                    height={1080}
-                    className="w-full h-auto object-contain"
-                    sizes="100vw"
-                  />
-                </div>
-                {section.images![0].caption && (
-                  <p className={`${mutedColor} text-sm text-center mt-4 px-6`}>
-                    {section.images![0].caption}
-                  </p>
-                )}
-              </div>
-            ) : (
-              <div className="space-y-3 p-2">
-                <div
-                  className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                  onClick={() => openLightbox(section.images![0].src, section.images![0].alt, section.images![0].caption)}
-                >
-                  <Image
-                    src={section.images![0].src}
-                    alt={section.images![0].alt}
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto object-contain"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                  />
-                </div>
-                {section.images![0].caption && (
-                  <p className={`${mutedColor} text-sm`}>
-                    {section.images![0].caption}
-                  </p>
-                )}
-              </div>
-            )
-          ) : images.some(img => img.fullWidth) && images.length > 1 ? (
-            // Layout for sections with multiple images where some are fullWidth
-            <div className="space-y-4">
-              {/* Full-width images first */}
-              {images.filter(img => img.fullWidth).map((image, index) => (
-                <div key={`img-full-${index}`} className="space-y-2">
+            (() => {
+              const image = section.images![0]
+              const imageContent = image.fullWidth ? (
+                <div className="w-screen relative left-[calc(50%-50vw)]">
                   <div
-                    className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                    className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
+                    onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={1920}
+                      height={1080}
+                      className="w-full h-auto object-contain"
+                      sizes="100vw"
+                    />
+                  </div>
+                  {image.caption && (
+                    <p className={`${mutedColor} text-sm text-center mt-4 px-6`}>
+                      {image.caption}
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-3 p-2">
+                  <div
+                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                   >
                     <Image
@@ -1126,45 +1212,126 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                       alt={image.alt}
                       width={1200}
                       height={800}
-                      className="w-full h-auto max-w-full object-contain"
+                      className="w-full h-auto object-contain"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                      loading="lazy"
                     />
                   </div>
                   {image.caption && (
-                    <p className={`${mutedColor} text-sm text-center mt-3 px-6`}>
+                    <p className={`${mutedColor} text-sm`}>
                       {image.caption}
                     </p>
                   )}
                 </div>
-              ))}
+              )
+
+              if (image.sensitive) {
+                return (
+                  <LockedContent
+                    isUnlocked={false}
+                    password={password}
+                    caseStudySlug={caseStudySlug}
+                    isLightBackground={isLightBackground}
+                    unlockMessage="Password required to view this image"
+                  >
+                    {imageContent}
+                  </LockedContent>
+                )
+              }
+
+              return imageContent
+            })()
+          ) : images.some(img => img.fullWidth) && images.length > 1 ? (
+            // Layout for sections with multiple images where some are fullWidth
+            <div className="space-y-4">
+              {/* Full-width images first */}
+              {images.filter(img => img.fullWidth).map((image, index) => {
+                const imageContent = (
+                  <div key={`img-full-${index}`} className="space-y-2">
+                    <div
+                      className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                      onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={1200}
+                        height={800}
+                        className="w-full h-auto max-w-full object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                        loading="lazy"
+                      />
+                    </div>
+                    {image.caption && (
+                      <p className={`${mutedColor} text-sm text-center mt-3 px-6`}>
+                        {image.caption}
+                      </p>
+                    )}
+                  </div>
+                )
+
+                if (image.sensitive) {
+                  return (
+                    <LockedContent
+                      key={`img-full-${index}`}
+                      isUnlocked={false}
+                      password={password}
+                      caseStudySlug={caseStudySlug}
+                      isLightBackground={isLightBackground}
+                      unlockMessage="Password required to view this image"
+                    >
+                      {imageContent}
+                    </LockedContent>
+                  )
+                }
+
+                return imageContent
+              })}
               {/* 2x2 grid for remaining images */}
               {images.filter(img => !img.fullWidth).length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {images
                     .filter(img => !img.fullWidth)
-                    .map((image, index) => (
-                      <div key={`img-grid-${index}`} className="space-y-2">
-                        <div
-                          className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                          onClick={() => openLightbox(image.src, image.alt, image.caption)}
-                        >
-                          <Image
-                            src={image.src}
-                            alt={image.alt}
-                            width={1200}
-                            height={800}
-                            className="w-full h-auto object-contain"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                          />
+                    .map((image, index) => {
+                      const imageContent = (
+                        <div key={`img-grid-${index}`} className="space-y-2">
+                          <div
+                            className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                            onClick={() => openLightbox(image.src, image.alt, image.caption)}
+                          >
+                            <Image
+                              src={image.src}
+                              alt={image.alt}
+                              width={1200}
+                              height={800}
+                              className="w-full h-auto object-contain"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                            />
+                          </div>
+                          {image.caption && (
+                            <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                              {image.caption}
+                            </p>
+                          )}
                         </div>
-                        {image.caption && (
-                          <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                            {image.caption}
-                          </p>
-                        )}
-                      </div>
-                    ))}
+                      )
+
+                        if (image.sensitive) {
+                          return (
+                            <LockedContent
+                              key={`img-grid-${index}`}
+                              isUnlocked={false}
+                              password={password}
+                              caseStudySlug={caseStudySlug}
+                              isLightBackground={isLightBackground}
+                              unlockMessage="Password required to view this image"
+                            >
+                              {imageContent}
+                            </LockedContent>
+                          )
+                        }
+
+                      return imageContent
+                    })}
                 </div>
               )}
             </div>
@@ -1192,8 +1359,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
                     {isExpanded && (
                       <div className={`grid grid-cols-1 ${group.length >= 3 ? 'md:grid-cols-2' : 'md:grid-cols-2'} ${group.length >= 6 ? 'lg:grid-cols-3' : ''} gap-4`}>
-                        {group.map((image, imgIndex) => (
-                          image.fullWidth ? (
+                        {group.map((image, imgIndex) => {
+                          const imageContent = image.fullWidth ? (
                             <div
                               key={`group-img-${groupIndex}-${imgIndex}`}
                               className="col-span-full w-full max-w-full overflow-hidden"
@@ -1239,7 +1406,24 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               )}
                             </div>
                           )
-                        ))}
+
+                            if (image.sensitive) {
+                              return (
+                                <LockedContent
+                                  key={`group-img-${groupIndex}-${imgIndex}`}
+                                  isUnlocked={false}
+                                  password={password}
+                                  caseStudySlug={caseStudySlug}
+                                  isLightBackground={isLightBackground}
+                                  unlockMessage="Password required to view this image"
+                                >
+                                  {imageContent}
+                                </LockedContent>
+                              )
+                            }
+
+                          return imageContent
+                        })}
                       </div>
                     )}
                   </div>
@@ -1353,70 +1537,115 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
             // Special layout for ReportCaster section-01: 3 images with admin below explorer
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* First image - left column, full height */}
-              <div className="space-y-2 p-2">
-                <div
-                  className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                  onClick={() => openLightbox(images[0].src, images[0].alt, images[0].caption)}
-                >
-                  <Image
-                    src={images[0].src}
-                    alt={images[0].alt}
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto object-contain"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  />
-                </div>
-                {images[0].caption && (
-                  <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                    {images[0].caption}
-                  </p>
-                )}
-              </div>
+              {(() => {
+                const imageContent = (
+                  <div className="space-y-2 p-2">
+                    <div
+                      className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                      onClick={() => openLightbox(images[0].src, images[0].alt, images[0].caption)}
+                    >
+                      <Image
+                        src={images[0].src}
+                        alt={images[0].alt}
+                        width={1200}
+                        height={800}
+                        className="w-full h-auto object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                      />
+                    </div>
+                    {images[0].caption && (
+                      <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                        {images[0].caption}
+                      </p>
+                    )}
+                  </div>
+                )
+                return images[0].sensitive ? (
+                  <LockedContent
+                    isUnlocked={false}
+                    password={password}
+                    caseStudySlug={caseStudySlug}
+                    isLightBackground={isLightBackground}
+                    unlockMessage="Password required to view this image"
+                  >
+                    {imageContent}
+                  </LockedContent>
+                ) : imageContent
+              })()}
               {/* Right column: explorer on top, admin below */}
               <div className="space-y-4">
                 {/* Explorer - top */}
-                <div className="space-y-2 p-2">
-                  <div
-                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                    onClick={() => openLightbox(images[1].src, images[1].alt, images[1].caption)}
-                  >
-                    <Image
-                      src={images[1].src}
-                      alt={images[1].alt}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                    />
-                  </div>
-                  {images[1].caption && (
-                    <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                      {images[1].caption}
-                    </p>
-                  )}
-                </div>
+                {(() => {
+                  const imageContent = (
+                    <div className="space-y-2 p-2">
+                      <div
+                        className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                        onClick={() => openLightbox(images[1].src, images[1].alt, images[1].caption)}
+                      >
+                        <Image
+                          src={images[1].src}
+                          alt={images[1].alt}
+                          width={1200}
+                          height={800}
+                          className="w-full h-auto object-contain"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                        />
+                      </div>
+                      {images[1].caption && (
+                        <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                          {images[1].caption}
+                        </p>
+                      )}
+                    </div>
+                  )
+                  return images[1].sensitive ? (
+                    <LockedContent
+                      isUnlocked={false}
+                      password={password}
+                      caseStudySlug={caseStudySlug}
+                      isLightBackground={isLightBackground}
+                      unlockMessage="Password required to view this image"
+                    >
+                      {imageContent}
+                    </LockedContent>
+                  ) : imageContent
+                })()}
                 {/* Admin - below explorer */}
-                <div className="space-y-2 p-2">
-                  <div
-                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
-                    onClick={() => openLightbox(images[2].src, images[2].alt, images[2].caption)}
-                  >
-                    <Image
-                      src={images[2].src}
-                      alt={images[2].alt}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                    />
-                  </div>
-                  {images[2].caption && (
-                    <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
-                      {images[2].caption}
-                    </p>
-                  )}
-                </div>
+                {(() => {
+                  const imageContent = (
+                    <div className="space-y-2 p-2">
+                      <div
+                        className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                        onClick={() => openLightbox(images[2].src, images[2].alt, images[2].caption)}
+                      >
+                        <Image
+                          src={images[2].src}
+                          alt={images[2].alt}
+                          width={1200}
+                          height={800}
+                          className="w-full h-auto object-contain"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                        />
+                      </div>
+                      {images[2].caption && (
+                        <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                          {images[2].caption}
+                        </p>
+                      )}
+                    </div>
+                  )
+                  return images[2].sensitive ? (
+                    <LockedContent
+                      isUnlocked={false}
+                      password={password}
+                      caseStudySlug={caseStudySlug}
+                      isLightBackground={isLightBackground}
+                      unlockMessage="Password required to view this image"
+                    >
+                      {imageContent}
+                    </LockedContent>
+                  ) : imageContent
+                })()}
               </div>
             </div>
           ) : (

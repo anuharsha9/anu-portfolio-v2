@@ -180,18 +180,6 @@ Even after I understood it, I found it frustrating and unintuitive. If a designe
       ],
       subsections: [
         {
-          title: 'Early Ideation: Hand-Drawn Wireframes',
-          description: 'The design process started with hand-drawn wireframes — capturing initial thoughts, exploring different approaches, and mapping out the user journey before moving to digital tools. This foundational work informed every decision in the final design, including the critical pivot to separate Train and Run workflows.',
-          images: [
-            {
-              src: '/images/case-study/ml-functions/Machine learning functions-handdrawn-wireframes.png',
-              alt: 'Machine learning functions hand-drawn wireframes',
-              caption: 'Hand-drawn wireframes: The foundation of the ML Functions redesign — early ideation, concept exploration, and workflow mapping',
-              fullWidth: true,
-            },
-          ],
-        },
-        {
           title: 'Workflow Planning & Architecture',
           description: 'Systematic mapping of the existing workflow, user journeys, and system architecture to inform the redesign strategy. These diagrams became the foundation for understanding how users thought about ML workflows and how the system architecture needed to support the new guided experience.',
           sensitive: true,
@@ -256,39 +244,22 @@ Replaced fragmented flow with honest, linear workflow. The new guided workflow: 
             },
           ],
         },
-        {
-          title: 'Workflow Planning & Architecture',
-          description: 'Systematic mapping of the existing workflow, user journeys, and system architecture to inform the redesign strategy.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/1. ML UI Structure.png',
-              alt: 'ML UI Structure',
-              caption: 'ML UI Structure: The system architecture and information architecture that became the foundation for the redesign',
-              fullWidth: true,
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/Overview of ML workflow based on user.png',
-              alt: 'Overview of ML workflow based on user',
-              caption: 'Overview of ML workflow based on user: User-based workflow mapping',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/ML functions inital workflow.png',
-              alt: 'ML functions initial workflow',
-              caption: 'ML functions initial workflow: Early workflow planning',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/all model types architecture map.png',
-              alt: 'All model types architecture map',
-              caption: 'All model types architecture map: Complete system architecture',
-              fullWidth: true,
-              sensitive: true,
-            },
-          ],
-        },
+      ],
+    },
+    {
+      id: 'section-04',
+      index: 'I',
+      title: 'Iterate with Inclusion: Balancing Control with Simplicity',
+      body: `After mapping the existing workflow and understanding the problems (Section 02), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
+
+I worked with Product to co-define scope, with Engineering to validate feasibility, with Data Scientists to validate ML logic, and with SMEs to exercise flows. Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation. The confusion matrix screen alone went through 10+ iterations as we aligned on layout, order of tabs, and what users should see first after training. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."`,
+      revealsTitle: 'What this reveals',
+      revealsPoints: [
+        'I lead cross-functional teams through complex technical projects over 6–8 month timelines, managing constraints and juggling multiple projects',
+        'I translate between technical and user perspectives by learning enough to say "no" to scope creep while earning respect from domain experts',
+        'I make Principal-level decisions with incomplete but sufficient knowledge — moving from "outsider learning ML" to trusted design leader',
+      ],
+      subsections: [
         {
           title: 'Multiple ways to launch ML Functions from the HUB',
           description: 'Right-click entry points driven by Techy Analyst persona. Users access Predict Data via right-click on dataset/folder or +Data menu — 100% discoverability in testing.',
@@ -345,29 +316,6 @@ Replaced fragmented flow with honest, linear workflow. The new guided workflow: 
             },
           ],
         },
-      ],
-    },
-    {
-      id: 'section-04',
-      index: 'I',
-      title: 'Iterate with Inclusion: Balancing Control with Simplicity',
-      body: `After mapping the existing workflow and understanding the problems (Section 02), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
-
-I worked with Product to co-define scope, with Engineering to validate feasibility, with Data Scientists to validate ML logic, and with SMEs to exercise flows. Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation. The confusion matrix screen alone went through 10+ iterations as we aligned on layout, order of tabs, and what users should see first after training. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'I lead cross-functional teams through complex technical projects over 6–8 month timelines, managing constraints and juggling multiple projects',
-        'I translate between technical and user perspectives by learning enough to say "no" to scope creep while earning respect from domain experts',
-        'I make Principal-level decisions with incomplete but sufficient knowledge — moving from "outsider learning ML" to trusted design leader',
-      ],
-      images: [
-        {
-          src: '/images/case-study/ml-functions/ml-leading-team',
-          alt: 'ML Functions leading team collaboration',
-          caption: 'Leading the team: Weekly UX + ML meeting notes, whiteboard sketches, and design iterations showing the cross-functional collaboration process',
-        },
-      ],
-      subsections: [
         {
           title: 'Prototyping and Testing',
           description: `I prototyped the structured guided flow and conducted usability testing with both technical and non-technical users. I refined guided experiences based on feedback, ensuring the patterns I developed (structured guided flows, progressive disclosure) could scale to future ML features.
@@ -435,12 +383,6 @@ Locked Steps 1-2 (problem type, target) in Optimize flow — changing these crea
               src: '/images/case-study/ml-functions/8. Train Model Workflow - Compare Models.png',
               alt: 'Train Model Workflow - Compare Models',
               caption: 'Compare Models: View and compare multiple trained models side by side — the model cards approach that replaced legacy tables, improving scanning and decision-making',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
-              alt: 'Train Model Workflow - Confusion Matrix',
-              caption: 'Confusion Matrix: The screen that went through 10+ iterations with the Principal Data Scientist, balancing his domain expertise (more metrics, exact terminology) with my UX priorities (clarity, visual hierarchy, scan-ability) — he called it "the best screen in the entire UX revamp"',
               sensitive: true,
             },
           ],

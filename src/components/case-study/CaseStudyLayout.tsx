@@ -504,7 +504,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     className={`${sectionBg} py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24 border-t ${borderClass}`}
                   >
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                      <SectionBlock section={section} isLightBackground={sectionBg === 'surface-light'} caseStudySlug={data.slug} />
+                      <SectionBlock 
+                        section={section} 
+                        isLightBackground={sectionBg === 'surface-light'} 
+                        caseStudySlug={data.slug}
+                        isUnlocked={showPasswordContent}
+                        password={data.passwordGate?.password || 'anu-access'}
+                      />
                     </div>
                   </MotionSection>
 
@@ -676,47 +682,100 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       className={`${sectionBg} ${paddingClass} border-t ${borderClass}`}
                     >
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <SectionBlock
-                          section={section}
-                          isLightBackground={sectionBg === 'surface-light'}
-                          caseStudySlug={data.slug}
-                          isUnlocked={showPasswordContent}
-                          password={data.passwordGate?.password || 'anu-access'}
-                          frameworkMapping={data.frameworkConnection ? (() => {
-                            // Create reverse mapping: sectionId -> framework letter
-                            const mapping: Record<string, string> = {}
-                            data.frameworkConnection.principles.forEach((principle) => {
-                              let sectionId = ''
-                              if (data.slug === 'reportcaster') {
-                                if (principle.letter === 'D') sectionId = 'section-01'
-                                else if (principle.letter === 'E') sectionId = 'section-02'
-                                else if (principle.letter === 'S') sectionId = 'section-03'
-                                else if (principle.letter === 'I') sectionId = 'version-iteration'
-                                else if (principle.letter === 'G') sectionId = 'section-05'
-                                else if (principle.letter === 'N') sectionId = 'section-06'
-                              } else if (data.slug === 'ml-functions') {
-                                if (principle.letter === 'D') sectionId = 'section-01'
-                                else if (principle.letter === 'E') sectionId = 'section-02'
-                                else if (principle.letter === 'S') sectionId = 'section-03'
-                                else if (principle.letter === 'I') sectionId = 'section-04'
-                                else if (principle.letter === 'G') sectionId = 'section-05'
-                                else if (principle.letter === 'N') sectionId = 'section-06'
-                              } else if (data.slug === 'iq-plugin') {
-                                if (principle.letter === 'D') sectionId = 'section-01'
-                                else if (principle.letter === 'E') sectionId = 'section-02'
-                                else if (principle.letter === 'S') sectionId = 'section-03'
-                                else if (principle.letter === 'I') sectionId = 'section-04'
-                                else if (principle.letter === 'G') sectionId = 'section-05'
-                                else if (principle.letter === 'N') sectionId = 'section-06'
-                              }
-                              // For sections that map to multiple principles, use the first one found
-                              if (sectionId && !mapping[sectionId]) {
-                                mapping[sectionId] = principle.letter
-                              }
-                            })
-                            return mapping
-                          })() : undefined}
-                        />
+                        {/* Lock entire section-04 (Iterate) for ML Functions */}
+                        {data.slug === 'ml-functions' && section.id === 'section-04' ? (
+                          <LockedContent
+                            isUnlocked={false}
+                            password={data.passwordGate?.password || 'anu-access'}
+                            caseStudySlug={data.slug}
+                            unlockMessage="Password required to view iteration details and new workflow designs"
+                            isLightBackground={sectionBg === 'surface-light'}
+                          >
+                            <SectionBlock
+                              section={section}
+                              isLightBackground={sectionBg === 'surface-light'}
+                              caseStudySlug={data.slug}
+                              isUnlocked={false}
+                              password={data.passwordGate?.password || 'anu-access'}
+                              frameworkMapping={data.frameworkConnection ? (() => {
+                                // Create reverse mapping: sectionId -> framework letter
+                                const mapping: Record<string, string> = {}
+                                data.frameworkConnection.principles.forEach((principle) => {
+                                  let sectionId = ''
+                                  if (data.slug === 'reportcaster') {
+                                    if (principle.letter === 'D') sectionId = 'section-01'
+                                    else if (principle.letter === 'E') sectionId = 'section-02'
+                                    else if (principle.letter === 'S') sectionId = 'section-03'
+                                    else if (principle.letter === 'I') sectionId = 'version-iteration'
+                                    else if (principle.letter === 'G') sectionId = 'section-05'
+                                    else if (principle.letter === 'N') sectionId = 'section-06'
+                                  } else if (data.slug === 'ml-functions') {
+                                    if (principle.letter === 'D') sectionId = 'section-01'
+                                    else if (principle.letter === 'E') sectionId = 'section-02'
+                                    else if (principle.letter === 'S') sectionId = 'section-03'
+                                    else if (principle.letter === 'I') sectionId = 'section-04'
+                                    else if (principle.letter === 'G') sectionId = 'section-05'
+                                    else if (principle.letter === 'N') sectionId = 'section-06'
+                                  } else if (data.slug === 'iq-plugin') {
+                                    if (principle.letter === 'D') sectionId = 'section-01'
+                                    else if (principle.letter === 'E') sectionId = 'section-02'
+                                    else if (principle.letter === 'S') sectionId = 'section-03'
+                                    else if (principle.letter === 'I') sectionId = 'section-04'
+                                    else if (principle.letter === 'G') sectionId = 'section-05'
+                                    else if (principle.letter === 'N') sectionId = 'section-06'
+                                  }
+                                  // For sections that map to multiple principles, use the first one found
+                                  if (sectionId && !mapping[sectionId]) {
+                                    mapping[sectionId] = principle.letter
+                                  }
+                                })
+                                return mapping
+                              })() : undefined}
+                            />
+                          </LockedContent>
+                        ) : (
+                          <SectionBlock
+                            section={section}
+                            isLightBackground={sectionBg === 'surface-light'}
+                            caseStudySlug={data.slug}
+                            isUnlocked={showPasswordContent}
+                            password={data.passwordGate?.password || 'anu-access'}
+                            frameworkMapping={data.frameworkConnection ? (() => {
+                              // Create reverse mapping: sectionId -> framework letter
+                              const mapping: Record<string, string> = {}
+                              data.frameworkConnection.principles.forEach((principle) => {
+                                let sectionId = ''
+                                if (data.slug === 'reportcaster') {
+                                  if (principle.letter === 'D') sectionId = 'section-01'
+                                  else if (principle.letter === 'E') sectionId = 'section-02'
+                                  else if (principle.letter === 'S') sectionId = 'section-03'
+                                  else if (principle.letter === 'I') sectionId = 'version-iteration'
+                                  else if (principle.letter === 'G') sectionId = 'section-05'
+                                  else if (principle.letter === 'N') sectionId = 'section-06'
+                                } else if (data.slug === 'ml-functions') {
+                                  if (principle.letter === 'D') sectionId = 'section-01'
+                                  else if (principle.letter === 'E') sectionId = 'section-02'
+                                  else if (principle.letter === 'S') sectionId = 'section-03'
+                                  else if (principle.letter === 'I') sectionId = 'section-04'
+                                  else if (principle.letter === 'G') sectionId = 'section-05'
+                                  else if (principle.letter === 'N') sectionId = 'section-06'
+                                } else if (data.slug === 'iq-plugin') {
+                                  if (principle.letter === 'D') sectionId = 'section-01'
+                                  else if (principle.letter === 'E') sectionId = 'section-02'
+                                  else if (principle.letter === 'S') sectionId = 'section-03'
+                                  else if (principle.letter === 'I') sectionId = 'section-04'
+                                  else if (principle.letter === 'G') sectionId = 'section-05'
+                                  else if (principle.letter === 'N') sectionId = 'section-06'
+                                }
+                                // For sections that map to multiple principles, use the first one found
+                                if (sectionId && !mapping[sectionId]) {
+                                  mapping[sectionId] = principle.letter
+                                }
+                              })
+                              return mapping
+                            })() : undefined}
+                          />
+                        )}
                       </div>
                     </MotionSection>
                   </>
@@ -726,7 +785,15 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                 {section.id === 'section-03' && data.slug === 'reportcaster' && (
                   <MotionSection className={`${sectionBg} py-8 md:py-12`}>
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                      <SystemMappingBreakdown isLightBackground={sectionBg === 'surface-light'} />
+                      <LockedContent
+                        isUnlocked={false}
+                        password={data.passwordGate?.password || 'anu-access'}
+                        caseStudySlug={data.slug}
+                        unlockMessage="Password required to view internal system mapping details"
+                        isLightBackground={sectionBg === 'surface-light'}
+                      >
+                        <SystemMappingBreakdown isLightBackground={sectionBg === 'surface-light'} />
+                      </LockedContent>
                     </div>
                   </MotionSection>
                 )}
@@ -736,8 +803,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   <MotionSection className="surface-light py-8 md:py-12">
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                       <LockedContent
-                        isUnlocked={showPasswordContent}
-                        password="access"
+                        isUnlocked={false}
+                        password="anu-access"
                         caseStudySlug={data.slug}
                         unlockMessage="Password required to view internal discovery details"
                         isLightBackground={true}
@@ -754,14 +821,22 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   <>
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <ResearchMethods isLightBackground={true} />
+                        <LockedContent
+                          isUnlocked={false}
+                          password={data.passwordGate?.password || 'anu-access'}
+                          caseStudySlug={data.slug}
+                          unlockMessage="Password required to view internal research methods and company information"
+                          isLightBackground={true}
+                        >
+                          <ResearchMethods isLightBackground={true} />
+                        </LockedContent>
                       </div>
                     </MotionSection>
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
                           isLightBackground={true}
@@ -798,8 +873,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
                           isLightBackground={true}
@@ -822,8 +897,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view design pivot details"
                           isLightBackground={true}
@@ -852,20 +927,26 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   <>
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <MLTeamCollaboration isLightBackground={true} />
-                      </div>
-                    </MotionSection>
-                    <MotionSection className="surface-light py-8 md:py-12">
-                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view layered disclosure strategy"
                           isLightBackground={true}
                         >
                           <LayeredDisclosureVisual isLightBackground={true} />
                         </LockedContent>
+                      </div>
+                    </MotionSection>
+                  </>
+                )}
+
+                {/* ML Functions Visuals - Section 05 (G - Grow Through Constraints) */}
+                {section.id === 'section-05' && data.slug === 'ml-functions' && (
+                  <>
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <MLTeamCollaboration isLightBackground={true} />
                       </div>
                     </MotionSection>
                   </>
@@ -993,8 +1074,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
                           isLightBackground={true}
@@ -1006,8 +1087,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="access"
+                          isUnlocked={false}
+                          password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view persona journey maps"
                           isLightBackground={true}

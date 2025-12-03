@@ -15,9 +15,9 @@ interface LockedContentProps {
 
 export default function LockedContent({
   children,
-  isUnlocked,
+  isUnlocked: propIsUnlocked,
   onUnlock,
-  password,
+  password = 'anu-access',
   caseStudySlug = 'default',
   unlockMessage = 'Password required to view sensitive content',
   isLightBackground = false,
@@ -26,31 +26,29 @@ export default function LockedContent({
   const [inputPassword, setInputPassword] = useState('')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
-  const [localUnlocked, setLocalUnlocked] = useState(isUnlocked)
+  const [isUnlocked, setIsUnlocked] = useState(false)
 
-  // Check sessionStorage on mount and listen for changes
+  // If propIsUnlocked is explicitly false, always lock (ignore sessionStorage)
+  // Otherwise, check sessionStorage for unlock status
   useEffect(() => {
+    if (propIsUnlocked === false) {
+      setIsUnlocked(false)
+      return
+    }
+
     const checkUnlockStatus = () => {
-      if (typeof window !== 'undefined') {
-        const storageKey = `case-study-unlocked-${caseStudySlug}`
-        const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-        
-        // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
-        if (caseStudySlug === 'iq-plugin') {
-          if (caseUnlocked || isUnlocked) {
-            setLocalUnlocked(true)
-          } else {
-            setLocalUnlocked(false)
-          }
-        } else {
-          // Other case studies respect both global and case-specific unlock
-          const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-          if (globalUnlocked || caseUnlocked || isUnlocked) {
-            setLocalUnlocked(true)
-          } else {
-            setLocalUnlocked(false)
-          }
-        }
+      if (typeof window === 'undefined') return
+
+      const storageKey = `case-study-unlocked-${caseStudySlug}`
+      const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
+      
+      // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
+      if (caseStudySlug === 'iq-plugin') {
+        setIsUnlocked(caseUnlocked || propIsUnlocked)
+      } else {
+        // Other case studies respect both global and case-specific unlock
+        const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+        setIsUnlocked(globalUnlocked || caseUnlocked || propIsUnlocked)
       }
     }
 
@@ -80,20 +78,11 @@ export default function LockedContent({
       window.removeEventListener('portfolio-unlocked', handleUnlockEvent)
       clearInterval(interval)
     }
-  }, [isUnlocked, caseStudySlug])
+  }, [propIsUnlocked, caseStudySlug])
 
   const handleUnlock = (e?: React.FormEvent) => {
     if (e) {
       e.preventDefault()
-    }
-
-    if (!password) {
-      // If no password provided, just call onUnlock if available
-      if (onUnlock) {
-        onUnlock()
-      }
-      setLocalUnlocked(true)
-      return
     }
 
     if (!inputPassword.trim()) {
@@ -108,14 +97,13 @@ export default function LockedContent({
       setError('')
       setSuccess(true)
       
-      // Set sessionStorage first
+      // Set sessionStorage
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
         
         // IQ Plugin only sets its own unlock (doesn't set global unlock)
         if (caseStudySlug === 'iq-plugin') {
           sessionStorage.setItem(storageKey, 'true')
-          // Don't dispatch global unlock event for IQ Plugin
         } else {
           // Other case studies set both global unlock and case-specific unlock
           sessionStorage.setItem('portfolio-globally-unlocked', 'true')
@@ -127,9 +115,10 @@ export default function LockedContent({
       
       // Wait a moment to show success, then unlock
       setTimeout(() => {
-        setLocalUnlocked(true)
+        setIsUnlocked(true)
         setShowPasswordModal(false)
         setSuccess(false)
+        setInputPassword('')
         // Call onUnlock callback if provided
         if (onUnlock) {
           onUnlock()
@@ -138,16 +127,12 @@ export default function LockedContent({
     } else {
       setError('Incorrect password. Please try again.')
       setSuccess(false)
-      // Clear input on error
       setInputPassword('')
     }
   }
 
-  // Use local unlocked state or prop
-  const actuallyUnlocked = localUnlocked || isUnlocked
-
-  // Force re-render when unlocked
-  if (actuallyUnlocked) {
+  // If unlocked, show content
+  if (isUnlocked) {
     return <>{children}</>
   }
 
@@ -239,9 +224,11 @@ export default function LockedContent({
                   <p className={`${isLightBackground ? 'text-[#666666]' : 'text-white/70'} text-sm`}>
                     Enter password to view sensitive content
                   </p>
-                  <p className={`${isLightBackground ? 'text-[var(--accent-teal)]' : 'text-[var(--accent-teal)]'} text-xs font-medium mt-2`}>
-                    ✓ Unlocking this section will unlock all protected content across the entire website
-                  </p>
+                  {caseStudySlug !== 'iq-plugin' && (
+                    <p className={`${isLightBackground ? 'text-[var(--accent-teal)]' : 'text-[var(--accent-teal)]'} text-xs font-medium mt-2`}>
+                      ✓ Unlocking this section will unlock all protected content across the entire website
+                    </p>
+                  )}
                 </div>
                 
                 <form onSubmit={handleUnlock} className="space-y-4">
@@ -311,4 +298,3 @@ export default function LockedContent({
     </>
   )
 }
-

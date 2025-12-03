@@ -23,7 +23,7 @@ export default function TalkSection() {
 
   return (
     <section
-      id="contact"
+      id="lets-talk"
       className="surface-dark relative overflow-visible py-20 xs:py-24 sm:py-32 md:py-40 lg:py-[12.5rem] border-t border-white/5"
     >
       {/* Animated Logo Background */}

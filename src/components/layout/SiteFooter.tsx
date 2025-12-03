@@ -1,10 +1,46 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { SignatureLogo } from '@/components/brand'
 
 export default function SiteFooter() {
+  const pathname = usePathname()
+  const router = useRouter()
   const currentYear = new Date().getFullYear()
+
+  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      // Already on homepage, wait a bit for any animations to settle, then scroll
+      setTimeout(() => {
+        const section = document.getElementById(sectionId)
+        if (section) {
+          // Account for both main nav (60px) and section nav (60px) if visible
+          const mainNavHeight = 60
+          const sectionNavHeight = 60
+          const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
+          const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
+          const offset = totalNavHeight + 20 // Extra padding
+          
+          const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+          const offsetPosition = Math.max(0, elementPosition - offset)
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          })
+          
+          // Update URL hash
+          window.history.pushState(null, '', `#${sectionId}`)
+        }
+      }, 100)
+    } else {
+      // On other pages (case studies, /me), use Next.js router to navigate
+      // This ensures proper page transition and hash handling
+      router.push(`/#${sectionId}`)
+    }
+  }
 
   return (
     <footer
@@ -28,6 +64,7 @@ export default function SiteFooter() {
             <nav className="hidden md:flex flex-wrap items-center justify-center gap-4 md:gap-6">
               <Link
                 href="/#work-overview"
+                onClick={(e) => handleSectionClick(e, 'work-overview')}
                 className="text-text-muted-dark hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 Work
@@ -40,6 +77,7 @@ export default function SiteFooter() {
               </Link>
               <Link
                 href="/#lets-talk"
+                onClick={(e) => handleSectionClick(e, 'lets-talk')}
                 className="text-text-muted-dark hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 Contact
