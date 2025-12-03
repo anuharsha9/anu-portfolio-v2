@@ -458,8 +458,13 @@ IQ taught me to think in ecosystems, not just individual features. This wasn't a
       },
     },
   },
-  // PASSWORD GATE REMOVED - Tile is already locked on home page
-  // No need for redundant locking on the case study page itself
+  // ----------------------------
+  // PASSWORD GATE (IQ Plugin requires independent unlock)
+  // ----------------------------
+  passwordGate: {
+    password: 'anu-access',
+    description: 'This case study contains sensitive company information and requires password access.',
+  },
   // ----------------------------
   // D.E.S.I.G.N. FRAMEWORK CONNECTION
   // ----------------------------
