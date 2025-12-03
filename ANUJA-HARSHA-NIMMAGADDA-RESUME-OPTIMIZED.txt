@@ -1,0 +1,92 @@
+ANUJA HARSHA NIMMAGADDA
+anu.anuja@outlook.com | +1 781-354-7394 | Portfolio: www.anujaharsha.com | linkedin.com/in/anu159
+
+================================================================================
+TARGET JOB TITLE
+================================================================================
+Principal Product Designer, Senior Product Designer, UX Design Lead, Enterprise UX, AI/ML, Systems Design
+
+================================================================================
+CAREER SUMMARY
+================================================================================
+Principal-level Product Designer with 13 years of end-to-end experience across B2C consumer products, B2B enterprise platforms, AI/ML workflows, systems design, mobile, and web. Specialize in modernizing complex workflows, simplifying multi-step systems, and bringing clarity to ambiguous problem spaces. Operate as a UX leader: aligning engineering, data science, and product teams; driving cross-functional clarity; and mentoring designers. Work at the intersection of product strategy, systems architecture, and user-centered design, delivering scalable, high-impact experiences that make measurable business impact. Proven track record of Principal-level impact at scale—redesigning mission-critical systems serving millions of users, reducing clicks by 44-56%, and eliminating support bottlenecks.
+
+================================================================================
+KEY SKILLS
+================================================================================
+User Experience Design | UX Design | Product Design | User Interface Design | UI Design | Enterprise UX | AI/ML Product Experiences | Workflow Design | Information Architecture | Systems Thinking | Legacy System Modernization | User Research | Usability Testing | Cross-functional Leadership | Product Strategy | UX Strategy | Interaction Design | Prototyping | Figma | Heuristic Evaluation | Accessibility | Visual Design | Mobile UX | Web UX | Requirement Gathering | UX Documentation | Stakeholder Alignment | Design Systems | Wireframing | User-Centered Design
+
+================================================================================
+EXPERIENCE
+================================================================================
+
+SENIOR PRODUCT DESIGNER
+Cloud Software Group (WebFOCUS/IBI) | August 2022 - November 2025
+
+Led User Experience modernization across multiple legacy product areas, operating as the de-facto Principal Designer in an engineering-first organization with low UX maturity. Established structured discovery, SME outreach, UX to PM to Engineering alignment, and ticket-writing templates that became team-wide standards. Frequently initiated alignment among Product Managers, engineers, architects, and Principal Data Scientists, driving clarity in ambiguous spaces where others hesitated to challenge technical constraints. Elevated UX maturity by mentoring designers, demonstrating cross-functional leadership, and influencing product strategy through research, prototyping, SME testing, and implementation alignment.
+
+KEY ACHIEVEMENTS:
+• Recognized by senior leadership in a company-wide meeting for early impact on ReportCaster and DSML within first 6 months, solidifying role as cross-functional UX leader
+
+ReportCaster Modernization (2022–2025)
+• Redesigned 40-year-old scheduler powering millions of BI jobs annually, achieving 44-56% fewer clicks for schedule creation, 50% faster completion, and eliminated multi-tab sprawl entirely
+• Took full ownership one week into joining, reverse-engineering undocumented rules and consolidating 5 fragmented subsystems into 1 unified guided workflow
+• Reduced support load by 25-30% and improved Explorer access by 60-70% fewer clicks, delivered safely at massive scale with resounding customer approval
+• Led cross-functional alignment with engineering, product, and QA, making strategic decisions when others hesitated; work shipped as part of WebFOCUS 9.3, impacting millions of users daily
+
+ML Functions Redesign (2023–2024)
+• Led end-to-end ML workflow revamp, achieving 100% discoverability in SME usability testing and reducing workflow from 12+ clicks to 7-9 clicks
+• Self-learned ML concepts through MIT coursework and collaboration with Principal Data Scientist, designing guided 4-step workflow for non-expert users
+• Delivered 2-click entry point, 50% faster setup, and 60% fewer configuration errors through inline validation and guided warnings
+• Created dual-experience approach balancing guided simplicity for novices with advanced flexibility for experts; eliminated all dead-end errors that confused users
+
+IQ Plugin — DSML Hub (2023–2024)
+• Designed unified hub that centralized Natural Language Query (NLQ), ML, and Automated Insights into contextual, business-friendly flows
+• Unified three fragmented DSML features into one cohesive experience, significantly improving discoverability, usability, and adoption
+• Mapped distinct user journeys for multiple personas and built scalable pattern for future DSML features, ensuring competitive positioning with leading BI platforms
+• Made complex data science capabilities approachable for business users while maintaining power for experts; owned UX strategy, IA, workflows, and usability testing
+
+SENIOR UX/UI DESIGNER (Consultant)
+InfoTriangle Technologies / T3 Solutions | February 2022 - July 2022
+
+• Designed matrimony management mobile app concept, including onboarding, dashboards, and guided workflows; provided UX support across multiple client needs
+
+FREELANCE PRODUCT AND UI/UX DESIGNER
+Independent Consultant | April 2017 - October 2021
+
+• Delivered UX, UI, mobile app designs, branding, and product concepts for 10+ small businesses and startups; designed CRM systems, marketing sites, dashboards, and mobile experiences
+• Provided end-to-end product support: discovery, IA, wireframes, visual design, prototypes, and handoff
+
+UX DESIGNER
+F1 Studioz | December 2016 - March 2017
+
+• Designed multiple enterprise B2B products, including conference room booking system and internal tools; worked in fast-paced agency model delivering rapid UX cycles
+
+UI/UX DESIGNER
+9P Studioz | August 2012 - November 2016
+
+• Sole designer for mobile app development startup, delivering UX/UI for 50+ apps including mobile games, productivity apps, branding, icons, and animations
+
+================================================================================
+EDUCATION
+================================================================================
+
+MIT xPRO — AI & Machine Learning in Product Design
+Master's Degree in English
+Bachelor's Degree in Animation & Visual Effects
+Bachelor's Degree in English Literature
+Georgia Tech — Human-Computer Interaction
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+
+Design Tools: Figma, FigJam, Adobe Creative Suite, Sketch, InVision | Development: HTML, CSS, JavaScript | AI Tools: GPT, AI Tools, Machine Learning Platforms
+
+================================================================================
+PUBLICATIONS
+================================================================================
+
+"The secret behind better BI: Who's your business user?" and "Enhancing user experience in WebFOCUS DSML" - Published on IBI Community | Design writing and essays on Medium
+
+================================================================================
