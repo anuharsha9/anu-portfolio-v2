@@ -105,8 +105,8 @@ function createImageGroups(images: CaseStudySection['images']) {
     return images ? [images.map((img, i) => ({ ...img, originalIndex: i }))] : []
   }
 
-  const groups: Array<Array<{ src: string; alt: string; caption?: string; fullWidth?: boolean; originalIndex: number }>> = []
-  let currentGroup: Array<{ src: string; alt: string; caption?: string; fullWidth?: boolean; originalIndex: number }> = []
+  const groups: Array<Array<{ src: string; alt: string; caption?: string; fullWidth?: boolean; sensitive?: boolean; originalIndex: number }>> = []
+  let currentGroup: Array<{ src: string; alt: string; caption?: string; fullWidth?: boolean; sensitive?: boolean; originalIndex: number }> = []
 
   images.forEach((img) => {
     const caption = img.caption?.toLowerCase() || ''
