@@ -1,28 +1,36 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
-interface ProcessPhase {
+interface FrameworkPrinciple {
   id: string
-  phase: string
+  letter: string
+  title: string
   sectionId: string
-  duration: string
 }
 
 interface ProcessTimelineNavProps {
-  phases: ProcessPhase[]
+  principles: FrameworkPrinciple[]
   isLightBackground?: boolean
 }
 
-export default function ProcessTimelineNav({ phases, isLightBackground = false }: ProcessTimelineNavProps) {
-  const [activePhase, setActivePhase] = useState<string | null>(null)
+export default function ProcessTimelineNav({ principles, isLightBackground = false }: ProcessTimelineNavProps) {
+  const pathname = usePathname()
+  const [activePrinciple, setActivePrinciple] = useState<string | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [showLeftIndicator, setShowLeftIndicator] = useState(false)
   const [showRightIndicator, setShowRightIndicator] = useState(false)
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const [currentBgIsLight, setCurrentBgIsLight] = useState(false)
+  const textColor = currentBgIsLight ? 'text-[#1A1A1A]' : 'text-white'
+  const mutedColor = currentBgIsLight ? 'text-[#666666]' : 'text-white/70'
   const accentColor = 'var(--accent-teal)'
+
+  // Check if we're on a case study page (where main nav is hidden)
+  const isCaseStudy = pathname?.startsWith('/case-study') || 
+                      pathname?.includes('/reportcaster') || 
+                      pathname?.includes('/ml-functions') || 
+                      pathname?.includes('/iq-plugin')
 
   // Track which section is in view
   useEffect(() => {
@@ -39,20 +47,20 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id
-          // Find all phases that map to this section (Phase 2 and 3 both map to version-iteration)
-          const matchingPhases = phases.filter((p) => p.sectionId === sectionId)
-          if (matchingPhases.length > 0) {
-            // If multiple phases match, determine which one to highlight based on scroll position
-            // For version-iteration, check if we're in the early part (Architecture) or later (Design)
-            if (matchingPhases.length > 1 && sectionId === 'version-iteration') {
+          // Find all principles that map to this section
+          const matchingPrinciples = principles.filter((p) => p.sectionId === sectionId)
+          if (matchingPrinciples.length > 0) {
+            // If multiple principles match, determine which one to highlight based on scroll position
+            // For version-iteration, check if we're in the early part or later
+            if (matchingPrinciples.length > 1 && sectionId === 'version-iteration') {
               const element = entry.target
               const rect = element.getBoundingClientRect()
               const scrollProgress = (window.innerHeight - rect.top) / (rect.height + window.innerHeight)
-              // If we're in the first 60% of the section, highlight Architecture (Phase 2)
-              // Otherwise highlight Design (Phase 3)
-              setActivePhase(scrollProgress < 0.6 ? matchingPhases[0].id : matchingPhases[1].id)
+              // If we're in the first 60% of the section, highlight first principle
+              // Otherwise highlight second principle
+              setActivePrinciple(scrollProgress < 0.6 ? matchingPrinciples[0].id : matchingPrinciples[1].id)
             } else {
-              setActivePhase(matchingPhases[0].id)
+              setActivePrinciple(matchingPrinciples[0].id)
             }
           }
         }
@@ -61,8 +69,8 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
 
     // Wait a bit for DOM to be ready, then observe all sections
     const timeoutId = setTimeout(() => {
-      phases.forEach((phase) => {
-        const element = document.getElementById(phase.sectionId)
+      principles.forEach((principle) => {
+        const element = document.getElementById(principle.sectionId)
         if (element) {
           observer.observe(element)
         }
@@ -71,21 +79,24 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
 
     return () => {
       clearTimeout(timeoutId)
-      phases.forEach((phase) => {
-        const element = document.getElementById(phase.sectionId)
+      principles.forEach((principle) => {
+        const element = document.getElementById(principle.sectionId)
         if (element) {
           observer.unobserve(element)
         }
       })
       observer.disconnect()
     }
-  }, [phases])
+  }, [principles])
 
   const scrollToSection = (sectionId: string) => {
     if (typeof window === 'undefined') return
     const element = document.getElementById(sectionId)
     if (element) {
-      const offset = 150 // Account for sticky header
+      // Adjust offset based on whether we're on a case study (no main nav)
+      const headerHeight = isCaseStudy ? 0 : 64 // 16 * 4 = 64px (top-16)
+      const navHeight = 60 // Approximate nav height
+      const offset = headerHeight + navHeight + 20 // Extra padding
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - offset
 
@@ -96,13 +107,58 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
     }
   }
 
-  // Show/hide nav based on scroll position (like SectionNav did)
+  // Show/hide nav based on scroll position - appear after scrolling past framework section
+  // Also detect current background color for dynamic text color
   useEffect(() => {
     if (typeof window === 'undefined') return
 
     const handleScroll = () => {
-      // Show earlier to ensure visibility - check if we've scrolled past the hero/overview
-      setIsVisible(window.scrollY > 300)
+      // Check if we've scrolled past the framework connection section
+      const frameworkSection = document.getElementById('framework-connection')
+      if (frameworkSection) {
+        const rect = frameworkSection.getBoundingClientRect()
+        // Show nav when framework section has scrolled past the top of viewport
+        setIsVisible(rect.bottom < 0)
+      } else {
+        // Fallback: show after scrolling past 800px (approximate position of framework section)
+        setIsVisible(window.scrollY > 800)
+      }
+
+      // Detect current background color by checking the section at the top of viewport
+      const navElement = document.querySelector('[aria-label="D.E.S.I.G.N. Framework navigation"]')
+      if (navElement) {
+        const navRect = navElement.getBoundingClientRect()
+        const viewportCenter = navRect.top + navRect.height / 2
+        
+        // Find the section that contains the center of the nav
+        const allSections = document.querySelectorAll('[class*="surface-"]')
+        let currentSection: HTMLElement | null = null
+        
+        for (let i = 0; i < allSections.length; i++) {
+          const section = allSections[i] as HTMLElement
+          const sectionRect = section.getBoundingClientRect()
+          if (viewportCenter >= sectionRect.top && viewportCenter <= sectionRect.bottom) {
+            currentSection = section
+            break
+          }
+        }
+        
+        // Check if current section has light background
+        if (currentSection) {
+          const hasLightBg = currentSection.classList.contains('surface-light')
+          setCurrentBgIsLight(hasLightBg)
+        } else {
+          // Fallback: check element directly below nav
+          const elementBelow = document.elementFromPoint(window.innerWidth / 2, navRect.bottom + 50)
+          if (elementBelow) {
+            const section = elementBelow.closest('[class*="surface-"]')
+            if (section) {
+              const hasLightBg = section.classList.contains('surface-light')
+              setCurrentBgIsLight(hasLightBg)
+            }
+          }
+        }
+      }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -116,7 +172,7 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
     if (typeof window === 'undefined') return
 
     const checkScrollIndicators = () => {
-      const scrollContainer = document.querySelector('[aria-label="Process timeline navigation mobile"] .overflow-x-auto') as HTMLElement
+      const scrollContainer = document.querySelector('[aria-label="D.E.S.I.G.N. Framework navigation"] .overflow-x-auto') as HTMLElement
       if (scrollContainer) {
         const { scrollLeft, scrollWidth, clientWidth } = scrollContainer
         setShowLeftIndicator(scrollLeft > 10)
@@ -128,7 +184,7 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
     checkScrollIndicators()
     window.addEventListener('resize', checkScrollIndicators, { passive: true })
 
-    const scrollContainer = document.querySelector('[aria-label="Process timeline navigation mobile"] .overflow-x-auto')
+    const scrollContainer = document.querySelector('[aria-label="D.E.S.I.G.N. Framework navigation"] .overflow-x-auto')
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', checkScrollIndicators, { passive: true })
       
@@ -145,94 +201,77 @@ export default function ProcessTimelineNav({ phases, isLightBackground = false }
 
   if (!isVisible) return null
 
+  const bgColor = currentBgIsLight ? 'bg-white/95' : 'bg-[var(--bg-dark)]/95'
+  const borderColor = currentBgIsLight ? 'border-black/10' : 'border-white/20'
+
+  // On case study pages, main nav is hidden, so nav should be at top-0
+  // On other pages, nav should be at top-16 to account for main nav
+  const topPosition = isCaseStudy ? 'top-0' : 'top-16'
+
   return (
-    <>
-      {/* Desktop: Fixed right sidebar */}
-      <nav
-        aria-label="Process timeline navigation"
-        className="hidden lg:block fixed right-8 top-1/2 -translate-y-1/2 z-50"
-      >
-        <div className={`${isLightBackground ? 'bg-white' : 'bg-[var(--bg-dark)]'} backdrop-blur-md rounded-lg border-2 ${isLightBackground ? 'border-black/20' : 'border-white/30'} p-4 shadow-2xl`}>
-          <div className="space-y-2">
-            <div className={`text-xs font-mono uppercase tracking-wider mb-3 px-2 font-semibold ${isLightBackground ? 'text-[#1A1A1A]' : 'text-white'}`}>
-              Process Timeline
+    <nav 
+      className={`fixed ${topPosition} left-0 right-0 z-40 ${bgColor} backdrop-blur-md border-b ${borderColor} shadow-lg transition-all duration-300`}
+      aria-label="D.E.S.I.G.N. Framework navigation"
+    >
+      <div className="relative">
+        <div 
+          className="overflow-x-auto scrollbar-hide"
+          onScroll={(e) => {
+            if (typeof window === 'undefined') return
+            const target = e.currentTarget
+            const { scrollLeft, scrollWidth, clientWidth } = target
+            setShowLeftIndicator(scrollLeft > 10)
+            setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
+          }}
+        >
+          <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-2.5 min-w-max max-w-[1200px] mx-auto">
+            {/* Framework label - only show on larger screens */}
+            <div className={`hidden md:flex items-center px-3 text-xs font-mono uppercase tracking-wider font-semibold ${currentBgIsLight ? 'text-[#1A1A1A]' : 'text-white/80'} border-r ${borderColor} mr-2`}>
+              D.E.S.I.G.N.
             </div>
-            {phases.map((phase, index) => {
-              const isActive = activePhase === phase.id
+            
+            {principles.map((principle) => {
+              const isActive = activePrinciple === principle.id
               return (
                 <button
-                  key={phase.id}
-                  onClick={() => scrollToSection(phase.sectionId)}
-                  className={`block w-full text-left px-3 py-2 rounded text-sm transition-colors min-h-[44px] touch-manipulation ${
+                  key={principle.id}
+                  onClick={() => scrollToSection(principle.sectionId)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      scrollToSection(principle.sectionId)
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[40px] md:min-h-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-transparent ${
                     isActive
-                      ? 'bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border border-[var(--accent-teal)]/30'
-                      : isLightBackground 
-                        ? 'text-[#1A1A1A] hover:text-[#1A1A1A] hover:bg-black/10 border border-transparent'
-                        : 'text-white hover:text-white hover:bg-white/10 border border-transparent'
+                      ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold`
+                      : currentBgIsLight
+                        ? 'text-[#1A1A1A] hover:text-[#1A1A1A] hover:bg-black/5 border border-transparent hover:border-black/10'
+                        : 'text-white/80 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
                   }`}
-                  aria-label={`Navigate to ${phase.phase} phase`}
+                  aria-label={`Navigate to ${principle.letter}: ${principle.title}`}
+                  aria-current={isActive ? 'true' : 'false'}
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs">{index + 1}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium truncate max-w-[140px]">{phase.phase}</div>
-                      <div className="text-xs opacity-70">{phase.duration}</div>
-                    </div>
-                  </div>
+                  <span className={`font-mono text-xs md:text-sm font-bold ${isActive ? 'text-[var(--accent-teal)]' : (currentBgIsLight ? 'text-[#1A1A1A]' : 'text-white/80')}`}>
+                    {principle.letter}
+                  </span>
+                  <span className="hidden sm:inline">{principle.title}</span>
+                  <span className="sm:hidden text-[10px]">{principle.title.split(' ')[0]}</span>
                 </button>
               )
             })}
           </div>
         </div>
-      </nav>
-
-      {/* Mobile: Horizontal scrollable nav at top */}
-      <nav 
-        className="fixed top-20 left-0 right-0 z-50 lg:hidden bg-[var(--bg-dark)] backdrop-blur-md border-b-2 border-white/30 shadow-2xl"
-        aria-label="Process timeline navigation mobile"
-      >
-        <div className="relative">
-          <div 
-            className="overflow-x-auto scrollbar-hide"
-            onScroll={(e) => {
-              if (typeof window === 'undefined') return
-              const target = e.currentTarget
-              const { scrollLeft, scrollWidth, clientWidth } = target
-              setShowLeftIndicator(scrollLeft > 10)
-              setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
-            }}
-          >
-            <div className="flex gap-2 px-4 py-3 min-w-max">
-              {phases.map((phase, index) => {
-                const isActive = activePhase === phase.id
-                return (
-                  <button
-                    key={phase.id}
-                    onClick={() => scrollToSection(phase.sectionId)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm whitespace-nowrap transition-colors min-h-[44px] min-w-[44px] touch-manipulation ${
-                      isActive
-                        ? 'bg-[var(--accent-teal)]/30 text-[var(--accent-teal)] font-semibold border-2 border-[var(--accent-teal)]/50'
-                        : 'text-white hover:text-white hover:bg-white/15 border border-white/20'
-                    }`}
-                    aria-label={`Navigate to ${phase.phase} phase`}
-                  >
-                    <span className="font-mono text-xs">{index + 1}</span>
-                    <span className="text-xs">{phase.phase}</span>
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-          {/* Scroll indicators */}
-          {showLeftIndicator && (
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[var(--bg-dark)] to-transparent pointer-events-none"></div>
-          )}
-          {showRightIndicator && (
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[var(--bg-dark)] to-transparent pointer-events-none"></div>
-          )}
-        </div>
-      </nav>
-    </>
+        
+        {/* Scroll indicators */}
+        {showLeftIndicator && (
+          <div className={`absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r ${currentBgIsLight ? 'from-white/95' : 'from-[var(--bg-dark)]/95'} to-transparent pointer-events-none`}></div>
+        )}
+        {showRightIndicator && (
+          <div className={`absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l ${currentBgIsLight ? 'from-white/95' : 'from-[var(--bg-dark)]/95'} to-transparent pointer-events-none`}></div>
+        )}
+      </div>
+    </nav>
   )
 }
 

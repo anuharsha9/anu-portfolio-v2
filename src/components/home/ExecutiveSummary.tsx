@@ -1,105 +1,152 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import MotionSection from '@/components/ui/MotionSection'
-import { SectionDivider, SignatureLogo } from '@/components/brand'
+import { SignatureLogo } from '@/components/brand'
+
+const frameworkItems = [
+  {
+    letter: 'D',
+    title: 'Discover Deeply',
+    mainText: 'Before touching pixels, I listen. I learn the system, talk to everyone — support, QA, PMs, engineers, even that one person who knows everything.',
+    lastSentence: 'Building context and empathy before creating solutions means we\'re all on the same page before making decisions.',
+  },
+  {
+    letter: 'E',
+    title: 'Empathize with the Ecosystem',
+    mainText: 'I understand not just users, but builders. I recognize every role — PM, engineer, QA — as part of the design equation.',
+    lastSentence: 'Creating shared understanding across functions results in alignment instead of conflict.',
+  },
+  {
+    letter: 'S',
+    title: 'Simplify the Chaos',
+    mainText: 'Enterprise systems are complex and noisy. I map, cluster, and prioritize until patterns appear.',
+    lastSentence: 'Making complexity digestible for everyone means complexity becomes clarity.',
+  },
+  {
+    letter: 'I',
+    title: 'Iterate with Inclusion',
+    mainText: 'I don\'t design alone. I prototype together, invite feedback early, and listen to dissent.',
+    lastSentence: 'Building ownership and momentum through collaboration creates cross-team buy-in.',
+  },
+  {
+    letter: 'G',
+    title: 'Grow Through Constraints',
+    mainText: 'Constraints aren\'t blockers — they\'re design\'s greatest teachers. Each limit sharpens creativity and pushes clarity.',
+    lastSentence: 'Letting every constraint refine, not restrict, your solution means solutions are shaped by reality, not idealism.',
+  },
+  {
+    letter: 'N',
+    title: 'Navigate Forward',
+    mainText: 'Once I\'ve learned the currents, I lead with confidence. I adapt to change, maintain balance, and carry my lessons wherever I go next.',
+    lastSentence: 'Keeping moving with intention means transformation sticks and scales.',
+  },
+]
 
 export default function ExecutiveSummary() {
   return (
-    <MotionSection id="executive-summary" className="surface-dark-alt py-12 xs:py-16 sm:py-20 md:py-24 lg:py-28 border-t border-white/5 relative overflow-hidden">
-      {/* Section Divider - No logo, just spacing */}
-      <div className="flex justify-center pt-0 pb-8 md:pb-12"></div>
-
+    <section id="executive-summary" className="surface-dark-alt py-8 xs:py-10 sm:py-12 md:py-16 border-t border-white/5 relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
-          whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}
-          viewport={{ once: true, amount: 0.15, margin: '0px 0px -50px 0px' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ willChange: 'opacity, transform', opacity: 0, visibility: 'hidden' }}
-          className="space-y-12 md:space-y-16"
+          className="space-y-6 md:space-y-8"
         >
-          {/* Header */}
-          <div className="text-center space-y-6 max-w-3xl mx-auto relative">
-            {/* Watermark Logo Above Title - Single watermark, half size */}
-            <div className="absolute -top-[135px] left-1/2 -translate-x-1/2 pointer-events-none hidden lg:block z-0">
-              <motion.div
-                className="w-24 h-24"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 0.15, scale: 1 }}
-                transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-              >
+          {/* Signature Wordmark - Name and Tagline */}
+          <div className="flex justify-center mb-6">
+            <div className="flex flex-col items-center gap-3 md:gap-4">
+              {/* Signature Logo - smaller than watermark */}
+              <div className="w-16 h-16 md:w-20 md:h-20">
                 <SignatureLogo className="w-full h-full text-white" />
-              </motion.div>
-            </div>
-            <div className="space-y-4 relative z-10">
-              <h2 className="text-white text-xl xs:text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-serif leading-tight">
-                Why I&apos;m an Asset to Your Team
-              </h2>
-              <p className="text-[var(--accent-teal)] text-base md:text-lg font-medium leading-relaxed">
-                Principal UX Designer transforming complex enterprise systems into intuitive experiences
-              </p>
+              </div>
+              {/* Name and Tagline */}
+              <div className="flex flex-col items-center gap-2 text-center">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-text-primary-dark leading-tight">
+                  Anuja Harsha Nimmagadda
+                </h1>
+                <p className="text-sm md:text-base text-text-muted-dark font-sans">
+                  Designer · Strategist · Systems Thinker
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Approach & Value - Structured Cards */}
+          {/* Header - Simplified */}
+          <div className="text-center space-y-2 max-w-4xl mx-auto mb-8">
+            <h2 className="text-text-primary-dark text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif leading-tight relative">
+              D.E.S.I.G.N. Framework
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60 mt-2"></span>
+            </h2>
+            <p className="text-text-muted-dark text-sm md:text-base font-bold leading-relaxed pt-2">
+              It&apos;s how I think, lead, and deliver impact and become a valuable asset to any team.
+            </p>
+            <p className="text-text-muted-dark text-sm md:text-base font-light leading-relaxed">
+              This framework distills 13 years of my design career — the insights and process I&apos;ve found myself returning to, because it works.
+            </p>
+          </div>
+
+          {/* Framework Items - 2 Column Grid (3 Rows) with Drop Caps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto">
+            {frameworkItems.map((item, index) => {
+              const firstLetter = item.title.charAt(0)
+              const restOfTitle = item.title.slice(1)
+
+              return (
+                <motion.div
+                  key={item.letter}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="group space-y-3 p-5 md:p-6 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10 transition-all duration-300"
+                >
+                  {/* Decorative line element */}
+                  <div className="flex items-baseline gap-3 mb-4">
+                    <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="h-px flex-1 bg-white/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)] opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Title with Drop Cap */}
+                  <h3 className="text-text-primary-dark text-xl md:text-2xl font-serif font-medium leading-tight flex items-baseline relative">
+                    <span className="text-[var(--accent-teal)] text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-none mr-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                      {firstLetter}
+                    </span>
+                    <span className="group-hover:text-white/90 transition-colors duration-300">{restOfTitle}</span>
+                  </h3>
+
+                  {/* Description with integrated outcome */}
+                  <p className="text-text-muted-dark text-sm md:text-base leading-relaxed clear-left">
+                    {item.mainText}
+                  </p>
+                  {/* Key takeaway - visually distinct but not teal */}
+                  <div className="mt-3 pt-3 border-t border-white/5">
+                    <p className="text-white/90 text-sm md:text-base leading-relaxed italic font-light">
+                      {item.lastSentence}
+                    </p>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Final Punchline - Compact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center pt-4 md:pt-6 mt-4 md:mt-6 border-t border-white/10"
           >
-            {[
-              {
-                title: 'Versatile Across Every Space',
-                description: '13 years across startups, agencies, enterprise products, freelance consulting, mobile, web, branding, and ML/AI. I adapt fast, bring both breadth and depth to every project, and can design anything from zero.',
-              },
-              {
-                title: 'Impact Measured in Millions',
-                description: 'My work reaches millions of users across Fortune 500 companies worldwide. Designing at CSG/IBI taught me how to ship clarity, reliability, and scale for real enterprise ecosystems.',
-              },
-              {
-                title: 'I Lead Without Authority',
-                description: 'I create direction when none exists, rally teams, influence decisions, and drive alignment. Bold, proactive, outcome-driven leadership — with or without the title.',
-              },
-              {
-                title: 'I Learn Fast and Make Complexity Simple',
-                description: 'I absorb new domains quickly and translate technical systems into intuitive experiences. If I can make machine learning accessible to non-technical users, I can simplify any domain.',
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15, margin: '0px 0px -50px 0px' }}
-                transition={{
-                  duration: 0.5,
-                  delay: 0.05 + (index * 0.05),
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                style={{ willChange: 'opacity, transform' }}
-                className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
-                    <div className="h-px flex-1 bg-white/10"></div>
-                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
-                  </div>
-                  <h3 className="text-white text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/70 text-sm md:text-base leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+            <p className="text-text-primary-dark text-base xs:text-lg sm:text-xl md:text-2xl font-serif leading-tight italic max-w-4xl mx-auto">
+              I don&apos;t just design; I make clarity operational — across people, systems, and products.
+            </p>
           </motion.div>
         </motion.div>
       </div>
-    </MotionSection>
+    </section>
   )
 }
 

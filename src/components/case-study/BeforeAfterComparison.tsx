@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 
 interface BeforeAfterComparisonProps {
@@ -34,27 +34,27 @@ export default function BeforeAfterComparison({
     setIsDragging(true)
   }
 
-  const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-    if (!isDragging || !containerRef.current) return
+  const handleMouseMove = useCallback((e: MouseEvent | TouchEvent) => {
+    if (!containerRef.current) return
 
     const rect = containerRef.current.getBoundingClientRect()
     const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX
     const x = clientX - rect.left
     const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100))
     setSliderPosition(percentage)
-  }
+  }, [])
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false)
-  }
+  }, [])
 
   useEffect(() => {
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove as EventListener)
-      window.addEventListener('mouseup', handleMouseUp)
-      window.addEventListener('touchmove', handleMouseMove as EventListener)
-      window.addEventListener('touchend', handleMouseUp)
-    }
+    if (!isDragging) return
+
+    window.addEventListener('mousemove', handleMouseMove as EventListener)
+    window.addEventListener('mouseup', handleMouseUp)
+    window.addEventListener('touchmove', handleMouseMove as EventListener)
+    window.addEventListener('touchend', handleMouseUp)
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove as EventListener)
@@ -62,7 +62,7 @@ export default function BeforeAfterComparison({
       window.removeEventListener('touchmove', handleMouseMove as EventListener)
       window.removeEventListener('touchend', handleMouseUp)
     }
-  }, [isDragging])
+  }, [isDragging, handleMouseMove, handleMouseUp])
 
   const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
   const imageShadow = isLightBackground

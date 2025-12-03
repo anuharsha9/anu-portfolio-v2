@@ -39,27 +39,39 @@ export default function ImageLightbox({
   const canGoPrev = hasNavigation && currentIndex > 0
   const canGoNext = hasNavigation && currentIndex < images.length - 1
 
-  // Handle keyboard navigation
+  // Handle keyboard navigation and prevent scrolling
   useEffect(() => {
-    if (!isOpen || !hasNavigation) return
+    if (!isOpen) return
+
+    // Prevent body scroll when lightbox is open
+    const scrollY = window.scrollY
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.width = '100%'
+    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
-      } else if (e.key === 'ArrowLeft' && canGoPrev) {
-        onNavigate(currentIndex - 1)
-      } else if (e.key === 'ArrowRight' && canGoNext) {
-        onNavigate(currentIndex + 1)
+      } else if (hasNavigation) {
+        if (e.key === 'ArrowLeft' && canGoPrev) {
+          onNavigate(currentIndex - 1)
+        } else if (e.key === 'ArrowRight' && canGoNext) {
+          onNavigate(currentIndex + 1)
+        }
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
-    // Prevent body scroll when lightbox is open
-    document.body.style.overflow = 'hidden'
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = 'unset'
+      // Restore scroll position
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
     }
   }, [isOpen, hasNavigation, canGoPrev, canGoNext, currentIndex, onNavigate, onClose])
 
@@ -92,14 +104,14 @@ export default function ImageLightbox({
           />
 
           {/* Lightbox Content */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 pointer-events-none">
             <motion.div
               ref={containerRef as React.RefObject<HTMLDivElement>}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full h-full max-w-7xl max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-7xl max-h-[85vh] flex flex-col items-center justify-center pointer-events-auto"
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -173,8 +185,8 @@ export default function ImageLightbox({
               )}
 
               {/* Image Container */}
-              <div className="relative flex-1 w-full bg-black/20 rounded-lg overflow-hidden">
-                <div className="relative w-full h-full min-h-[400px]">
+              <div className="relative w-full flex-shrink-0 bg-black/20 rounded-lg overflow-hidden" style={{ maxHeight: 'calc(85vh - 120px)' }}>
+                <div className="relative w-full" style={{ aspectRatio: 'auto', minHeight: '300px', maxHeight: 'calc(85vh - 120px)' }}>
                   <Image
                     id="lightbox-image"
                     src={imageSrc}
@@ -189,7 +201,7 @@ export default function ImageLightbox({
 
               {/* Image Counter */}
               {hasNavigation && (
-                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm">
+                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm">
                   {currentIndex + 1} / {images.length}
                 </div>
               )}
@@ -200,9 +212,9 @@ export default function ImageLightbox({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1, duration: 0.3 }}
-                  className="mt-4 text-center"
+                  className="mt-4 text-center flex-shrink-0 w-full"
                 >
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-3xl mx-auto px-4">
                     {imageCaption}
                   </p>
                 </motion.div>
@@ -213,7 +225,7 @@ export default function ImageLightbox({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mt-2 text-center"
+                className="mt-2 text-center flex-shrink-0"
               >
                 <p className="text-white/40 text-xs">
                   {hasNavigation ? 'Press ESC to close • Use arrow keys to navigate' : 'Press ESC to close'}

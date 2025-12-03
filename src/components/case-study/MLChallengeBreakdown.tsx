@@ -52,10 +52,10 @@ export default function MLChallengeBreakdown({ isLightBackground = false }: MLCh
   ]
 
   return (
-    <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
-      <div className="space-y-8">
+    <div className={`${bgColor} rounded-lg border ${borderColor} p-4 md:p-6`}>
+      <div className="space-y-3">
         {/* Header */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-1.5">
           <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>
             The ML Experience That Was Hard for Everyone
           </h3>
@@ -65,14 +65,14 @@ export default function MLChallengeBreakdown({ isLightBackground = false }: MLCh
         </div>
 
         {/* Challenge Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
           {challenges.map((challenge, index) => (
             <div
               key={index}
-              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
+              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-3 md:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
               style={{ borderColor: accentColor + '40' }}
             >
-              <div className="space-y-4">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-3">
                   <div
                     className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
@@ -82,7 +82,7 @@ export default function MLChallengeBreakdown({ isLightBackground = false }: MLCh
                   </div>
                   <h4 className={`${textColor} text-lg font-semibold`}>{challenge.category}</h4>
                 </div>
-                <ul className="space-y-2 pl-12">
+                <ul className="space-y-1 pl-12">
                   {challenge.items.map((item, itemIndex) => (
                     <li key={itemIndex} className={`${mutedColor} text-sm leading-relaxed flex items-start gap-2`}>
                       <span className="text-[var(--accent-teal)] font-bold flex-shrink-0 mt-0.5">•</span>
@@ -96,7 +96,7 @@ export default function MLChallengeBreakdown({ isLightBackground = false }: MLCh
         </div>
 
         {/* Bottom Note */}
-        <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-6 border ${borderColor} mt-8`}>
+        <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-3 border ${borderColor} mt-3`}>
           <p className={`${textColor} text-base leading-relaxed text-center`}>
             <span className="font-semibold" style={{ color: accentColor }}>The mandate:</span> Make predictive modeling usable, understandable, and trustworthy — for analysts and everyday business users. I said yes to owning the end-to-end UX, even though I had no ML background.
           </p>

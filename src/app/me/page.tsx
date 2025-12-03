@@ -190,11 +190,11 @@ export default function AboutPage() {
                 },
                 {
                   title: 'High-Output Operator',
-                  description: 'I operate at top velocity. Built this portfolio in less than two weeks, redesigned 3 enterprise systems end-to-end alone.',
+                  description: 'I operate at top velocity. Built this portfolio in less than two weeks, redesigned 3 enterprise systems end-to-end alone. My work is live in production—shipped, deployed, and impacting millions of users.',
                 },
                 {
                   title: 'Leader Without Title',
-                  description: 'I take initiative before being asked. I onboard teams, align engineers, and make decisions when others freeze. Bold and fearless.',
+                  description: 'I take initiative before being asked. I onboard teams, align engineers, and make decisions when others freeze. Took full ownership of a 40-year-old system one week into joining. Bold, fearless, and Principal-level impact without the title.',
                 },
                 {
                   title: 'Multi-Disciplinary',

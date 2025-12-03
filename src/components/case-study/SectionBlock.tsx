@@ -7,15 +7,42 @@ import WorkflowPrototype from './WorkflowPrototype'
 import ImageLightbox from './ImageLightbox'
 import BeforeAfterComparison from './BeforeAfterComparison'
 import AhaMoment from './AhaMoment'
-import ChallengeBreakdown from './ChallengeBreakdown'
 import TeamOnboardingProcess from './TeamOnboardingProcess'
 import EntryPointTransformation from './EntryPointTransformation'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
+import LockedContent from './LockedContent'
+import SensitiveImage from './SensitiveImage'
 
 interface SectionBlockProps {
   section: CaseStudySection
   isLightBackground?: boolean
   caseStudySlug?: string
+  frameworkMapping?: Record<string, string> // Maps sectionId to framework letter
+  isUnlocked?: boolean // Whether password-protected content should be shown
+  password?: string // Password for unlocking sensitive content
+}
+
+// Helper to extract metrics from text (percentages, numbers, etc.)
+function extractMetrics(text: string): string[] {
+  const metrics: string[] = []
+  // Match patterns like "44–56%", "5 / 5", "12+ clicks", "100%", etc.
+  const metricPatterns = [
+    /\d+[–-]\d+%/g, // Range percentages
+    /\d+%/g, // Single percentages
+    /\d+\s*\/\s*\d+/g, // Ratios like "5 / 5"
+    /\d+\+\s*(?:clicks|steps|months|years)/gi, // "12+ clicks"
+    /≈?\d+[–-]\d+%\s*(?:fewer|faster|reduction|increase)/gi, // "≈60–70% fewer"
+    /\d+\s*→\s*\d+/g, // "5 → 1"
+  ]
+  
+  metricPatterns.forEach(pattern => {
+    const matches = text.match(pattern)
+    if (matches) {
+      metrics.push(...matches)
+    }
+  })
+  
+  return [...new Set(metrics)] // Remove duplicates
 }
 
 // Helper to parse body text and extract Aha moments
@@ -123,7 +150,54 @@ function createImageGroups(images: CaseStudySection['images']) {
   return groups.length > 0 ? groups : [images.map((img, i) => ({ ...img, originalIndex: i }))]
 }
 
-export default function SectionBlock({ section, isLightBackground = false, caseStudySlug }: SectionBlockProps) {
+export default function SectionBlock({ section, isLightBackground = false, caseStudySlug, frameworkMapping, isUnlocked = false, password }: SectionBlockProps) {
+  // Check global unlock state in addition to prop
+  const [globalUnlocked, setGlobalUnlocked] = useState(false)
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+      setGlobalUnlocked(globalUnlockState)
+    }
+  }, [])
+  
+  // Use global unlock or prop unlock
+  const actuallyUnlocked = isUnlocked || globalUnlocked
+  
+  // Calculate if section should be locked entirely (if >50% of content is sensitive)
+  const calculateSectionSensitivity = () => {
+    if (section.sensitive) return true // Already marked as sensitive
+    
+    const images = section.images || []
+    const subsections = section.subsections || []
+    
+    // Count sensitive images
+    const sensitiveImages = images.filter(img => img.sensitive).length
+    const totalImages = images.length
+    
+    // Count sensitive subsections
+    const sensitiveSubsections = subsections.filter(sub => {
+      if (sub.sensitive) return true
+      const subImages = sub.images || []
+      const sensitiveSubImages = subImages.filter(img => img.sensitive).length
+      return subImages.length > 0 && sensitiveSubImages / subImages.length > 0.5
+    }).length
+    const totalSubsections = subsections.length
+    
+    // Count total sensitive items
+    const totalSensitive = sensitiveImages + sensitiveSubsections
+    const totalItems = totalImages + totalSubsections
+    
+    // If >50% of content is sensitive, lock the whole section
+    if (totalItems > 0 && totalSensitive / totalItems > 0.5) {
+      return true
+    }
+    
+    return false
+  }
+  
+  const isSectionSensitive = calculateSectionSensitivity()
+  
   const [expandedGroups, setExpandedGroups] = useState<Set<number>>(new Set([0]))
   const [expandedDetailImages, setExpandedDetailImages] = useState(false)
   const [expandedSubsections, setExpandedSubsections] = useState<Set<number>>(new Set()) // All subsections collapsed by default
@@ -247,16 +321,13 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     images.length > 0
   const renderBodyAtTop = !hasVisualContent
 
-  return (
-    <div
-      id={section.id}
-      className="space-y-16 scroll-mt-24"
-    >
-      {/* Header Section */}
-      <div className="space-y-4">
+  // Split header and body content for sensitive sections
+  // Header Section (always visible)
+  const sectionHeader = (
+    <div className="space-y-4">
         <div className="flex items-baseline gap-4">
           <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5 rounded border ${borderColor}`}>
-            {section.index}
+            {frameworkMapping && frameworkMapping[section.id] ? frameworkMapping[section.id] : section.index}
           </span>
           <div className={`h-px flex-1 ${dividerColor}`}></div>
         </div>
@@ -269,27 +340,87 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               </span>
             )}
           </h2>
-          {/* Phase Indicator */}
-          {(() => {
-            const phaseMap: Record<string, { phase: string; number: number }> = {
-              'section-02': { phase: 'Research & Discovery', number: 1 },
-              'version-iteration': { phase: 'Architecture & Design', number: 2 },
-              'section-06': { phase: 'Team Alignment', number: 4 },
-              'section-07': { phase: 'Shipping & Impact', number: 5 },
-            }
-            const phase = phaseMap[section.id]
-            if (phase) {
-              return (
-                <div className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} rounded-lg px-3 py-1.5 border ${borderColor} flex-shrink-0`}>
-                  <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-0.5`}>Phase {phase.number}</div>
-                  <div className={`${textColor} text-xs font-semibold`}>{phase.phase}</div>
-                </div>
-              )
-            }
-            return null
-          })()}
         </div>
+
+        {/* Section Summary (TL;DR) */}
+        {section.summary && (
+          <div className={`bg-gradient-to-r ${isLightBackground ? 'from-[var(--accent-teal)]/10 to-[var(--accent-teal)]/5' : 'from-[var(--accent-teal)]/20 to-[var(--accent-teal)]/10'} rounded-xl p-4 md:p-5 border ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/40'}`}>
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 mt-0.5">
+                <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
+                <p className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Methodology Tags */}
+        {section.methodologies && section.methodologies.length > 0 && (
+          <div className="flex flex-wrap items-center gap-2">
+            <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider mr-1`}>Methods:</span>
+            {section.methodologies.map((method, index) => (
+              <span
+                key={index}
+                className={`${isLightBackground ? 'bg-black/5 border-black/10' : 'bg-white/10 border-white/20'} ${textColor} text-xs px-3 py-1 rounded-full border font-medium`}
+              >
+                {method}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Extract and Display Metrics */}
+        {section.body && (() => {
+          const metrics = extractMetrics(section.body)
+          return metrics.length > 0 ? (
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Key Metrics:</span>
+              {metrics.slice(0, 5).map((metric, index) => (
+                <span
+                  key={index}
+                  className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10 border-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/40'} text-[var(--accent-teal)] text-xs px-3 py-1 rounded-full border font-semibold`}
+                >
+                  {metric}
+                </span>
+              ))}
+            </div>
+          ) : null
+        })()}
       </div>
+  )
+
+  // Body Content (can be locked)
+  const sectionBody = (
+    <div className="space-y-6">
+      {/* "What this reveals" - Prominent Callout at Top */}
+      {section.revealsPoints && Array.isArray(section.revealsPoints) && section.revealsPoints.length > 0 && (
+        <div className={`bg-gradient-to-br ${isLightBackground ? 'from-[var(--accent-teal)]/15 to-[var(--accent-teal)]/8' : 'from-[var(--accent-teal)]/25 to-[var(--accent-teal)]/15'} rounded-xl p-6 md:p-8 border-2 ${isLightBackground ? 'border-[var(--accent-teal)]/40' : 'border-[var(--accent-teal)]/50'} shadow-lg`}>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
+              <div className="h-px flex-1 bg-[var(--accent-teal)]/30"></div>
+              <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold`}>
+                {section.revealsTitle || 'What this reveals'}
+              </h3>
+              <div className="h-px flex-1 bg-[var(--accent-teal)]/30"></div>
+              <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+            </div>
+            <ul className="space-y-3">
+              {section.revealsPoints.map((point, index) => (
+                <li key={`reveal-${index}`} className={`${textColor} text-sm md:text-base leading-relaxed flex items-start gap-3`}>
+                  <span className="text-[var(--accent-teal)] text-lg font-bold flex-shrink-0 mt-0.5">→</span>
+                  <span className="font-medium">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       {/* Body Text - Render at top only if no visual content */}
       {renderBodyAtTop && section.body && (
@@ -305,38 +436,49 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     </AhaMoment>
                   )
                 }
+                // Break long paragraphs into shorter ones for better scanning
+                const paragraphs = part.content.split(/\n\n+/).filter(p => p.trim())
                 return (
-                  <p key={`text-${index}`} className="whitespace-pre-line">
-                    {part.content}
-                  </p>
+                  <div key={`text-${index}`} className="space-y-4">
+                    {paragraphs.map((para, pIndex) => (
+                      <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                        {para.trim()}
+                      </p>
+                    ))}
+                  </div>
                 )
               })
             ) : (
-              <p className="whitespace-pre-line">
-                {section.body}
-              </p>
+              // Break long paragraphs into shorter ones for better scanning
+              (() => {
+                const paragraphs = section.body.split(/\n\n+/).filter(p => p.trim())
+                return (
+                  <div className="space-y-3">
+                    {paragraphs.map((para, pIndex) => (
+                      <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                        {para.trim()}
+                      </p>
+                    ))}
+                  </div>
+                )
+              })()
             )}
           </div>
         </div>
       )}
 
-      {/* Challenge Breakdown integrated into Section 01 - ReportCaster only */}
-      {section.id === 'section-01' && caseStudySlug === 'reportcaster' && (
-        <div className="pt-8">
-          <ChallengeBreakdown isLightBackground={isLightBackground} />
-        </div>
-      )}
+      {/* Challenge Breakdown now integrated into DiscoveryVisual component - shown in CaseStudyLayout */}
 
       {/* Team Onboarding Process integrated into Section 06 - ReportCaster only */}
       {section.id === 'section-06' && caseStudySlug === 'reportcaster' && (
-        <div className="pt-8">
+        <div className="pt-6">
           <TeamOnboardingProcess isLightBackground={isLightBackground} />
         </div>
       )}
 
       {/* Subsections */}
       {section.subsections && Array.isArray(section.subsections) && section.subsections.length > 0 && (
-        <div className="space-y-8">
+        <div className="space-y-4">
           {section.subsections.map((subsection, subIndex) => {
             const isExpanded = expandedSubsections.has(subIndex)
             const isFirstSubsection = subIndex === 0
@@ -344,6 +486,9 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
             // Special handling for certain subsections - always open
             const isAlwaysOpen = subsection.title === 'Early Ideation: Hand-Drawn Wireframes' ||
               subsection.title === 'Schedule Dialog'
+            
+            // Special styling for text-only subsections (like Prototyping and Testing)
+            const isTextOnlySubsection = !subsection.images || subsection.images.length === 0
 
             // Subsections that use 2x2 grid layout
             const use2x2Grid = subsection.title === 'Distribution List' ||
@@ -365,7 +510,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
                     {/* Subsection Images */}
                     {subsection.images && Array.isArray(subsection.images) && subsection.images.length > 0 && (
-                      <div className="space-y-8">
+                      <div className="space-y-4">
                         {/* For Workflow Planning: 2x2 grid for regular images */}
                         {subsection.title === 'Workflow Planning & Architecture' && (
                           <>
@@ -427,7 +572,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         )}
                         {/* For Schedule Dialog: Compact gallery with expand option */}
                         {subsection.title === 'Schedule Dialog' && subsection.images && Array.isArray(subsection.images) && subsection.images.length > 0 && (
-                          <div className="space-y-6">
+                          <div className="space-y-3">
                             {/* Header with expand button */}
                             <div className="flex items-center justify-between">
                               <div>
@@ -568,7 +713,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               image.fullWidth ? (
                                 <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="col-span-full space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -576,8 +721,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                       alt={image.alt}
                                       width={1200}
                                       height={800}
-                                      className="w-full h-auto object-contain"
-                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                      className="w-full h-auto max-w-full object-contain"
+                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                                     />
                                   </div>
                                   {image.caption && (
@@ -637,15 +782,29 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                 {subsection.images.length} {subsection.images.length === 1 ? 'screen' : 'screens'}
                               </span>
                             )}
+                            {isTextOnlySubsection && (
+                              <span className={`px-3 py-1 rounded-full text-xs font-semibold border-2`} style={{
+                                backgroundColor: 'transparent',
+                                color: 'var(--accent-teal)',
+                                borderColor: 'var(--accent-teal)'
+                              }}>
+                                Text Content
+                              </span>
+                            )}
                           </div>
                           {subsection.description && (
-                            <p className={`${mutedColor} text-sm leading-relaxed`}>
+                            <p className={`${mutedColor} text-sm leading-relaxed line-clamp-3 ${!isExpanded ? '' : ''}`}>
                               {subsection.description}
                             </p>
                           )}
                           {!isExpanded && subsection.images && subsection.images.length > 0 && (
                             <p className={`text-xs font-medium`} style={{ color: 'var(--accent-teal)' }}>
                               Click to view {subsection.images.length} {subsection.images.length === 1 ? 'screen' : 'screens'}
+                            </p>
+                          )}
+                          {!isExpanded && isTextOnlySubsection && (
+                            <p className={`text-xs font-medium`} style={{ color: 'var(--accent-teal)' }}>
+                              Click to expand and read full content
                             </p>
                           )}
                         </div>
@@ -725,7 +884,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               image.fullWidth ? (
                                 <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="col-span-full space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -733,8 +892,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                       alt={image.alt}
                                       width={1200}
                                       height={800}
-                                      className="w-full h-auto object-contain"
-                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                      className="w-full h-auto max-w-full object-contain"
+                                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                                     />
                                   </div>
                                   {image.caption && (
@@ -780,7 +939,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Workflow Prototype(s) */}
       {section.workflowPrototype && Array.isArray(section.workflowPrototype) && section.workflowPrototype.length > 0 && (
-        <div className="space-y-16">
+                      <div className="space-y-4">
           {section.workflowPrototype.map((prototype, idx) => {
             if (!prototype || !prototype.steps || !Array.isArray(prototype.steps) || prototype.steps.length === 0) {
               return null
@@ -809,23 +968,31 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Before/After Comparison */}
       {section.beforeAfter && (
-        <div className="space-y-12">
-          <BeforeAfterComparison
-            beforeImage={section.beforeAfter.before}
-            afterImage={section.beforeAfter.after}
-            beforeLabel={section.beforeAfter.beforeLabel}
-            afterLabel={section.beforeAfter.afterLabel}
+        <div className="space-y-4">
+          <LockedContent
+            isUnlocked={isUnlocked}
+            password={password}
+            caseStudySlug={caseStudySlug}
+            unlockMessage="Password required to view before/after comparison"
             isLightBackground={isLightBackground}
-          />
+          >
+            <BeforeAfterComparison
+              beforeImage={section.beforeAfter.before}
+              afterImage={section.beforeAfter.after}
+              beforeLabel={section.beforeAfter.beforeLabel}
+              afterLabel={section.beforeAfter.afterLabel}
+              isLightBackground={isLightBackground}
+            />
+          </LockedContent>
         </div>
       )}
 
       {/* Images */}
       {images.length > 0 && (
-        <div className="space-y-12">
+                      <div className="space-y-4">
           {/* Special handling for Section 1: Collapsible gallery for 8 legacy images - ReportCaster only */}
           {section.id === 'section-01' && images.length === 8 && caseStudySlug === 'reportcaster' ? (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <div>
@@ -944,25 +1111,25 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 )}
               </div>
             )
-          ) : section.id === 'recurrences-redesign' && images.length > 1 ? (
-            // Special layout for Recurrences section: full-width first image, then 2x2 grid
-            <div className="space-y-8">
-              {/* Full-width Weekly image */}
+          ) : images.some(img => img.fullWidth) && images.length > 1 ? (
+            // Layout for sections with multiple images where some are fullWidth
+            <div className="space-y-4">
+              {/* Full-width images first */}
               {images.filter(img => img.fullWidth).map((image, index) => (
                 <div key={`img-full-${index}`} className="space-y-2">
                   <div
-                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                    className={`relative w-full max-w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                   >
-                                        <Image
-                                          src={image.src}
-                                          alt={image.alt}
-                                          width={1200}
-                                          height={800}
-                                          className="w-full h-auto object-contain"
-                                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                                          loading="lazy"
-                                        />
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto max-w-full object-contain"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                      loading="lazy"
+                    />
                   </div>
                   {image.caption && (
                     <p className={`${mutedColor} text-sm text-center mt-3 px-6`}>
@@ -1002,7 +1169,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               )}
             </div>
           ) : imageGroups && imageGroups.length > 1 ? (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {imageGroups.map((group, groupIndex) => {
                 const isExpanded = expandedGroups.has(groupIndex)
                 const isFirstGroup = groupIndex === 0
@@ -1029,10 +1196,10 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                           image.fullWidth ? (
                             <div
                               key={`group-img-${groupIndex}-${imgIndex}`}
-                              className="col-span-full w-screen relative left-[calc(50%-50vw)]"
+                              className="col-span-full w-full max-w-full overflow-hidden"
                             >
                               <div
-                                className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
+                                className="relative w-full max-w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
                                 onClick={() => openLightbox(image.src, image.alt, image.caption)}
                               >
                                 <Image
@@ -1080,8 +1247,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               })}
             </div>
           ) : workflowImages.length > 0 && designDetailImages.length > 0 ? (
-            <div className="space-y-12">
-              <div className="space-y-4">
+                      <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Workflow</span>
                   <div className={`h-px flex-1 ${dividerColor}`}></div>
@@ -1091,10 +1258,10 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     image.fullWidth ? (
                       <div
                         key={`workflow-img-${index}`}
-                        className="col-span-full w-screen relative left-[calc(50%-50vw)]"
+                        className="col-span-full w-full max-w-full overflow-hidden"
                       >
                         <div
-                          className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
+                          className="relative w-full max-w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
                           onClick={() => openLightbox(image.src, image.alt, image.caption)}
                         >
                           <Image
@@ -1102,8 +1269,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                             alt={image.alt}
                             width={1200}
                             height={800}
-                            className="w-full h-auto object-contain"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="w-full h-auto max-w-full object-contain"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                           />
                         </div>
                         {image.caption && (
@@ -1138,7 +1305,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <button
                   onClick={() => setExpandedDetailImages(!expandedDetailImages)}
                   className={`w-full flex items-center justify-between p-4 ${bgColor} ${imageBorderRadius} border ${borderColor} hover:opacity-90 transition-all`}
@@ -1182,16 +1349,86 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 )}
               </div>
             </div>
+          ) : section.id === 'section-01' && caseStudySlug === 'reportcaster' && images.length === 3 ? (
+            // Special layout for ReportCaster section-01: 3 images with admin below explorer
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* First image - left column, full height */}
+              <div className="space-y-2 p-2">
+                <div
+                  className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                  onClick={() => openLightbox(images[0].src, images[0].alt, images[0].caption)}
+                >
+                  <Image
+                    src={images[0].src}
+                    alt={images[0].alt}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-contain"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  />
+                </div>
+                {images[0].caption && (
+                  <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                    {images[0].caption}
+                  </p>
+                )}
+              </div>
+              {/* Right column: explorer on top, admin below */}
+              <div className="space-y-4">
+                {/* Explorer - top */}
+                <div className="space-y-2 p-2">
+                  <div
+                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                    onClick={() => openLightbox(images[1].src, images[1].alt, images[1].caption)}
+                  >
+                    <Image
+                      src={images[1].src}
+                      alt={images[1].alt}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto object-contain"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    />
+                  </div>
+                  {images[1].caption && (
+                    <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                      {images[1].caption}
+                    </p>
+                  )}
+                </div>
+                {/* Admin - below explorer */}
+                <div className="space-y-2 p-2">
+                  <div
+                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                    onClick={() => openLightbox(images[2].src, images[2].alt, images[2].caption)}
+                  >
+                    <Image
+                      src={images[2].src}
+                      alt={images[2].alt}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto object-contain"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    />
+                  </div>
+                  {images[2].caption && (
+                    <p className={`${mutedColor} text-sm leading-relaxed mt-3`}>
+                      {images[2].caption}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
           ) : (
-            <div className={`grid grid-cols-1 ${images.length >= 3 ? 'md:grid-cols-2' : 'md:grid-cols-2'} ${images.length >= 6 ? 'lg:grid-cols-3' : ''} gap-4`}>
-              {images.map((image, index) =>
+              <div className={`grid grid-cols-1 ${images.length >= 3 ? 'md:grid-cols-2' : 'md:grid-cols-2'} ${images.length >= 6 ? 'lg:grid-cols-3' : ''} gap-4`}>
+                {images.map((image, index) =>
                 image.fullWidth ? (
                   <div
                     key={`img-${index}`}
-                    className="col-span-full w-screen relative left-[calc(50%-50vw)]"
+                    className="col-span-full w-full max-w-full overflow-hidden"
                   >
                     <div
-                      className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
+                      className="relative w-full max-w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
                       onClick={() => openLightbox(image.src, image.alt, image.caption)}
                     >
                       <Image
@@ -1199,8 +1436,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         alt={image.alt}
                         width={1200}
                         height={800}
-                        className="w-full h-auto object-contain"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="w-full h-auto max-w-full object-contain"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                       />
                     </div>
                     {image.caption && (
@@ -1237,117 +1474,75 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
         </div>
       )}
 
-      {/* Story and Insights - Side by Side Below Visual (only if there's visual content AND revealsPoints) */}
-      {!renderBodyAtTop && section.body && section.revealsPoints && Array.isArray(section.revealsPoints) && section.revealsPoints.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          <div className="lg:col-span-2 space-y-8">
-            <div className={`${bgColor} rounded-lg p-6 md:p-8 border ${borderColor}`}>
-              <div className={`${mutedColor} leading-relaxed text-base md:text-lg space-y-4`}>
-                {/* Only parse Aha moments for ReportCaster */}
-                {caseStudySlug === 'reportcaster' ? (
-                  parseBodyWithAhaMoments(section.body, isLightBackground).map((part, index) => {
-                    if (part.type === 'aha') {
-                      return (
-                        <AhaMoment key={`aha-${index}`} isLightBackground={isLightBackground}>
-                          <strong>{part.title}:</strong> {part.content}
-                        </AhaMoment>
-                      )
-                    }
+      {/* Story - Full Width Below Visual (revealsPoints now shown at top) */}
+      {!renderBodyAtTop && section.body && (
+        <div className="space-y-4">
+          <div className={`${bgColor} rounded-lg p-6 md:p-8 border ${borderColor}`}>
+            <div className={`${mutedColor} leading-relaxed text-base md:text-lg space-y-4`}>
+              {/* Only parse Aha moments for ReportCaster */}
+              {caseStudySlug === 'reportcaster' ? (
+                parseBodyWithAhaMoments(section.body, isLightBackground).map((part, index) => {
+                  if (part.type === 'aha') {
                     return (
-                      <p key={`text-${index}`} className="whitespace-pre-line">
-                        {part.content}
-                      </p>
+                      <AhaMoment key={`aha-${index}`} isLightBackground={isLightBackground}>
+                        <strong>{part.title}:</strong> {part.content}
+                      </AhaMoment>
                     )
-                  })
-                ) : (
-                  <p className="whitespace-pre-line">
-                    {section.body}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {section.bullets && Array.isArray(section.bullets) && section.bullets.length > 0 && (
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <h3 className={`${textColor} text-lg font-semibold`}>Key points</h3>
-                  <div className={`h-px flex-1 ${dividerColor}`}></div>
-                </div>
-                <div className="grid grid-cols-1 gap-3">
-                  {section.bullets.map((bullet, index) => (
-                    <div
-                      key={`bullet-${index}`}
-                      className={`flex gap-3 p-4 rounded-lg ${bgColor} border ${borderColor} hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-300`}
-                    >
-                      <span className={`text-[var(--accent-teal)] text-base font-mono flex-shrink-0 mt-0.5 font-semibold`}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <p className={`${mutedColor} leading-relaxed text-base`}>{bullet}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          <aside className="lg:col-span-1">
-            <div className={`${bgColor} rounded-lg p-6 border-2 ${borderColor} backdrop-blur-sm lg:sticky lg:top-24 shadow-lg`}>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Insight</span>
-                  <div className={`h-px flex-1 ${dividerColor}`}></div>
-                </div>
-                {section.revealsTitle ? (
-                  <h3 className={`${textColor} text-base font-semibold mb-4`}>
-                    {section.revealsTitle}
-                  </h3>
-                ) : (
-                  <h3 className={`${textColor} text-base font-semibold mb-4`}>
-                    What this reveals
-                  </h3>
-                )}
-                <ul className="space-y-4">
-                  {section.revealsPoints.map((point, index) => (
-                    <li key={`reveal-${index}`} className={`${mutedColor} text-sm md:text-base leading-relaxed flex items-start gap-2`}>
-                      <span className={`${textColor} text-[var(--accent-teal)] font-semibold flex-shrink-0 mt-0.5`}>•</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </aside>
-        </div>
-      )}
-
-      {/* Simple Body Text - Render at bottom if there's visual content but NO revealsPoints */}
-      {!renderBodyAtTop && section.body && (!section.revealsPoints || !Array.isArray(section.revealsPoints) || section.revealsPoints.length === 0) && (
-        <div className={`${bgColor} rounded-lg p-6 md:p-8 border ${borderColor}`}>
-          <div className={`${mutedColor} leading-relaxed text-base md:text-lg space-y-4`}>
-            {/* Only parse Aha moments for ReportCaster */}
-            {caseStudySlug === 'reportcaster' ? (
-              parseBodyWithAhaMoments(section.body, isLightBackground).map((part, index) => {
-                if (part.type === 'aha') {
+                  }
+                  // Break long paragraphs into shorter ones for better scanning
+                  const paragraphs = part.content.split(/\n\n+/).filter(p => p.trim())
                   return (
-                    <AhaMoment key={`aha-${index}`} isLightBackground={isLightBackground}>
-                      <strong>{part.title}:</strong> {part.content}
-                    </AhaMoment>
+                    <div key={`text-${index}`} className="space-y-4">
+                      {paragraphs.map((para, pIndex) => (
+                        <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                          {para.trim()}
+                        </p>
+                      ))}
+                    </div>
                   )
-                }
-                return (
-                  <p key={`text-${index}`} className="whitespace-pre-line">
-                    {part.content}
-                  </p>
-                )
-              })
-            ) : (
-              <p className="whitespace-pre-line">
-                {section.body}
-              </p>
-            )}
+                })
+              ) : (
+                // Break long paragraphs into shorter ones for better scanning
+                (() => {
+                  const paragraphs = section.body.split(/\n\n+/).filter(p => p.trim())
+                  return (
+                    <div className="space-y-3">
+                      {paragraphs.map((para, pIndex) => (
+                        <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                          {para.trim()}
+                        </p>
+                      ))}
+                    </div>
+                  )
+                })()
+              )}
+            </div>
           </div>
+
+          {section.bullets && Array.isArray(section.bullets) && section.bullets.length > 0 && (
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <h3 className={`${textColor} text-lg font-semibold`}>Key points</h3>
+                <div className={`h-px flex-1 ${dividerColor}`}></div>
+              </div>
+              <div className="grid grid-cols-1 gap-3">
+                {section.bullets.map((bullet, index) => (
+                  <div
+                    key={`bullet-${index}`}
+                    className={`flex gap-3 p-4 rounded-lg ${bgColor} border ${borderColor} hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-300`}
+                  >
+                    <span className={`text-[var(--accent-teal)] text-base font-mono flex-shrink-0 mt-0.5 font-semibold`}>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <p className={`${mutedColor} leading-relaxed text-base`}>{bullet}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
+
 
       {/* Image Lightbox */}
       {lightboxImage && (
@@ -1368,6 +1563,40 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
           }}
         />
       )}
+    </div>
+  )
+
+  // If section is sensitive and not unlocked, show header but lock body content
+  if (isSectionSensitive && !actuallyUnlocked) {
+    return (
+      <div
+        id={section.id}
+        className="space-y-6 scroll-mt-24"
+      >
+        {/* Header - Always visible */}
+        {sectionHeader}
+        
+        {/* Body - Locked */}
+        <LockedContent
+          isUnlocked={actuallyUnlocked}
+          password={password}
+          caseStudySlug={caseStudySlug || 'default'}
+          isLightBackground={isLightBackground}
+        >
+          {sectionBody}
+        </LockedContent>
+      </div>
+    )
+  }
+
+  // Normal rendering - show everything
+  return (
+    <div
+      id={section.id}
+      className="space-y-6 scroll-mt-24"
+    >
+      {sectionHeader}
+      {sectionBody}
     </div>
   )
 }

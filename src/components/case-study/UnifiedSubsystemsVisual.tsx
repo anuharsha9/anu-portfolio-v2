@@ -55,10 +55,10 @@ export default function UnifiedSubsystemsVisual({ isLightBackground = false }: U
         {/* Header */}
         <div className="text-center space-y-3">
           <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>
-            Aha Moment: Discovering the Five Subsystems
+            Aha Moment: Discovering Why It Kept Getting Deferred
           </h3>
           <p className={`${mutedColor} text-base md:text-lg max-w-2xl mx-auto`}>
-            As I documented workflows, I realized RC wasn&apos;t a feature — it was a product inside a product. Five independent subsystems, each with its own entry point and mental model.
+            As I documented workflows and explored the system, I discovered the root cause: RC wasn&apos;t a single system — it was five independent subsystems scattered across the product. This fragmentation explained why it was so complex and why everyone hesitated to touch it. Each subsystem had its own entry point, mental model, and hidden location, making the whole system feel impossible to understand or modernize.
           </p>
         </div>
 

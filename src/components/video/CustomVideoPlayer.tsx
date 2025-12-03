@@ -7,12 +7,14 @@ interface CustomVideoPlayerProps {
   src: string
   poster?: string
   className?: string
+  onPlay?: () => void
 }
 
 export default function CustomVideoPlayer({
   src,
   poster,
   className = '',
+  onPlay,
 }: CustomVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -38,7 +40,10 @@ export default function CustomVideoPlayer({
     const video = videoRef.current
     if (!video) return
 
-    const handlePlay = () => setIsPlaying(true)
+    const handlePlay = () => {
+      setIsPlaying(true)
+      onPlay?.()
+    }
     const handlePause = () => setIsPlaying(false)
     const handleEnded = () => {
       setIsPlaying(false)
@@ -68,6 +73,7 @@ export default function CustomVideoPlayer({
       video.removeEventListener('timeupdate', handleTimeUpdate)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const formatTime = (seconds: number) => {

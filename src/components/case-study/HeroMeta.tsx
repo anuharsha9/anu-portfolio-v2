@@ -6,8 +6,7 @@ import { motion } from 'framer-motion'
 import ImageLightbox from './ImageLightbox'
 import { SignatureLogo } from '@/components/brand'
 import CaseStudyNav from './CaseStudyNav'
-import Button from '@/components/ui/Button'
-import { heroTitleVariant, heroSubVariant, heroButtonsVariant, fadeIn, buttonHover, buttonTap } from '@/lib/animations'
+import { heroTitleVariant, heroSubVariant, fadeIn } from '@/lib/animations'
 
 interface HeroMetaProps {
   heroTitle: string
@@ -29,6 +28,8 @@ interface HeroMetaProps {
   demoVideoLabel2?: string
   publicDemoUrl?: string
   publicDemoLabel?: string
+  dataSheetUrl?: string
+  dataSheetLabel?: string
 }
 
 export default function HeroMeta({
@@ -48,6 +49,8 @@ export default function HeroMeta({
   demoVideoLabel2,
   publicDemoUrl,
   publicDemoLabel,
+  dataSheetUrl,
+  dataSheetLabel,
 }: HeroMetaProps) {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
 
@@ -88,77 +91,101 @@ export default function HeroMeta({
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
 
             {/* Left Column: Text Content */}
-            <div className="space-y-6 sm:space-y-7 md:space-y-8">
+            <div className="space-y-5 sm:space-y-6 md:space-y-7">
               {/* Case Study Navigation - Links to other case studies */}
               <CaseStudyNav />
               
-              {/* Main Title - Single Line */}
+              {/* Main Title - Split REPORTCASTER into two lines */}
               <motion.h1 
                 variants={heroTitleVariant}
                 initial="hidden"
                 animate="visible"
                 className="text-[var(--text-primary-dark)] text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif leading-[0.95] tracking-tighter break-words"
               >
-                {heroTitle}
+                {heroTitle === 'REPORTCASTER' ? (
+                  <>
+                    REPORT<br />
+                    CASTER
+                  </>
+                ) : (
+                  heroTitle
+                )}
               </motion.h1>
 
-              {/* Subtitle */}
-              {heroSubheading && (
-                <motion.p 
-                  variants={heroSubVariant}
-                  initial="hidden"
-                  animate="visible"
-                  className="text-[var(--text-muted-dark)] text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic leading-relaxed"
-                >
-                  {heroSubheading}
-                </motion.p>
-              )}
-
-              {/* Subtitle Text */}
+              {/* Combined Subtitle - heroSubheading and heroSubtitle as one paragraph */}
               <motion.p 
                 variants={heroSubVariant}
                 initial="hidden"
                 animate="visible"
                 className="text-[var(--text-muted-dark)] text-base sm:text-lg md:text-xl font-serif italic leading-relaxed"
               >
+                {heroSubheading && <>{heroSubheading} </>}
                 {heroSubtitle}
               </motion.p>
 
-              {/* Metadata - Lightened Presentation */}
-              <div className="pt-6 sm:pt-7 md:pt-8 space-y-4 sm:space-y-5 md:space-y-6">
-                {/* First Row: Role & Company */}
-                <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                  <div className="space-y-1.5">
-                    <div className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50">
+              {/* Data Sheet Link - Simple link style */}
+              {dataSheetUrl && (
+                <motion.div
+                  variants={heroSubVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="pt-2"
+                >
+                  <a
+                    href={dataSheetUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[var(--text-muted-dark)] hover:text-[var(--accent-teal)] transition-colors duration-200 text-sm sm:text-base font-sans"
+                  >
+                    <svg
+                      className="w-3.5 h-3.5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                    <span>{dataSheetLabel || 'ibi ReportCaster Data Sheet'}</span>
+                  </a>
+                </motion.div>
+              )}
+
+              {/* Metadata - Properly Aligned Layout */}
+              <div className="pt-4 sm:pt-5 md:pt-6">
+                <div className="space-y-3 text-sm">
+                  {/* Role */}
+                  <div className="flex items-center gap-4">
+                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
                       Role
-                    </div>
-                    <div className="text-[var(--text-primary-dark)] text-sm font-sans leading-snug">
-                      {role}
-                    </div>
+                    </span>
+                    <span className="text-[var(--text-primary-dark)] font-sans">{role}</span>
                   </div>
-                  <div className="space-y-1.5">
-                    <div className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50">
+                  
+                  {/* Company */}
+                  <div className="flex items-center gap-4">
+                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
                       Company
-                    </div>
-                    <div className="text-[var(--text-primary-dark)] text-sm font-sans leading-snug">
-                      {company}
-                    </div>
+                    </span>
+                    <span className="text-[var(--text-primary-dark)] font-sans">{company}</span>
+                  </div>
+                  
+                  {/* Timeframe */}
+                  <div className="flex items-center gap-4">
+                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
+                      Timeframe
+                    </span>
+                    <span className="text-[var(--text-primary-dark)] font-sans">{timeframe}</span>
                   </div>
                 </div>
-
-                {/* Second Row: Timeframe */}
-                <div className="space-y-1.5">
-                  <div className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50">
-                    Timeframe
-                  </div>
-                  <div className="text-[var(--text-primary-dark)] text-sm font-sans">
-                    {timeframe}
-                  </div>
-                </div>
-
-                {/* Third Row: Scope */}
-                <div className="space-y-3">
-                  <div className="flex flex-wrap gap-2">
+                
+                {/* Scope Tags - Below metadata */}
+                {scope.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-5">
                     {scope.map((item, index) => (
                       <span
                         key={index}
@@ -168,137 +195,14 @@ export default function HeroMeta({
                       </span>
                     ))}
                   </div>
-                </div>
-
-                  {/* Demo Buttons - Using Button Component for Consistency */}
-                  {(demoVideoUrl || demoVideoUrl2 || hasPrototype) && (
-                    <motion.div 
-                      variants={heroButtonsVariant}
-                      initial="hidden"
-                      animate="visible"
-                      className="pt-4 flex flex-row flex-wrap gap-3"
-                    >
-                      {demoVideoUrl && (
-                        <motion.div whileHover={buttonHover} whileTap={buttonTap}>
-                          <a
-                            href={demoVideoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--text-primary-dark)]/20 bg-transparent hover:bg-[var(--accent-teal)]/10 hover:border-[var(--accent-teal)]/30 transition-all duration-300 text-[var(--text-primary-dark)] text-sm md:text-base font-medium"
-                          >
-                            <svg
-                              className="w-4 h-4"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                            </svg>
-                            <span>{demoVideoLabel || 'Public Demo'}</span>
-                          </a>
-                        </motion.div>
-                      )}
-                      {demoVideoUrl2 && (
-                        <motion.div whileHover={buttonHover} whileTap={buttonTap}>
-                          <a
-                            href={demoVideoUrl2}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--text-primary-dark)]/20 bg-transparent hover:bg-[var(--accent-teal)]/10 hover:border-[var(--accent-teal)]/30 transition-all duration-300 text-[var(--text-primary-dark)] text-sm md:text-base font-medium"
-                          >
-                            <svg
-                              className="w-4 h-4"
-                              fill="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                            </svg>
-                            <span>{demoVideoLabel2 || 'Public Demo'}</span>
-                          </a>
-                        </motion.div>
-                      )}
-                      {hasPrototype && (
-                        <motion.div whileHover={buttonHover} whileTap={buttonTap}>
-                          <a
-                            href={`#prototype`}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              // Check if case study is unlocked
-                              if (typeof window !== 'undefined' && caseStudySlug) {
-                                const storageKey = `case-study-unlocked-${caseStudySlug}`
-                                const isUnlocked = sessionStorage.getItem(storageKey) === 'true'
-                                if (!isUnlocked) {
-                                  // Set flag to indicate user wants to go to prototype after unlocking
-                                  sessionStorage.setItem(`redirect-to-prototype-${caseStudySlug}`, 'true')
-                                  // Scroll to the main password gate (same one that unlocks the case study)
-                                  const passwordGate = document.getElementById('password-gate')
-                                  if (passwordGate) {
-                                    passwordGate.scrollIntoView({ behavior: 'smooth' })
-                                    return
-                                  }
-                                } else {
-                                  // Case study is unlocked, scroll to prototype section
-                                  const prototypeSection = document.getElementById('prototype')
-                                  if (prototypeSection) {
-                                    prototypeSection.scrollIntoView({ behavior: 'smooth' })
-                                  }
-                                }
-                              } else {
-                                // Fallback: try to scroll to prototype
-                                const prototypeSection = document.getElementById('prototype')
-                                if (prototypeSection) {
-                                  prototypeSection.scrollIntoView({ behavior: 'smooth' })
-                                }
-                              }
-                            }}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--text-primary-dark)]/20 bg-transparent hover:bg-[var(--accent-teal)]/10 hover:border-[var(--accent-teal)]/30 transition-all duration-300 text-[var(--text-primary-dark)] text-sm md:text-base font-medium"
-                          >
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                              />
-                            </svg>
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                              />
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <span>Video Walkthrough</span>
-                          </a>
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  )}
+                )}
               </div>
             </div>
 
             {/* Right Column: Laptop Visual - Macro Photography Feel */}
             {coverImage && (
               <motion.div 
-                className="relative min-h-[400px] lg:min-h-[600px] flex items-center justify-center lg:justify-start -mx-6 md:-mx-10 lg:mx-0 lg:ml-12 overflow-visible"
+                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-12 overflow-visible"
                 variants={fadeIn}
                 initial="hidden"
                 animate="visible"
@@ -315,23 +219,23 @@ export default function HeroMeta({
                   }}
                 />
 
-                {/* Laptop Container - Macro Scale with Bleed - Reduced by 25% */}
+                {/* Laptop Container - Fixed Size for Consistency */}
                 <div
-                  className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float"
+                  className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float w-full"
                   style={{
                     '--laptop-scale': '1.4625',
                     transformOrigin: 'center center',
+                    maxWidth: '600px',
                     width: '100%',
-                    maxWidth: 'none',
                   } as React.CSSProperties}
                   onClick={() => openLightbox(coverImage.src, coverImage.alt)}
                 >
                   <div 
-                    className="relative"
+                    className="relative w-full"
                     style={{ 
-                      aspectRatio: '16/10', 
-                      minHeight: '300px',
+                      aspectRatio: '16/10',
                       width: '100%',
+                      maxWidth: '600px',
                     }}
                   >
                     <Image
@@ -340,7 +244,7 @@ export default function HeroMeta({
                       fill
                       className="object-contain"
                       priority
-                      sizes="(max-width: 1024px) 100vw, 80vw"
+                      sizes="(max-width: 1024px) 100vw, 600px"
                       style={{
                         filter: 'drop-shadow(0 20px 60px rgba(67, 56, 202, 0.3))',
                       }}

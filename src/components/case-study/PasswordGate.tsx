@@ -14,7 +14,7 @@ interface PasswordGateProps {
 
 export default function PasswordGate({
   onPasswordCorrect,
-  password: casePassword = 'access',
+  password: casePassword = 'anu-access',
   description,
   learnItems,
   caseStudySlug = 'default',
@@ -24,16 +24,27 @@ export default function PasswordGate({
   const [error, setError] = useState('')
 
   // Check if already unlocked in sessionStorage on mount
+  // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storageKey = `case-study-unlocked-${caseStudySlug}`
-      const isUnlocked = sessionStorage.getItem(storageKey) === 'true'
-      if (isUnlocked) {
-        // Already unlocked, call the callback immediately
-        onPasswordCorrect()
+      const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
+      
+      // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
+      if (caseStudySlug === 'iq-plugin') {
+        if (caseUnlocked) {
+          onPasswordCorrect()
+        }
+      } else {
+        // Other case studies respect both global and case-specific unlock
+        const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+        if (globalUnlocked || caseUnlocked) {
+          onPasswordCorrect()
+        }
       }
     }
-  }, [caseStudySlug, onPasswordCorrect])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [caseStudySlug]) // Remove onPasswordCorrect from dependencies to prevent unnecessary re-runs
 
   // Default "What you'll learn" items
   const defaultLearnItems = [
@@ -55,14 +66,22 @@ export default function PasswordGate({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const trimmedPassword = password.trim().toLowerCase()
-    const correctPassword = (casePassword || 'access').toLowerCase()
+    const correctPassword = (casePassword || 'anu-access').toLowerCase()
     
     if (trimmedPassword === correctPassword) {
       setError('')
       // Save to sessionStorage so it persists until tab is closed
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
-        sessionStorage.setItem(storageKey, 'true')
+        
+        // IQ Plugin only sets its own unlock (doesn't set global unlock)
+        if (caseStudySlug === 'iq-plugin') {
+          sessionStorage.setItem(storageKey, 'true')
+        } else {
+          // Other case studies set both global unlock and case-specific unlock
+          sessionStorage.setItem('portfolio-globally-unlocked', 'true')
+          sessionStorage.setItem(storageKey, 'true')
+        }
       }
       // Call the callback to unlock the content
       onPasswordCorrect()

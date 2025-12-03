@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 
 interface WebFOCUSInitiativeRowProps {
   overline: string
@@ -30,6 +31,79 @@ export default function WebFOCUSInitiativeRow({
   index,
 }: WebFOCUSInitiativeRowProps) {
   const isImageLeft = orientation === 'image-left'
+  const isLocked = title === 'IQ Plugin'
+  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [inputPassword, setInputPassword] = useState('')
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
+
+  // Check if unlocked - IQ Plugin requires its own specific unlock
+  useEffect(() => {
+    if (typeof window !== 'undefined' && isLocked) {
+      const checkUnlock = () => {
+        // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
+        const storageKey = 'case-study-unlocked-iq-plugin'
+        const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
+        setIsUnlocked(caseUnlocked)
+      }
+      checkUnlock()
+      
+      // Listen for storage changes (only for IQ Plugin specific unlock)
+      const handleStorageChange = (e: StorageEvent) => {
+        if (e.key === 'case-study-unlocked-iq-plugin') {
+          checkUnlock()
+        }
+      }
+      
+      window.addEventListener('storage', handleStorageChange)
+      
+      // Poll periodically to catch same-tab unlocks
+      const interval = setInterval(checkUnlock, 500)
+      
+      return () => {
+        window.removeEventListener('storage', handleStorageChange)
+        clearInterval(interval)
+      }
+    }
+  }, [isLocked])
+
+  const handleUnlock = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    if (!inputPassword.trim()) {
+      setError('Please enter a password.')
+      return
+    }
+
+    const trimmedPassword = inputPassword.trim().toLowerCase()
+    const correctPassword = 'anu-access'
+    
+    if (trimmedPassword === correctPassword) {
+      setError('')
+      setSuccess(true)
+      
+      // Set sessionStorage - IQ Plugin only sets its own unlock (doesn't set global unlock)
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('case-study-unlocked-iq-plugin', 'true')
+        // Don't dispatch global unlock event for IQ Plugin
+      }
+      
+      // Wait a moment to show success, then unlock
+      setTimeout(() => {
+        setIsUnlocked(true)
+        setShowPasswordModal(false)
+        setSuccess(false)
+        setInputPassword('')
+      }, 1000)
+    } else {
+      setError('Incorrect password. Please try again.')
+      setSuccess(false)
+      setInputPassword('')
+    }
+  }
 
   // Image placeholder with gradient if no image provided
   const ImageContent = visualImage ? (
@@ -57,7 +131,7 @@ export default function WebFOCUSInitiativeRow({
         ease: [0.22, 1, 0.36, 1],
         delay: index * 0.06, // Stagger: 0ms, 60ms, 120ms
       }}
-      className="group"
+      className="group relative"
     >
       <div
         className={`flex flex-col ${
@@ -116,6 +190,157 @@ export default function WebFOCUSInitiativeRow({
           </div>
         </div>
       </div>
+
+      {/* Lock Overlay for IQ Plugin */}
+      {isLocked && !isUnlocked && (
+        <div 
+          className="absolute inset-0 bg-white/80 backdrop-blur-xl z-10 flex items-center justify-center rounded-lg cursor-pointer"
+          onClick={() => setShowPasswordModal(true)}
+        >
+          <div className="text-center space-y-4 px-8">
+            <div className="flex justify-center">
+              <svg
+                className="w-16 h-16 text-[var(--accent-teal)]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <p className="text-[var(--text-primary-light)] text-lg font-medium">
+              This case study is locked
+            </p>
+            <p className="text-[var(--text-muted-light)] text-sm">
+              Confidential company information
+            </p>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setShowPasswordModal(true)
+              }}
+              className="mt-4 px-6 py-2 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] font-medium hover:bg-[var(--accent-teal)]/20 transition-all duration-300"
+            >
+              Unlock with password
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Password Modal */}
+      <AnimatePresence>
+        {showPasswordModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => {
+              setShowPasswordModal(false)
+              setError('')
+              setInputPassword('')
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            >
+              <div className="space-y-6">
+                <div className="text-center">
+                  <div className="flex justify-center mb-4">
+                    <svg
+                      className="w-12 h-12 text-[var(--accent-teal)]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-serif font-semibold text-[#1A1A1A] mb-2">
+                    Unlock IQ Plugin Case Study
+                  </h3>
+                  <p className="text-sm text-[#666666] mb-1">
+                    This case study is locked due to confidential company information.
+                  </p>
+                  <p className="text-xs text-[var(--accent-teal)] font-medium">
+                    ✓ Unlocking this section will unlock all protected content across the entire website
+                  </p>
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    handleUnlock()
+                  }}
+                  className="space-y-4"
+                >
+                  <div>
+                    <input
+                      type="password"
+                      value={inputPassword}
+                      onChange={(e) => {
+                        setInputPassword(e.target.value)
+                        setError('')
+                      }}
+                      placeholder="Enter password"
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-300 ${
+                        error
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
+                          : success
+                          ? 'border-green-500 focus:border-green-500 focus:ring-green-500/20'
+                          : 'border-[var(--accent-teal)]/30 focus:border-[var(--accent-teal)] focus:ring-[var(--accent-teal)]/20'
+                      } focus:outline-none focus:ring-4 text-[#1A1A1A]`}
+                      autoFocus
+                    />
+                    {error && (
+                      <p className="mt-2 text-sm text-red-600">{error}</p>
+                    )}
+                    {success && (
+                      <p className="mt-2 text-sm text-green-600">✓ Unlocking...</p>
+                    )}
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowPasswordModal(false)
+                        setError('')
+                        setInputPassword('')
+                        setSuccess(false)
+                      }}
+                      className="flex-1 px-4 py-3 rounded-lg border-2 border-black/20 text-[#1A1A1A] font-medium hover:bg-black/5 transition-all duration-300"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      onClick={handleUnlock}
+                      className="flex-1 px-4 py-3 rounded-lg bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal)]/90 transition-all duration-300"
+                    >
+                      {success ? 'Unlocking...' : 'Unlock Content'}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }

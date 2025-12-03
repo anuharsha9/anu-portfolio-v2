@@ -79,11 +79,13 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           url: `${siteUrl}/images/og-image.jpg`,
         },
       },
-      image: data.coverImage
+      image: data.coverImage && typeof data.coverImage === 'string'
         ? `${siteUrl}${data.coverImage}`
+        : data.coverImage?.src
+        ? `${siteUrl}${data.coverImage.src}`
         : `${siteUrl}/images/og-image.jpg`,
-      datePublished: data.publishedDate || new Date().toISOString(),
-      dateModified: data.updatedDate || new Date().toISOString(),
+      datePublished: data.publishedDate || '2025-01-02T00:00:00.000Z',
+      dateModified: data.updatedDate || '2025-01-02T00:00:00.000Z',
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': `${siteUrl}/work/${data.slug}/`,
@@ -120,8 +122,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         '@type': 'WebPage',
         '@id': `${siteUrl}/work/${data.slug}/`,
       },
-      datePublished: data.publishedDate || new Date().toISOString(),
-      dateModified: data.updatedDate || new Date().toISOString(),
+      datePublished: data.publishedDate || '2025-01-02T00:00:00.000Z',
+      dateModified: data.updatedDate || '2025-01-02T00:00:00.000Z',
       about: {
         '@type': 'Thing',
         name: data.scope?.join(', ') || 'UX Design',

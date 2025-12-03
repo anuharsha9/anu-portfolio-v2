@@ -52,14 +52,14 @@ export default function MLLearningJourney({ isLightBackground = false }: MLLearn
 
   return (
     <div className={`${bgColor} rounded-lg p-6 md:p-8`}>
-      <div className="space-y-5">
+      <div className="space-y-3">
         {/* Compact integrated header and body text */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className={`${mutedColor} text-sm md:text-base leading-relaxed`}>
-            <p className="mb-3">
+            <p className="mb-2">
               After accepting the project, I faced a critical challenge: I came in with no ML background and had to learn fast enough to design responsibly.
             </p>
-            <p className="mb-3">
+            <p className="mb-2">
               I learned that ML wasn&apos;t just about algorithms — it was about data selection and preparation, model training and evaluation, interpreting results and understanding confidence, and handling edge cases and errors gracefully.
             </p>
             <p>
@@ -69,20 +69,20 @@ export default function MLLearningJourney({ isLightBackground = false }: MLLearn
         </div>
 
         {/* Learning Methods Grid - Integrated seamlessly */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {learningMethods.map((method, index) => (
             <div
               key={index}
-              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
+              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
               style={{ borderColor: accentColor + '40' }}
             >
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">{method.icon}</span>
                   <h4 className={`${textColor} text-base font-semibold`}>{method.method}</h4>
                 </div>
                 <p className={`${mutedColor} text-xs leading-relaxed`}>{method.description}</p>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1">
                   {method.details.map((detail, detailIndex) => (
                     <li key={detailIndex} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
                       <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">•</span>

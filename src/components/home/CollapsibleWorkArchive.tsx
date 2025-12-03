@@ -93,11 +93,11 @@ export default function CollapsibleWorkArchive() {
   } | null>(null)
 
   return (
-    <MotionSection id="work-archive" className="surface-dark-alt py-12 md:py-16 relative">
+    <MotionSection id="work-archive" className="surface-light py-12 md:py-16 relative">
       {/* Subtle Logo Watermark - Top Left Corner */}
       <div className="absolute top-8 left-8 opacity-[0.03] pointer-events-none hidden lg:block">
         <div className="w-24 h-24">
-          <SignatureLogo className="w-full h-full text-white" />
+          <SignatureLogo className="w-full h-full text-black" />
         </div>
       </div>
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -112,13 +112,13 @@ export default function CollapsibleWorkArchive() {
           {/* Header Section - Always Visible */}
           <div className="text-center space-y-6">
             <div className="space-y-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/60 font-mono">
+              <p className="text-xs uppercase tracking-[0.2em] text-[#666666] font-mono">
                 A decade of work
               </p>
-              <h2 className="text-white text-2xl md:text-3xl font-serif leading-tight">
+              <h2 className="text-[#1A1A1A] text-2xl md:text-3xl font-serif leading-tight">
                 Explore my work archive
               </h2>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              <p className="text-[#666666] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
                 A decade of design work—from early mobile apps and web platforms to enterprise systems and agency projects. Each piece represents a different challenge, a different scale, and a different lesson learned.
               </p>
             </div>
@@ -175,8 +175,8 @@ export default function CollapsibleWorkArchive() {
                       className="space-y-6"
                     >
                       {/* Era Header */}
-                      <div className="flex items-baseline gap-4 pb-2 border-b border-white/10">
-                        <h3 className="text-white text-xl md:text-2xl font-serif">
+                      <div className="flex items-baseline gap-4 pb-2 border-b border-black/10">
+                        <h3 className="text-[#1A1A1A] text-xl md:text-2xl font-serif">
                           {era.title}
                         </h3>
                         <span className="text-[var(--accent-teal)] text-xs font-mono uppercase tracking-wider opacity-60">
@@ -206,10 +206,10 @@ export default function CollapsibleWorkArchive() {
                                 pdfUrl: tile.href,
                                 thumbnailUrl: tile.image,
                               })}
-                              className="group relative flex flex-col h-full w-full rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_8px_24px_rgba(13,148,136,0.15)] hover:border-[rgba(13,148,136,0.5)] hover:bg-white/8"
+                              className="group relative flex flex-col h-full w-full rounded-xl border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 bg-black/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 hover:bg-black/8"
                             >
                               {/* Accent indicator */}
-                              <div className="absolute top-4 left-4 w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-[var(--accent-teal)] transition-colors duration-300 z-10" />
+                              <div className="absolute top-4 left-4 w-1.5 h-1.5 rounded-full bg-black/20 group-hover:bg-[var(--accent-teal)] transition-colors duration-300 z-10" />
                               
                               {/* Image with gradient overlay */}
                               <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden mb-4 flex-shrink-0">
@@ -225,14 +225,14 @@ export default function CollapsibleWorkArchive() {
                               
                               {/* Content */}
                               <div className="p-6 space-y-3 flex-1 flex flex-col">
-                                <h4 className="text-white text-lg font-medium transition-all duration-300 group-hover:text-[var(--accent-teal)]">
+                                <h4 className="text-[#1A1A1A] text-lg font-medium transition-all duration-300 group-hover:text-[var(--accent-teal)]">
                                   {tile.title}
                                 </h4>
-                                <p className="text-white/70 text-sm leading-relaxed flex-1">
+                                <p className="text-[#666666] text-sm leading-relaxed flex-1">
                                   {tile.description}
                                 </p>
                                 <div className="pt-2 mt-auto">
-                                  <span className="inline-flex items-center gap-x-2 rounded-full border border-white/20 text-white px-4 py-2 text-sm font-medium transition-all duration-300 group-hover:border-[var(--accent-teal)] group-hover:bg-[var(--accent-teal)]/10 group-hover:text-[var(--accent-teal)]">
+                                  <span className="inline-flex items-center gap-x-2 rounded-full border border-black/20 text-[#1A1A1A] px-4 py-2 text-sm font-medium transition-all duration-300 group-hover:border-[var(--accent-teal)] group-hover:bg-[var(--accent-teal)]/10 group-hover:text-[var(--accent-teal)]">
                                     Preview
                                     <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
                                   </span>

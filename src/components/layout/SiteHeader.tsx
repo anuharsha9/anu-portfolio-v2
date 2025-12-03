@@ -10,17 +10,31 @@ import MobileMenu from './MobileMenu'
 
 export default function SiteHeader() {
   const pathname = usePathname()
-  const [isVisible, setIsVisible] = useState(false)
   const isLandingPage = pathname === '/'
-
-  // Always show header on /me page, otherwise use scroll behavior
+  const isCaseStudy = pathname?.startsWith('/case-study') || pathname?.includes('/reportcaster') || pathname?.includes('/ml-functions') || pathname?.includes('/iq-plugin')
+  
+  // Start hidden on landing page, visible on other pages (except case studies)
   const alwaysVisible = pathname === '/me'
+  const hideOnCaseStudy = isCaseStudy
+  const [isVisible, setIsVisible] = useState(!isLandingPage && !hideOnCaseStudy) // Hidden on landing page initially
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return
+
     if (alwaysVisible) {
       setIsVisible(true)
       return
     }
+
+    // Hide completely on case study pages
+    if (hideOnCaseStudy) {
+      setIsVisible(false)
+      return
+    }
+
+    // Don't hide main nav on landing page - keep it accessible for site navigation
+    // Section nav and main nav can coexist
 
     // Always show header on mobile (for hamburger menu access)
     const isMobile = window.innerWidth < 1024 // lg breakpoint
@@ -31,7 +45,7 @@ export default function SiteHeader() {
 
     const handleResize = () => {
       const isMobileNow = window.innerWidth < 1024
-      if (isMobileNow) {
+      if (isMobileNow && !hideOnCaseStudy) {
         setIsVisible(true)
       }
     }
@@ -41,14 +55,27 @@ export default function SiteHeader() {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [alwaysVisible])
+  }, [alwaysVisible, hideOnCaseStudy, isLandingPage])
 
   // Use centralized scroll manager
   useScrollManager((scrollY) => {
-    if (alwaysVisible || (typeof window !== 'undefined' && window.innerWidth < 1024)) return
-    // Show header when user scrolls down more than 100px
-    setIsVisible(scrollY > 100)
-  }, [alwaysVisible])
+    if (alwaysVisible || hideOnCaseStudy || (typeof window !== 'undefined' && window.innerWidth < 1024)) return
+    
+    // On landing page: 
+    // - Hide at top (scrollY === 0 or very small)
+    // - Show when scrolling down (keep visible even when section nav appears)
+    // - Main nav should stay accessible for navigation to other pages
+    if (isLandingPage) {
+      const hasScrolled = scrollY > 50 // Show nav after scrolling 50px
+      
+      // Keep main nav visible once user scrolls - don't hide when section nav appears
+      // Both can coexist: section nav for landing page sections, main nav for site navigation
+      setIsVisible(hasScrolled)
+    } else {
+      // On other pages: show header when user scrolls down more than 100px
+      setIsVisible(scrollY > 100)
+    }
+  }, [alwaysVisible, hideOnCaseStudy, isLandingPage])
 
   return (
     <header

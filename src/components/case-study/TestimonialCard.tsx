@@ -1,4 +1,8 @@
+
 'use client'
+
+import TopQuoteIcon from '@/assets/top-quote.svg'
+import BottomQuoteIcon from '@/assets/bottom-quote.svg'
 
 interface TestimonialCardProps {
   quote: string
@@ -26,13 +30,40 @@ export default function TestimonialCard({
       <blockquote className="space-y-4">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
-          <div className="h-px flex-1 bg-white/10"></div>
+          <div className={`h-px flex-1 ${isLightBackground ? 'bg-black/10' : 'bg-white/10'}`}></div>
           <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
         </div>
-        <p className={`${textColor} text-base md:text-lg leading-relaxed italic`}>
-          &ldquo;{quote}&rdquo;
-        </p>
-        <footer className="pt-4 border-t border-white/10">
+        {/* Quote with icons */}
+        <div className="relative">
+          {/* Opening quote icon */}
+          <div className="relative mb-2" style={{ paddingLeft: '1.2em' }}>
+            <TopQuoteIcon
+              style={{
+                position: 'absolute',
+                left: '0',
+                top: '-0.2em',
+                width: '1.2em',
+                height: '1.2em',
+              }}
+              className="text-[var(--accent-teal)]"
+            />
+          </div>
+          <p className={`${textColor} text-base md:text-lg leading-relaxed relative`} style={{ paddingRight: '1.2em', paddingBottom: '2em' }}>
+            {quote}
+            {/* Closing quote icon */}
+            <BottomQuoteIcon
+              style={{
+                position: 'absolute',
+                right: '0',
+                bottom: '0',
+                width: '1.2em',
+                height: '1.2em',
+              }}
+              className="text-[var(--accent-teal)]"
+            />
+          </p>
+        </div>
+        <footer className={`pt-4 border-t ${isLightBackground ? 'border-black/10' : 'border-white/10'}`}>
           <p className={`${textColor} font-semibold group-hover:text-[var(--accent-teal)] transition-colors`}>{name}</p>
           <p className={`${mutedColor} text-sm`}>
             {role} {company && `at ${company}`}

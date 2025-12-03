@@ -36,9 +36,9 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
 
   return (
     <div className={`${bgColor} rounded-lg border ${borderColor} p-6 md:p-8`}>
-      <div className="space-y-6">
+      <div className="space-y-3">
         {/* Header */}
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-1">
           <h3 className={`${textColor} text-xl md:text-2xl font-serif`}>
             Competitive Analysis: What We Learned
           </h3>
@@ -48,11 +48,11 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
         </div>
 
         {/* Compact Grid Layout - 4 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
           {/* What We Studied */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4`} style={{ borderColor: accentColor + '40' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-3`}>What We Studied</h4>
-            <div className="space-y-2">
+          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '40' }}>
+            <h4 className={`${textColor} text-sm font-semibold mb-2`}>What We Studied</h4>
+            <div className="space-y-1">
               {insights.studied.map((item, idx) => (
                 <div key={idx} className={`${bgColor} rounded p-2 border ${borderColor}`}>
                   <p className={`${textColor} text-xs font-semibold mb-0.5`}>{item.tool}</p>
@@ -63,9 +63,9 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
           </div>
 
           {/* What We Adopted */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4`} style={{ borderColor: accentColor + '60' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-3`} style={{ color: accentColor }}>What We Adopted</h4>
-            <ul className="space-y-1.5">
+          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '60' }}>
+            <h4 className={`${textColor} text-sm font-semibold mb-2`} style={{ color: accentColor }}>What We Adopted</h4>
+            <ul className="space-y-1">
               {insights.adopted.map((item, idx) => (
                 <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
                   <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">✓</span>
@@ -76,9 +76,9 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
           </div>
 
           {/* What We Avoided */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4`} style={{ borderColor: mutedColor.replace('text-', '').includes('666') ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-3`}>What We Avoided</h4>
-            <ul className="space-y-1.5">
+          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: mutedColor.replace('text-', '').includes('666') ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)' }}>
+            <h4 className={`${textColor} text-sm font-semibold mb-2`}>What We Avoided</h4>
+            <ul className="space-y-1">
               {insights.avoided.map((item, idx) => (
                 <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
                   <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">×</span>
@@ -89,9 +89,9 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
           </div>
 
           {/* What We Did Differently */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4`} style={{ borderColor: accentColor + '60' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-3`} style={{ color: accentColor }}>What We Did Differently</h4>
-            <ul className="space-y-1.5">
+          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '60' }}>
+            <h4 className={`${textColor} text-sm font-semibold mb-2`} style={{ color: accentColor }}>What We Did Differently</h4>
+            <ul className="space-y-1">
               {insights.different.map((item, idx) => (
                 <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
                   <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">→</span>

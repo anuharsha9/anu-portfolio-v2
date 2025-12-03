@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import ScheduleWorkflowComparison from './ScheduleWorkflowComparison'
 
 interface VersionData {
   id: string
@@ -34,7 +33,7 @@ interface VersionIterationProps {
 }
 
 export default function VersionIteration({ v1, v2, v3, isLightBackground = false }: VersionIterationProps) {
-  const [activeVersion, setActiveVersion] = useState<'v1' | 'v2' | 'v3'>('v3')
+  const [activeVersion, setActiveVersion] = useState<'v1' | 'v2' | 'v3'>('v1')
   // Start with all subsections collapsed by default
   const [collapsedSubsections, setCollapsedSubsections] = useState<Set<number>>(() => {
     // Initialize with all subsection indices collapsed
@@ -115,84 +114,93 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
           <h3 className={`${textColor} text-xl md:text-2xl font-serif`}>
             The Iteration Journey: Three Architectural Approaches
           </h3>
-          {/* Phase Indicator */}
-          <div className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} rounded-lg px-3 py-1.5 border ${borderColor}`}>
-            <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-0.5`}>Phases 2 & 3</div>
-            <div className={`${textColor} text-xs font-semibold`}>Architecture & Design</div>
-          </div>
         </div>
         <p className={`${mutedColor} text-sm md:text-base max-w-2xl mx-auto`}>
           I explored three directions before finding the solution that balanced platform architecture, engineering constraints, and user needs.
         </p>
       </div>
 
-      {/* Architectural Comparison Tiles - Clickable */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {versions.map((version) => (
-          <button
-            key={version.id}
-            onClick={() => setActiveVersion(version.id)}
-            className={`${bgColor} rounded-lg border-2 p-4 text-left transition-all duration-300 hover:scale-105 ${
-              activeVersion === version.id
-                ? 'border-[var(--accent-teal)] shadow-lg'
-                : `border-opacity-50 ${borderColor}`
-            }`}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className={`font-mono text-base font-bold ${
-                  version.status === 'shipped' ? 'text-[var(--accent-teal)]' : mutedColor
+      {/* Tabs Navigation */}
+      <div className={`border-b ${borderColor}`}>
+        <div className="flex flex-wrap gap-2 md:gap-0">
+          {versions.map((version) => {
+            const isActive = activeVersion === version.id
+            const tabLabel = version.id === 'v1' 
+              ? 'First Attempt (Rejected)'
+              : version.id === 'v2'
+              ? 'Second Attempt (Rejected)'
+              : 'Final Attempt (Launched)'
+            
+            return (
+              <button
+                key={version.id}
+                onClick={() => setActiveVersion(version.id)}
+                className={`px-4 md:px-6 py-3 text-sm md:text-base font-medium transition-all duration-300 border-b-2 ${
+                  isActive
+                    ? `border-[var(--accent-teal)] ${textColor} font-semibold`
+                    : `border-transparent ${mutedColor} hover:${textColor} hover:border-white/20`
                 }`}
               >
-                {version.label}
-              </span>
-              {version.status === 'shipped' && (
-                <span className="text-[var(--accent-teal)] text-xs font-semibold uppercase tracking-wider bg-[var(--accent-teal)]/10 px-2 py-1 rounded">
-                  Shipped
-                </span>
-              )}
-              {version.status === 'rejected' && (
-                <span className={`${mutedColor} text-xs font-semibold uppercase tracking-wider`}>
-                  Rejected
-                </span>
-              )}
-            </div>
-            <h4 className={`${textColor} text-sm font-semibold mb-1`}>{version.approach}</h4>
-            <p className={`${mutedColor} text-xs mb-2 leading-relaxed`}>{version.description}</p>
-            <div className="text-xs">
-              <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-0.5`}>Rationale</p>
-              <p className={`${textColor} text-xs`}>{version.rationale}</p>
-              {version.rejection && (
-                <>
-                  <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-0.5 mt-2`}>Rejection</p>
-                  <p className={`${textColor} text-xs italic`}>{version.rejection}</p>
-                </>
-              )}
-            </div>
-          </button>
-        ))}
+                {tabLabel}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Active Version Content */}
-      {activeSection && (
-        <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
+      {activeSection && activeVersionData && (
+        <div className={`${bgColor} rounded-lg border ${borderColor} p-6 md:p-8 lg:p-12`}>
           <div className="space-y-6">
-            {/* Title */}
-            <h4 className={`${textColor} text-xl md:text-2xl font-serif`}>
-              {activeSection.title}
-            </h4>
+            {/* Title and Status */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                <h4 className={`${textColor} text-xl md:text-2xl font-serif`}>
+                  {activeSection.title}
+                </h4>
+                {activeVersionData.status === 'shipped' && (
+                  <span className="text-[var(--accent-teal)] text-xs font-semibold uppercase tracking-wider bg-[var(--accent-teal)]/10 px-3 py-1.5 rounded border border-[var(--accent-teal)]/30">
+                    Shipped
+                  </span>
+                )}
+                {activeVersionData.status === 'rejected' && (
+                  <span className={`${mutedColor} text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded border ${borderColor}`}>
+                    Rejected
+                  </span>
+                )}
+              </div>
+              
+              {/* Approach and Description */}
+              <div className="space-y-2">
+                <h5 className={`${textColor} text-base md:text-lg font-semibold`}>
+                  {activeVersionData.approach}
+                </h5>
+                <p className={`${mutedColor} text-sm md:text-base`}>
+                  {activeVersionData.description}
+                </p>
+              </div>
+
+              {/* Rationale and Rejection */}
+              <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-4 space-y-3 border ${borderColor}`}>
+                <div>
+                  <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>Rationale</p>
+                  <p className={`${textColor} text-sm`}>{activeVersionData.rationale}</p>
+                </div>
+                {activeVersionData.rejection && (
+                  <div>
+                    <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>Why It Was Rejected</p>
+                    <p className={`${textColor} text-sm italic`}>{activeVersionData.rejection}</p>
+                  </div>
+                )}
+              </div>
+            </div>
 
             {/* Body */}
             <div className={`${mutedColor} leading-relaxed space-y-4`}>
               {activeSection.body.split('\n\n').map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
+                <p key={idx} className="text-sm md:text-base">{paragraph}</p>
               ))}
             </div>
-
-            {/* Schedule Workflow Comparison - only for V3, placed above subsections */}
-            {activeVersion === 'v3' && (
-              <ScheduleWorkflowComparison isLightBackground={isLightBackground} />
-            )}
 
                    {/* Images - 2x2 Grid */}
                    {activeSection.images && activeSection.images.length > 0 && (

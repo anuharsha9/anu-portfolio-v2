@@ -14,7 +14,7 @@ const initiatives = [
     bullets: [
       '75% fewer clicks in scheduling',
       'Eliminated multi-tab sprawl',
-      'Reduced complexity eliminated common support pain points',
+      'Reduced complexity and eliminated common support pain points',
       '5 legacy subsystems → 1 unified hub-native experience',
     ],
     impact: 'Revamping a 40-year-old scheduler powering 20 million schedules run every week.',
@@ -78,10 +78,15 @@ export default function WebFOCUSOverview() {
           className="space-y-8"
         >
           <div className="space-y-6">
-            <h2 className="text-[var(--text-primary-light)] text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
-              Modernizing WebFOCUS at Cloud Software Group
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
-            </h2>
+            <div className="text-center space-y-2">
+              <p className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans">
+                My recent work
+              </p>
+              <h2 className="text-[var(--text-primary-light)] text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
+                Modernizing WebFOCUS at Cloud Software Group
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
+              </h2>
+            </div>
             
             {/* Company Logo & Case Study Links */}
             <div className="flex justify-center items-center gap-3 pt-2 flex-wrap">
@@ -145,17 +150,17 @@ export default function WebFOCUSOverview() {
             </p>
 
             <p>
-              Across three years, I led UX modernization efforts for several of its most critical subsystems: <strong>ReportCaster</strong> (scheduling and distribution), <strong>ML Functions</strong> (integrated data science and machine learning), and <strong>IQ Plugin</strong> (AI-powered insights and natural language query). These were high-volume, high-risk features that had accumulated 40+ years of legacy friction, fragmentation, and technical constraints.
+              Across three years, I led UX modernization efforts for several of its most critical subsystems: <strong>ReportCaster</strong> (scheduling and distribution), <strong>ML Functions</strong> (integrated data science and machine learning), and <strong>IQ Plugin</strong> (AI-powered insights and natural language query). These were high-volume, high-risk features that had accumulated 40+ years of legacy friction, fragmentation, and technical constraints. <strong>I operated at Principal-level impact</strong>—taking full ownership, making strategic decisions, and leading cross-functional teams—while delivering production-ready work that&apos;s now live and impacting millions of users.
             </p>
 
             <p>
-              My work focused on restoring clarity, reducing cognitive load, and unifying UI patterns across the platform—turning deeply embedded legacy workflows into predictable, scalable, hub-native experiences. The ReportCaster redesign I led is now part of WebFOCUS 9.3, introducing a comprehensive redesign that makes scheduling and distribution incredibly easy to use.
+              My work focused on restoring clarity, reducing cognitive load, and unifying UI patterns across the platform—turning deeply embedded legacy workflows into predictable, scalable, hub-native experiences. <strong>The ReportCaster redesign I led is now live in production as part of WebFOCUS 9.3</strong> — shipped, deployed, and actively used by millions of enterprise users across hundreds of organizations. This isn&apos;t concept work; it&apos;s real, production software that&apos;s making a measurable impact every day.
             </p>
 
             {/* Virtual User Group Link with Context */}
             <div className="pt-4 space-y-3">
               <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed italic">
-                I led this Virtual User Group Session at Cloud Software Group for our enterprise customers — alongside the Senior PM of the WebFOCUS HUB.
+                I led this Virtual User Group Session at Cloud Software Group for our enterprise customers — alongside the Senior PM of the WebFOCUS Hub.
               </p>
               <a
                 href="https://www.youtube.com/watch?v=NnMGjEJFIX4"
@@ -193,7 +198,7 @@ export default function WebFOCUSOverview() {
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 py-8 md:py-10 border-t border-b border-black/10">
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               {/* Subtle accent corner */}
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
@@ -203,35 +208,35 @@ export default function WebFOCUSOverview() {
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">schedules processed per day across customer deployments</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>40-year-old</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">workflows redesigned and unified under the WebFOCUS Hub</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>3 core</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">subsystems modernized (scheduling, ML training, insights)</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>Millions</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">of end users across Fortune 500s, finance, healthcare, government</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>Platform-wide</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">UX patterns introduced for the first time in years</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>75% fewer</p>

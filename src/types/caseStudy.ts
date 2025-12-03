@@ -8,8 +8,20 @@ export interface QuickOverview {
   subtitle: string
   whatTheSystemWas: string
   myRole: string
-  keyActions: string[]
+  credentials?: string
+  keyActions?: string[]
   impactMetrics: HighlightMetric[]
+  // STAR format section (Situation, Task, Action, Result)
+  star?: {
+    situation: string
+    task: string
+    action: string
+    result: string
+  }
+  // Technologies and tools used
+  technologies?: string[]
+  // Key achievements summary
+  keyAchievements?: string[]
   publicDemoUrl?: string // Optional public demo link (e.g., for ReportCaster)
   publicDemoLabel?: string // Label for the demo button/link
   dataSheetUrl?: string // Optional data sheet link from ibi.com
@@ -28,11 +40,13 @@ export interface CaseStudySubsection {
     text: string
     attribution?: string
   }
+  sensitive?: boolean // If true, entire subsection is sensitive
   images?: {
     src: string
     alt: string
     caption?: string
     fullWidth?: boolean
+    sensitive?: boolean // Company-specific UI screenshots, flows, etc.
   }[]
   workflowPrototype?: {
     title: string
@@ -52,26 +66,32 @@ export interface CaseStudySection {
   id: string
   index: string // e.g. "01"
   title: string
+  summary?: string // TL;DR for the section - 1-2 sentences
+  methodologies?: string[] // e.g. ["User Research", "Competitive Analysis", "Prototyping"]
   body: string
   bullets?: string[]
   revealsTitle?: string
   revealsPoints?: string[]
+  sensitive?: boolean // If true, entire section content is sensitive (rare - usually just images)
   images?: {
     src: string
     alt: string
     caption?: string
     fullWidth?: boolean
+    sensitive?: boolean // Company-specific UI screenshots, flows, etc.
   }[]
   beforeAfter?: {
     before: {
       src: string
       alt: string
       caption?: string
+      sensitive?: boolean
     }
     after: {
       src: string
       alt: string
       caption?: string
+      sensitive?: boolean
     }
     beforeLabel?: string
     afterLabel?: string
@@ -99,6 +119,7 @@ export interface CaseStudySection {
       alt: string
       caption?: string
       fullWidth?: boolean
+      sensitive?: boolean
     }[]
     subsections?: CaseStudySubsection[]
   }
@@ -111,6 +132,7 @@ export interface CaseStudySection {
       alt: string
       caption?: string
       fullWidth?: boolean
+      sensitive?: boolean
     }[]
     subsections?: CaseStudySubsection[]
   }
@@ -123,6 +145,7 @@ export interface CaseStudySection {
       alt: string
       caption?: string
       fullWidth?: boolean
+      sensitive?: boolean
     }[]
     subsections?: CaseStudySubsection[]
   }
@@ -139,6 +162,15 @@ export interface VersionNode {
 export interface UXPrinciple {
   title: string
   description: string
+}
+
+export interface FrameworkConnection {
+  // Which D.E.S.I.G.N. principles were most relevant to this case study
+  principles: {
+    letter: 'D' | 'E' | 'S' | 'I' | 'G' | 'N'
+    title: string
+    description: string // How this principle was applied in this specific case study
+  }[]
 }
 
 export interface CaseStudyData {
@@ -161,6 +193,8 @@ export interface CaseStudyData {
     intro?: string
     principles: UXPrinciple[]
   }
+  // D.E.S.I.G.N. Framework connection
+  frameworkConnection?: FrameworkConnection
   sections: CaseStudySection[]
   publicSections?: CaseStudySection[] // Sections that should be public (not gated)
   prototypeMedia?: {
@@ -170,6 +204,49 @@ export interface CaseStudyData {
     videoEmbedUrl?: string // YouTube embed URL
     videoUrl?: string // Self-hosted video URL (MP4)
     videoPoster?: string // Poster/thumbnail for self-hosted videos
+    // Before/After video comparison
+    beforeAfter?: {
+      before: {
+        title: string
+        videoUrl?: string
+        videoEmbedUrl?: string // YouTube embed URL (public)
+        videoPoster?: string
+        description?: string
+      }
+      after: {
+        title: string
+        videoUrl: string
+        videoPoster?: string
+        description?: string
+        isPublic?: boolean // If true, video is public (e.g., Figma prototype, not from sandbox)
+      }
+      comparisonNotes?: {
+        before: string[]
+        after: string[]
+      }
+    }
+    // Multiple before videos (for IQ Plugin - 3 old workflows)
+    multiBeforeAfter?: {
+      before: {
+        title: string
+        videos: {
+          title: string
+          videoUrl: string
+          videoPoster?: string
+          description?: string
+        }[]
+      }
+      after: {
+        title: string
+        videoUrl: string
+        videoPoster?: string
+        description?: string
+      }
+      comparisonNotes?: {
+        before: string[]
+        after: string[]
+      }
+    }
   }
   impactSummary: {
     heading: string

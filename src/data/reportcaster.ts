@@ -5,12 +5,12 @@ export const reportcasterCaseStudy: CaseStudyData = {
   heroTitle: 'REPORTCASTER',
   heroSubheading: 'Rebuilding a legacy product and rebuilding myself',
   heroSubtitle:
-    'A true story of taking on a 40-year-old system no one else wanted to touch — and turning it into clarity, structure, and a scalable future.',
+    'A journey of taking on a 40-year-old system driven by flooding customer requests for modernization and turning it into clarity, structure, and a scalable future.',
   coverImage: {
     src: '/images/case-study/ReportCaster/rc-cover.png',
     alt: 'ReportCaster case study cover image',
   },
-  role: 'Senior Product Designer (Principal-level scope)',
+  role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2022–2025',
   scope: [
@@ -25,21 +25,11 @@ export const reportcasterCaseStudy: CaseStudyData = {
   // ----------------------------
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
-    subtitle: 'Modernizing a 40-year-old enterprise scheduling system',
+    subtitle: 'Enterprise scheduling system modernization',
     whatTheSystemWas:
-      'A deeply embedded, decades-old scheduling engine powering millions of automated jobs across enterprise customers — undocumented, fragmented, and structurally outdated.',
+      'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'I took full ownership of the redesign one week into joining. I reverse-engineered the system, rebuilt its mental model, and defined a new architecture aligned with platform patterns and engineering constraints.',
-    keyActions: [
-      'Reconstructed the end-to-end system using sandbox exploration, support insights, customer conversations, and legacy engineering knowledge.',
-      'Unified five fragmented subsystems into one coherent mental model.',
-      'Proposed three major architectural directions and synthesized constraints to define the final path.',
-      "Introduced a scalable, modal-based creation model initiated from the platform's + menu.",
-      'Proposed Explorer-as-filtered-view pattern that could scale across the entire platform.',
-      'Redesigned recurrence with natural-language summaries.',
-      'Clarified undocumented rules such as bursting, retention, and crash recovery.',
-      'Onboarded engineering, PM, QA, docs, and support teams into the redesigned architecture.',
-    ],
+      'I took full ownership of the redesign one week into joining—a testament to my ability to operate autonomously and deliver at Principal-level impact. I rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. This wasn&apos;t just design; it was technical systems thinking, strategic product leadership, and end-to-end execution from ambiguity to production.',
     impactMetrics: [
       { label: 'Schedule creation', value: '44–56% fewer clicks, no new tabs' },
       { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
@@ -47,6 +37,27 @@ export const reportcasterCaseStudy: CaseStudyData = {
       { label: 'Creation speed', value: '≈40–50% faster' },
       { label: 'Support load', value: '≈25–30% reduction (directional)' },
       { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
+    ],
+    star: {
+      situation: 'A 40-year-old mission-critical system serving millions of users across hundreds of enterprise customers, processing 20 million schedules weekly. Customer requests for modernization were flooding in, creating urgent business pressure. Five fragmented subsystems with undocumented rules and no coherent mental model.',
+      task: 'Responsibly modernize a system that couldn\'t afford to break — maintaining backward compatibility and aligning with platform patterns.',
+      action: 'Took full ownership one week into joining. Mapped complex workflows across five fragmented subsystems, reverse-engineered undocumented rules, and unified them into one coherent architecture. Led cross-functional alignment with engineering, product, and QA—making strategic decisions when others hesitated. Delivered a modal-based creation model aligned with platform patterns.',
+      result: '44–56% fewer clicks, eliminated multi-tab sprawl, and reduced support load by 25–30% — delivered safely at massive scale with resounding customer approval.',
+    },
+    technologies: [
+      'Figma',
+      'WebFOCUS Platform',
+      'User Research',
+      'System Architecture',
+      'Prototyping',
+      'Stakeholder Alignment',
+    ],
+    keyAchievements: [
+      'Unified five fragmented subsystems into one coherent mental model',
+      'Reduced schedule creation clicks by 44–56% with zero new tabs',
+      'Eliminated multi-tab sprawl entirely',
+      'Onboarded cross-functional teams (engineering, PM, QA, docs, support)',
+      'Clarified undocumented rules (bursting, retention, crash recovery)',
     ],
     publicDemoUrl: 'https://webfocusinfocenter.informationbuilders.com/wfappent/TL2s/TL_ls/source/ReportCaster.htm',
     publicDemoLabel: 'ReportCaster Public Demo',
@@ -86,57 +97,51 @@ export const reportcasterCaseStudy: CaseStudyData = {
   // ----------------------------
   uxPrinciples: {
     title: 'UX principles behind the ReportCaster redesign',
-    intro: 'Underneath the architecture work, the redesign was guided by a few very deliberate UX principles:',
+    intro: 'Underneath the architecture work, the redesign was guided by established UX principles and heuristics:',
     principles: [
       {
-        title: 'Reduce cognitive load, not power',
+        title: 'Cognitive Load Theory: Reduce mental overhead, preserve functionality',
         description:
-          'Keep the full power of a 40-year-old system, but remove unnecessary branching, repeated decisions, and hidden rules that made scheduling mentally exhausting.',
+          'Applied cognitive load principles to remove unnecessary branching, repeated decisions, and hidden rules while maintaining the full power of a legacy system. Users get simplicity without losing capability.',
       },
       {
-        title: 'One mental model for everything',
+        title: 'Mental Models: One consistent system model',
         description:
-          'Treat schedules, distribution lists, access lists, Explorer, and Admin as parts of one system, not five disconnected tools. Every decision reinforced a single, predictable model.',
+          'Unified five fragmented subsystems (schedules, distribution, access, Explorer, Admin) into one coherent mental model. Every interaction reinforces a single, predictable pattern aligned with user expectations.',
       },
       {
-        title: 'Make workflows predictable and reversible',
+        title: 'User Control & Freedom: Predictable, reversible workflows',
         description:
-          'Users should always know: where they are in the flow, what happens next, and how to safely go back without breaking anything.',
+          'Users always know where they are, what happens next, and how to safely undo actions. Applied Nielsen\'s heuristic for user control through clear navigation, visible state, and reversible operations.',
       },
       {
-        title: 'Respect legacy behavior, clarify legacy logic',
+        title: 'Match Between System & Real World: Legacy behavior preserved, logic clarified',
         description:
-          "Don't casually \"break\" workflows customers rely on. Preserve critical behaviors (bursting, retention, blackout rules), but make them visible and explainable in the UI.",
-      },
-      {
-        title: 'Architect first, polish second',
-        description:
-          'Prioritize information architecture, entry points, and system behavior before debating component styling. UI polish is layered on top of a stable structural foundation.',
-      },
-      {
-        title: 'Align with platform patterns, not side-step them',
-        description:
-          "Use the hub's + menu, modal patterns, and explorer conventions so RC feels like a first-class citizen of WebFOCUS—not a bolted-on legacy corner.",
+          'Respected existing workflows customers relied on (bursting, retention, blackout rules) while making legacy logic visible and explainable. Applied Nielsen\'s heuristic to match user mental models rather than forcing new ones.',
       },
     ],
   },
   // ----------------------------
-  // NARRATIVE CASE STUDY SECTIONS (01–08) - Password Gated
+  // NARRATIVE CASE STUDY SECTIONS (01–06) - Mapped to D.E.S.I.G.N. Framework
   // ----------------------------
   sections: [
     {
       id: 'section-01',
-      index: '01',
-      title: 'How I Landed the Project (And Why It Mattered)',
-      body: `One week into joining, my design director mentioned a legacy scheduling tool waiting in the pipeline. Customer requests for a modern ReportCaster had started flowing in, but the project still hadn't been assigned.
+      index: 'D',
+      title: 'Discover Deeply: How I Landed the Project',
+      summary: 'Volunteered for a deferred 40-year-old legacy system one week into joining. Built structure from scratch with only sandbox access and tribal knowledge.',
+      methodologies: ['System Exploration', 'Support Ticket Analysis', 'Customer Rep Interviews'],
+      body: `One week into joining, my design director mentioned a legacy scheduling tool waiting in the pipeline. Customer requests for a modern ReportCaster were flooding in — the volume and urgency of these requests made it clear this wasn't just another deferred project. It was a business-critical need driven by customer demand.
 
 When he brought it up, I said, "I would like to take it up." He gave it to me the same day.
 
-The entire product was being modernized, but RC kept getting deferred. Why? It was HUGE. Nobody had touched it in decades. It was old, massive, and untouched — something no one else wanted to touch.
+The entire product was being modernized, but RC kept getting deferred despite the mounting customer pressure. Why? It was HUGE. Nobody had touched it in decades. It was old, massive, and untouched — something no one else wanted to touch, even as customer requests piled up.
 
 I had one sandbox link, a brief demo from the lead support engineer, and tribal knowledge. That was it. So I started.
 
-This wasn't just a design project — it was an archaeological dig. I was reverse-engineering a 40-year-old system that had evolved organically, accumulating complexity with no documentation. The systems that keep getting deferred are often the ones that need the most help — and the ones that teach you the most.`,
+This wasn't just a design project — it was an archaeological dig. The system had evolved organically, accumulating complexity with no documentation. The systems that keep getting deferred are often the ones that need the most help — and the ones that teach you the most.
+
+As I explored sandbox environments, mapped undocumented workflows, and built complete context through support tickets, customer reps, and system exploration, I discovered something that explained why RC kept getting deferred: it wasn't a single system — it was five independent subsystems, each with its own entry point, mental model, and hidden location. This fragmentation was the root cause of the complexity that made everyone hesitate to touch it.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Ownership & Initiative → Volunteered for deferred project one week into joining',
@@ -147,83 +152,77 @@ This wasn't just a design project — it was an archaeological dig. I was revers
         {
           src: '/images/case-study/ReportCaster/RC legacy schedule dialog properties.png',
           alt: 'RC legacy schedule dialog properties',
-          caption: 'RC legacy schedule dialog properties: The fragmented schedule dialog showing properties — one of many disconnected interfaces users had to navigate.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/RC legacy schedule dialog distribution.png',
-          alt: 'RC legacy schedule dialog distribution',
-          caption: 'RC legacy schedule dialog distribution: Another separate interface for managing distribution lists — part of the five independent subsystems.',
+          caption: 'Legacy schedule dialog: One of many disconnected interfaces users had to navigate.',
+          sensitive: true,
         },
         {
           src: '/images/case-study/ReportCaster/RC legacy explorer.png',
           alt: 'RC legacy explorer',
-          caption: 'RC legacy Explorer: A separate interface for viewing schedules — users had to navigate multiple disconnected systems to accomplish one task.',
+          caption: 'Legacy Explorer: A separate interface for viewing schedules — users navigated multiple disconnected systems.',
+          sensitive: true,
         },
         {
           src: '/images/case-study/ReportCaster/RC legacy admin status.png',
           alt: 'RC legacy admin status',
-          caption: 'RC legacy Admin: System configuration hidden in legacy menus — the fifth independent subsystem that needed unification.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/RC legacy - distribution dialog.png',
-          alt: 'RC legacy distribution dialog',
-          caption: 'RC legacy distribution dialog: A separate dialog for managing distribution — showing how subsystems were fragmented across different interfaces.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/RC legacy distribution list UI.png',
-          alt: 'RC legacy distribution list UI',
-          caption: 'RC legacy distribution list UI: Distribution list management in yet another separate interface — demonstrating the lack of unified mental model.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/RC legacy access list UI.png',
-          alt: 'RC legacy access list UI',
-          caption: 'RC legacy access list UI: Access control in a separate interface — part of the fragmented system architecture.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/RC legacy distrubtion ui in basic schedule.png',
-          alt: 'RC legacy distribution UI in basic schedule',
-          caption: 'RC legacy distribution UI in basic schedule: Distribution settings embedded inconsistently in the basic schedule dialog — showing how subsystems were mixed together without clear patterns.',
+          caption: 'Legacy Admin: System configuration hidden in legacy menus.',
+          sensitive: true,
         },
       ],
     },
     {
       id: 'section-02',
-      index: '02',
-      title: 'Learning the System No One Documented',
-      body: `After accepting the project, I faced the reality: there was no onboarding, no spec, no design file, no historical rationale. Just: "Here's the sandbox. Figure it out."
+      index: 'E',
+      title: 'Empathize with the Ecosystem: Understanding Users and Constraints',
+      summary: 'Reverse-engineered an undocumented system from fragments. Created the first complete mental model map in RC\'s 40-year history.',
+      methodologies: ['System Mapping', 'Support Ticket Analysis', 'Competitive Analysis', 'Workflow Documentation'],
+      body: `At the enterprise product level, we weren't allowed to conduct direct user research with actual customers. The Customer Support team and customer reps became my proxies for understanding user pain points.
 
-This became a detective story. I had to piece together a 40-year-old system from fragments: hundreds of screenshots, support tickets, conversations with the one engineer who knew it end-to-end, and patterns I discovered by using it myself.
-
-At the enterprise product level, we weren't allowed to conduct direct user research with actual customers. The Customer Support team and customer reps became my proxies for understanding user pain points.
-
-I mapped everything — see the visual breakdowns below. I spent months understanding what RC actually did, not what it was supposed to do. The gap between those two things was where the real problems lived.
+I designed for the entire RC ecosystem: end users creating schedules, support teams handling tickets, engineers maintaining legacy code, and PMs planning features. Each role's constraints and needs shaped the unified architecture.
 
 I discovered users were hacking their way around the UI. I saw real tickets showing how customers customized and worked around the broken UI. The "Basic" vs "Advanced" schedule types weren't about complexity — they were legacy artifacts creating artificial barriers.
 
-I validated everything with customer support and customer reps repeatedly. Eventually, I created a full mind map representing the actual product mental model — the first one in RC's 40-year history. By the time I finished, I knew more about the system's UX and workflows than anyone else in the org.`,
+I validated everything with customer support and customer reps repeatedly. By understanding the ecosystem — not just end users, but everyone who interacted with RC — I could design a solution that worked for the entire system.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
-        'Deep System Understanding → Created first mental-model map in RC\'s 40-year history',
+        'Ecosystem Thinking → Designed for entire RC ecosystem: users, support, engineers, PMs',
+        'User-Centered Research → Built understanding through support tickets and customer reps when direct research wasn\'t allowed',
+        'Constraint Awareness → Each role\'s constraints and needs shaped the unified architecture',
+      ],
+    },
+    {
+      id: 'section-03',
+      index: 'S',
+      title: 'Simplify the Chaos: Mapping and Unifying the System',
+      summary: 'Mapped and unified five fragmented subsystems into one coherent mental model. Prioritized patterns, clarified undocumented rules, and made complexity digestible for everyone.',
+      methodologies: ['System Mapping', 'Support Ticket Analysis', 'Competitive Analysis', 'Workflow Documentation'],
+      body: `After accepting the project, I faced the reality: there was no onboarding, no spec, no design file, no historical rationale. Just: "Here's the sandbox. Figure it out."
+
+This became a detective story. I had to piece together the system from fragments: hundreds of screenshots, support tickets, conversations with the one engineer who knew it end-to-end, and patterns I discovered by using it myself.
+
+I mapped everything — see the visual breakdowns below. I spent months understanding what RC actually did, not what it was supposed to do. The gap between those two things was where the real problems lived.
+
+Eventually, I created a full mind map representing the actual product mental model — the first one in RC's 40-year history. By the time I finished, I knew more about the system's UX and workflows than anyone else in the org.
+
+After mapping the system and identifying the five subsystems, I explored three architectural directions before finding the solution that balanced everything.`,
+      revealsTitle: 'What this reveals',
+      revealsPoints: [
+        'Deep System Understanding → Created first complete mental-model map',
         'User-Centered Research → Built understanding through support tickets and customer reps when direct research wasn\'t allowed',
         'Independent Problem-Solving → Reconstructed undocumented system from scratch',
+        'Systems Thinking → Identified five subsystems and unified them into one coherent mental model',
       ],
       images: [
         {
           src: '/images/case-study/ReportCaster/ReportCaster Basic Map Workflow.png',
           alt: 'ReportCaster Basic Workflow',
-          caption: 'RC mental-model map: The first complete system diagram in RC\'s 40-year history — showing the unified workflow that replaced five independent subsystems with one coherent mental model.',
-        },
-        {
-          src: '/images/case-study/ReportCaster/industry comparison of rc with other schedulers.png',
-          alt: 'Industry comparison of RC with other schedulers',
-          caption: 'Competitive analysis: Studying how other enterprise schedulers handled similar complexity — identifying patterns that worked and opportunities to differentiate.',
+          caption: 'RC mental-model map: The complete system diagram showing the unified workflow that replaced five independent subsystems with one coherent mental model.',
         },
       ],
     },
     {
       id: 'version-iteration',
-      index: '03',
-      title: 'The Iteration Journey: Three Architectural Approaches',
+      index: 'I',
+      title: 'Iterate with Inclusion: Three Architectural Approaches',
       body: `After mapping the system and identifying the five subsystems (Section 02), I explored three architectural directions before finding the solution that balanced everything.
 
 Navigate through V1, V2, and V3 below to see how each approach evolved based on constraints and platform patterns.`,
@@ -334,40 +333,10 @@ This version balanced platform architecture, engineering constraints, user menta
                 fullWidth: true,
               },
               {
-                src: '/images/case-study/ReportCaster/Schedule dialog - tasks.png',
-                alt: 'Schedule dialog - tasks',
-                caption: 'Schedule dialog - Tasks: Tasks view within the schedule dialog — demonstrating how the unified interface consolidates all schedule components.',
-              },
-              {
-                src: '/images/case-study/ReportCaster/Task Dialog.png',
-                alt: 'Task Dialog',
-                caption: 'Task Dialog: Task configuration within the schedule workflow — showing how individual tasks are configured and managed within the unified schedule creation flow.',
-              },
-              {
-                src: '/images/case-study/ReportCaster/Schedule Dialog - distribution.png',
-                alt: 'Schedule Dialog - distribution',
-                caption: 'Schedule Dialog - Distribution: Distribution method dialog integrated into the main schedule creation flow — no longer a separate subsystem.',
-              },
-              {
-                src: '/images/case-study/ReportCaster/Distribution Dialog.png',
-                alt: 'Distribution Dialog',
-                caption: 'Distribution Dialog: The distribution method selection interface within the schedule workflow — showing how distribution options are presented and configured.',
-              },
-              {
                 src: '/images/case-study/ReportCaster/Schedule Dialog - Properties.png',
                 alt: 'Schedule Dialog - Properties',
                 caption: 'Schedule Dialog - Properties: The modal-based creation flow showing how all schedule properties are accessible in one unified interface, replacing the fragmented legacy dialogs.',
               },
-              {
-                src: '/images/case-study/ReportCaster/Schedule Dialog - Job Log.png',
-                alt: 'Schedule Dialog - Job Log',
-                caption: 'Schedule Dialog - Job Log: Job monitoring integrated into the schedule workflow — showing how users can view job status and logs within the schedule context.',
-              },
-              {
-                src: '/images/case-study/ReportCaster/Job log dialog.png',
-                alt: 'Job log dialog',
-                caption: 'Job log dialog: Detailed job log view within the schedule workflow — providing comprehensive job monitoring and status information.',
-        },
       ],
     },
     {
@@ -485,18 +454,16 @@ This version balanced platform architecture, engineering constraints, user menta
       },
     },
     {
-      id: 'section-06',
-      index: '06',
-      title: 'Aligning and Leading the Team',
+      id: 'section-05',
+      index: 'G',
+      title: 'Grow Through Constraints: Aligning and Leading the Team',
       body: `After defining the architecture (V3), UX was done. Time for UI.
 
 As I worked through hundreds of screens, the team assembled. But most had never seen RC end-to-end — engineers knew the backend, PMs knew features, support knew problems. No one understood the whole system.
 
-I became the person who could explain it all. I onboarded lead architect, lead engineer, full engineering squad, new PM, QA, documentation, and SMEs.
+I onboarded lead architect, lead engineer, full engineering squad, new PM, QA, documentation, and SMEs through dozens of demos. Each team member needed to understand not just their piece, but how RC worked as a unified system.
 
-I was also redesigning ML Functions simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second. I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish).
-
-The handoff was clean because the architecture was solid. The team could execute because they understood the "why" behind every decision, not just the "what."`,
+I was also redesigning ML Functions simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second. I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish). The team could execute because they understood the "why" behind every decision, not just the "what."`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Team Alignment → Onboarded entire cross-functional team through dozens of demos',
@@ -505,61 +472,120 @@ The handoff was clean because the architecture was solid. The team could execute
       ],
     },
     {
-      id: 'section-07',
-      index: '07',
-      title: 'Shipping Impact',
+      id: 'section-06',
+      index: 'N',
+      title: 'Navigate Forward: Shipping Impact and Reflection',
       body: `After aligning the team, we shipped. The system transformed from a fragmented, five-subsystem product into a unified, platform-native experience.
 
 The transformation was visible immediately. Users who had spent years working around the system's limitations could now work with it. New users could understand RC in minutes, not hours. Support tickets shifted from "how do I..." to "can I do..." — a fundamental shift from confusion to capability.
 
-The architecture I designed allowed the PM to add new features after launch without breaking the mental model. I had designed for extensibility, not just for the current release.`,
+The architecture I designed allowed the PM to add new features after launch without breaking the mental model. I had designed for extensibility, not just for the current release.
+
+This was not just a redesign — it was a complete architectural transformation of a system that had become too complex for anyone to understand. I reverse-engineered an undocumented enterprise system, thought at platform scale, and led cross-functional teams through ambiguity. I became the only person in a 200-person business unit who understood RC end-to-end. This project taught me to design at platform scale — not just individual features, but how systems connect, how patterns scale, and how architecture enables future growth.
+
+The key insight: You don't need to rebuild everything from scratch. Understand the system deeply enough to identify the core mental model, then rebuild the architecture around that clarity. Legacy systems can be modernized without losing their power — you just need to make the complexity visible, then structure it. RC reshaped how I think about design: clarity, structure, and systems-level problem-solving became my core strengths.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Long-Term Thinking → Designed for extensibility — architecture allowed new features post-launch',
         'Measurable Impact → New users understood RC in minutes, reduced complexity eliminated common support pain points',
         'Architectural Transformation → Unified five subsystems into one coherent system',
+        'Growth Through Challenge → RC reshaped how I think, teaching me to design at platform scale',
+        'Systems-Level Impact → My value is in clarity, direction, and systems-level problem-solving',
       ],
       beforeAfter: {
         before: {
           src: '/images/case-study/ReportCaster/Before.png',
           alt: 'Before: Legacy RC interface',
           caption: 'Before: Legacy RC interface — fragmented, multi-tab workflow requiring 4–6 clicks to create a schedule, with five independent subsystems and no unified mental model.',
+          sensitive: true,
         },
         after: {
           src: '/images/case-study/ReportCaster/After.png',
           alt: 'After: New RC interface',
-          caption: 'After: New RC interface — unified, modal-based workflow requiring 1 click to create a schedule, with Explorer 1 click away and all subsystems unified into one coherent system.',
+          caption: 'After: New RC interface — unified, modal-based workflow requiring 2 clicks to create a schedule (+ menu → create schedule), with Explorer 1 click away and all subsystems unified into one coherent system.',
         },
         beforeLabel: 'Before',
         afterLabel: 'After',
       },
-    },
-    {
-      id: 'section-08',
-      index: '08',
-      title: 'What This Project Made Me & The Takeaway',
-      body: `This was not just a redesign — it was a complete architectural transformation of a 40-year-old system that had become too complex for anyone to understand.
-
-I reverse-engineered an undocumented enterprise system, thought at platform scale, and led cross-functional teams through ambiguity. I became the only person in a 200-person business unit who understood RC end-to-end. RC didn't intimidate me. It made me sharper, more patient, more structured, more strategic.
-
-The key insight: You don't need to rebuild everything from scratch. Understand the system deeply enough to identify the core mental model, then rebuild the architecture around that clarity. Legacy systems can be modernized without losing their power — you just need to make the complexity visible, then structure it.`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'Growth Through Challenge → RC reshaped how I think, teaching me to design at platform scale',
-        'Thriving in Complexity → Managed two major redesigns simultaneously while having a 1 year old at home',
-        'Systems-Level Impact → My value is in clarity, direction, and systems-level problem-solving',
-      ],
     },
   ],
   // ----------------------------
   // PROTOTYPE (placeholder URLs)
   // ----------------------------
   prototypeMedia: {
-    title: 'Experience the final schedule flow',
+    title: 'Transformation in Motion',
     description:
-      'Watch the walkthrough to see how the modal-based schedule flow simplifies complex scheduling tasks and delivers the improved user experience.',
+      'See the transformation unfold in real-time. Compare the old fragmented workflow with the new unified design side-by-side.',
+    // Before/After video comparison
+    beforeAfter: {
+      before: {
+        title: 'Legacy RC Workflow',
+        videoUrl: '/videos/rc-old-workflow.mp4', // 5 min video of old RC UI workflow
+        videoPoster: '/images/case-study/ReportCaster/rc-old-workflow-poster.jpg',
+        description: 'The old fragmented workflow: multiple disconnected interfaces, 4–6 clicks to create a schedule, hidden functionality in legacy menus.',
+      },
+      after: {
+        title: 'New Unified Workflow',
+        videoUrl: '/videos/rc-prototype-walkthrough.mp4',
+        videoPoster: '/images/case-study/ReportCaster/rc-prototype-poster.jpg',
+        description: 'The new unified workflow: modal-based creation, 2 clicks to create a schedule (+ menu → create schedule), all functionality accessible from one place. (Note: This is a Figma prototype and may not reflect all final shipped changes.)',
+        isPublic: true, // Figma prototype, not from sandbox
+      },
+      comparisonNotes: {
+        before: [
+          'Multiple disconnected interfaces',
+          '4–6 clicks to create a schedule',
+          'Hidden functionality in legacy menus',
+          'No unified mental model',
+        ],
+        after: [
+          'Unified modal-based workflow',
+          '2 clicks to create a schedule (+ menu → create schedule)',
+          'All functionality accessible',
+          'One coherent system',
+        ],
+      },
+    },
+    // Fallback single video if beforeAfter not available
     videoUrl: '/videos/rc-prototype-walkthrough.mp4',
     videoPoster: '/images/case-study/ReportCaster/rc-prototype-poster.jpg',
+  },
+  // ----------------------------
+  // D.E.S.I.G.N. FRAMEWORK CONNECTION
+  // ----------------------------
+  frameworkConnection: {
+    principles: [
+      {
+        letter: 'D',
+        title: 'Discover Deeply',
+        description: 'I explored sandbox environments, mapped undocumented workflows, and built complete context through support tickets, customer reps, and system exploration before proposing any solutions.',
+      },
+      {
+        letter: 'E',
+        title: 'Empathize with the Ecosystem',
+        description: 'I designed for the entire RC ecosystem: end users creating schedules, support teams handling tickets, engineers maintaining legacy code, and PMs planning features. Each role\'s constraints and needs shaped the unified architecture.',
+      },
+      {
+        letter: 'S',
+        title: 'Simplify the Chaos',
+        description: 'I mapped and unified fragmented subsystems into one coherent mental model. I prioritized patterns, clarified undocumented rules, and made complexity digestible for everyone.',
+      },
+      {
+        letter: 'I',
+        title: 'Iterate with Inclusion',
+        description: 'I prototyped three major architectural directions (independent product, hub plugin, modal-based) and synthesized feedback from engineering, PM, QA, docs, and support. The final modal-based approach emerged from collaborative constraint synthesis.',
+      },
+      {
+        letter: 'G',
+        title: 'Grow Through Constraints',
+        description: 'Legacy platform patterns, backward compatibility, and engineering timelines forced hard choices. Instead of fighting constraints, I used them to refine the solution — the modal-based architecture emerged directly from platform + menu patterns and engineering realities.',
+      },
+      {
+        letter: 'N',
+        title: 'Navigate Forward',
+        description: 'I became the only person in a 200-person business unit who understood RC end-to-end. I onboarded all teams into the new architecture and ensured the redesigned system could scale and extend for future needs.',
+      },
+    ],
   },
   // ----------------------------
   // IMPACT + REFLECTION SUMMARY
@@ -574,21 +600,6 @@ The key insight: You don't need to rebuild everything from scratch. Understand t
       'Recurrence redesigned with natural-language summaries.',
       'Reduced support tickets and onboarding friction.',
       'RC prepared for future extensibility.',
-    ],
-  },
-  // ----------------------------
-  // PASSWORD GATE
-  // ----------------------------
-  passwordGate: {
-    password: 'access',
-    description:
-      'To view the full case study (IA, workflows, alternatives, V1/V2/V3 files, and detailed rationale), enter the password below.',
-    learnItems: [
-      'How I reverse-engineered a 40-year-old undocumented system',
-      'Three architectural approaches and why V3 won',
-      'Complete workflow diagrams and information architecture',
-      'Design alternatives, constraints, and decision rationale',
-      'Behind-the-scenes notes and team alignment process',
     ],
   },
   // ----------------------------

@@ -40,9 +40,9 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
 
   return (
     <div className={`${bgColor} rounded-lg border ${borderColor} p-6 md:p-8`}>
-      <div className="space-y-6">
+      <div className="space-y-3">
         {/* Header */}
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-1">
           <h3 className={`${textColor} text-xl md:text-2xl font-serif`}>
             Three Critical Design Pivots
           </h3>
@@ -52,14 +52,14 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
         </div>
 
         {/* Compact Pivots - 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {pivots.map((pivot, index) => (
             <div
               key={index}
-              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
+              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
               style={{ borderColor: accentColor + '40' }}
             >
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {/* Header with number */}
                 <div className="flex items-center gap-2">
                   <div
@@ -72,13 +72,13 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
                 </div>
 
                 {/* Before/After - Compact */}
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className={`${bgColor} rounded p-2 border ${borderColor}`}>
-                    <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>Before</p>
+                    <p className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-0.5`}>Before</p>
                     <p className={`${mutedColor} text-xs leading-tight`}>{pivot.before}</p>
                   </div>
                   <div className={`${bgColor} rounded p-2 border-2`} style={{ borderColor: accentColor + '60' }}>
-                    <p className={`${textColor} text-xs font-mono uppercase tracking-wider mb-1`} style={{ color: accentColor }}>After</p>
+                    <p className={`${textColor} text-xs font-mono uppercase tracking-wider mb-0.5`} style={{ color: accentColor }}>After</p>
                     <p className={`${textColor} text-xs font-medium leading-tight`}>{pivot.after}</p>
                   </div>
                 </div>

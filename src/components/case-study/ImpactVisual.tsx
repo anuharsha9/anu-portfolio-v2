@@ -38,7 +38,7 @@ export default function ImpactVisual({ isLightBackground = false }: ImpactVisual
 
   return (
     <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
-      <div className="space-y-10">
+      <div className="space-y-8">
         {/* Header */}
         <div className="text-center space-y-3">
           <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>

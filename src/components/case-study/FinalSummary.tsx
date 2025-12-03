@@ -17,7 +17,7 @@ export default function FinalSummary({ summary, isLightBackground = false }: Fin
   const dividerColor = isLightBackground ? 'bg-black/10' : 'bg-white/10'
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-12">
       {/* Header */}
       <div className="space-y-4">
         <div className="flex items-baseline gap-4">

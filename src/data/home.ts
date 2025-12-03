@@ -160,25 +160,25 @@ export const personalProjects: PersonalProject[] = [
     title: 'Painting',
     description:
       'Where composition and color come to play. This is where I sharpen my eye for balance, contrast, and visual rhythm—the same principles I bring into product UI.',
-    image: '/images/painting.jpg',
+    image: '/assets/painting.jpg',
   },
   {
     title: 'Baking',
     description:
       'Precision disguised as comfort. Timings, ratios, and structure—it\'s basically systems thinking with sugar, and it keeps my "measure twice" instincts alive.',
-    image: '/images/baking.jpg',
+    image: '/assets/baking.jpg',
   },
   {
     title: 'Cooking',
     description:
       'Fast, intuitive experimentation. I rarely follow recipes to the letter—same with design. I like to improvise, taste, adjust, and move quickly toward something that feels right.',
-    image: '/images/cooking.jpg',
+    image: '/assets/cooking.jpg',
   },
   {
     title: 'Poetry',
     description:
       'Language as design material. I\'ve written poems for years. It\'s where I practice saying a lot with a little—which is also how I like my interfaces and product narratives to feel.',
-    image: '/images/poetry.jpg',
+    image: '/assets/poetry.jpg',
   },
 ]
 

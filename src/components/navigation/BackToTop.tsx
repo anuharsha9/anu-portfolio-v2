@@ -34,7 +34,13 @@ export default function BackToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-[60] w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white shadow-lg hover:bg-[var(--accent-teal)]/90 transition-colors duration-200 flex items-center justify-center group"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              scrollToTop()
+            }
+          }}
+          className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-[60] w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white shadow-lg hover:bg-[var(--accent-teal)]/90 transition-colors duration-200 flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-[var(--bg-dark)]"
           aria-label="Back to top"
         >
           <svg

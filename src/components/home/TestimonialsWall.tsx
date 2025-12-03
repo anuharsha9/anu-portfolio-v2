@@ -97,8 +97,15 @@ const TestimonialTile = memo(function TestimonialTile({
     >
       {/* Tile - Consistent styling with rest of website, varied padding for organic feel */}
       <div
-        className={`w-full ${paddingClass} rounded-2xl border border-black/5 bg-[var(--bg-light-alt)] flex flex-col transition-all duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.12)] hover:border-[rgba(13,148,136,0.3)] hover:-translate-y-1`}
+        className={`w-full ${paddingClass} rounded-xl border border-white/5 bg-white/5 flex flex-col transition-all duration-300 hover:bg-white/10 hover:border-white/10 hover:shadow-[0_4px_12px_rgba(13,148,136,0.075)] hover:-translate-y-0.5`}
       >
+        {/* Decorative line element - similar to framework tiles */}
+        <div className="flex items-baseline gap-3 mb-3">
+          <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="h-px flex-1 bg-white/10"></div>
+          <div className="h-px w-8 bg-[var(--accent-teal)] opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+
         {/* Opening quote icon */}
         <div className="relative mb-2" style={{ 
           paddingLeft: isVeryShortQuote || isShortQuote ? '1.3em' : '1.1em',
@@ -118,7 +125,7 @@ const TestimonialTile = memo(function TestimonialTile({
         {/* Quote */}
         <blockquote className="flex-1 flex flex-col space-y-4 mt-2">
           <p
-            className={`text-[var(--text-primary-light)] leading-relaxed font-sans flex-1 ${textSize} ${fontWeight} relative`}
+            className={`text-white leading-relaxed font-sans flex-1 ${textSize} ${fontWeight} relative`}
             style={{
               lineHeight: isVeryShortQuote || isShortQuote 
                 ? '1.3' 
@@ -147,17 +154,19 @@ const TestimonialTile = memo(function TestimonialTile({
           </p>
 
           {/* Attribution */}
-          <footer className="pt-4 border-t border-black/10 mt-auto flex-shrink-0">
-            <p className={`text-[var(--text-primary-light)] font-semibold ${isVeryLongQuote || isLongQuote ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
+          <footer className="pt-4 border-t border-white/5 mt-auto flex-shrink-0">
+            <p className={`text-white font-semibold ${isVeryLongQuote || isLongQuote ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
               {rec.name}
             </p>
-            <p className={`text-[var(--text-muted-light)] mt-1 ${isVeryLongQuote || isLongQuote ? 'text-sm md:text-base' : 'text-xs md:text-sm'}`}>
+            <p className={`text-white/70 mt-1 ${isVeryLongQuote || isLongQuote ? 'text-sm md:text-base' : 'text-xs md:text-sm'}`}>
               {rec.role} {rec.company && `at ${rec.company}`}
             </p>
             {rec.relationship && (
-              <p className={`text-[var(--accent-teal)] mt-2 font-bold ${isVeryLongQuote || isLongQuote ? 'text-xs md:text-sm' : 'text-xs'} leading-relaxed`}>
-                {rec.relationship}
-              </p>
+              <div className="mt-3 pt-3 border-t border-white/5">
+                <p className={`text-white/90 mt-2 font-light italic ${isVeryLongQuote || isLongQuote ? 'text-xs md:text-sm' : 'text-xs'} leading-relaxed`}>
+                  {rec.relationship}
+                </p>
+              </div>
             )}
           </footer>
         </blockquote>
@@ -191,10 +200,10 @@ export default function TestimonialsWall({
   return (
     <section
       id="testimonials"
-      className="surface-light py-10 md:py-12 lg:py-16 relative"
+      className="surface-dark-alt py-10 md:py-12 lg:py-16 relative"
     >
       {/* Section Divider */}
-      <SectionDivider isLightBackground={true} />
+      <SectionDivider isLightBackground={false} />
       
       {/* Subtle Logo Watermark - Top Right Corner */}
       <div className="absolute top-8 right-8 opacity-[0.02] pointer-events-none hidden lg:block">

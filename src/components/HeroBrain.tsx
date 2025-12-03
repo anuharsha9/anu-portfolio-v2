@@ -40,8 +40,8 @@ export function HeroBrain() {
       }
 
       const setupGearRotations = () => {
-        // During fade-in: all gears rotate at the same speed as main gear rotation after fade-in, but 10-15% faster
-        const fadeInSpeedMultiplier = 1.125 // 12.5% faster (middle of 10-15%)
+        // During fade-in: gears rotate slower, then speed up by 10-15% after fade-in
+        const speedUpMultiplier = 1.125 // 12.5% faster after fade-in (middle of 10-15%)
         const fadeInDuration = 3 // seconds
 
         // Cache all gear groups upfront to avoid repeated DOM queries
@@ -60,11 +60,12 @@ export function HeroBrain() {
 
           const isClockwise = Math.random() > 0.5
           // After fade-in, main gears rotate at their normal speed (20-40 seconds per full rotation)
-          const rotationSpeed = 20 + Math.random() * 20
+          // But we speed them up by 10-15%, so the actual speed is faster
+          const baseRotationSpeed = 20 + Math.random() * 20
+          const rotationSpeed = baseRotationSpeed / speedUpMultiplier // Faster rotation after fade-in
 
-          // During fade-in: rotate at same speed as after fade-in, but 10-15% faster
-          const normalRotationIn3s = (360 / rotationSpeed) * fadeInDuration
-          const fadeInRotationAmount = normalRotationIn3s * fadeInSpeedMultiplier * (isClockwise ? 1 : -1)
+          // During fade-in: rotate slower (at the base speed, before speed-up)
+          const fadeInRotationAmount = (360 / baseRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
 
           // Set variables on the gear group so both base and hover gears inherit
           gearGroup.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
@@ -72,7 +73,7 @@ export function HeroBrain() {
           gearGroup.style.setProperty('--rotation-amount', isClockwise ? '360deg' : '-360deg')
         })
 
-        // Background gears: during fade-in rotate at main gear speed (10-15% faster), then 1/3 speed after fade-in
+        // Background gears: during fade-in rotate slower, then speed up after fade-in
         const bgGears = Array.from(
           brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
         )
@@ -83,11 +84,12 @@ export function HeroBrain() {
         bgGears.forEach((gear) => {
           const isClockwise = Math.random() > 0.5
           // Background gears rotate at 1/3 speed of main gears after fade-in (3x slower)
-          const bgRotationSpeed = avgMainGearSpeed * 3
+          // But we speed them up by 10-15%, so the actual speed is faster
+          const baseBgRotationSpeed = avgMainGearSpeed * 3
+          const bgRotationSpeed = baseBgRotationSpeed / speedUpMultiplier // Faster rotation after fade-in
 
-          // During fade-in: rotate at main gear speed (10-15% faster than main gear normal speed)
-          const normalRotationIn3s = (360 / avgMainGearSpeed) * fadeInDuration
-          const fadeInRotationAmount = normalRotationIn3s * fadeInSpeedMultiplier * (isClockwise ? 1 : -1)
+          // During fade-in: rotate slower (at the base speed, before speed-up)
+          const fadeInRotationAmount = (360 / baseBgRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
 
           gear.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
           gear.style.setProperty('--rotation-duration', `${bgRotationSpeed}s`)
@@ -416,16 +418,15 @@ export function HeroBrain() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transform: 'translateY(20px)',
-                minHeight: '100px',
+                minHeight: '180px', // Fixed height to prevent jerk when hover text appears
                 width: '100%',
                 maxWidth: '600px',
               }}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 40 }}
               transition={{
                 duration: 4,
-                delay: 3.5, // After gears fade in, before subtext
+                delay: 3.5, // Placeholder text fades in first (after gears fade in)
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
@@ -463,17 +464,32 @@ export function HeroBrain() {
                         // Check if text contains ' • ' separator (old format) or is a single thought
                         const parts = hoverText.split(' • ')
                         if (parts.length > 1) {
-                          // Old format with label and description
-                          const label = parts[0].replace(/::/g, ':')
-                          const labelWithColon = label.endsWith(':') ? label : `${label}:`
-                          const rest = parts.slice(1).join(' • ')
-                          return (
-                            <>
-                              <span>{labelWithColon}</span>
-                              <br />
-                              <span>{rest}</span>
-                            </>
-                          )
+                          // If multiple parts, display each on a new line
+                          if (parts.length > 2) {
+                            // Multiple lines (3+)
+                            return (
+                              <>
+                                {parts.map((part, index) => (
+                                  <span key={index}>
+                                    {part.trim()}
+                                    {index < parts.length - 1 && <br />}
+                                  </span>
+                                ))}
+                              </>
+                            )
+                          } else {
+                            // Old format with label and description (2 lines)
+                            const label = parts[0].replace(/::/g, ':')
+                            const labelWithColon = label.endsWith(':') ? label : `${label}:`
+                            const rest = parts.slice(1).join(' • ')
+                            return (
+                              <>
+                                <span>{labelWithColon}</span>
+                                <br />
+                                <span>{rest}</span>
+                              </>
+                            )
+                          }
                         } else {
                           // New format: single thought, split at natural break point if long
                           const thought = hoverText.trim()
@@ -524,105 +540,123 @@ export function HeroBrain() {
                   </motion.div>
                 ) : (
                   <motion.div
-                    key="welcome-content"
+                    key="placeholder-text"
                     className="flex flex-col items-center justify-center"
-                    style={{ position: 'relative', zIndex: 10 }}
-                    initial={{ opacity: 0, y: 30 }}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      maxWidth: '100%',
+                      position: 'relative',
+                      zIndex: 20,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    {/* First line - Welcome to my mind */}
-                    <motion.p
-                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-3 md:px-6"
+                    {/* Welcome to my mind */}
+                    <p
+                      className="font-serif font-medium text-white text-center px-3 md:px-6 mb-2"
                       style={{
-                        fontSize: 'clamp(1.75rem, 8vw, 3.5rem)', // Responsive: smaller on mobile
+                        fontSize: 'clamp(1.75rem, 8vw, 3.5rem)',
                       }}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     >
                       Welcome to my mind
-                    </motion.p>
-
-                    {/* Second line - Placeholder */}
+                    </p>
+                    {/* Hover hint */}
                     <motion.p
-                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 md:px-6 font-semibold"
+                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 md:px-6 font-medium flex items-center justify-center gap-2 uppercase"
                       style={{
-                        letterSpacing: '0.05em',
-                        fontSize: 'clamp(0.75rem, 3vw, 0.9rem)', // Responsive: smaller on mobile
+                        letterSpacing: '0.08em',
+                        fontSize: 'clamp(0.7rem, 2.5vw, 0.85rem)',
                       }}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      HOVER ON THE GEARS TO SEE WHAT&apos;S ON IT
+                      <motion.span
+                        animate={{
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="inline-block text-[var(--accent-teal)]"
+                      >
+                        →
+                      </motion.span>
+                      <span>Hover on the gears to explore</span>
+                      <motion.span
+                        animate={{
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.5
+                        }}
+                        className="inline-block text-[var(--accent-teal)]"
+                      >
+                        →
+                      </motion.span>
                     </motion.p>
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
 
-            {/* Text stack - centered with max width */}
+            {/* Subtext and Buttons - animate from bottom - fixed height to prevent jerk */}
             <motion.div
-              className="max-w-2xl space-y-4 md:space-y-6 px-3 md:px-0"
-              style={{ marginTop: '10px' }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 4,
-                ease: [0.22, 1, 0.36, 1], // Apple-style easing
-                delay: 3.8 // After placeholder text starts
-              }}
+              className="max-w-2xl px-3 md:px-0"
+              style={{ marginTop: '-10px', minHeight: '120px' }}
             >
-              {/* Subtitle - Slower fade (2x slower) */}
+              {/* Subtext - Inter font, regular body text */}
               <motion.p
-                className="text-sm md:text-base lg:text-lg text-[var(--text-muted-dark)] leading-relaxed"
-                initial={{ opacity: 0, y: 30 }}
+                className="font-sans text-white/70 text-center px-3 md:px-6 mb-4 md:mb-5"
+                style={{
+                  fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+                  fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+                }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 3, delay: 4.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                {(() => {
-                  const text = "It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions."
-                  const words = text.split(' ')
-                  const totalWords = words.length
-                  // If odd number, first line gets more words; if even, split evenly
-                  const firstLineWords = Math.ceil(totalWords / 2)
-                  const firstLine = words.slice(0, firstLineWords).join(' ')
-                  const secondLine = words.slice(firstLineWords).join(' ')
-                  return (
-                    <>
-                      {firstLine}
-                      <br />
-                      {secondLine}
-                    </>
-                  )
-                })()}
+                It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
               </motion.p>
 
-              {/* Buttons - Slower fade (2x slower) */}
+              {/* Buttons - Side by side, same size */}
               <motion.div
-                className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3 w-full"
-                initial={{ opacity: 0, y: 30 }}
+                className="pt-2 md:pt-3 flex flex-row items-center justify-center gap-3 w-full"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 5.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 3, delay: 5.5, ease: [0.22, 1, 0.36, 1] }}
               >
+                {/* Portfolio teaser - Primary CTA - matched size */}
+                <button
+                  onClick={() => setShowVideoModal(true)}
+                  className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
+                >
+                  <svg
+                    className="w-4 h-4 md:w-5 md:h-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>Watch: Why I built this portfolio</span>
+                </button>
+
+                {/* View my work - Secondary CTA */}
                 <a
                   href="#work-overview"
-                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 w-full sm:w-auto"
+                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
                 >
                   View my work
                 </a>
-
-                <button
-                  onClick={() => setShowVideoModal(true)}
-                  className="pointer-events-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group w-full sm:w-auto"
-                >
-                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span>Portfolio teaser</span>
-                </button>
               </motion.div>
             </motion.div>
           </div>
@@ -637,14 +671,14 @@ export function HeroBrain() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '100px',
+                minHeight: '180px', // Fixed height to prevent jerk when hover text appears
                 maxWidth: '600px',
               }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 80 }}
+              animate={{ opacity: 1, y: 40 }}
               transition={{
                 duration: 4,
-                delay: 3.5,
+                delay: 3.5, // Placeholder text fades in first (after gears fade in)
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
@@ -680,16 +714,32 @@ export function HeroBrain() {
                       {(() => {
                         const parts = hoverText.split(' • ')
                         if (parts.length > 1) {
-                          const label = parts[0].replace(/::/g, ':')
-                          const labelWithColon = label.endsWith(':') ? label : `${label}:`
-                          const rest = parts.slice(1).join(' • ')
-                          return (
-                            <>
-                              <span>{labelWithColon}</span>
-                              <br />
-                              <span>{rest}</span>
-                            </>
-                          )
+                          // If multiple parts, display each on a new line
+                          if (parts.length > 2) {
+                            // Multiple lines (3+)
+                            return (
+                              <>
+                                {parts.map((part, index) => (
+                                  <span key={index}>
+                                    {part.trim()}
+                                    {index < parts.length - 1 && <br />}
+                                  </span>
+                                ))}
+                              </>
+                            )
+                          } else {
+                            // Old format with label and description (2 lines)
+                            const label = parts[0].replace(/::/g, ':')
+                            const labelWithColon = label.endsWith(':') ? label : `${label}:`
+                            const rest = parts.slice(1).join(' • ')
+                            return (
+                              <>
+                                <span>{labelWithColon}</span>
+                                <br />
+                                <span>{rest}</span>
+                              </>
+                            )
+                          }
                         } else {
                           const thought = hoverText.trim()
                           const splitPoint = thought.match(/[,;]/)
@@ -736,98 +786,123 @@ export function HeroBrain() {
                   </motion.div>
                 ) : (
                   <motion.div
-                    key="welcome-content-mobile"
+                    key="placeholder-text-mobile"
                     className="flex flex-col items-center justify-center"
-                    style={{ position: 'relative', zIndex: 10 }}
-                    initial={{ opacity: 0, y: 30 }}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      maxWidth: '100%',
+                      position: 'relative',
+                      zIndex: 20,
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <motion.p
-                      className="font-serif font-medium text-[var(--text-primary-dark)] text-center px-3"
+                    {/* Welcome to my mind */}
+                    <p
+                      className="font-serif font-medium text-white text-center px-3 mb-2"
                       style={{
                         fontSize: 'clamp(1.75rem, 8vw, 3.5rem)',
                       }}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     >
                       Welcome to my mind
-                    </motion.p>
+                    </p>
+                    {/* Hover hint */}
                     <motion.p
-                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 font-semibold"
+                      className="text-[var(--accent-teal)] leading-relaxed text-center px-3 font-medium flex items-center justify-center gap-2 uppercase"
                       style={{
-                        letterSpacing: '0.05em',
-                        fontSize: 'clamp(0.75rem, 3vw, 0.9rem)',
+                        letterSpacing: '0.08em',
+                        fontSize: 'clamp(0.7rem, 2.5vw, 0.85rem)',
                       }}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      HOVER ON THE GEARS TO SEE WHAT&apos;S ON IT
+                      <motion.span
+                        animate={{
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                        className="inline-block text-[var(--accent-teal)]"
+                      >
+                        →
+                      </motion.span>
+                      <span>Hover on the gears to explore</span>
+                      <motion.span
+                        animate={{
+                          opacity: [0.5, 1, 0.5]
+                        }}
+                        transition={{
+                          duration: 2.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.5
+                        }}
+                        className="inline-block text-[var(--accent-teal)]"
+                      >
+                        →
+                      </motion.span>
                     </motion.p>
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
 
-            {/* Text stack - centered with max width */}
+            {/* Subtext and Buttons - animate from bottom - fixed height to prevent jerk */}
             <motion.div
-              className="max-w-2xl space-y-4 px-3 w-full"
-              style={{ marginTop: '10px' }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 4,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 3.8
-              }}
+              className="max-w-2xl px-3 w-full"
+              style={{ marginTop: '-10px', minHeight: '120px' }}
             >
+              {/* Subtext - Inter font, regular body text - fades in second */}
               <motion.p
-                className="text-sm text-[var(--text-muted-dark)] leading-relaxed"
-                initial={{ opacity: 0, y: 30 }}
+                className="font-sans text-white/70 text-center px-3 mb-4"
+                style={{
+                  fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+                  fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+                }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 3, delay: 4.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                {(() => {
-                  const text = "It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions."
-                  const words = text.split(' ')
-                  const totalWords = words.length
-                  const firstLineWords = Math.ceil(totalWords / 2)
-                  const firstLine = words.slice(0, firstLineWords).join(' ')
-                  const secondLine = words.slice(firstLineWords).join(' ')
-                  return (
-                    <>
-                      {firstLine}
-                      <br />
-                      {secondLine}
-                    </>
-                  )
-                })()}
+                It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
               </motion.p>
 
+              {/* Buttons - Side by side, same size - fades in third */}
               <motion.div
-                className="pt-4 flex flex-col items-center justify-center gap-3 w-full"
-                initial={{ opacity: 0, y: 30 }}
+                className="pt-2 flex flex-row items-center justify-center gap-3 w-full"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 4, delay: 5.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 3, delay: 5.5, ease: [0.22, 1, 0.36, 1] }}
               >
+                {/* Portfolio teaser - Primary CTA - matched size */}
+                <button
+                  onClick={() => setShowVideoModal(true)}
+                  className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  <span>Watch: Why I built this portfolio</span>
+                </button>
+
+                {/* View my work - Secondary CTA */}
                 <a
                   href="#work-overview"
-                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 w-full"
+                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
                 >
                   View my work
                 </a>
-                <button
-                  onClick={() => setShowVideoModal(true)}
-                  className="pointer-events-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 group w-full"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span>Portfolio teaser</span>
-                </button>
               </motion.div>
             </motion.div>
           </div>
