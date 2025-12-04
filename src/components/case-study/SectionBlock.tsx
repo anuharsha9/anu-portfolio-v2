@@ -10,8 +10,34 @@ import AhaMoment from './AhaMoment'
 import TeamOnboardingProcess from './TeamOnboardingProcess'
 import EntryPointTransformation from './EntryPointTransformation'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
-import LockedContent from './LockedContent'
 import SensitiveImage from './SensitiveImage'
+
+// Simple lock icon component for locked sections
+const SimpleLockIcon = ({ message, isLightBackground }: { message: string; isLightBackground: boolean }) => {
+  const textColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/70'
+  const iconColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/60'
+  
+  return (
+    <div className={`flex flex-col items-center justify-center py-12 md:py-16 space-y-4 ${isLightBackground ? 'bg-white/5' : 'bg-black/10'} rounded-lg border ${isLightBackground ? 'border-black/10' : 'border-white/10'}`}>
+      <svg
+        className={`w-12 h-12 ${iconColor}`}
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.5}
+          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+        />
+      </svg>
+      <p className={`${textColor} text-sm text-center px-4`}>
+        {message}
+      </p>
+    </div>
+  )
+}
 
 interface SectionBlockProps {
   section: CaseStudySection
@@ -393,7 +419,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
           ) : null
         })()}
       </div>
-  )
+  );
 
   // Body Content (can be locked)
   const sectionBody = (
@@ -545,19 +571,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                       </div>
                                     )
 
-                                    if (image.sensitive) {
+                                    if (image.sensitive && !actuallyUnlocked) {
                                       return (
-                                        <LockedContent
+                                        <SimpleLockIcon
                                           key={`sub-img-${subIndex}-${imgIndex}`}
-                                          isUnlocked={false}
-                                          password={password}
-                                          caseStudySlug={caseStudySlug}
+                                          message={subsection.title || 'Locked content'}
                                           isLightBackground={isLightBackground}
-                                          unlockMessage="Password required to view this image"
-                                        >
-                                          {imageContent}
-                                        </LockedContent>
+                                        />
                                       )
+                                    }
+                                    
+                                    if (image.sensitive && actuallyUnlocked) {
+                                      return imageContent
                                     }
 
                                     return imageContent
@@ -590,19 +615,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                 </div>
                               )
 
-                              if (image.sensitive) {
+                              if (image.sensitive && !actuallyUnlocked) {
                                 return (
-                                  <LockedContent
+                                  <SimpleLockIcon
                                     key={`sub-img-full-${subIndex}-${imgIndex}`}
-                                    isUnlocked={false}
-                                    password={password}
-                                    caseStudySlug={caseStudySlug}
+                                    message={subsection.title || 'Locked content'}
                                     isLightBackground={isLightBackground}
-                                    unlockMessage="Password required to view this image"
-                                  >
-                                    {imageContent}
-                                  </LockedContent>
+                                  />
                                 )
+                              }
+                              
+                              if (image.sensitive && actuallyUnlocked) {
+                                return imageContent
                               }
 
                               return imageContent
@@ -747,17 +771,16 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
                               if (image.sensitive && !actuallyUnlocked) {
                                 return (
-                                  <LockedContent
+                                  <SimpleLockIcon
                                     key={`sub-img-${subIndex}-${imgIndex}`}
-                                    isUnlocked={actuallyUnlocked}
-                                    password={password}
-                                    caseStudySlug={caseStudySlug}
+                                    message={subsection.title || section.title || 'Locked content'}
                                     isLightBackground={isLightBackground}
-                                    unlockMessage="Password required to view this image"
-                                  >
-                                    {imageContent}
-                                  </LockedContent>
+                                  />
                                 )
+                              }
+                              
+                              if (image.sensitive && actuallyUnlocked) {
+                                return imageContent
                               }
 
                               return imageContent
@@ -896,30 +919,28 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         {/* Entry Point Transformation for ML Functions Section 06 */}
                         {section.id === 'section-06' && subsection.title === 'Multiple ways to launch ML Functions from the HUB' && caseStudySlug === 'ml-functions' && (
                           <div className="pt-4">
-                            <LockedContent
-                              isUnlocked={false}
-                              password={password}
-                              caseStudySlug={caseStudySlug}
-                              isLightBackground={isLightBackground}
-                              unlockMessage="Password required to view new workflow entry points"
-                            >
+                            {actuallyUnlocked ? (
                               <EntryPointTransformation isLightBackground={isLightBackground} />
-                            </LockedContent>
+                            ) : (
+                              <SimpleLockIcon
+                                message="Workflow entry points"
+                                isLightBackground={isLightBackground}
+                              />
+                            )}
                           </div>
                         )}
 
                         {/* Four Step Flow Breakdown for ML Functions Section 06 - The main step workflow UI */}
                         {section.id === 'section-06' && subsection.title === 'The main step workflow UI' && caseStudySlug === 'ml-functions' && (
                           <div className="pt-4 pb-4">
-                            <LockedContent
-                              isUnlocked={false}
-                              password={password}
-                              caseStudySlug={caseStudySlug}
-                              isLightBackground={isLightBackground}
-                              unlockMessage="Password required to view new 4-step guided workflow"
-                            >
+                            {actuallyUnlocked ? (
                               <FourStepFlowBreakdown isLightBackground={isLightBackground} />
-                            </LockedContent>
+                            ) : (
+                              <SimpleLockIcon
+                                message="4-step guided workflow"
+                                isLightBackground={isLightBackground}
+                              />
+                            )}
                           </div>
                         )}
 
@@ -1001,16 +1022,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
                               if (image.sensitive && !actuallyUnlocked) {
                                 return (
-                                  <LockedContent
+                                  <SimpleLockIcon
                                     key={`sub-img-${subIndex}-${imgIndex}`}
-                                    isUnlocked={actuallyUnlocked}
-                                    password={password}
-                                    caseStudySlug={caseStudySlug}
+                                    message={subsection.title || section.title || 'Locked content'}
                                     isLightBackground={isLightBackground}
-                                    unlockMessage="Password required to view this image"
-                                  >
-                                    {imageContent}
-                                  </LockedContent>
+                                  />
                                 )
                               }
 
@@ -1060,13 +1076,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {/* Before/After Comparison */}
       {section.beforeAfter && (
         <div className="space-y-4">
-          <LockedContent
-            isUnlocked={section.beforeAfter.before.sensitive === true ? false : isUnlocked}
-            password={password}
-            caseStudySlug={caseStudySlug}
-            unlockMessage="Password required to view before/after comparison"
-            isLightBackground={isLightBackground}
-          >
+          {(section.beforeAfter.before.sensitive === true ? false : actuallyUnlocked) ? (
             <BeforeAfterComparison
               beforeImage={section.beforeAfter.before}
               afterImage={section.beforeAfter.after}
@@ -1074,7 +1084,12 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               afterLabel={section.beforeAfter.afterLabel}
               isLightBackground={isLightBackground}
             />
-          </LockedContent>
+          ) : (
+            <SimpleLockIcon
+              message="Before/after comparison"
+              isLightBackground={isLightBackground}
+            />
+          )}
         </div>
       )}
 
@@ -1149,19 +1164,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     </div>
                   )
 
-                  if (image.sensitive) {
+                  if (image.sensitive && !actuallyUnlocked) {
                     return (
-                      <LockedContent
+                      <SimpleLockIcon
                         key={`legacy-img-${index}`}
-                        isUnlocked={false}
-                        password={password}
-                        caseStudySlug={caseStudySlug}
+                        message={section.title || 'Locked content'}
                         isLightBackground={isLightBackground}
-                        unlockMessage="Password required to view this image"
-                      >
-                        {imageContent}
-                      </LockedContent>
+                      />
                     )
+                  }
+                  
+                  if (image.sensitive && actuallyUnlocked) {
+                    return imageContent
                   }
 
                   return imageContent
@@ -1224,18 +1238,17 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 </div>
               )
 
-              if (image.sensitive) {
+              if (image.sensitive && !actuallyUnlocked) {
                 return (
-                  <LockedContent
-                    isUnlocked={false}
-                    password={password}
-                    caseStudySlug={caseStudySlug}
+                  <SimpleLockIcon
+                    message={section.title || 'Locked content'}
                     isLightBackground={isLightBackground}
-                    unlockMessage="Password required to view this image"
-                  >
-                    {imageContent}
-                  </LockedContent>
+                  />
                 )
+              }
+              
+              if (image.sensitive && actuallyUnlocked) {
+                return imageContent
               }
 
               return imageContent
@@ -1269,19 +1282,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                   </div>
                 )
 
-                if (image.sensitive) {
+                if (image.sensitive && !actuallyUnlocked) {
                   return (
-                    <LockedContent
+                    <SimpleLockIcon
                       key={`img-full-${index}`}
-                      isUnlocked={false}
-                      password={password}
-                      caseStudySlug={caseStudySlug}
+                      message={section.title || 'Locked content'}
                       isLightBackground={isLightBackground}
-                      unlockMessage="Password required to view this image"
-                    >
-                      {imageContent}
-                    </LockedContent>
+                    />
                   )
+                }
+                
+                if (image.sensitive && actuallyUnlocked) {
+                  return imageContent
                 }
 
                 return imageContent
@@ -1315,19 +1327,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         </div>
                       )
 
-                        if (image.sensitive) {
+                        if (image.sensitive && !actuallyUnlocked) {
                           return (
-                            <LockedContent
+                            <SimpleLockIcon
                               key={`img-grid-${index}`}
-                              isUnlocked={false}
-                              password={password}
-                              caseStudySlug={caseStudySlug}
+                              message={section.title || 'Locked content'}
                               isLightBackground={isLightBackground}
-                              unlockMessage="Password required to view this image"
-                            >
-                              {imageContent}
-                            </LockedContent>
+                            />
                           )
+                        }
+                        
+                        if (image.sensitive && actuallyUnlocked) {
+                          return imageContent
                         }
 
                       return imageContent
@@ -1407,19 +1418,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                             </div>
                           )
 
-                            if (image.sensitive) {
+                            if (image.sensitive && !actuallyUnlocked) {
                               return (
-                                <LockedContent
+                                <SimpleLockIcon
                                   key={`group-img-${groupIndex}-${imgIndex}`}
-                                  isUnlocked={false}
-                                  password={password}
-                                  caseStudySlug={caseStudySlug}
+                                  message={section.title || 'Locked content'}
                                   isLightBackground={isLightBackground}
-                                  unlockMessage="Password required to view this image"
-                                >
-                                  {imageContent}
-                                </LockedContent>
+                                />
                               )
+                            }
+                            
+                            if (image.sensitive && actuallyUnlocked) {
+                              return imageContent
                             }
 
                           return imageContent
@@ -1560,16 +1570,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     )}
                   </div>
                 )
-                return images[0].sensitive ? (
-                  <LockedContent
-                    isUnlocked={false}
-                    password={password}
-                    caseStudySlug={caseStudySlug}
+                return images[0].sensitive && !actuallyUnlocked ? (
+                  <SimpleLockIcon
+                    message={section.title || 'Locked content'}
                     isLightBackground={isLightBackground}
-                    unlockMessage="Password required to view this image"
-                  >
-                    {imageContent}
-                  </LockedContent>
+                  />
                 ) : imageContent
               })()}
               {/* Right column: explorer on top, admin below */}
@@ -1598,16 +1603,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                       )}
                     </div>
                   )
-                  return images[1].sensitive ? (
-                    <LockedContent
-                      isUnlocked={false}
-                      password={password}
-                      caseStudySlug={caseStudySlug}
+                  return images[1].sensitive && !actuallyUnlocked ? (
+                    <SimpleLockIcon
+                      message={section.title || 'Locked content'}
                       isLightBackground={isLightBackground}
-                      unlockMessage="Password required to view this image"
-                    >
-                      {imageContent}
-                    </LockedContent>
+                    />
                   ) : imageContent
                 })()}
                 {/* Admin - below explorer */}
@@ -1634,16 +1634,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                       )}
                     </div>
                   )
-                  return images[2].sensitive ? (
-                    <LockedContent
-                      isUnlocked={false}
-                      password={password}
-                      caseStudySlug={caseStudySlug}
+                  return images[2].sensitive && !actuallyUnlocked ? (
+                    <SimpleLockIcon
+                      message={section.title || 'Locked content'}
                       isLightBackground={isLightBackground}
-                      unlockMessage="Password required to view this image"
-                    >
-                      {imageContent}
-                    </LockedContent>
+                    />
                   ) : imageContent
                 })()}
               </div>
@@ -1806,14 +1801,14 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
         {sectionHeader}
         
         {/* Body - Locked */}
-        <LockedContent
-          isUnlocked={actuallyUnlocked}
-          password={password}
-          caseStudySlug={caseStudySlug || 'default'}
-          isLightBackground={isLightBackground}
-        >
-          {sectionBody}
-        </LockedContent>
+        {actuallyUnlocked ? (
+          sectionBody
+        ) : (
+          <SimpleLockIcon
+            message={section.title || 'Locked section'}
+            isLightBackground={isLightBackground}
+          />
+        )}
       </div>
     )
   }

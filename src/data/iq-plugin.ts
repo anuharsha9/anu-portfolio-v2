@@ -535,4 +535,18 @@ IQ proved that advanced analytics doesn't have to be intimidating. By unifying D
     ],
   },
   // ----------------------------
+  // PASSWORD GATE
+  // ----------------------------
+  passwordGate: {
+    password: 'anu-access',
+    description: 'This case study contains confidential company information and cannot be made public. Enter the password to view the full case study.',
+    learnItems: [
+      'Complete system architecture and information design',
+      'Multi-persona journey mapping and dual-layer UX patterns',
+      'Step-by-step workflow details for NLQ, Insights, and Predict Data',
+      'Competitive analysis and strategic positioning',
+      'Cross-functional collaboration process with PM, engineering, and QA',
+      'Behind-the-scenes design decisions and trade-offs',
+    ],
+  },
 }

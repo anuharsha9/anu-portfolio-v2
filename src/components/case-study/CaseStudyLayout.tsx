@@ -238,6 +238,14 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
     }
   }, [data.slug, data.passwordGate])
 
+  // Password state for IQ Plugin inline input
+  const [iqPassword, setIqPassword] = useState('')
+  const [iqError, setIqError] = useState('')
+  
+  // Password state for ML and RC case studies
+  const [mlRcPassword, setMlRcPassword] = useState('')
+  const [mlRcError, setMlRcError] = useState('')
+
   const handlePasswordCorrect = () => {
     if (typeof window !== 'undefined') {
       const storageKey = `case-study-unlocked-${data.slug}`
@@ -268,6 +276,38 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
     setShowPasswordContent(true)
   }
 
+  const handleIqPasswordSubmit = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault()
+    }
+    
+    const trimmedPassword = iqPassword.trim().toLowerCase()
+    const correctPassword = data.passwordGate?.password || 'anu-access'
+    
+    if (trimmedPassword === correctPassword.toLowerCase()) {
+      setIqError('')
+      handlePasswordCorrect()
+    } else {
+      setIqError('Incorrect password. Please try again.')
+    }
+  }
+
+  const handleMlRcPasswordSubmit = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault()
+    }
+    
+    const trimmedPassword = mlRcPassword.trim().toLowerCase()
+    const correctPassword = 'anu-access'
+    
+    if (trimmedPassword === correctPassword.toLowerCase()) {
+      setMlRcError('')
+      handlePasswordCorrect()
+    } else {
+      setMlRcError('Incorrect password. Please try again.')
+    }
+  }
+
   return (
     <>
       <StructuredData type="caseStudy" data={data} />
@@ -290,65 +330,178 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       {/* Hero - Dark Immersive Background */}
       {/* Show locked hero if passwordGate exists AND content is not unlocked */}
       {data.passwordGate && !showPasswordContent ? (
-        /* Locked Hero View */
-        <section className="relative surface-dark overflow-hidden min-h-[80vh] flex items-center">
-          <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
-            {/* Breadcrumbs */}
-            <div className="pt-8 pb-4">
-              <Breadcrumbs
-                items={[
-                  { label: 'Home', href: '/' },
-                  { label: 'Work', href: '/#work-overview' },
-                  { label: 'Locked Case Study' },
-                ]}
-              />
-            </div>
+        /* Locked Hero View - Custom for IQ Plugin to match home page style */
+        data.slug === 'iq-plugin' ? (
+          <section className="relative surface-light overflow-hidden min-h-[80vh] flex items-center">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+              {/* Breadcrumbs */}
+              <div className="pt-8 pb-4">
+                <Breadcrumbs
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Work', href: '/#work-overview' },
+                    { label: 'IQ Plugin Case Study' },
+                  ]}
+                />
+              </div>
 
-            <div className="max-w-2xl mx-auto text-center space-y-8 py-16 md:py-24">
-              {/* Lock Icon */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex justify-center"
-              >
-                <svg
-                  className="w-16 h-16 md:w-20 md:h-20 text-white/60"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div className="max-w-2xl mx-auto text-center space-y-8 py-16 md:py-24">
+                {/* Lock Icon */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex justify-center"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
-              </motion.div>
+                  <svg
+                    className="w-16 h-16 md:w-20 md:h-20 text-[var(--text-muted-light)]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </motion.div>
 
-              {/* Title */}
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-white text-3xl md:text-4xl lg:text-5xl font-serif leading-tight"
-              >
-                Unification of all ML and AI features project.
-              </motion.h1>
+                {/* Title */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-[var(--text-primary-light)] text-3xl md:text-4xl lg:text-5xl font-serif leading-tight"
+                >
+                  {data.heroTitle || 'IQ Plugin Case Study'}
+                </motion.h1>
 
-              {/* Description */}
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-white/80 text-base md:text-lg leading-relaxed"
-              >
-                This case study is locked due to confidential company information and can&apos;t be made public. Please enter password to view this case study.
-              </motion.p>
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed"
+                >
+                  {data.passwordGate?.description || 'This case study contains confidential company information and cannot be made public. Enter the password to view the full case study.'}
+                </motion.p>
+
+                {/* Password Input with Circular Button - Same as home page */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="pt-6 w-full max-w-md mx-auto"
+                >
+                  <form onSubmit={handleIqPasswordSubmit} className="w-full">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="password"
+                        value={iqPassword}
+                        onChange={(e) => {
+                          setIqPassword(e.target.value)
+                          setIqError('')
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            handleIqPasswordSubmit()
+                          }
+                        }}
+                        placeholder="Enter password"
+                        className="flex-1 px-4 py-3 rounded-full border border-black/20 text-[var(--text-primary-light)] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent placeholder:text-[var(--text-muted-light)] shadow-sm"
+                        autoFocus
+                      />
+                      <button
+                        type="submit"
+                        className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white flex items-center justify-center hover:bg-[var(--accent-teal-soft)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 shadow-md"
+                        aria-label="Submit password"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    {iqError && (
+                      <p className="mt-2 text-sm text-red-600 text-center">{iqError}</p>
+                    )}
+                  </form>
+                </motion.div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        ) : (
+          /* Default Locked Hero View for other case studies */
+          <section className="relative surface-dark overflow-hidden min-h-[80vh] flex items-center">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+              {/* Breadcrumbs */}
+              <div className="pt-8 pb-4">
+                <Breadcrumbs
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Work', href: '/#work-overview' },
+                    { label: 'Locked Case Study' },
+                  ]}
+                />
+              </div>
+
+              <div className="max-w-2xl mx-auto text-center space-y-8 py-16 md:py-24">
+                {/* Lock Icon */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="flex justify-center"
+                >
+                  <svg
+                    className="w-16 h-16 md:w-20 md:h-20 text-white/60"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </motion.div>
+
+                {/* Title */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-white text-3xl md:text-4xl lg:text-5xl font-serif leading-tight"
+                >
+                  Unification of all ML and AI features project.
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-white/80 text-base md:text-lg leading-relaxed"
+                >
+                  This case study is locked due to confidential company information and can&apos;t be made public. Please enter password to view this case study.
+                </motion.p>
+              </div>
+            </div>
+          </section>
+        )
       ) : (
         /* Normal Hero View */
         <section className="relative surface-dark overflow-hidden">
@@ -426,6 +579,63 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               </div>
             </div>
             <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+              {/* Password Unlock Section for ML and RC - Before Quick Overview */}
+              {(data.slug === 'ml-functions' || data.slug === 'reportcaster') && !showPasswordContent && (
+                <MotionSection className="surface-light py-8 md:py-12 mb-8 md:mb-12">
+                  <div className="max-w-2xl mx-auto space-y-6">
+                    <div className="text-center space-y-4">
+                      <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
+                        Parts of the case study are locked due to sensitive company data and NDA restrictions. To unlock them all enter password here or continue scrolling to see the public version.
+                      </p>
+                    </div>
+                    
+                    {/* Password Input with Circular Button */}
+                    <form onSubmit={handleMlRcPasswordSubmit} className="w-full max-w-md mx-auto">
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="password"
+                          value={mlRcPassword}
+                          onChange={(e) => {
+                            setMlRcPassword(e.target.value)
+                            setMlRcError('')
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              handleMlRcPasswordSubmit()
+                            }
+                          }}
+                          placeholder="Enter password"
+                          className="flex-1 px-4 py-3 rounded-full border border-black/20 text-[var(--text-primary-light)] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent placeholder:text-[var(--text-muted-light)] shadow-sm"
+                          autoFocus
+                        />
+                        <button
+                          type="submit"
+                          className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white flex items-center justify-center hover:bg-[var(--accent-teal-soft)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 shadow-md"
+                          aria-label="Submit password"
+                        >
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                      {mlRcError && (
+                        <p className="mt-2 text-sm text-red-600 text-center">{mlRcError}</p>
+                      )}
+                    </form>
+                  </div>
+                </MotionSection>
+              )}
+              
               <QuickOverview data={data.quickOverview} heroSubtitle={data.heroSubtitle} caseStudySlug={data.slug} />
             </div>
           </MotionSection>

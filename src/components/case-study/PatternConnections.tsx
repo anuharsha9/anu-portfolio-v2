@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 interface PatternConnectionsProps {
     isLightBackground?: boolean
 }
@@ -50,12 +52,8 @@ export default function PatternConnections({ isLightBackground = false }: Patter
 
                 {/* 3 Side-by-Side Tiles */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                    {patterns.map((pattern) => (
-                        <div
-                            key={pattern.id}
-                            className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 h-full transition-all duration-300 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
-                            style={{ borderColor: accentColor }}
-                        >
+                    {patterns.map((pattern) => {
+                        const content = (
                             <div className="space-y-3">
                                 <h4 className={`${textColor} text-lg font-semibold`}>{pattern.name}</h4>
                                 <p className={`${textColor} text-sm font-medium`} style={{ color: accentColor }}>
@@ -65,8 +63,31 @@ export default function PatternConnections({ isLightBackground = false }: Patter
                                     {pattern.description}
                                 </p>
                             </div>
-                        </div>
-                    ))}
+                        )
+                        
+                        if (pattern.link) {
+                            return (
+                                <Link
+                                    key={pattern.id}
+                                    href={pattern.link}
+                                    className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 h-full transition-all duration-300 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] block`}
+                                    style={{ borderColor: accentColor }}
+                                >
+                                    {content}
+                                </Link>
+                            )
+                        }
+                        
+                        return (
+                            <div
+                                key={pattern.id}
+                                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 h-full transition-all duration-300 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
+                                style={{ borderColor: accentColor }}
+                            >
+                                {content}
+                            </div>
+                        )
+                    })}
                 </div>
 
                 {/* Summary */}
