@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import ImageLightbox from './ImageLightbox'
 
 interface BeforeAfterComparisonProps {
   beforeImage: {
@@ -17,6 +18,7 @@ interface BeforeAfterComparisonProps {
   beforeLabel?: string
   afterLabel?: string
   isLightBackground?: boolean
+  comparisonNotes?: string
 }
 
 export default function BeforeAfterComparison({
@@ -25,10 +27,40 @@ export default function BeforeAfterComparison({
   beforeLabel = 'Before',
   afterLabel = 'After',
   isLightBackground = false,
+  comparisonNotes,
 }: BeforeAfterComparisonProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
+  const [viewMode, setViewMode] = useState<'slider' | 'side-by-side'>('slider')
   const containerRef = useRef<HTMLDivElement>(null)
+  // Lightbox state
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption?: string } | null>(null)
+  const [lightboxImages, setLightboxImages] = useState<Array<{ src: string; alt: string; caption?: string }>>([])
+  const [lightboxCurrentIndex, setLightboxCurrentIndex] = useState(0)
+
+  const openLightbox = (src: string, alt: string, caption?: string, index?: number) => {
+    const images = [
+      { src: beforeImage.src, alt: beforeImage.alt, caption: beforeImage.caption },
+      { src: afterImage.src, alt: afterImage.alt, caption: afterImage.caption },
+    ]
+    setLightboxImage({ src, alt, caption })
+    setLightboxImages(images)
+    setLightboxCurrentIndex(index ?? 0)
+  }
+
+  const closeLightbox = () => {
+    setLightboxImage(null)
+    setLightboxImages([])
+    setLightboxCurrentIndex(0)
+  }
+
+  const handleLightboxNavigate = (index: number) => {
+    if (lightboxImages[index]) {
+      const img = lightboxImages[index]
+      setLightboxImage({ src: img.src, alt: img.alt, caption: img.caption })
+      setLightboxCurrentIndex(index)
+    }
+  }
 
   const handleMouseDown = () => {
     setIsDragging(true)
@@ -64,6 +96,24 @@ export default function BeforeAfterComparison({
     }
   }, [isDragging, handleMouseMove, handleMouseUp])
 
+  // Keyboard navigation for slider
+  useEffect(() => {
+    if (viewMode !== 'slider') return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        setSliderPosition((prev) => Math.max(0, prev - 5))
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        setSliderPosition((prev) => Math.min(100, prev + 5))
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [viewMode])
+
   const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
   const imageShadow = isLightBackground
     ? 'shadow-[0_4px_12px_rgba(0,0,0,0.15)]'
@@ -74,18 +124,63 @@ export default function BeforeAfterComparison({
     : 'outline outline-1 outline-white/5 outline-offset-[-1px]'
   const labelColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
   const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
+  const bgColor = isLightBackground ? 'bg-white/50' : 'bg-white/5'
 
   return (
     <div className="space-y-4">
-      <div
-        ref={containerRef}
-        className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-col-resize select-none`}
-        style={{ minHeight: '400px' }}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-      >
+      {/* View Mode Toggle */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>View:</span>
+          <div className={`${bgColor} rounded-lg p-1 border ${borderColor} flex gap-1`}>
+            <button
+              onClick={() => setViewMode('slider')}
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${
+                viewMode === 'slider'
+                  ? 'bg-[var(--accent-teal)] text-white'
+                  : `${labelColor} hover:bg-black/5`
+              }`}
+              aria-label="Slider view"
+            >
+              Slider
+            </button>
+            <button
+              onClick={() => setViewMode('side-by-side')}
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${
+                viewMode === 'side-by-side'
+                  ? 'bg-[var(--accent-teal)] text-white'
+                  : `${labelColor} hover:bg-black/5`
+              }`}
+              aria-label="Side-by-side view"
+            >
+              Side-by-Side
+            </button>
+          </div>
+        </div>
+        {viewMode === 'slider' && (
+          <div className={`${mutedColor} text-xs`}>
+            Use ← → arrow keys or drag
+          </div>
+        )}
+      </div>
+      {viewMode === 'slider' ? (
+        <div
+          ref={containerRef}
+          className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-col-resize select-none`}
+          style={{ minHeight: '400px' }}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
+          tabIndex={0}
+        >
         {/* After Image (background) - determines container size */}
-        <div className="relative w-full">
+        <div 
+          className="relative w-full cursor-pointer"
+          onClick={(e) => {
+            e.stopPropagation()
+            openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)
+          }}
+          onDoubleClick={(e) => e.stopPropagation()}
+        >
           <Image
             src={afterImage.src}
             alt={afterImage.alt}
@@ -101,14 +196,22 @@ export default function BeforeAfterComparison({
           className="absolute inset-0 overflow-hidden pointer-events-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
-          <Image
-            src={beforeImage.src}
-            alt={beforeImage.alt}
-            width={1200}
-            height={800}
-            className="w-full h-auto object-contain"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-          />
+          <div 
+            className="w-full h-full cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation()
+              openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)
+            }}
+          >
+            <Image
+              src={beforeImage.src}
+              alt={beforeImage.alt}
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+            />
+          </div>
         </div>
 
         {/* Slider Line */}
@@ -166,6 +269,68 @@ export default function BeforeAfterComparison({
           {afterLabel}
         </div>
       </div>
+      ) : (
+        /* Side-by-Side View */
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="space-y-3">
+            <div className={`${bgColor} rounded-lg px-4 py-2 border ${borderColor} inline-block`}>
+              <span className={`${labelColor} text-sm font-semibold`}>{beforeLabel}</span>
+            </div>
+            <div 
+              onClick={() => openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)}
+              className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
+            >
+              <Image
+                src={beforeImage.src}
+                alt={beforeImage.alt}
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+              />
+            </div>
+            {beforeImage.caption && (
+              <p className={`${mutedColor} text-sm leading-relaxed`}>{beforeImage.caption}</p>
+            )}
+          </div>
+          <div className="space-y-3">
+            <div className={`${bgColor} rounded-lg px-4 py-2 border ${borderColor} inline-block`}>
+              <span className={`${labelColor} text-sm font-semibold`}>{afterLabel}</span>
+            </div>
+            <div 
+              onClick={() => openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)}
+              className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
+            >
+              <Image
+                src={afterImage.src}
+                alt={afterImage.alt}
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+              />
+            </div>
+            {afterImage.caption && (
+              <p className={`${mutedColor} text-sm leading-relaxed`}>{afterImage.caption}</p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Comparison Notes */}
+      {comparisonNotes && (
+        <div className={`${bgColor} rounded-lg p-4 md:p-5 border ${borderColor} border-l-4`} style={{ borderLeftColor: 'var(--accent-teal)' }}>
+          <div className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-[var(--accent-teal)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>Key Differences</div>
+              <p className={`${labelColor} text-sm md:text-base leading-relaxed`}>{comparisonNotes}</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Captions */}
       {(beforeImage.caption || afterImage.caption) && (
@@ -183,6 +348,20 @@ export default function BeforeAfterComparison({
             </p>
           )}
         </div>
+      )}
+
+      {/* Image Lightbox */}
+      {lightboxImage && (
+        <ImageLightbox
+          isOpen={!!lightboxImage}
+          onClose={closeLightbox}
+          imageSrc={lightboxImage.src}
+          imageAlt={lightboxImage.alt}
+          imageCaption={lightboxImage.caption}
+          images={lightboxImages.length > 0 ? lightboxImages : undefined}
+          currentIndex={lightboxCurrentIndex}
+          onNavigate={lightboxImages.length > 0 ? handleLightboxNavigate : undefined}
+        />
       )}
     </div>
   )

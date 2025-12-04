@@ -7,7 +7,9 @@ import ImageLightbox from './ImageLightbox'
 import { SignatureLogo } from '@/components/brand'
 import CaseStudyNav from './CaseStudyNav'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
+import HeroTestimonial from '@/components/home/HeroTestimonial'
 import { heroTitleVariant, heroSubVariant, fadeIn } from '@/lib/animations'
+import { recommendations } from '@/data/home'
 
 interface HeroMetaProps {
   heroTitle: string
@@ -36,6 +38,7 @@ interface HeroMetaProps {
     variant?: 'live' | 'shipping' | 'development'
   }
   shareUrl?: string
+  testimonialName?: string // Name of testimonial to feature in hero
 }
 
 export default function HeroMeta({
@@ -59,8 +62,14 @@ export default function HeroMeta({
   dataSheetLabel,
   status,
   shareUrl,
+  testimonialName,
 }: HeroMetaProps) {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+  
+  // Find testimonial if name provided
+  const testimonial = testimonialName
+    ? recommendations.find((r) => r.name === testimonialName)
+    : null
 
   const openLightbox = (src: string, alt: string) => {
     setLightboxImage({ src, alt })
@@ -124,7 +133,7 @@ export default function HeroMeta({
           </div>
 
           {/* 2-Column Layout - Content and Laptop */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-24 items-start lg:items-center">
 
             {/* Left Column: Text Content */}
             <div className="space-y-5 sm:space-y-6 md:space-y-7">
@@ -250,7 +259,7 @@ export default function HeroMeta({
             {/* Right Column: Laptop Visual - Macro Photography Feel with Enhanced Composition */}
             {coverImage && (
               <motion.div 
-                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible lg:pt-8"
+                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible"
                 variants={fadeIn}
                 initial="hidden"
                 animate="visible"
@@ -299,6 +308,18 @@ export default function HeroMeta({
               </motion.div>
             )}
           </div>
+
+          {/* Testimonial - Below 2-column layout */}
+          {testimonial && (
+            <motion.div
+              variants={heroSubVariant}
+              initial="hidden"
+              animate="visible"
+              className="mt-12 sm:mt-16 md:mt-20 max-w-3xl mx-auto"
+            >
+              <HeroTestimonial testimonial={testimonial} />
+            </motion.div>
+          )}
         </div>
       </motion.header>
 

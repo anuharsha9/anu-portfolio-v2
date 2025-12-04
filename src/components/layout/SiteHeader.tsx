@@ -189,7 +189,7 @@ export default function SiteHeader() {
               href="/assets/Anuja-Nimmagadda-2025.pdf"
               download="Anuja-Nimmagadda-Resume-2025.pdf"
               onClick={() => trackResumeDownload()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white text-sm font-medium transition-all duration-300 hover:border-white/40 hover:bg-white/10"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 text-white text-sm font-semibold transition-all duration-300 hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/20 hover:shadow-[0_0_20px_rgba(13,148,136,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
               aria-label="Download Resume"
             >
               <svg
@@ -206,7 +206,7 @@ export default function SiteHeader() {
                   d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              Resume
+              <span>Resume</span>
             </a>
           </div>
           {/* Mobile Menu - Always visible on mobile, even when header is transitioning */}

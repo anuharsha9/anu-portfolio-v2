@@ -97,6 +97,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512x512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Font optimization: preconnect and font-display swap for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -112,6 +113,23 @@ export default function RootLayout({
         <StructuredData type="website" />
         <StructuredData type="person" />
         <PageShell>{children}</PageShell>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                      console.log('SW registered:', registration);
+                    })
+                    .catch((error) => {
+                      console.log('SW registration failed:', error);
+                    });
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   )

@@ -115,17 +115,15 @@ export const iqPluginCaseStudy: CaseStudyData = {
       title: 'Discover Deeply: Understanding the DSML Fragmentation Problem',
       summary: 'Unified three fragmented DSML features (Automated Insights, NLQ, Predict Data) into one cohesive entry point, making DSML accessible for both business users and data experts.',
       methodologies: ['Persona Mapping', 'Journey Mapping', 'Competitive Analysis', 'Usability Testing'],
-      body: `After ML Functions, I was asked to unify all DSML capabilities into a single entry point. The challenge: Automated Insights, NLQ, and Predict Data were fragmented — different entry points, different mental models. Users had to hunt for features; non-technical users found it intimidating.
+      body: `After ML Functions, I was asked to unify all DSML capabilities into a single entry point. The challenge: Automated Insights, NLQ, and Predict Data were fragmented — different entry points, different mental models.
+
+Users had to hunt for features; non-technical users found it intimidating.
 
 I said yes immediately. Opportunity: unify these into one cohesive system, making DSML usable for real people — not just data scientists. The mandate: create a "front door" to DSML that competes with leading BI platforms — but more approachable.
 
-Before IQ, DSML features were scattered. Automated Insights lived in one place, NLQ in another, Predict Data somewhere else. Each had its own entry point, its own mental model, its own learning curve.
+I mapped where these features lived and how users found them. I also studied the competitive landscape — Power BI and Tableau were powerful but too technical, Qlik had usability issues.
 
-I mapped where these features lived and how users found them. Users had to know where to look. Non-technical users found it intimidating. Technical users found it inefficient.
-
-I also studied the competitive landscape. Power BI and Tableau were powerful but too technical. Qlik had usability issues. There was a clear gap: platforms were either too technical or had usability problems. IQ could win by being both powerful and approachable.
-
-I explored the fragmentation problem, mapped user journeys, and built complete context about user needs and competitive landscape before designing the unified solution.`,
+There was a clear gap: platforms were either too technical or had usability problems. IQ could win by being both powerful and approachable.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Ownership & Initiative → Took on IQ immediately, seeing opportunity to unify fragmented DSML',
@@ -154,8 +152,6 @@ I explored the fragmentation problem, mapped user journeys, and built complete c
       title: 'Empathize with the Ecosystem: Designing for Multiple Personas',
       body: `I balanced multiple distinct personas with different DSML comfort levels. The central tension: keep depth for technical users without overwhelming business users. I designed dual-layer experiences that served both, ensuring IQ competed with leading BI platforms while being more approachable.
 
-IQ needed to serve multiple distinct personas, each with different needs and comfort levels with data science. The central tension was simple: How do you keep the depth technical users need without overwhelming everyone else?
-
 I mapped distinct journeys for each persona and balanced their needs through guided experiences, progressive disclosure, and consistent mental models. All four IQ pillars used the same interaction patterns, navigation, and visual language — making IQ feel like one cohesive system, not four separate tools.`,
       images: [
         {
@@ -178,9 +174,13 @@ I mapped distinct journeys for each persona and balanced their needs through gui
       title: 'Simplify the Chaos: Unifying the DSML Experience',
       body: `I unified three DSML features into one cohesive experience. I prioritized patterns, applied progressive disclosure, and made DSML complexity digestible for non-technical users while maintaining depth for experts.
 
-I started with low-fidelity flows for each IQ component: Automated Insights, Ask a Question (NLQ), Predict Data, and Discover. I built iterative prototypes tested with internal users — both technical and non-technical — to validate the dual-persona approach.
+I started with low-fidelity flows for each IQ component: Automated Insights, Ask a Question (NLQ), Predict Data, and Discover.
 
-Multiple rounds of usability testing revealed key insights: non-technical users needed more hand-holding in the NLQ flow, technical users wanted faster access to advanced Predict Data controls, and the Discover page needed clearer examples. Feedback drove changes to NLQ question handling, Predict Data configuration options, and the Discover page structure.`,
+I built iterative prototypes tested with internal users — both technical and non-technical — to validate the dual-persona approach.
+
+Multiple rounds of usability testing revealed key insights: non-technical users needed more hand-holding in the NLQ flow, technical users wanted faster access to advanced Predict Data controls, and the Discover page needed clearer examples.
+
+Feedback drove changes to NLQ question handling, Predict Data configuration options, and the Discover page structure.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
@@ -248,7 +248,9 @@ Multiple rounds of usability testing revealed key insights: non-technical users 
       title: 'Iterate with Inclusion: Prototyping and Testing the Unified Experience',
       body: `I prototyped the unified entry point and conducted usability testing with both technical and non-technical users. I refined guided experiences based on feedback, ensuring the Discover page, tooltips, and contextual help actually helped users learn DSML concepts.
 
-The final IQ experience breaks down into four interconnected pillars, each designed to feel like part of the same system: Automated Insights, Ask a Question (NLQ), Predict Data, and Discover. All four pillars use consistent interaction patterns, navigation, and visual language — making IQ feel like one cohesive system, not four separate tools.`,
+The final IQ experience breaks down into four interconnected pillars, each designed to feel like part of the same system: Automated Insights, Ask a Question (NLQ), Predict Data, and Discover.
+
+All four pillars use consistent interaction patterns, navigation, and visual language — making IQ feel like one cohesive system, not four separate tools.`,
       subsections: [
         {
           title: 'IQ NLQ Workflow',
@@ -372,9 +374,11 @@ The final IQ experience breaks down into four interconnected pillars, each desig
 
 Designing IQ required balancing competing needs: technical depth vs. simplicity, multiple personas, and cross-functional alignment.
 
-I led alignment across multiple product teams, engineering, and QA: collaborated with PMs from HUB, Designer, and other feature teams (aligned on shared patterns, negotiated scope boundaries), validated technical feasibility with engineering (co-designed integration patterns, balanced user needs with platform architecture), and collaborated with QA on multi-persona test cases (provided UX rationale for dual-layer UX patterns).
+I led alignment across multiple product teams, engineering, and QA: collaborated with PMs from HUB, Designer, and other feature teams, validated technical feasibility with engineering, and collaborated with QA on multi-persona test cases.
 
-I addressed each challenge through progressive disclosure, iterative testing with both user types, and regular collaboration with PM, engineering, and QA. A lot of cross-functional collaboration was required with IQ — I collaborated with PMs from other feature teams like HUB and Designer because DSML reached everywhere. This wasn't just about designing within IQ; it was about ensuring IQ's patterns and integrations worked seamlessly across the entire WebFOCUS ecosystem.
+I addressed each challenge through progressive disclosure, iterative testing with both user types, and regular collaboration with PM, engineering, and QA.
+
+A lot of cross-functional collaboration was required with IQ — I collaborated with PMs from other feature teams like HUB and Designer because DSML reached everywhere. This wasn't just about designing within IQ; it was about ensuring IQ's patterns and integrations worked seamlessly across the entire WebFOCUS ecosystem.
 
 I onboarded the team onto the IQ vision and UX constraints through demos and documentation, ensuring consistency as the project evolved. The team could execute because they understood the "why" behind every decision, not just the "what."`,
       revealsTitle: 'What this reveals',
@@ -395,9 +399,15 @@ Internal usability tests highlighted how much easier it was to find and understa
 
 The learning curve dropped: new users needed fewer explanations to get started, and non-technical users were more willing to try features they previously avoided.
 
-IQ didn't just centralize DSML features — it changed how I think about designing advanced capabilities for real people. The project demonstrated that advanced capability doesn't have to mean advanced pain, and that thoughtful UX architecture can serve both technical experts and everyday business users. I learned that serving multiple distinct personas wasn't about compromise — it was about thoughtful layering, progressive disclosure, and consistent mental models.
+IQ didn't just centralize DSML features — it changed how I think about designing advanced capabilities for real people. The project demonstrated that advanced capability doesn't have to mean advanced pain, and that thoughtful UX architecture can serve both technical experts and everyday business users.
 
-IQ taught me to think in ecosystems, not just individual features. This wasn't about designing within IQ; it was about ensuring IQ's patterns and integrations worked seamlessly across the entire WebFOCUS ecosystem. I collaborated with PMs from HUB, Designer, and other feature teams because DSML reached everywhere. The patterns I developed (progressive disclosure, dual-layer UX, consistent interaction patterns) became foundational for the entire DSML experience. This work reinforced my ability to lead complex, multi-persona design initiatives that balance depth with accessibility.`,
+I learned that serving multiple distinct personas wasn't about compromise — it was about thoughtful layering, progressive disclosure, and consistent mental models.
+
+IQ taught me to think in ecosystems, not just individual features. This wasn't about designing within IQ; it was about ensuring IQ's patterns and integrations worked seamlessly across the entire WebFOCUS ecosystem.
+
+I collaborated with PMs from HUB, Designer, and other feature teams because DSML reached everywhere. The patterns I developed (progressive disclosure, dual-layer UX, consistent interaction patterns) became foundational for the entire DSML experience.
+
+This work reinforced my ability to lead complex, multi-persona design initiatives that balance depth with accessibility.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'I design for both power and approachability.',

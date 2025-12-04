@@ -56,6 +56,7 @@ export default function Button({
           rel={rel} 
           className={classes} 
           style={primaryStyle}
+          aria-label={typeof children === 'string' ? children : undefined}
         >
           {children}
         </Link>
@@ -70,6 +71,8 @@ export default function Button({
       style={primaryStyle}
       whileHover={buttonHover}
       whileTap={buttonTap}
+      aria-label={typeof children === 'string' ? children : undefined}
+      type="button"
     >
       {children}
     </motion.button>

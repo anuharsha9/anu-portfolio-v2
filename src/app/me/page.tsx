@@ -39,7 +39,7 @@ export default function AboutPage() {
 
     // Also listen to window resize
     window.addEventListener('resize', updateImageHeight)
-    
+
     return () => {
       resizeObserver.disconnect()
       window.removeEventListener('resize', updateImageHeight)
@@ -122,10 +122,10 @@ export default function AboutPage() {
                     width={400}
                     height={600}
                     className="object-contain"
-                    style={imageHeight ? { 
-                      maxHeight: `${imageHeight}px`, 
-                      width: 'auto', 
-                      height: 'auto', 
+                    style={imageHeight ? {
+                      maxHeight: `${imageHeight}px`,
+                      width: 'auto',
+                      height: 'auto',
                       display: 'block',
                       aspectRatio: 'auto'
                     } : {
@@ -173,108 +173,312 @@ export default function AboutPage() {
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
               <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
-                How I Design & Ship with AI
+                How I Work With AI
               </h2>
-              <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
-                AI-assisted, human-led. This portfolio demonstrates my ability to bridge design-to-implementation using AI.
+              <p className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif font-medium max-w-3xl mx-auto">
+                AI-Assisted, Human-Led, Design-Driven.
+              </p>
+              <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+                I don&apos;t treat AI as a shortcut — I treat it as a junior developer I manage. My job is architecture, direction, and quality control. AI&apos;s job is speed.
               </p>
             </div>
 
-            {/* Main Content Card */}
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-white/50 rounded-2xl p-6 md:p-8 lg:p-10 border border-black/10 space-y-8">
-                {/* Critical Distinction */}
-                <div className="space-y-4">
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif">
-                    The Distinction
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="bg-black/5 rounded-lg p-5 border border-black/10">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">At Work</span>
-                          <div className="h-px flex-1 bg-black/10"></div>
-                        </div>
-                        <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
-                          AI used for <strong className="text-[var(--text-primary-light)]">productivity</strong>: ticket writing, brainstorming, research, learning. <strong className="text-[var(--text-primary-light)]">NOT</strong> for shipping production code.
-                        </p>
-                      </div>
+            {/* Critical Distinction */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                  className="bg-black/5 rounded-2xl p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">At Work</span>
+                      <div className="h-px flex-1 bg-black/10"></div>
                     </div>
-                    <div className="bg-black/5 rounded-lg p-5 border border-black/10">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">Personal</span>
-                          <div className="h-px flex-1 bg-black/10"></div>
-                        </div>
-                        <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
-                          AI used for <strong className="text-[var(--text-primary-light)]">shipping code</strong>: This portfolio demonstrates production-ready code using AI-augmented workflows.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* How I Work */}
-                <div className="space-y-4">
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif">
-                    My Process
-                  </h3>
-                  <div className="space-y-4 text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
-                    <p>
-                      <strong className="text-[var(--text-primary-light)]">Design architecture, UX, flows</strong> — I lead these. Human-led design thinking, user research, and systems thinking.
-                    </p>
-                    <p>
-                      <strong className="text-[var(--text-primary-light)]">Code implementation</strong> — I use AI (Cursor, GPT, Gemini) to generate, refactor, and explain code for personal projects. Years of HTML/CSS foundation enable me to effectively direct AI and audit for accessibility, semantics, and layout issues.
-                    </p>
-                    <p>
-                      <strong className="text-[var(--text-primary-light)]">Debugging & learning</strong> — I use AI as a teacher for small JS interactions and React patterns. I maintain strong working knowledge of HTML/CSS, especially for UI layouts, responsive behavior, and debugging. Basic familiarity with JS/React; I leverage AI to implement and debug interaction logic.
-                    </p>
-                    <p>
-                      <strong className="text-[var(--text-primary-light)]">Deployment</strong> — I own the full stack: This portfolio is deployed on AWS S3 + CloudFront (CDN), built with Next.js, TypeScript, and Tailwind CSS.
+                    <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                      AI used for <strong className="text-[var(--text-primary-light)]">productivity</strong>: ticket writing, brainstorming, research, learning. <strong className="text-[var(--text-primary-light)]">NOT</strong> for shipping production code.
                     </p>
                   </div>
-                </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="bg-black/5 rounded-2xl p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">Personal</span>
+                      <div className="h-px flex-1 bg-black/10"></div>
+                    </div>
+                    <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                      AI used for <strong className="text-[var(--text-primary-light)]">shipping code</strong>: This portfolio demonstrates production-ready code using AI-augmented workflows.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
 
-                {/* Key Message */}
-                <div className="bg-[var(--accent-teal)]/5 rounded-lg p-6 border border-[var(--accent-teal)]/20">
-                  <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
-                    <strong>This portfolio demonstrates my ability to bridge design-to-implementation using AI.</strong> At work, I use AI for productivity and learning, while maintaining traditional design-to-engineering collaboration.
+            {/* Process Steps - Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {/* 01 - Design the System First */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.1 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">01</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Design the System First
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    Every project begins with clarity:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>Problem framing</li>
+                    <li>User flows</li>
+                    <li>Edge cases</li>
+                    <li>Systems diagrams</li>
+                    <li>UX strategy</li>
+                    <li>Interaction models</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    I think in structure: what the product should do, not just how it should look. Once the UX architecture is solid, I move into implementation.
                   </p>
                 </div>
+              </motion.div>
 
-                {/* GitHub Link */}
-                <div className="pt-4">
-                  <a
-                    href="https://github.com/anuharsha9/anu-portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors group"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    <span className="font-medium">View source code on GitHub</span>
-                    <svg
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
+              {/* 02 - Use AI to Generate Foundation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.2 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">02</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Use AI to Generate the Foundation (Cursor, GPT, Gemini)
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    I instruct AI to produce:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>HTML/CSS scaffolds</li>
+                    <li>React/JS components</li>
+                    <li>Layouts and animations</li>
+                    <li>Responsive behavior</li>
+                    <li>Reusable patterns</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    AI handles the boilerplate. I control the design intent and the architecture.
+                  </p>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* 03 - Audit, Debug, and Refine */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.3 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">03</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Audit, Debug, and Refine the Code Myself
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    This is where most &quot;AI-native designers&quot; stop — but this is where I begin. I manually:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>Fix DOM issues</li>
+                    <li>Rewrite structure for accessibility</li>
+                    <li>Correct semantic HTML</li>
+                    <li>Debug CSS specificity</li>
+                    <li>Patch layout inconsistencies</li>
+                    <li>Verify interactions</li>
+                    <li>Tune JS behavior (with AI assistance)</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    I don&apos;t push code I don&apos;t understand. If something breaks, I inspect it directly, then use AI to explain why and help me patch it.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* 04 - Learn Through Implementation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.4 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">04</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Learn Through Implementation (AI as a Teacher)
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    When I hit a front-end roadblock, I ask AI:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>&quot;Explain this JS snippet.&quot;</li>
+                    <li>&quot;Why is this event listener not firing?&quot;</li>
+                    <li>&quot;What does this React lifecycle part actually do?&quot;</li>
+                    <li>&quot;Show me three alternative approaches and their trade-offs.&quot;</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    This continuous loop makes me more technical with every project. I may not be a JS engineer, but I am absolutely front-end fluent.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* 05 - Ship Real, Production-Ready Experiences */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.5 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">05</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Ship Real, Production-Ready Experiences
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    I deploy everything on AWS S3 + CloudFront, managing:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>Hosting</li>
+                    <li>Caching</li>
+                    <li>CDN performance</li>
+                    <li>Versioning</li>
+                    <li>Static asset pipelines</li>
+                    <li>Cache invalidations</li>
+                    <li>Custom domain routing</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    This ensures the final product is fast, global, stable, and owned by me (no platform lock-in). I deliver the full path from design → code → deployment.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* 06 - Reduce Eng Dependency */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.6 }}
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">06</span>
+                    <div className="h-px flex-1 bg-black/10"></div>
+                    <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+                  </div>
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Reduce Eng Dependency Without Replacing Engineers
+                  </h3>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
+                    My goal isn&apos;t to &quot;become&quot; a front-end engineer. My goal is to:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
+                    <li>remove the design-to-dev translation gap</li>
+                    <li>move prototypes into real code faster</li>
+                    <li>reduce dependency on engineering for simple UI</li>
+                    <li>free engineers to focus on high-complexity backend work</li>
+                  </ul>
+                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
+                    AI expands my reach — it doesn&apos;t blur my discipline.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Philosophy & Key Message - Combined */}
+            <div className="max-w-3xl mx-auto mt-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.7 }}
+                className="bg-[var(--accent-teal)]/5 rounded-2xl p-6 md:p-8 border border-[var(--accent-teal)]/20 space-y-4 text-center"
+              >
+                <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif">
+                  My Philosophy
+                </h3>
+                <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
+                  <strong>This portfolio demonstrates my ability to bridge design-to-implementation using AI.</strong> AI accelerates me, but it doesn&apos;t replace the fundamentals. I lead the product, I direct the implementation, and I verify every detail myself.
+                </p>
+                <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed font-medium">
+                  AI is my superpower — but design is still the driver.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* GitHub Link */}
+            <div className="text-center pt-8">
+              <a
+                href="https://github.com/anuharsha9/anu-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors group"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                <span className="font-medium">View source code on GitHub</span>
+                <svg
+                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -303,31 +507,19 @@ export default function AboutPage() {
             </div>
 
             {/* Key Traits Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
                   title: 'Builder',
                   description: 'If nobody\'s doing it, I\'ll do it. I learn what I need to learn and execute—bridging gaps between design, engineering, and product.',
                 },
                 {
-                  title: 'Systems Thinker + Creative',
-                  description: 'I decompose chaos and architect flows, while also designing, animating, and writing. Both sides of the brain in one person.',
-                },
-                {
                   title: 'High-Output Operator',
-                  description: 'I operate at top velocity. Built this portfolio in less than two weeks using an AI-augmented workflow (personal project), redesigned 3 enterprise systems end-to-end alone. My work is live in production—shipped, deployed, and impacting millions of users.',
+                  description: 'I operate at top velocity. Redesigned 3 enterprise systems end-to-end alone. My work is live in production—shipped, deployed, and impacting millions of users.',
                 },
                 {
                   title: 'Leader Without Title',
                   description: 'I take initiative before being asked. I onboard teams, align engineers, and make decisions when others freeze. Took full ownership of a 40-year-old system one week into joining. Bold, fearless, and Principal-level impact without the title.',
-                },
-                {
-                  title: 'Multi-Disciplinary',
-                  description: 'I blend UX, product thinking, data science, engineering logic, animation, and branding. Usually 3–5 people—I do all of it.',
-                },
-                {
-                  title: 'Survivor With Vision',
-                  description: 'I navigate complexity and uncertainty while building for the future. I convert challenges into forward motion and maintain momentum under pressure.',
                 },
               ].map((trait, index) => (
                 <motion.div
@@ -429,7 +621,7 @@ export default function AboutPage() {
                       The secret behind better BI: Who&apos;s your business user?
                     </h3>
                     <p className="text-[#666666] text-sm md:text-base leading-relaxed">
-                      Exploring how understanding your actual business users—not just your technical users—transforms how you design enterprise BI experiences. 
+                      Exploring how understanding your actual business users—not just your technical users—transforms how you design enterprise BI experiences.
                       This article dives into user personas, workflows, and the gap between what users need and what we assume they need.
                     </p>
                     <div className="pt-2">
@@ -489,8 +681,8 @@ export default function AboutPage() {
                       Enhancing user experience in WebFOCUS DSML
                     </h3>
                     <p className="text-[#666666] text-sm md:text-base leading-relaxed">
-                      A deep dive into making data science and machine learning accessible in enterprise tools. 
-                      This piece covers the design challenges of DSML, how to balance power with simplicity, and the UX principles that guide 
+                      A deep dive into making data science and machine learning accessible in enterprise tools.
+                      This piece covers the design challenges of DSML, how to balance power with simplicity, and the UX principles that guide
                       making advanced capabilities approachable for non-technical users.
                     </p>
                     <div className="pt-2">
@@ -522,7 +714,7 @@ export default function AboutPage() {
                 href="https://medium.com/@anu.anuja"
                 target="_blank"
                 rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-[var(--accent-teal)] text-[var(--accent-teal)] font-medium hover:bg-[var(--accent-teal)] hover:text-white transition-all duration-300 group"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-[var(--accent-teal)] text-[var(--accent-teal)] font-medium hover:bg-[var(--accent-teal)] hover:text-white transition-all duration-300 group"
               >
                 <span>View all articles on Medium</span>
                 <svg
@@ -648,40 +840,103 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* TECH STACK FOOTER */}
-      <MotionSection className="surface-light py-8 md:py-12 border-t border-black/5">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-          <div className="text-center space-y-4">
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[var(--text-muted-light)] text-sm md:text-base">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-[var(--text-primary-light)]">Built with:</span>
-                <span>HTML, CSS, JS, Next.js, Cursor (AI coding agent), GitHub</span>
+      {/* TECH STACK - Prominent Visual Breakdown */}
+      <MotionSection className="surface-light py-12 md:py-16 border-t border-black/5">
+        <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            {/* Header */}
+            <div className="text-center space-y-2">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="h-px flex-1 bg-black/10 max-w-md"></div>
+                <h2 className="text-[var(--text-primary-light)] text-2xl md:text-3xl font-serif">
+                  Tech Stack
+                </h2>
+                <div className="h-px flex-1 bg-black/10 max-w-md"></div>
+                <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
               </div>
-              <span className="text-black/20">·</span>
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-[var(--text-primary-light)]">Deployed on:</span>
-                <span>AWS S3 + CloudFront (CDN)</span>
-              </div>
+              <p className="text-[var(--text-muted-light)] text-sm md:text-base">
+                This portfolio demonstrates production-ready code using AI-augmented workflows
+              </p>
             </div>
-            <div className="pt-2">
+
+            {/* Tech Stack Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {/* Built With */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="bg-white rounded-lg p-6 md:p-8 border border-black/10 shadow-sm hover:shadow-md hover:border-[var(--accent-teal)]/30 transition-all duration-300"
+              >
+                <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif font-semibold mb-4">
+                  Built With
+                </h3>
+                <div className="space-y-3">
+                  {['HTML', 'CSS', 'JavaScript', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech) => (
+                    <div key={tech} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
+                      <span className="text-[var(--text-primary-light)] text-sm md:text-base">{tech}</span>
+                    </div>
+                  ))}
+                  <div className="flex items-center gap-3 pt-2 border-t border-black/10">
+                    <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
+                    <span className="text-[var(--text-primary-light)] text-sm md:text-base">
+                      Cursor (AI coding agent)
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Deployed On */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-white rounded-lg p-6 md:p-8 border border-black/10 shadow-sm hover:shadow-md hover:border-[var(--accent-teal)]/30 transition-all duration-300"
+              >
+                <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif font-semibold mb-4">
+                  Deployed On
+                </h3>
+                <div className="space-y-3">
+                  {['AWS S3', 'CloudFront (CDN)', 'Static Export', 'Custom Domain'].map((tech) => (
+                    <div key={tech} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
+                      <span className="text-[var(--text-primary-light)] text-sm md:text-base">{tech}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* GitHub Link - Centered */}
+            <div className="text-center pt-4">
               <a
                 href="https://github.com/anuharsha9/anu-portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)]/10 border border-[var(--accent-teal)]/30 text-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/20 hover:border-[var(--accent-teal)]/50 transition-all duration-300 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+                aria-label="View source code on GitHub"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
-                <span>View source code</span>
+                <span>View source code on GitHub</span>
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </MotionSection>
 

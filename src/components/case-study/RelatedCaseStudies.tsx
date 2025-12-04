@@ -17,14 +17,25 @@ export default function RelatedCaseStudies({ currentSlug, className = '' }: Rela
     <section className={`${className} surface-dark-alt py-16 md:py-24`} aria-labelledby="related-case-studies-heading">
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
         <h2 id="related-case-studies-heading" className="text-xl md:text-2xl font-serif text-white mb-12 md:mb-16">
-          Related Case Studies
+          You might also like
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
           {related.map((study) => (
             <Link
               key={study.slug}
               href={`/work/${study.slug}`}
-              className="group bg-white/5 rounded-lg border border-refined-dark p-6 md:p-8 hover-lift transition-all duration-normal hover:border-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+              className="group bg-white/5 rounded-lg border border-refined-dark p-6 md:p-8 transition-all duration-300 hover:border-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+              style={{
+                transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px) scale(1.01)'
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(13, 148, 136, 0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
             >
               <div className="space-y-3">
                 <h3 className="text-base md:text-lg font-serif text-white group-hover:text-[var(--accent-teal)] transition-colors">

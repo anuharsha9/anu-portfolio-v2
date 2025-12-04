@@ -58,11 +58,11 @@ export default function WebFOCUSInitiativeRow({
       window.addEventListener('storage', handleUnlock)
       window.addEventListener('portfolio-unlocked', handleUnlock)
 
-      // Poll for changes (in case unlocked in same tab)
+      // Poll less frequently for better performance (reduced from 500ms to 2000ms)
       const interval = setInterval(() => {
         const unlocked = sessionStorage.getItem(storageKey) === 'true'
         setIsUnlocked(unlocked)
-      }, 500)
+      }, 2000)
 
       return () => {
         window.removeEventListener('storage', handleUnlock)

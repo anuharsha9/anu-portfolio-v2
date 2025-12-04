@@ -115,28 +115,31 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel - Full Screen Overlay */}
             <motion.div
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[var(--bg-dark)] border-l border-refined-dark lg:hidden flex flex-col"
+              className="fixed inset-0 bg-[var(--bg-dark)] lg:hidden flex flex-col"
               style={{
                 height: '100vh',
                 maxHeight: '100vh',
                 zIndex: 9999,
                 position: 'fixed',
                 top: 0,
+                left: 0,
                 right: 0,
+                bottom: 0,
                 isolation: 'isolate'
               }}
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header */}
-              <div className="p-6 border-b border-refined-dark flex-shrink-0">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-8 h-8">
+              {/* Header - Centered */}
+              <div className="p-8 border-b border-refined-dark flex-shrink-0 text-center">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex-1"></div>
+                  <div className="w-12 h-12 mx-auto">
                     <AnimatedSignatureLogo
                       className="w-full h-full text-white"
                       duration={16000}
@@ -145,7 +148,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+                    className="w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     aria-label="Close menu"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,17 +159,18 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                 <Link
                   href="/"
                   onClick={() => setIsOpen(false)}
-                  className="text-white text-lg font-medium hover:text-[var(--accent-teal)] transition-colors"
+                  className="text-white text-xl font-serif font-medium hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Anuja Harsha Nimmagadda
                 </Link>
+                <p className="text-white/60 text-sm mt-2">Principal UX Designer</p>
               </div>
 
               {/* Navigation Links - Scrollable */}
-              <nav className="flex-1 overflow-y-auto overflow-x-hidden p-6 space-y-1" style={{ minHeight: 0 }}>
+              <nav className="flex-1 overflow-y-auto overflow-x-hidden p-8 space-y-2" style={{ minHeight: 0 }} aria-label="Main navigation">
                 {/* Main Navigation */}
-                <div className="mb-6">
-                  <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
+                <div className="mb-8">
+                  <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
                     Navigation
                   </p>
                   {mainNavLinks.map((link) => (
@@ -174,7 +178,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="block px-4 py-3 rounded-lg text-white hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
+                      className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                     >
                       {link.label}
                     </Link>
@@ -183,16 +187,17 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                     href="/assets/Anuja-Nimmagadda-2025.pdf"
                     download="Anuja-Nimmagadda-Resume-2025.pdf"
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-3 rounded-lg text-white hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
+                    className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border-2 border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 mt-4"
+                    aria-label="Download Resume"
                   >
-                    Resume
+                    Download Resume
                   </a>
                 </div>
 
                 {/* Landing Page Sections */}
                 {isOnLandingPage && (
                   <div>
-                    <p className="text-white/40 text-xs uppercase tracking-wider mb-3 px-2">
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
                       Sections
                     </p>
                     {landingPageSections.map((section) => (
@@ -200,7 +205,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                         key={section.href}
                         href={section.href}
                         onClick={() => setIsOpen(false)}
-                        className="block px-4 py-3 rounded-lg text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors"
+                        className="block px-6 py-3 rounded-lg text-white/80 text-base hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                       >
                         {section.label}
                       </Link>

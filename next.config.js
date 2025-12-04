@@ -7,7 +7,13 @@ const nextConfig = {
     domains: [],
   },
   trailingSlash: true, // Helps with S3 routing
-  webpack(config) {
+  // Performance optimizations
+  compress: true, // Enable gzip compression
+  poweredByHeader: false, // Remove X-Powered-By header
+  // Optimize production builds
+  swcMinify: true, // Use SWC minifier (faster than Terser)
+  webpack(config, { isServer, dev }) {
+    // SVG optimization
     config.module.rules.push({
       test: /\.svg$/,
       use: [
@@ -40,6 +46,44 @@ const nextConfig = {
         },
       ],
     })
+
+    // Production optimizations
+    if (!dev && !isServer) {
+      // Optimize bundle splitting
+      config.optimization = {
+        ...config.optimization,
+        moduleIds: 'deterministic',
+        runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            // Separate vendor chunks
+            framerMotion: {
+              name: 'framer-motion',
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              priority: 20,
+              reuseExistingChunk: true,
+            },
+            react: {
+              name: 'react',
+              test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+            // Common chunks
+            common: {
+              name: 'common',
+              minChunks: 2,
+              priority: 10,
+              reuseExistingChunk: true,
+            },
+          },
+        },
+      }
+    }
+
     return config
   },
 }

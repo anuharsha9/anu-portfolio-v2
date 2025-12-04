@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface LockedContentProps {
   children: React.ReactNode
-  isUnlocked: boolean
+  isUnlocked?: boolean // Optional - if not provided, checks sessionStorage
   onUnlock?: () => void
   password?: string
   caseStudySlug?: string
@@ -22,6 +22,9 @@ export default function LockedContent({
   unlockMessage = 'Password required to view sensitive content',
   isLightBackground = false,
 }: LockedContentProps) {
+  // If propIsUnlocked is explicitly false, always lock (ignore sessionStorage)
+  // If propIsUnlocked is undefined, check sessionStorage
+  // If propIsUnlocked is true, always unlock
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [inputPassword, setInputPassword] = useState('')
   const [error, setError] = useState('')
@@ -29,26 +32,34 @@ export default function LockedContent({
   const [isUnlocked, setIsUnlocked] = useState(false)
 
   // If propIsUnlocked is explicitly false, always lock (ignore sessionStorage)
-  // Otherwise, check sessionStorage for unlock status
+  // If propIsUnlocked is undefined, check sessionStorage
+  // If propIsUnlocked is true, always unlock
   useEffect(() => {
     if (propIsUnlocked === false) {
       setIsUnlocked(false)
       return
     }
 
+    // If explicitly true, always unlock
+    if (propIsUnlocked === true) {
+      setIsUnlocked(true)
+      return
+    }
+
+    // Otherwise (undefined), check sessionStorage
     const checkUnlockStatus = () => {
       if (typeof window === 'undefined') return
 
       const storageKey = `case-study-unlocked-${caseStudySlug}`
       const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-      
+
       // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
       if (caseStudySlug === 'iq-plugin') {
-        setIsUnlocked(caseUnlocked || propIsUnlocked)
+        setIsUnlocked(caseUnlocked)
       } else {
         // Other case studies respect both global and case-specific unlock
         const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-        setIsUnlocked(globalUnlocked || caseUnlocked || propIsUnlocked)
+        setIsUnlocked(globalUnlocked || caseUnlocked)
       }
     }
 
@@ -70,8 +81,9 @@ export default function LockedContent({
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('portfolio-unlocked', handleUnlockEvent)
 
-    // Also poll periodically to catch same-tab unlocks
-    const interval = setInterval(checkUnlockStatus, 500)
+    // Poll less frequently for better performance (reduced from 500ms to 2000ms)
+    // Storage events handle cross-tab changes, polling is just a fallback
+    const interval = setInterval(checkUnlockStatus, 2000)
 
     return () => {
       window.removeEventListener('storage', handleStorageChange)
@@ -92,15 +104,15 @@ export default function LockedContent({
 
     const trimmedPassword = inputPassword.trim().toLowerCase()
     const correctPassword = password.toLowerCase()
-    
+
     if (trimmedPassword === correctPassword) {
       setError('')
       setSuccess(true)
-      
+
       // Set sessionStorage
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
-        
+
         // IQ Plugin only sets its own unlock (doesn't set global unlock)
         if (caseStudySlug === 'iq-plugin') {
           sessionStorage.setItem(storageKey, 'true')
@@ -112,7 +124,7 @@ export default function LockedContent({
           window.dispatchEvent(new CustomEvent('portfolio-unlocked'))
         }
       }
-      
+
       // Wait a moment to show success, then unlock
       setTimeout(() => {
         setIsUnlocked(true)
@@ -143,13 +155,13 @@ export default function LockedContent({
   return (
     <>
       <div className="relative">
-        {/* Blurred Content */}
-        <div className="blur-md pointer-events-none select-none" style={{ filter: 'blur(20px)' }}>
+        {/* Blurred Content - 70% blur (strong blur with some visibility) */}
+        <div className="pointer-events-none select-none" style={{ filter: 'blur(25px)', opacity: 0.3 }}>
           {children}
         </div>
-        
+
         {/* Lock Overlay */}
-        <div className={`absolute inset-0 ${bgColor} backdrop-blur-md flex flex-col items-center justify-center p-8 rounded-lg border-2 ${borderColor}`}>
+        <div className={`absolute inset-0 ${bgColor} backdrop-blur-sm flex flex-col items-center justify-center p-8 rounded-lg border-2 ${borderColor}`}>
           <div className="text-center space-y-4 max-w-md">
             {/* Lock Icon */}
             <div className="flex justify-center">
@@ -168,7 +180,7 @@ export default function LockedContent({
                 />
               </svg>
             </div>
-            
+
             <div className="space-y-2">
               <p className={`${textColor} font-semibold text-lg ${isLightBackground ? 'drop-shadow-sm' : ''}`}>
                 {unlockMessage}
@@ -177,7 +189,7 @@ export default function LockedContent({
                 This content contains company-specific information and requires password access.
               </p>
             </div>
-            
+
             <button
               onClick={() => setShowPasswordModal(true)}
               className={`${isLightBackground ? 'bg-[#1A1A1A] text-white hover:bg-[#333333]' : 'bg-white text-[#1A1A1A] hover:bg-white/90'} px-6 py-3 rounded-lg font-medium transition-colors`}
@@ -200,7 +212,7 @@ export default function LockedContent({
               onClick={() => setShowPasswordModal(false)}
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             />
-            
+
             {/* Modal */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -217,7 +229,7 @@ export default function LockedContent({
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              
+
               <div className="space-y-6">
                 <div className="text-center space-y-2">
                   <h3 className={`${textColor} text-2xl font-serif`}>Unlock Content</h3>
@@ -230,7 +242,7 @@ export default function LockedContent({
                     </p>
                   )}
                 </div>
-                
+
                 <form onSubmit={handleUnlock} className="space-y-4">
                   <div>
                     <input
@@ -277,15 +289,14 @@ export default function LockedContent({
                       </motion.p>
                     )}
                   </div>
-                  
+
                   <button
                     type="submit"
                     disabled={success}
-                    className={`w-full text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-75 disabled:cursor-not-allowed ${
-                      success 
-                        ? 'bg-green-500 hover:bg-green-600' 
-                        : 'bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/90'
-                    }`}
+                    className={`w-full text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-75 disabled:cursor-not-allowed ${success
+                      ? 'bg-green-500 hover:bg-green-600'
+                      : 'bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/90'
+                      }`}
                   >
                     {success ? 'Unlocking...' : 'Unlock Content'}
                   </button>

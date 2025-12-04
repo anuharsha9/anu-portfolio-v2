@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import ImageLightbox from './ImageLightbox'
 
 interface VersionData {
   id: string
@@ -32,7 +33,8 @@ interface VersionIterationProps {
   isLightBackground?: boolean
 }
 
-export default function VersionIteration({ v1, v2, v3, isLightBackground = false }: VersionIterationProps) {
+export default function VersionIteration({ v1, v2, v3, isLightBackground = true }: VersionIterationProps) {
+  // Force light background for case studies
   const [activeVersion, setActiveVersion] = useState<'v1' | 'v2' | 'v3'>('v1')
   // Start with all subsections collapsed by default
   const [collapsedSubsections, setCollapsedSubsections] = useState<Set<number>>(() => {
@@ -42,10 +44,40 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
     }
     return new Set()
   })
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
-  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
+  // Lightbox state
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption?: string } | null>(null)
+  const [lightboxImages, setLightboxImages] = useState<Array<{ src: string; alt: string; caption?: string }>>([])
+  const [lightboxCurrentIndex, setLightboxCurrentIndex] = useState(0)
+
+  const openLightbox = (src: string, alt: string, caption?: string, images?: Array<{ src: string; alt: string; caption?: string }>, index?: number) => {
+    setLightboxImage({ src, alt, caption })
+    if (images && index !== undefined) {
+      setLightboxImages(images)
+      setLightboxCurrentIndex(index)
+    } else {
+      setLightboxImages([])
+      setLightboxCurrentIndex(0)
+    }
+  }
+
+  const closeLightbox = () => {
+    setLightboxImage(null)
+    setLightboxImages([])
+    setLightboxCurrentIndex(0)
+  }
+
+  const handleLightboxNavigate = (index: number) => {
+    if (lightboxImages[index]) {
+      const img = lightboxImages[index]
+      setLightboxImage({ src: img.src, alt: img.alt, caption: img.caption })
+      setLightboxCurrentIndex(index)
+    }
+  }
+  // Force light theme
+  const textColor = 'text-[#1A1A1A]'
+  const mutedColor = 'text-[#666666]'
+  const borderColor = 'border-black/10'
+  const bgColor = 'bg-white'
   const accentColor = 'var(--accent-teal)'
   
   // Image styling to match SectionBlock polish
@@ -122,7 +154,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
 
       {/* Tabs Navigation */}
       <div className={`border-b ${borderColor}`}>
-        <div className="flex flex-wrap gap-2 md:gap-0">
+        <div className="flex flex-wrap gap-2 md:gap-0 justify-center">
           {versions.map((version) => {
             const isActive = activeVersion === version.id
             const tabLabel = version.id === 'v1' 
@@ -208,6 +240,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
                        {activeSection.images.map((image, idx) => (
                          <div key={idx} className="space-y-3 cursor-pointer group">
                            <div 
+                             onClick={() => openLightbox(image.src, image.alt, image.caption, activeSection.images?.map(img => ({ src: img.src, alt: img.alt, caption: img.caption })), idx)}
                              className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg ${isLightBackground ? 'bg-black/5' : 'bg-white/5'}`}
                            >
                              <Image
@@ -293,6 +326,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
                               {subsection.images.map((image, imgIdx) => (
                                 <div key={imgIdx} className="space-y-3 cursor-pointer group">
                                   <div 
+                                    onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.map(img => ({ src: img.src, alt: img.alt, caption: img.caption })), imgIdx)}
                                     className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg ${isLightBackground ? 'bg-black/5' : 'bg-white/5'}`}
                                   >
                                     <Image
@@ -319,6 +353,20 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = false
             )}
           </div>
         </div>
+      )}
+
+      {/* Image Lightbox */}
+      {lightboxImage && (
+        <ImageLightbox
+          isOpen={!!lightboxImage}
+          onClose={closeLightbox}
+          imageSrc={lightboxImage.src}
+          imageAlt={lightboxImage.alt}
+          imageCaption={lightboxImage.caption}
+          images={lightboxImages.length > 0 ? lightboxImages : undefined}
+          currentIndex={lightboxCurrentIndex}
+          onNavigate={lightboxImages.length > 0 ? handleLightboxNavigate : undefined}
+        />
       )}
     </div>
   )

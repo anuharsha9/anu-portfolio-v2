@@ -100,7 +100,12 @@ export default function ExecutiveSummary() {
                     delay: index * 0.08,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group space-y-3 p-5 md:p-6 rounded-lg border border-refined-light bg-white/50 hover:bg-white/70 hover-lift transition-all duration-normal"
+                  className="group space-y-3 p-5 md:p-6 rounded-lg border border-refined-light bg-white/50 hover:bg-white/70 cursor-pointer hover:shadow-lg hover:border-[var(--accent-teal)]/30"
+                  whileHover={{ 
+                    y: -4, 
+                    scale: 1.01
+                  }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   {/* Title with Drop Cap */}
                   <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif font-medium leading-snug flex items-baseline relative">

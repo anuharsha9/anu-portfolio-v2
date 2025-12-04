@@ -96,15 +96,17 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
   const getCaseStudySchema = () => {
     if (!data) return null
 
+    // Enhanced schema with Project type for better SEO
     return {
       '@context': 'https://schema.org',
-      '@type': 'Article',
+      '@type': ['Article', 'CreativeWork'],
       headline: data.heroTitle,
       description: data.heroSubtitle || data.heroSubheading,
       author: {
         '@type': 'Person',
         name: 'Anuja Harsha Nimmagadda',
         url: siteUrl,
+        jobTitle: 'Principal UX Designer',
       },
       publisher: {
         '@type': 'Organization',
@@ -129,6 +131,13 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         name: data.scope?.join(', ') || 'UX Design',
       },
       keywords: data.scope?.join(', ') || 'UX Design, Enterprise Design',
+      // Additional Project schema properties
+      projectType: 'Case Study',
+      workExample: {
+        '@type': 'CreativeWork',
+        name: data.heroTitle,
+        description: data.heroSubtitle || data.heroSubheading,
+      },
     }
   }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -38,6 +38,35 @@ export default function ImageLightbox({
   const hasNavigation = images && images.length > 1 && onNavigate
   const canGoPrev = hasNavigation && currentIndex > 0
   const canGoNext = hasNavigation && currentIndex < images.length - 1
+
+  // Handle touch gestures for mobile
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd || !hasNavigation) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+
+    if (isLeftSwipe && canGoNext && onNavigate) {
+      onNavigate(currentIndex + 1)
+    }
+    if (isRightSwipe && canGoPrev && onNavigate) {
+      onNavigate(currentIndex - 1)
+    }
+  }
 
   // Handle keyboard navigation and prevent scrolling
   useEffect(() => {
@@ -184,8 +213,14 @@ export default function ImageLightbox({
                 </button>
               )}
 
-              {/* Image Container */}
-              <div className="relative w-full flex-shrink-0 bg-black/20 rounded-lg overflow-hidden" style={{ maxHeight: 'calc(85vh - 120px)' }}>
+              {/* Image Container - Touch Gesture Support */}
+              <div 
+                className="relative w-full flex-shrink-0 bg-black/20 rounded-lg overflow-hidden" 
+                style={{ maxHeight: 'calc(85vh - 120px)' }}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+              >
                 <div className="relative w-full" style={{ aspectRatio: 'auto', minHeight: '300px', maxHeight: 'calc(85vh - 120px)' }}>
                   <Image
                     id="lightbox-image"

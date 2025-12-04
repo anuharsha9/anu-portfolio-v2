@@ -130,13 +130,17 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       methodologies: ['Self-Directed Learning', 'Domain Expert Collaboration', 'Competitive Analysis'],
       body: `The mandate was clear: make predictive modeling usable, understandable, and trustworthy — for analysts and everyday business users.
 
-ML tools in the BI market were powerful but inaccessible to non-technical users. Existing predictive workflows required external tools, coding, or specialized knowledge. WebFOCUS needed a native, guided, user-friendly predictive layer that fit naturally into its ecosystem.
+ML tools in the BI market were powerful but inaccessible to non-technical users. Existing predictive workflows required external tools, coding, or specialized knowledge.
+
+WebFOCUS needed a native, guided, user-friendly predictive layer that fit naturally into its ecosystem.
 
 I said yes to owning the end-to-end UX — from ambiguity to production-ready flows (launching in 2026).
 
-I had no ML background, but that became a strength. I learned ML fast enough to design it responsibly through competitive analysis, online courses, constant questions to our domain expert, and AI tools to fill knowledge gaps. I studied how Power BI, Tableau, and Qlik Sense handled ML workflows — identifying what worked, what failed, and where we could differentiate.
+I had no ML background, but that became a strength. I learned ML fast enough to design it responsibly through competitive analysis, online courses, constant questions to our domain expert, and AI tools to fill knowledge gaps.
 
-This practical learning approach meant I could translate between data scientists and users. I became the bridge between technical complexity and human understanding, applying that learning directly to design decisions. I designed with incomplete knowledge but high responsibility, using practical learning to make Principal-level decisions.`,
+This practical learning approach meant I could translate between data scientists and users. I became the bridge between technical complexity and human understanding, applying that learning directly to design decisions.
+
+I designed with incomplete knowledge but high responsibility, using practical learning to make Principal-level decisions.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         "I don't wait for expertise — I build it while designing, even when starting from zero knowledge",
@@ -169,13 +173,15 @@ This practical learning approach meant I could translate between data scientists
       id: 'section-02',
       index: 'E',
       title: 'Empathize with the Ecosystem: Understanding Users and Workflows',
-      summary: 'Documented the fragmented 4+ step ML workflow, identified pain points, and designed a structured 4-step guided flow that reduced clicks from 12+ to 7-9.',
+      summary: 'Documented the fragmented 4+ step ML workflow, identified pain points, and mapped user journeys to understand how different personas interacted with ML capabilities.',
       methodologies: ['Workflow Mapping', 'User Journey Analysis', 'Usability Testing', 'Iterative Prototyping'],
       body: `I designed for the entire ML ecosystem: data scientists who needed technical depth, business users who needed simplicity, and analysts who needed both. I translated between domain expertise and non-technical users' need for clarity, becoming the bridge that made ML accessible.
 
-The existing ML experience was opaque. I documented every workflow step, every user decision point, and every place where users got stuck. This mapping became the foundation for the redesign.
+The existing ML experience was opaque. I documented every workflow step, every user decision point, and every place where users got stuck.
 
-Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, a new user trying to adopt ML for the first time has almost no chance. That realization directly pushed me toward inventing a guided, step-based workflow.`,
+Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, a new user trying to adopt ML for the first time has almost no chance.
+
+That realization directly pushed me toward inventing a guided, step-based workflow.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Reverse-engineer systems → translate technical to user language',
@@ -226,9 +232,7 @@ Even after I understood it, I found it frustrating and unintuitive. If a designe
       methodologies: ['Workflow Mapping', 'User Journey Analysis', 'Usability Testing', 'Iterative Prototyping'],
       body: `The mapping revealed the problems, but solving them required multiple iterations. Three critical pivots shaped the final design.
 
-Breakthrough: structured guided flow based on what a model needs to train responsibly. Our domain expert's answer to "What do you absolutely need?" → problem type, target, predictors, hyperparameters. That became the UX spine.
-
-Replaced fragmented flow with honest, linear workflow. The new guided workflow: structured step-by-step flow, right-click entry, clear error handling, reduced from 12+ clicks to 7-9 clicks.`,
+Breakthrough: structured guided flow based on what a model needs to train responsibly. Our domain expert's answer to "What do you absolutely need?" → problem type, target, predictors, hyperparameters. That became the UX spine.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Reverse-engineer systems → translate technical to user language',
@@ -254,7 +258,7 @@ Replaced fragmented flow with honest, linear workflow. The new guided workflow: 
       id: 'section-04',
       index: 'I',
       title: 'Iterate with Inclusion: Balancing Control with Simplicity',
-      body: `After mapping the existing workflow and understanding the problems (Section 02), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
+      body: `After mapping the existing workflow and understanding the problems (Section 02), and designing the structured guided flow (Section 03), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
 
 I worked with Product to co-define scope, with Engineering to validate feasibility, with Data Scientists to validate ML logic, and with SMEs to exercise flows. Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation. The confusion matrix screen alone went through 10+ iterations as we aligned on layout, order of tabs, and what users should see first after training. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."`,
       revealsTitle: 'What this reveals',
@@ -322,17 +326,13 @@ I worked with Product to co-define scope, with Engineering to validate feasibili
         },
         {
           title: 'Prototyping and Testing',
-          description: `I prototyped the structured guided flow and conducted usability testing with both technical and non-technical users. I refined guided experiences based on feedback, ensuring the patterns I developed (structured guided flows, progressive disclosure) could scale to future ML features.
-
-The biggest design challenge: how much control to expose? Too much = intimidating. Too little = limiting for experts.
+          description: `The biggest design challenge: how much control to expose? Too much = intimidating. Too little = limiting for experts.
 
 Solution: Layered disclosure serving multiple user types. Worked with data scientists to identify what to show, hide, or make optional. Result: simple for beginners, powerful for experts.
 
-I worked through 10+ iterations on confusion matrix and results screens with our domain expert, balancing technical accuracy with UX clarity. Weekly "UX + ML" meetings ensured technical accuracy met user understanding. The confusion matrix screen alone went through 10+ iterations as we aligned on layout, order of tabs, and what users should see first after training. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."
+I worked through 10+ iterations on confusion matrix and results screens with our domain expert, balancing technical accuracy with UX clarity. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."
 
-We surface edge cases early in plain language. SME testing: zero "I don't know what to do" moments. Invalid inputs? Users knew exactly what to change.
-
-Locked Steps 1-2 (problem type, target) in Optimize flow — changing these creates a new model. Kept Steps 3-4 editable so users can adjust predictors/hyperparameters while preserving modeling intent.`,
+We surface edge cases early in plain language. SME testing: zero "I don't know what to do" moments. Invalid inputs? Users knew exactly what to change.`,
         },
         {
           title: 'Component Design',
@@ -423,13 +423,17 @@ Locked Steps 1-2 (problem type, target) in Optimize flow — changing these crea
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Aligning and Leading the Team',
-      body: `After mapping the existing workflow and understanding the problems (Section 02), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
+      body: `After prototyping and testing the structured guided flow (Section 04), I needed to align the team and ensure technical feasibility. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
 
-I led alignment across product, engineering, data science, and QA: co-defined scope with product (pushed back on scope creep, advocated for phased releases), validated feasibility with engineering (translated UX requirements into technical specs, balanced user needs with constraints), validated ML logic with data scientists (10+ iterations on confusion matrix, balanced technical accuracy with scannable UX), and collaborated with QA on test cases (provided UX rationale for error states, eliminated dead-end errors).
+I led alignment across product, engineering, data science, and QA: co-defined scope with product, validated feasibility with engineering, validated ML logic with data scientists, and collaborated with QA on test cases.
 
-Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation.
+Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews.
 
-I was also redesigning ReportCaster simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second. I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish). The team could execute because they understood the "why" behind every decision, not just the "what."`,
+With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation.
+
+I was also redesigning ReportCaster simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second.
+
+I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish). The team could execute because they understood the "why" behind every decision, not just the "what."`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'I lead cross-functional teams through complex technical projects over 6–8 month timelines, managing constraints and juggling multiple projects',
@@ -450,13 +454,13 @@ I was also redesigning ReportCaster simultaneously while having a 1 year old at 
       title: 'Navigate Forward: Impact, Validation, and Reflection',
       body: `Validation from SME tests and org-wide demos: transformed intimidating, error-prone flow into understandable, navigable experience.
 
-All 5 SMEs found Predict Data via right-click without help. New workflow: 7-9 clicks (down from 12+). Zero "I don't know what to do" dead-ends.
-
 Internal demos (150-200 people) received strong leadership support. First time ML in WebFOCUS felt demo-ready — understandable and teachable, not just technically correct.
 
 The patterns developed here (structured guided flows, inline teaching, right-click entry) directly shaped IQ Plugin.
 
-This project taught me that you don't need to become a domain expert to design responsibly. You need to learn fast enough to translate between domain expertise and user needs, then make principled decisions about what to expose and what to hide. I started as an "outsider" learning ML, and became a trusted design leader making Principal-level decisions. That transformation — learning while designing, translating complexity into clarity — became a core part of how I approach technical design challenges.`,
+This project taught me that you don't need to become a domain expert to design responsibly. You need to learn fast enough to translate between domain expertise and user needs, then make principled decisions about what to expose and what to hide.
+
+I started as an "outsider" learning ML, and became a trusted design leader making Principal-level decisions. That transformation — learning while designing, translating complexity into clarity — became a core part of how I approach technical design challenges.`,
       beforeAfter: {
         before: {
           src: '/images/case-study/ml-functions/Legacy Train Model Resuls UI.png',
@@ -512,6 +516,7 @@ This project taught me that you don't need to become a domain expert to design r
         videoUrl: '/videos/ml-prototype-walkthrough.mp4',
         videoPoster: '/images/case-study/ml-functions/ml-prototype-poster.jpg',
         description: 'The new guided workflow: structured step-by-step flow, right-click entry, clear error handling, reduced from 12+ clicks to 7-9 clicks.',
+        sensitive: true, // Unreleased feature - new ML UI
       },
       comparisonNotes: {
         before: [

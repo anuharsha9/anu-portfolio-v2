@@ -6,6 +6,8 @@ import { CaseStudySection } from '@/types/caseStudy'
 import WorkflowPrototype from './WorkflowPrototype'
 import ImageLightbox from './ImageLightbox'
 import BeforeAfterComparison from './BeforeAfterComparison'
+import VisualSummaryCard from './VisualSummaryCard'
+import PullQuote from './PullQuote'
 import AhaMoment from './AhaMoment'
 import TeamOnboardingProcess from './TeamOnboardingProcess'
 import EntryPointTransformation from './EntryPointTransformation'
@@ -13,28 +15,47 @@ import FourStepFlowBreakdown from './FourStepFlowBreakdown'
 import SensitiveImage from './SensitiveImage'
 
 // Simple lock icon component for locked sections
-const SimpleLockIcon = ({ message, isLightBackground }: { message: string; isLightBackground: boolean }) => {
-  const textColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/70'
-  const iconColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/60'
+const SimpleLockIcon = ({ message, isLightBackground, children }: { message: string; isLightBackground: boolean; children?: React.ReactNode }) => {
+  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
+  const iconColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
+  const borderColor = isLightBackground ? 'border-black/20' : 'border-white/20'
 
   return (
-    <div className={`flex flex-col items-center justify-center py-12 md:py-16 space-y-4 ${isLightBackground ? 'bg-white/5' : 'bg-black/10'}`}>
-      <svg
-        className={`w-12 h-12 ${iconColor}`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1.5}
-          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+    <div className="relative min-h-[200px]">
+      {/* Blurred Content Behind - 70% blur */}
+      {children && (
+        <div className="pointer-events-none select-none" style={{ filter: 'blur(25px)', opacity: 0.3 }}>
+          {children}
+        </div>
+      )}
+      
+      {/* Blurred background pattern if no children (for placeholder) */}
+      {!children && (
+        <div 
+          className={`absolute inset-0 ${isLightBackground ? 'bg-gradient-to-br from-black/5 via-black/10 to-black/5' : 'bg-gradient-to-br from-white/5 via-white/10 to-white/5'}`}
+          style={{ filter: 'blur(30px)' }}
         />
-      </svg>
-      <p className={`${textColor} text-sm text-center px-4`}>
-        {message}
-      </p>
+      )}
+      
+      {/* Lock Overlay */}
+      <div className={`absolute inset-0 ${isLightBackground ? 'bg-white/85' : 'bg-[var(--bg-dark)]/85'} backdrop-blur-sm flex flex-col items-center justify-center py-12 md:py-16 space-y-4 rounded-lg border-2 ${borderColor}`}>
+        <svg
+          className={`w-12 h-12 ${iconColor}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+          />
+        </svg>
+        <p className={`${textColor} text-sm text-center px-4 font-medium`}>
+          {message}
+        </p>
+      </div>
     </div>
   )
 }
@@ -366,35 +387,57 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
         </h2>
       </div>
 
-      {/* Section Summary (TL;DR) */}
+      {/* Section Summary (TL;DR) - Enhanced as Visual Summary Card */}
       {section.summary && (
-        <div className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-4 md:p-5`}>
-          <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 mt-0.5">
-              <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
-              <p className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
-            </div>
-          </div>
-        </div>
+        <VisualSummaryCard
+          icon={
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          }
+          title="TL;DR"
+          summary={section.summary}
+          isLightBackground={isLightBackground}
+        />
       )}
 
-      {/* Methodology Tags */}
+      {/* Methodology Tags - Enhanced with Tooltips */}
       {section.methodologies && section.methodologies.length > 0 && (
         <div className="flex flex-wrap items-center gap-2">
           <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider mr-1`}>Methods:</span>
-          {section.methodologies.map((method, index) => (
-            <span
-              key={index}
-              className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-xs px-3 py-1 font-medium`}
-            >
-              {method}
-            </span>
-          ))}
+          {section.methodologies.map((method, index) => {
+            // Method descriptions for tooltips
+            const methodDescriptions: Record<string, string> = {
+              'System Exploration': 'Mapped undocumented workflows through sandbox environments and system analysis',
+              'Support Ticket Analysis': 'Analyzed customer support tickets to identify pain points and user needs',
+              'Customer Rep Interviews': 'Interviewed customer representatives as proxies for direct user research',
+              'Competitive Analysis': 'Studied how competitors handle similar features to identify best practices',
+              'Workflow Documentation': 'Documented existing workflows to understand system behavior',
+              'User Journey Analysis': 'Mapped user journeys to identify friction points and opportunities',
+              'Usability Testing': 'Conducted usability tests to validate design decisions',
+              'Iterative Prototyping': 'Built and refined prototypes based on feedback',
+              'Self-Directed Learning': 'Learned complex domains quickly through courses and research',
+              'Domain Expert Collaboration': 'Worked closely with domain experts to understand technical requirements',
+            }
+            const description = methodDescriptions[method] || method
+
+            return (
+              <div key={index} className="group relative">
+                <span
+                  className={`${isLightBackground ? 'bg-black/5 hover:bg-black/10' : 'bg-white/10 hover:bg-white/20'} ${textColor} text-xs px-3 py-1.5 font-medium rounded cursor-help transition-colors duration-200 border ${borderColor} hover:border-[var(--accent-teal)]/50`}
+                >
+                  {method}
+                </span>
+                {/* Tooltip */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 pointer-events-none">
+                  <div className={`${isLightBackground ? 'bg-[#1A1A1A] text-white' : 'bg-white text-[#1A1A1A]'} rounded-lg px-3 py-2 text-xs max-w-xs shadow-lg border ${borderColor} whitespace-normal`}>
+                    {description}
+                    <div className={`absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 ${isLightBackground ? 'border-[#1A1A1A]' : 'border-white'} border-transparent`}></div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
       )}
 
@@ -421,21 +464,67 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   // Body Content (can be locked)
   const sectionBody = (
     <div className="space-y-6">
-      {/* "What this reveals" - Prominent Callout at Top */}
+      {/* "What this reveals" - Enhanced for Skimmability & Readability */}
       {section.revealsPoints && Array.isArray(section.revealsPoints) && section.revealsPoints.length > 0 && (
-        <div className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-6 md:p-8`}>
-          <div className="space-y-3">
-            <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold`}>
+        <div className="space-y-6">
+          {/* Header */}
+          <div className="flex items-center gap-3">
+            <div className={`h-px flex-1 ${dividerColor}`}></div>
+            <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold whitespace-nowrap`}>
               {section.revealsTitle || 'What this reveals'}
             </h3>
-            <ul className="space-y-3">
-              {section.revealsPoints.map((point, index) => (
-                <li key={`reveal-${index}`} className={`${textColor} text-sm md:text-base leading-relaxed flex items-start gap-3`}>
-                  <span className="text-[var(--accent-teal)] text-lg font-bold flex-shrink-0 mt-0.5">→</span>
-                  <span className="font-medium">{point}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={`h-px flex-1 ${dividerColor}`}></div>
+            <div className={`h-px w-8 ${isLightBackground ? 'bg-[var(--accent-teal)]' : 'bg-[var(--accent-teal)]'}`}></div>
+          </div>
+
+          {/* Insights Grid - Card-based for better scanning */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {section.revealsPoints.map((point, index) => {
+              // Extract key phrase (text before → or : or —)
+              const keyPhraseMatch = point.match(/^([^→:—]+?)(→|:|—)/)
+              const keyPhrase = keyPhraseMatch ? keyPhraseMatch[1].trim() : null
+              const restOfText = keyPhraseMatch ? point.substring(keyPhraseMatch[0].length).trim() : point
+
+              return (
+                <div
+                  key={`reveal-${index}`}
+                  className={`${isLightBackground ? 'bg-white/50 border-black/10' : 'bg-white/5 border-white/10'} rounded-lg p-5 md:p-6 border hover:shadow-elevation-2 hover-lift transition-all duration-300 group`}
+                >
+                  <div className="space-y-3">
+                    {/* Number Badge */}
+                    <div className="flex items-center gap-2">
+                      <div className={`w-6 h-6 rounded-full ${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} flex items-center justify-center flex-shrink-0`}>
+                        <span className={`text-[var(--accent-teal)] text-xs font-mono font-bold`}>
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                      </div>
+                      <div className={`h-px flex-1 ${dividerColor}`}></div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-2">
+                      {keyPhrase ? (
+                        <>
+                          <div className={`${textColor} text-sm md:text-base font-semibold leading-snug`}>
+                            {keyPhrase}
+                          </div>
+                          <div className={`${mutedColor} text-sm md:text-base leading-relaxed`}>
+                            {restOfText}
+                          </div>
+                        </>
+                      ) : (
+                        <div className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>
+                          {point}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Accent Line */}
+                    <div className={`h-px w-12 ${isLightBackground ? 'bg-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/40'} group-hover:bg-[var(--accent-teal)] transition-colors duration-300`}></div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
@@ -468,15 +557,60 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               })
             ) : (
               // Break long paragraphs into shorter ones for better scanning
+              // Extract pull quotes from impactful sentences
               (() => {
                 const paragraphs = section.body.split(/\n\n+/).filter(p => p.trim())
+                
+                // Patterns for pull quotes: sentences with strong statements, questions, or key insights
+                const pullQuotePatterns = [
+                  /(?:^|\.\s+)([A-Z][^.!?]*(?:don't|can't|won't|should|must|need|critical|fundamental|breakthrough|realization|discovered|realized|learned|understood|key|essential|important|significant|major|turning point|game changer)[^.!?]*[.!?])/gi,
+                  /(?:^|\.\s+)([A-Z][^.!?]*\?[^.!?]*[.!?])/g, // Questions
+                  /(?:^|\.\s+)([A-Z][^.!?]*(?:This|That|It|The|What|Why|How)[^.!?]*(?:reveals|shows|means|demonstrates|proves|indicates)[^.!?]*[.!?])/gi,
+                ]
+                
                 return (
                   <div className="space-y-3">
-                    {paragraphs.map((para, pIndex) => (
-                      <p key={`para-${pIndex}`} className="whitespace-pre-line">
-                        {para.trim()}
-                      </p>
-                    ))}
+                    {paragraphs.map((para, pIndex) => {
+                      const trimmedPara = para.trim()
+                      
+                      // Check if this paragraph contains a pull quote candidate
+                      let hasPullQuote = false
+                      let pullQuoteText = ''
+                      
+                      for (const pattern of pullQuotePatterns) {
+                        const matches = trimmedPara.match(pattern)
+                        if (matches && matches.length > 0) {
+                          // Find the most impactful sentence (longest, most specific)
+                          const candidate = matches
+                            .map(m => m.trim().replace(/^(?:^|\.\s+)/, ''))
+                            .filter(m => m.length > 40 && m.length < 200) // Reasonable length
+                            .sort((a, b) => b.length - a.length)[0]
+                          
+                          if (candidate) {
+                            hasPullQuote = true
+                            pullQuoteText = candidate
+                            break
+                          }
+                        }
+                      }
+                      
+                      // If paragraph is very long and has a pull quote, extract it
+                      if (hasPullQuote && trimmedPara.length > 300) {
+                        const remainingText = trimmedPara.replace(pullQuoteText, '').trim()
+                        return (
+                          <div key={`para-${pIndex}`} className="space-y-4">
+                            <p className="whitespace-pre-line">{remainingText}</p>
+                            <PullQuote quote={pullQuoteText} isLightBackground={isLightBackground} />
+                          </div>
+                        )
+                      }
+                      
+                      return (
+                        <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                          {trimmedPara}
+                        </p>
+                      )
+                    })}
                   </div>
                 )
               })()
@@ -1067,7 +1201,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {/* Before/After Comparison */}
       {section.beforeAfter && (
         <div className="space-y-4">
-          {(section.beforeAfter.before.sensitive || section.beforeAfter.after?.sensitive) && !actuallyUnlocked ? (
+          {((section.beforeAfter.before.sensitive || section.beforeAfter.after?.sensitive) && !actuallyUnlocked) ? (
             <SimpleLockIcon
               message="Before/after comparison"
               isLightBackground={isLightBackground}
@@ -1078,6 +1212,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               afterImage={section.beforeAfter.after}
               beforeLabel={section.beforeAfter.beforeLabel}
               afterLabel={section.beforeAfter.afterLabel}
+              comparisonNotes={section.beforeAfter.comparisonNotes}
               isLightBackground={isLightBackground}
             />
           )}
@@ -1563,9 +1698,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 )
                 return images[0].sensitive && !actuallyUnlocked ? (
                   <SimpleLockIcon
-                    message={section.title || 'Locked content'}
+                    message="Enter Password"
                     isLightBackground={isLightBackground}
-                  />
+                  >
+                    {imageContent}
+                  </SimpleLockIcon>
                 ) : imageContent
               })()}
               {/* Right column: explorer on top, admin below */}
@@ -1596,9 +1733,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                   )
                   return images[1].sensitive && !actuallyUnlocked ? (
                     <SimpleLockIcon
-                      message={section.title || 'Locked content'}
+                      message="Enter Password"
                       isLightBackground={isLightBackground}
-                    />
+                    >
+                      {imageContent}
+                    </SimpleLockIcon>
                   ) : imageContent
                 })()}
                 {/* Admin - below explorer */}
@@ -1627,9 +1766,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                   )
                   return images[2].sensitive && !actuallyUnlocked ? (
                     <SimpleLockIcon
-                      message={section.title || 'Locked content'}
+                      message="Enter Password"
                       isLightBackground={isLightBackground}
-                    />
+                    >
+                      {imageContent}
+                    </SimpleLockIcon>
                   ) : imageContent
                 })()}
               </div>

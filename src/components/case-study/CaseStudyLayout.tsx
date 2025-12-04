@@ -21,6 +21,8 @@ import CaseStudyNav from './CaseStudyNav'
 import StructuredData from '@/components/structured-data/StructuredData'
 import FrameworkConnection from './FrameworkConnection'
 import LockedContent from './LockedContent'
+import LetsTalkCTA from './LetsTalkCTA'
+import DesignSystemShowcase from './DesignSystemShowcase'
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 
@@ -102,19 +104,11 @@ const LayeredDisclosureVisual = dynamic(() => import('./LayeredDisclosureVisual'
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const FourStepFlowBreakdown = dynamic(() => import('./FourStepFlowBreakdown'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
 const EntryPointTransformation = dynamic(() => import('./EntryPointTransformation'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
 const MLImpactMetrics = dynamic(() => import('./MLImpactMetrics'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const MLLearningTransformation = dynamic(() => import('./MLLearningTransformation'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -158,11 +152,32 @@ const IQChallengesBreakdown = dynamic(() => import('./IQChallengesBreakdown'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const IQLearningTransformation = dynamic(() => import('./IQLearningTransformation'), {
+// IQLearningTransformation removed - content integrated into section body
+const IQValidationSources = dynamic(() => import('./IQValidationSources'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const IQValidationSources = dynamic(() => import('./IQValidationSources'), {
+const ReportCasterTimeline = dynamic(() => import('./ReportCasterTimeline'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const ReportCasterArchitecture = dynamic(() => import('./ReportCasterArchitecture'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const MLFunctionsTimeline = dynamic(() => import('./MLFunctionsTimeline'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const IQPluginTimeline = dynamic(() => import('./IQPluginTimeline'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const IQPluginArchitecture = dynamic(() => import('./IQPluginArchitecture'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const VideoEmbed = dynamic(() => import('./VideoEmbed'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -259,8 +274,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       window.addEventListener('storage', handleUnlock)
       window.addEventListener('portfolio-unlocked', handleUnlock)
 
-      // Poll for changes
-      const interval = setInterval(handleUnlock, 500)
+      // Poll less frequently for better performance (reduced from 500ms to 2000ms)
+      const interval = setInterval(handleUnlock, 2000)
 
       return () => {
         window.removeEventListener('storage', handleUnlock)
@@ -350,9 +365,41 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
     }
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
+
   return (
     <>
       <StructuredData type="caseStudy" data={data} />
+      {/* Breadcrumb Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: siteUrl,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Case Studies',
+                item: `${siteUrl}/#work-overview`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: data.heroTitle,
+                item: `${siteUrl}/work/${data.slug}/`,
+              },
+            ],
+          }),
+        }}
+      />
       {/* Reading Progress Indicator */}
       <ReadingProgress />
 
@@ -538,6 +585,11 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               scope={data.scope}
               hasPrototype={!!data.prototypeMedia}
               caseStudySlug={data.slug}
+              testimonialName={
+                data.slug === 'reportcaster' ? 'Yingchun Chen' :
+                data.slug === 'ml-functions' ? 'Marcus Horbach' :
+                data.slug === 'iq-plugin' ? 'Anita George' : undefined
+              }
               demoVideoUrl={data.quickOverview.demoVideoUrl}
               demoVideoLabel={data.quickOverview.demoVideoLabel}
               demoVideoUrl2={data.quickOverview.demoVideoUrl2}
@@ -699,7 +751,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
             if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
             else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
             else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-            else if (principle.letter === 'I') sectionId = 'version-iteration' // Iterate with Inclusion
+            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
             else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
             else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
           } else if (data.slug === 'ml-functions') {
@@ -852,8 +904,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
             return (
               <div key={section.id}>
-                {/* Special handling for version-iteration section */}
-                {section.id === 'version-iteration' && (section as any).v1Data && (section as any).v2Data && (section as any).v3Data ? (
+                {/* Special handling for section-04 (version iteration) for ReportCaster */}
+                {section.id === 'section-04' && data.slug === 'reportcaster' && (section as any).v1Data && (section as any).v2Data && (section as any).v3Data ? (
                   <>
                     {/* Render as proper section with header */}
                     <MotionSection
@@ -922,7 +974,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                         {/* Lock entire section-04 (Iterate) for ML Functions */}
                         {data.slug === 'ml-functions' && section.id === 'section-04' ? (
                           <LockedContent
-                            isUnlocked={false}
                             password={data.passwordGate?.password || 'anu-access'}
                             caseStudySlug={data.slug}
                             unlockMessage="Password required to view iteration details and new workflow designs"
@@ -932,7 +983,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                               section={section}
                               isLightBackground={sectionBg === 'surface-light'}
                               caseStudySlug={data.slug}
-                              isUnlocked={false}
+                              isUnlocked={showPasswordContent}
                               password={data.passwordGate?.password || 'anu-access'}
                               frameworkMapping={data.frameworkConnection ? (() => {
                                 // Create reverse mapping: sectionId -> framework letter
@@ -1023,7 +1074,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   <MotionSection className={`${sectionBg} py-8 md:py-12`}>
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                       <LockedContent
-                        isUnlocked={false}
                         password={data.passwordGate?.password || 'anu-access'}
                         caseStudySlug={data.slug}
                         unlockMessage="Password required to view internal system mapping details"
@@ -1035,12 +1085,18 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </MotionSection>
                 )}
 
+                {/* ReportCaster Timeline - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
+                {section.id === 'section-01' && data.slug === 'reportcaster' && (
+                  <MotionSection className="surface-light py-8 md:py-12">
+                    <ReportCasterTimeline isLightBackground={true} />
+                  </MotionSection>
+                )}
+
                 {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
                 {section.id === 'section-01' && data.slug === 'reportcaster' && (
                   <MotionSection className="surface-light py-8 md:py-12">
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                       <LockedContent
-                        isUnlocked={false}
                         password="anu-access"
                         caseStudySlug={data.slug}
                         unlockMessage="Password required to view internal discovery details"
@@ -1059,7 +1115,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
                           password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view internal research methods and company information"
@@ -1072,7 +1127,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
                           password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
@@ -1083,6 +1137,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       </div>
                     </MotionSection>
                   </>
+                )}
+
+                {/* ML Functions Timeline - Inside Section 01 */}
+                {section.id === 'section-01' && data.slug === 'ml-functions' && (
+                  <MotionSection className="surface-light py-8 md:py-12">
+                    <MLFunctionsTimeline isLightBackground={true} />
+                  </MotionSection>
                 )}
 
                 {/* ML Functions Visuals - Section 01 */}
@@ -1110,7 +1171,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
                           password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
@@ -1134,7 +1194,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
                           password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view design pivot details"
@@ -1166,7 +1225,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
                           password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view layered disclosure strategy"
@@ -1190,12 +1248,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </>
                 )}
 
-                {/* ML Functions Visuals - Section 06 - FourStepFlowBreakdown now integrated into "The main step workflow UI" subsection */}
-
-                {/* Challenge Breakdown is now integrated into Section 01 */}
-
-
-                {/* Team Onboarding Process is now integrated into Section 06 */}
+                {/* Note: FourStepFlowBreakdown content is integrated into section subsections */}
+                {/* Note: Challenge Breakdown is integrated into Section 01 */}
+                {/* Note: Team Onboarding Process is integrated into Section 06 */}
 
                 {/* Insert Impact Visual after Section 06 - ReportCaster only */}
                 {section.id === 'section-06' && data.slug === 'reportcaster' && (
@@ -1280,6 +1335,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </>
                 )}
 
+                {/* IQ Plugin Timeline - Inside Section 01 */}
+                {section.id === 'section-01' && data.slug === 'iq-plugin' && (
+                  <MotionSection className="surface-light py-8 md:py-12">
+                    <IQPluginTimeline isLightBackground={true} />
+                  </MotionSection>
+                )}
+
+                {/* IQ Plugin Architecture - Inside Section 02 */}
+                {section.id === 'section-02' && data.slug === 'iq-plugin' && (
+                  <MotionSection className="surface-light py-8 md:py-12">
+                    <IQPluginArchitecture isLightBackground={true} />
+                  </MotionSection>
+                )}
+
                 {/* IQ Plugin Visuals - Section 01 */}
                 {section.id === 'section-01' && data.slug === 'iq-plugin' && (
                   <MotionSection className="surface-light py-8 md:py-12">
@@ -1312,7 +1381,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
+                          isUnlocked={showPasswordContent}
                           password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view user personas"
@@ -1325,7 +1394,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
-                          isUnlocked={false}
+                          isUnlocked={showPasswordContent}
                           password="anu-access"
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view persona journey maps"
@@ -1418,6 +1487,16 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
           {/* Final Summary Section */}
           {/* FinalSummary is now combined with Section 08 */}
+
+          {/* Let's Talk CTA */}
+          <LetsTalkCTA />
+
+          {/* Design System Showcase - Subtle, Not Prominent */}
+          <MotionSection className="surface-light py-8 md:py-12">
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+              <DesignSystemShowcase isLightBackground={true} caseStudySlug={data.slug} />
+            </div>
+          </MotionSection>
 
           {/* Related Case Studies */}
           <RelatedCaseStudies currentSlug={data.slug} />

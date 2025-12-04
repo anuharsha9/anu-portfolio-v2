@@ -95,6 +95,7 @@ export interface CaseStudySection {
     }
     beforeLabel?: string
     afterLabel?: string
+    comparisonNotes?: string
   }
   subsections?: CaseStudySubsection[]
   workflowPrototype?: {
@@ -216,6 +217,7 @@ export interface CaseStudyData {
         videoEmbedUrl?: string // YouTube embed URL (public)
         videoPoster?: string
         description?: string
+        sensitive?: boolean // If true, video requires password protection
       }
       after: {
         title: string
@@ -223,6 +225,7 @@ export interface CaseStudyData {
         videoPoster?: string
         description?: string
         isPublic?: boolean // If true, video is public (e.g., Figma prototype, not from sandbox)
+        sensitive?: boolean // If true, video requires password protection
       }
       comparisonNotes?: {
         before: string[]
