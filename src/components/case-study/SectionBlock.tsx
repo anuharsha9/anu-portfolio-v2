@@ -16,7 +16,7 @@ import SensitiveImage from './SensitiveImage'
 const SimpleLockIcon = ({ message, isLightBackground }: { message: string; isLightBackground: boolean }) => {
   const textColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/70'
   const iconColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/60'
-  
+
   return (
     <div className={`flex flex-col items-center justify-center py-12 md:py-16 space-y-4 ${isLightBackground ? 'bg-white/5' : 'bg-black/10'} rounded-lg border ${isLightBackground ? 'border-black/10' : 'border-white/10'}`}>
       <svg
@@ -60,14 +60,14 @@ function extractMetrics(text: string): string[] {
     /≈?\d+[–-]\d+%\s*(?:fewer|faster|reduction|increase)/gi, // "≈60–70% fewer"
     /\d+\s*→\s*\d+/g, // "5 → 1"
   ]
-  
+
   metricPatterns.forEach(pattern => {
     const matches = text.match(pattern)
     if (matches) {
       metrics.push(...matches)
     }
   })
-  
+
   return [...new Set(metrics)] // Remove duplicates
 }
 
@@ -179,29 +179,29 @@ function createImageGroups(images: CaseStudySection['images']) {
 export default function SectionBlock({ section, isLightBackground = false, caseStudySlug, frameworkMapping, isUnlocked = false, password }: SectionBlockProps) {
   // Check global unlock state in addition to prop
   const [globalUnlocked, setGlobalUnlocked] = useState(false)
-  
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
       setGlobalUnlocked(globalUnlockState)
     }
   }, [])
-  
+
   // For sensitive images, always check unlock status (don't rely on isUnlocked prop)
   // The isUnlocked prop is for password-gated case studies, but individual images can be locked independently
   const actuallyUnlocked = isUnlocked || globalUnlocked
-  
+
   // Calculate if section should be locked entirely (if >50% of content is sensitive)
   const calculateSectionSensitivity = () => {
     if (section.sensitive) return true // Already marked as sensitive
-    
+
     const images = section.images || []
     const subsections = section.subsections || []
-    
+
     // Count sensitive images
     const sensitiveImages = images.filter(img => img.sensitive).length
     const totalImages = images.length
-    
+
     // Count sensitive subsections
     const sensitiveSubsections = subsections.filter(sub => {
       if (sub.sensitive) return true
@@ -210,21 +210,21 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       return subImages.length > 0 && sensitiveSubImages / subImages.length > 0.5
     }).length
     const totalSubsections = subsections.length
-    
+
     // Count total sensitive items
     const totalSensitive = sensitiveImages + sensitiveSubsections
     const totalItems = totalImages + totalSubsections
-    
+
     // If >50% of content is sensitive, lock the whole section
     if (totalItems > 0 && totalSensitive / totalItems > 0.5) {
       return true
     }
-    
+
     return false
   }
-  
+
   const isSectionSensitive = calculateSectionSensitivity()
-  
+
   const [expandedGroups, setExpandedGroups] = useState<Set<number>>(new Set([0]))
   const [expandedDetailImages, setExpandedDetailImages] = useState(false)
   const [expandedSubsections, setExpandedSubsections] = useState<Set<number>>(new Set()) // All subsections collapsed by default
@@ -352,73 +352,73 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   // Header Section (always visible)
   const sectionHeader = (
     <div className="space-y-4">
-        <div className="flex items-baseline gap-4">
-          <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5 rounded border ${borderColor}`}>
-            {frameworkMapping && frameworkMapping[section.id] ? frameworkMapping[section.id] : section.index}
-          </span>
-          <div className={`h-px flex-1 ${dividerColor}`}></div>
-        </div>
-        <div className="flex items-start gap-3">
-          <h2 className={`${textColor} text-3xl md:text-4xl font-serif leading-tight flex-1`}>
-            {section.title}
-            {section.id === 'version-3' && (
-              <span className="block mt-2 text-xl md:text-2xl font-normal italic" style={{ color: 'var(--accent-teal)' }}>
-                The solution that balanced everything
-              </span>
-            )}
-          </h2>
-        </div>
+      <div className="flex items-baseline gap-4">
+        <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5 rounded border ${borderColor}`}>
+          {frameworkMapping && frameworkMapping[section.id] ? frameworkMapping[section.id] : section.index}
+        </span>
+        <div className={`h-px flex-1 ${dividerColor}`}></div>
+      </div>
+      <div className="flex items-start gap-3">
+        <h2 className={`${textColor} text-3xl md:text-4xl font-serif leading-tight flex-1`}>
+          {section.title}
+          {section.id === 'version-3' && (
+            <span className="block mt-2 text-xl md:text-2xl font-normal italic" style={{ color: 'var(--accent-teal)' }}>
+              The solution that balanced everything
+            </span>
+          )}
+        </h2>
+      </div>
 
-        {/* Section Summary (TL;DR) */}
-        {section.summary && (
-          <div className={`bg-gradient-to-r ${isLightBackground ? 'from-[var(--accent-teal)]/10 to-[var(--accent-teal)]/5' : 'from-[var(--accent-teal)]/20 to-[var(--accent-teal)]/10'} rounded-xl p-4 md:p-5 border ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/40'}`}>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 mt-0.5">
-                <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
-                <p className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
-              </div>
+      {/* Section Summary (TL;DR) */}
+      {section.summary && (
+        <div className={`bg-gradient-to-r ${isLightBackground ? 'from-[var(--accent-teal)]/10 to-[var(--accent-teal)]/5' : 'from-[var(--accent-teal)]/20 to-[var(--accent-teal)]/10'} rounded-xl p-4 md:p-5 border ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/40'}`}>
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0 mt-0.5">
+              <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <div className={`${mutedColor} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
+              <p className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Methodology Tags */}
-        {section.methodologies && section.methodologies.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider mr-1`}>Methods:</span>
-            {section.methodologies.map((method, index) => (
+      {/* Methodology Tags */}
+      {section.methodologies && section.methodologies.length > 0 && (
+        <div className="flex flex-wrap items-center gap-2">
+          <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider mr-1`}>Methods:</span>
+          {section.methodologies.map((method, index) => (
+            <span
+              key={index}
+              className={`${isLightBackground ? 'bg-black/5 border-black/10' : 'bg-white/10 border-white/20'} ${textColor} text-xs px-3 py-1 rounded-full border font-medium`}
+            >
+              {method}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Extract and Display Metrics */}
+      {section.body && (() => {
+        const metrics = extractMetrics(section.body)
+        return metrics.length > 0 ? (
+          <div className="flex flex-wrap items-center gap-2 pt-2">
+            <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Key Metrics:</span>
+            {metrics.slice(0, 5).map((metric, index) => (
               <span
                 key={index}
-                className={`${isLightBackground ? 'bg-black/5 border-black/10' : 'bg-white/10 border-white/20'} ${textColor} text-xs px-3 py-1 rounded-full border font-medium`}
+                className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10 border-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/40'} text-[var(--accent-teal)] text-xs px-3 py-1 rounded-full border font-semibold`}
               >
-                {method}
+                {metric}
               </span>
             ))}
           </div>
-        )}
-
-        {/* Extract and Display Metrics */}
-        {section.body && (() => {
-          const metrics = extractMetrics(section.body)
-          return metrics.length > 0 ? (
-            <div className="flex flex-wrap items-center gap-2 pt-2">
-              <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Key Metrics:</span>
-              {metrics.slice(0, 5).map((metric, index) => (
-                <span
-                  key={index}
-                  className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10 border-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/40'} text-[var(--accent-teal)] text-xs px-3 py-1 rounded-full border font-semibold`}
-                >
-                  {metric}
-                </span>
-              ))}
-            </div>
-          ) : null
-        })()}
-      </div>
+        ) : null
+      })()}
+    </div>
   );
 
   // Body Content (can be locked)
@@ -513,7 +513,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
             // Special handling for certain subsections - always open
             const isAlwaysOpen = subsection.title === 'Early Ideation: Hand-Drawn Wireframes' ||
               subsection.title === 'Schedule Dialog'
-            
+
             // Special styling for text-only subsections (like Prototyping and Testing)
             const isTextOnlySubsection = !subsection.images || subsection.images.length === 0
 
@@ -580,7 +580,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                         />
                                       )
                                     }
-                                    
+
                                     if (image.sensitive && actuallyUnlocked) {
                                       return imageContent
                                     }
@@ -624,7 +624,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                   />
                                 )
                               }
-                              
+
                               if (image.sensitive && actuallyUnlocked) {
                                 return imageContent
                               }
@@ -778,7 +778,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                   />
                                 )
                               }
-                              
+
                               if (image.sensitive && actuallyUnlocked) {
                                 return imageContent
                               }
@@ -1046,7 +1046,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Workflow Prototype(s) */}
       {section.workflowPrototype && Array.isArray(section.workflowPrototype) && section.workflowPrototype.length > 0 && (
-                      <div className="space-y-4">
+        <div className="space-y-4">
           {section.workflowPrototype.map((prototype, idx) => {
             if (!prototype || !prototype.steps || !Array.isArray(prototype.steps) || prototype.steps.length === 0) {
               return null
@@ -1095,7 +1095,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Images */}
       {images.length > 0 && (
-                      <div className="space-y-4">
+        <div className="space-y-4">
           {/* Special handling for Section 1: Collapsible gallery for 8 legacy images - ReportCaster only */}
           {section.id === 'section-01' && images.length === 8 && caseStudySlug === 'reportcaster' ? (
             <div className="space-y-4">
@@ -1173,7 +1173,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                       />
                     )
                   }
-                  
+
                   if (image.sensitive && actuallyUnlocked) {
                     return imageContent
                   }
@@ -1246,7 +1246,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                   />
                 )
               }
-              
+
               if (image.sensitive && actuallyUnlocked) {
                 return imageContent
               }
@@ -1291,7 +1291,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     />
                   )
                 }
-                
+
                 if (image.sensitive && actuallyUnlocked) {
                   return imageContent
                 }
@@ -1327,19 +1327,19 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         </div>
                       )
 
-                        if (image.sensitive && !actuallyUnlocked) {
-                          return (
-                            <SimpleLockIcon
-                              key={`img-grid-${index}`}
-                              message={section.title || 'Locked content'}
-                              isLightBackground={isLightBackground}
-                            />
-                          )
-                        }
-                        
-                        if (image.sensitive && actuallyUnlocked) {
-                          return imageContent
-                        }
+                      if (image.sensitive && !actuallyUnlocked) {
+                        return (
+                          <SimpleLockIcon
+                            key={`img-grid-${index}`}
+                            message={section.title || 'Locked content'}
+                            isLightBackground={isLightBackground}
+                          />
+                        )
+                      }
+
+                      if (image.sensitive && actuallyUnlocked) {
+                        return imageContent
+                      }
 
                       return imageContent
                     })}
@@ -1418,19 +1418,19 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                             </div>
                           )
 
-                            if (image.sensitive && !actuallyUnlocked) {
-                              return (
-                                <SimpleLockIcon
-                                  key={`group-img-${groupIndex}-${imgIndex}`}
-                                  message={section.title || 'Locked content'}
-                                  isLightBackground={isLightBackground}
-                                />
-                              )
-                            }
-                            
-                            if (image.sensitive && actuallyUnlocked) {
-                              return imageContent
-                            }
+                          if (image.sensitive && !actuallyUnlocked) {
+                            return (
+                              <SimpleLockIcon
+                                key={`group-img-${groupIndex}-${imgIndex}`}
+                                message={section.title || 'Locked content'}
+                                isLightBackground={isLightBackground}
+                              />
+                            )
+                          }
+
+                          if (image.sensitive && actuallyUnlocked) {
+                            return imageContent
+                          }
 
                           return imageContent
                         })}
@@ -1441,7 +1441,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               })}
             </div>
           ) : workflowImages.length > 0 && designDetailImages.length > 0 ? (
-                      <div className="space-y-4">
+            <div className="space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>Workflow</span>
@@ -1644,8 +1644,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               </div>
             </div>
           ) : (
-              <div className={`grid grid-cols-1 ${images.length >= 3 ? 'md:grid-cols-2' : 'md:grid-cols-2'} ${images.length >= 6 ? 'lg:grid-cols-3' : ''} gap-4`}>
-                {images.map((image, index) =>
+            <div className={`grid grid-cols-1 ${images.length >= 3 ? 'md:grid-cols-2' : 'md:grid-cols-2'} ${images.length >= 6 ? 'lg:grid-cols-3' : ''} gap-4`}>
+              {images.map((image, index) =>
                 image.fullWidth ? (
                   <div
                     key={`img-${index}`}
@@ -1799,7 +1799,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       >
         {/* Header - Always visible */}
         {sectionHeader}
-        
+
         {/* Body - Locked */}
         {actuallyUnlocked ? (
           sectionBody

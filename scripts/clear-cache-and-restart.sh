@@ -46,10 +46,21 @@ fi
 echo ""
 echo "✨ All caches cleared!"
 echo ""
-echo "🚀 Starting dev server..."
-npm run dev:restart
+echo "🚀 Starting dev server in background..."
+pkill -f "next dev" 2>/dev/null
+sleep 2
+rm -rf .next
+nohup npm run dev > /dev/null 2>&1 &
+sleep 3
+
+# Check if server started
+if curl -s http://localhost:3000 > /dev/null 2>&1; then
+    echo "✅ Dev server is running on http://localhost:3000"
+else
+    echo "⏳ Dev server is starting... (may take a few more seconds)"
+fi
 
 echo ""
-echo "✅ Done! Dev server should be running on http://localhost:3000"
 echo "💡 Remember to hard refresh browsers (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)"
+echo "💡 To stop the server, run: pkill -f 'next dev'"
 

@@ -32,7 +32,7 @@ export default function WebFOCUSInitiativeRow({
 }: WebFOCUSInitiativeRowProps) {
   const isImageLeft = orientation === 'image-left'
   const isIQPlugin = ctaHref === '/work/iq-plugin'
-  
+
   // Check if IQ plugin is unlocked
   const [isUnlocked, setIsUnlocked] = useState(() => {
     if (typeof window !== 'undefined' && isIQPlugin) {
@@ -41,29 +41,29 @@ export default function WebFOCUSInitiativeRow({
     }
     return false
   })
-  
+
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  
+
   useEffect(() => {
     if (isIQPlugin && typeof window !== 'undefined') {
       const storageKey = 'case-study-unlocked-iq-plugin'
-      
+
       // Listen for unlock events
       const handleUnlock = () => {
         const unlocked = sessionStorage.getItem(storageKey) === 'true'
         setIsUnlocked(unlocked)
       }
-      
+
       window.addEventListener('storage', handleUnlock)
       window.addEventListener('portfolio-unlocked', handleUnlock)
-      
+
       // Poll for changes (in case unlocked in same tab)
       const interval = setInterval(() => {
         const unlocked = sessionStorage.getItem(storageKey) === 'true'
         setIsUnlocked(unlocked)
       }, 500)
-      
+
       return () => {
         window.removeEventListener('storage', handleUnlock)
         window.removeEventListener('portfolio-unlocked', handleUnlock)
@@ -71,15 +71,15 @@ export default function WebFOCUSInitiativeRow({
       }
     }
   }, [isIQPlugin])
-  
+
   const handlePasswordSubmit = (e?: React.FormEvent) => {
     if (e) {
       e.preventDefault()
     }
-    
+
     const trimmedPassword = password.trim().toLowerCase()
     const correctPassword = 'anu-access'
-    
+
     if (trimmedPassword === correctPassword) {
       setError('')
       if (typeof window !== 'undefined') {
@@ -126,15 +126,13 @@ export default function WebFOCUSInitiativeRow({
         id="iq-plugin-tile"
       >
         <div
-          className={`flex flex-col ${
-            isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-          } gap-8 md:gap-12 items-center md:items-start relative`}
+          className={`flex flex-col ${isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+            } gap-8 md:gap-12 items-center md:items-start relative`}
         >
           {/* Blurred Background Content */}
           <div className="absolute inset-0 pointer-events-none" style={{ filter: 'blur(20px)', opacity: 0.7 }}>
-            <div className={`flex flex-col ${
-              isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-            } gap-8 md:gap-12 items-center md:items-start w-full`}>
+            <div className={`flex flex-col ${isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+              } gap-8 md:gap-12 items-center md:items-start w-full`}>
               {/* Image */}
               <div className="relative w-full md:w-1/2 flex-shrink-0 flex items-center justify-center overflow-visible">
                 <div className="relative w-full" style={{ aspectRatio: '16/10', minHeight: '300px' }}>
@@ -246,9 +244,8 @@ export default function WebFOCUSInitiativeRow({
       id={isIQPlugin ? 'iq-plugin-tile' : undefined}
     >
       <div
-        className={`flex flex-col ${
-          isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-        } gap-8 md:gap-12 items-center md:items-start`}
+        className={`flex flex-col ${isImageLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+          } gap-8 md:gap-12 items-center md:items-start`}
       >
         {/* Image */}
         <Link href={ctaHref} className="relative w-full md:w-1/2 flex-shrink-0 flex items-center justify-center group/image overflow-visible">
@@ -266,7 +263,7 @@ export default function WebFOCUSInitiativeRow({
 
           {/* Title */}
           <Link href={ctaHref} className="block group/title">
-            <h3 
+            <h3
               className="text-[var(--text-primary-light)] text-2xl md:text-3xl lg:text-4xl font-serif transition-all duration-300 relative group-hover/title:text-[var(--accent-teal)]"
             >
               {title}

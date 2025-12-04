@@ -11,9 +11,10 @@ import MobileMenu from './MobileMenu'
 export default function SiteHeader() {
   const pathname = usePathname()
   const isLandingPage = pathname === '/'
-  
-  // Start hidden on all pages initially - only show after scrolling
-  const [isVisible, setIsVisible] = useState(false)
+  const isCaseStudyPage = pathname?.startsWith('/work/') ?? false
+
+  // Always visible on case study pages, otherwise start hidden
+  const [isVisible, setIsVisible] = useState(isCaseStudyPage)
 
   useEffect(() => {
     // Only run on client side
@@ -45,22 +46,28 @@ export default function SiteHeader() {
 
   // Use centralized scroll manager
   useScrollManager((scrollY) => {
+    // Always show on case study pages
+    if (isCaseStudyPage) {
+      setIsVisible(true)
+      return
+    }
+
     // Always show on mobile
     if (typeof window !== 'undefined' && window.innerWidth < 1024) {
       setIsVisible(true)
       return
     }
-    
-    // On all pages: hide at top, show when scrolling down
+
+    // On all other pages: hide at top, show when scrolling down
     const hasScrolled = scrollY > 50 // Show nav after scrolling 50px
     setIsVisible(hasScrolled)
-  }, [isLandingPage])
+  }, [isLandingPage, isCaseStudyPage])
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 bg-[var(--bg-dark)] backdrop-blur-md shadow-lg transition-all duration-500 ${isVisible
-          ? 'opacity-100 translate-y-0 border-b border-white/10 h-auto'
-          : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden border-b border-transparent'
+        ? 'opacity-100 translate-y-0 border-b border-white/10 h-auto'
+        : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden border-b border-transparent'
         }`}
       style={{ zIndex: 10000, isolation: 'isolate', position: 'fixed' }}
     >
@@ -96,7 +103,7 @@ export default function SiteHeader() {
                       const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
                       const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
                       const offset = totalNavHeight + 20 // Extra padding
-                      
+
                       const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
                       const offsetPosition = Math.max(0, elementPosition - offset)
 
@@ -104,7 +111,7 @@ export default function SiteHeader() {
                         top: offsetPosition,
                         behavior: 'smooth',
                       })
-                      
+
                       // Update URL hash
                       window.history.pushState(null, '', '#work-overview')
                     }
@@ -151,7 +158,7 @@ export default function SiteHeader() {
                       const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
                       const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
                       const offset = totalNavHeight + 20 // Extra padding
-                      
+
                       const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
                       const offsetPosition = Math.max(0, elementPosition - offset)
 
@@ -159,7 +166,7 @@ export default function SiteHeader() {
                         top: offsetPosition,
                         behavior: 'smooth',
                       })
-                      
+
                       // Update URL hash
                       window.history.pushState(null, '', '#lets-talk')
                     }

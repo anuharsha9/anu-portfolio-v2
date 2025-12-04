@@ -64,7 +64,7 @@ export default function PatternConnections({ isLightBackground = false }: Patter
                                 </p>
                             </div>
                         )
-                        
+
                         if (pattern.link) {
                             return (
                                 <Link
@@ -77,7 +77,7 @@ export default function PatternConnections({ isLightBackground = false }: Patter
                                 </Link>
                             )
                         }
-                        
+
                         return (
                             <div
                                 key={pattern.id}

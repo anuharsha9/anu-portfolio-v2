@@ -64,7 +64,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
                 </p>
               </div>
             )
-            
+
             if (pattern.link) {
               return (
                 <Link
@@ -77,7 +77,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
                 </Link>
               )
             }
-            
+
             return (
               <div
                 key={pattern.id}
