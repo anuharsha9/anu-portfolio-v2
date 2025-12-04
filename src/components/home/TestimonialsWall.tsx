@@ -97,14 +97,8 @@ const TestimonialTile = memo(function TestimonialTile({
     >
       {/* Tile - Consistent styling with rest of website, varied padding for organic feel */}
       <div
-        className={`w-full ${paddingClass} rounded-xl border border-white/5 bg-white/5 flex flex-col transition-all duration-300 hover:bg-white/10 hover:border-white/10 hover:shadow-[0_4px_12px_rgba(13,148,136,0.075)] hover:-translate-y-0.5`}
+        className={`w-full ${paddingClass} rounded-lg border border-refined-dark bg-white/5 flex flex-col hover-lift transition-all duration-normal hover:border-white/20`}
       >
-        {/* Decorative line element - similar to framework tiles */}
-        <div className="flex items-baseline gap-3 mb-3">
-          <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div className="h-px flex-1 bg-white/10"></div>
-          <div className="h-px w-8 bg-[var(--accent-teal)] opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </div>
 
         {/* Opening quote icon */}
         <div className="relative mb-2" style={{ 
@@ -154,7 +148,7 @@ const TestimonialTile = memo(function TestimonialTile({
           </p>
 
           {/* Attribution */}
-          <footer className="pt-4 border-t border-white/5 mt-auto flex-shrink-0">
+          <footer className="pt-4 mt-auto flex-shrink-0">
             <p className={`text-white font-semibold ${isVeryLongQuote || isLongQuote ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
               {rec.name}
             </p>
@@ -162,7 +156,7 @@ const TestimonialTile = memo(function TestimonialTile({
               {rec.role} {rec.company && `at ${rec.company}`}
             </p>
             {rec.relationship && (
-              <div className="mt-3 pt-3 border-t border-white/5">
+              <div className="mt-3 pt-3">
                 <p className={`text-white/90 mt-2 font-light italic ${isVeryLongQuote || isLongQuote ? 'text-xs md:text-sm' : 'text-xs'} leading-relaxed`}>
                   {rec.relationship}
                 </p>

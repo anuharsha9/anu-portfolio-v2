@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import ImageLightbox from './ImageLightbox'
 import { SignatureLogo } from '@/components/brand'
 import CaseStudyNav from './CaseStudyNav'
+import SocialShareButtons from '@/components/sharing/SocialShareButtons'
 import { heroTitleVariant, heroSubVariant, fadeIn } from '@/lib/animations'
 
 interface HeroMetaProps {
@@ -34,6 +35,7 @@ interface HeroMetaProps {
     label: string
     variant?: 'live' | 'shipping' | 'development'
   }
+  shareUrl?: string
 }
 
 export default function HeroMeta({
@@ -56,6 +58,7 @@ export default function HeroMeta({
   dataSheetUrl,
   dataSheetLabel,
   status,
+  shareUrl,
 }: HeroMetaProps) {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
 
@@ -87,42 +90,51 @@ export default function HeroMeta({
         {/* Subtle Logo Watermark - Top Right Corner */}
         <div className="absolute top-8 right-8 opacity-[0.03] pointer-events-none hidden lg:block">
           <div className="w-32 h-32">
-            <SignatureLogo className="w-full h-full text-[var(--text-primary-dark)]" />
+            <SignatureLogo className="w-full h-full text-[var(--text-primary-light)]" />
           </div>
         </div>
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          {/* 2-Column Bento Grid Layout - 40% text, 60% image */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 items-center">
+        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          {/* Social Share Buttons - Above case study nav, centered */}
+          {shareUrl && (
+            <div className="flex justify-center mb-3">
+              <SocialShareButtons
+                title={heroTitle}
+                url={shareUrl}
+                description={heroSubtitle}
+              />
+            </div>
+          )}
+          
+          {/* Case Study Navigation - Above title, centered */}
+          <div className="text-center mb-4 sm:mb-5 md:mb-6">
+            <CaseStudyNav />
+          </div>
+          
+          {/* Centered Title */}
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <motion.h1 
+              variants={heroTitleVariant}
+              initial="hidden"
+              animate="visible"
+              className="text-[var(--text-primary-light)] text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif leading-tight tracking-tight"
+            >
+              {heroTitle === 'REPORTCASTER' ? 'REPORT CASTER' : heroTitle}
+            </motion.h1>
+          </div>
+
+          {/* 2-Column Layout - Content and Laptop */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-24 items-start">
 
             {/* Left Column: Text Content */}
             <div className="space-y-5 sm:space-y-6 md:space-y-7">
-              {/* Case Study Navigation - Links to other case studies */}
-              <CaseStudyNav />
-              
-              {/* Main Title - Split REPORTCASTER into two lines */}
-              <motion.h1 
-                variants={heroTitleVariant}
-                initial="hidden"
-                animate="visible"
-                className="text-[var(--text-primary-dark)] text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif leading-[0.95] tracking-tighter break-words"
-              >
-                {heroTitle === 'REPORTCASTER' ? (
-                  <>
-                    REPORT<br />
-                    CASTER
-                  </>
-                ) : (
-                  heroTitle
-                )}
-              </motion.h1>
 
               {/* Combined Subtitle - heroSubheading and heroSubtitle as one paragraph */}
               <motion.p 
                 variants={heroSubVariant}
                 initial="hidden"
                 animate="visible"
-                className="text-[var(--text-muted-dark)] text-base sm:text-lg md:text-xl font-serif italic leading-relaxed"
+                className="text-[var(--text-muted-light)] text-base sm:text-lg md:text-xl font-serif italic leading-relaxed tracking-normal"
               >
                 {heroSubheading && <>{heroSubheading} </>}
                 {heroSubtitle}
@@ -171,7 +183,7 @@ export default function HeroMeta({
                     href={dataSheetUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[var(--text-muted-dark)] hover:text-[var(--accent-teal)] transition-colors duration-200 text-sm sm:text-base font-sans"
+                    className="inline-flex items-center gap-1.5 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-normal text-sm sm:text-base font-sans"
                   >
                     <svg
                       className="w-3.5 h-3.5"
@@ -196,26 +208,26 @@ export default function HeroMeta({
                 <div className="space-y-3 text-sm">
                   {/* Role */}
                   <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
+                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
                       Role
                     </span>
-                    <span className="text-[var(--text-primary-dark)] font-sans">{role}</span>
+                    <span className="text-[var(--text-primary-light)] font-sans">{role}</span>
                   </div>
                   
                   {/* Company */}
                   <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
+                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
                       Company
                     </span>
-                    <span className="text-[var(--text-primary-dark)] font-sans">{company}</span>
+                    <span className="text-[var(--text-primary-light)] font-sans">{company}</span>
                   </div>
                   
                   {/* Timeframe */}
                   <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-dark)] text-xs uppercase tracking-wider font-sans font-medium opacity-50 w-[90px] flex-shrink-0">
+                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
                       Timeframe
                     </span>
-                    <span className="text-[var(--text-primary-dark)] font-sans">{timeframe}</span>
+                    <span className="text-[var(--text-primary-light)] font-sans">{timeframe}</span>
                   </div>
                 </div>
                 
@@ -225,7 +237,7 @@ export default function HeroMeta({
                     {scope.map((item, index) => (
                       <span
                         key={index}
-                        className="text-[var(--text-muted-dark)] text-[11px] uppercase tracking-widest font-sans px-2.5 py-1 rounded-full border border-[var(--accent-teal)]/40"
+                        className="text-[var(--text-primary-light)]/80 text-[11px] uppercase tracking-widest font-sans px-2.5 py-1 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5"
                       >
                         {item}
                       </span>
@@ -235,33 +247,33 @@ export default function HeroMeta({
               </div>
             </div>
 
-            {/* Right Column: Laptop Visual - Macro Photography Feel */}
+            {/* Right Column: Laptop Visual - Macro Photography Feel with Enhanced Composition */}
             {coverImage && (
               <motion.div 
-                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-12 overflow-visible"
+                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible lg:pt-8"
                 variants={fadeIn}
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Enhanced Glow Effect - Larger and More Visible */}
+                {/* Subtle black shadow glow behind laptop for floating effect */}
                 <div
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
                   style={{
-                    background: 'radial-gradient(ellipse at center, rgba(67, 56, 202, 0.4) 0%, rgba(37, 99, 235, 0.3) 30%, rgba(30, 27, 75, 0.2) 50%, transparent 70%)',
-                    filter: 'blur(80px)',
-                    width: '80%',
-                    height: '80%',
+                    background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
+                    filter: 'blur(60px)',
+                    width: '85%',
+                    height: '85%',
                   }}
                 />
-
-                {/* Laptop Container - Fixed Size for Consistency */}
+                
+                {/* Laptop Container - Floating animation */}
                 <div
-                  className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float w-full"
+                  className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float w-full z-10"
                   style={{
-                    '--laptop-scale': '1.4625',
+                    '--laptop-scale': '1.5',
                     transformOrigin: 'center center',
-                    maxWidth: '600px',
+                    maxWidth: '650px',
                     width: '100%',
                   } as React.CSSProperties}
                   onClick={() => openLightbox(coverImage.src, coverImage.alt)}
@@ -271,7 +283,7 @@ export default function HeroMeta({
                     style={{ 
                       aspectRatio: '16/10',
                       width: '100%',
-                      maxWidth: '600px',
+                      maxWidth: '650px',
                     }}
                   >
                     <Image
@@ -281,9 +293,6 @@ export default function HeroMeta({
                       className="object-contain"
                       priority
                       sizes="(max-width: 1024px) 100vw, 600px"
-                      style={{
-                        filter: 'drop-shadow(0 20px 60px rgba(67, 56, 202, 0.3))',
-                      }}
                     />
                   </div>
                 </div>

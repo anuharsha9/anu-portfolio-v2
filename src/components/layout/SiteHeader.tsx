@@ -66,7 +66,7 @@ export default function SiteHeader() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 bg-[var(--bg-dark)] backdrop-blur-md shadow-lg transition-all duration-500 ${isVisible
-        ? 'opacity-100 translate-y-0 border-b border-white/10 h-auto'
+        ? 'opacity-100 translate-y-0 border-b border-refined-dark h-auto'
         : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden border-b border-transparent'
         }`}
       style={{ zIndex: 10000, isolation: 'isolate', position: 'fixed' }}

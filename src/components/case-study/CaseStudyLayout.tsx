@@ -27,8 +27,7 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner'
 // Dynamic imports for heavy components - loaded on demand with loading states
 // Note: Next.js requires options to be object literals, not variables
 const ProcessTimelineNav = dynamic(() => import('./ProcessTimelineNav'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
+  ssr: false
 })
 const ImpactVisual = dynamic(() => import('./ImpactVisual'), {
   ssr: false,
@@ -475,7 +474,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           </section>
         ) : (
           /* Default Locked Hero View for other case studies */
-          <section className="relative surface-dark overflow-hidden min-h-[80vh] flex items-center">
+          <section className="relative surface-light overflow-hidden min-h-[80vh] flex items-center">
             <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
 
               <div className="max-w-2xl mx-auto text-center space-y-8 py-16 md:py-24">
@@ -487,7 +486,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   className="flex justify-center"
                 >
                   <svg
-                    className="w-16 h-16 md:w-20 md:h-20 text-white/60"
+                    className="w-16 h-16 md:w-20 md:h-20 text-[var(--text-muted-light)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -506,7 +505,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-white text-3xl md:text-4xl lg:text-5xl font-serif leading-tight"
+                  className="text-[var(--text-primary-light)] text-3xl md:text-4xl lg:text-5xl font-serif leading-tight"
                 >
                   Unification of all ML and AI features project.
                 </motion.h1>
@@ -516,7 +515,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-white/80 text-base md:text-lg leading-relaxed"
+                  className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed"
                 >
                   This case study is locked due to confidential company information and can&apos;t be made public. Please enter password to view this case study.
                 </motion.p>
@@ -526,18 +525,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
         )
       ) : (
         /* Normal Hero View */
-        <section className="relative surface-dark overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
-
-            {/* Social Share Buttons */}
-            <div className="pb-4">
-              <SocialShareButtons
-                title={data.heroTitle}
-                url={`${typeof window !== 'undefined' ? window.location.origin : ''}/work/${data.slug}`}
-                description={data.heroSubtitle}
-              />
-            </div>
-
+        <section className="relative surface-light overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-20">
             <HeroMeta
               heroTitle={data.heroTitle}
               heroSubheading={data.heroSubheading}
@@ -558,6 +547,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               dataSheetLabel={data.quickOverview.dataSheetLabel}
               publicDemoUrl={data.quickOverview.publicDemoUrl}
               publicDemoLabel={data.quickOverview.publicDemoLabel}
+              shareUrl={`${typeof window !== 'undefined' ? window.location.origin : ''}/work/${data.slug}`}
             />
           </div>
         </section>
@@ -688,6 +678,64 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               />
             </div>
           )}
+        </>
+      )}
+
+      {/* D.E.S.I.G.N. Framework Navigation - Appears after Transformation in Motion, always visible */}
+      {(() => {
+        const shouldShow = data.frameworkConnection && 
+          (data.slug === 'reportcaster' || data.slug === 'ml-functions' || data.slug === 'iq-plugin') &&
+          data.frameworkConnection.principles && 
+          data.frameworkConnection.principles.length > 0
+        
+        if (!shouldShow || !data.frameworkConnection) return null
+        
+        const mappedPrinciples = data.frameworkConnection.principles.map((principle, index) => {
+          // Map framework principles to sections based on case study
+          let sectionId = ''
+
+          if (data.slug === 'reportcaster') {
+            // ReportCaster mapping - 6 sections for D.E.S.I.G.N.
+            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
+            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
+            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
+            else if (principle.letter === 'I') sectionId = 'version-iteration' // Iterate with Inclusion
+            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
+            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
+          } else if (data.slug === 'ml-functions') {
+            // ML Functions mapping - 6 sections for D.E.S.I.G.N.
+            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
+            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
+            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
+            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
+            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
+            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
+          } else if (data.slug === 'iq-plugin') {
+            // IQ Plugin mapping - 6 sections for D.E.S.I.G.N.
+            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
+            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
+            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
+            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
+            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
+            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
+          }
+
+          return {
+            id: `framework-${principle.letter.toLowerCase()}`,
+            letter: principle.letter,
+            title: principle.title,
+            sectionId: sectionId || `section-0${index + 1}`, // Fallback
+          }
+        })
+        
+        return <ProcessTimelineNav principles={mappedPrinciples} />
+      })()}
+
+      {/* ============================================
+          CASE STUDY CONTENT (Only visible when unlocked)
+          ============================================ */}
+      {(showPasswordContent || !data.passwordGate) && (
+        <>
 
           {/* D.E.S.I.G.N. Framework Connection - surface-light */}
           {data.frameworkConnection && (
@@ -738,13 +786,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           {data.publicSections &&
             data.publicSections.map((section, index) => {
               const isDiscoverySection = section.id === 'section-01' || section.id === 'section-02'
-              const sectionBg =
-                isDiscoverySection
-                  ? 'surface-light'
-                  : index % 2 === 0
-                    ? 'surface-light'
-                    : 'surface-dark-alt'
-              const borderClass = sectionBg.includes('dark') ? 'border-white/5' : 'border-black/5'
+              const sectionBg = 'surface-light'
+              const borderClass = sectionBg.includes('dark') ? 'border-refined-dark' : 'border-refined-light'
 
               return (
                 <div key={section.id}>
@@ -773,60 +816,19 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           ============================================ */}
       {(showPasswordContent || !data.passwordGate) && data.frameworkConnection && (
         <>
-          {/* D.E.S.I.G.N. Framework Navigation */}
-          <ProcessTimelineNav
-            principles={data.frameworkConnection.principles.map((principle, index) => {
-              // Map framework principles to sections based on case study
-              let sectionId = ''
-
-              if (data.slug === 'reportcaster') {
-                // ReportCaster mapping - 6 sections for D.E.S.I.G.N.
-                if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-                else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-                else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-                else if (principle.letter === 'I') sectionId = 'version-iteration' // Iterate with Inclusion
-                else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-                else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-              } else if (data.slug === 'ml-functions') {
-                // ML Functions mapping - 6 sections for D.E.S.I.G.N.
-                if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-                else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-                else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-                else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
-                else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-                else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-              } else if (data.slug === 'iq-plugin') {
-                // IQ Plugin mapping - 6 sections for D.E.S.I.G.N.
-                if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-                else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-                else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-                else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
-                else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-                else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-              }
-
-              return {
-                id: `framework-${principle.letter.toLowerCase()}`,
-                letter: principle.letter,
-                title: principle.title,
-                sectionId: sectionId || `section-0${index + 1}`, // Fallback
-              }
-            })}
-          />
-
           {/* Gated Header */}
-          <MotionSection className="surface-dark py-8 md:py-12">
-            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-              <div className="space-y-4 text-center">
-                <h2 className="text-white text-3xl md:text-4xl font-serif">
-                  Full in-depth Case study
-                </h2>
-                <p className="text-white/80 text-base md:text-lg leading-relaxed">
-                  Full narrative, step-by-step story, and reflections.
-                </p>
+          <MotionSection className="surface-light py-8 md:py-12">
+              <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                <div className="space-y-4 text-center">
+                  <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
+                    Full in-depth Case study
+                  </h2>
+                  <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
+                    Full narrative, step-by-step story, and reflections.
+                  </p>
+                </div>
               </div>
-            </div>
-          </MotionSection>
+            </MotionSection>
 
           {/* All Sections (always visible, sensitive content locked) */}
           {data.sections.map((section, index) => {
@@ -841,20 +843,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               (data.slug === 'ml-functions' && section.id === 'section-06') ||
               (data.slug === 'iq-plugin' && section.id === 'section-06')
 
-            // Group sections by theme for better visual flow - more variety
+            // All sections are light now
             let sectionBg = 'surface-light'
-            if (isVersionSection) {
-              sectionBg = 'surface-dark-alt'
-            } else if (isDiscoverySection) {
-              // D and E sections: alternate
-              sectionBg = index % 2 === 0 ? 'surface-light' : 'surface-dark-alt'
-            } else if (isOutcomeSection) {
-              // N section: dark for contrast
-              sectionBg = 'surface-dark-alt'
-            } else {
-              // S, I, G sections: alternate more aggressively
-              sectionBg = index % 2 === 0 ? 'surface-dark-alt' : 'surface-light'
-            }
 
             // Remove top borders for cleaner look - only keep if transitioning from different background
             const borderClass = '' // Removed borders for cleaner separation
@@ -874,16 +864,15 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                         {/* Section Header */}
                         <div className="space-y-4 mb-8">
                           <div className="flex items-baseline gap-4">
-                            <span className={`${sectionBg === 'surface-light' ? 'bg-black/5' : 'bg-white/10'} ${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5 rounded border ${sectionBg === 'surface-light' ? 'border-black/10' : 'border-white/10'}`}>
+                            <span className={`${sectionBg === 'surface-light' ? 'bg-black/5' : 'bg-white/10'} ${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5`}>
                               {section.index}
                             </span>
-                            <div className={`h-px flex-1 ${sectionBg === 'surface-light' ? 'bg-black/10' : 'bg-white/10'}`}></div>
                           </div>
-                          <h2 className={`${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-3xl md:text-4xl font-serif leading-tight`}>
+                          <h2 className={`${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-3xl md:text-4xl font-serif leading-snug tracking-tight`}>
                             {section.title}
                           </h2>
                           {section.summary && (
-                            <div className={`bg-gradient-to-r ${sectionBg === 'surface-light' ? 'from-[var(--accent-teal)]/10 to-[var(--accent-teal)]/5' : 'from-[var(--accent-teal)]/20 to-[var(--accent-teal)]/10'} rounded-xl p-4 md:p-5 border ${sectionBg === 'surface-light' ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/40'}`}>
+                            <div className={`${sectionBg === 'surface-light' ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-4 md:p-5`}>
                               <div className="flex items-start gap-3">
                                 <div className="flex-shrink-0 mt-0.5">
                                   <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1157,12 +1146,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </MotionSection>
                     {/* UX Principles - In Simplify section (S) */}
                     {data.uxPrinciples && (
-                      <MotionSection className="surface-dark-alt py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20">
+                      <MotionSection className="surface-light py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20">
                         <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <UXPrinciples
                             title={data.uxPrinciples.title}
                             intro={data.uxPrinciples.intro}
                             principles={data.uxPrinciples.principles}
+                            isLightBackground={true}
                           />
                         </div>
                       </MotionSection>
@@ -1270,9 +1260,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       </div>
                     </MotionSection>
                     {/* Pattern Connections Visual - ReportCaster only */}
-                    <MotionSection className="surface-dark-alt py-8 md:py-12">
+                    <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <PatternConnections isLightBackground={false} />
+                        <PatternConnections isLightBackground={true} />
                       </div>
                     </MotionSection>
                   </>
@@ -1347,12 +1337,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </MotionSection>
                     {/* UX Principles - In Simplify section (S) */}
                     {data.uxPrinciples && (
-                      <MotionSection className="surface-dark-alt py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20">
+                      <MotionSection className="surface-light py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20">
                         <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <UXPrinciples
                             title={data.uxPrinciples.title}
                             intro={data.uxPrinciples.intro}
                             principles={data.uxPrinciples.principles}
+                            isLightBackground={true}
                           />
                         </div>
                       </MotionSection>
@@ -1369,6 +1360,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           title={data.uxPrinciples.title}
                           intro={data.uxPrinciples.intro}
                           principles={data.uxPrinciples.principles}
+                          isLightBackground={false}
                         />
                       </div>
                     </MotionSection>

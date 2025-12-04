@@ -18,7 +18,7 @@ const SimpleLockIcon = ({ message, isLightBackground }: { message: string; isLig
   const iconColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/60'
 
   return (
-    <div className={`flex flex-col items-center justify-center py-12 md:py-16 space-y-4 ${isLightBackground ? 'bg-white/5' : 'bg-black/10'} rounded-lg border ${isLightBackground ? 'border-black/10' : 'border-white/10'}`}>
+    <div className={`flex flex-col items-center justify-center py-12 md:py-16 space-y-4 ${isLightBackground ? 'bg-white/5' : 'bg-black/10'}`}>
       <svg
         className={`w-12 h-12 ${iconColor}`}
         fill="none"
@@ -295,20 +295,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
   // Use dark colors for light backgrounds, light colors for dark backgrounds
   const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const mutedColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/70'
+  const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
   const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
   const dividerColor = isLightBackground ? 'bg-black/10' : 'bg-white/10'
 
-  // Shadow only on light backgrounds
+  // Light shadow for depth, minimal design
   const imageShadow = isLightBackground
-    ? 'shadow-[0_4px_12px_rgba(0,0,0,0.15)]'
+    ? 'elevation-sm'
     : ''
-  const imageBorderRadius = 'rounded-[10px]'
-  // Add outline to prevent cut-off feeling with rounded corners
-  const imageOutline = isLightBackground
-    ? 'outline outline-1 outline-black/5 outline-offset-[-1px]'
-    : 'outline outline-1 outline-white/5 outline-offset-[-1px]'
+  const imageBorderRadius = 'rounded'
+  // No outline for cleaner look
+  const imageOutline = ''
 
   const images = section.images || []
   const imageGroups = images.length > 6 ? createImageGroups(images) : null
@@ -353,13 +351,12 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   const sectionHeader = (
     <div className="space-y-4">
       <div className="flex items-baseline gap-4">
-        <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5 rounded border ${borderColor}`}>
+        <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5`}>
           {frameworkMapping && frameworkMapping[section.id] ? frameworkMapping[section.id] : section.index}
         </span>
-        <div className={`h-px flex-1 ${dividerColor}`}></div>
       </div>
       <div className="flex items-start gap-3">
-        <h2 className={`${textColor} text-3xl md:text-4xl font-serif leading-tight flex-1`}>
+        <h2 className={`${textColor} text-3xl md:text-4xl font-serif leading-snug tracking-tight flex-1`}>
           {section.title}
           {section.id === 'version-3' && (
             <span className="block mt-2 text-xl md:text-2xl font-normal italic" style={{ color: 'var(--accent-teal)' }}>
@@ -371,7 +368,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Section Summary (TL;DR) */}
       {section.summary && (
-        <div className={`bg-gradient-to-r ${isLightBackground ? 'from-[var(--accent-teal)]/10 to-[var(--accent-teal)]/5' : 'from-[var(--accent-teal)]/20 to-[var(--accent-teal)]/10'} rounded-xl p-4 md:p-5 border ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/40'}`}>
+        <div className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-4 md:p-5`}>
           <div className="flex items-start gap-3">
             <div className="flex-shrink-0 mt-0.5">
               <svg className="w-5 h-5 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -393,7 +390,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
           {section.methodologies.map((method, index) => (
             <span
               key={index}
-              className={`${isLightBackground ? 'bg-black/5 border-black/10' : 'bg-white/10 border-white/20'} ${textColor} text-xs px-3 py-1 rounded-full border font-medium`}
+              className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-xs px-3 py-1 font-medium`}
             >
               {method}
             </span>
@@ -410,7 +407,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
             {metrics.slice(0, 5).map((metric, index) => (
               <span
                 key={index}
-                className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10 border-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/40'} text-[var(--accent-teal)] text-xs px-3 py-1 rounded-full border font-semibold`}
+                className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} text-[var(--accent-teal)] text-xs px-3 py-1 font-semibold`}
               >
                 {metric}
               </span>
@@ -426,17 +423,11 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     <div className="space-y-6">
       {/* "What this reveals" - Prominent Callout at Top */}
       {section.revealsPoints && Array.isArray(section.revealsPoints) && section.revealsPoints.length > 0 && (
-        <div className={`bg-gradient-to-br ${isLightBackground ? 'from-[var(--accent-teal)]/15 to-[var(--accent-teal)]/8' : 'from-[var(--accent-teal)]/25 to-[var(--accent-teal)]/15'} rounded-xl p-6 md:p-8 border-2 ${isLightBackground ? 'border-[var(--accent-teal)]/40' : 'border-[var(--accent-teal)]/50'} shadow-lg`}>
+        <div className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-6 md:p-8`}>
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
-              <div className="h-px flex-1 bg-[var(--accent-teal)]/30"></div>
-              <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold`}>
-                {section.revealsTitle || 'What this reveals'}
-              </h3>
-              <div className="h-px flex-1 bg-[var(--accent-teal)]/30"></div>
-              <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
-            </div>
+            <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold`}>
+              {section.revealsTitle || 'What this reveals'}
+            </h3>
             <ul className="space-y-3">
               {section.revealsPoints.map((point, index) => (
                 <li key={`reveal-${index}`} className={`${textColor} text-sm md:text-base leading-relaxed flex items-start gap-3`}>
@@ -550,7 +541,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                     const imageContent = (
                                       <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                         <div
-                                          className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                          className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90`}
                                           onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
                                         >
                                           <Image
@@ -594,7 +585,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               const imageContent = (
                                 <div key={`sub-img-full-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -646,7 +637,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               {subsection.images.length > 6 && (
                                 <button
                                   onClick={() => setShowAllScheduleDialogImages(!showAllScheduleDialogImages)}
-                                  className={`px-4 py-2 rounded-lg border ${borderColor} ${bgColor} ${textColor} text-sm font-medium hover:opacity-90 transition-all duration-300 flex items-center gap-2`}
+                                  className={`px-4 py-2 ${bgColor} ${textColor} text-sm font-medium hover:opacity-90 transition-opacity duration-300 flex items-center gap-2`}
                                 >
                                   <span>{showAllScheduleDialogImages ? 'Show Less' : `Show All ${subsection.images.length}`}</span>
                                   <svg
@@ -697,7 +688,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                                   return (
                                     <div key={`sub-img-${subIndex}-${imgIndex + startIndex}`} className="group space-y-2">
                                       <div
-                                        className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.03] hover:shadow-xl bg-black/5`}
+                                        className={`relative w-full aspect-[4/3] ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90 bg-black/5`}
                                         onClick={() => openLightbox(image.src, image.alt, image.caption, subsection.images?.filter(img => !img.fullWidth), imgIndex)}
                                       >
                                         <Image
@@ -748,7 +739,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               const imageContent = (
                                 <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -815,7 +806,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               ) : (
                                 <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -848,14 +839,14 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                       onClick={() => toggleSubsection(subIndex)}
                       aria-label={`${isExpanded ? 'Collapse' : 'Expand'} subsection: ${subsection.title}`}
                       aria-expanded={isExpanded}
-                      className={`w-full text-left ${bgColor} ${imageBorderRadius} border-2 ${isExpanded ? 'border-[var(--accent-teal)]/60' : borderColor} p-6 hover:border-[var(--accent-teal)]/40 hover:shadow-lg transition-all duration-300`}
+                      className={`w-full text-left ${bgColor} p-6 transition-opacity duration-300 hover:opacity-90`}
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div className="flex-1 space-y-3">
                           <div className="flex items-center gap-3">
                             <h3 className={`${textColor} text-lg md:text-xl font-serif`}>{subsection.title}</h3>
                             {subsection.images && subsection.images.length > 0 && (
-                              <span className={`px-3 py-1 rounded-full text-xs font-semibold border-2`} style={{
+                              <span className={`px-3 py-1 text-xs font-semibold`} style={{
                                 backgroundColor: isExpanded ? 'var(--accent-teal)' : 'transparent',
                                 color: isExpanded ? 'white' : 'var(--accent-teal)',
                                 borderColor: 'var(--accent-teal)'
@@ -864,7 +855,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               </span>
                             )}
                             {isTextOnlySubsection && (
-                              <span className={`px-3 py-1 rounded-full text-xs font-semibold border-2`} style={{
+                              <span className={`px-3 py-1 text-xs font-semibold`} style={{
                                 backgroundColor: 'transparent',
                                 color: 'var(--accent-teal)',
                                 borderColor: 'var(--accent-teal)'
@@ -906,7 +897,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     {isExpanded && (
                       <div className="space-y-8 pl-2">
                         {subsection.quote && (
-                          <div className={`${bgColor} rounded-lg p-6 md:p-8 border-l-4 border-[var(--accent-teal)]`}>
+                          <div className={`${bgColor} p-6 md:p-8`}>
                             <p className={`${textColor} italic text-lg md:text-xl leading-relaxed`}>
                               &quot;{subsection.quote.text}&quot;
                             </p>
@@ -1000,7 +991,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                               ) : (
                                 <div key={`sub-img-${subIndex}-${imgIndex}`} className="space-y-2 p-2">
                                   <div
-                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg`}
+                                    className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} cursor-pointer transition-opacity duration-300 hover:opacity-90`}
                                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                                   >
                                     <Image
@@ -1076,17 +1067,17 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {/* Before/After Comparison */}
       {section.beforeAfter && (
         <div className="space-y-4">
-          {(section.beforeAfter.before.sensitive === true ? false : actuallyUnlocked) ? (
+          {(section.beforeAfter.before.sensitive || section.beforeAfter.after?.sensitive) && !actuallyUnlocked ? (
+            <SimpleLockIcon
+              message="Before/after comparison"
+              isLightBackground={isLightBackground}
+            />
+          ) : (
             <BeforeAfterComparison
               beforeImage={section.beforeAfter.before}
               afterImage={section.beforeAfter.after}
               beforeLabel={section.beforeAfter.beforeLabel}
               afterLabel={section.beforeAfter.afterLabel}
-              isLightBackground={isLightBackground}
-            />
-          ) : (
-            <SimpleLockIcon
-              message="Before/after comparison"
               isLightBackground={isLightBackground}
             />
           )}
@@ -1197,7 +1188,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               const imageContent = image.fullWidth ? (
                 <div className="w-screen relative left-[calc(50%-50vw)]">
                   <div
-                    className="relative w-full cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.02] hover:shadow-lg"
+                    className="relative w-full cursor-pointer transition-opacity duration-300 hover:opacity-90"
                     onClick={() => openLightbox(image.src, image.alt, image.caption)}
                   >
                     <Image
@@ -1357,7 +1348,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     {!isFirstGroup && (
                       <button
                         onClick={() => toggleGroup(groupIndex)}
-                        className={`w-full flex items-center justify-between p-4 ${bgColor} ${imageBorderRadius} border ${borderColor} hover:opacity-90 transition-all`}
+                        className={`w-full flex items-center justify-between p-4 ${bgColor} hover:opacity-90 transition-opacity`}
                       >
                         <span className={`${textColor} text-sm font-medium`}>
                           {group[0].caption?.split(':')[0] || `View ${group.length} images`}
@@ -1701,7 +1692,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {/* Story - Full Width Below Visual (revealsPoints now shown at top) */}
       {!renderBodyAtTop && section.body && (
         <div className="space-y-4">
-          <div className={`${bgColor} rounded-lg p-6 md:p-8 border ${borderColor}`}>
+          <div className={`${bgColor} p-6 md:p-8`}>
             <div className={`${mutedColor} leading-relaxed text-base md:text-lg space-y-4`}>
               {/* Only parse Aha moments for ReportCaster */}
               {caseStudySlug === 'reportcaster' ? (
@@ -1753,7 +1744,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 {section.bullets.map((bullet, index) => (
                   <div
                     key={`bullet-${index}`}
-                    className={`flex gap-3 p-4 rounded-lg ${bgColor} border ${borderColor} hover:opacity-90 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-300`}
+                    className={`flex gap-3 p-4 ${bgColor} hover:opacity-90 transition-opacity duration-300`}
                   >
                     <span className={`text-[var(--accent-teal)] text-base font-mono flex-shrink-0 mt-0.5 font-semibold`}>
                       {String(index + 1).padStart(2, '0')}

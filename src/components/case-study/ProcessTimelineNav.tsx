@@ -18,7 +18,6 @@ interface ProcessTimelineNavProps {
 export default function ProcessTimelineNav({ principles, isLightBackground = false }: ProcessTimelineNavProps) {
   const pathname = usePathname()
   const [activePrinciple, setActivePrinciple] = useState<string | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
   const [showLeftIndicator, setShowLeftIndicator] = useState(false)
   const [showRightIndicator, setShowRightIndicator] = useState(false)
   const [currentBgIsLight, setCurrentBgIsLight] = useState(false)
@@ -28,6 +27,9 @@ export default function ProcessTimelineNav({ principles, isLightBackground = fal
 
   // Check if we're on a case study page (where main nav is hidden)
   const isCaseStudy = pathname?.startsWith('/case-study') || 
+                      pathname?.includes('/work/reportcaster') || 
+                      pathname?.includes('/work/ml-functions') || 
+                      pathname?.includes('/work/iq-plugin') ||
                       pathname?.includes('/reportcaster') || 
                       pathname?.includes('/ml-functions') || 
                       pathname?.includes('/iq-plugin')
@@ -107,36 +109,11 @@ export default function ProcessTimelineNav({ principles, isLightBackground = fal
     }
   }
 
-  // Show/hide nav based on scroll position - appear after scrolling past video/prototype section
-  // Also detect current background color for dynamic text color
+  // Detect current background color for dynamic text color
   useEffect(() => {
     if (typeof window === 'undefined') return
 
     const handleScroll = () => {
-      // Check if we've scrolled past the prototype/video section
-      const prototypeSection = document.getElementById('prototype')
-      const frameworkSection = document.getElementById('framework-connection')
-      
-      if (prototypeSection && frameworkSection) {
-        const prototypeRect = prototypeSection.getBoundingClientRect()
-        const frameworkRect = frameworkSection.getBoundingClientRect()
-        
-        // Show nav when:
-        // 1. User has scrolled past the prototype section (bottom of prototype is above viewport)
-        // 2. AND the framework section is in view or approaching
-        const hasScrolledPastPrototype = prototypeRect.bottom < window.innerHeight
-        const isFrameworkInView = frameworkRect.top < window.innerHeight && frameworkRect.bottom > 0
-        
-        setIsVisible(hasScrolledPastPrototype && isFrameworkInView)
-      } else if (frameworkSection) {
-        // Fallback: if no prototype section, show when framework is in view
-        const rect = frameworkSection.getBoundingClientRect()
-        setIsVisible(rect.top < window.innerHeight && rect.bottom > 0)
-      } else {
-        // Final fallback: show after scrolling past 800px
-        setIsVisible(window.scrollY > 800)
-      }
-
       // Detect current background color by checking the section at the top of viewport
       const navElement = document.querySelector('[aria-label="D.E.S.I.G.N. Framework navigation"]')
       if (navElement) {
@@ -212,20 +189,24 @@ export default function ProcessTimelineNav({ principles, isLightBackground = fal
     }
   }, [])
 
-  if (!isVisible) return null
+  // Early return if no principles (after all hooks)
+  if (!principles || principles.length === 0) {
+    return null
+  }
 
+  // Always visible - no conditional rendering
   const bgColor = currentBgIsLight ? 'bg-white/95' : 'bg-[var(--bg-dark)]/95'
   const borderColor = currentBgIsLight ? 'border-black/10' : 'border-white/20'
 
-  // On case study pages, main nav is hidden, so nav should be at top-0
+  // On case study pages, header is visible, so nav should be below it (header is ~64px tall)
   // On other pages, nav should be at top-16 to account for main nav
-  const topPosition = isCaseStudy ? 'top-0' : 'top-16'
+  const topPosition = isCaseStudy ? 'top-16' : 'top-16' // Always below header
 
   return (
     <nav 
       className={`fixed ${topPosition} left-0 right-0 z-[9999] ${bgColor} backdrop-blur-md border-b ${borderColor} shadow-lg transition-all duration-300`}
       aria-label="D.E.S.I.G.N. Framework navigation"
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 9998, display: 'block', visibility: 'visible', opacity: 1 }}
     >
       <div className="relative">
         <div 

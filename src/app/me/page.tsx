@@ -48,12 +48,12 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* SECTION 1 — HERO WITH SIGNATURE */}
-      <MotionSection className="surface-dark py-12 xs:py-14 sm:py-16 md:py-20 border-t border-white/5 relative overflow-hidden">
+      <MotionSection className="surface-light py-12 xs:py-14 sm:py-16 md:py-20 border-t border-black/5 relative overflow-hidden">
         {/* Animated Logo Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[250px] h-[300px] xs:w-[300px] xs:h-[350px] sm:w-[350px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px]">
             <AnimatedSignatureLogo
-              className="w-full h-full text-white opacity-[0.05]"
+              className="w-full h-full text-[var(--text-primary-light)] opacity-[0.05]"
               duration={100000}
               pauseDuration={4000}
               autoPlay={true}
@@ -77,7 +77,7 @@ export default function AboutPage() {
 
             {/* Intro Video */}
             <div className="max-w-md mx-auto" style={{ width: '80%', maxWidth: '358px' }}>
-              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/10 bg-[var(--bg-dark-alt)] shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-black/10 bg-white/50 shadow-sm">
                 <CustomVideoPlayer
                   src="/videos/intro-video.mp4"
                   poster="/images/intro-video-poster.jpg"
@@ -90,7 +90,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 2 — ORIGIN STORY */}
-      <MotionSection className="surface-dark-alt py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-white/5">
+      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -102,11 +102,11 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-white/40 text-sm font-mono uppercase tracking-wider">01</span>
-                <div className="h-px flex-1 bg-white/10 max-w-md"></div>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">01</span>
+                <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
-              <h2 className="text-white text-3xl md:text-4xl font-serif leading-tight">
+              <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif leading-tight">
                 Where it started
               </h2>
             </div>
@@ -115,7 +115,7 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4">
               {/* Photo - Left Side */}
               <div ref={imageContainerRef} style={imageHeight ? { maxHeight: `${imageHeight}px` } : {}}>
-                <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center" style={imageHeight ? { maxHeight: `${imageHeight}px`, height: `${imageHeight}px`, width: 'fit-content' } : { width: 'fit-content' }}>
+                <div className="relative rounded-2xl overflow-hidden border border-black/10 bg-white/50 flex items-center justify-center" style={imageHeight ? { maxHeight: `${imageHeight}px`, height: `${imageHeight}px`, width: 'fit-content' } : { width: 'fit-content' }}>
                   <Image
                     src="/images/anu-photo.jpeg"
                     alt="Anuja Harsha Nimmagadda"
@@ -139,8 +139,8 @@ export default function AboutPage() {
 
               {/* Content - Right Side */}
               <div ref={textTileRef} style={{ width: '70%', maxWidth: '600px' }}>
-                <div className="bg-white/5 rounded-lg p-6 md:p-8 border border-white/10">
-                  <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed">
+                <div className="bg-white/50 rounded-lg p-6 md:p-8 border border-black/10">
+                  <div className="space-y-4 text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
                     <p>
                       I discovered design at age 15. What started as early curiosity around visual storytelling quickly evolved into a deeper fascination with problem-solving — how to make complex systems understandable, how to bring order to chaos, and how to help people feel confident in tools that seemed overwhelming at first.
                     </p>

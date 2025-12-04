@@ -117,7 +117,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
 
             {/* Menu Panel */}
             <motion.div
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[var(--bg-dark)] border-l border-white/10 lg:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[var(--bg-dark)] border-l border-refined-dark lg:hidden flex flex-col"
               style={{
                 height: '100vh',
                 maxHeight: '100vh',
@@ -134,7 +134,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="p-6 border-b border-white/10 flex-shrink-0">
+              <div className="p-6 border-b border-refined-dark flex-shrink-0">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-8 h-8">
                     <AnimatedSignatureLogo
@@ -210,7 +210,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
               </nav>
 
               {/* Footer */}
-              <div className="p-6 border-t border-white/10 flex-shrink-0">
+              <div className="p-6 border-t border-refined-dark flex-shrink-0">
                 <p className="text-white/40 text-xs text-center">
                   © {new Date().getFullYear()}
                 </p>

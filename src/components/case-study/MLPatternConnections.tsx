@@ -9,7 +9,7 @@ interface MLPatternConnectionsProps {
 export default function MLPatternConnections({ isLightBackground = false }: MLPatternConnectionsProps) {
   const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
   const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
   const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
   const accentColor = 'var(--accent-teal)'
 
@@ -38,7 +38,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
   ]
 
   return (
-    <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
+    <div className={`${bgColor} p-8 md:p-12`}>
       <div className="space-y-8">
         {/* Header */}
         <div className="text-center space-y-3">
@@ -70,8 +70,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
                 <Link
                   key={pattern.id}
                   href={pattern.link}
-                  className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 h-full transition-all duration-300 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] block`}
-                  style={{ borderColor: accentColor }}
+                  className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border ${borderColor} p-6 md:p-8 h-full block hover-lift transition-all duration-normal`}
                 >
                   {content}
                 </Link>
@@ -81,8 +80,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
             return (
               <div
                 key={pattern.id}
-                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-6 md:p-8 h-full transition-all duration-300 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
-                style={{ borderColor: accentColor }}
+                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border ${borderColor} elevation-sm p-6 md:p-8 h-full`}
               >
                 {content}
               </div>

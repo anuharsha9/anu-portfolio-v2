@@ -20,15 +20,15 @@ export default function SignatureWordmark({
     <div className={`flex flex-col items-center gap-4 md:gap-6 ${className}`}>
       {/* Signature Logo - larger on desktop */}
       <div className="w-20 h-20 md:w-28 md:h-28">
-        <SignatureLogo className="w-full h-full text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)]" />
+        <SignatureLogo className="w-full h-full text-[#1A1A1A]" />
       </div>
 
       {/* Name and Tagline */}
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-[var(--text-primary-light)] dark:text-[var(--text-primary-dark)] leading-tight">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-[#1A1A1A] leading-tight">
           {headline}
         </h1>
-        <p className="text-sm md:text-base text-[var(--text-muted-light)] dark:text-[var(--text-muted-dark)] font-sans">
+        <p className="text-sm md:text-base text-[var(--text-muted-light)] font-sans">
           {subline}
         </p>
       </div>

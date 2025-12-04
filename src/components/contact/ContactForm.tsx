@@ -125,11 +125,11 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
   }
 
   const bgColor = isLightBackground ? 'bg-white' : 'bg-black/10'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
   const textColor = isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'
   const mutedColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/60'
   const inputBg = isLightBackground ? 'bg-white' : 'bg-white/5'
-  const inputBorder = isLightBackground ? 'border-black/10' : 'border-white/10'
+  const inputBorder = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
   const inputFocus = isLightBackground
     ? 'focus:border-[var(--accent-teal)] focus:ring-[var(--accent-teal)]/20'
     : 'focus:border-white/30 focus:ring-white/10'

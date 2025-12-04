@@ -42,12 +42,12 @@ export default function SocialShareButtons({
   }
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <span className="text-sm text-white/60 hidden sm:inline">Share:</span>
+    <div className={`flex items-center gap-3 ${className}`} style={{ display: 'flex', visibility: 'visible', opacity: 1 }}>
+      <span className="text-sm text-[var(--text-muted-light)] hidden sm:inline">Share:</span>
       <div className="flex items-center gap-2">
         <button
           onClick={shareToTwitter}
-          className="p-2 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+          className="p-2 rounded-lg border border-black/10 bg-white/50 hover:bg-white/70 hover:border-black/20 transition-all duration-200 text-[var(--text-primary-light)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
           aria-label="Share on Twitter"
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -56,7 +56,7 @@ export default function SocialShareButtons({
         </button>
         <button
           onClick={shareToLinkedIn}
-          className="p-2 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+          className="p-2 rounded-lg border border-black/10 bg-white/50 hover:bg-white/70 hover:border-black/20 transition-all duration-200 text-[var(--text-primary-light)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
           aria-label="Share on LinkedIn"
         >
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -65,7 +65,7 @@ export default function SocialShareButtons({
         </button>
         <button
           onClick={copyLink}
-          className="p-2 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/30 transition-all duration-200 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+          className="p-2 rounded-lg border border-black/10 bg-white/50 hover:bg-white/70 hover:border-black/20 transition-all duration-200 text-[var(--text-primary-light)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
           aria-label={copied ? 'Link copied' : 'Copy link'}
         >
           {copied ? (

@@ -44,7 +44,7 @@ const frameworkItems = [
 
 export default function ExecutiveSummary() {
   return (
-    <section id="executive-summary" className="surface-dark-alt py-8 xs:py-10 sm:py-12 md:py-16 border-t border-white/5 relative overflow-hidden">
+    <section id="executive-summary" className="surface-light py-8 xs:py-10 sm:py-12 md:py-16 relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,14 +57,14 @@ export default function ExecutiveSummary() {
             <div className="flex flex-col items-center gap-3 md:gap-4">
               {/* Signature Logo - smaller than watermark */}
               <div className="w-16 h-16 md:w-20 md:h-20">
-                <SignatureLogo className="w-full h-full text-white" />
+                <SignatureLogo className="w-full h-full text-[var(--text-primary-light)]" />
               </div>
               {/* Name and Tagline */}
               <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-text-primary-dark leading-tight">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-serif text-[var(--text-primary-light)] leading-tight">
                   Anuja Harsha Nimmagadda
                 </h1>
-                <p className="text-sm md:text-base text-text-muted-dark font-sans">
+                <p className="text-sm md:text-base text-[var(--text-muted-light)] font-sans">
                   Designer · Strategist · Systems Thinker
                 </p>
               </div>
@@ -73,14 +73,13 @@ export default function ExecutiveSummary() {
 
           {/* Header - Simplified */}
           <div className="text-center space-y-2 max-w-4xl mx-auto mb-8">
-            <h2 className="text-text-primary-dark text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif leading-tight relative">
+            <h2 className="text-[var(--text-primary-light)] text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight">
               D.E.S.I.G.N. Framework
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60 mt-2"></span>
             </h2>
-            <p className="text-text-muted-dark text-sm md:text-base font-bold leading-relaxed pt-2">
+            <p className="text-[var(--text-muted-light)] text-sm md:text-base font-bold leading-relaxed pt-2">
               It&apos;s how I think, lead, and deliver impact and become a valuable asset to any team.
             </p>
-            <p className="text-text-muted-dark text-sm md:text-base font-light leading-relaxed">
+            <p className="text-[var(--text-muted-light)] text-sm md:text-base font-light leading-relaxed">
               This framework distills 13 years of my design career — the insights and process I&apos;ve found myself returning to, because it works.
             </p>
           </div>
@@ -101,30 +100,23 @@ export default function ExecutiveSummary() {
                     delay: index * 0.08,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group space-y-3 p-5 md:p-6 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10 transition-all duration-300"
+                  className="group space-y-3 p-5 md:p-6 rounded-lg border border-refined-light bg-white/50 hover:bg-white/70 hover-lift transition-all duration-normal"
                 >
-                  {/* Decorative line element */}
-                  <div className="flex items-baseline gap-3 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0 opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="h-px flex-1 bg-white/10"></div>
-                    <div className="h-px w-8 bg-[var(--accent-teal)] opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-
                   {/* Title with Drop Cap */}
-                  <h3 className="text-text-primary-dark text-xl md:text-2xl font-serif font-medium leading-tight flex items-baseline relative">
-                    <span className="text-[var(--accent-teal)] text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-none mr-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif font-medium leading-snug flex items-baseline relative">
+                    <span className="text-[var(--accent-teal)] text-4xl md:text-5xl lg:text-6xl font-bold font-serif leading-none mr-2 opacity-90 group-hover:opacity-100 transition-opacity duration-normal tracking-tight">
                       {firstLetter}
                     </span>
-                    <span className="group-hover:text-white/90 transition-colors duration-300">{restOfTitle}</span>
+                    <span className="group-hover:text-[var(--accent-teal)] transition-colors duration-normal">{restOfTitle}</span>
                   </h3>
 
                   {/* Description with integrated outcome */}
-                  <p className="text-text-muted-dark text-sm md:text-base leading-relaxed clear-left">
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed clear-left">
                     {item.mainText}
                   </p>
                   {/* Key takeaway - visually distinct but not teal */}
-                  <div className="mt-3 pt-3 border-t border-white/5">
-                    <p className="text-white/90 text-sm md:text-base leading-relaxed italic font-light">
+                  <div className="mt-3 pt-3">
+                    <p className="text-[var(--text-primary-light)] text-sm md:text-base leading-relaxed italic font-light">
                       {item.lastSentence}
                     </p>
                   </div>
@@ -138,9 +130,9 @@ export default function ExecutiveSummary() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center pt-4 md:pt-6 mt-4 md:mt-6 border-t border-white/10"
+            className="text-center pt-4 md:pt-6 mt-4 md:mt-6"
           >
-            <p className="text-text-primary-dark text-base xs:text-lg sm:text-xl md:text-2xl font-serif leading-tight italic max-w-4xl mx-auto">
+            <p className="text-[var(--text-primary-light)] text-base xs:text-lg sm:text-xl md:text-2xl font-serif leading-tight italic max-w-4xl mx-auto">
               I don&apos;t just design; I make clarity operational — across people, systems, and products.
             </p>
           </motion.div>

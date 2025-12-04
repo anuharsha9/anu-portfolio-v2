@@ -17,17 +17,17 @@ export default function CaseStudyNav() {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm pb-6">
+    <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm">
       {otherCaseStudies.map((cs, index) => (
         <span key={cs.slug} className="flex items-center">
           <Link
             href={`/work/${cs.slug}`}
-            className="text-white/70 hover:text-[var(--accent-teal)] transition-colors duration-200 text-sm"
+            className="text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-normal text-sm"
           >
             {cs.title.split(':')[0].trim()}
           </Link>
           {index < otherCaseStudies.length - 1 && (
-            <span className="text-white/40 mx-2">·</span>
+            <span className="text-[var(--text-muted-light)]/50 mx-2">·</span>
           )}
         </span>
       ))}

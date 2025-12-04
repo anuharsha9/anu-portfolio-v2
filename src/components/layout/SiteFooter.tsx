@@ -44,7 +44,7 @@ export default function SiteFooter() {
 
   return (
     <footer
-      className="surface-dark-alt border-t border-white/10"
+      className="surface-dark-alt border-t border-refined-dark"
     >
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">

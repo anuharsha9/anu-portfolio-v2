@@ -163,7 +163,7 @@ export default function WebFOCUSInitiativeRow({
                 </ul>
 
                 {/* Impact Line */}
-                <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed font-medium pt-3 border-t border-black/10">
+                <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed font-medium pt-3 border-t border-refined-light">
                   {impact}
                 </p>
               </div>
@@ -281,7 +281,7 @@ export default function WebFOCUSInitiativeRow({
           </ul>
 
           {/* Impact Line */}
-          <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed font-medium pt-3 border-t border-black/10">
+          <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed font-medium pt-3 border-t border-refined-light">
             {impact}
           </p>
 
