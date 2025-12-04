@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import MotionSection from '@/components/ui/MotionSection'
 import WebFOCUSInitiativeRow from './WebFOCUSInitiativeRow'
@@ -83,11 +84,11 @@ export default function WebFOCUSOverview() {
                 My recent work
               </p>
               <h2 className="text-[var(--text-primary-light)] text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
-                Modernizing WebFOCUS at Cloud Software Group
+              Modernizing WebFOCUS at Cloud Software Group
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
-              </h2>
-            </div>
-            
+            </h2>
+          </div>
+
             {/* Company Logo & Case Study Links */}
             <div className="flex justify-center items-center gap-3 pt-2 flex-wrap">
               <a
@@ -113,7 +114,7 @@ export default function WebFOCUSOverview() {
                 </svg>
               </a>
               <span className="text-[var(--text-muted-light)]/40">·</span>
-              <a
+              <Link
                 href="/work/reportcaster"
                 className="flex items-center gap-2 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-300 group"
                 aria-label="View ReportCaster case study"
@@ -132,7 +133,7 @@ export default function WebFOCUSOverview() {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 

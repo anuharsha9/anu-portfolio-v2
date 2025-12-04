@@ -48,7 +48,7 @@ export default function BeforeAfterVideo({
     if (typeof window !== 'undefined') {
       const storageKey = `case-study-unlocked-${caseStudySlug}`
       const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-      
+
       // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
       if (caseStudySlug === 'iq-plugin') {
         setIsUnlocked(caseUnlocked)
@@ -63,13 +63,13 @@ export default function BeforeAfterVideo({
   const handleUnlock = () => {
     const trimmedPassword = passwordInput.trim().toLowerCase()
     const correctPassword = password.toLowerCase()
-    
+
     if (trimmedPassword === correctPassword) {
       setPasswordError('')
       // Unlock the entire case study
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
-        
+
         // IQ Plugin only sets its own unlock (doesn't set global unlock)
         if (caseStudySlug === 'iq-plugin') {
           sessionStorage.setItem(storageKey, 'true')
@@ -78,7 +78,7 @@ export default function BeforeAfterVideo({
           sessionStorage.setItem('portfolio-globally-unlocked', 'true')
           sessionStorage.setItem(storageKey, 'true')
         }
-        
+
         setIsUnlocked(true)
         setShowPasswordModal(false)
         // Dispatch custom event to notify parent components
@@ -149,37 +149,28 @@ export default function BeforeAfterVideo({
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={() => setActiveVideo('before')}
-          aria-label="Show before video only"
-          aria-pressed={activeVideo === 'before'}
-          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
-            activeVideo === 'before'
+          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${activeVideo === 'before'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
               : `${borderColor} ${mutedColor} hover:opacity-90`
-          }`}
+            }`}
         >
           Before Only
         </button>
         <button
           onClick={() => setActiveVideo('both')}
-          aria-label="Show before and after videos side by side"
-          aria-pressed={activeVideo === 'both'}
-          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
-            activeVideo === 'both'
+          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${activeVideo === 'both'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
               : `${borderColor} ${mutedColor} hover:opacity-90`
-          }`}
+            }`}
         >
           Side-by-Side
         </button>
         <button
           onClick={() => setActiveVideo('after')}
-          aria-label="Show after video only"
-          aria-pressed={activeVideo === 'after'}
-          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
-            activeVideo === 'after'
+          className={`px-6 py-2 rounded-lg border transition-all duration-300 ${activeVideo === 'after'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
               : `${borderColor} ${mutedColor} hover:opacity-90`
-          }`}
+            }`}
         >
           After Only
         </button>
@@ -187,18 +178,12 @@ export default function BeforeAfterVideo({
 
       {/* Video Container */}
       <div
-        className={`grid gap-6 ${
-          activeVideo === 'both' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'
-        }`}
+        className={`grid gap-6 ${activeVideo === 'both' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'
+          }`}
       >
         {/* Before Video */}
         {(activeVideo === 'before' || activeVideo === 'both') && (
           <div className="space-y-4">
-            {!isBeforeVideoPublic && !isUnlocked && (
-              <p className={`${mutedColor} text-sm md:text-base leading-relaxed italic`}>
-                Note: The legacy workflow video is under NDA and requires password access to view.
-              </p>
-            )}
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></div>
               <h3 className={`${textColor} text-xl font-serif font-semibold`}>{before.title}</h3>
@@ -206,7 +191,7 @@ export default function BeforeAfterVideo({
             {before.description && (
               <p className={`${mutedColor} text-sm leading-relaxed`}>{before.description}</p>
             )}
-            <div 
+            <div
               className="relative w-full aspect-video rounded-xl border-2 border-red-500/30 bg-black overflow-hidden shadow-lg cursor-pointer group"
               onClick={(e) => handleVideoClick(e, true)}
             >
@@ -252,7 +237,7 @@ export default function BeforeAfterVideo({
                         src={before.videoUrl}
                         className="rounded-xl"
                         onPlay={handleBeforePlay}
-                        // No poster prop - don't show poster when unlocked
+                      // No poster prop - don't show poster when unlocked
                       />
                     )
                   )}
@@ -272,7 +257,7 @@ export default function BeforeAfterVideo({
             {after.description && (
               <p className={`${mutedColor} text-sm leading-relaxed`}>{after.description}</p>
             )}
-            <div 
+            <div
               className="relative w-full aspect-video rounded-xl border-2 border-[var(--accent-teal)] bg-gradient-to-br from-[var(--bg-dark-alt)] to-[var(--bg-dark)] overflow-hidden shadow-lg cursor-pointer group"
               onClick={(e) => handleVideoClick(e, false)}
             >

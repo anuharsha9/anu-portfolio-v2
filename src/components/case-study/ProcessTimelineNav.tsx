@@ -107,20 +107,33 @@ export default function ProcessTimelineNav({ principles, isLightBackground = fal
     }
   }
 
-  // Show/hide nav based on scroll position - appear after scrolling past framework section
+  // Show/hide nav based on scroll position - appear after scrolling past video/prototype section
   // Also detect current background color for dynamic text color
   useEffect(() => {
     if (typeof window === 'undefined') return
 
     const handleScroll = () => {
-      // Check if we've scrolled past the framework connection section
+      // Check if we've scrolled past the prototype/video section
+      const prototypeSection = document.getElementById('prototype')
       const frameworkSection = document.getElementById('framework-connection')
-      if (frameworkSection) {
+      
+      if (prototypeSection && frameworkSection) {
+        const prototypeRect = prototypeSection.getBoundingClientRect()
+        const frameworkRect = frameworkSection.getBoundingClientRect()
+        
+        // Show nav when:
+        // 1. User has scrolled past the prototype section (bottom of prototype is above viewport)
+        // 2. AND the framework section is in view or approaching
+        const hasScrolledPastPrototype = prototypeRect.bottom < window.innerHeight
+        const isFrameworkInView = frameworkRect.top < window.innerHeight && frameworkRect.bottom > 0
+        
+        setIsVisible(hasScrolledPastPrototype && isFrameworkInView)
+      } else if (frameworkSection) {
+        // Fallback: if no prototype section, show when framework is in view
         const rect = frameworkSection.getBoundingClientRect()
-        // Show nav when framework section has scrolled past the top of viewport
-        setIsVisible(rect.bottom < 0)
+        setIsVisible(rect.top < window.innerHeight && rect.bottom > 0)
       } else {
-        // Fallback: show after scrolling past 800px (approximate position of framework section)
+        // Final fallback: show after scrolling past 800px
         setIsVisible(window.scrollY > 800)
       }
 
@@ -210,8 +223,9 @@ export default function ProcessTimelineNav({ principles, isLightBackground = fal
 
   return (
     <nav 
-      className={`fixed ${topPosition} left-0 right-0 z-40 ${bgColor} backdrop-blur-md border-b ${borderColor} shadow-lg transition-all duration-300`}
+      className={`fixed ${topPosition} left-0 right-0 z-[9999] ${bgColor} backdrop-blur-md border-b ${borderColor} shadow-lg transition-all duration-300`}
       aria-label="D.E.S.I.G.N. Framework navigation"
+      style={{ zIndex: 9999 }}
     >
       <div className="relative">
         <div 

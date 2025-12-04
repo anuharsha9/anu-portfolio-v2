@@ -575,34 +575,7 @@ export function HeroBrain() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <motion.span
-                        animate={{
-                          opacity: [0.5, 1, 0.5]
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="inline-block text-[var(--accent-teal)]"
-                      >
-                        →
-                      </motion.span>
                       <span>Hover on the gears to explore</span>
-                      <motion.span
-                        animate={{
-                          opacity: [0.5, 1, 0.5]
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.5
-                        }}
-                        className="inline-block text-[var(--accent-teal)]"
-                      >
-                        →
-                      </motion.span>
                     </motion.p>
                   </motion.div>
                 )}
@@ -641,13 +614,13 @@ export function HeroBrain() {
                   className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
                 >
                   <svg
-                    className="w-4 h-4 md:w-5 md:h-5"
+                    className="w-4 h-4 md:w-5 md:h-5 text-[var(--accent-teal)]"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M8 5v14l11-7z" />
                   </svg>
-                  <span>Watch: Why I built this portfolio</span>
+                  <span>Why I built this portfolio</span>
                 </button>
 
                 {/* View my work - Secondary CTA */}
@@ -680,7 +653,7 @@ export function HeroBrain() {
                   }}
                   className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
                 >
-                  View my work
+                  Case Studies
                 </a>
               </motion.div>
             </motion.div>
@@ -846,34 +819,7 @@ export function HeroBrain() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <motion.span
-                        animate={{
-                          opacity: [0.5, 1, 0.5]
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                        className="inline-block text-[var(--accent-teal)]"
-                      >
-                        →
-                      </motion.span>
                       <span>Hover on the gears to explore</span>
-                      <motion.span
-                        animate={{
-                          opacity: [0.5, 1, 0.5]
-                        }}
-                        transition={{
-                          duration: 2.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.5
-                        }}
-                        className="inline-block text-[var(--accent-teal)]"
-                      >
-                        →
-                      </motion.span>
                     </motion.p>
                   </motion.div>
                 )}
@@ -912,13 +858,13 @@ export function HeroBrain() {
                   className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 h-4 text-[var(--accent-teal)]"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M8 5v14l11-7z" />
                   </svg>
-                  <span>Watch: Why I built this portfolio</span>
+                  <span>Why I built this portfolio</span>
                 </button>
 
                 {/* View my work - Secondary CTA */}
@@ -951,7 +897,7 @@ export function HeroBrain() {
                   }}
                   className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
                 >
-                  View my work
+                  Case Studies
                 </a>
               </motion.div>
             </motion.div>

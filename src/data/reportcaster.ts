@@ -528,7 +528,7 @@ The key insight: You don't need to rebuild everything from scratch. Understand t
         title: 'Legacy RC Workflow',
         videoUrl: '/videos/rc-old-workflow.mp4', // 5 min video of old RC UI workflow
         videoPoster: '/images/case-study/ReportCaster/rc-old-workflow-poster.jpg',
-        description: 'The old fragmented workflow: multiple disconnected interfaces, 4–6 clicks to create a schedule, hidden functionality in legacy menus.',
+        description: 'The old fragmented workflow: multiple disconnected interfaces, 4–6 clicks to create a schedule, hidden functionality in legacy menus. Note: The legacy workflow video is under NDA and requires password access to view.',
       },
       after: {
         title: 'New Unified Workflow',
