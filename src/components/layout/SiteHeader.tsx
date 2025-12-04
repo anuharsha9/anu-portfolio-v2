@@ -7,11 +7,15 @@ import { AnimatedSignatureLogo } from '@/components/brand'
 import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 import { useScrollManager } from '@/hooks/useScrollManager'
 import MobileMenu from './MobileMenu'
+import NavDropdown from './NavDropdown'
 
 export default function SiteHeader() {
   const pathname = usePathname()
   const isLandingPage = pathname === '/'
   const isCaseStudyPage = pathname?.startsWith('/work/') ?? false
+
+  // Shared state to ensure only one dropdown is open at a time
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
   // Always visible on case study pages, otherwise start hidden
   const [isVisible, setIsVisible] = useState(isCaseStudyPage)
@@ -87,61 +91,56 @@ export default function SiteHeader() {
         <div className="flex items-center gap-4 md:gap-6">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-4 md:gap-6">
-            <Link
-              href="/#work-overview"
-              className="text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault()
-                if (pathname === '/') {
-                  // Already on homepage, wait a bit then scroll with proper offset
-                  setTimeout(() => {
-                    const section = document.getElementById('work-overview')
-                    if (section) {
-                      // Account for both main nav (60px) and section nav (60px) if visible
-                      const mainNavHeight = 60
-                      const sectionNavHeight = 60
-                      const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
-                      const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
-                      const offset = totalNavHeight + 20 // Extra padding
-
-                      const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
-                      const offsetPosition = Math.max(0, elementPosition - offset)
-
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth',
-                      })
-
-                      // Update URL hash
-                      window.history.pushState(null, '', '#work-overview')
+            <NavDropdown
+              label="Case Studies"
+              items={[
+                {
+                  label: 'Recent Work Overview',
+                  href: '/#work-overview',
+                  onClick: () => {
+                    if (pathname === '/') {
+                      setTimeout(() => {
+                        const section = document.getElementById('work-overview')
+                        if (section) {
+                          const mainNavHeight = 60
+                          const sectionNavHeight = 60
+                          const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
+                          const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
+                          const offset = totalNavHeight + 20
+                          const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
+                          const offsetPosition = Math.max(0, elementPosition - offset)
+                          window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+                          window.history.pushState(null, '', '#work-overview')
+                        }
+                      }, 100)
                     }
-                  }, 100)
-                } else {
-                  // On other pages (case studies, /me), navigate to home with hash
-                  window.location.href = '/#work-overview'
-                }
+                  },
+                },
+                { label: 'ReportCaster', href: '/work/reportcaster' },
+                { label: 'ML Functions', href: '/work/ml-functions' },
+                { label: 'IQ Plugin', href: '/work/iq-plugin' },
+              ]}
+              isOpen={openDropdown === 'case-studies'}
+              onOpenChange={(open) => {
+                // When opening, ensure only this dropdown is open
+                setOpenDropdown(open ? 'case-studies' : null)
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent-teal)'
+            />
+            <NavDropdown
+              label="Me"
+              items={[
+                { label: 'Intro Video', href: '/me#intro-video' },
+                { label: 'Origin Story', href: '/me#origin-story' },
+                { label: 'How I Work with AI', href: '/me#how-i-work-with-ai' },
+                { label: 'Design Writings & Essays', href: '/me#design-writings' },
+                { label: 'Who I Am Outside of Work', href: '/me#outside-of-work' },
+              ]}
+              isOpen={openDropdown === 'me'}
+              onOpenChange={(open) => {
+                // When opening, ensure only this dropdown is open
+                setOpenDropdown(open ? 'me' : null)
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'white'
-              }}
-            >
-              Case Studies
-            </Link>
-            <Link
-              href="/me"
-              className="text-white transition-colors"
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent-teal)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'white'
-              }}
-            >
-              Me
-            </Link>
+            />
             <Link
               href="/#lets-talk"
               className="text-white transition-colors"

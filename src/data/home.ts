@@ -213,6 +213,15 @@ export interface Recommendation {
   relationship: string
 }
 
+export interface ADPListReview {
+  quote: string
+  name: string
+  role?: string
+  company?: string
+  rating?: number
+  date?: string
+}
+
 export const recommendations: Recommendation[] = [
   {
     quote: 'From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design.',

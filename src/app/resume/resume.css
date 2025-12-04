@@ -1,0 +1,239 @@
+/* Resume Styling - Portfolio-inspired, ATS-optimized */
+
+/* Import portfolio fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
+
+/* Screen styles - subtle portfolio styling */
+.resume-container {
+  min-height: 100vh;
+  background: var(--bg-light, #FAFAF9);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.resume-content {
+  max-width: 8.5in;
+  width: 100%;
+  background: white;
+  padding: 1.5in;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #111111;
+}
+
+/* Contact Info */
+.contact-info {
+  text-align: center;
+  margin-bottom: 24pt;
+  padding-bottom: 12pt;
+  border-bottom: 2pt solid var(--accent-teal, #0D9488);
+}
+
+.contact-info strong {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18pt;
+  display: block;
+  margin-bottom: 8pt;
+  color: #111111;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.contact-details {
+  font-size: 10pt;
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* Headings */
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 14pt;
+  font-weight: 400;
+  margin-top: 16pt;
+  margin-bottom: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1.5pt solid var(--accent-teal, #0D9488);
+  padding-bottom: 4pt;
+  color: #111111;
+}
+
+h2 {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 12pt;
+  font-weight: 600;
+  margin-top: 10pt;
+  margin-bottom: 6pt;
+  color: #111111;
+}
+
+/* Job Titles and Dates */
+.job-title {
+  font-weight: 600;
+  font-size: 11pt;
+  color: #111111;
+  margin-bottom: 4pt;
+}
+
+.job-title .date {
+  float: right;
+  font-weight: 400;
+  color: #666666;
+  font-size: 10pt;
+}
+
+.company {
+  font-style: italic;
+  color: #666666;
+  font-size: 10pt;
+  margin-bottom: 8pt;
+}
+
+.job-description {
+  margin-top: 8pt;
+  margin-bottom: 8pt;
+  text-align: justify;
+  color: #111111;
+}
+
+/* Lists */
+ul {
+  margin: 6pt 0;
+  padding-left: 20pt;
+}
+
+li {
+  margin-bottom: 4pt;
+  color: #111111;
+  line-height: 1.5;
+}
+
+/* Skills List */
+.skills-list {
+  display: block;
+  margin: 8pt 0;
+  line-height: 1.8;
+}
+
+.skills-list span {
+  display: inline-block;
+  margin-right: 12pt;
+  margin-bottom: 4pt;
+  color: #111111;
+}
+
+/* Summary */
+.summary {
+  margin: 8pt 0;
+  text-align: justify;
+  color: #111111;
+  line-height: 1.6;
+}
+
+.summary strong {
+  color: #111111;
+  font-weight: 600;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 14pt;
+}
+
+.key-achievements {
+  margin-top: 8pt;
+  font-weight: 600;
+  color: #111111;
+  font-size: 11pt;
+}
+
+.education-list {
+  margin-top: 8pt;
+}
+
+.education-list .job-title {
+  margin-top: 6pt;
+}
+
+/* Print Styles - ATS Optimized */
+@media print {
+  @page {
+    margin: 0.7in;
+    size: letter;
+  }
+
+  .resume-container {
+    padding: 0;
+    background: white;
+  }
+
+  .resume-content {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    background: white;
+  }
+
+  /* Ensure colors print */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  /* Remove browser print headers and footers */
+  @page {
+    @top-center { content: ""; }
+    @top-left { content: ""; }
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+    @bottom-left { content: ""; }
+    @bottom-right { content: ""; }
+  }
+
+  /* Page breaks */
+  h1 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure text is black for ATS */
+  body, .resume-content {
+    color: #000000 !important;
+  }
+
+  h1, h2, .job-title, .key-achievements {
+    color: #000000 !important;
+  }
+
+  /* Keep teal accent for headings border (subtle) */
+  h1 {
+    border-bottom-color: #0D9488;
+  }
+
+  .contact-info {
+    border-bottom-color: #0D9488;
+  }
+}
+
+/* Screen-only enhancements */
+@media screen {
+  .resume-content {
+    border-radius: 8px;
+  }
+
+  h1:hover {
+    border-bottom-color: var(--accent-teal-700, #0F766E);
+  }
+}
+

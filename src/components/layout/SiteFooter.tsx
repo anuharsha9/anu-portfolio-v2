@@ -64,13 +64,29 @@ export default function SiteFooter() {
             <nav className="hidden md:flex flex-wrap items-center justify-center gap-4 md:gap-6">
               <Link
                 href="/#work-overview"
-                onClick={(e) => handleSectionClick(e, 'work-overview')}
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (pathname === '/') {
+                    // Already on homepage, scroll to section
+                    handleSectionClick(e, 'work-overview')
+                  } else {
+                    // Navigate to landing page work overview section
+                    router.push('/#work-overview')
+                  }
+                }}
                 className="text-text-muted-dark hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 Case Studies
               </Link>
               <Link
                 href="/me"
+                onClick={(e) => {
+                  // Always navigate to /me page (landing)
+                  if (pathname !== '/me') {
+                    e.preventDefault()
+                    router.push('/me')
+                  }
+                }}
                 className="text-text-muted-dark hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 About Me

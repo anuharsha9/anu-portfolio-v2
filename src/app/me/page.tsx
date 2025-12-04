@@ -18,6 +18,8 @@ export default function AboutPage() {
   const [imageHeight, setImageHeight] = useState<number | null>(null)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const updateImageHeight = () => {
       if (textTileRef.current) {
         const textHeight = textTileRef.current.offsetHeight
@@ -40,11 +42,11 @@ export default function AboutPage() {
     // Also listen to window resize
     window.addEventListener('resize', updateImageHeight)
 
-    return () => {
-      resizeObserver.disconnect()
-      window.removeEventListener('resize', updateImageHeight)
-    }
-  }, [])
+      return () => {
+        resizeObserver.disconnect()
+        window.removeEventListener('resize', updateImageHeight)
+      }
+    }, [])
   return (
     <main className="min-h-screen">
       {/* SECTION 1 — HERO WITH SIGNATURE */}

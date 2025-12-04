@@ -6,6 +6,65 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AnimatedSignatureLogo } from '@/components/brand'
 
+interface MobileDropdownProps {
+  label: string
+  items: Array<{ label: string; href: string }>
+  onItemClick: () => void
+}
+
+function MobileDropdown({ label, items, onItemClick }: MobileDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <div className="mb-2">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        aria-expanded={isOpen}
+      >
+        <span>{label}</span>
+        <svg
+          className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="pl-4 pt-2 space-y-1">
+              {items.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onItemClick}
+                  className="block px-6 py-3 rounded-lg text-white/80 text-base hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
 interface MobileMenuProps {
   isLandingPage?: boolean
 }
@@ -59,10 +118,19 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
   // Check if we're on landing page
   const isOnLandingPage = pathname === '/'
 
-  const mainNavLinks = [
-    { label: 'Work', href: '/#work-overview' },
-    { label: 'Me', href: '/me' },
-    { label: 'Contact', href: '/#lets-talk' },
+  const caseStudiesItems = [
+    { label: 'Recent Work Overview', href: '/#work-overview' },
+    { label: 'ReportCaster', href: '/work/reportcaster' },
+    { label: 'ML Functions', href: '/work/ml-functions' },
+    { label: 'IQ Plugin', href: '/work/iq-plugin' },
+  ]
+
+  const meItems = [
+    { label: 'Intro Video', href: '/me#intro-video' },
+    { label: 'Origin Story', href: '/me#origin-story' },
+    { label: 'How I Work with AI', href: '/me#how-i-work-with-ai' },
+    { label: 'Design Writings & Essays', href: '/me#design-writings' },
+    { label: 'Who I Am Outside of Work', href: '/me#outside-of-work' },
   ]
 
   const toggleMenu = () => {
@@ -173,16 +241,29 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
                     Navigation
                   </p>
-                  {mainNavLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  
+                  {/* Case Studies Dropdown */}
+                  <MobileDropdown
+                    label="Case Studies"
+                    items={caseStudiesItems}
+                    onItemClick={() => setIsOpen(false)}
+                  />
+                  
+                  {/* Me Dropdown */}
+                  <MobileDropdown
+                    label="Me"
+                    items={meItems}
+                    onItemClick={() => setIsOpen(false)}
+                  />
+                  
+                  <Link
+                    href="/#lets-talk"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    Contact
+                  </Link>
+                  
                   <a
                     href="/assets/Anuja-Nimmagadda-2025.pdf"
                     download="Anuja-Nimmagadda-Resume-2025.pdf"

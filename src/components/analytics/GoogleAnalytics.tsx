@@ -82,3 +82,18 @@ export const trackContactFormSubmit = (projectType?: string) => {
   trackEvent('submit_contact_form', 'Contact', projectType || 'General Inquiry')
 }
 
+// Helper function to track accessibility page views
+export const trackAccessibilityPageView = () => {
+  trackEvent('view_accessibility_page', 'Page View', 'Accessibility Statement')
+}
+
+// Helper function to track PWA install prompts
+export const trackPWAInstallPrompt = () => {
+  trackEvent('pwa_install_prompt', 'PWA', 'Install Prompt Shown')
+}
+
+// Helper function to track PWA installs
+export const trackPWAInstall = () => {
+  trackEvent('pwa_install', 'PWA', 'App Installed')
+}
+
