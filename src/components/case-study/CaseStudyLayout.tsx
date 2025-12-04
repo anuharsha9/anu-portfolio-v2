@@ -389,6 +389,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               demoVideoUrl2={data.quickOverview.demoVideoUrl2}
               demoVideoLabel2={data.quickOverview.demoVideoLabel2}
               dataSheetUrl={data.quickOverview.dataSheetUrl}
+              status={data.status}
               dataSheetLabel={data.quickOverview.dataSheetLabel}
               publicDemoUrl={data.quickOverview.publicDemoUrl}
               publicDemoLabel={data.quickOverview.publicDemoLabel}

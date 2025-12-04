@@ -26,7 +26,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
     let currentSection = ''
     
     // Check sections in reverse order (from bottom to top)
-    for (let i = sections.length - 1; i >= 0; i--) {
+      for (let i = sections.length - 1; i >= 0; i--) {
       const element = document.getElementById(sections[i].id)
       if (element) {
         const rect = element.getBoundingClientRect()
@@ -38,8 +38,8 @@ export default function SectionNav({ sections }: SectionNavProps) {
           break
         }
       }
-    }
-    
+      }
+
     // If no section found, use the first one
     if (!currentSection && sections.length > 0) {
       currentSection = sections[0].id

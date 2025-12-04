@@ -120,11 +120,11 @@ export default function ImageLightbox({
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute -top-12 right-0 z-10 text-white/80 hover:text-white transition-colors p-2"
+                className="absolute top-4 right-4 z-10 text-white/90 hover:text-white transition-colors p-2 bg-black/50 hover:bg-black/70 rounded-full backdrop-blur-sm"
                 aria-label="Close lightbox"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-6 h-6 md:w-7 md:h-7"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -201,7 +201,7 @@ export default function ImageLightbox({
 
               {/* Image Counter */}
               {hasNavigation && (
-                <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 z-10 text-white/60 text-sm">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-white/70 text-sm font-medium bg-black/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
                   {currentIndex + 1} / {images.length}
                 </div>
               )}

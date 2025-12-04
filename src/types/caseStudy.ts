@@ -186,6 +186,10 @@ export interface CaseStudyData {
   company: string
   timeframe: string
   scope: string[]
+  status?: {
+    label: string
+    variant?: 'live' | 'shipping' | 'development'
+  }
   quickOverview: QuickOverview
   versionTimeline: VersionNode[]
   uxPrinciples?: {

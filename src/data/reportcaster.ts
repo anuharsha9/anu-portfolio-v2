@@ -13,6 +13,10 @@ export const reportcasterCaseStudy: CaseStudyData = {
   role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2022–2025',
+  status: {
+    label: 'Live in Production',
+    variant: 'live' as const,
+  },
   scope: [
     'Enterprise UX',
     'Legacy modernization',
@@ -460,6 +464,8 @@ This version balanced platform architecture, engineering constraints, user menta
       body: `After defining the architecture (V3), UX was done. Time for UI.
 
 As I worked through hundreds of screens, the team assembled. But most had never seen RC end-to-end — engineers knew the backend, PMs knew features, support knew problems. No one understood the whole system.
+
+I led cross-functional alignment across engineering, product, and QA: validated technical feasibility with engineering (co-designed API contracts, balanced user needs with platform constraints), co-defined scope with product (advocated for user research to prevent costly rework), and collaborated with QA on test cases (provided UX rationale for error states and validation rules).
 
 I onboarded lead architect, lead engineer, full engineering squad, new PM, QA, documentation, and SMEs through dozens of demos. Each team member needed to understand not just their piece, but how RC worked as a unified system.
 

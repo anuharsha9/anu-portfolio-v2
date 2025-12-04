@@ -30,6 +30,10 @@ interface HeroMetaProps {
   publicDemoLabel?: string
   dataSheetUrl?: string
   dataSheetLabel?: string
+  status?: {
+    label: string
+    variant?: 'live' | 'shipping' | 'development'
+  }
 }
 
 export default function HeroMeta({
@@ -51,6 +55,7 @@ export default function HeroMeta({
   publicDemoLabel,
   dataSheetUrl,
   dataSheetLabel,
+  status,
 }: HeroMetaProps) {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
 
@@ -122,6 +127,37 @@ export default function HeroMeta({
                 {heroSubheading && <>{heroSubheading} </>}
                 {heroSubtitle}
               </motion.p>
+
+              {/* Status Badge - Subtle, informational */}
+              {status && (
+                <motion.div
+                  variants={heroSubVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="pt-2"
+                >
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans font-medium ${
+                      status.variant === 'live'
+                        ? 'bg-green-500/10 text-green-400/80 border border-green-500/20'
+                        : status.variant === 'shipping'
+                        ? 'bg-blue-500/10 text-blue-400/80 border border-blue-500/20'
+                        : 'bg-amber-500/10 text-amber-400/80 border border-amber-500/20'
+                    }`}
+                  >
+                    {status.variant === 'live' && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-400/80"></span>
+                    )}
+                    {status.variant === 'shipping' && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/80"></span>
+                    )}
+                    {status.variant === 'development' && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80"></span>
+                    )}
+                    {status.label}
+                  </span>
+                </motion.div>
+              )}
 
               {/* Data Sheet Link - Simple link style */}
               {dataSheetUrl && (

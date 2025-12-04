@@ -143,17 +143,14 @@ export default function BeforeAfterVideo({
         <p className={`${mutedColor} text-base md:text-lg leading-relaxed max-w-2xl mx-auto`}>
           Compare the old workflow with the new design side-by-side. These are actual video walkthroughs — the prototype walkthrough is created and narrated by me.
         </p>
-        {!isBeforeVideoPublic && !isUnlocked && (
-          <p className={`${mutedColor} text-sm md:text-base leading-relaxed max-w-2xl mx-auto italic`}>
-            Note: The legacy workflow video is under NDA and requires password access to view.
-          </p>
-        )}
       </div>
 
       {/* View Mode Toggle */}
       <div className="flex items-center justify-center gap-4">
         <button
           onClick={() => setActiveVideo('before')}
+          aria-label="Show before video only"
+          aria-pressed={activeVideo === 'before'}
           className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
             activeVideo === 'before'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
@@ -164,6 +161,8 @@ export default function BeforeAfterVideo({
         </button>
         <button
           onClick={() => setActiveVideo('both')}
+          aria-label="Show before and after videos side by side"
+          aria-pressed={activeVideo === 'both'}
           className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
             activeVideo === 'both'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
@@ -174,6 +173,8 @@ export default function BeforeAfterVideo({
         </button>
         <button
           onClick={() => setActiveVideo('after')}
+          aria-label="Show after video only"
+          aria-pressed={activeVideo === 'after'}
           className={`px-6 py-2 rounded-lg border transition-all duration-300 ${
             activeVideo === 'after'
               ? `${isLightBackground ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50' : 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50'} ${textColor} font-semibold`
@@ -193,6 +194,11 @@ export default function BeforeAfterVideo({
         {/* Before Video */}
         {(activeVideo === 'before' || activeVideo === 'both') && (
           <div className="space-y-4">
+            {!isBeforeVideoPublic && !isUnlocked && (
+              <p className={`${mutedColor} text-sm md:text-base leading-relaxed italic`}>
+                Note: The legacy workflow video is under NDA and requires password access to view.
+              </p>
+            )}
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></div>
               <h3 className={`${textColor} text-xl font-serif font-semibold`}>{before.title}</h3>

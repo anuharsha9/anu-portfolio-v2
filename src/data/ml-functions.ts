@@ -13,6 +13,10 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2024',
+  status: {
+    label: 'Shipping 2026',
+    variant: 'shipping' as const,
+  },
   scope: [
     'Enterprise UX',
     'ML workflows',
@@ -421,7 +425,9 @@ Locked Steps 1-2 (problem type, target) in Optimize flow — changing these crea
       title: 'Grow Through Constraints: Aligning and Leading the Team',
       body: `After mapping the existing workflow and understanding the problems (Section 02), I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
 
-I worked with Product to co-define scope, with Engineering to validate feasibility, with Data Scientists to validate ML logic, and with SMEs to exercise flows. Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation.
+I led alignment across product, engineering, data science, and QA: co-defined scope with product (pushed back on scope creep, advocated for phased releases), validated feasibility with engineering (translated UX requirements into technical specs, balanced user needs with constraints), validated ML logic with data scientists (10+ iterations on confusion matrix, balanced technical accuracy with scannable UX), and collaborated with QA on test cases (provided UX rationale for error states, eliminated dead-end errors).
+
+Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews. With our domain expert, collaboration was constant and deeply detailed — despite being remote, we maintained close alignment through structured meetings and clear documentation.
 
 I was also redesigning ReportCaster simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second. I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish). The team could execute because they understood the "why" behind every decision, not just the "what."`,
       revealsTitle: 'What this reveals',

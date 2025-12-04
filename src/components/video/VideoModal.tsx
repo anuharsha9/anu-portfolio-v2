@@ -44,7 +44,8 @@ export default function VideoModal({ isOpen, onClose, videoSrc, poster }: VideoM
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 flex items-center justify-center p-4"
+          style={{ zIndex: 20000 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -67,11 +68,12 @@ export default function VideoModal({ isOpen, onClose, videoSrc, poster }: VideoM
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors z-20"
+              className="absolute top-4 right-4 md:-top-12 md:right-0 text-white/90 hover:text-white transition-colors z-30 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              style={{ zIndex: 20001 }}
               aria-label="Close video"
             >
               <svg
-                className="w-8 h-8"
+                className="w-6 h-6 md:w-8 md:h-8"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

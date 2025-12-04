@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="w-[250px] h-[300px] xs:w-[300px] xs:h-[350px] sm:w-[350px] sm:h-[400px] md:w-[400px] md:h-[500px] lg:w-[500px] lg:h-[600px]">
             <AnimatedSignatureLogo
               className="w-full h-full text-white opacity-[0.05]"
-              duration={50000}
+              duration={100000}
               pauseDuration={4000}
               autoPlay={true}
             />
@@ -530,7 +530,7 @@ export default function AboutPage() {
           <div className="w-[400px] h-[500px] md:w-[500px] md:h-[600px]">
             <AnimatedSignatureLogo
               className="w-full h-full text-white opacity-[0.05]"
-              duration={50000}
+              duration={100000}
               pauseDuration={4000}
               autoPlay={true}
             />

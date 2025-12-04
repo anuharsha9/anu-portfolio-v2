@@ -13,6 +13,10 @@ export const iqPluginCaseStudy: CaseStudyData = {
   role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2024',
+  status: {
+    label: 'In Development',
+    variant: 'development' as const,
+  },
   scope: [
     'Enterprise UX',
     'DSML integration',
@@ -368,6 +372,8 @@ The final IQ experience breaks down into four interconnected pillars, each desig
 
 Designing IQ required balancing competing needs: technical depth vs. simplicity, multiple personas, and cross-functional alignment.
 
+I led alignment across multiple product teams, engineering, and QA: collaborated with PMs from HUB, Designer, and other feature teams (aligned on shared patterns, negotiated scope boundaries), validated technical feasibility with engineering (co-designed integration patterns, balanced user needs with platform architecture), and collaborated with QA on multi-persona test cases (provided UX rationale for dual-layer UX patterns).
+
 I addressed each challenge through progressive disclosure, iterative testing with both user types, and regular collaboration with PM, engineering, and QA. A lot of cross-functional collaboration was required with IQ — I collaborated with PMs from other feature teams like HUB and Designer because DSML reached everywhere. This wasn't just about designing within IQ; it was about ensuring IQ's patterns and integrations worked seamlessly across the entire WebFOCUS ecosystem.
 
 I onboarded the team onto the IQ vision and UX constraints through demos and documentation, ensuring consistency as the project evolved. The team could execute because they understood the "why" behind every decision, not just the "what."`,
@@ -457,13 +463,6 @@ IQ taught me to think in ecosystems, not just individual features. This wasn't a
         ],
       },
     },
-  },
-  // ----------------------------
-  // PASSWORD GATE (IQ Plugin requires independent unlock)
-  // ----------------------------
-  passwordGate: {
-    password: 'anu-access',
-    description: 'This case study contains sensitive company information and requires password access.',
   },
   // ----------------------------
   // D.E.S.I.G.N. FRAMEWORK CONNECTION

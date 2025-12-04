@@ -139,7 +139,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   <div className="w-8 h-8">
                     <AnimatedSignatureLogo
                       className="w-full h-full text-white"
-                      duration={8000}
+                      duration={16000}
                       pauseDuration={2000}
                     />
                   </div>

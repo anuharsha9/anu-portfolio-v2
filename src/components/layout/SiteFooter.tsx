@@ -67,7 +67,7 @@ export default function SiteFooter() {
                 onClick={(e) => handleSectionClick(e, 'work-overview')}
                 className="text-text-muted-dark hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
-                Work
+                Case Studies
               </Link>
               <Link
                 href="/me"
