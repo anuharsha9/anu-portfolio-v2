@@ -110,10 +110,6 @@ export default function SiteFooter() {
             </div>
             <span className="hidden md:inline text-text-muted-dark/30">·</span>
             <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 lg:gap-4">
-              <p className="text-text-muted-dark text-xs text-center md:text-left italic hidden md:block">
-                Built from scratch via vibe-coding
-              </p>
-              <span className="hidden md:inline text-text-muted-dark/30">·</span>
               <div className="text-text-muted-dark text-xs md:text-sm">
                 © {currentYear}
               </div>

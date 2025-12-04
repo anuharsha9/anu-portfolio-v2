@@ -155,7 +155,7 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 3 — WHAT I'M KNOWN FOR & HOW I THINK */}
+      {/* SECTION 3 — HOW I WORK WITH AI */}
       <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
@@ -168,7 +168,132 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">02</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">03</span>
+                <div className="h-px flex-1 bg-black/10 max-w-md"></div>
+                <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
+              </div>
+              <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
+                How I Design & Ship with AI
+              </h2>
+              <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-3xl mx-auto">
+                AI-assisted, human-led. This portfolio demonstrates my ability to bridge design-to-implementation using AI.
+              </p>
+            </div>
+
+            {/* Main Content Card */}
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white/50 rounded-2xl p-6 md:p-8 lg:p-10 border border-black/10 space-y-8">
+                {/* Critical Distinction */}
+                <div className="space-y-4">
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif">
+                    The Distinction
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-black/5 rounded-lg p-5 border border-black/10">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">At Work</span>
+                          <div className="h-px flex-1 bg-black/10"></div>
+                        </div>
+                        <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                          AI used for <strong className="text-[var(--text-primary-light)]">productivity</strong>: ticket writing, brainstorming, research, learning. <strong className="text-[var(--text-primary-light)]">NOT</strong> for shipping production code.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="bg-black/5 rounded-lg p-5 border border-black/10">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">Personal</span>
+                          <div className="h-px flex-1 bg-black/10"></div>
+                        </div>
+                        <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                          AI used for <strong className="text-[var(--text-primary-light)]">shipping code</strong>: This portfolio demonstrates production-ready code using AI-augmented workflows.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* How I Work */}
+                <div className="space-y-4">
+                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif">
+                    My Process
+                  </h3>
+                  <div className="space-y-4 text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
+                    <p>
+                      <strong className="text-[var(--text-primary-light)]">Design architecture, UX, flows</strong> — I lead these. Human-led design thinking, user research, and systems thinking.
+                    </p>
+                    <p>
+                      <strong className="text-[var(--text-primary-light)]">Code implementation</strong> — I use AI (Cursor, GPT, Gemini) to generate, refactor, and explain code for personal projects. Years of HTML/CSS foundation enable me to effectively direct AI and audit for accessibility, semantics, and layout issues.
+                    </p>
+                    <p>
+                      <strong className="text-[var(--text-primary-light)]">Debugging & learning</strong> — I use AI as a teacher for small JS interactions and React patterns. I maintain strong working knowledge of HTML/CSS, especially for UI layouts, responsive behavior, and debugging. Basic familiarity with JS/React; I leverage AI to implement and debug interaction logic.
+                    </p>
+                    <p>
+                      <strong className="text-[var(--text-primary-light)]">Deployment</strong> — I own the full stack: This portfolio is deployed on AWS S3 + CloudFront (CDN), built with Next.js, TypeScript, and Tailwind CSS.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Key Message */}
+                <div className="bg-[var(--accent-teal)]/5 rounded-lg p-6 border border-[var(--accent-teal)]/20">
+                  <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
+                    <strong>This portfolio demonstrates my ability to bridge design-to-implementation using AI.</strong> At work, I use AI for productivity and learning, while maintaining traditional design-to-engineering collaboration.
+                  </p>
+                </div>
+
+                {/* GitHub Link */}
+                <div className="pt-4">
+                  <a
+                    href="https://github.com/anuharsha9/anu-portfolio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors group"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span className="font-medium">View source code on GitHub</span>
+                    <svg
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </MotionSection>
+
+      {/* SECTION 4 — WHAT I'M KNOWN FOR & HOW I THINK */}
+      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: '4%' }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1.0, ease: [0.4, 0.0, 0.2, 1] }}
+            className="space-y-12 md:space-y-16"
+          >
+            {/* Section Header */}
+            <div className="space-y-4 text-center">
+              <div className="flex items-baseline gap-4 justify-center">
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">04</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -190,7 +315,7 @@ export default function AboutPage() {
                 },
                 {
                   title: 'High-Output Operator',
-                  description: 'I operate at top velocity. Built this portfolio in less than two weeks, redesigned 3 enterprise systems end-to-end alone. My work is live in production—shipped, deployed, and impacting millions of users.',
+                  description: 'I operate at top velocity. Built this portfolio in less than two weeks using an AI-augmented workflow (personal project), redesigned 3 enterprise systems end-to-end alone. My work is live in production—shipped, deployed, and impacting millions of users.',
                 },
                 {
                   title: 'Leader Without Title',
@@ -239,7 +364,7 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 4 — DESIGN WRITING & ARTICLES */}
+      {/* SECTION 5 — DESIGN WRITING & ARTICLES */}
       <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
@@ -252,7 +377,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">04</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">05</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -420,7 +545,7 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 5 — OUTSIDE OF WORK */}
+      {/* SECTION 6 — OUTSIDE OF WORK */}
       <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
@@ -433,7 +558,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">05</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">06</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -523,7 +648,44 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 6 — CONTACT / CTA */}
+      {/* TECH STACK FOOTER */}
+      <MotionSection className="surface-light py-8 md:py-12 border-t border-black/5">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+          <div className="text-center space-y-4">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[var(--text-muted-light)] text-sm md:text-base">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-[var(--text-primary-light)]">Built with:</span>
+                <span>HTML, CSS, JS, Next.js, Cursor (AI coding agent), GitHub</span>
+              </div>
+              <span className="text-black/20">·</span>
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-[var(--text-primary-light)]">Deployed on:</span>
+                <span>AWS S3 + CloudFront (CDN)</span>
+              </div>
+            </div>
+            <div className="pt-2">
+              <a
+                href="https://github.com/anuharsha9/anu-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors text-sm"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>View source code</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </MotionSection>
+
+      {/* SECTION 7 — CONTACT / CTA */}
       <MotionSection className="surface-dark py-40 md:py-[12.5rem] border-t border-white/5 relative overflow-hidden">
         {/* Animated Logo Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -555,7 +717,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-white/40 text-sm font-mono uppercase tracking-wider">06</span>
+                <span className="text-white/40 text-sm font-mono uppercase tracking-wider">07</span>
                 <div className="h-px flex-1 bg-white/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>

@@ -4,6 +4,7 @@ import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TestimonialsWall from '@/components/home/TestimonialsWall'
 import TalkSection from '@/components/home/TalkSection'
 import ExecutiveSummary from '@/components/home/ExecutiveSummary'
+import ForEngineeringLeaders from '@/components/home/ForEngineeringLeaders'
 import { recommendations } from '@/data/home'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
@@ -43,6 +44,7 @@ export default function Home() {
     <>
       <HeroBrain />
       <ExecutiveSummary />
+      <ForEngineeringLeaders />
       <WebFOCUSOverview />
       <TestimonialsWall recommendations={recommendations} />
       <CollapsibleWorkArchive />
