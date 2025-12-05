@@ -3,8 +3,8 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 const nextConfig = {
   reactStrictMode: true,
-  // Only enable static export for production builds, not dev server
-  ...(isProduction && { output: 'export' }),
+  // Only enable static export for production builds
+  ...(isProduction ? { output: 'export' } : {}),
   images: {
     unoptimized: true, // Required for static export
     domains: [],
