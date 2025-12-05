@@ -492,12 +492,12 @@ export function HeroBrain() {
     <>
       <section
         id="hero-brain"
-        className="surface-dark relative flex flex-col items-center justify-center overflow-visible px-4 md:px-6 pt-4 md:pt-16 pb-6 border-t border-white/5 min-h-screen"
+        className="surface-dark relative flex flex-col items-center justify-center overflow-visible px-4 md:px-6 pt-0 md:pt-16 pb-6 border-t border-white/5 min-h-screen"
       >
         {/* SVG Container - on mobile this is at top, on desktop it's positioned normally */}
         <div
           ref={containerRef}
-          className="relative w-full max-w-[1200px] overflow-visible md:mt-0 -mt-12"
+          className="relative w-full max-w-[1200px] overflow-visible md:mt-0 -mt-8"
           style={{ aspectRatio: '1943.4 / 1835' }}
         >
           {/* Brain SVG - gears fade in while rotating */}
@@ -922,7 +922,7 @@ export function HeroBrain() {
                     >
                       Welcome to my mind
                     </p>
-                    {/* Hover hint */}
+                    {/* Tap hint - mobile only */}
                     <motion.p
                       className="text-[var(--accent-teal)] leading-relaxed text-center px-3 font-medium flex items-center justify-center gap-2 uppercase"
                       style={{
@@ -933,7 +933,7 @@ export function HeroBrain() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <span>Hover on the gears to explore</span>
+                      <span>Tap the gears to explore</span>
                     </motion.p>
                   </motion.div>
                 )}

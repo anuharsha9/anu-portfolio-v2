@@ -1,45 +1,31 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
 import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
+import { getCaseStudyData } from '@/lib/getCaseStudyData'
 
 interface MobileMenuProps {
   isLandingPage?: boolean
+  isLightBackground?: boolean
 }
 
-export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
+export default function MobileMenu({ isLandingPage = false, isLightBackground = false }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
-  // Prevent body scroll when menu is open
+  // Simple scroll prevention - just overflow hidden, no position changes
   useEffect(() => {
     if (isOpen) {
-      // Store current scroll position
-      const scrollY = window.scrollY
       document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
-      document.body.style.top = `-${scrollY}px`
-      document.body.style.width = '100%'
     } else {
-      // Restore scroll position
-      const scrollY = document.body.style.top
       document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.width = ''
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
-      }
     }
     return () => {
       document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.width = ''
     }
   }, [isOpen])
 
@@ -60,6 +46,27 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
   // Check if we're on landing page
   const isOnLandingPage = pathname === '/'
 
+  // Check if we're on a case study page and get sections
+  const caseStudySections = useMemo(() => {
+    if (!pathname?.startsWith('/work/')) return null
+
+    const slug = pathname.split('/work/')[1]?.split('/')[0]?.replace(/\/$/, '')
+    if (!slug) return null
+
+    const caseStudyData = getCaseStudyData(slug)
+    if (!caseStudyData?.sections) return null
+
+    // Clean up pathname to ensure proper format (remove trailing slash)
+    const basePath = pathname.replace(/\/$/, '')
+
+    return caseStudyData.sections.map((section) => ({
+      label: section.title,
+      href: `${basePath}#${section.id}`,
+    }))
+  }, [pathname])
+
+  const isOnCaseStudyPage = !!caseStudySections
+
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
@@ -72,7 +79,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
           <motion.button
             onClick={toggleMenu}
             className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 relative pointer-events-auto"
-            style={{ zIndex: 10001 }}
+            style={{ zIndex: 10003 }}
             aria-label="Open menu"
             aria-expanded={false}
             type="button"
@@ -80,9 +87,9 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <span className="w-6 h-0.5 bg-white rounded-full" />
-            <span className="w-6 h-0.5 bg-white rounded-full" />
-            <span className="w-6 h-0.5 bg-white rounded-full" />
+            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
+            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
+            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
           </motion.button>
         )}
       </AnimatePresence>
@@ -100,7 +107,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                zIndex: 9998,
+                zIndex: 10001,
                 isolation: 'isolate'
               }}
               initial={{ opacity: 0 }}
@@ -110,19 +117,20 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Menu Panel - Full Screen Overlay */}
+            {/* Menu Panel - Full Screen Overlay - above header */}
             <motion.div
               className="fixed inset-0 bg-[var(--bg-dark)] lg:hidden flex flex-col"
               style={{
                 height: '100vh',
                 maxHeight: '100vh',
-                zIndex: 9999,
+                zIndex: 10002,
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                isolation: 'isolate'
+                isolation: 'isolate',
+                overflow: 'hidden'
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -215,6 +223,25 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                       Sections
                     </p>
                     {landingPageSections.map((section) => (
+                      <Link
+                        key={section.href}
+                        href={section.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block px-6 py-3 rounded-lg text-white/80 text-base hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      >
+                        {section.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* Case Study Sections */}
+                {isOnCaseStudyPage && caseStudySections && (
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
+                      Sections
+                    </p>
+                    {caseStudySections.map((section) => (
                       <Link
                         key={section.href}
                         href={section.href}

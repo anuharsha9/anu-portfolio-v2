@@ -249,10 +249,10 @@ export default function SiteHeader() {
             </svg>
             <span>Resume</span>
           </a>
-          {/* Mobile Menu - Always visible on mobile, even when header is transitioning */}
-          <div className="lg:hidden relative z-[60]">
-            <MobileMenu isLandingPage={isLandingPage} />
-          </div>
+        </div>
+        {/* Mobile Menu - positioned absolutely on the right for mobile, outside centered container */}
+        <div className="lg:hidden absolute right-4 xs:right-5 sm:right-6 md:right-8 z-[60]">
+          <MobileMenu isLandingPage={isLandingPage} isLightBackground={isLightBackground} />
         </div>
       </nav>
     </header>
