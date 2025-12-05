@@ -24,6 +24,8 @@ export default function CustomVideoPlayer({
   const [progress, setProgress] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [videoDimensions, setVideoDimensions] = useState<{ width: number; height: number } | null>(null)
+  const [posterImage, setPosterImage] = useState<string | null>(poster || null)
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -56,8 +58,99 @@ export default function CustomVideoPlayer({
         setProgress((video.currentTime / video.duration) * 100)
       }
     }
+
+    const extractFirstFrame = (videoElement: HTMLVideoElement) => {
+      // Wait a bit to ensure video is ready
+      const attemptExtraction = () => {
+        try {
+          // Check if video has valid dimensions
+          if (videoElement.videoWidth === 0 || videoElement.videoHeight === 0) {
+            // Retry after a short delay
+            setTimeout(attemptExtraction, 100)
+            return
+          }
+
+          const originalTime = videoElement.currentTime
+          const originalPaused = videoElement.paused
+
+          // Ensure video is paused for extraction
+          if (!videoElement.paused) {
+            videoElement.pause()
+          }
+
+          // Seek to the very beginning
+          videoElement.currentTime = 0
+
+          // Wait for seeked event to ensure frame is loaded
+          const handleSeeked = () => {
+            try {
+              // Double check dimensions are available
+              if (videoElement.videoWidth === 0 || videoElement.videoHeight === 0) {
+                videoElement.currentTime = originalTime
+                videoElement.removeEventListener('seeked', handleSeeked)
+                return
+              }
+
+              const canvas = document.createElement('canvas')
+              canvas.width = videoElement.videoWidth
+              canvas.height = videoElement.videoHeight
+              const ctx = canvas.getContext('2d', { willReadFrequently: true })
+
+              if (ctx && canvas.width > 0 && canvas.height > 0) {
+                // Draw the current video frame to canvas
+                ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height)
+
+                // Convert to data URL for poster
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9)
+
+                if (dataUrl && dataUrl !== 'data:,') {
+                  setPosterImage(dataUrl)
+                }
+              }
+
+              // Reset to original time
+              videoElement.currentTime = originalTime
+              if (!originalPaused) {
+                videoElement.play()
+              }
+            } catch (error) {
+              console.warn('Error extracting frame:', error)
+            } finally {
+              videoElement.removeEventListener('seeked', handleSeeked)
+            }
+          }
+
+          videoElement.addEventListener('seeked', handleSeeked, { once: true })
+
+          // Fallback timeout in case seeked doesn't fire
+          setTimeout(() => {
+            videoElement.removeEventListener('seeked', handleSeeked)
+          }, 2000)
+        } catch (error) {
+          console.warn('Could not extract first frame:', error)
+        }
+      }
+
+      // Start extraction after a small delay to ensure video is ready
+      setTimeout(attemptExtraction, 200)
+    }
+
     const handleLoadedMetadata = () => {
       setDuration(video.duration)
+      // Get video's natural dimensions
+      const width = video.videoWidth
+      const height = video.videoHeight
+      if (width > 0 && height > 0) {
+        setVideoDimensions({ width, height })
+      }
+    }
+
+    const handleLoadedData = () => {
+      // Extract first frame as poster if no poster provided
+      // Try after loadeddata event which ensures video frame data is available
+      if (!poster && !posterImage) {
+        extractFirstFrame(video)
+      }
     }
 
     video.addEventListener('play', handlePlay)
@@ -65,6 +158,7 @@ export default function CustomVideoPlayer({
     video.addEventListener('ended', handleEnded)
     video.addEventListener('timeupdate', handleTimeUpdate)
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    video.addEventListener('loadeddata', handleLoadedData)
 
     return () => {
       video.removeEventListener('play', handlePlay)
@@ -72,9 +166,10 @@ export default function CustomVideoPlayer({
       video.removeEventListener('ended', handleEnded)
       video.removeEventListener('timeupdate', handleTimeUpdate)
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      video.removeEventListener('loadeddata', handleLoadedData)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [src])
 
   const formatTime = (seconds: number) => {
     if (isNaN(seconds)) return '0:00'
@@ -82,6 +177,16 @@ export default function CustomVideoPlayer({
     const secs = Math.floor(seconds % 60)
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
+
+  // Update video poster attribute when posterImage is extracted
+  useEffect(() => {
+    const video = videoRef.current
+    if (video && posterImage && !poster) {
+      // Directly set the poster attribute on the video element
+      // This will automatically display when the video is paused
+      video.setAttribute('poster', posterImage)
+    }
+  }, [posterImage, poster])
 
   // Show controls on hover, hide after 3 seconds of no hover
   useEffect(() => {
@@ -95,28 +200,35 @@ export default function CustomVideoPlayer({
     }
   }, [isHovered])
 
+  // Calculate aspect ratio for container
+  const containerStyle = videoDimensions
+    ? { aspectRatio: `${videoDimensions.width} / ${videoDimensions.height}` }
+    : { minHeight: '200px' } // Placeholder height until video loads
+
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full ${className}`}
+      className={`relative w-full ${className}`}
+      style={containerStyle}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <video
         ref={videoRef}
-        className="w-full h-full object-cover"
-        poster={poster}
+        className="w-full h-full object-contain"
+        poster={poster || undefined}
         preload="metadata"
         playsInline
         onClick={togglePlay}
+        style={{ display: 'block' }}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
       {/* Fallback poster if video poster doesn't load */}
-      {!isPlaying && !poster && (
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-dark)] to-[var(--bg-dark-alt)] flex items-center justify-center">
+      {!isPlaying && !poster && !posterImage && (
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-dark)] to-[var(--bg-dark-alt)] flex items-center justify-center z-0">
           <div className="text-white/40 text-sm">Video thumbnail</div>
         </div>
       )}
@@ -125,7 +237,7 @@ export default function CustomVideoPlayer({
       {!isPlaying && (
         <button
           onClick={togglePlay}
-          className="absolute inset-0 flex items-center justify-center z-20 bg-black/10 hover:bg-black/20 transition-colors duration-300 group"
+          className="absolute inset-0 flex items-center justify-center z-30 bg-black/10 hover:bg-black/20 transition-colors duration-300 group"
           aria-label="Play video"
         >
           <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110">

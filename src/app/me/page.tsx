@@ -79,14 +79,16 @@ export default function AboutPage() {
             </section>
 
             {/* Intro Video */}
-            <div className="max-w-md mx-auto" style={{ width: '80%', maxWidth: '358px' }}>
-              <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-black/10 bg-white/50 shadow-sm">
+            <div className="max-w-md mx-auto space-y-4" style={{ width: '80%', maxWidth: '358px' }}>
+              <div className="relative w-full rounded-2xl overflow-hidden border border-black/10 bg-white/50 shadow-sm">
                 <CustomVideoPlayer
                   src="/videos/intro-video.mp4"
-                  poster="/images/intro-video-poster.jpg"
                   className="rounded-2xl"
                 />
               </div>
+              <p className="text-[#666666] text-sm text-center leading-relaxed">
+                Who am I?
+              </p>
             </div>
           </motion.div>
         </div>

@@ -707,14 +707,14 @@ export function HeroBrain() {
                 It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
               </motion.p>
 
-              {/* Buttons - Side by side, same size */}
+              {/* Buttons - Stacked vertically */}
               <motion.div
-                className="pt-2 md:pt-3 flex flex-row items-center justify-center gap-3 w-full"
+                className="pt-2 md:pt-3 flex flex-col items-center justify-center gap-4 w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 3, delay: 5.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Portfolio teaser - Primary CTA - matched size */}
+                {/* Portfolio video - Primary CTA */}
                 <button
                   onClick={() => setShowVideoModal(true)}
                   className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
@@ -729,7 +729,7 @@ export function HeroBrain() {
                   <span>Why I built this portfolio</span>
                 </button>
 
-                {/* View my work - Secondary CTA */}
+                {/* Case Studies - Link with downward arrow */}
                 <a
                   href="#work-overview"
                   onClick={(e) => {
@@ -757,9 +757,17 @@ export function HeroBrain() {
                       }
                     }, 100)
                   }}
-                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
+                  className="pointer-events-auto inline-flex flex-col items-center justify-center gap-1 text-white/70 text-xs md:text-sm font-medium transition-all duration-300 hover:text-white/90 group"
                 >
-                  Case Studies
+                  <span>Case Studies</span>
+                  <svg
+                    className="w-4 h-4 md:w-5 md:h-5 text-white/70 transition-all duration-300 group-hover:text-white/90"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </a>
               </motion.div>
             </motion.div>
@@ -951,14 +959,14 @@ export function HeroBrain() {
                 It holds the same chaos everyone carries — but turns it into clarity, structure, and scalable product decisions.
               </motion.p>
 
-              {/* Buttons - Side by side, same size - fades in third */}
+              {/* Buttons - Stacked vertically - fades in third */}
               <motion.div
-                className="pt-2 flex flex-row items-center justify-center gap-3 w-full"
+                className="pt-2 flex flex-col items-center justify-center gap-4 w-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 3, delay: 5.5, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Portfolio teaser - Primary CTA - matched size */}
+                {/* Portfolio video - Primary CTA */}
                 <button
                   onClick={() => setShowVideoModal(true)}
                   className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
@@ -973,7 +981,7 @@ export function HeroBrain() {
                   <span>Why I built this portfolio</span>
                 </button>
 
-                {/* View my work - Secondary CTA */}
+                {/* Case Studies - Link with downward arrow */}
                 <a
                   href="#work-overview"
                   onClick={(e) => {
@@ -1001,9 +1009,17 @@ export function HeroBrain() {
                       }
                     }, 100)
                   }}
-                  className="pointer-events-auto inline-flex items-center justify-center rounded-full border border-white/20 text-white/70 px-5 py-2.5 text-xs font-medium transition-all duration-300 hover:border-white/30 hover:text-white/90 hover:bg-white/5"
+                  className="pointer-events-auto inline-flex flex-col items-center justify-center gap-1 text-white/70 text-xs font-medium transition-all duration-300 hover:text-white/90 group"
                 >
-                  Case Studies
+                  <span>Case Studies</span>
+                  <svg
+                    className="w-4 h-4 text-white/70 transition-all duration-300 group-hover:text-white/90"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
                 </a>
               </motion.div>
             </motion.div>

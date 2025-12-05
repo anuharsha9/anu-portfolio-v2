@@ -88,7 +88,7 @@ export default function VideoModal({ isOpen, onClose, videoSrc, poster }: VideoM
             </button>
 
             {/* Video Container */}
-            <div className="relative w-full aspect-[9/16] rounded-2xl overflow-hidden border border-white/20 bg-[var(--bg-dark-alt)] shadow-2xl">
+            <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 bg-[var(--bg-dark-alt)] shadow-2xl">
               <CustomVideoPlayer
                 src={videoSrc}
                 poster={poster}
