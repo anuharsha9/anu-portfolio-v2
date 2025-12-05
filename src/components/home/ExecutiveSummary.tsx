@@ -65,7 +65,7 @@ export default function ExecutiveSummary() {
                   Anuja Harsha Nimmagadda
                 </h1>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-sans">
-                  Designer · Strategist · Systems Thinker
+                  Designer · Product Strategist · AI-Driven Systems Thinker
                 </p>
               </div>
             </div>
@@ -101,8 +101,8 @@ export default function ExecutiveSummary() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="group space-y-3 p-5 md:p-6 rounded-lg border border-refined-light bg-white/50 hover:bg-white/70 cursor-pointer hover:shadow-lg hover:border-[var(--accent-teal)]/30"
-                  whileHover={{ 
-                    y: -4, 
+                  whileHover={{
+                    y: -4,
                     scale: 1.01
                   }}
                   whileTap={{ scale: 0.98 }}

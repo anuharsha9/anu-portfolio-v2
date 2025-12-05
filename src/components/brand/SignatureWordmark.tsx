@@ -13,7 +13,7 @@ interface SignatureWordmarkProps {
  */
 export default function SignatureWordmark({
   headline = 'Anuja Harsha Nimmagadda',
-  subline = 'Designer · Strategist · Systems Thinker',
+  subline = 'Designer · Product Strategist · AI-Driven Systems Thinker',
   className = '',
 }: SignatureWordmarkProps) {
   return (
