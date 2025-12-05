@@ -89,6 +89,24 @@ export default function AboutPage() {
               <p className="text-[#666666] text-sm text-center leading-relaxed">
                 Who am I?
               </p>
+              {/* Let's Talk Button */}
+              <div className="flex justify-center pt-2">
+                <Link
+                  href="/#lets-talk"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal)]/90 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+                  aria-label="Let's talk - Contact me"
+                >
+                  <span>Let&apos;s talk</span>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -197,30 +215,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">01</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Design the System First
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    Design the System First
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    Every project begins with clarity:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>Problem framing</li>
-                    <li>User flows</li>
-                    <li>Edge cases</li>
-                    <li>Systems diagrams</li>
-                    <li>UX strategy</li>
-                    <li>Interaction models</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    I think in structure: what the product should do, not just how it should look. Once the UX architecture is solid, I move into implementation.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    I think in structure: problem framing, user flows, UX strategy. Once the architecture is solid, I move into implementation.
                   </p>
                 </div>
               </motion.div>
@@ -231,29 +238,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">02</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Use AI to Generate the Foundation (Cursor, GPT, Gemini)
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    AI Generates the Foundation
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    I instruct AI to produce:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>HTML/CSS scaffolds</li>
-                    <li>React/JS components</li>
-                    <li>Layouts and animations</li>
-                    <li>Responsive behavior</li>
-                    <li>Reusable patterns</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    AI handles the boilerplate. I control the design intent and the architecture.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    I instruct AI (Cursor, GPT, Gemini) to produce HTML/CSS scaffolds, React components, layouts. AI handles boilerplate; I control design intent and architecture.
                   </p>
                 </div>
               </motion.div>
@@ -264,31 +261,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.3 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">03</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Audit, Debug, and Refine the Code Myself
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    I Audit & Refine Everything
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    This is where most &quot;AI-native designers&quot; stop — but this is where I begin. I manually:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>Fix DOM issues</li>
-                    <li>Rewrite structure for accessibility</li>
-                    <li>Correct semantic HTML</li>
-                    <li>Debug CSS specificity</li>
-                    <li>Patch layout inconsistencies</li>
-                    <li>Verify interactions</li>
-                    <li>Tune JS behavior (with AI assistance)</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    I don&apos;t push code I don&apos;t understand. If something breaks, I inspect it directly, then use AI to explain why and help me patch it.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    I manually fix DOM issues, rewrite for accessibility, debug CSS, patch layouts. I don&apos;t push code I don&apos;t understand — if something breaks, I inspect and fix it.
                   </p>
                 </div>
               </motion.div>
@@ -299,28 +284,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.4 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">04</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Learn Through Implementation (AI as a Teacher)
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    AI as a Teacher
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    When I hit a front-end roadblock, I ask AI:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>&quot;Explain this JS snippet.&quot;</li>
-                    <li>&quot;Why is this event listener not firing?&quot;</li>
-                    <li>&quot;What does this React lifecycle part actually do?&quot;</li>
-                    <li>&quot;Show me three alternative approaches and their trade-offs.&quot;</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    This continuous loop makes me more technical with every project. I may not be a JS engineer, but I am absolutely front-end fluent.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    When I hit a roadblock, I ask AI to explain concepts, debug issues, and show alternatives. This continuous loop makes me more technical with every project.
                   </p>
                 </div>
               </motion.div>
@@ -331,31 +307,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">05</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Ship Real, Production-Ready Experiences
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    Ship Production-Ready Work
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    I deploy everything on AWS S3 + CloudFront, managing:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>Hosting</li>
-                    <li>Caching</li>
-                    <li>CDN performance</li>
-                    <li>Versioning</li>
-                    <li>Static asset pipelines</li>
-                    <li>Cache invalidations</li>
-                    <li>Custom domain routing</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    This ensures the final product is fast, global, stable, and owned by me (no platform lock-in). I deliver the full path from design → code → deployment.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    I deploy on AWS S3 + CloudFront, managing hosting, caching, CDN, and deployments. Fast, global, stable — no platform lock-in.
                   </p>
                 </div>
               </motion.div>
@@ -366,28 +330,19 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.6 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">06</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
-                    I Reduce Eng Dependency Without Replacing Engineers
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                    Reduce Eng Dependency
                   </h3>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed">
-                    My goal isn&apos;t to &quot;become&quot; a front-end engineer. My goal is to:
-                  </p>
-                  <ul className="list-disc list-inside space-y-1 text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed ml-4">
-                    <li>remove the design-to-dev translation gap</li>
-                    <li>move prototypes into real code faster</li>
-                    <li>reduce dependency on engineering for simple UI</li>
-                    <li>free engineers to focus on high-complexity backend work</li>
-                  </ul>
-                  <p className="text-[var(--text-muted-light)] text-base leading-relaxed pt-2">
-                    AI expands my reach — it doesn&apos;t blur my discipline.
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    I remove the design-to-dev gap, move prototypes to code faster, and free engineers for high-complexity work. AI expands my reach — it doesn&apos;t blur my discipline.
                   </p>
                 </div>
               </motion.div>
@@ -398,31 +353,20 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.7 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">07</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
                     Built With
                   </h3>
-                  <div className="space-y-3">
-                    {['HTML', 'CSS', 'JavaScript', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'].map((tech) => (
-                      <div key={tech} className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
-                        <span className="text-[var(--text-muted-light)] text-sm md:text-base">{tech}</span>
-                      </div>
-                    ))}
-                    <div className="flex items-center gap-3 pt-2 border-t border-black/10">
-                      <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
-                      <span className="text-[var(--text-muted-light)] text-sm md:text-base">
-                        Cursor (AI coding agent)
-                      </span>
-                    </div>
-                  </div>
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    HTML, CSS, JavaScript, Next.js, TypeScript, Tailwind CSS, Framer Motion, Cursor (AI coding agent).
+                  </p>
                 </div>
               </motion.div>
 
@@ -432,25 +376,20 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.8 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-5 md:p-6 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     <span className="text-[#666666] text-xs font-mono uppercase tracking-wider">08</span>
                     <div className="h-px flex-1 bg-black/10"></div>
                     <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
                   </div>
-                  <h3 className="text-[var(--text-primary-light)] text-xl md:text-2xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
+                  <h3 className="text-[var(--text-primary-light)] text-lg md:text-xl font-serif group-hover:text-[var(--accent-teal)] transition-colors">
                     Deployed On
                   </h3>
-                  <div className="space-y-3">
-                    {['AWS S3', 'CloudFront (CDN)', 'Static Export', 'Custom Domain'].map((tech) => (
-                      <div key={tech} className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
-                        <span className="text-[var(--text-muted-light)] text-sm md:text-base">{tech}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <p className="text-[var(--text-muted-light)] text-sm md:text-base leading-relaxed">
+                    AWS S3, CloudFront CDN, static export, custom domain.
+                  </p>
                 </div>
               </motion.div>
             </div>
@@ -495,6 +434,124 @@ export default function AboutPage() {
                 <span className="font-medium">View source code on GitHub</span>
                 <svg
                   className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </MotionSection>
+
+      {/* ADPList Reviews Section */}
+      <MotionSection id="adp-list" className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: '4%' }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 1.0, ease: [0.4, 0.0, 0.2, 1] }}
+            className="space-y-12 md:space-y-16"
+          >
+            {/* Section Header */}
+            <div className="space-y-4 text-center">
+              <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
+                ADPList Mentorship Reviews
+              </h2>
+              <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+                Feedback from designers I&apos;ve mentored on ADPList
+              </p>
+            </div>
+
+            {/* Reviews Grid - 3 tiles side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {adpListReviews.map((review, index) => (
+                <motion.div
+                  key={`${review.name}-${index}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-white/50 rounded-xl border border-black/10 p-6 md:p-8 hover:bg-white/70 hover:border-[var(--accent-teal)]/30 hover:shadow-lg transition-all duration-300 group flex flex-col"
+                >
+                  <div className="space-y-4 flex-1 flex flex-col">
+                    {/* Quote Icon */}
+                    <div className="relative">
+                      <TopQuoteIcon
+                        className="w-8 h-8 text-[var(--accent-teal)] opacity-70"
+                        style={{
+                          position: 'absolute',
+                          left: '-0.5em',
+                          top: '-0.5em',
+                        }}
+                      />
+                    </div>
+
+                    {/* Quote */}
+                    <blockquote className="space-y-4 flex-1 flex flex-col">
+                      <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed italic relative pl-4 flex-1">
+                        &ldquo;{review.quote}&rdquo;
+                        <BottomQuoteIcon
+                          className="w-6 h-6 text-[var(--accent-teal)] opacity-70 absolute bottom-0 right-0"
+                        />
+                      </p>
+                    </blockquote>
+
+                    {/* Author Info */}
+                    <footer className="pt-4 border-t border-black/10 mt-auto">
+                      <p className="text-[var(--text-primary-light)] font-semibold text-base md:text-lg">
+                        {review.name}
+                      </p>
+                      {(review.role || review.company) && (
+                        <p className="text-[var(--text-muted-light)] text-sm md:text-base mt-1">
+                          {review.role && review.company
+                            ? `${review.role} at ${review.company}`
+                            : review.role || review.company}
+                        </p>
+                      )}
+                      {review.rating && (
+                        <div className="flex items-center gap-1 mt-2">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className={`w-4 h-4 ${i < review.rating!
+                                ? 'text-yellow-400 fill-current'
+                                : 'text-gray-300'
+                                }`}
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
+                      )}
+                    </footer>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Link to full profile */}
+            <div className="text-center pt-4">
+              <a
+                href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors text-sm font-medium"
+                aria-label="View full ADPList mentor profile"
+              >
+                <span>View all reviews on ADPList</span>
+                <svg
+                  className="w-4 h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -585,7 +642,7 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* SECTION 5 — DESIGN WRITING & ARTICLES */}
-      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
+      <MotionSection id="design-writing" className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
         <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
           <motion.div
             initial={{ opacity: 0, y: '4%' }}
@@ -751,124 +808,6 @@ export default function AboutPage() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </MotionSection>
-
-      {/* ADPList Reviews Section */}
-      <MotionSection className="surface-light py-12 xs:py-16 sm:py-20 md:py-24 lg:py-32 border-t border-black/5">
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: '4%' }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 1.0, ease: [0.4, 0.0, 0.2, 1] }}
-            className="space-y-12 md:space-y-16"
-          >
-            {/* Section Header */}
-            <div className="space-y-4 text-center">
-              <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
-                ADPList Mentorship Reviews
-              </h2>
-              <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-                Feedback from designers I&apos;ve mentored on ADPList
-              </p>
-            </div>
-
-            {/* Reviews Grid - 3 tiles side by side */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {adpListReviews.map((review, index) => (
-                <motion.div
-                  key={`${review.name}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/50 rounded-xl border border-black/10 p-6 md:p-8 hover:bg-white/70 hover:border-[var(--accent-teal)]/30 hover:shadow-lg transition-all duration-300 group flex flex-col"
-                >
-                  <div className="space-y-4 flex-1 flex flex-col">
-                    {/* Quote Icon */}
-                    <div className="relative">
-                      <TopQuoteIcon
-                        className="w-8 h-8 text-[var(--accent-teal)] opacity-70"
-                        style={{
-                          position: 'absolute',
-                          left: '-0.5em',
-                          top: '-0.5em',
-                        }}
-                      />
-                    </div>
-
-                    {/* Quote */}
-                    <blockquote className="space-y-4 flex-1 flex flex-col">
-                      <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed italic relative pl-4 flex-1">
-                        &ldquo;{review.quote}&rdquo;
-                        <BottomQuoteIcon
-                          className="w-6 h-6 text-[var(--accent-teal)] opacity-70 absolute bottom-0 right-0"
-                        />
-                      </p>
-                    </blockquote>
-
-                    {/* Author Info */}
-                    <footer className="pt-4 border-t border-black/10 mt-auto">
-                      <p className="text-[var(--text-primary-light)] font-semibold text-base md:text-lg">
-                        {review.name}
-                      </p>
-                      {(review.role || review.company) && (
-                        <p className="text-[var(--text-muted-light)] text-sm md:text-base mt-1">
-                          {review.role && review.company
-                            ? `${review.role} at ${review.company}`
-                            : review.role || review.company}
-                        </p>
-                      )}
-                      {review.rating && (
-                        <div className="flex items-center gap-1 mt-2">
-                          {[...Array(5)].map((_, i) => (
-                            <svg
-                              key={i}
-                              className={`w-4 h-4 ${i < review.rating!
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
-                                }`}
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
-                        </div>
-                      )}
-                    </footer>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Link to full profile */}
-            <div className="text-center pt-4">
-              <a
-                href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal)]/80 transition-colors text-sm font-medium"
-                aria-label="View full ADPList mentor profile"
-              >
-                <span>View all reviews on ADPList</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"

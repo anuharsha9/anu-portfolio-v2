@@ -34,17 +34,25 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
     setIsOpen(false)
   }, [pathname])
 
-  // Landing page section links
+  // Landing page section links - simplified navigation
   const landingPageSections = [
-    { label: 'Executive Summary', href: '/#executive-summary' },
-    { label: 'Work Overview', href: '/#work-overview' },
+    { label: 'Case Studies', href: '/#work-overview' },
     { label: 'Testimonials', href: '/#testimonials' },
     { label: 'Work Archive', href: '/#work-archive' },
-    { label: 'Contact', href: '/#contact' },
+  ]
+
+  // Me page section links - simplified navigation
+  const mePageSections = [
+    { label: 'How I Work with AI', href: '/me#how-i-work-with-ai' },
+    { label: 'ADP List', href: '/me#adp-list' },
+    { label: 'Design Writing', href: '/me#design-writing' },
   ]
 
   // Check if we're on landing page
   const isOnLandingPage = pathname === '/'
+
+  // Check if we're on me page
+  const isOnMePage = pathname === '/me' || pathname === '/me/'
 
   // Check if we're on a case study page and get sections
   const caseStudySections = useMemo(() => {
@@ -182,7 +190,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                     onClick={() => setIsOpen(false)}
                     className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
-                    Case Studies
+                    Work
                   </Link>
 
                   <Link
@@ -191,14 +199,6 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                     className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     Me
-                  </Link>
-
-                  <Link
-                    href="/#lets-talk"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    Contact
                   </Link>
 
                   <a
@@ -223,6 +223,25 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                       Sections
                     </p>
                     {landingPageSections.map((section) => (
+                      <Link
+                        key={section.href}
+                        href={section.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block px-6 py-3 rounded-lg text-white/80 text-base hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                      >
+                        {section.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {/* Me Page Sections */}
+                {isOnMePage && (
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
+                      Sections
+                    </p>
+                    {mePageSections.map((section) => (
                       <Link
                         key={section.href}
                         href={section.href}

@@ -76,7 +76,7 @@ export default function CaseStudiesDropdown({ className = '', onNavigate }: Case
         href="/#work-overview"
         className={className}
       >
-        Case Studies
+        Work
       </Link>
     )
   }
@@ -106,7 +106,7 @@ export default function CaseStudiesDropdown({ className = '', onNavigate }: Case
           }
         }}
       >
-        Case Studies
+        Work
       </Link>
 
       <AnimatePresence>

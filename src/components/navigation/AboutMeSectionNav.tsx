@@ -10,11 +10,9 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: 'hero', label: 'Intro' },
-  { id: 'origin-story', label: 'Origin Story' },
   { id: 'how-i-work-with-ai', label: 'How I Work with AI' },
-  { id: 'what-im-known-for', label: 'What I\'m Known For' },
-  { id: 'outside-of-work', label: 'Outside of Work' },
+  { id: 'adp-list', label: 'ADP List' },
+  { id: 'design-writing', label: 'Design Writing' },
 ]
 
 export default function AboutMeSectionNav() {

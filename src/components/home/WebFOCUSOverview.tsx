@@ -138,7 +138,7 @@ export default function WebFOCUSOverview() {
             </div>
           </div>
 
-          <div className="space-y-6 text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
+          <div className="space-y-4 text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
             <p>
               <a
                 href="https://www.ibi.com/products/ibi-webfocus"
@@ -152,15 +152,11 @@ export default function WebFOCUSOverview() {
             </p>
 
             <p>
-              For three years, I was the <strong>UX leader for WebFOCUS</strong>—driving the modernization of its most complex, highest-impact legacy subsystems: <strong>ReportCaster</strong> (enterprise scheduling), <strong>Machine Learning Functions</strong> (model training workflows), and the <strong>IQ Plugin</strong> for Data Science & Machine Learning in a primarily engineering-led environment. These features carried 40+ years of technical debt, high user volume, and long-standing friction across the platform.
+              For three years, I was the <strong>UX leader for WebFOCUS</strong>—driving modernization of its most complex, highest-impact legacy subsystems.
             </p>
 
             <p>
-              Trusted by my Director of Design with full autonomy, I led the modernization strategy, defined the UX architecture, and drove cross-functional alignment across product management, engineering, and data science. I also onboarded, guided, and mentored junior designers as these initiatives expanded.
-            </p>
-
-            <p>
-              <strong>The ReportCaster redesign, shipped in WebFOCUS 9.3, is deployed globally and used daily at massive scale.</strong> I collaborated closely with Directors of Design, Engineering, and Product Management on modernization strategy, architectural decisions, and long-term product direction. I also delivered organization-wide demos to 150–200-person audiences and <strong>co-owned the WebFOCUS Design System</strong>, aiding the migration from Sketch to Figma and defining platform-wide standards for component usage, interaction patterns, and accessibility.
+              <strong>ReportCaster</strong> (enterprise scheduling), <strong>Machine Learning Functions</strong> (model training workflows), and the <strong>IQ Plugin</strong> for Data Science & Machine Learning. These features carried 40+ years of technical debt, high user volume, and long-standing friction.
             </p>
 
             {/* Virtual User Group Link with Context */}

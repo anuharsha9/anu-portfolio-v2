@@ -169,7 +169,7 @@ export default function SiteHeader() {
         </Link>
         {/* Centered Navigation Links */}
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Minimal: Work, Me, Resume */}
           <div className="hidden lg:flex items-center gap-4 md:gap-6">
             <CaseStudiesDropdown
               className={`${isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'} transition-colors hover:text-[var(--accent-teal)]`}
@@ -179,49 +179,6 @@ export default function SiteHeader() {
               className={`${isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'} transition-colors hover:text-[var(--accent-teal)]`}
             >
               Me
-            </Link>
-            <Link
-              href="/#lets-talk"
-              className={`${isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'} transition-colors`}
-              onClick={(e) => {
-                e.preventDefault()
-                if (pathname === '/') {
-                  // Already on homepage, wait a bit then scroll with proper offset
-                  setTimeout(() => {
-                    const section = document.getElementById('lets-talk')
-                    if (section) {
-                      // Account for both main nav (taller) and section nav (shorter) if visible
-                      const mainNavHeight = 72 // Main nav is now taller
-                      const sectionNavHeight = 48 // Section nav is now shorter
-                      const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
-                      const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
-                      const offset = totalNavHeight + 20 // Extra padding
-
-                      const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
-                      const offsetPosition = Math.max(0, elementPosition - offset)
-
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth',
-                      })
-
-                      // Update URL hash
-                      window.history.pushState(null, '', '#lets-talk')
-                    }
-                  }, 100)
-                } else {
-                  // On other pages (case studies, /me), navigate to home with hash
-                  window.location.href = '/#lets-talk'
-                }
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent-teal)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = isLightBackground ? 'var(--text-primary-light)' : 'white'
-              }}
-            >
-              Contact
             </Link>
           </div>
           {/* Resume Button - positioned absolutely on the right */}

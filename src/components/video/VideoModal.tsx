@@ -65,15 +65,15 @@ export default function VideoModal({ isOpen, onClose, videoSrc, poster }: VideoM
             transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
+            {/* Close Button - Always visible inside modal */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 md:-top-12 md:right-0 text-white/90 hover:text-white transition-colors z-30 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              className="absolute top-4 right-4 text-white/90 hover:text-white transition-colors z-30 bg-black/50 rounded-full p-2 backdrop-blur-sm"
               style={{ zIndex: 20001 }}
               aria-label="Close video"
             >
               <svg
-                className="w-6 h-6 md:w-8 md:h-8"
+                className="w-6 h-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

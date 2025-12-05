@@ -10,11 +10,9 @@ interface Section {
 }
 
 const sections: Section[] = [
-  { id: 'executive-summary', label: 'Executive Summary' },
   { id: 'work-overview', label: 'Case Studies' },
   { id: 'testimonials', label: 'Testimonials' },
   { id: 'work-archive', label: 'Work Archive' },
-  { id: 'lets-talk', label: 'Contact' },
 ]
 
 export default function LandingPageSectionNav() {
