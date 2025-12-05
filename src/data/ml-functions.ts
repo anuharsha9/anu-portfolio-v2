@@ -12,7 +12,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   },
   role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: '2023–2024',
+  timeframe: '2023–2025',
   status: {
     label: 'Shipping 2026',
     variant: 'shipping' as const,
@@ -33,7 +33,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
-      'I came in with no ML background and self-learned through courses, constant questions to our domain expert, and AI tools to fill knowledge gaps. Over 6–8 months, I owned the end-to-end redesign of the ML training experience—from ambiguity to production-ready flows (launching in 2026). I led weekly "UX + ML" meetings, bridging technical complexity with user needs, and worked cross-functionally with product, engineering, and data science to ensure technical feasibility while maintaining accessibility. This demonstrates my ability to rapidly acquire deep domain expertise and deliver Principal-level impact in unfamiliar territories.',
+      'I came in with no ML background and self-learned through courses, constant questions to our domain expert, and AI tools to fill knowledge gaps. Over 6–8 months, I owned the end-to-end redesign of the ML training experience—from ambiguity to production-ready flows (launching in 2026). I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire ML Functions redesign solo while simultaneously leading ReportCaster and IQ Plugin. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. I led weekly "UX + ML" meetings, bridging technical complexity with user needs, and worked cross-functionally with product, engineering, and data science to ensure technical feasibility while maintaining accessibility. During maternity leave, I onboarded 2 designers, ensuring seamless knowledge transfer and continuity. This demonstrates my ability to rapidly acquire deep domain expertise, manage multiple complex projects simultaneously, and deliver Principal-level impact in unfamiliar territories.',
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
@@ -47,6 +47,18 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       {
         label: 'Ability to configure hyperparameters at the right time',
         value: 'From hidden, post-hoc-only settings → explicit Step 4 in the guided flow',
+      },
+      {
+        label: 'Entry point to ML training',
+        value: '2-click entry point (right-click → Predict Data)',
+      },
+      {
+        label: 'Setup speed improvement',
+        value: '50% faster setup through guided 4-step workflow',
+      },
+      {
+        label: 'Configuration errors',
+        value: '60% fewer configuration errors through inline validation and guided warnings',
       },
       {
         label: 'Dead-end errors in SME test sessions ("results not generated" confusion from the old UI)',
@@ -75,8 +87,12 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     keyAchievements: [
       'Achieved 100% discoverability in SME usability testing',
       'Reduced ML workflow from 12+ clicks to 7-9 clicks',
+      'Delivered 2-click entry point, 50% faster setup, 60% fewer configuration errors',
+      'Only designer who worked on all major WebFOCUS features; owned entire ML Functions redesign solo while simultaneously leading ReportCaster and IQ Plugin',
+      'Onboarded 2 designers during maternity leave transition, ensuring seamless knowledge transfer and continuity',
       'Eliminated all dead-end "results not generated" errors',
       'Created dual-experience approach for technical and non-technical users',
+      'Delivered organization-wide design demos to 150-200 person business unit, presenting ML workflow redesign',
       'Self-learned ML concepts and collaborated with Principal Data Scientist',
     ],
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/ibi-webFOCUS-integrated-data-science-data-sheet.pdf',

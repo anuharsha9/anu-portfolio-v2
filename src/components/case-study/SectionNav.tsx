@@ -9,135 +9,287 @@ interface SectionNavProps {
 }
 
 export default function SectionNav({ sections }: SectionNavProps) {
-  const [activeSection, setActiveSection] = useState<string>('')
   const [isVisible, setIsVisible] = useState(false)
-  const observerRef = useRef<IntersectionObserver | null>(null)
-  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
+  const [activeSection, setActiveSection] = useState<string>('')
+  const [showLeftIndicator, setShowLeftIndicator] = useState(false)
+  const [showRightIndicator, setShowRightIndicator] = useState(false)
+  const [currentBgIsLight, setCurrentBgIsLight] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const navRef = useRef<HTMLElement>(null)
 
-  // Use centralized scroll manager
+  const [hasShadow, setHasShadow] = useState(false)
+
+  // Show on any scroll, just like main nav (carbon copy behavior)
   useScrollManager((scrollY) => {
-    // Show/hide nav based on scroll position
-    setIsVisible(scrollY > 400)
-    
-    // Update active section
-    const scrollPosition = scrollY + 250 // Offset for header and some padding
-    
-    // Find the section that's currently at or just past the scroll position
-    let currentSection = ''
-    
-    // Check sections in reverse order (from bottom to top)
-      for (let i = sections.length - 1; i >= 0; i--) {
-      const element = document.getElementById(sections[i].id)
-      if (element) {
-        const rect = element.getBoundingClientRect()
-        const elementTop = scrollY + rect.top
-        
-        // If this section's top is above or at our scroll position, it's the active one
-        if (elementTop <= scrollPosition) {
-          currentSection = sections[i].id
-          break
-        }
-      }
-      }
+    // Show on any scroll (not just past hero) - matches main nav behavior
+    const hasScrolled = scrollY > 0
+    setIsVisible(hasScrolled)
+    setHasShadow(hasScrolled)
+  }, [])
 
-    // If no section found, use the first one
-    if (!currentSection && sections.length > 0) {
-      currentSection = sections[0].id
-    }
-    
-    setActiveSection(currentSection)
-  }, [sections])
+  // Use same background detection as main nav (carbon copy)
+  useScrollManager((scrollY) => {
+    // Detect background color based on what's behind the section nav (same logic as main nav)
+    if (typeof window !== 'undefined' && scrollY > 0 && navRef.current) {
+      const navRect = navRef.current.getBoundingClientRect()
+      // Sample multiple points to get a better sense of the background
+      const samplePoints = [
+        { x: window.innerWidth / 4, y: navRect.top - 5 },
+        { x: window.innerWidth / 2, y: navRect.top - 5 },
+        { x: (window.innerWidth * 3) / 4, y: navRect.top - 5 },
+      ]
 
-  useEffect(() => {
+      let lightCount = 0
+      let darkCount = 0
 
-    // Use Intersection Observer as primary method (more performant than scroll listener)
-    // Only use scroll listener for show/hide nav visibility
-    const observerOptions = {
-      root: null,
-      rootMargin: '-150px 0px -50% 0px',
-      threshold: [0, 0.1, 0.5, 1],
-    }
+      samplePoints.forEach(point => {
+        const elementBelow = document.elementFromPoint(point.x, point.y)
+        if (elementBelow) {
+          // Walk up the DOM tree to find the actual background
+          let currentElement: Element | null = elementBelow
+          let bgColor = ''
 
-    observerRef.current = new IntersectionObserver((entries) => {
-      // Find the section with the most content visible at the top
-      let bestSection = ''
-      let bestScore = -1
+          while (currentElement && !bgColor) {
+            const computedStyle = window.getComputedStyle(currentElement)
+            bgColor = computedStyle.backgroundColor
 
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const rect = entry.boundingClientRect
-          // Score based on how much is visible and how close to top
-          const visibleHeight = Math.min(rect.height, window.innerHeight - rect.top)
-          const topProximity = Math.max(0, 300 - rect.top) // Bonus for being near top
-          const score = visibleHeight + topProximity * 0.5
+            if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+              const hasLightSurface = currentElement.classList.contains('surface-light') ||
+                currentElement.classList.contains('surface-light-alt')
+              const hasDarkSurface = currentElement.classList.contains('surface-dark') ||
+                currentElement.classList.contains('surface-dark-alt')
 
-          if (score > bestScore) {
-            bestScore = score
-            bestSection = entry.target.id
+              if (hasLightSurface) {
+                lightCount++
+                break
+              } else if (hasDarkSurface) {
+                darkCount++
+                break
+              }
+              currentElement = currentElement.parentElement
+            } else {
+              const rgb = bgColor.match(/\d+/g)
+              if (rgb && rgb.length >= 3) {
+                const r = parseInt(rgb[0])
+                const g = parseInt(rgb[1])
+                const b = parseInt(rgb[2])
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000
+
+                if (brightness > 128) {
+                  lightCount++
+                } else {
+                  darkCount++
+                }
+              }
+              break
+            }
           }
         }
       })
 
-      if (bestSection) {
-        setActiveSection(bestSection)
-      }
+      // Determine if background is predominantly light or dark
+      setCurrentBgIsLight(lightCount > darkCount)
+    } else if (scrollY === 0) {
+      // At top of page, default to dark
+      setCurrentBgIsLight(false)
+    }
+  }, [])
+
+  // Track active section
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
     }, observerOptions)
 
-    // Observe all sections
     sections.forEach((section) => {
       const element = document.getElementById(section.id)
       if (element) {
-        sectionRefs.current.set(section.id, element)
-        observerRef.current?.observe(element)
+        observer.observe(element)
       }
     })
 
-    // Cleanup
     return () => {
-      observerRef.current?.disconnect()
+      sections.forEach((section) => {
+        const element = document.getElementById(section.id)
+        if (element) {
+          observer.unobserve(element)
+        }
+      })
+      observer.disconnect()
     }
   }, [sections])
 
   const scrollToSection = (sectionId: string) => {
+    if (typeof window === 'undefined') return
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      // Calculate actual nav heights dynamically
+      const header = document.querySelector('header')
+      const sectionNav = navRef.current
+      const mainNavHeight = header ? header.getBoundingClientRect().height : 72 // Main nav is now taller
+      const sectionNavHeight = sectionNav ? sectionNav.getBoundingClientRect().height : 48 // Section nav is now shorter
+      const offset = mainNavHeight + sectionNavHeight + 20 // Extra padding
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const offsetPosition = elementPosition - offset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      })
+
+      // Update URL hash
+      window.history.pushState(null, '', `#${sectionId}`)
     }
   }
 
+  // Check scroll indicators
+  useEffect(() => {
+    if (!isVisible) return
+
+    const checkScrollIndicators = () => {
+      if (navRef.current) {
+        const scrollContainer = navRef.current.querySelector('.overflow-x-auto')
+        if (scrollContainer) {
+          const { scrollLeft, scrollWidth, clientWidth } = scrollContainer
+          setShowLeftIndicator(scrollLeft > 10)
+          setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
+        }
+      }
+    }
+
+    checkScrollIndicators()
+    window.addEventListener('resize', checkScrollIndicators)
+
+    return () => {
+      window.removeEventListener('resize', checkScrollIndicators)
+    }
+  }, [isVisible])
+
+  // Calculate main nav height dynamically
+  const [mainNavHeight, setMainNavHeight] = useState(72) // Main nav is now taller
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const updateNavHeight = () => {
+      const header = document.querySelector('header')
+      if (header) {
+        const height = header.getBoundingClientRect().height
+        setMainNavHeight(height > 0 ? height : 64)
+      }
+    }
+
+    updateNavHeight()
+    window.addEventListener('resize', updateNavHeight)
+
+    // Also check when header visibility changes
+    const observer = new MutationObserver(updateNavHeight)
+    const header = document.querySelector('header')
+    if (header) {
+      observer.observe(header, { attributes: true, attributeFilter: ['class', 'style'] })
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateNavHeight)
+      observer.disconnect()
+    }
+  }, [isVisible])
+
   if (!isVisible) return null
 
+  const bgStyle = currentBgIsLight
+    ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' }
+    : { backgroundColor: 'rgba(10, 10, 11, 0.85)' }
+
+  const textColor = currentBgIsLight ? 'text-[var(--text-primary-light)]' : 'text-white'
+  const mutedColor = currentBgIsLight ? 'text-[var(--text-muted-light)]' : 'text-white/70'
+  const borderColor = currentBgIsLight ? 'border-black/10' : 'border-white/20'
+
   return (
-    <nav 
-      className="fixed right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
+    <nav
+      ref={navRef}
+      className={`fixed left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible
+        ? 'opacity-100 translate-y-0 h-auto'
+        : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'
+        } ${hasShadow ? 'shadow-lg' : ''}`}
+      style={{
+        top: `${mainNavHeight}px`,
+        zIndex: 9999, // Just below main nav (10000)
+        isolation: 'isolate',
+        position: 'fixed',
+        ...bgStyle,
+        borderBottom: isVisible ? (currentBgIsLight ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent'
+      }}
       aria-label="Case study section navigation"
     >
-      <div className="bg-white/90 backdrop-blur-sm rounded-lg p-4 border border-black/10 shadow-lg">
-        <div className="space-y-2">
-          <div className="text-xs font-mono uppercase tracking-wider text-[#666666] mb-3 px-2">
-            Sections
+      <div className="relative">
+        <div
+          className="overflow-x-auto scrollbar-hide"
+          onScroll={(e) => {
+            if (typeof window === 'undefined') return
+            const target = e.currentTarget
+            const { scrollLeft, scrollWidth, clientWidth } = target
+            setShowLeftIndicator(scrollLeft > 10)
+            setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
+          }}
+        >
+          <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-1 sm:py-1.5 min-w-max max-w-[1200px] mx-auto justify-center">
+            {sections.map((section) => {
+              const isActive = activeSection === section.id
+              // Extract first word from section title - show only first word on all screen sizes
+              const firstWord = section.title.split(' ')[0]
+              const firstLetter = firstWord.charAt(0)
+              const restOfWord = firstWord.slice(1)
+              return (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      scrollToSection(section.id)
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-transparent ${isActive
+                    ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0`
+                    : currentBgIsLight
+                      ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0'
+                      : 'text-white/80 hover:text-white hover:bg-white/10 border-0'
+                    }`}
+                  aria-label={`Navigate to ${section.title}`}
+                  aria-current={isActive ? 'true' : 'false'}
+                >
+                  <span><span className="font-bold">{firstLetter}</span>{restOfWord}</span>
+                </button>
+              )
+            })}
           </div>
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              aria-label={`Navigate to section ${sections.indexOf(section) + 1}: ${section.title}`}
-              aria-current={activeSection === section.id ? 'true' : 'false'}
-              className={`block w-full text-left px-3 py-2 rounded text-sm transition-colors ${
-                activeSection === section.id
-                  ? 'bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] font-semibold'
-                  : 'text-[#666666] hover:text-[#1A1A1A] hover:bg-black/5'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs">{sections.indexOf(section) + 1}</span>
-                <span className="truncate max-w-[120px]">{section.title}</span>
-              </div>
-            </button>
-          ))}
         </div>
+
+        {/* Scroll indicators */}
+        {showLeftIndicator && (
+          <div
+            className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r to-transparent pointer-events-none"
+            style={currentBgIsLight ? { background: 'linear-gradient(to right, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to right, rgba(10, 10, 11, 0.95), transparent)' }}
+          ></div>
+        )}
+        {showRightIndicator && (
+          <div
+            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l to-transparent pointer-events-none"
+            style={currentBgIsLight ? { background: 'linear-gradient(to left, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to left, rgba(10, 10, 11, 0.95), transparent)' }}
+          ></div>
+        )}
       </div>
     </nav>
   )
 }
-

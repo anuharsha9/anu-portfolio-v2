@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import { useMemo, memo } from 'react'
 import { Recommendation } from '@/data/home'
-import { SignatureLogo, SectionDivider } from '@/components/brand'
+import SignatureLogo from '@/components/brand/SignatureLogo'
+import SectionDivider from '@/components/brand/SectionDivider'
 import TopQuoteIcon from '@/assets/top-quote.svg'
 import BottomQuoteIcon from '@/assets/bottom-quote.svg'
 

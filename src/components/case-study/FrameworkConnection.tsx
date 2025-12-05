@@ -73,7 +73,7 @@ export default function FrameworkConnection({ data, isLightBackground = false, s
           const firstLetter = principle.title.charAt(0)
           const restOfTitle = principle.title.slice(1)
           const sectionId = sectionMappings?.[principle.letter]
-          
+
           const handleClick = (e: React.MouseEvent) => {
             if (sectionId) {
               e.preventDefault()
@@ -105,7 +105,7 @@ export default function FrameworkConnection({ data, isLightBackground = false, s
               <p className={`${mutedColor} text-xs md:text-sm leading-relaxed`}>
                 {principle.description}
               </p>
-              
+
               {/* Link indicator if section mapping exists */}
               {sectionId && (
                 <div className="mt-3 flex items-center gap-2 text-[var(--accent-teal)] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -140,13 +140,13 @@ export default function FrameworkConnection({ data, isLightBackground = false, s
                 <a
                   href={`#${sectionId}`}
                   onClick={handleClick}
-                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(13,148,136,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group cursor-pointer block`}
+                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,170,188,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group cursor-pointer block`}
                 >
                   {cardContent}
                 </a>
               ) : (
                 <div
-                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(13,148,136,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group`}
+                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,170,188,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group`}
                 >
                   {cardContent}
                 </div>

@@ -19,30 +19,49 @@ export function HeroBrain() {
 
 
   useEffect(() => {
+    console.log('[Gear Animation] HeroBrain component mounted, initializing...')
     const container = containerRef.current
-    if (!container) return
+    if (!container) {
+      console.error('[Gear Animation] Container ref is null!')
+      return
+    }
+    console.log('[Gear Animation] Container found')
 
     let cleanup: (() => void) | null = null
 
     const setup = () => {
+      console.log('[Gear Animation] Setup function called')
       const svgRoot = container.querySelector<SVGSVGElement>('svg')
       if (!svgRoot) {
+        console.log('[Gear Animation] SVG not found yet, retrying...')
         setTimeout(setup, 100)
         return
       }
+      console.log('[Gear Animation] SVG found')
       svgRootRef.current = svgRoot
       let brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears-copy')
       if (!brainGearsGroup) {
         brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
       }
       if (!brainGearsGroup) {
+        console.error('[Gear Animation] Brain gears group not found!')
         return
       }
+      console.log('[Gear Animation] Brain gears group found')
 
       const setupGearRotations = () => {
-        // During fade-in: gears rotate slower, then speed up by 10-15% after fade-in
-        const speedUpMultiplier = 1.125 // 12.5% faster after fade-in (middle of 10-15%)
-        const fadeInDuration = 3 // seconds
+        console.log('[Gear Animation] Starting gear rotation setup...')
+
+        // Simplified: All gears fade in rotating (0-2s), then slow down at 2s
+        const fadeInDuration = 2.0 // seconds - all gears fade in rotating
+        const slowDownTime = 2.0 // seconds - when gears slow down
+        const mainGearSlowDownPercent = 0.30 // Main gears slow down by 30% (multiply speed by 0.7)
+
+        console.log('[Gear Animation] Configuration:', {
+          fadeInDuration: `${fadeInDuration}s (all gears fade in rotating)`,
+          slowDownTime: `${slowDownTime}s (gears slow down)`,
+          mainGearSlowDown: `${(mainGearSlowDownPercent * 100).toFixed(0)}% slower after ${slowDownTime}s`
+        })
 
         // Cache all gear groups upfront to avoid repeated DOM queries
         const gearGroups = new Map<string, SVGGElement>()
@@ -53,48 +72,135 @@ export function HeroBrain() {
           }
         })
 
+        console.log(`[Gear Animation] Found ${gearGroups.size} gear groups`)
+
         // Main gears - use cached references
         gearGroups.forEach((gearGroup, gearId) => {
           const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
-          if (!gearBase) return
+          if (!gearBase) {
+            console.warn(`[Gear Animation] No gear-base found for ${gearId}`)
+            return
+          }
 
           const isClockwise = Math.random() > 0.5
-          // After fade-in, main gears rotate at their normal speed (20-40 seconds per full rotation)
-          // But we speed them up by 10-15%, so the actual speed is faster
+          // Main gears: varying speeds (20-40 seconds per full rotation)
           const baseRotationSpeed = 20 + Math.random() * 20
-          const rotationSpeed = baseRotationSpeed / speedUpMultiplier // Faster rotation after fade-in
 
-          // During fade-in: rotate slower (at the base speed, before speed-up)
-          const fadeInRotationAmount = (360 / baseRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
+          // Fast speed during fade-in (0-2s)
+          const fastRotationSpeed = baseRotationSpeed
 
-          // Set variables on the gear group so both base and hover gears inherit
+          // Slow speed after 2s (30% slower = multiply duration by 1/0.7 = 1.43)
+          const slowRotationSpeed = baseRotationSpeed / (1 - mainGearSlowDownPercent) // Slower = longer duration
+
+          // Calculate fade-in rotation (2s at fast speed)
+          const fadeInRotationAmount = (360 / fastRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
+
+          // Set variables for simplified animation
+          const rotationAmountValue = isClockwise ? '360deg' : '-360deg'
           gearGroup.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
-          gearGroup.style.setProperty('--rotation-duration', `${rotationSpeed}s`)
-          gearGroup.style.setProperty('--rotation-amount', isClockwise ? '360deg' : '-360deg')
+          gearGroup.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
+          gearGroup.style.setProperty('--rotation-amount', rotationAmountValue)
+
+          // Also set directly on gear-base to ensure inheritance
+          gearBase.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
+          gearBase.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
+          gearBase.style.setProperty('--rotation-amount', rotationAmountValue)
+
+          // Simplified animation: fade-in rotating (0-2s), then slow continuous rotation (starts at 2s)
+          gearBase.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
+
+          // Set on hover gear if it exists
+          const gearHover = gearGroup.querySelector<SVGGElement>('[id^="gear-hover"]')
+          if (gearHover) {
+            gearHover.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
+            gearHover.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
+            gearHover.style.setProperty('--rotation-amount', rotationAmountValue)
+            gearHover.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
+          }
+
+          // Calculate angular velocities for comparison
+          const fastAngularVelocity = Math.abs(fadeInRotationAmount) / fadeInDuration // degrees per second during fade-in (0-2s)
+          const slowAngularVelocity = 360 / slowRotationSpeed // degrees per second after slow-down (after 2s)
+          const speedDifferencePercent = ((fastAngularVelocity - slowAngularVelocity) / slowAngularVelocity) * 100
+
+          // Verify animation and CSS variables are set correctly (use setTimeout to ensure DOM is updated)
+          setTimeout(() => {
+            const computedAnimation = getComputedStyle(gearBase).animation || getComputedStyle(gearBase).getPropertyValue('animation')
+            const computedFadeInRotation = getComputedStyle(gearBase).getPropertyValue('--fade-in-rotation').trim()
+            const computedRotationDuration = getComputedStyle(gearBase).getPropertyValue('--rotation-duration').trim()
+            const computedRotationAmount = getComputedStyle(gearBase).getPropertyValue('--rotation-amount').trim()
+
+            console.log(`[Gear Animation] ${gearId} - Verification:`, {
+              animation: computedAnimation || 'NOT SET',
+              fadeInRotation: computedFadeInRotation || 'NOT SET',
+              rotationDuration: computedRotationDuration || 'NOT SET',
+              rotationAmount: computedRotationAmount || 'NOT SET',
+              expectedDuration: `${slowRotationSpeed}s`,
+              slowDownTime: `${slowDownTime}s`
+            })
+
+            if (!computedFadeInRotation || !computedRotationDuration || !computedAnimation) {
+              console.warn(`[Gear Animation] ${gearId}: Animation or CSS variables not set!`)
+            }
+          }, 100)
+
+          // Debug: log to verify values for all gears
+          console.log(`[Gear Animation] ${gearId}:`, {
+            direction: isClockwise ? 'clockwise' : 'counter-clockwise',
+            fastSpeed: `${fastRotationSpeed.toFixed(2)}s per rotation (0-2s)`,
+            slowSpeed: `${slowRotationSpeed.toFixed(2)}s per rotation (after 2s, 30% slower)`,
+            fadeInRotation: `${fadeInRotationAmount.toFixed(2)}deg over ${fadeInDuration}s`,
+            fastAngularVelocity: `${fastAngularVelocity.toFixed(2)} deg/s (fade-in)`,
+            slowAngularVelocity: `${slowAngularVelocity.toFixed(2)} deg/s (after slow-down)`,
+            speedDifference: `${speedDifferencePercent.toFixed(1)}% slower after 2s`
+          })
         })
 
-        // Background gears: during fade-in rotate slower, then speed up after fade-in
+        // Background gears: fade in rotating (0-2s), then slow down dramatically at 2s
         const bgGears = Array.from(
           brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
         )
 
+        console.log(`[Gear Animation] Found ${bgGears.length} background gears`)
+
         // Use average main gear speed for fade-in calculation
         const avgMainGearSpeed = 30 // seconds per full rotation
 
-        bgGears.forEach((gear) => {
+        bgGears.forEach((gear, index) => {
           const isClockwise = Math.random() > 0.5
-          // Background gears rotate at 1/3 speed of main gears after fade-in (3x slower)
-          // But we speed them up by 10-15%, so the actual speed is faster
-          const baseBgRotationSpeed = avgMainGearSpeed * 3
-          const bgRotationSpeed = baseBgRotationSpeed / speedUpMultiplier // Faster rotation after fade-in
+          // Background gears: fast during fade-in, then dramatically slower (3x slower than main gears)
+          const fastBgRotationSpeed = avgMainGearSpeed // Fast speed during fade-in
+          const slowBgRotationSpeed = avgMainGearSpeed * 3 // Dramatically slower after 2s (3x slower)
 
-          // During fade-in: rotate slower (at the base speed, before speed-up)
-          const fadeInRotationAmount = (360 / baseBgRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
+          // Calculate fade-in rotation (2s at fast speed)
+          const fadeInRotationAmount = (360 / fastBgRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
 
+          const bgRotationAmountValue = isClockwise ? '360deg' : '-360deg'
           gear.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
-          gear.style.setProperty('--rotation-duration', `${bgRotationSpeed}s`)
-          gear.style.setProperty('--rotation-amount', isClockwise ? '360deg' : '-360deg')
+          gear.style.setProperty('--rotation-duration', `${slowBgRotationSpeed}s`)
+          gear.style.setProperty('--rotation-amount', bgRotationAmountValue)
+
+          // Simplified animation: fade-in rotating (0-2s), then slow continuous rotation (starts at 2s)
+          gear.style.setProperty('animation', `gear-fade-in-bg ${fadeInDuration}s linear forwards, gear-rotate-bg-slow ${slowBgRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
+
+          if (index === 0) {
+            const bgFadeInAngularVelocity = Math.abs(fadeInRotationAmount) / fadeInDuration
+            const bgSlowAngularVelocity = 360 / slowBgRotationSpeed
+            const bgSpeedDifferencePercent = ((bgFadeInAngularVelocity - bgSlowAngularVelocity) / bgSlowAngularVelocity) * 100
+
+            console.log(`[Gear Animation] Background gear (sample):`, {
+              direction: isClockwise ? 'clockwise' : 'counter-clockwise',
+              fastSpeed: `${fastBgRotationSpeed.toFixed(2)}s per rotation (0-2s)`,
+              slowSpeed: `${slowBgRotationSpeed.toFixed(2)}s per rotation (after 2s, dramatically slower)`,
+              fadeInRotation: `${fadeInRotationAmount.toFixed(2)}deg over ${fadeInDuration}s`,
+              fadeInAngularVelocity: `${bgFadeInAngularVelocity.toFixed(2)} deg/s (fade-in)`,
+              slowAngularVelocity: `${bgSlowAngularVelocity.toFixed(2)} deg/s (after slow-down)`,
+              speedDifference: `${bgSpeedDifferencePercent.toFixed(1)}% slower after 2s`
+            })
+          }
         })
+
+        console.log('[Gear Animation] Gear rotation setup complete!')
       }
 
       const setTransformOrigins = () => {
@@ -426,7 +532,7 @@ export function HeroBrain() {
               animate={{ opacity: 1, y: 40 }}
               transition={{
                 duration: 4,
-                delay: 3.5, // Placeholder text fades in first (after gears fade in)
+                delay: 2.2, // Placeholder text fades in after gears slow down
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
@@ -632,12 +738,12 @@ export function HeroBrain() {
                       const section = document.getElementById('work-overview')
                       if (section) {
                         // Account for navbar height on mobile (if visible)
-                        const mainNavHeight = 60
-                        const sectionNavHeight = 60
+                        const mainNavHeight = 72 // Main nav is now taller
+                        const sectionNavHeight = 48 // Section nav is now shorter
                         const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
                         const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
                         const offset = totalNavHeight + 20 // Extra padding
-                        
+
                         const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
                         const offsetPosition = Math.max(0, elementPosition - offset)
 
@@ -645,7 +751,7 @@ export function HeroBrain() {
                           top: offsetPosition,
                           behavior: 'smooth',
                         })
-                        
+
                         // Update URL hash
                         window.history.pushState(null, '', '#work-overview')
                       }
@@ -676,7 +782,7 @@ export function HeroBrain() {
               animate={{ opacity: 1, y: 40 }}
               transition={{
                 duration: 4,
-                delay: 3.5, // Placeholder text fades in first (after gears fade in)
+                delay: 2.2, // Placeholder text fades in after gears slow down
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
@@ -876,12 +982,12 @@ export function HeroBrain() {
                       const section = document.getElementById('work-overview')
                       if (section) {
                         // Account for navbar height on mobile (if visible)
-                        const mainNavHeight = 60
-                        const sectionNavHeight = 60
+                        const mainNavHeight = 72 // Main nav is now taller
+                        const sectionNavHeight = 48 // Section nav is now shorter
                         const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
                         const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
                         const offset = totalNavHeight + 20 // Extra padding
-                        
+
                         const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
                         const offsetPosition = Math.max(0, elementPosition - offset)
 
@@ -889,7 +995,7 @@ export function HeroBrain() {
                           top: offsetPosition,
                           behavior: 'smooth',
                         })
-                        
+
                         // Update URL hash
                         window.history.pushState(null, '', '#work-overview')
                       }

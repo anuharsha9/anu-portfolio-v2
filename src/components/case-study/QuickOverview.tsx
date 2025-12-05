@@ -57,8 +57,8 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 transition-all duration-300 group cursor-pointer hover:shadow-lg hover:border-[var(--accent-teal)]/40"
-          whileHover={{ 
-            y: -4, 
+          whileHover={{
+            y: -4,
             scale: 1.01
           }}
           whileTap={{ scale: 0.98 }}
@@ -100,7 +100,7 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+          className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
         >
           <div className="space-y-4">
             <div className="flex items-center gap-3">

@@ -29,7 +29,7 @@
   text-align: center;
   margin-bottom: 24pt;
   padding-bottom: 12pt;
-  border-bottom: 2pt solid var(--accent-teal, #0D9488);
+  border-bottom: 2pt solid var(--accent-teal, #20AABC);
 }
 
 .contact-info strong {
@@ -57,7 +57,7 @@ h1 {
   margin-bottom: 8pt;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 1.5pt solid var(--accent-teal, #0D9488);
+  border-bottom: 1.5pt solid var(--accent-teal, #20AABC);
   padding-bottom: 4pt;
   color: #111111;
 }
@@ -188,12 +188,29 @@ li {
 
   /* Remove browser print headers and footers */
   @page {
-    @top-center { content: ""; }
-    @top-left { content: ""; }
-    @top-right { content: ""; }
-    @bottom-center { content: ""; }
-    @bottom-left { content: ""; }
-    @bottom-right { content: ""; }
+    @top-center {
+      content: "";
+    }
+
+    @top-left {
+      content: "";
+    }
+
+    @top-right {
+      content: "";
+    }
+
+    @bottom-center {
+      content: "";
+    }
+
+    @bottom-left {
+      content: "";
+    }
+
+    @bottom-right {
+      content: "";
+    }
   }
 
   /* Page breaks */
@@ -208,21 +225,25 @@ li {
   }
 
   /* Ensure text is black for ATS */
-  body, .resume-content {
+  body,
+  .resume-content {
     color: #000000 !important;
   }
 
-  h1, h2, .job-title, .key-achievements {
+  h1,
+  h2,
+  .job-title,
+  .key-achievements {
     color: #000000 !important;
   }
 
   /* Keep teal accent for headings border (subtle) */
   h1 {
-    border-bottom-color: #0D9488;
+    border-bottom-color: #20AABC;
   }
 
   .contact-info {
-    border-bottom-color: #0D9488;
+    border-bottom-color: #20AABC;
   }
 }
 
@@ -233,7 +254,6 @@ li {
   }
 
   h1:hover {
-    border-bottom-color: var(--accent-teal-700, #0F766E);
+    border-bottom-color: var(--accent-teal-700, #1A8A9A);
   }
 }
-

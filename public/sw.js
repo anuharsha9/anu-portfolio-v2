@@ -1,5 +1,5 @@
 // Service Worker for PWA functionality
-const CACHE_NAME = 'anu-portfolio-v1'
+const CACHE_NAME = 'anu-portfolio-v3'
 const urlsToCache = [
   '/',
   '/me',
@@ -11,16 +11,24 @@ const urlsToCache = [
   '/images/favicon-512x512.png',
 ]
 
-// Install event - cache resources
+// Install event - clear ALL old caches first, then cache resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(urlsToCache)
-      })
-      .catch((err) => {
-        console.log('Cache install failed:', err)
-      })
+    caches.keys().then((cacheNames) => {
+      // Delete ALL existing caches
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          return caches.delete(cacheName)
+        })
+      )
+    }).then(() => {
+      // Now open new cache
+      return caches.open(CACHE_NAME)
+    }).then((cache) => {
+      return cache.addAll(urlsToCache)
+    }).catch((err) => {
+      console.log('Cache install failed:', err)
+    })
   )
   self.skipWaiting()
 })
@@ -53,14 +61,32 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
+  // Skip caching ALL Next.js internal files (they're dynamic and shouldn't be cached)
+  // This includes all _next/static files, CSS, JS chunks, etc.
+  const url = new URL(event.request.url)
+  if (url.pathname.includes('/_next/') ||
+    url.pathname.startsWith('/_next/') ||
+    url.pathname.includes('layout.css') ||
+    url.pathname.includes('app-pages-internals') ||
+    url.pathname.includes('main-app.js') ||
+    url.pathname.includes('page.js') ||
+    url.pathname.includes('error.js') ||
+    url.pathname.includes('not-found.js') ||
+    url.pathname.includes('.css') ||
+    url.pathname.includes('.js')) {
+    // Always fetch from network for Next.js internal files - bypass cache completely
+    event.respondWith(fetch(event.request))
+    return
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Return cached version or fetch from network
         return response || fetch(event.request)
           .then((response) => {
-            // Don't cache if not a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+            // Don't cache 404 responses or invalid responses
+            if (!response || response.status !== 200 || response.status === 404 || response.type !== 'basic') {
               return response
             }
 

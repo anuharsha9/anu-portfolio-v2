@@ -33,12 +33,12 @@ export const reportcasterCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'I took full ownership of the redesign one week into joining—a testament to my ability to operate autonomously and deliver at Principal-level impact. I rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. This wasn&apos;t just design; it was technical systems thinking, strategic product leadership, and end-to-end execution from ambiguity to production.',
+      'I took full ownership of the redesign one week into joining—a testament to my ability to operate autonomously and deliver at Principal-level impact. I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire ReportCaster redesign solo initially, while simultaneously leading ML Functions and IQ Plugin. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions, working closely with the Lead Architect of the entire organization. I rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. After establishing the architecture and core workflows, I onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition. Even after moving focus to other projects, I continued to be looped in for critical architectural decisions as the knowledge hub. This wasn&apos;t just design; it was technical systems thinking, strategic product leadership, team management, and end-to-end execution from ambiguity to production.',
     impactMetrics: [
       { label: 'Schedule creation', value: '44–56% fewer clicks, no new tabs' },
       { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
       { label: 'Explorer access', value: '≈60–70% fewer clicks' },
-      { label: 'Creation speed', value: '≈40–50% faster' },
+      { label: 'Creation speed', value: '≈50% faster completion' },
       { label: 'Support load', value: '≈25–30% reduction (directional)' },
       { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
     ],
@@ -46,7 +46,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       situation: 'A 40-year-old mission-critical system serving millions of users across hundreds of enterprise customers, processing 20 million schedules weekly. Customer requests for modernization were flooding in, creating urgent business pressure. Five fragmented subsystems with undocumented rules and no coherent mental model.',
       task: 'Responsibly modernize a system that couldn\'t afford to break — maintaining backward compatibility and aligning with platform patterns.',
       action: 'Took full ownership one week into joining. Mapped complex workflows across five fragmented subsystems, reverse-engineered undocumented rules, and unified them into one coherent architecture. Led cross-functional alignment with engineering, product, and QA—making strategic decisions when others hesitated. Delivered a modal-based creation model aligned with platform patterns.',
-      result: '44–56% fewer clicks, eliminated multi-tab sprawl, and reduced support load by 25–30% — delivered safely at massive scale with resounding customer approval.',
+      result: '44–56% fewer clicks, eliminated multi-tab sprawl, and reduced support load by 25–30% — delivered safely at massive scale with resounding customer approval. Work shipped as part of WebFOCUS 9.3, impacting millions of users daily. Recognized by senior leadership in a company-wide meeting for early impact within first 6 months.',
     },
     technologies: [
       'Figma',
@@ -60,6 +60,12 @@ export const reportcasterCaseStudy: CaseStudyData = {
       'Unified five fragmented subsystems into one coherent mental model',
       'Reduced schedule creation clicks by 44–56% with zero new tabs',
       'Eliminated multi-tab sprawl entirely',
+      'Only designer who worked on all major WebFOCUS features; owned entire ReportCaster redesign solo initially while simultaneously leading ML Functions and IQ Plugin',
+      'Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition',
+      'Continued to be looped in for critical architectural decisions as knowledge hub even after transitioning focus to other projects',
+      'Delivered multiple organization-wide design demos to 150-200 person business unit, presenting design walkthroughs and architectural decisions',
+      'Co-hosted Virtual User Group Sessions for enterprise customers as only designer alongside Senior PM',
+      'Shipped as part of WebFOCUS 9.3, impacting millions of users daily across enterprise deployments',
       'Onboarded cross-functional teams (engineering, PM, QA, docs, support)',
       'Clarified undocumented rules (bursting, retention, crash recovery)',
     ],
@@ -541,7 +547,7 @@ Legacy systems can be modernized without losing their power — you just need to
           src: '/images/case-study/ReportCaster/After.png',
           alt: 'After: New RC interface',
           caption: 'After: New RC interface — unified, modal-based workflow requiring 2 clicks to create a schedule (+ menu → create schedule), with Explorer 1 click away and all subsystems unified into one coherent system.',
-          sensitive: true,
+          // Public - new workflow is not sensitive
         },
         beforeLabel: 'Before',
         afterLabel: 'After',
@@ -569,7 +575,7 @@ Legacy systems can be modernized without losing their power — you just need to
         videoUrl: '/videos/rc-prototype-walkthrough.mp4',
         videoPoster: '/images/case-study/ReportCaster/rc-prototype-poster.jpg',
         description: 'The new unified workflow: modal-based creation, 2 clicks to create a schedule (+ menu → create schedule), all functionality accessible from one place. (Note: This is a Figma prototype and may not reflect all final shipped changes.)',
-        // Public - new workflow is not sensitive
+        isPublic: true, // Public - new workflow is not sensitive
       },
       comparisonNotes: {
         before: [

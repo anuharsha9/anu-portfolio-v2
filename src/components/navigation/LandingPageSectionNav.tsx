@@ -30,16 +30,89 @@ export default function LandingPageSectionNav() {
   // Only show on landing page
   const isLandingPage = pathname === '/'
 
-  // Show after scrolling past hero - always visible once past hero (no hide/show on scroll)
+  const [hasShadow, setHasShadow] = useState(false)
+
+  // Show on any scroll, just like main nav (carbon copy behavior)
   useScrollManager((scrollY) => {
     if (!isLandingPage) return
-    
-    // Show after scrolling past hero (about 100vh) - always visible once past
-    const pastHero = scrollY > window.innerHeight * 0.8
-    setIsVisible(pastHero)
+
+    // Show on any scroll (not just past hero) - matches main nav behavior
+    const hasScrolled = scrollY > 0
+    setIsVisible(hasScrolled)
+    setHasShadow(hasScrolled)
   }, [isLandingPage])
 
-  // Track active section and detect background color
+  // Use same background detection as main nav (carbon copy)
+  useScrollManager((scrollY) => {
+    if (!isLandingPage) return
+
+    // Detect background color based on what's behind the section nav (same logic as main nav)
+    if (typeof window !== 'undefined' && scrollY > 0 && navRef.current) {
+      const navRect = navRef.current.getBoundingClientRect()
+      // Sample multiple points to get a better sense of the background
+      const samplePoints = [
+        { x: window.innerWidth / 4, y: navRect.top - 5 },
+        { x: window.innerWidth / 2, y: navRect.top - 5 },
+        { x: (window.innerWidth * 3) / 4, y: navRect.top - 5 },
+      ]
+
+      let lightCount = 0
+      let darkCount = 0
+
+      samplePoints.forEach(point => {
+        const elementBelow = document.elementFromPoint(point.x, point.y)
+        if (elementBelow) {
+          // Walk up the DOM tree to find the actual background
+          let currentElement: Element | null = elementBelow
+          let bgColor = ''
+
+          while (currentElement && !bgColor) {
+            const computedStyle = window.getComputedStyle(currentElement)
+            bgColor = computedStyle.backgroundColor
+
+            if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+              const hasLightSurface = currentElement.classList.contains('surface-light') ||
+                currentElement.classList.contains('surface-light-alt')
+              const hasDarkSurface = currentElement.classList.contains('surface-dark') ||
+                currentElement.classList.contains('surface-dark-alt')
+
+              if (hasLightSurface) {
+                lightCount++
+                break
+              } else if (hasDarkSurface) {
+                darkCount++
+                break
+              }
+              currentElement = currentElement.parentElement
+            } else {
+              const rgb = bgColor.match(/\d+/g)
+              if (rgb && rgb.length >= 3) {
+                const r = parseInt(rgb[0])
+                const g = parseInt(rgb[1])
+                const b = parseInt(rgb[2])
+                const brightness = (r * 299 + g * 587 + b * 114) / 1000
+
+                if (brightness > 128) {
+                  lightCount++
+                } else {
+                  darkCount++
+                }
+              }
+              break
+            }
+          }
+        }
+      })
+
+      // Determine if background is predominantly light or dark
+      setCurrentBgIsLight(lightCount > darkCount)
+    } else if (scrollY === 0) {
+      // At top of page, default to dark
+      setCurrentBgIsLight(false)
+    }
+  }, [isLandingPage])
+
+  // Track active section
   useEffect(() => {
     if (!isLandingPage) return
 
@@ -53,14 +126,6 @@ export default function LandingPageSectionNav() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id)
-          
-          // Detect background color of the section
-          const section = entry.target as HTMLElement
-          const computedStyle = window.getComputedStyle(section)
-          const bgColor = computedStyle.backgroundColor
-          // Check if background is light (white/light gray) or dark
-          const isLight = bgColor.includes('rgb(255') || bgColor.includes('rgb(250') || bgColor.includes('rgb(245')
-          setCurrentBgIsLight(isLight)
         }
       })
     }, observerOptions)
@@ -84,10 +149,15 @@ export default function LandingPageSectionNav() {
   }, [isLandingPage])
 
   const scrollToSection = (sectionId: string) => {
+    if (typeof window === 'undefined') return
     const element = document.getElementById(sectionId)
     if (element) {
-      const navHeight = 60 // Approximate nav height
-      const offset = navHeight + 20 // Extra padding
+      // Calculate actual nav heights dynamically
+      const header = document.querySelector('header')
+      const sectionNav = navRef.current
+      const mainNavHeight = header ? header.getBoundingClientRect().height : 72 // Main nav is now taller
+      const sectionNavHeight = sectionNav ? sectionNav.getBoundingClientRect().height : 48 // Section nav is now shorter
+      const offset = mainNavHeight + sectionNavHeight + 20 // Extra padding
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - offset
 
@@ -95,7 +165,7 @@ export default function LandingPageSectionNav() {
         top: offsetPosition,
         behavior: 'smooth',
       })
-      
+
       // Update URL hash
       window.history.pushState(null, '', `#${sectionId}`)
     }
@@ -124,22 +194,65 @@ export default function LandingPageSectionNav() {
     }
   }, [isLandingPage, isVisible])
 
+  // Calculate main nav height dynamically
+  const [mainNavHeight, setMainNavHeight] = useState(72) // Main nav is now taller
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !isLandingPage) return
+
+    const updateNavHeight = () => {
+      const header = document.querySelector('header')
+      if (header) {
+        const height = header.getBoundingClientRect().height
+        setMainNavHeight(height > 0 ? height : 64)
+      }
+    }
+
+    updateNavHeight()
+    window.addEventListener('resize', updateNavHeight)
+
+    // Also check when header visibility changes
+    const observer = new MutationObserver(updateNavHeight)
+    const header = document.querySelector('header')
+    if (header) {
+      observer.observe(header, { attributes: true, attributeFilter: ['class', 'style'] })
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateNavHeight)
+      observer.disconnect()
+    }
+  }, [isLandingPage, isVisible])
+
   if (!isLandingPage || !isVisible) return null
 
-  const textColor = currentBgIsLight ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = currentBgIsLight ? 'text-[#666666]' : 'text-white/70'
-  const bgColor = currentBgIsLight ? 'bg-white/95' : 'bg-[var(--bg-dark)]/95'
+  const bgStyle = currentBgIsLight
+    ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' }
+    : { backgroundColor: 'rgba(10, 10, 11, 0.85)' }
+
+  const textColor = currentBgIsLight ? 'text-[var(--text-primary-light)]' : 'text-white'
+  const mutedColor = currentBgIsLight ? 'text-[var(--text-muted-light)]' : 'text-white/70'
   const borderColor = currentBgIsLight ? 'border-black/10' : 'border-white/20'
 
   return (
-    <nav 
+    <nav
       ref={navRef}
-      className={`fixed top-[60px] left-0 right-0 z-30 ${bgColor} backdrop-blur-md border-b ${borderColor} shadow-lg transition-all duration-300`}
+      className={`fixed left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible
+        ? 'opacity-100 translate-y-0 h-auto'
+        : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'
+        } ${hasShadow ? 'shadow-lg' : ''}`}
+      style={{
+        top: `${mainNavHeight}px`,
+        zIndex: 9999, // Just below main nav (10000)
+        isolation: 'isolate',
+        position: 'fixed',
+        ...bgStyle,
+        borderBottom: isVisible ? (currentBgIsLight ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent'
+      }}
       aria-label="Landing page section navigation"
-      style={{ top: '60px' }} // Position below main nav (main nav is ~60px tall)
     >
       <div className="relative">
-        <div 
+        <div
           className="overflow-x-auto scrollbar-hide"
           onScroll={(e) => {
             if (typeof window === 'undefined') return
@@ -149,7 +262,7 @@ export default function LandingPageSectionNav() {
             setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
           }}
         >
-          <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-2.5 min-w-max max-w-[1200px] mx-auto justify-end">
+          <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-1 sm:py-1.5 min-w-max max-w-[1200px] mx-auto justify-center">
             {sections.map((section) => {
               const isActive = activeSection === section.id
               return (
@@ -162,13 +275,12 @@ export default function LandingPageSectionNav() {
                       scrollToSection(section.id)
                     }
                   }}
-                  className={`flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[40px] md:min-h-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-transparent ${
-                    isActive
-                      ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold`
-                      : currentBgIsLight
-                        ? 'text-[#1A1A1A] hover:text-[#1A1A1A] hover:bg-black/5 border border-transparent hover:border-black/10'
-                        : 'text-white/80 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/20'
-                  }`}
+                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-transparent ${isActive
+                    ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0`
+                    : currentBgIsLight
+                      ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0'
+                      : 'text-white/80 hover:text-white hover:bg-white/10 border-0'
+                    }`}
                   aria-label={`Navigate to ${section.label}`}
                   aria-current={isActive ? 'true' : 'false'}
                 >
@@ -179,13 +291,19 @@ export default function LandingPageSectionNav() {
             })}
           </div>
         </div>
-        
+
         {/* Scroll indicators */}
         {showLeftIndicator && (
-          <div className={`absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r ${currentBgIsLight ? 'from-white/95' : 'from-[var(--bg-dark)]/95'} to-transparent pointer-events-none`}></div>
+          <div
+            className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r to-transparent pointer-events-none"
+            style={currentBgIsLight ? { background: 'linear-gradient(to right, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to right, rgba(10, 10, 11, 0.95), transparent)' }}
+          ></div>
         )}
         {showRightIndicator && (
-          <div className={`absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l ${currentBgIsLight ? 'from-white/95' : 'from-[var(--bg-dark)]/95'} to-transparent pointer-events-none`}></div>
+          <div
+            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l to-transparent pointer-events-none"
+            style={currentBgIsLight ? { background: 'linear-gradient(to left, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to left, rgba(10, 10, 11, 0.95), transparent)' }}
+          ></div>
         )}
       </div>
     </nav>

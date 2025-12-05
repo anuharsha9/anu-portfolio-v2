@@ -120,7 +120,8 @@ export default function LockedContent({
           // Other case studies set both global unlock and case-specific unlock
           sessionStorage.setItem('portfolio-globally-unlocked', 'true')
           sessionStorage.setItem(storageKey, 'true')
-          // Dispatch custom event to notify all LockedContent components
+          // Dispatch custom event to notify all components
+          window.dispatchEvent(new CustomEvent('case-study-unlocked', { detail: { slug: caseStudySlug } }))
           window.dispatchEvent(new CustomEvent('portfolio-unlocked'))
         }
       }

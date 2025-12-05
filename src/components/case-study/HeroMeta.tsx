@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ImageLightbox from './ImageLightbox'
-import { SignatureLogo } from '@/components/brand'
+import SignatureLogo from '@/components/brand/SignatureLogo'
 import CaseStudyNav from './CaseStudyNav'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
 import HeroTestimonial from '@/components/home/HeroTestimonial'
@@ -212,48 +212,19 @@ export default function HeroMeta({
                 </motion.div>
               )}
 
-              {/* Metadata - Properly Aligned Layout */}
-              <div className="pt-4 sm:pt-5 md:pt-6">
-                <div className="space-y-3 text-sm">
-                  {/* Role */}
-                  <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                      Role
+              {/* Scope Tags - Moved up */}
+              {scope.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-4 sm:pt-5 md:pt-6">
+                  {scope.map((item, index) => (
+                    <span
+                      key={index}
+                      className="text-[var(--text-primary-light)]/80 text-[11px] uppercase tracking-widest font-sans px-2.5 py-1 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5"
+                    >
+                      {item}
                     </span>
-                    <span className="text-[var(--text-primary-light)] font-sans">{role}</span>
-                  </div>
-                  
-                  {/* Company */}
-                  <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                      Company
-                    </span>
-                    <span className="text-[var(--text-primary-light)] font-sans">{company}</span>
-                  </div>
-                  
-                  {/* Timeframe */}
-                  <div className="flex items-center gap-4">
-                    <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                      Timeframe
-                    </span>
-                    <span className="text-[var(--text-primary-light)] font-sans">{timeframe}</span>
-                  </div>
+                  ))}
                 </div>
-                
-                {/* Scope Tags - Below metadata */}
-                {scope.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mt-5">
-                    {scope.map((item, index) => (
-                      <span
-                        key={index}
-                        className="text-[var(--text-primary-light)]/80 text-[11px] uppercase tracking-widest font-sans px-2.5 py-1 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+              )}
             </div>
 
             {/* Right Column: Laptop Visual - Macro Photography Feel with Enhanced Composition */}
@@ -309,17 +280,56 @@ export default function HeroMeta({
             )}
           </div>
 
-          {/* Testimonial - Below 2-column layout */}
-          {testimonial && (
-            <motion.div
-              variants={heroSubVariant}
-              initial="hidden"
-              animate="visible"
-              className="mt-12 sm:mt-16 md:mt-20 max-w-3xl mx-auto"
-            >
-              <HeroTestimonial testimonial={testimonial} />
-            </motion.div>
-          )}
+          {/* Testimonial and Role/Company/Timeframe Tile - Below 2-column layout */}
+          <motion.div
+            variants={heroSubVariant}
+            initial="hidden"
+            animate="visible"
+            className="mt-12 sm:mt-16 md:mt-20"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+              {/* Role/Company/Timeframe Tile */}
+              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-black/10 shadow-sm">
+                <div className="space-y-4">
+                  <h3 className="text-[var(--text-primary-light)] text-sm uppercase tracking-wider font-sans font-semibold mb-4">
+                    Project Details
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    {/* Role */}
+                    <div className="flex items-start gap-4">
+                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
+                        Role
+                      </span>
+                      <span className="text-[var(--text-primary-light)] font-sans">{role}</span>
+                    </div>
+                    
+                    {/* Company */}
+                    <div className="flex items-start gap-4">
+                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
+                        Company
+                      </span>
+                      <span className="text-[var(--text-primary-light)] font-sans">{company}</span>
+                    </div>
+                    
+                    {/* Timeframe */}
+                    <div className="flex items-start gap-4">
+                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
+                        Timeframe
+                      </span>
+                      <span className="text-[var(--text-primary-light)] font-sans">{timeframe}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial */}
+              {testimonial && (
+                <div>
+                  <HeroTestimonial testimonial={testimonial} />
+                </div>
+              )}
+            </div>
+          </motion.div>
         </div>
       </motion.header>
 

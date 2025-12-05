@@ -18,8 +18,7 @@ interface PageShellProps {
 
 export default function PageShell({ children }: PageShellProps) {
   const pathname = usePathname()
-  const isAboutMePage = pathname === '/me'
-  const isLandingPage = pathname === '/'
+  const isLandingPage = pathname === '/' || pathname === ''
 
   return (
     <ErrorBoundary>
@@ -27,7 +26,7 @@ export default function PageShell({ children }: PageShellProps) {
       <ReadingProgress />
       <SiteHeader />
       {isLandingPage && <LandingPageSectionNav />}
-      {isAboutMePage && <AboutMeSectionNav />}
+      {(pathname === '/me' || pathname === '/me/') && <AboutMeSectionNav />}
       <URLHashSync />
       <main id="main-content">
         {children}

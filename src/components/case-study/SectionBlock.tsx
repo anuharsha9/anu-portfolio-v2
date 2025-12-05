@@ -13,6 +13,7 @@ import TeamOnboardingProcess from './TeamOnboardingProcess'
 import EntryPointTransformation from './EntryPointTransformation'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
 import SensitiveImage from './SensitiveImage'
+import LockedContent from './LockedContent'
 
 // Simple lock icon component for locked sections
 const SimpleLockIcon = ({ message, isLightBackground, children }: { message: string; isLightBackground: boolean; children?: React.ReactNode }) => {
@@ -28,15 +29,15 @@ const SimpleLockIcon = ({ message, isLightBackground, children }: { message: str
           {children}
         </div>
       )}
-      
+
       {/* Blurred background pattern if no children (for placeholder) */}
       {!children && (
-        <div 
+        <div
           className={`absolute inset-0 ${isLightBackground ? 'bg-gradient-to-br from-black/5 via-black/10 to-black/5' : 'bg-gradient-to-br from-white/5 via-white/10 to-white/5'}`}
           style={{ filter: 'blur(30px)' }}
         />
       )}
-      
+
       {/* Lock Overlay */}
       <div className={`absolute inset-0 ${isLightBackground ? 'bg-white/85' : 'bg-[var(--bg-dark)]/85'} backdrop-blur-sm flex flex-col items-center justify-center py-12 md:py-16 space-y-4 rounded-lg border-2 ${borderColor}`}>
         <svg
@@ -203,14 +204,41 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-      setGlobalUnlocked(globalUnlockState)
+      const checkUnlockState = () => {
+        const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+        const caseUnlockState = caseStudySlug
+          ? sessionStorage.getItem(`case-study-unlocked-${caseStudySlug}`) === 'true'
+          : false
+        setGlobalUnlocked(globalUnlockState || caseUnlockState)
+      }
+
+      // Check on mount
+      checkUnlockState()
+
+      // Listen for unlock events
+      const handleUnlock = () => {
+        checkUnlockState()
+      }
+
+      window.addEventListener('case-study-unlocked', handleUnlock)
+      window.addEventListener('portfolio-unlocked', handleUnlock)
+
+      // Also check periodically in case sessionStorage is updated elsewhere
+      const interval = setInterval(checkUnlockState, 500)
+
+      return () => {
+        window.removeEventListener('case-study-unlocked', handleUnlock)
+        window.removeEventListener('portfolio-unlocked', handleUnlock)
+        clearInterval(interval)
+      }
     }
-  }, [])
+  }, [caseStudySlug])
 
   // For sensitive images, always check unlock status (don't rely on isUnlocked prop)
   // The isUnlocked prop is for password-gated case studies, but individual images can be locked independently
-  const actuallyUnlocked = isUnlocked || globalUnlocked
+  // IMPORTANT: For individual sensitive images, ONLY check globalUnlocked (sessionStorage), NOT isUnlocked prop
+  // This ensures that even if a case study is unlocked, individual sensitive images remain locked until explicitly unlocked
+  const actuallyUnlocked = globalUnlocked
 
   // Calculate if section should be locked entirely (if >50% of content is sensitive)
   const calculateSectionSensitivity = () => {
@@ -560,23 +588,23 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
               // Extract pull quotes from impactful sentences
               (() => {
                 const paragraphs = section.body.split(/\n\n+/).filter(p => p.trim())
-                
+
                 // Patterns for pull quotes: sentences with strong statements, questions, or key insights
                 const pullQuotePatterns = [
                   /(?:^|\.\s+)([A-Z][^.!?]*(?:don't|can't|won't|should|must|need|critical|fundamental|breakthrough|realization|discovered|realized|learned|understood|key|essential|important|significant|major|turning point|game changer)[^.!?]*[.!?])/gi,
                   /(?:^|\.\s+)([A-Z][^.!?]*\?[^.!?]*[.!?])/g, // Questions
                   /(?:^|\.\s+)([A-Z][^.!?]*(?:This|That|It|The|What|Why|How)[^.!?]*(?:reveals|shows|means|demonstrates|proves|indicates)[^.!?]*[.!?])/gi,
                 ]
-                
+
                 return (
                   <div className="space-y-3">
                     {paragraphs.map((para, pIndex) => {
                       const trimmedPara = para.trim()
-                      
+
                       // Check if this paragraph contains a pull quote candidate
                       let hasPullQuote = false
                       let pullQuoteText = ''
-                      
+
                       for (const pattern of pullQuotePatterns) {
                         const matches = trimmedPara.match(pattern)
                         if (matches && matches.length > 0) {
@@ -585,7 +613,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                             .map(m => m.trim().replace(/^(?:^|\.\s+)/, ''))
                             .filter(m => m.length > 40 && m.length < 200) // Reasonable length
                             .sort((a, b) => b.length - a.length)[0]
-                          
+
                           if (candidate) {
                             hasPullQuote = true
                             pullQuoteText = candidate
@@ -593,7 +621,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                           }
                         }
                       }
-                      
+
                       // If paragraph is very long and has a pull quote, extract it
                       if (hasPullQuote && trimmedPara.length > 300) {
                         const remainingText = trimmedPara.replace(pullQuoteText, '').trim()
@@ -604,7 +632,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                           </div>
                         )
                       }
-                      
+
                       return (
                         <p key={`para-${pIndex}`} className="whitespace-pre-line">
                           {trimmedPara}
@@ -1201,21 +1229,17 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
       {/* Before/After Comparison */}
       {section.beforeAfter && (
         <div className="space-y-4">
-          {((section.beforeAfter.before.sensitive || section.beforeAfter.after?.sensitive) && !actuallyUnlocked) ? (
-            <SimpleLockIcon
-              message="Before/after comparison"
-              isLightBackground={isLightBackground}
-            />
-          ) : (
-            <BeforeAfterComparison
-              beforeImage={section.beforeAfter.before}
-              afterImage={section.beforeAfter.after}
-              beforeLabel={section.beforeAfter.beforeLabel}
-              afterLabel={section.beforeAfter.afterLabel}
-              comparisonNotes={section.beforeAfter.comparisonNotes}
-              isLightBackground={isLightBackground}
-            />
-          )}
+          <BeforeAfterComparison
+            beforeImage={section.beforeAfter.before}
+            afterImage={section.beforeAfter.after}
+            beforeLabel={section.beforeAfter.beforeLabel}
+            afterLabel={section.beforeAfter.afterLabel}
+            comparisonNotes={section.beforeAfter.comparisonNotes}
+            isLightBackground={isLightBackground}
+            isUnlocked={actuallyUnlocked}
+            password={password}
+            caseStudySlug={caseStudySlug}
+          />
         </div>
       )}
 
@@ -1292,11 +1316,16 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
                   if (image.sensitive && !actuallyUnlocked) {
                     return (
-                      <SimpleLockIcon
+                      <LockedContent
                         key={`legacy-img-${index}`}
-                        message={section.title || 'Locked content'}
+                        isUnlocked={actuallyUnlocked}
+                        password={password}
+                        caseStudySlug={caseStudySlug}
                         isLightBackground={isLightBackground}
-                      />
+                        unlockMessage="Password required to view this legacy screenshot"
+                      >
+                        {imageContent}
+                      </LockedContent>
                     )
                   }
 
@@ -1366,10 +1395,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
               if (image.sensitive && !actuallyUnlocked) {
                 return (
-                  <SimpleLockIcon
-                    message={section.title || 'Locked content'}
+                  <LockedContent
+                    isUnlocked={actuallyUnlocked}
+                    password={password}
+                    caseStudySlug={caseStudySlug}
                     isLightBackground={isLightBackground}
-                  />
+                    unlockMessage="Password required to view this image"
+                  >
+                    {imageContent}
+                  </LockedContent>
                 )
               }
 
@@ -1697,12 +1731,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                   </div>
                 )
                 return images[0].sensitive && !actuallyUnlocked ? (
-                  <SimpleLockIcon
-                    message="Enter Password"
+                  <LockedContent
+                    isUnlocked={actuallyUnlocked}
+                    password={password}
+                    caseStudySlug={caseStudySlug}
                     isLightBackground={isLightBackground}
+                    unlockMessage="Password required to view this legacy screenshot"
                   >
                     {imageContent}
-                  </SimpleLockIcon>
+                  </LockedContent>
                 ) : imageContent
               })()}
               {/* Right column: explorer on top, admin below */}
@@ -1732,12 +1769,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     </div>
                   )
                   return images[1].sensitive && !actuallyUnlocked ? (
-                    <SimpleLockIcon
-                      message="Enter Password"
+                    <LockedContent
+                      isUnlocked={actuallyUnlocked}
+                      password={password}
+                      caseStudySlug={caseStudySlug}
                       isLightBackground={isLightBackground}
+                      unlockMessage="Password required to view this legacy screenshot"
                     >
                       {imageContent}
-                    </SimpleLockIcon>
+                    </LockedContent>
                   ) : imageContent
                 })()}
                 {/* Admin - below explorer */}
@@ -1765,12 +1805,15 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                     </div>
                   )
                   return images[2].sensitive && !actuallyUnlocked ? (
-                    <SimpleLockIcon
-                      message="Enter Password"
+                    <LockedContent
+                      isUnlocked={actuallyUnlocked}
+                      password={password}
+                      caseStudySlug={caseStudySlug}
                       isLightBackground={isLightBackground}
+                      unlockMessage="Password required to view this legacy screenshot"
                     >
                       {imageContent}
-                    </SimpleLockIcon>
+                    </LockedContent>
                   ) : imageContent
                 })()}
               </div>

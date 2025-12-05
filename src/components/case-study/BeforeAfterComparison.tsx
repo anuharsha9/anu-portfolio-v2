@@ -3,22 +3,28 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import ImageLightbox from './ImageLightbox'
+import LockedContent from './LockedContent'
 
 interface BeforeAfterComparisonProps {
   beforeImage: {
     src: string
     alt: string
     caption?: string
+    sensitive?: boolean
   }
   afterImage: {
     src: string
     alt: string
     caption?: string
+    sensitive?: boolean
   }
   beforeLabel?: string
   afterLabel?: string
   isLightBackground?: boolean
   comparisonNotes?: string
+  isUnlocked?: boolean
+  password?: string
+  caseStudySlug?: string
 }
 
 export default function BeforeAfterComparison({
@@ -28,7 +34,53 @@ export default function BeforeAfterComparison({
   afterLabel = 'After',
   isLightBackground = false,
   comparisonNotes,
+  isUnlocked = false,
+  password,
+  caseStudySlug,
 }: BeforeAfterComparisonProps) {
+  // Check unlock state
+  const [actuallyUnlocked, setActuallyUnlocked] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+      const caseUnlockState = caseStudySlug
+        ? sessionStorage.getItem(`case-study-unlocked-${caseStudySlug}`) === 'true'
+        : false
+      return isUnlocked || globalUnlockState || caseUnlockState
+    }
+    return isUnlocked
+  })
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const checkUnlockState = () => {
+        const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+        const caseUnlockState = caseStudySlug
+          ? sessionStorage.getItem(`case-study-unlocked-${caseStudySlug}`) === 'true'
+          : false
+        setActuallyUnlocked(isUnlocked || globalUnlockState || caseUnlockState)
+      }
+
+      checkUnlockState()
+
+      const handleUnlock = () => {
+        checkUnlockState()
+      }
+
+      window.addEventListener('case-study-unlocked', handleUnlock)
+      window.addEventListener('portfolio-unlocked', handleUnlock)
+      const interval = setInterval(checkUnlockState, 500)
+
+      return () => {
+        window.removeEventListener('case-study-unlocked', handleUnlock)
+        window.removeEventListener('portfolio-unlocked', handleUnlock)
+        clearInterval(interval)
+      }
+    }
+  }, [isUnlocked, caseStudySlug])
+
+  // Calculate lock states based on sensitive flags and unlock status
+  const isBeforeLocked = !!(beforeImage.sensitive && !actuallyUnlocked)
+  const isAfterLocked = !!(afterImage.sensitive && !actuallyUnlocked)
   const [sliderPosition, setSliderPosition] = useState(50)
   const [isDragging, setIsDragging] = useState(false)
   const [viewMode, setViewMode] = useState<'slider' | 'side-by-side'>('slider')
@@ -135,22 +187,20 @@ export default function BeforeAfterComparison({
           <div className={`${bgColor} rounded-lg p-1 border ${borderColor} flex gap-1`}>
             <button
               onClick={() => setViewMode('slider')}
-              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${
-                viewMode === 'slider'
-                  ? 'bg-[var(--accent-teal)] text-white'
-                  : `${labelColor} hover:bg-black/5`
-              }`}
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${viewMode === 'slider'
+                ? 'bg-[var(--accent-teal)] text-white'
+                : `${labelColor} hover:bg-black/5`
+                }`}
               aria-label="Slider view"
             >
               Slider
             </button>
             <button
               onClick={() => setViewMode('side-by-side')}
-              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${
-                viewMode === 'side-by-side'
-                  ? 'bg-[var(--accent-teal)] text-white'
-                  : `${labelColor} hover:bg-black/5`
-              }`}
+              className={`px-3 py-1.5 rounded text-xs font-medium transition-all duration-200 ${viewMode === 'side-by-side'
+                ? 'bg-[var(--accent-teal)] text-white'
+                : `${labelColor} hover:bg-black/5`
+                }`}
               aria-label="Side-by-side view"
             >
               Side-by-Side
@@ -172,103 +222,153 @@ export default function BeforeAfterComparison({
           onTouchStart={handleMouseDown}
           tabIndex={0}
         >
-        {/* After Image (background) - determines container size */}
-        <div 
-          className="relative w-full cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation()
-            openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)
-          }}
-          onDoubleClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            src={afterImage.src}
-            alt={afterImage.alt}
-            width={1200}
-            height={800}
-            className="w-full h-auto object-contain"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-          />
-        </div>
+          {/* After Image (background) - determines container size */}
+          {isAfterLocked ? (
+            <LockedContent
+              isUnlocked={actuallyUnlocked}
+              password={password}
+              caseStudySlug={caseStudySlug}
+              isLightBackground={isLightBackground}
+              unlockMessage="Password required to view this image"
+            >
+              <div className="relative w-full">
+                <Image
+                  src={afterImage.src}
+                  alt={afterImage.alt}
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-contain opacity-30"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                />
+              </div>
+            </LockedContent>
+          ) : (
+            <div
+              className="relative w-full cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation()
+                openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)
+              }}
+              onDoubleClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={afterImage.src}
+                alt={afterImage.alt}
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              />
+            </div>
+          )}
 
-        {/* Before Image (clipped overlay) */}
-        <div
-          className="absolute inset-0 overflow-hidden pointer-events-none"
-          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-        >
-          <div 
-            className="w-full h-full cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)
-            }}
-          >
-            <Image
-              src={beforeImage.src}
-              alt={beforeImage.alt}
-              width={1200}
-              height={800}
-              className="w-full h-auto object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-            />
-          </div>
-        </div>
+          {/* Before Image (clipped overlay) */}
+          {!isBeforeLocked && (
+            <div
+              className="absolute inset-0 overflow-hidden pointer-events-none"
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            >
+              <div
+                className="w-full h-full cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)
+                }}
+              >
+                <Image
+                  src={beforeImage.src}
+                  alt={beforeImage.alt}
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                />
+              </div>
+            </div>
+          )}
 
-        {/* Slider Line */}
-        <div
-          className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.2)] z-10 pointer-events-none"
-          style={{ left: `${sliderPosition}%` }}
-        >
-          {/* Slider Handle */}
+          {/* Lock overlay for before image in slider */}
+          {isBeforeLocked && (
+            <div
+              className="absolute inset-0 overflow-hidden pointer-events-none z-20"
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            >
+              <LockedContent
+                isUnlocked={actuallyUnlocked}
+                password={password}
+                caseStudySlug={caseStudySlug}
+                isLightBackground={isLightBackground}
+                unlockMessage="Password required to view legacy interface"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={beforeImage.src}
+                    alt={beforeImage.alt}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-contain opacity-30"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                  />
+                </div>
+              </LockedContent>
+            </div>
+          )}
+
+          {/* Slider Line */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border-2 border-[var(--accent-teal)] shadow-lg flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing"
-            style={{ transform: 'translate(-50%, -50%)' }}
+            className="absolute top-0 bottom-0 w-0.5 bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.2)] z-10 pointer-events-none"
+            style={{ left: `${sliderPosition}%` }}
           >
-            <div className="flex items-center gap-1">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-[var(--accent-teal)]"
-              >
-                <path
-                  d="M8 2L4 6L8 10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-[var(--accent-teal)]"
-              >
-                <path
-                  d="M4 2L8 6L4 10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+            {/* Slider Handle */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border-2 border-[var(--accent-teal)] shadow-lg flex items-center justify-center pointer-events-auto cursor-grab active:cursor-grabbing"
+              style={{ transform: 'translate(-50%, -50%)' }}
+            >
+              <div className="flex items-center gap-1">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-[var(--accent-teal)]"
+                >
+                  <path
+                    d="M8 2L4 6L8 10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-[var(--accent-teal)]"
+                >
+                  <path
+                    d="M4 2L8 6L4 10"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Labels */}
-        <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded text-white text-sm font-medium">
-          {beforeLabel}
+          {/* Labels */}
+          <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded text-white text-sm font-medium">
+            {beforeLabel}
+          </div>
+          <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded text-white text-sm font-medium">
+            {afterLabel}
+          </div>
         </div>
-        <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded text-white text-sm font-medium">
-          {afterLabel}
-        </div>
-      </div>
       ) : (
         /* Side-by-Side View */
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
@@ -276,19 +376,40 @@ export default function BeforeAfterComparison({
             <div className={`${bgColor} rounded-lg px-4 py-2 border ${borderColor} inline-block`}>
               <span className={`${labelColor} text-sm font-semibold`}>{beforeLabel}</span>
             </div>
-            <div 
-              onClick={() => openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)}
-              className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
-            >
-              <Image
-                src={beforeImage.src}
-                alt={beforeImage.alt}
-                width={1200}
-                height={800}
-                className="w-full h-auto object-contain"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
-              />
-            </div>
+            {isBeforeLocked ? (
+              <LockedContent
+                isUnlocked={actuallyUnlocked}
+                password={password}
+                caseStudySlug={caseStudySlug}
+                isLightBackground={isLightBackground}
+                unlockMessage="Password required to view legacy interface"
+              >
+                <div className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline}`}>
+                  <Image
+                    src={beforeImage.src}
+                    alt={beforeImage.alt}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-contain opacity-30"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                  />
+                </div>
+              </LockedContent>
+            ) : (
+              <div
+                onClick={() => openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)}
+                className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
+              >
+                <Image
+                  src={beforeImage.src}
+                  alt={beforeImage.alt}
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                />
+              </div>
+            )}
             {beforeImage.caption && (
               <p className={`${mutedColor} text-sm leading-relaxed`}>{beforeImage.caption}</p>
             )}
@@ -297,19 +418,40 @@ export default function BeforeAfterComparison({
             <div className={`${bgColor} rounded-lg px-4 py-2 border ${borderColor} inline-block`}>
               <span className={`${labelColor} text-sm font-semibold`}>{afterLabel}</span>
             </div>
-            <div 
-              onClick={() => openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)}
-              className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
-            >
-              <Image
-                src={afterImage.src}
-                alt={afterImage.alt}
-                width={1200}
-                height={800}
-                className="w-full h-auto object-contain"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
-              />
-            </div>
+            {isAfterLocked ? (
+              <LockedContent
+                isUnlocked={actuallyUnlocked}
+                password={password}
+                caseStudySlug={caseStudySlug}
+                isLightBackground={isLightBackground}
+                unlockMessage="Password required to view this image"
+              >
+                <div className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline}`}>
+                  <Image
+                    src={afterImage.src}
+                    alt={afterImage.alt}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-contain opacity-30"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                  />
+                </div>
+              </LockedContent>
+            ) : (
+              <div
+                onClick={() => openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)}
+                className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline} cursor-pointer transition-all duration-300 hover:opacity-90 hover:scale-[1.01]`}
+              >
+                <Image
+                  src={afterImage.src}
+                  alt={afterImage.alt}
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                />
+              </div>
+            )}
             {afterImage.caption && (
               <p className={`${mutedColor} text-sm leading-relaxed`}>{afterImage.caption}</p>
             )}

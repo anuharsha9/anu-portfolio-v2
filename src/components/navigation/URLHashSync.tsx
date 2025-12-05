@@ -27,12 +27,12 @@ export default function URLHashSync() {
         const section = document.getElementById(hash)
         if (section) {
           // Account for both main nav (60px) and section nav (60px) if visible
-          const mainNavHeight = 60
-          const sectionNavHeight = 60
+          const mainNavHeight = 72 // Main nav is now taller
+          const sectionNavHeight = 48 // Section nav is now shorter
           const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
           const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
           const offset = totalNavHeight + 20 // Extra padding
-          
+
           const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
           const offsetPosition = Math.max(0, elementPosition - offset)
 

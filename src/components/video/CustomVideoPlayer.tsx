@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { SignatureLogo } from '@/components/brand'
+import SignatureLogo from '@/components/brand/SignatureLogo'
 
 interface CustomVideoPlayerProps {
   src: string

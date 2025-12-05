@@ -332,3 +332,30 @@ export const brainZones: BrainZone[] = [
     // for now no link, purely conceptual
   },
 ]
+
+export const adpListReviews: ADPListReview[] = [
+  {
+    quote: 'Anuja is an excellent mentor. She is proactive, provides actionable tips, checks on progress, and leverages her expertise.',
+    name: 'Gina Kim',
+    role: 'Product Designer',
+    company: 'UC Riverside',
+    date: 'March 05, 2025',
+    rating: 5,
+  },
+  {
+    quote: 'Really good advice for breaking out of a rut and how to enter the field.',
+    name: 'Nathan Irwin',
+    role: 'Design Student',
+    company: 'British Columbia Institute of Technology',
+    date: 'February 05, 2025',
+    rating: 5,
+  },
+  {
+    quote: 'Anuja is an experienced designer with a unique and insightful approach. This was an enriching experience covering design projects, AI, emerging industries, and UX in the USA.',
+    name: 'Eswar Varma',
+    role: 'Associate Lead UX Designer',
+    company: 'Born Group (part of Tech Mahindra)',
+    date: 'February 05, 2025',
+    rating: 5,
+  },
+]

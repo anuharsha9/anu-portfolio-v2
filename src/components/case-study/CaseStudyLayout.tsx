@@ -13,7 +13,9 @@ import SectionBlock from './SectionBlock'
 import PrototypeBlock from './PrototypeBlock'
 import PasswordGate from './PasswordGate'
 import FinalSummary from './FinalSummary'
-import { CaseStudySignatureBadge, SignatureLogo, SectionDivider } from '@/components/brand'
+import CaseStudySignatureBadge from '@/components/brand/CaseStudySignatureBadge'
+import SignatureLogo from '@/components/brand/SignatureLogo'
+import SectionDivider from '@/components/brand/SectionDivider'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
 import RelatedCaseStudies from './RelatedCaseStudies'
 import SectionNav from './SectionNav'
@@ -404,13 +406,10 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       <ReadingProgress />
 
       {/* Table of Contents - Sticky Navigation */}
-      {/* Only show SectionNav if ProcessTimelineNav is not configured (i.e., not for RC, ML, or IQ) */}
-      {data.sections && data.sections.length > 3 &&
-        data.slug !== 'reportcaster' &&
-        data.slug !== 'ml-functions' &&
-        data.slug !== 'iq-plugin' && (
-          <SectionNav sections={data.sections} />
-        )}
+      {/* Section Navigation - shows on all case study pages */}
+      {data.sections && data.sections.length > 0 && (
+        <SectionNav sections={data.sections} />
+      )}
 
       {/* ============================================
           PUBLIC SECTION (Visible by default)
@@ -587,8 +586,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               caseStudySlug={data.slug}
               testimonialName={
                 data.slug === 'reportcaster' ? 'Yingchun Chen' :
-                data.slug === 'ml-functions' ? 'Marcus Horbach' :
-                data.slug === 'iq-plugin' ? 'Anita George' : undefined
+                  data.slug === 'ml-functions' ? 'Marcus Horbach' :
+                    data.slug === 'iq-plugin' ? 'Anita George' : undefined
               }
               demoVideoUrl={data.quickOverview.demoVideoUrl}
               demoVideoLabel={data.quickOverview.demoVideoLabel}
@@ -733,55 +732,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
         </>
       )}
 
-      {/* D.E.S.I.G.N. Framework Navigation - Appears after Transformation in Motion, always visible */}
-      {(() => {
-        const shouldShow = data.frameworkConnection && 
-          (data.slug === 'reportcaster' || data.slug === 'ml-functions' || data.slug === 'iq-plugin') &&
-          data.frameworkConnection.principles && 
-          data.frameworkConnection.principles.length > 0
-        
-        if (!shouldShow || !data.frameworkConnection) return null
-        
-        const mappedPrinciples = data.frameworkConnection.principles.map((principle, index) => {
-          // Map framework principles to sections based on case study
-          let sectionId = ''
-
-          if (data.slug === 'reportcaster') {
-            // ReportCaster mapping - 6 sections for D.E.S.I.G.N.
-            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
-            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-          } else if (data.slug === 'ml-functions') {
-            // ML Functions mapping - 6 sections for D.E.S.I.G.N.
-            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
-            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-          } else if (data.slug === 'iq-plugin') {
-            // IQ Plugin mapping - 6 sections for D.E.S.I.G.N.
-            if (principle.letter === 'D') sectionId = 'section-01' // Discover Deeply
-            else if (principle.letter === 'E') sectionId = 'section-02' // Empathize with Ecosystem
-            else if (principle.letter === 'S') sectionId = 'section-03' // Simplify the Chaos
-            else if (principle.letter === 'I') sectionId = 'section-04' // Iterate with Inclusion
-            else if (principle.letter === 'G') sectionId = 'section-05' // Grow Through Constraints
-            else if (principle.letter === 'N') sectionId = 'section-06' // Navigate Forward
-          }
-
-          return {
-            id: `framework-${principle.letter.toLowerCase()}`,
-            letter: principle.letter,
-            title: principle.title,
-            sectionId: sectionId || `section-0${index + 1}`, // Fallback
-          }
-        })
-        
-        return <ProcessTimelineNav principles={mappedPrinciples} />
-      })()}
+      {/* D.E.S.I.G.N. Framework Navigation - REMOVED: Now using SectionNav instead */}
 
       {/* ============================================
           CASE STUDY CONTENT (Only visible when unlocked)
@@ -870,17 +821,17 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
         <>
           {/* Gated Header */}
           <MotionSection className="surface-light py-8 md:py-12">
-              <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <div className="space-y-4 text-center">
-                  <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
-                    Full in-depth Case study
-                  </h2>
-                  <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
-                    Full narrative, step-by-step story, and reflections.
-                  </p>
-                </div>
+            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+              <div className="space-y-4 text-center">
+                <h2 className="text-[var(--text-primary-light)] text-3xl md:text-4xl font-serif">
+                  Full in-depth Case study
+                </h2>
+                <p className="text-[var(--text-muted-light)] text-base md:text-lg leading-relaxed">
+                  Full narrative, step-by-step story, and reflections.
+                </p>
               </div>
-            </MotionSection>
+            </div>
+          </MotionSection>
 
           {/* All Sections (always visible, sensitive content locked) */}
           {data.sections.map((section, index) => {

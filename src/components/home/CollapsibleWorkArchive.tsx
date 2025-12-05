@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import MotionSection from '@/components/ui/MotionSection'
-import { SignatureLogo } from '@/components/brand'
+import SignatureLogo from '@/components/brand/SignatureLogo'
 import PDFPreviewModal from '@/components/ui/PDFPreviewModal'
 
 interface ArchiveTile {
@@ -167,8 +167,8 @@ export default function CollapsibleWorkArchive() {
                       initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
                       animate={{ opacity: 1, y: 0, visibility: 'visible' as const }}
                       style={{ willChange: 'opacity, transform', opacity: 0, visibility: 'hidden' }}
-                      transition={{ 
-                        duration: 0.5, 
+                      transition={{
+                        duration: 0.5,
                         ease: [0.22, 1, 0.36, 1],
                         delay: eraIndex * 0.06
                       }}
@@ -192,8 +192,8 @@ export default function CollapsibleWorkArchive() {
                             initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
                             animate={{ opacity: 1, y: 0, visibility: 'visible' as const }}
                             style={{ willChange: 'opacity, transform', opacity: 0, visibility: 'hidden' }}
-                            transition={{ 
-                              duration: 0.5, 
+                            transition={{
+                              duration: 0.5,
                               ease: [0.22, 1, 0.36, 1],
                               delay: (eraIndex * 0.06) + (tileIndex * 0.04)
                             }}
@@ -206,11 +206,11 @@ export default function CollapsibleWorkArchive() {
                                 pdfUrl: tile.href,
                                 thumbnailUrl: tile.image,
                               })}
-                              className="group relative flex flex-col h-full w-full rounded-xl border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 bg-black/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(13,148,136,0.075)] hover:border-[var(--accent-teal)]/50 hover:bg-black/8"
+                              className="group relative flex flex-col h-full w-full rounded-xl border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 bg-black/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 hover:bg-black/8"
                             >
                               {/* Accent indicator */}
                               <div className="absolute top-4 left-4 w-1.5 h-1.5 rounded-full bg-black/20 group-hover:bg-[var(--accent-teal)] transition-colors duration-300 z-10" />
-                              
+
                               {/* Image with gradient overlay */}
                               <div className="relative w-full aspect-video rounded-t-2xl overflow-hidden mb-4 flex-shrink-0">
                                 <Image
@@ -222,7 +222,7 @@ export default function CollapsibleWorkArchive() {
                                 {/* Subtle gradient overlay on hover */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                               </div>
-                              
+
                               {/* Content */}
                               <div className="p-6 space-y-3 flex-1 flex flex-col">
                                 <h4 className="text-[#1A1A1A] text-lg font-medium transition-all duration-300 group-hover:text-[var(--accent-teal)]">

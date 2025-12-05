@@ -116,17 +116,68 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
+              (function() {
+                // Immediately unregister service workers in development (don't wait for load)
+                const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                
+                if (isDevelopment && 'serviceWorker' in navigator) {
+                  // Aggressively unregister all service workers immediately
+                  navigator.serviceWorker.getRegistrations().then((registrations) => {
+                    return Promise.all(
+                      registrations.map((registration) => registration.unregister())
+                    );
+                  }).then(() => {
+                    // Clear all caches
+                    if ('caches' in window) {
+                      return caches.keys().then((cacheNames) => {
+                        return Promise.all(
+                          cacheNames.map((cacheName) => caches.delete(cacheName))
+                        );
+                      });
+                    }
+                  }).then(() => {
+                    console.log('Service workers unregistered and caches cleared for development');
+                  }).catch((error) => {
+                    console.log('Error unregistering service workers:', error);
+                  });
+                  
+                  // Also unregister on page load as backup
+                  window.addEventListener('load', () => {
+                    navigator.serviceWorker.getRegistrations().then((registrations) => {
+                      registrations.forEach((registration) => {
+                        registration.unregister();
+                      });
+                    });
+                  });
+                  return; // Don't register service worker in development
+                }
+                
+                // Production: Register service worker
+                if ('serviceWorker' in navigator) {
+                  window.addEventListener('load', () => {
+                    navigator.serviceWorker.getRegistrations().then((registrations) => {
+                      registrations.forEach((registration) => {
+                        registration.unregister();
+                      });
+                    }).then(() => {
+                      if ('caches' in window) {
+                        caches.keys().then((cacheNames) => {
+                          cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                          });
+                        });
+                      }
+                    }).then(() => {
+                      return navigator.serviceWorker.register('/sw.js');
+                    }).then((registration) => {
                       console.log('SW registered:', registration);
-                    })
-                    .catch((error) => {
+                      registration.update();
+                    }).catch((error) => {
                       console.log('SW registration failed:', error);
                     });
-                });
-              }
+                  });
+                }
+              })();
             `,
           }}
         />

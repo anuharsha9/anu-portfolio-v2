@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { SignatureLogo } from '@/components/brand'
+import SignatureLogo from '@/components/brand/SignatureLogo'
 
 const frameworkItems = [
   {

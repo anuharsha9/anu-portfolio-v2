@@ -67,15 +67,10 @@ class ScrollManager {
 // Singleton instance
 let scrollManagerInstance: ScrollManager | null = null
 
-function getScrollManager(): ScrollManager {
+function getScrollManager(): ScrollManager | null {
   if (typeof window === 'undefined') {
-    // Return a dummy manager for SSR - create a minimal instance
-    class DummyScrollManager extends ScrollManager {
-      constructor() {
-        super()
-      }
-    }
-    return new DummyScrollManager()
+    // Return null for SSR - don't create any instance
+    return null
   }
 
   if (!scrollManagerInstance) {
@@ -98,7 +93,12 @@ export function useScrollManager(callback: ScrollCallback, deps: React.Dependenc
   }, [callback])
 
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return
+
     const manager = getScrollManager()
+    if (!manager) return
+
     managerRef.current = manager
 
     const wrappedCallback: ScrollCallback = (scrollY, viewportHeight) => {

@@ -12,7 +12,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   },
   role: 'Senior Product Designer (Principal-level scope & impact)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: '2023–2024',
+  timeframe: '2023–2025',
   status: {
     label: 'In Development',
     variant: 'development' as const,
@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'DSML features — Automated Insights, Natural Language Query, and Predict Data — were fragmented, hard to discover, and intimidating. Users had to hunt across different parts of the platform, each with its own entry point and mental model.',
     myRole:
-      'I owned UX strategy, IA, primary workflows, personas/journey mapping, prototypes, usability testing, and cross-functional alignment with PM, engineering, and QA. IQ was the "front door" to DSML in WebFOCUS—a strategic initiative to stay competitive with platforms like Power BI, Tableau, and Qlik while being easier for non-technical users to adopt. I led design decisions that balanced technical depth with accessibility, making complex data science capabilities approachable for business users while maintaining power for experts. This required deep technical understanding, strategic product thinking, and Principal-level leadership across functions.',
+      'I owned UX strategy, IA, primary workflows, personas/journey mapping, prototypes, usability testing, and cross-functional alignment with PM, engineering, and QA. I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire IQ Plugin initiative solo while simultaneously leading ReportCaster and ML Functions. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. IQ was the "front door" to DSML in WebFOCUS—a strategic initiative to stay competitive with platforms like Power BI, Tableau, and Qlik while being easier for non-technical users to adopt. I led design decisions that balanced technical depth with accessibility, making complex data science capabilities approachable for business users while maintaining power for experts. This required deep technical understanding, strategic product thinking, and Principal-level leadership across functions.',
     impactMetrics: [
       { label: 'Centralized DSML capabilities', value: 'Unified experience' },
       { label: 'Reduced learning curve', value: 'Improved discoverability' },
@@ -59,9 +59,12 @@ export const iqPluginCaseStudy: CaseStudyData = {
     ],
     keyAchievements: [
       'Unified three fragmented DSML features into one cohesive experience',
+      'Only designer who worked on all major WebFOCUS features; owned entire IQ Plugin initiative solo while simultaneously leading ReportCaster and ML Functions',
+      'Established IQ patterns as foundational for entire DSML experience; seamless integrations across WebFOCUS ecosystem',
       'Mapped distinct user journeys for multiple personas representing different DSML comfort levels',
       'Created dual-layer UX balancing guided simplicity with expert flexibility',
       'Built scalable pattern for future DSML features',
+      'Delivered organization-wide design demos to 150-200 person business unit, presenting IQ Plugin design strategy',
       'Ensured competitive positioning with leading BI platforms',
     ],
     dataSheetUrl: 'https://www.ibi.com/products/ibi-webfocus',

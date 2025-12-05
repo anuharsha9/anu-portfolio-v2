@@ -41,28 +41,28 @@ export default function ResumePage() {
           }
           .print-button {
             padding: 12px 24px;
-            background: var(--accent-teal, #0D9488);
+            background: var(--accent-teal, #20AABC);
             color: white;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+            box-shadow: 0 4px 12px rgba(32, 170, 188, 0.3);
             transition: all 0.2s;
             font-family: 'Inter Tight', sans-serif;
             text-decoration: none;
             display: inline-block;
           }
           .print-button:hover {
-            background: var(--accent-teal-700, #0F766E);
+            background: var(--accent-teal-700, #1A8A9A);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(13, 148, 136, 0.4);
+            box-shadow: 0 6px 16px rgba(32, 170, 188, 0.4);
           }
           .print-button-secondary {
-            background: var(--accent-teal-700, #0F766E);
+            background: var(--accent-teal-700, #1A8A9A);
           }
           .print-button-secondary:hover {
-            background: var(--accent-teal-800, #115E59);
+            background: var(--accent-teal-800, #146A78);
           }
         }
         @media print {
@@ -75,7 +75,7 @@ export default function ResumePage() {
           }
         }
       `}</style>
-      
+
       <div className="resume-actions">
         <a
           href="/assets/Anuja-Nimmagadda-Resume-2025.pdf"
@@ -86,9 +86,9 @@ export default function ResumePage() {
         >
           Download PDF
         </a>
-        <button 
-          onClick={() => window.print()} 
-          className="print-button print-button-secondary" 
+        <button
+          onClick={() => window.print()}
+          className="print-button print-button-secondary"
           aria-label="Print Resume"
         >
           Print
@@ -182,16 +182,16 @@ function ResumeContent() {
           <span className="date">August 2022 - November 2025</span>
         </div>
         <div className="company">Cloud Software Group (WebFOCUS/IBI)</div>
-        
+
         <div className="job-description">
           Led User Experience modernization across multiple legacy product areas, operating as the de-facto Principal Designer in an engineering-first organization with low UX maturity. Established structured discovery, SME outreach, UX to PM to Engineering alignment, and ticket-writing templates that became team-wide standards. Frequently initiated alignment among Product Managers, engineers, architects, and Principal Data Scientists, driving clarity in ambiguous spaces where others hesitated to challenge technical constraints. Elevated UX maturity by mentoring designers, demonstrating cross-functional leadership, and influencing product strategy through research, prototyping, SME testing, and implementation alignment.
         </div>
-        
+
         <div className="key-achievements">KEY ACHIEVEMENTS:</div>
         <ul>
           <li>Recognized by senior leadership in a company-wide meeting for early impact on ReportCaster and DSML within first 6 months, solidifying role as cross-functional UX leader</li>
         </ul>
-        
+
         <h2>ReportCaster Modernization (2022–2025)</h2>
         <ul>
           <li>Redesigned 40-year-old scheduler powering millions of BI jobs annually, achieving 44-56% fewer clicks for schedule creation, 50% faster completion, and eliminated multi-tab sprawl entirely</li>
@@ -199,7 +199,7 @@ function ResumeContent() {
           <li>Reduced support load by 25-30% and improved Explorer access by 60-70% fewer clicks, delivered safely at massive scale with resounding customer approval</li>
           <li>Led cross-functional alignment with engineering, product, and QA, making strategic decisions when others hesitated; work shipped as part of WebFOCUS 9.3, impacting millions of users daily</li>
         </ul>
-        
+
         <h2>ML Functions Redesign (2023–2024)</h2>
         <ul>
           <li>Led end-to-end ML workflow revamp, achieving 100% discoverability in SME usability testing and reducing workflow from 12+ clicks to 7-9 clicks</li>
@@ -207,7 +207,7 @@ function ResumeContent() {
           <li>Delivered 2-click entry point, 50% faster setup, and 60% fewer configuration errors through inline validation and guided warnings</li>
           <li>Created dual-experience approach balancing guided simplicity for novices with advanced flexibility for experts; eliminated all dead-end errors that confused users</li>
         </ul>
-        
+
         <h2>IQ Plugin — DSML Hub (2023–2024)</h2>
         <ul>
           <li>Designed unified hub that centralized Natural Language Query (NLQ), ML, and Automated Insights into contextual, business-friendly flows</li>

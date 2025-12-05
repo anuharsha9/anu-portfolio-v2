@@ -69,7 +69,7 @@ export default function MLChallengeBreakdown({ isLightBackground = false }: MLCh
           {challenges.map((challenge, index) => (
             <div
               key={index}
-              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-3 md:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(13,148,136,0.075)]`}
+              className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-2xl border-2 p-3 md:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)]`}
               style={{ borderColor: accentColor + '40' }}
             >
               <div className="space-y-1.5">

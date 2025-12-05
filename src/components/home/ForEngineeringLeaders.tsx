@@ -30,7 +30,7 @@ export default function ForEngineeringLeaders() {
                 I understand constraints, trade-offs, and deployment realities. I can ship interactive, coded prototypes (as demonstrated by this portfolio) instead of just Figma links.
               </p>
               <p>
-                I use AI for productivity and learning — but I never treat it as a black box. This portfolio demonstrates my capability to bridge design-to-implementation using AI-augmented workflows. <strong className="text-[var(--text-primary-light)]">At work, I maintain traditional design-engineering collaboration</strong> — this portfolio showcases what&apos;s possible, not how I work in enterprise environments.
+                I leverage AI for productivity and learning — but I never treat it as a black box. I bridge design-to-implementation using AI-augmented workflows, maintaining full understanding and control over the code I ship. This portfolio demonstrates my capability to translate design intent into production-ready implementations, combining strategic design thinking with technical execution.
               </p>
             </div>
           </div>
