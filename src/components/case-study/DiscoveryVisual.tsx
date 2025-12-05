@@ -65,7 +65,7 @@ export default function DiscoveryVisual({ isLightBackground = false }: Discovery
             Aha Moment: Discovering Why It Kept Getting Deferred
           </h3>
           <p className={`${mutedColor} text-base md:text-lg max-w-3xl mx-auto`}>
-            As I explored the system, I discovered the root cause: RC wasn&apos;t a single system — it was five independent subsystems scattered across the product. This fragmentation, combined with its age and complexity, explained why it was so daunting and why everyone hesitated to touch it.
+            The discovery: five independent subsystems scattered across the product, each with its own entry point and mental model.
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export default function DiscoveryVisual({ isLightBackground = false }: Discovery
           <div className="text-center">
             <span className={`${mutedColor} text-sm font-mono uppercase tracking-wider`}>The Discovery: Five Independent Subsystems</span>
           </div>
-          
+
           {/* Before: 5 Separate Systems */}
           <div className="space-y-4">
             <div className="text-center">
@@ -241,7 +241,7 @@ export default function DiscoveryVisual({ isLightBackground = false }: Discovery
         {/* Bottom Note */}
         <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-6 border ${borderColor} mt-8`}>
           <p className={`${textColor} text-base leading-relaxed text-center`}>
-            <span className="font-semibold" style={{ color: accentColor }}>The insight:</span> Understanding the five subsystems wasn&apos;t just discovery — it was the key to unlocking why RC was so complex. This fragmentation explained the deferral, and unifying them became the path forward.
+            <span className="font-semibold" style={{ color: accentColor }}>The insight:</span> This fragmentation explained the deferral. Unifying them became the path forward.
           </p>
         </div>
       </div>

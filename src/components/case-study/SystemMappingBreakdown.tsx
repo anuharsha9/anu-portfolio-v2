@@ -50,7 +50,7 @@ export default function SystemMappingBreakdown({ isLightBackground = false }: Sy
             What I Mapped: The Complete System
           </h3>
           <p className={`${mutedColor} text-sm md:text-base max-w-2xl mx-auto`}>
-            The process was methodical and exhausting. I spent months understanding what RC actually did, not what it was supposed to do. The gap between those two things was where the real problems lived.
+            The categories below show the scope of mapping required to understand the complete system.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function SystemMappingBreakdown({ isLightBackground = false }: Sy
         {/* Bottom Note - Compact */}
         <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-4 border ${borderColor} mt-6`}>
           <p className={`${textColor} text-sm leading-relaxed text-center`}>
-            <span className="font-semibold" style={{ color: accentColor }}>The result:</span> Eventually, I created a full mind map that represented the actual product mental model — the first one in RC&apos;s 40-year history. By the time I finished, I knew more about the system&apos;s UX and workflows than anyone else in the org.
+            <span className="font-semibold" style={{ color: accentColor }}>The result:</span> This mapping produced the first complete mental model in RC&apos;s 40-year history — a foundation that enabled the unified architecture.
           </p>
         </div>
       </div>

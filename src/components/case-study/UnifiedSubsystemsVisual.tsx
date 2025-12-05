@@ -58,7 +58,7 @@ export default function UnifiedSubsystemsVisual({ isLightBackground = false }: U
             Aha Moment: Discovering Why It Kept Getting Deferred
           </h3>
           <p className={`${mutedColor} text-base md:text-lg max-w-2xl mx-auto`}>
-            As I documented workflows and explored the system, I discovered the root cause: RC wasn&apos;t a single system — it was five independent subsystems scattered across the product. This fragmentation explained why it was so complex and why everyone hesitated to touch it. Each subsystem had its own entry point, mental model, and hidden location, making the whole system feel impossible to understand or modernize.
+            Five independent subsystems, each buried in different locations with separate entry points and mental models.
           </p>
         </div>
 

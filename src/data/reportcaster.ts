@@ -33,7 +33,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'Took full ownership of the redesign one week into joining—operating autonomously and delivering at Principal-level impact. Only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. Owned the entire ReportCaster redesign solo initially, while simultaneously leading ML Functions and IQ Plugin. Collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. Deeply collaborated with PM to contribute to roadmaps and help refine them, participating in yearly roadmap meetings with PMs and leadership. Worked closely with the Lead Architect of the entire organization. Rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition. Continued to be looped in for critical architectural decisions as the knowledge hub even after moving focus to other projects.',
+      'Took full ownership one week into joining—delivered Principal-level impact autonomously. Owned entire redesign solo while leading 3 Principal-level initiatives simultaneously. Collaborated with Directors of Design, Engineering, and Product on strategic decisions. Rebuilt mental models from scratch and balanced user needs with engineering constraints. Onboarded 2 designers for shipping and remained knowledge hub for critical decisions.',
     impactMetrics: [
       { label: 'Schedule creation', value: '44–56% fewer clicks, no new tabs' },
       { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
@@ -43,10 +43,10 @@ export const reportcasterCaseStudy: CaseStudyData = {
       { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
     ],
     star: {
-      situation: 'A 40-year-old mission-critical scheduling engine powering millions of automated jobs across hundreds of enterprise customers, processing 20 million schedules weekly. The system was deeply embedded, undocumented, fragmented, and structurally outdated with five fragmented subsystems and no coherent mental model. Customer requests for modernization were flooding in, creating urgent business pressure.',
-      task: 'Responsibly modernize a system that couldn\'t afford to break — maintaining backward compatibility and aligning with platform patterns.',
-      action: 'Took full ownership one week into joining. Mapped complex workflows across five fragmented subsystems, reverse-engineered undocumented rules, and unified them into one coherent architecture. Led cross-functional alignment with engineering, product, and QA—making strategic decisions when others hesitated. Delivered a modal-based creation model aligned with platform patterns.',
-      result: '44–56% fewer clicks, eliminated multi-tab sprawl, and reduced support load by 25–30% — delivered safely at massive scale with resounding customer approval. Work shipped as part of WebFOCUS 9.3, impacting millions of users daily. Recognized by senior leadership in a company-wide meeting for early impact within first 6 months.',
+      situation: '40-year-old scheduling engine processing 20M+ schedules weekly. Five fragmented subsystems with no coherent mental model. Customer modernization requests flooding in.',
+      task: 'Modernize a mission-critical system that couldn\'t afford to break — maintaining backward compatibility and platform alignment.',
+      action: 'Took full ownership one week into joining. Mapped five fragmented subsystems, reverse-engineered undocumented rules, unified into one architecture. Led cross-functional alignment and delivered modal-based creation model.',
+      result: '44–56% fewer clicks, eliminated multi-tab sprawl, reduced support load 25–30%. Shipped in WebFOCUS 9.3, impacting millions daily. Recognized by senior leadership for early impact.',
     },
     technologies: [
       'Figma',
@@ -185,9 +185,7 @@ This wasn't just a design project — it was an archaeological dig. The system h
 
 I designed for the entire RC ecosystem: end users creating schedules, support teams handling tickets, engineers maintaining legacy code, and PMs planning features. Each role's constraints and needs shaped the unified architecture.
 
-I discovered users were hacking their way around the UI. I saw real tickets showing how customers customized and worked around the broken UI.
-
-The "Basic" vs "Advanced" schedule types weren't about complexity — they were legacy artifacts creating artificial barriers.
+I discovered users were hacking their way around the UI. I saw real tickets showing how customers customized and worked around the broken UI. The "Basic" vs "Advanced" schedule types weren't about complexity — they were legacy artifacts creating artificial barriers.
 
 I validated everything with customer support and customer reps repeatedly. By understanding the ecosystem — not just end users, but everyone who interacted with RC — I could design a solution that worked for the entire system.`,
       revealsTitle: 'What this reveals',
@@ -281,13 +279,11 @@ That was a fair constraint — not a design flaw. They liked the experience, but
         title: 'Version 2: Plugin Integration',
         body: `After V1 was rejected, I pivoted. If independence wasn't viable, the next logical step was a plugin.
 
-The platform had custom plugins already — Portals, Server directories, Management Center — everything was migrating into the hub. So I thought: "If the reason V1 was rejected is 'it's outside the hub,' then bring RC inside as a plugin."
+The platform had custom plugins already — everything was migrating into the hub. So I thought: "If the reason V1 was rejected is 'it's outside the hub,' then bring RC inside as a plugin."
 
 I built a hub-friendly plugin with fully integrated navigation, consolidated subsystems, and future-proof IA. I loved this version the most.
 
-Again — it worked. But it was rejected.
-
-"Too much engineering effort. Too big of an addition this year."
+Again — it worked. But it was rejected. "Too much engineering effort. Too big of an addition this year."
 
 This was a different constraint: not strategic (like V1), but resourcing. The plugin architecture was sound, but it would have required more engineering time than was available.
 
@@ -330,13 +326,11 @@ Aha moment — the + menu insight: If ReportCaster is fundamentally a creation w
 
 I designed modal-based creation flows that matched platform conventions. Conversations with the lead architect revealed the Home page was essentially filtered views of assets — I proposed treating RC Explorer as a filtered view, a pattern that could scale to all asset types.
 
-**Technical constraints I worked within:** RC was built on legacy FOCUS code with no React or JavaScript. Modals were the right choice because they worked within the existing platform infrastructure without requiring a complete rewrite.
+**Technical constraints:** RC was built on legacy FOCUS code with no React or JavaScript. Modals were the right choice because they worked within existing platform infrastructure without requiring a complete rewrite.
 
 This constraint became an advantage — it forced me to design WITH the platform, not against it.
 
-Final solution: Scheduling and lists → modals from + menu. Explorer → filtered RC view in Home. Admin → surfaced in management center. All within the hub, all consistent, all discoverable.
-
-This version balanced platform architecture, engineering constraints, user mental models, and long-term scalability.`,
+Final solution: Scheduling and lists → modals from + menu. Explorer → filtered RC view in Home. Admin → surfaced in management center.`,
         subsections: [
           {
             title: 'Schedule Dialog',
@@ -495,13 +489,13 @@ This version balanced platform architecture, engineering constraints, user menta
 
 As I worked through hundreds of screens, the team assembled. But most had never seen RC end-to-end — engineers knew the backend, PMs knew features, support knew problems. No one understood the whole system.
 
-I led cross-functional alignment across engineering, product, and QA: validated technical feasibility with engineering, co-defined scope with product, and collaborated with QA on test cases.
+I led cross-functional alignment: validated technical feasibility, co-defined scope, collaborated on test cases.
 
-I onboarded lead architect, lead engineer, full engineering squad, new PM, QA, documentation, and SMEs through dozens of demos. Each team member needed to understand not just their piece, but how RC worked as a unified system.
+I onboarded the entire team through dozens of demos. Each team member needed to understand not just their piece, but how RC worked as a unified system.
 
 I was also redesigning ML Functions simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second.
 
-I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off (UI polish). The team could execute because they understood the "why" behind every decision, not just the "what."`,
+I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off. The team could execute because they understood the "why" behind every decision, not just the "what."`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Team Alignment → Onboarded entire cross-functional team through dozens of demos',
@@ -521,13 +515,11 @@ Support tickets shifted from "how do I..." to "can I do..." — a fundamental sh
 
 The architecture I designed allowed the PM to add new features after launch without breaking the mental model. I had designed for extensibility, not just for the current release.
 
-This was not just a redesign — it was a complete architectural transformation of a system that had become too complex for anyone to understand. I reverse-engineered an undocumented enterprise system, thought at platform scale, and led cross-functional teams through ambiguity.
+This was not just a redesign — it was a complete architectural transformation. I reverse-engineered an undocumented enterprise system, thought at platform scale, and led cross-functional teams through ambiguity.
 
 I became the only person in a 200-person business unit who understood RC end-to-end. This project taught me to design at platform scale — not just individual features, but how systems connect, how patterns scale, and how architecture enables future growth.
 
-The key insight: You don't need to rebuild everything from scratch. Understand the system deeply enough to identify the core mental model, then rebuild the architecture around that clarity.
-
-Legacy systems can be modernized without losing their power — you just need to make the complexity visible, then structure it. RC reshaped how I think about design: clarity, structure, and systems-level problem-solving became my core strengths.`,
+The key insight: You don't need to rebuild everything from scratch. Understand the system deeply enough to identify the core mental model, then rebuild the architecture around that clarity.`,
       revealsTitle: 'What this reveals',
       revealsPoints: [
         'Long-Term Thinking → Designed for extensibility — architecture allowed new features post-launch',
