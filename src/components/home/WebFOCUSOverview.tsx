@@ -204,7 +204,7 @@ export default function WebFOCUSOverview() {
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 py-8 md:py-10 border-t border-b border-refined-light">
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               {/* Subtle accent corner */}
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
@@ -214,42 +214,42 @@ export default function WebFOCUSOverview() {
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">schedules processed per day across customer deployments</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>40-year-old</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">workflows redesigned and unified under the WebFOCUS Hub</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>3 core</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">subsystems modernized (scheduling, ML training, insights)</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>12 demos</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">organization-wide presentations to 150-200 person business unit</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>Directors</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">direct collaboration with Design, Engineering & Product leadership</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>Platform-wide</p>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">UX patterns introduced for the first time in years</p>
               </div>
             </div>
-            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] transition-all duration-300 group overflow-hidden">
+            <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">
               <div className="absolute top-0 right-0 w-16 h-16 bg-[var(--accent-teal)]/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="flex flex-col items-center text-center">
                 <p className="text-2xl md:text-3xl font-semibold leading-none mb-3 transition-colors duration-300" style={{ color: 'var(--accent-teal)' }}>75% fewer</p>

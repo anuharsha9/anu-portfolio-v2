@@ -26,7 +26,7 @@ export default function TestimonialCard({
   const accentColor = 'var(--accent-teal)'
 
   return (
-    <div className={`${bgColor} rounded-2xl p-6 md:p-8 border ${borderColor} hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group`}>
+    <div className={`${bgColor} rounded-2xl p-6 md:p-8 border ${borderColor} hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group`}>
       <blockquote className="space-y-4">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>

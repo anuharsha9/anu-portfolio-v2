@@ -195,7 +195,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.1 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.2 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -262,7 +262,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.3 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.4 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -329,7 +329,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.5 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -364,7 +364,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.6 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -396,7 +396,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.7 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -430,7 +430,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.9, delay: 0.8 }}
-                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
@@ -558,7 +558,7 @@ export default function AboutPage() {
                     delay: index * 0.1,
                     ease: [0.4, 0.0, 0.2, 1],
                   }}
-                  className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                  className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center gap-2">
@@ -948,7 +948,7 @@ export default function AboutPage() {
                     delay: index * 0.1,
                     ease: [0.4, 0.0, 0.2, 1],
                   }}
-                  className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
+                  className="bg-black/5 rounded-2xl p-6 md:p-8 border border-black/10 hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 transition-all duration-300 group"
                 >
                   <div className="space-y-3">
                     {/* Image */}

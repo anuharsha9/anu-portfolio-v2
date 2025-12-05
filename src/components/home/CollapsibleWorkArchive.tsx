@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import MotionSection from '@/components/ui/MotionSection'
 import SignatureLogo from '@/components/brand/SignatureLogo'
-import PDFPreviewModal from '@/components/ui/PDFPreviewModal'
 
 interface ArchiveTile {
   title: string
@@ -85,12 +84,6 @@ const eraGroups: EraGroup[] = [
 
 export default function CollapsibleWorkArchive() {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [selectedPDF, setSelectedPDF] = useState<{
-    title: string
-    description: string
-    pdfUrl: string
-    thumbnailUrl?: string
-  } | null>(null)
 
   return (
     <MotionSection id="work-archive" className="surface-light py-12 md:py-16 relative">
@@ -199,14 +192,11 @@ export default function CollapsibleWorkArchive() {
                             }}
                             className="flex"
                           >
-                            <button
-                              onClick={() => setSelectedPDF({
-                                title: tile.title,
-                                description: tile.description,
-                                pdfUrl: tile.href,
-                                thumbnailUrl: tile.image,
-                              })}
-                              className="group relative flex flex-col h-full w-full rounded-xl border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 bg-black/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(32,170,188,0.075)] hover:border-[var(--accent-teal)]/50 hover:bg-black/8"
+                            <a
+                              href={tile.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group relative flex flex-col h-full w-full rounded-xl border border-black/10 border-t-2 border-t-[var(--accent-teal)]/30 bg-black/5 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-[0_4px_12px_rgba(0,162,183,0.075)] hover:border-[var(--accent-teal)]/50 hover:bg-black/8"
                             >
                               {/* Accent indicator */}
                               <div className="absolute top-4 left-4 w-1.5 h-1.5 rounded-full bg-black/20 group-hover:bg-[var(--accent-teal)] transition-colors duration-300 z-10" />
@@ -238,7 +228,7 @@ export default function CollapsibleWorkArchive() {
                                   </span>
                                 </div>
                               </div>
-                            </button>
+                            </a>
                           </motion.div>
                         ))}
                       </div>
@@ -250,18 +240,6 @@ export default function CollapsibleWorkArchive() {
           </AnimatePresence>
         </motion.div>
       </div>
-
-      {/* PDF Preview Modal */}
-      {selectedPDF && (
-        <PDFPreviewModal
-          isOpen={!!selectedPDF}
-          onClose={() => setSelectedPDF(null)}
-          title={selectedPDF.title}
-          description={selectedPDF.description}
-          pdfUrl={selectedPDF.pdfUrl}
-          thumbnailUrl={selectedPDF.thumbnailUrl}
-        />
-      )}
     </MotionSection>
   )
 }

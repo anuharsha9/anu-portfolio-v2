@@ -1,45 +1,55 @@
-/* Resume Styling - Portfolio-inspired, ATS-optimized */
+/* Resume Styling - ATS-optimized with turquoise accent, matching portfolio aesthetic */
 
-/* Import portfolio fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
-
-/* Screen styles - subtle portfolio styling */
+/* Screen styles - Dark theme matching portfolio */
 .resume-container {
   min-height: 100vh;
-  background: var(--bg-light, #FAFAF9);
-  padding: 2rem;
+  background: var(--bg-dark, #0A0A0B);
+  padding: 4rem 2rem 3rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
+
 
 .resume-content {
   max-width: 8.5in;
   width: 100%;
   background: white;
-  padding: 1.5in;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  font-family: 'Inter Tight', system-ui, -apple-system, sans-serif;
+  padding: 0.7in;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  font-family: "Times New Roman", Times, serif;
+  /* ATS-compatible font */
   font-size: 11pt;
   line-height: 1.5;
-  color: #111111;
+  color: #000000;
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.resume-content:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 162, 183, 0.1);
 }
 
 /* Contact Info */
 .contact-info {
   text-align: center;
-  margin-bottom: 24pt;
-  padding-bottom: 12pt;
-  border-bottom: 2pt solid var(--accent-teal, #20AABC);
+  margin-bottom: 16pt;
+  padding-bottom: 8pt;
+  border-bottom: 2pt solid var(--accent-teal, #00A2B7);
+  font-size: 10pt;
+  line-height: 1.5;
 }
 
 .contact-info strong {
-  font-family: 'DM Serif Display', serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 18pt;
   display: block;
-  margin-bottom: 8pt;
-  color: #111111;
+  margin-bottom: 6pt;
+  color: #000000;
   font-weight: 400;
-  letter-spacing: 0.5px;
 }
 
 .contact-details {
@@ -50,47 +60,48 @@
 
 /* Headings */
 h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 14pt;
-  font-weight: 400;
-  margin-top: 16pt;
-  margin-bottom: 8pt;
+  font-family: "Times New Roman", Times, serif;
+  /* ATS-compatible font */
+  font-size: 12pt;
+  font-weight: 700;
+  margin-top: 12pt;
+  margin-bottom: 6pt;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1.5pt solid var(--accent-teal, #20AABC);
-  padding-bottom: 4pt;
-  color: #111111;
+  border-bottom: 1pt solid var(--accent-teal, #00A2B7);
+  padding-bottom: 2pt;
+  color: #000000;
 }
 
 h2 {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 12pt;
-  font-weight: 600;
-  margin-top: 10pt;
-  margin-bottom: 6pt;
-  color: #111111;
+  font-family: "Times New Roman", Times, serif;
+  /* ATS-compatible font */
+  font-size: 11pt;
+  font-weight: 700;
+  margin-top: 8pt;
+  margin-bottom: 4pt;
+  color: #000000;
 }
 
 /* Job Titles and Dates */
 .job-title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 11pt;
-  color: #111111;
-  margin-bottom: 4pt;
+  color: #000000;
+  margin-bottom: 2pt;
 }
 
 .job-title .date {
   float: right;
   font-weight: 400;
-  color: #666666;
-  font-size: 10pt;
+  color: #000000;
+  font-size: 11pt;
 }
 
 .company {
-  font-style: italic;
-  color: #666666;
-  font-size: 10pt;
-  margin-bottom: 8pt;
+  font-weight: 400;
+  color: #000000;
+  font-size: 11pt;
+  margin-bottom: 6pt;
 }
 
 .job-description {
@@ -102,14 +113,15 @@ h2 {
 
 /* Lists */
 ul {
-  margin: 6pt 0;
-  padding-left: 20pt;
+  margin: 4pt 0;
+  padding-left: 18pt;
 }
 
 li {
-  margin-bottom: 4pt;
-  color: #111111;
+  margin-bottom: 3pt;
+  color: #000000;
   line-height: 1.5;
+  font-size: 11pt;
 }
 
 /* Skills List */
@@ -128,27 +140,41 @@ li {
 
 /* Summary */
 .summary {
-  margin: 8pt 0;
-  text-align: justify;
-  color: #111111;
-  line-height: 1.6;
+  margin: 4pt 0;
+  text-align: left;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 11pt;
 }
 
 .summary strong {
-  color: #111111;
-  font-weight: 600;
+  color: #000000;
+  font-weight: 700;
 }
 
 /* Sections */
 .section {
-  margin-bottom: 14pt;
+  margin-bottom: 12pt;
+  page-break-inside: avoid;
 }
 
 .key-achievements {
-  margin-top: 8pt;
-  font-weight: 600;
-  color: #111111;
+  margin-top: 6pt;
+  font-weight: 700;
+  color: #000000;
   font-size: 11pt;
+  text-transform: uppercase;
+}
+
+.target-job-title {
+  margin: 4pt 0;
+  color: #000000;
+  line-height: 1.5;
+  font-size: 11pt;
+}
+
+.section {
+  margin-bottom: 10pt;
 }
 
 .education-list {
@@ -171,13 +197,20 @@ li {
     background: white;
   }
 
+  .resume-container {
+    background: white;
+    padding: 0;
+  }
+
   .resume-content {
     max-width: 100%;
     width: 100%;
-    padding: 0;
+    padding: 0.7in;
     box-shadow: none;
     background: white;
+    border-radius: 0;
   }
+
 
   /* Ensure colors print */
   * {
@@ -230,20 +263,20 @@ li {
     color: #000000 !important;
   }
 
-  h1,
-  h2,
-  .job-title,
-  .key-achievements {
+  h2 {
     color: #000000 !important;
   }
 
-  /* Keep teal accent for headings border (subtle) */
+  * {
+    color: #000000 !important;
+  }
+
   h1 {
-    border-bottom-color: #20AABC;
+    border-bottom-color: #00A2B7;
   }
 
   .contact-info {
-    border-bottom-color: #20AABC;
+    border-bottom-color: #00A2B7;
   }
 }
 

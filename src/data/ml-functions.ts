@@ -10,7 +10,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     src: '/images/case-study/ml-functions/ml-functions-cover.png',
     alt: 'ML Functions case study cover image',
   },
-  role: 'Senior Product Designer (Principal-level scope & impact)',
+  role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2025',
   status: {
@@ -33,7 +33,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
-      'I came in with no ML background and self-learned through courses, constant questions to our domain expert, and AI tools to fill knowledge gaps. Over 6–8 months, I owned the end-to-end redesign of the ML training experience—from ambiguity to production-ready flows (launching in 2026). I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire ML Functions redesign solo while simultaneously leading ReportCaster and IQ Plugin. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. I led weekly "UX + ML" meetings, bridging technical complexity with user needs, and worked cross-functionally with product, engineering, and data science to ensure technical feasibility while maintaining accessibility. During maternity leave, I onboarded 2 designers, ensuring seamless knowledge transfer and continuity. This demonstrates my ability to rapidly acquire deep domain expertise, manage multiple complex projects simultaneously, and deliver Principal-level impact in unfamiliar territories.',
+      'Came in with no ML background and self-learned through courses, constant questions to our domain expert, and AI tools. Owned the end-to-end redesign of the ML training experience—from ambiguity to production-ready flows (launching in 2026). Only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. Owned the entire ML Functions redesign solo while simultaneously leading ReportCaster and IQ Plugin. Collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. Deeply collaborated with PM to contribute to roadmaps and help refine them, participating in yearly roadmap meetings with PMs and leadership. Led weekly "UX + ML" meetings, bridging technical complexity with user needs. Worked cross-functionally with product, engineering, and data science to ensure technical feasibility while maintaining accessibility. Onboarded 2 designers during maternity leave, ensuring seamless knowledge transfer and continuity.',
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
@@ -70,7 +70,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       },
     ],
     star: {
-      situation: 'ML training was fragmented across 4+ steps, hidden behind right-click menus, and produced confusing "results not generated" errors.',
+      situation: 'ML training required a fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training, making the process opaque and error-prone.',
       task: 'Make ML training accessible to non-technical users while maintaining power for experts.',
       action: 'Designed a guided 4-step workflow with early validation, dual-experience approach (guided + advanced), and eliminated dead-end errors through inline feedback.',
       result: '100% discoverability in testing, reduced clicks from 12+ to 7-9, and zero dead-end errors.',

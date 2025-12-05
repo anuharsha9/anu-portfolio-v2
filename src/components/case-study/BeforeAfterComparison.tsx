@@ -25,6 +25,7 @@ interface BeforeAfterComparisonProps {
   isUnlocked?: boolean
   password?: string
   caseStudySlug?: string
+  sectionTitle?: string
 }
 
 export default function BeforeAfterComparison({
@@ -37,6 +38,7 @@ export default function BeforeAfterComparison({
   isUnlocked = false,
   password,
   caseStudySlug,
+  sectionTitle = 'this section',
 }: BeforeAfterComparisonProps) {
   // Check unlock state
   const [actuallyUnlocked, setActuallyUnlocked] = useState(() => {
@@ -178,6 +180,58 @@ export default function BeforeAfterComparison({
   const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
   const bgColor = isLightBackground ? 'bg-white/50' : 'bg-white/5'
 
+  // If before image is sensitive and locked, wrap entire component
+  if (isBeforeLocked) {
+    return (
+      <LockedContent
+        isUnlocked={actuallyUnlocked}
+        password={password}
+        caseStudySlug={caseStudySlug}
+        isLightBackground={isLightBackground}
+        unlockMessage={`Password required to view ${sectionTitle}`}
+      >
+        <div className="space-y-4">
+          {/* View Mode Toggle */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider`}>View:</span>
+              <div className={`${bgColor} rounded-lg p-1 border ${borderColor} flex gap-1`}>
+                <button
+                  className={`px-3 py-1.5 rounded text-xs font-medium ${labelColor}`}
+                  disabled
+                >
+                  Slider
+                </button>
+                <button
+                  className={`px-3 py-1.5 rounded text-xs font-medium ${labelColor}`}
+                  disabled
+                >
+                  Side-by-Side
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* Blurred slider placeholder */}
+          <div
+            className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline}`}
+            style={{ minHeight: '400px' }}
+          >
+            <div className="relative w-full h-full">
+              <Image
+                src={beforeImage.src}
+                alt={beforeImage.alt}
+                width={1200}
+                height={800}
+                className="w-full h-auto object-contain"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+              />
+            </div>
+          </div>
+        </div>
+      </LockedContent>
+    )
+  }
+
   return (
     <div className="space-y-4">
       {/* View Mode Toggle */}
@@ -223,96 +277,46 @@ export default function BeforeAfterComparison({
           tabIndex={0}
         >
           {/* After Image (background) - determines container size */}
-          {isAfterLocked ? (
-            <LockedContent
-              isUnlocked={actuallyUnlocked}
-              password={password}
-              caseStudySlug={caseStudySlug}
-              isLightBackground={isLightBackground}
-              unlockMessage="Password required to view this image"
-            >
-              <div className="relative w-full">
-                <Image
-                  src={afterImage.src}
-                  alt={afterImage.alt}
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto object-contain opacity-30"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                />
-              </div>
-            </LockedContent>
-          ) : (
+          <div
+            className="relative w-full cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation()
+              openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)
+            }}
+            onDoubleClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={afterImage.src}
+              alt={afterImage.alt}
+              width={1200}
+              height={800}
+              className="w-full h-auto object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+            />
+          </div>
+
+          {/* Before Image (clipped overlay) */}
+          <div
+            className="absolute inset-0 overflow-hidden pointer-events-none"
+            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+          >
             <div
-              className="relative w-full cursor-pointer"
+              className="w-full h-full cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation()
-                openLightbox(afterImage.src, afterImage.alt, afterImage.caption, 1)
+                openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)
               }}
-              onDoubleClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={afterImage.src}
-                alt={afterImage.alt}
+                src={beforeImage.src}
+                alt={beforeImage.alt}
                 width={1200}
                 height={800}
                 className="w-full h-auto object-contain"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               />
             </div>
-          )}
-
-          {/* Before Image (clipped overlay) */}
-          {!isBeforeLocked && (
-            <div
-              className="absolute inset-0 overflow-hidden pointer-events-none"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-            >
-              <div
-                className="w-full h-full cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  openLightbox(beforeImage.src, beforeImage.alt, beforeImage.caption, 0)
-                }}
-              >
-                <Image
-                  src={beforeImage.src}
-                  alt={beforeImage.alt}
-                  width={1200}
-                  height={800}
-                  className="w-full h-auto object-contain"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Lock overlay for before image in slider */}
-          {isBeforeLocked && (
-            <div
-              className="absolute inset-0 overflow-hidden pointer-events-none z-20"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-            >
-              <LockedContent
-                isUnlocked={actuallyUnlocked}
-                password={password}
-                caseStudySlug={caseStudySlug}
-                isLightBackground={isLightBackground}
-                unlockMessage="Password required to view legacy interface"
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={beforeImage.src}
-                    alt={beforeImage.alt}
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto object-contain opacity-30"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
-                  />
-                </div>
-              </LockedContent>
-            </div>
-          )}
+          </div>
 
           {/* Slider Line */}
           <div
@@ -382,7 +386,7 @@ export default function BeforeAfterComparison({
                 password={password}
                 caseStudySlug={caseStudySlug}
                 isLightBackground={isLightBackground}
-                unlockMessage="Password required to view legacy interface"
+                unlockMessage={`Password required to view ${sectionTitle}`}
               >
                 <div className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline}`}>
                   <Image
@@ -424,7 +428,7 @@ export default function BeforeAfterComparison({
                 password={password}
                 caseStudySlug={caseStudySlug}
                 isLightBackground={isLightBackground}
-                unlockMessage="Password required to view this image"
+                unlockMessage={`Password required to view ${sectionTitle}`}
               >
                 <div className={`relative w-full ${imageBorderRadius} overflow-hidden border ${borderColor} ${imageShadow} ${imageOutline}`}>
                   <Image

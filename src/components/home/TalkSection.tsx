@@ -86,7 +86,7 @@ export default function TalkSection() {
                         className="text-white text-sm sm:text-base md:text-lg font-medium transition-all duration-300 relative group hover:text-[var(--accent-teal)] whitespace-nowrap"
                         style={{
                           textShadow: hoveredLink === index
-                            ? '0 0 20px rgba(32, 170, 188, 0.6)'
+                            ? '0 0 20px rgba(0, 162, 183, 0.6)'
                             : 'none',
                           color: hoveredLink === index ? 'var(--accent-teal)' : 'white',
                         }}
@@ -99,7 +99,7 @@ export default function TalkSection() {
                         className="text-white text-sm sm:text-base md:text-lg font-medium transition-all duration-300 relative group hover:text-[var(--accent-teal)] whitespace-nowrap"
                         style={{
                           textShadow: hoveredLink === index
-                            ? '0 0 20px rgba(32, 170, 188, 0.6)'
+                            ? '0 0 20px rgba(0, 162, 183, 0.6)'
                             : 'none',
                           color: hoveredLink === index ? 'var(--accent-teal)' : 'white',
                         }}

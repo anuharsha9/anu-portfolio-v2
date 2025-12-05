@@ -25,32 +25,32 @@
    /* Improved contrast: 5.2:1 (was 4.2:1) */
 
    /* ============================================
-     ACCENT COLORS - TURQUOISE PALETTE (based on #20AABC)
+     ACCENT COLORS - TURQUOISE PALETTE (based on #00A2B7)
      ============================================ */
-   --accent-teal-50: #E6F7F9;
+   --accent-teal-50: #E0F5F7;
    /* Very light turquoise */
-   --accent-teal-100: #B3E8F0;
+   --accent-teal-100: #B3E5EB;
    /* Light turquoise */
-   --accent-teal-200: #80D9E7;
+   --accent-teal-200: #80D4DF;
    /* Lighter turquoise */
-   --accent-teal-300: #4DCADE;
+   --accent-teal-300: #4DC3D3;
    /* Light-medium turquoise */
-   --accent-teal-400: #33B8CD;
+   --accent-teal-400: #26B2C7;
    /* Medium-light turquoise */
-   --accent-teal-500: #26A3B8;
+   --accent-teal-500: #0DA1B7;
    /* Medium turquoise */
-   --accent-teal-600: #20AABC;
+   --accent-teal-600: #00A2B7;
    /* Primary turquoise accent color */
-   --accent-teal-700: #1A8A9A;
+   --accent-teal-700: #008A9A;
    /* Darker turquoise */
-   --accent-teal-800: #146A78;
+   --accent-teal-800: #00727D;
    /* Dark turquoise */
-   --accent-teal-900: #0E4A56;
+   --accent-teal-900: #005A60;
    /* Very dark turquoise */
 
    /* Legacy support */
-   --accent-teal: #20AABC;
-   --accent-teal-soft: #20AABC;
+   --accent-teal: #00A2B7;
+   --accent-teal-soft: #00A2B7;
 
    /* ============================================
      SEMANTIC COLORS
@@ -71,9 +71,9 @@
    /* ============================================
      STATE COLORS
      ============================================ */
-   --hover-overlay: rgba(32, 170, 188, 0.08);
-   --active-overlay: rgba(32, 170, 188, 0.12);
-   --focus-ring: rgba(32, 170, 188, 0.4);
+   --hover-overlay: rgba(0, 162, 183, 0.08);
+   --active-overlay: rgba(0, 162, 183, 0.12);
+   --focus-ring: rgba(0, 162, 183, 0.4);
    --focus-ring-width: 2px;
    --focus-ring-offset: 2px;
 

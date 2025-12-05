@@ -140,13 +140,13 @@ export default function FrameworkConnection({ data, isLightBackground = false, s
                 <a
                   href={`#${sectionId}`}
                   onClick={handleClick}
-                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,170,188,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group cursor-pointer block`}
+                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,162,183,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group cursor-pointer block`}
                 >
                   {cardContent}
                 </a>
               ) : (
                 <div
-                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(32,170,188,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group`}
+                  className={`${bgColor} rounded-xl p-5 md:p-6 border ${borderColor} ${isLightBackground ? 'border-t-2 border-t-[var(--accent-teal)]/30' : 'border-t-2 border-t-white/10'} hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,162,183,0.05)] hover:border-[var(--accent-teal)]/30 transition-all duration-300 group`}
                 >
                   {cardContent}
                 </div>

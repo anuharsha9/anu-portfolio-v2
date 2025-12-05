@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
+import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 
 interface MobileMenuProps {
   isLandingPage?: boolean
@@ -167,7 +168,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
                     Navigation
                   </p>
-                  
+
                   <Link
                     href="/#work-overview"
                     onClick={() => setIsOpen(false)}
@@ -175,7 +176,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   >
                     Case Studies
                   </Link>
-                  
+
                   <Link
                     href="/me"
                     onClick={() => setIsOpen(false)}
@@ -183,7 +184,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   >
                     Me
                   </Link>
-                  
+
                   <Link
                     href="/#lets-talk"
                     onClick={() => setIsOpen(false)}
@@ -191,15 +192,19 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   >
                     Contact
                   </Link>
-                  
+
                   <a
-                    href="/assets/Anuja-Nimmagadda-2025.pdf"
-                    download="Anuja-Nimmagadda-Resume-2025.pdf"
-                    onClick={() => setIsOpen(false)}
+                    href="/resume"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      trackResumeDownload()
+                      setIsOpen(false)
+                    }}
                     className="block px-6 py-4 rounded-lg text-white text-lg font-medium hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white border-2 border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 mt-4"
-                    aria-label="Download Resume"
+                    aria-label="View Resume"
                   >
-                    Download Resume
+                    View Resume
                   </a>
                 </div>
 

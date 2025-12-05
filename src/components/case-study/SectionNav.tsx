@@ -260,7 +260,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
                       scrollToSection(section.id)
                     }
                   }}
-                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 focus:ring-offset-transparent ${isActive
+                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none ${isActive
                     ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0`
                     : currentBgIsLight
                       ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0'

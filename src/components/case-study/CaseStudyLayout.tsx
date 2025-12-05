@@ -1439,9 +1439,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           {/* Final Summary Section */}
           {/* FinalSummary is now combined with Section 08 */}
 
-          {/* Let's Talk CTA */}
-          <LetsTalkCTA />
-
           {/* Design System Showcase - Subtle, Not Prominent */}
           <MotionSection className="surface-light py-8 md:py-12">
             <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -1451,6 +1448,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
           {/* Related Case Studies */}
           <RelatedCaseStudies currentSlug={data.slug} />
+
+          {/* Let's Talk CTA */}
+          <LetsTalkCTA />
 
           {/* Case Study Signature Badge */}
           <MotionSection className="surface-light py-8 md:py-12">

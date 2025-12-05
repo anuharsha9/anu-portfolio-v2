@@ -4,160 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anuja Harsha Nimmagadda - Resume</title>
-    <!-- Resume fonts - Helvetica for ATS compatibility -->
     <style>
         @page {
             margin: 0.7in;
-            /* Remove browser print headers and footers */
-            @top-center { content: ""; }
-            @top-left { content: ""; }
-            @top-right { content: ""; }
-            @bottom-center { content: ""; }
-            @bottom-left { content: ""; }
-            @bottom-right { content: ""; }
+            size: letter;
         }
         body {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             font-size: 11pt;
             line-height: 1.5;
-            color: #111111;
+            color: #000000;
             max-width: 8.5in;
             margin: 0 auto;
-            padding: 0;
+            padding: 0.7in;
+            background: white;
         }
-        /* NO HEADER - Contact info in body as per ATS guidelines */
         .contact-info {
             text-align: center;
             font-size: 10pt;
-            margin-bottom: 24pt;
-            padding-bottom: 12pt;
-            border-bottom: 2pt solid #0D9488; /* Portfolio teal accent */
+            margin-bottom: 16pt;
+            padding-bottom: 8pt;
+            border-bottom: 2pt solid #00A2B7;
         }
         .contact-info strong {
-            font-family: Helvetica, Arial, sans-serif;
+            font-family: "Times New Roman", Times, serif;
             font-size: 18pt;
             display: block;
-            margin-bottom: 8pt;
-            color: #111111;
+            margin-bottom: 6pt;
+            color: #000000;
             font-weight: 400;
-            letter-spacing: 0.5px;
         }
         h1 {
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 14pt;
-            font-weight: 400;
-            margin-top: 16pt;
-            margin-bottom: 8pt;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12pt;
+            font-weight: 700;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1.5pt solid #0D9488; /* Portfolio teal accent */
-            padding-bottom: 4pt;
-            color: #111111;
+            border-bottom: 1pt solid #00A2B7;
+            padding-bottom: 2pt;
+            color: #000000;
         }
         h2 {
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 12pt;
-            font-weight: 600;
-            margin-top: 10pt;
-            margin-bottom: 6pt;
-            color: #111111;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 11pt;
+            font-weight: 700;
+            margin-top: 8pt;
+            margin-bottom: 4pt;
+            color: #000000;
         }
         .job-title {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 11pt;
-            color: #111111;
-            margin-bottom: 4pt;
+            color: #000000;
+            margin-bottom: 2pt;
         }
         .company {
-            font-style: italic;
-            color: #666666;
-            font-size: 10pt;
+            font-weight: 400;
+            color: #000000;
+            font-size: 11pt;
+            margin-bottom: 6pt;
         }
         .date {
             float: right;
             font-weight: 400;
-            color: #666666;
-            font-size: 10pt;
-        }
-        /* ATS Optimization: Ensure text is readable */
-        * {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-            color-adjust: exact;
+            color: #000000;
+            font-size: 11pt;
         }
         ul {
-            margin: 6pt 0;
-            padding-left: 20pt;
+            margin: 4pt 0;
+            padding-left: 18pt;
         }
         li {
-            margin-bottom: 4pt;
-            color: #111111;
+            margin-bottom: 3pt;
+            color: #000000;
             line-height: 1.5;
+            font-size: 11pt;
         }
         .skills-list {
             display: block;
-            margin: 8pt 0;
+            margin: 6pt 0;
             line-height: 1.8;
         }
         .skills-list span {
             display: inline-block;
             margin-right: 12pt;
             margin-bottom: 4pt;
-            color: #111111;
+            color: #000000;
         }
         .summary {
-            margin: 8pt 0;
-            text-align: justify;
-            color: #111111;
-            line-height: 1.6;
-        }
-        .summary strong {
-            color: #111111;
-            font-weight: 600;
-        }
-        .section {
-            margin-bottom: 14pt;
-        }
-        .key-achievements {
-            margin-top: 8pt;
-            font-weight: 600;
-            color: #111111;
+            margin: 4pt 0;
+            text-align: left;
+            color: #000000;
+            line-height: 1.5;
             font-size: 11pt;
         }
-        /* Print Styles - ATS Optimized */
+        .summary strong {
+            color: #000000;
+            font-weight: 700;
+        }
+        .section {
+            margin-bottom: 10pt;
+        }
+        .key-achievements {
+            margin-top: 6pt;
+            font-weight: 700;
+            color: #000000;
+            font-size: 11pt;
+            text-transform: uppercase;
+        }
+        .target-job-title {
+            margin: 4pt 0;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 11pt;
+        }
         @media print {
             @page {
                 margin: 0.7in;
                 size: letter;
             }
             body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-                color-adjust: exact;
+                color: #000000 !important;
+                padding: 0.7in;
+            }
+            * {
                 color: #000000 !important;
             }
-            /* Ensure text is black for ATS */
-            body, .contact-info, h1, h2, .job-title, .key-achievements, li, .skills-list span {
-                color: #000000 !important;
-            }
-            /* Keep teal accent for headings border (subtle) */
             h1 {
-                border-bottom-color: #0D9488;
+                border-bottom-color: #00A2B7;
             }
             .contact-info {
-                border-bottom-color: #0D9488;
+                border-bottom-color: #00A2B7;
             }
-            /* Page breaks */
             h1 {
                 page-break-after: avoid;
-                break-after: avoid;
             }
             .section {
                 page-break-inside: avoid;
-                break-inside: avoid;
             }
         }
-        /* Ensure no tables or text boxes - all plain text */
     </style>
 </head>
 <body>
@@ -170,8 +156,8 @@
 
 <!-- Target Job Title -->
 <h1>TARGET JOB TITLE</h1>
-<div class="section">
-    Principal Product Designer, Senior Product Designer, UX Design Lead, Enterprise UX, AI/ML, Systems Design
+<div class="target-job-title">
+    Principal Product Designer, Senior Product Designer, UX Design Lead, Enterprise UX Designer, Lead Systems Designer
 </div>
 
 <!-- Career Summary -->
@@ -183,7 +169,7 @@
 <!-- AI-Assisted Design & Development -->
 <h1>AI-ASSISTED DESIGN & DEVELOPMENT</h1>
 <div class="summary">
-    <strong>Designed and Developed my Portfolio Website with AI assistance</strong>. Leverage strong foundational knowledge of HTML/CSS and AI-assisted workflows to bridge design-to-implementation, delivering production-ready front-end code. Approach: design the system first (problem framing, user flows, UX strategy), use AI to generate foundation (HTML/CSS scaffolds, React/JavaScript components, layouts), then manually audit, debug, and refine (accessibility, semantic HTML, CSS specificity, interactions). While not a deep React/JavaScript expert, effectively leverage AI to understand code, debug issues, and explore alternatives—treating AI as a managed resource where my role is architecture, direction, and quality control. Portfolio (anujaharsha.com), built with Next.js, TypeScript, React, Tailwind CSS, deployed on AWS S3/CloudFront, demonstrates this capability. Source code available on GitHub.
+    <strong>Designed and Developed Portfolio Website with AI assistance</strong>. Leverage strong foundational knowledge of HTML/CSS and AI-assisted workflows to bridge design-to-implementation, delivering production-ready front-end code. Approach: design the system first (problem framing, user flows, UX strategy), use AI to generate foundation (HTML/CSS scaffolds, React/JavaScript components, layouts), then manually audit, debug, and refine (accessibility, semantic HTML, CSS specificity, interactions). While not a deep React/JavaScript expert, effectively leverage AI to understand code, debug issues, and explore alternatives—treating AI as a managed resource where my role is architecture, direction, and quality control. Portfolio (anujaharsha.com), built with Next.js, TypeScript, React, Tailwind CSS, deployed on AWS S3/CloudFront, demonstrates this capability. Source code available on GitHub.
 </div>
 
 <!-- Key Skills -->
@@ -236,7 +222,7 @@
 
 <div class="section">
     <div class="job-title">
-        SENIOR PRODUCT DESIGNER
+        SENIOR UI/UX ENGINEER
         <span class="date">August 2022 - November 2025</span>
     </div>
     <div class="company">Cloud Software Group (WebFOCUS/IBI)</div>
@@ -280,11 +266,6 @@
         <li>Owned entire initiative solo while leading other projects; made complex data science capabilities approachable for business users while maintaining power for experts</li>
     </ul>
     
-    <h2>WebFOCUS Designer (2025)</h2>
-    <ul>
-        <li>Contributed design work on WebFOCUS Designer, a project previously worked on by 3 designers; assigned towards end of employment while maintaining oversight on other initiatives</li>
-    </ul>
-    
     <h2>Design System Co-Ownership & Platform Standards (2022–2025)</h2>
     <ul>
         <li>Migrated design system from Sketch to Figma for entire design and engineering organization; added components, improved system elements</li>
@@ -311,7 +292,7 @@
     <div class="company">Independent Consultant</div>
     <ul>
         <li>Delivered UX, UI, mobile app designs, branding, and product concepts for 10+ small businesses and startups; designed CRM systems, marketing sites, dashboards, and mobile experiences</li>
-        <li>Provided end-to-end product support: discovery, IA, wireframes, visual design, prototypes, and handoff</li>
+        <li>Provided end-to-end product support: discovery, Information Architecture (IA), wireframes, visual design, prototypes, and handoff</li>
     </ul>
 </div>
 
@@ -340,9 +321,7 @@
 <!-- Education -->
 <h1>EDUCATION</h1>
 <div class="section">
-    <div class="job-title">
-        MIT xPRO — Artificial Intelligence (AI) & Machine Learning (ML) in Product Design
-    </div>
+    <div class="job-title">MIT xPRO — Artificial Intelligence (AI) & Machine Learning (ML) in Product Design</div>
     <div class="job-title" style="margin-top: 6pt;">Georgia Tech — Human-Computer Interaction</div>
     <div style="margin-top: 8pt;">
         <div class="job-title">Master's Degree in English</div>

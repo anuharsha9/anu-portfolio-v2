@@ -30,7 +30,7 @@ export default function RelatedCaseStudies({ currentSlug, className = '' }: Rela
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px) scale(1.01)'
-                e.currentTarget.style.boxShadow = '0 12px 24px rgba(32, 170, 188, 0.15)'
+                e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 162, 183, 0.15)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0) scale(1)'

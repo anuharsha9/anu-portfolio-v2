@@ -10,7 +10,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     src: '/images/case-study/ReportCaster/rc-cover.png',
     alt: 'ReportCaster case study cover image',
   },
-  role: 'Senior Product Designer (Principal-level scope & impact)',
+  role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2022–2025',
   status: {
@@ -33,7 +33,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'I took full ownership of the redesign one week into joining—a testament to my ability to operate autonomously and deliver at Principal-level impact. I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire ReportCaster redesign solo initially, while simultaneously leading ML Functions and IQ Plugin. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions, working closely with the Lead Architect of the entire organization. I rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. After establishing the architecture and core workflows, I onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition. Even after moving focus to other projects, I continued to be looped in for critical architectural decisions as the knowledge hub. This wasn&apos;t just design; it was technical systems thinking, strategic product leadership, team management, and end-to-end execution from ambiguity to production.',
+      'Took full ownership of the redesign one week into joining—operating autonomously and delivering at Principal-level impact. Only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. Owned the entire ReportCaster redesign solo initially, while simultaneously leading ML Functions and IQ Plugin. Collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. Deeply collaborated with PM to contribute to roadmaps and help refine them, participating in yearly roadmap meetings with PMs and leadership. Worked closely with the Lead Architect of the entire organization. Rebuilt mental models from scratch, defined new architectures, and balanced user needs with deep engineering constraints. Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition. Continued to be looped in for critical architectural decisions as the knowledge hub even after moving focus to other projects.',
     impactMetrics: [
       { label: 'Schedule creation', value: '44–56% fewer clicks, no new tabs' },
       { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
@@ -43,7 +43,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
     ],
     star: {
-      situation: 'A 40-year-old mission-critical system serving millions of users across hundreds of enterprise customers, processing 20 million schedules weekly. Customer requests for modernization were flooding in, creating urgent business pressure. Five fragmented subsystems with undocumented rules and no coherent mental model.',
+      situation: 'A 40-year-old mission-critical scheduling engine powering millions of automated jobs across hundreds of enterprise customers, processing 20 million schedules weekly. The system was deeply embedded, undocumented, fragmented, and structurally outdated with five fragmented subsystems and no coherent mental model. Customer requests for modernization were flooding in, creating urgent business pressure.',
       task: 'Responsibly modernize a system that couldn\'t afford to break — maintaining backward compatibility and aligning with platform patterns.',
       action: 'Took full ownership one week into joining. Mapped complex workflows across five fragmented subsystems, reverse-engineered undocumented rules, and unified them into one coherent architecture. Led cross-functional alignment with engineering, product, and QA—making strategic decisions when others hesitated. Delivered a modal-based creation model aligned with platform patterns.',
       result: '44–56% fewer clicks, eliminated multi-tab sprawl, and reduced support load by 25–30% — delivered safely at massive scale with resounding customer approval. Work shipped as part of WebFOCUS 9.3, impacting millions of users daily. Recognized by senior leadership in a company-wide meeting for early impact within first 6 months.',

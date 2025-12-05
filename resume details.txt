@@ -259,7 +259,8 @@ Portfolio: www.anujaharsha.com | Source Code: github.com/anuharsha9/anu-portfoli
 
 Instructions:
 
-I want you to create an ATS optimized resume for me in HTML  - best of all 3 resumes above.
+I want you to create an ATS optimized resume for me in HTML incorporating my website accent color smartly
+and - best of all 3 resumes above.
 Using the following - 
 
 

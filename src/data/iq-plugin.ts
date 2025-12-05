@@ -10,7 +10,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     src: '/images/case-study/iq-plugin/iq-cover.png',
     alt: 'IQ Plugin case study cover image',
   },
-  role: 'Senior Product Designer (Principal-level scope & impact)',
+  role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2025',
   status: {
@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'DSML features — Automated Insights, Natural Language Query, and Predict Data — were fragmented, hard to discover, and intimidating. Users had to hunt across different parts of the platform, each with its own entry point and mental model.',
     myRole:
-      'I owned UX strategy, IA, primary workflows, personas/journey mapping, prototypes, usability testing, and cross-functional alignment with PM, engineering, and QA. I was the only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. I owned the entire IQ Plugin initiative solo while simultaneously leading ReportCaster and ML Functions. I collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. IQ was the "front door" to DSML in WebFOCUS—a strategic initiative to stay competitive with platforms like Power BI, Tableau, and Qlik while being easier for non-technical users to adopt. I led design decisions that balanced technical depth with accessibility, making complex data science capabilities approachable for business users while maintaining power for experts. This required deep technical understanding, strategic product thinking, and Principal-level leadership across functions.',
+      'Owned UX strategy, IA, primary workflows, personas/journey mapping, prototypes, usability testing, and cross-functional alignment with PM, engineering, and QA. Only designer who worked on all major WebFOCUS features, leading 3 out of 4 Principal-level initiatives (ReportCaster, ML Functions, IQ Plugin) simultaneously. Owned the entire IQ Plugin initiative solo while simultaneously leading ReportCaster and ML Functions. Collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives and architectural decisions. Deeply collaborated with PM to contribute to roadmaps and help refine them, participating in yearly roadmap meetings with PMs and leadership. IQ was the "front door" to DSML in WebFOCUS—a strategic initiative to stay competitive with platforms like Power BI, Tableau, and Qlik while being easier for non-technical users to adopt. Led design decisions that balanced technical depth with accessibility, making complex data science capabilities approachable for business users while maintaining power for experts.',
     impactMetrics: [
       { label: 'Centralized DSML capabilities', value: 'Unified experience' },
       { label: 'Reduced learning curve', value: 'Improved discoverability' },
@@ -43,7 +43,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       { label: 'Competitive positioning with leading BI platforms', value: 'Market alignment' },
     ],
     star: {
-      situation: 'DSML features (Automated Insights, NLQ, Predict Data) were fragmented, hard to discover, and intimidating.',
+      situation: 'DSML features — Automated Insights, Natural Language Query, and Predict Data — were fragmented, hard to discover, and intimidating. Users had to hunt across different parts of the platform, each with its own entry point and mental model, creating a confusing and disjointed experience.',
       task: 'Unify DSML capabilities into a single, approachable entry point that works for both business users and data experts.',
       action: 'Designed a unified entry point that centralizes all DSML capabilities into one cohesive experience with dual-layer UX (guided for non-technical, advanced for experts).',
       result: 'Centralized DSML capabilities, improved discoverability, and made DSML approachable for non-technical users while maintaining competitive positioning.',

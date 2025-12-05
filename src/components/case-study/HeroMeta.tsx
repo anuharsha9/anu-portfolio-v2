@@ -65,7 +65,7 @@ export default function HeroMeta({
   testimonialName,
 }: HeroMetaProps) {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
-  
+
   // Find testimonial if name provided
   const testimonial = testimonialName
     ? recommendations.find((r) => r.name === testimonialName)
@@ -81,7 +81,7 @@ export default function HeroMeta({
 
   return (
     <>
-      <motion.header 
+      <motion.header
         className="relative min-h-[70vh] xs:min-h-[75vh] sm:min-h-[80vh] flex items-center py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -95,7 +95,7 @@ export default function HeroMeta({
             backgroundRepeat: 'repeat',
           }}
         />
-        
+
         {/* Subtle Logo Watermark - Top Right Corner */}
         <div className="absolute top-8 right-8 opacity-[0.03] pointer-events-none hidden lg:block">
           <div className="w-32 h-32">
@@ -114,15 +114,15 @@ export default function HeroMeta({
               />
             </div>
           )}
-          
+
           {/* Case Study Navigation - Above title, centered */}
           <div className="text-center mb-4 sm:mb-5 md:mb-6">
             <CaseStudyNav />
           </div>
-          
+
           {/* Centered Title */}
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
-            <motion.h1 
+            <motion.h1
               variants={heroTitleVariant}
               initial="hidden"
               animate="visible"
@@ -139,7 +139,7 @@ export default function HeroMeta({
             <div className="space-y-5 sm:space-y-6 md:space-y-7">
 
               {/* Combined Subtitle - heroSubheading and heroSubtitle as one paragraph */}
-              <motion.p 
+              <motion.p
                 variants={heroSubVariant}
                 initial="hidden"
                 animate="visible"
@@ -158,22 +158,21 @@ export default function HeroMeta({
                   className="pt-2"
                 >
                   <span
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans font-medium ${
-                      status.variant === 'live'
-                        ? 'bg-green-500/10 text-green-400/80 border border-green-500/20'
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans font-medium ${status.variant === 'live'
+                        ? 'bg-green-100 text-green-700 border border-green-300'
                         : status.variant === 'shipping'
-                        ? 'bg-blue-500/10 text-blue-400/80 border border-blue-500/20'
-                        : 'bg-amber-500/10 text-amber-400/80 border border-amber-500/20'
-                    }`}
+                          ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                          : 'bg-amber-100 text-amber-700 border border-amber-300'
+                      }`}
                   >
                     {status.variant === 'live' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-400/80"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-600"></span>
                     )}
                     {status.variant === 'shipping' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/80"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                     )}
                     {status.variant === 'development' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
                     )}
                     {status.label}
                   </span>
@@ -229,7 +228,7 @@ export default function HeroMeta({
 
             {/* Right Column: Laptop Visual - Macro Photography Feel with Enhanced Composition */}
             {coverImage && (
-              <motion.div 
+              <motion.div
                 className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible"
                 variants={fadeIn}
                 initial="hidden"
@@ -246,7 +245,7 @@ export default function HeroMeta({
                     height: '85%',
                   }}
                 />
-                
+
                 {/* Laptop Container - Floating animation */}
                 <div
                   className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float w-full z-10"
@@ -258,9 +257,9 @@ export default function HeroMeta({
                   } as React.CSSProperties}
                   onClick={() => openLightbox(coverImage.src, coverImage.alt)}
                 >
-                  <div 
+                  <div
                     className="relative w-full"
-                    style={{ 
+                    style={{
                       aspectRatio: '16/10',
                       width: '100%',
                       maxWidth: '650px',
@@ -302,7 +301,7 @@ export default function HeroMeta({
                       </span>
                       <span className="text-[var(--text-primary-light)] font-sans">{role}</span>
                     </div>
-                    
+
                     {/* Company */}
                     <div className="flex items-start gap-4">
                       <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
@@ -310,7 +309,7 @@ export default function HeroMeta({
                       </span>
                       <span className="text-[var(--text-primary-light)] font-sans">{company}</span>
                     </div>
-                    
+
                     {/* Timeframe */}
                     <div className="flex items-start gap-4">
                       <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">

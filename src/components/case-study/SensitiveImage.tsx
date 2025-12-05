@@ -21,6 +21,7 @@ interface SensitiveImageProps {
   sizes?: string
   fill?: boolean
   aspectRatio?: string
+  sectionTitle?: string
 }
 
 export default function SensitiveImage({
@@ -41,6 +42,7 @@ export default function SensitiveImage({
   sizes,
   fill = false,
   aspectRatio,
+  sectionTitle = 'this content',
 }: SensitiveImageProps) {
   const imageElement = fill ? (
     <Image
@@ -81,7 +83,7 @@ export default function SensitiveImage({
         password={password}
         caseStudySlug={caseStudySlug}
         isLightBackground={isLightBackground}
-        unlockMessage="Password required to view this image"
+        unlockMessage={`Password required to view ${sectionTitle}`}
       >
         <div className={className}>
           {imageWithCaption}

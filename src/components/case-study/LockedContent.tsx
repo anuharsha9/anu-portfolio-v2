@@ -19,7 +19,7 @@ export default function LockedContent({
   onUnlock,
   password = 'anu-access',
   caseStudySlug = 'default',
-  unlockMessage = 'Password required to view sensitive content',
+  unlockMessage = 'Password required to view internal discovery details',
   isLightBackground = false,
 }: LockedContentProps) {
   // If propIsUnlocked is explicitly false, always lock (ignore sessionStorage)
@@ -30,6 +30,11 @@ export default function LockedContent({
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [isUnlocked, setIsUnlocked] = useState(false)
+
+  // Modal styling based on background
+  const bgColor = isLightBackground ? 'bg-white' : 'bg-[var(--bg-dark)]'
+  const borderColor = isLightBackground ? 'border-gray-200' : 'border-white/20'
+  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
 
   // If propIsUnlocked is explicitly false, always lock (ignore sessionStorage)
   // If propIsUnlocked is undefined, check sessionStorage
@@ -97,6 +102,11 @@ export default function LockedContent({
       e.preventDefault()
     }
 
+    // Clear previous errors
+    setError('')
+    setSuccess(false)
+
+    // Validation: Check if password is empty
     if (!inputPassword.trim()) {
       setError('Please enter a password.')
       return
@@ -106,6 +116,7 @@ export default function LockedContent({
     const correctPassword = password.toLowerCase()
 
     if (trimmedPassword === correctPassword) {
+      // Success state
       setError('')
       setSuccess(true)
 
@@ -126,18 +137,20 @@ export default function LockedContent({
         }
       }
 
-      // Wait a moment to show success, then unlock
+      // Wait a moment to show success message, then unlock and close modal
       setTimeout(() => {
         setIsUnlocked(true)
         setShowPasswordModal(false)
         setSuccess(false)
         setInputPassword('')
+        setError('')
         // Call onUnlock callback if provided
         if (onUnlock) {
           onUnlock()
         }
-      }, 1000)
+      }, 1500)
     } else {
+      // Error state - incorrect password
       setError('Incorrect password. Please try again.')
       setSuccess(false)
       setInputPassword('')
@@ -149,55 +162,43 @@ export default function LockedContent({
     return <>{children}</>
   }
 
-  const bgColor = isLightBackground ? 'bg-white/90' : 'bg-[var(--bg-dark)]/60'
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const borderColor = isLightBackground ? 'border-black/20' : 'border-white/20'
-
   return (
     <>
-      <div className="relative">
-        {/* Blurred Content - 70% blur (strong blur with some visibility) */}
-        <div className="pointer-events-none select-none" style={{ filter: 'blur(25px)', opacity: 0.3 }}>
-          {children}
-        </div>
-
-        {/* Lock Overlay */}
-        <div className={`absolute inset-0 ${bgColor} backdrop-blur-sm flex flex-col items-center justify-center p-8 rounded-lg border-2 ${borderColor}`}>
-          <div className="text-center space-y-4 max-w-md">
-            {/* Lock Icon */}
-            <div className="flex justify-center">
-              <svg
-                className={`w-12 h-12 ${isLightBackground ? 'text-[#1A1A1A]' : 'text-white'}`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style={{ strokeWidth: isLightBackground ? 2.5 : 2 }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={isLightBackground ? 2.5 : 2}
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </div>
-
-            <div className="space-y-2">
-              <p className={`${textColor} font-semibold text-lg ${isLightBackground ? 'drop-shadow-sm' : ''}`}>
-                {unlockMessage}
-              </p>
-              <p className={`${isLightBackground ? 'text-[#4A4A4A]' : 'text-white/70'} text-sm ${isLightBackground ? 'drop-shadow-sm' : ''}`}>
-                This content contains company-specific information and requires password access.
-              </p>
-            </div>
-
-            <button
-              onClick={() => setShowPasswordModal(true)}
-              className={`${isLightBackground ? 'bg-[#1A1A1A] text-white hover:bg-[#333333]' : 'bg-white text-[#1A1A1A] hover:bg-white/90'} px-6 py-3 rounded-lg font-medium transition-colors`}
+      {/* Lock UI - No content rendered, just the lock card */}
+      <div className="flex flex-col items-center justify-center py-16 md:py-20">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200/50 px-8 py-12 max-w-md w-full text-center">
+          {/* Lock Icon */}
+          <div className="flex justify-center mb-6">
+            <svg
+              className="w-16 h-16 text-gray-900"
+              fill="currentColor"
+              viewBox="0 0 24 24"
             >
-              Enter Password
-            </button>
+              <path
+                fillRule="evenodd"
+                d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+                clipRule="evenodd"
+              />
+            </svg>
           </div>
+
+          {/* Heading */}
+          <h3 className="text-gray-900 font-bold text-lg mb-3">
+            {unlockMessage}
+          </h3>
+
+          {/* Descriptive Text */}
+          <p className="text-gray-600 text-sm mb-6 leading-relaxed">
+            This content contains company-specific information and requires password access.
+          </p>
+
+          {/* Unlock Link */}
+          <button
+            onClick={() => setShowPasswordModal(true)}
+            className="text-[var(--accent-teal)] hover:text-[var(--accent-teal-700)] underline text-sm font-medium transition-colors"
+          >
+            Unlock
+          </button>
         </div>
       </div>
 
@@ -261,7 +262,12 @@ export default function LockedContent({
                         }
                       }}
                       placeholder="Enter password"
-                      className={`w-full px-4 py-3 rounded-lg border-2 ${error ? 'border-red-400' : success ? 'border-green-400' : borderColor} ${isLightBackground ? 'bg-white text-[#1A1A1A]' : 'bg-white/10 text-white'} placeholder:${isLightBackground ? 'text-[#999999]' : 'text-white/50'} focus:outline-none focus:border-[var(--accent-teal)] transition-colors`}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${error
+                          ? 'border-red-400 focus:border-red-500'
+                          : success
+                            ? 'border-green-400 focus:border-green-500'
+                            : `${borderColor} focus:border-[var(--accent-teal)]`
+                        } ${isLightBackground ? 'bg-white text-[#1A1A1A]' : 'bg-white/10 text-white'} ${isLightBackground ? 'placeholder:text-[#999999]' : 'placeholder:text-white/50'} focus:outline-none`}
                       autoFocus
                       disabled={success}
                     />
