@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "predev": "rm -rf .next || true",
-    "dev": "next dev -H 127.0.0.1",
+    "dev": "next dev",
     "dev:clean": "rm -rf .next && next dev -H 127.0.0.1",
     "dev:restart": "pkill -f 'next dev' || true; sleep 2; rm -rf .next && next dev -H 127.0.0.1",
     "build": "next build",

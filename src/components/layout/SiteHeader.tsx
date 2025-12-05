@@ -226,7 +226,7 @@ export default function SiteHeader() {
           </div>
           {/* Resume Button - positioned absolutely on the right */}
           <a
-            href="/resume"
+            href="/resume.html"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackResumeDownload()}

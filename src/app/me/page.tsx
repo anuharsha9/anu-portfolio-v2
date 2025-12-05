@@ -173,7 +173,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">03</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">02</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -525,7 +525,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">04</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">03</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -597,7 +597,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">05</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">04</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -896,7 +896,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">06</span>
+                <span className="text-[#666666] text-sm font-mono uppercase tracking-wider">05</span>
                 <div className="h-px flex-1 bg-black/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>
@@ -1018,7 +1018,7 @@ export default function AboutPage() {
             {/* Section Header */}
             <div className="space-y-4 text-center">
               <div className="flex items-baseline gap-4 justify-center">
-                <span className="text-white/40 text-sm font-mono uppercase tracking-wider">07</span>
+                <span className="text-white/40 text-sm font-mono uppercase tracking-wider">06</span>
                 <div className="h-px flex-1 bg-white/10 max-w-md"></div>
                 <div className="h-px w-12 bg-[var(--accent-teal)]"></div>
               </div>

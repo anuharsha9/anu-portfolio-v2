@@ -27,6 +27,41 @@
             padding: 0.7in;
         }
 
+        /* Download Button */
+        .download-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #00A2B7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 12pt;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-family: "Times New Roman", Times, serif;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+
+        .download-button:hover {
+            background-color: #008a9c;
+        }
+
+        .download-button:active {
+            background-color: #007080;
+        }
+
+        @media print {
+            .download-button {
+                display: none;
+            }
+        }
+
         /* Contact Header */
         .header {
             text-align: center;
@@ -229,6 +264,11 @@
     </style>
 </head>
 <body>
+    <!-- Download PDF Button -->
+    <a href="/assets/Anuja-Nimmagadda-Resume-2025.pdf" download class="download-button">
+        Download PDF
+    </a>
+
     <!-- Header -->
     <div class="header">
         <div class="name">ANUJA HARSHA NIMMAGADDA</div>

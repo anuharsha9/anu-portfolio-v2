@@ -194,7 +194,7 @@ export default function MobileMenu({ isLandingPage = false }: MobileMenuProps) {
                   </Link>
 
                   <a
-                    href="/resume"
+                    href="/resume.html"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {

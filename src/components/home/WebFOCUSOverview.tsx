@@ -211,7 +211,7 @@ export default function WebFOCUSOverview() {
                 <div className="mb-3">
                   <ScheduleRangeVisual />
                 </div>
-                <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">schedules processed per day across customer deployments</p>
+                <p className="text-sm md:text-base text-[var(--text-muted-light)] font-medium leading-snug">schedules processed per week across customer deployments</p>
               </div>
             </div>
             <div className="relative bg-gradient-to-br from-black/5 to-black/3 rounded-2xl p-6 md:p-8 border border-refined-light border-t-2 border-t-[var(--accent-teal)]/30 hover:-translate-y-1 hover:border-[var(--accent-teal)]/40 hover:bg-gradient-to-br hover:from-black/8 hover:to-black/5 hover:shadow-[0_8px_16px_rgba(0,162,183,0.075)] transition-all duration-300 group overflow-hidden">

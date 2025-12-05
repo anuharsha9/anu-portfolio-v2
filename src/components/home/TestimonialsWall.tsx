@@ -26,7 +26,7 @@ const TestimonialTile = memo(function TestimonialTile({
   top3Shortest: number[]
 }) {
   const staggerDelay = index * 0.08
-  
+
   // Create more visual variety for Pinterest feel with varied sizes
   // SHORTER quotes get LARGER text, LONGER quotes get SMALLER text
   // More granular size categories for better visual play
@@ -35,42 +35,42 @@ const TestimonialTile = memo(function TestimonialTile({
   const isMediumQuote = wordCount > 30 && wordCount <= 50  // Large text
   const isLongQuote = wordCount > 50 && wordCount <= 75  // Medium text
   const isVeryLongQuote = wordCount > 75  // Small text
-  
+
   // Varied padding for more organic mosaic - scaled down
   const paddingClass = isVeryShortQuote
     ? 'p-3 md:p-4'
     : isShortQuote
-    ? 'p-4 md:p-5'
-    : isMediumQuote
-    ? 'p-5 md:p-6'
-    : isLongQuote
-    ? 'p-6 md:p-7'
-    : 'p-7 md:p-8'
-  
+      ? 'p-4 md:p-5'
+      : isMediumQuote
+        ? 'p-5 md:p-6'
+        : isLongQuote
+          ? 'p-6 md:p-7'
+          : 'p-7 md:p-8'
+
   // Varied typography sizes - INVERSE relationship with more granular steps (scaled down)
   const textSize = isVeryShortQuote
     ? 'text-xl md:text-2xl lg:text-3xl'  // Very short quotes get extra large text
     : isShortQuote
-    ? 'text-lg md:text-xl lg:text-2xl'  // Short quotes get large text
-    : isMediumQuote
-    ? 'text-base md:text-lg lg:text-xl'  // Medium quotes get medium-large text
-    : isLongQuote
-    ? 'text-sm md:text-base lg:text-lg'  // Long quotes get medium text
-    : 'text-xs md:text-sm lg:text-base'  // Very long quotes get smallest text
-  
+      ? 'text-lg md:text-xl lg:text-2xl'  // Short quotes get large text
+      : isMediumQuote
+        ? 'text-base md:text-lg lg:text-xl'  // Medium quotes get medium-large text
+        : isLongQuote
+          ? 'text-sm md:text-base lg:text-lg'  // Long quotes get medium text
+          : 'text-xs md:text-sm lg:text-base'  // Very long quotes get smallest text
+
   // Varied font weights - only make the 3 shortest quotes bold
   // Use memoized top3Shortest
   const isOneOfShortest = top3Shortest.includes(wordCount)
-  
+
   // Vijay Raman gets extra bold weight as leadership recommendation
   const isVijayRaman = rec.name === 'Vijay Raman'
-  
+
   const fontWeight = isVijayRaman
     ? 'font-bold'  // Extra bold for leadership recommendation
-    : isOneOfShortest 
-    ? 'font-semibold' 
-    : 'font-normal'
-  
+    : isOneOfShortest
+      ? 'font-semibold'
+      : 'font-normal'
+
   // Add random offset for uneven tops - create organic feel at top and bottom
   // Use index to create pseudo-random but consistent offsets
   // Create more variation: some tiles start higher, some lower
@@ -83,9 +83,9 @@ const TestimonialTile = memo(function TestimonialTile({
       initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
       whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}
       viewport={{ once: true, amount: 0.15, margin: '0px 0px -50px 0px' }}
-      style={{ 
-        willChange: 'opacity, transform', 
-        opacity: 0, 
+      style={{
+        willChange: 'opacity, transform',
+        opacity: 0,
         visibility: 'hidden',
         marginTop: `${topOffset}px`,
       }}
@@ -102,7 +102,7 @@ const TestimonialTile = memo(function TestimonialTile({
       >
 
         {/* Opening quote icon */}
-        <div className="relative mb-2" style={{ 
+        <div className="relative mb-2" style={{
           paddingLeft: isVeryShortQuote || isShortQuote ? '1.3em' : '1.1em',
         }}>
           <TopQuoteIcon
@@ -122,13 +122,13 @@ const TestimonialTile = memo(function TestimonialTile({
           <p
             className={`text-white leading-relaxed font-sans flex-1 ${textSize} ${fontWeight} relative`}
             style={{
-              lineHeight: isVeryShortQuote || isShortQuote 
-                ? '1.3' 
-                : isMediumQuote 
-                ? '1.5' 
-                : isLongQuote 
-                ? '1.6' 
-                : '1.7',
+              lineHeight: isVeryShortQuote || isShortQuote
+                ? '1.3'
+                : isMediumQuote
+                  ? '1.5'
+                  : isLongQuote
+                    ? '1.6'
+                    : '1.7',
               paddingRight: '1.2em',
               paddingBottom: '2.4em',
               paddingLeft: isVeryShortQuote || isShortQuote ? '0.2em' : '0.1em',
@@ -179,11 +179,11 @@ export default function TestimonialsWall({
     if (!recommendations || recommendations.length === 0) return []
     return recommendations.map(r => r.quote.trim().split(/\s+/).filter(word => word.length > 0).length)
   }, [recommendations])
-  
+
   const sortedCounts = useMemo(() => {
     return [...wordCounts].sort((a, b) => a - b)
   }, [wordCounts])
-  
+
   const top3Shortest = useMemo(() => {
     return sortedCounts.slice(0, 3)
   }, [sortedCounts])
@@ -199,14 +199,14 @@ export default function TestimonialsWall({
     >
       {/* Section Divider */}
       <SectionDivider isLightBackground={false} />
-      
+
       {/* Subtle Logo Watermark - Top Right Corner */}
       <div className="absolute top-8 right-8 opacity-[0.02] pointer-events-none hidden lg:block">
         <div className="w-24 h-24">
           <SignatureLogo className="w-full h-full text-black" />
         </div>
       </div>
-      
+
       <div className="max-w-[1125px] mx-auto px-6 md:px-8 lg:px-10">
         {/* Section Title */}
         <motion.div
@@ -219,13 +219,16 @@ export default function TestimonialsWall({
           }}
           className="mb-10 md:mb-12"
         >
-          <h2 className="text-[var(--text-primary-light)] text-xl md:text-2xl lg:text-3xl font-serif leading-tight tracking-tight">
-            People I&apos;ve worked with say…
-          </h2>
+          <div className="text-center space-y-2">
+            <h2 className="text-white text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
+              People I&apos;ve worked with say…
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
+            </h2>
+          </div>
         </motion.div>
 
         {/* Masonry Layout - Enhanced Pinterest style with more variation */}
-        <div 
+        <div
           className="columns-1 md:columns-2 lg:columns-3 gap-3 md:gap-4 lg:gap-5"
           style={{
             columnFill: 'balance' as const,
@@ -242,7 +245,7 @@ export default function TestimonialsWall({
           ))}
         </div>
       </div>
-      
+
       {/* Section Divider at bottom */}
       <div className="pt-8 md:pt-10">
         <SectionDivider isLightBackground={true} />
