@@ -14,6 +14,7 @@ import EntryPointTransformation from './EntryPointTransformation'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
 import SensitiveImage from './SensitiveImage'
 import LockedContent from './LockedContent'
+import { getTheme } from '@/lib/design-system'
 
 
 interface SectionBlockProps {
@@ -297,19 +298,17 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     setLightboxImage(null)
   }
 
-  // Use dark colors for light backgrounds, light colors for dark backgrounds
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[var(--text-muted-light)]' : 'text-white/70'
+  // Use design system for theming
+  const t = getTheme(isLightBackground)
+  const textColor = t.text
+  const mutedColor = t.textMuted
   const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
-  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
-  const dividerColor = isLightBackground ? 'bg-black/10' : 'bg-white/10'
+  const bgColor = t.bg
+  const dividerColor = t.divider
 
   // Light shadow for depth, minimal design
-  const imageShadow = isLightBackground
-    ? 'elevation-sm'
-    : ''
+  const imageShadow = isLightBackground ? 'elevation-sm' : ''
   const imageBorderRadius = 'rounded'
-  // No outline for cleaner look
   const imageOutline = ''
 
   const images = section.images || []

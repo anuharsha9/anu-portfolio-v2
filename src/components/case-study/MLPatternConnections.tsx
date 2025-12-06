@@ -1,95 +1,54 @@
 'use client'
 
 import Link from 'next/link'
+import { getTheme } from '@/lib/design-system'
 
 interface MLPatternConnectionsProps {
   isLightBackground?: boolean
 }
 
 export default function MLPatternConnections({ isLightBackground = false }: MLPatternConnectionsProps) {
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
-  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
-  const accentColor = 'var(--accent-teal)'
+  const t = getTheme(isLightBackground)
+  const borderClass = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
 
   const patterns = [
-    {
-      id: 'ml',
-      name: 'ML Functions',
-      pattern: '4-step guided flows',
-      description: 'Progressive disclosure for complex ML workflows',
-      link: null,
-    },
-    {
-      id: 'iq',
-      name: 'IQ Plugin',
-      pattern: 'Applied ML patterns to DSML',
-      description: '4-step flow pattern became foundation for broader ML ecosystem',
-      link: '/work/iq-plugin',
-    },
-    {
-      id: 'rc',
-      name: 'ReportCaster',
-      pattern: 'Right-click entry points',
-      description: 'Natural platform patterns for workflow initiation',
-      link: '/work/reportcaster',
-    },
+    { id: 'ml', name: 'ML Functions', pattern: '4-step guided flows', description: 'Progressive disclosure for complex ML workflows', link: null },
+    { id: 'iq', name: 'IQ Plugin', pattern: 'Applied ML patterns to DSML', description: '4-step flow pattern became foundation for broader ML ecosystem', link: '/work/iq-plugin' },
+    { id: 'rc', name: 'ReportCaster', pattern: 'Right-click entry points', description: 'Natural platform patterns for workflow initiation', link: '/work/reportcaster' },
   ]
 
+  const CardContent = ({ name, pattern, description }: { name: string; pattern: string; description: string }) => (
+    <div className="space-y-3">
+      <h4 className={`${t.text} text-lg font-semibold`}>{name}</h4>
+      <p className={`${t.textAccent} text-sm font-medium`}>{pattern}</p>
+      <p className={`${t.textMuted} text-xs leading-relaxed`}>{description}</p>
+    </div>
+  )
+
   return (
-    <div className={`${bgColor} p-8 md:p-12`}>
+    <div className={`${t.bg} p-8 md:p-12`}>
       <div className="space-y-8">
-        {/* Header */}
         <div className="text-center space-y-3">
-          <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>
-            Patterns That Became Reusable
-          </h3>
-          <p className={`${mutedColor} text-base md:text-lg max-w-3xl mx-auto`}>
+          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>Patterns That Became Reusable</h3>
+          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>
             The patterns I developed in ML Functions became part of my design vocabulary and directly influenced my other projects.
           </p>
         </div>
 
-        {/* 3 Side-by-Side Tiles */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {patterns.map((pattern) => {
-            const content = (
-              <div className="space-y-3">
-                <h4 className={`${textColor} text-lg font-semibold`}>{pattern.name}</h4>
-                <p className={`${textColor} text-sm font-medium`} style={{ color: accentColor }}>
-                  {pattern.pattern}
-                </p>
-                <p className={`${mutedColor} text-xs leading-relaxed`}>
-                  {pattern.description}
-                </p>
+          {patterns.map((p) =>
+            p.link ? (
+              <Link key={p.id} href={p.link} className={`${t.cardBg} rounded-lg border ${borderClass} p-6 md:p-8 h-full block hover-lift transition-all duration-normal`}>
+                <CardContent {...p} />
+              </Link>
+            ) : (
+              <div key={p.id} className={`${t.cardBg} rounded-lg border ${borderClass} elevation-sm p-6 md:p-8 h-full`}>
+                <CardContent {...p} />
               </div>
             )
-
-            if (pattern.link) {
-              return (
-                <Link
-                  key={pattern.id}
-                  href={pattern.link}
-                  className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border ${borderColor} p-6 md:p-8 h-full block hover-lift transition-all duration-normal`}
-                >
-                  {content}
-                </Link>
-              )
-            }
-
-            return (
-              <div
-                key={pattern.id}
-                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border ${borderColor} elevation-sm p-6 md:p-8 h-full`}
-              >
-                {content}
-              </div>
-            )
-          })}
+          )}
         </div>
-
       </div>
     </div>
   )
 }
-

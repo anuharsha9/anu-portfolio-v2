@@ -1,15 +1,14 @@
 'use client'
 
+import { getTheme } from '@/lib/design-system'
+
 interface CompetitiveAnalysisBreakdownProps {
   isLightBackground?: boolean
 }
 
 export default function CompetitiveAnalysisBreakdown({ isLightBackground = false }: CompetitiveAnalysisBreakdownProps) {
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
-  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
-  const accentColor = 'var(--accent-teal)'
+  const t = getTheme(isLightBackground)
+  const subtleBorder = isLightBackground ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'
 
   const insights = {
     studied: [
@@ -17,84 +16,64 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
       { tool: 'Tableau', note: 'Powerful Python/R integration, but ML workflows feel bolted-on' },
       { tool: 'Qlik Sense', note: 'Very powerful analytics, but expert-first with steep learning curve' },
     ],
-    adopted: [
-      'Strong visuals',
-      'Keeping ML inside the main analytics workflow',
-    ],
-    avoided: [
-      'Script-first setups',
-      'Jargon-heavy defaults',
-      'Overloaded control-heavy screens',
-    ],
-    different: [
-      'Right-click dataset entry (natural WebFOCUS pattern)',
-      'A guided 4-step flow (progressive disclosure)',
-      'Progressive disclosure of hyperparameters (optional Step 4)',
-      'Inline teaching text (educate while enabling)',
-    ],
+    adopted: ['Strong visuals', 'Keeping ML inside the main analytics workflow'],
+    avoided: ['Script-first setups', 'Jargon-heavy defaults', 'Overloaded control-heavy screens'],
+    different: ['Right-click dataset entry (natural WebFOCUS pattern)', 'A guided 4-step flow (progressive disclosure)', 'Progressive disclosure of hyperparameters (optional Step 4)', 'Inline teaching text (educate while enabling)'],
   }
 
   return (
-    <div className={`${bgColor} rounded-lg border ${borderColor} p-6 md:p-8`}>
+    <div className={`${t.bg} rounded-lg border ${t.border} p-6 md:p-8`}>
       <div className="space-y-3">
-        {/* Header */}
         <div className="text-center space-y-1">
-          <h3 className={`${textColor} text-xl md:text-2xl font-serif`}>
-            Competitive Analysis: What We Learned
-          </h3>
-          <p className={`${mutedColor} text-sm md:text-base max-w-2xl mx-auto`}>
+          <h3 className={`${t.text} text-xl md:text-2xl font-serif`}>Competitive Analysis: What We Learned</h3>
+          <p className={`${t.textMuted} text-sm md:text-base max-w-2xl mx-auto`}>
             Deep study of Power BI, Tableau, and Qlik Sense revealed what worked, what failed, and where we could differentiate.
           </p>
         </div>
 
-        {/* Compact Grid Layout - 4 columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
-          {/* What We Studied */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '40' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-2`}>What We Studied</h4>
+          <div className={`${t.cardBg} rounded-lg border-2 p-3`} style={{ borderColor: `${t.accentVar}40` }}>
+            <h4 className={`${t.text} text-sm font-semibold mb-2`}>What We Studied</h4>
             <div className="space-y-1">
-              {insights.studied.map((item, idx) => (
-                <div key={idx} className={`${bgColor} rounded p-2 border ${borderColor}`}>
-                  <p className={`${textColor} text-xs font-semibold mb-0.5`}>{item.tool}</p>
-                  <p className={`${mutedColor} text-xs leading-tight`}>{item.note}</p>
+              {insights.studied.map((item, i) => (
+                <div key={i} className={`${t.bg} rounded p-2 border ${t.border}`}>
+                  <p className={`${t.text} text-xs font-semibold mb-0.5`}>{item.tool}</p>
+                  <p className={`${t.textMuted} text-xs leading-tight`}>{item.note}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* What We Adopted */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '60' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-2`} style={{ color: accentColor }}>What We Adopted</h4>
+          <div className={`${t.cardBg} rounded-lg border-2 p-3`} style={{ borderColor: `${t.accentVar}60` }}>
+            <h4 className={`text-sm font-semibold mb-2 ${t.textAccent}`}>What We Adopted</h4>
             <ul className="space-y-1">
-              {insights.adopted.map((item, idx) => (
-                <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
-                  <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">✓</span>
+              {insights.adopted.map((item, i) => (
+                <li key={i} className={`${t.textMuted} text-xs flex items-start gap-1.5`}>
+                  <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>✓</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* What We Avoided */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: mutedColor.replace('text-', '').includes('666') ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-2`}>What We Avoided</h4>
+          <div className={`${t.cardBg} rounded-lg border-2 p-3`} style={{ borderColor: subtleBorder }}>
+            <h4 className={`${t.text} text-sm font-semibold mb-2`}>What We Avoided</h4>
             <ul className="space-y-1">
-              {insights.avoided.map((item, idx) => (
-                <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
-                  <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">×</span>
+              {insights.avoided.map((item, i) => (
+                <li key={i} className={`${t.textMuted} text-xs flex items-start gap-1.5`}>
+                  <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>×</span>
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* What We Did Differently */}
-          <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-3`} style={{ borderColor: accentColor + '60' }}>
-            <h4 className={`${textColor} text-sm font-semibold mb-2`} style={{ color: accentColor }}>What We Did Differently</h4>
+          <div className={`${t.cardBg} rounded-lg border-2 p-3`} style={{ borderColor: `${t.accentVar}60` }}>
+            <h4 className={`text-sm font-semibold mb-2 ${t.textAccent}`}>What We Did Differently</h4>
             <ul className="space-y-1">
-              {insights.different.map((item, idx) => (
-                <li key={idx} className={`${mutedColor} text-xs flex items-start gap-1.5`}>
-                  <span className="text-[var(--accent-teal)] mt-0.5 flex-shrink-0">→</span>
+              {insights.different.map((item, i) => (
+                <li key={i} className={`${t.textMuted} text-xs flex items-start gap-1.5`}>
+                  <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>→</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -105,4 +84,3 @@ export default function CompetitiveAnalysisBreakdown({ isLightBackground = false
     </div>
   )
 }
-

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import LockedContent from './LockedContent'
 import ImageLightbox from './ImageLightbox'
+import { getTheme } from '@/lib/design-system'
 
 interface DesignSystemShowcaseProps {
   isLightBackground?: boolean
@@ -42,11 +43,12 @@ export default function DesignSystemShowcase({ isLightBackground = true, caseStu
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; title?: string } | null>(null)
   const [lightboxImages, setLightboxImages] = useState<Array<{ src: string; alt: string; title?: string }>>([])
   const [lightboxCurrentIndex, setLightboxCurrentIndex] = useState(0)
+  const t = getTheme(isLightBackground)
 
   const openLightbox = (src: string, alt: string, title?: string, index?: number) => {
     setLightboxImage({ src, alt, title })
-    setLightboxImages(designSystemImages.map(img => ({ src: img.src, alt: img.alt, title: img.title })))
-    setLightboxCurrentIndex(index ?? designSystemImages.findIndex(img => img.src === src))
+    setLightboxImages(designSystemImages.map((img) => ({ src: img.src, alt: img.alt, title: img.title })))
+    setLightboxCurrentIndex(index ?? designSystemImages.findIndex((img) => img.src === src))
   }
 
   const closeLightbox = () => {
@@ -56,35 +58,17 @@ export default function DesignSystemShowcase({ isLightBackground = true, caseStu
 
   const handleLightboxNavigate = (index: number) => {
     setLightboxCurrentIndex(index)
-    if (lightboxImages[index]) {
-      setLightboxImage(lightboxImages[index])
-    }
+    if (lightboxImages[index]) setLightboxImage(lightboxImages[index])
   }
 
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
-  const bgColor = isLightBackground ? 'bg-white' : 'bg-black/10'
-
   return (
-    <LockedContent
-      password="anu-access"
-      caseStudySlug={caseStudySlug}
-      unlockMessage="Password required to view design system documentation"
-      isLightBackground={isLightBackground}
-    >
+    <LockedContent password="anu-access" caseStudySlug={caseStudySlug} unlockMessage="Password required to view design system documentation" isLightBackground={isLightBackground}>
       <div className="space-y-6">
-        {/* Subtle Header - Not Prominent */}
         <div className="text-center space-y-2">
-          <h3 className={`${textColor} text-lg md:text-xl font-serif font-medium`}>
-            Design System Components
-          </h3>
-          <p className={`${mutedColor} text-sm md:text-base max-w-2xl mx-auto`}>
-            Shared design system used across all three case studies
-          </p>
+          <h3 className={`${t.text} text-lg md:text-xl font-serif font-medium`}>Design System Components</h3>
+          <p className={`${t.textMuted} text-sm md:text-base max-w-2xl mx-auto`}>Shared design system used across all three case studies</p>
         </div>
 
-        {/* Grid of Design System Images */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {designSystemImages.map((image, index) => (
             <motion.div
@@ -93,45 +77,21 @@ export default function DesignSystemShowcase({ isLightBackground = true, caseStu
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.4, delay: index * 0.03 }}
-              className={`${bgColor} rounded-lg border ${borderColor} p-3 cursor-pointer overflow-hidden group hover:shadow-lg hover:border-[var(--accent-teal)]/30`}
-              whileHover={{ 
-                scale: 1.02,
-                y: -2
-              }}
+              className={`${t.cardBg} rounded-lg border ${t.border} p-3 cursor-pointer overflow-hidden group hover:shadow-lg hover:border-[var(--accent-teal)]/30`}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => openLightbox(image.src, image.alt, image.title, index)}
             >
               <div className="relative w-full aspect-square mb-2 bg-black/5 rounded overflow-hidden">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
+                <Image src={image.src} alt={image.alt} fill className="object-contain group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw" />
               </div>
-              <p className={`${textColor} text-xs font-medium text-center truncate group-hover:text-[var(--accent-teal)] transition-colors`}>
-                {image.title}
-              </p>
+              <p className={`${t.text} text-xs font-medium text-center truncate group-hover:text-[var(--accent-teal)] transition-colors`}>{image.title}</p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Image Lightbox */}
-      {lightboxImage && (
-        <ImageLightbox
-          isOpen={!!lightboxImage}
-          onClose={closeLightbox}
-          imageSrc={lightboxImage.src}
-          imageAlt={lightboxImage.alt}
-          imageCaption={lightboxImage.title}
-          images={lightboxImages}
-          currentIndex={lightboxCurrentIndex}
-          onNavigate={handleLightboxNavigate}
-        />
-      )}
+      {lightboxImage && <ImageLightbox isOpen={!!lightboxImage} onClose={closeLightbox} imageSrc={lightboxImage.src} imageAlt={lightboxImage.alt} imageCaption={lightboxImage.title} images={lightboxImages} currentIndex={lightboxCurrentIndex} onNavigate={handleLightboxNavigate} />}
     </LockedContent>
   )
 }
-

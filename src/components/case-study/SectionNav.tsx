@@ -14,25 +14,19 @@ export default function SectionNav({ sections }: SectionNavProps) {
   const [showLeftIndicator, setShowLeftIndicator] = useState(false)
   const [showRightIndicator, setShowRightIndicator] = useState(false)
   const [currentBgIsLight, setCurrentBgIsLight] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const [hasShadow, setHasShadow] = useState(false)
+  const [mainNavHeight, setMainNavHeight] = useState(72)
   const navRef = useRef<HTMLElement>(null)
 
-  const [hasShadow, setHasShadow] = useState(false)
-
-  // Show on any scroll, just like main nav (carbon copy behavior)
   useScrollManager((scrollY) => {
-    // Show on any scroll (not just past hero) - matches main nav behavior
     const hasScrolled = scrollY > 0
     setIsVisible(hasScrolled)
     setHasShadow(hasScrolled)
   }, [])
 
-  // Use same background detection as main nav (carbon copy)
   useScrollManager((scrollY) => {
-    // Detect background color based on what's behind the section nav (same logic as main nav)
     if (typeof window !== 'undefined' && scrollY > 0 && navRef.current) {
       const navRect = navRef.current.getBoundingClientRect()
-      // Sample multiple points to get a better sense of the background
       const samplePoints = [
         { x: window.innerWidth / 4, y: navRect.top - 5 },
         { x: window.innerWidth / 2, y: navRect.top - 5 },
@@ -42,10 +36,9 @@ export default function SectionNav({ sections }: SectionNavProps) {
       let lightCount = 0
       let darkCount = 0
 
-      samplePoints.forEach(point => {
+      samplePoints.forEach((point) => {
         const elementBelow = document.elementFromPoint(point.x, point.y)
         if (elementBelow) {
-          // Walk up the DOM tree to find the actual background
           let currentElement: Element | null = elementBelow
           let bgColor = ''
 
@@ -54,10 +47,8 @@ export default function SectionNav({ sections }: SectionNavProps) {
             bgColor = computedStyle.backgroundColor
 
             if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-              const hasLightSurface = currentElement.classList.contains('surface-light') ||
-                currentElement.classList.contains('surface-light-alt')
-              const hasDarkSurface = currentElement.classList.contains('surface-dark') ||
-                currentElement.classList.contains('surface-dark-alt')
+              const hasLightSurface = currentElement.classList.contains('surface-light') || currentElement.classList.contains('surface-light-alt')
+              const hasDarkSurface = currentElement.classList.contains('surface-dark') || currentElement.classList.contains('surface-dark-alt')
 
               if (hasLightSurface) {
                 lightCount++
@@ -70,16 +61,9 @@ export default function SectionNav({ sections }: SectionNavProps) {
             } else {
               const rgb = bgColor.match(/\d+/g)
               if (rgb && rgb.length >= 3) {
-                const r = parseInt(rgb[0])
-                const g = parseInt(rgb[1])
-                const b = parseInt(rgb[2])
-                const brightness = (r * 299 + g * 587 + b * 114) / 1000
-
-                if (brightness > 128) {
-                  lightCount++
-                } else {
-                  darkCount++
-                }
+                const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
+                if (brightness > 128) lightCount++
+                else darkCount++
               }
               break
             }
@@ -87,43 +71,30 @@ export default function SectionNav({ sections }: SectionNavProps) {
         }
       })
 
-      // Determine if background is predominantly light or dark
       setCurrentBgIsLight(lightCount > darkCount)
     } else if (scrollY === 0) {
-      // At top of page, default to dark
       setCurrentBgIsLight(false)
     }
   }, [])
 
-  // Track active section
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -60% 0px',
-      threshold: 0,
-    }
+    const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id)
-        }
+        if (entry.isIntersecting) setActiveSection(entry.target.id)
       })
     }, observerOptions)
 
     sections.forEach((section) => {
       const element = document.getElementById(section.id)
-      if (element) {
-        observer.observe(element)
-      }
+      if (element) observer.observe(element)
     })
 
     return () => {
       sections.forEach((section) => {
         const element = document.getElementById(section.id)
-        if (element) {
-          observer.unobserve(element)
-        }
+        if (element) observer.unobserve(element)
       })
       observer.disconnect()
     }
@@ -133,26 +104,19 @@ export default function SectionNav({ sections }: SectionNavProps) {
     if (typeof window === 'undefined') return
     const element = document.getElementById(sectionId)
     if (element) {
-      // Calculate actual nav heights dynamically
       const header = document.querySelector('header')
       const sectionNav = navRef.current
-      const mainNavHeight = header ? header.getBoundingClientRect().height : 72 // Main nav is now taller
-      const sectionNavHeight = sectionNav ? sectionNav.getBoundingClientRect().height : 48 // Section nav is now shorter
-      const offset = mainNavHeight + sectionNavHeight + 20 // Extra padding
+      const mainNav = header ? header.getBoundingClientRect().height : 72
+      const secNav = sectionNav ? sectionNav.getBoundingClientRect().height : 48
+      const offset = mainNav + secNav + 20
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - offset
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      })
-
-      // Update URL hash
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
       window.history.pushState(null, '', `#${sectionId}`)
     }
   }
 
-  // Check scroll indicators
   useEffect(() => {
     if (!isVisible) return
 
@@ -169,14 +133,8 @@ export default function SectionNav({ sections }: SectionNavProps) {
 
     checkScrollIndicators()
     window.addEventListener('resize', checkScrollIndicators)
-
-    return () => {
-      window.removeEventListener('resize', checkScrollIndicators)
-    }
+    return () => window.removeEventListener('resize', checkScrollIndicators)
   }, [isVisible])
-
-  // Calculate main nav height dynamically
-  const [mainNavHeight, setMainNavHeight] = useState(72) // Main nav is now taller
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -192,12 +150,9 @@ export default function SectionNav({ sections }: SectionNavProps) {
     updateNavHeight()
     window.addEventListener('resize', updateNavHeight)
 
-    // Also check when header visibility changes
     const observer = new MutationObserver(updateNavHeight)
     const header = document.querySelector('header')
-    if (header) {
-      observer.observe(header, { attributes: true, attributeFilter: ['class', 'style'] })
-    }
+    if (header) observer.observe(header, { attributes: true, attributeFilter: ['class', 'style'] })
 
     return () => {
       window.removeEventListener('resize', updateNavHeight)
@@ -207,31 +162,10 @@ export default function SectionNav({ sections }: SectionNavProps) {
 
   if (!isVisible) return null
 
-  const bgStyle = currentBgIsLight
-    ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' }
-    : { backgroundColor: 'rgba(10, 10, 11, 0.85)' }
-
-  const textColor = currentBgIsLight ? 'text-[var(--text-primary-light)]' : 'text-white'
-  const mutedColor = currentBgIsLight ? 'text-[var(--text-muted-light)]' : 'text-white/70'
-  const borderColor = currentBgIsLight ? 'border-black/10' : 'border-white/20'
+  const bgStyle = currentBgIsLight ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' } : { backgroundColor: 'rgba(10, 10, 11, 0.85)' }
 
   return (
-    <nav
-      ref={navRef}
-      className={`fixed left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible
-        ? 'opacity-100 translate-y-0 h-auto'
-        : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'
-        } ${hasShadow ? 'shadow-lg' : ''}`}
-      style={{
-        top: `${mainNavHeight}px`,
-        zIndex: 9999, // Just below main nav (10000)
-        isolation: 'isolate',
-        position: 'fixed',
-        ...bgStyle,
-        borderBottom: isVisible ? (currentBgIsLight ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent'
-      }}
-      aria-label="Case study section navigation"
-    >
+    <nav ref={navRef} className={`fixed left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0 h-auto' : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'} ${hasShadow ? 'shadow-lg' : ''}`} style={{ top: `${mainNavHeight}px`, zIndex: 9999, isolation: 'isolate', position: 'fixed', ...bgStyle, borderBottom: isVisible ? (currentBgIsLight ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent' }} aria-label="Case study section navigation">
       <div className="relative">
         <div
           className="overflow-x-auto scrollbar-hide"
@@ -246,7 +180,6 @@ export default function SectionNav({ sections }: SectionNavProps) {
           <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-1 sm:py-1.5 min-w-max max-w-[1200px] mx-auto justify-center">
             {sections.map((section) => {
               const isActive = activeSection === section.id
-              // Extract first word from section title - show only first word on all screen sizes
               const firstWord = section.title.split(' ')[0]
               const firstLetter = firstWord.charAt(0)
               const restOfWord = firstWord.slice(1)
@@ -260,35 +193,22 @@ export default function SectionNav({ sections }: SectionNavProps) {
                       scrollToSection(section.id)
                     }
                   }}
-                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none ${isActive
-                    ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0`
-                    : currentBgIsLight
-                      ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0'
-                      : 'text-white/80 hover:text-white hover:bg-white/10 border-0'
-                    }`}
+                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none ${isActive ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0` : currentBgIsLight ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0' : 'text-white/80 hover:text-white hover:bg-white/10 border-0'}`}
                   aria-label={`Navigate to ${section.title}`}
                   aria-current={isActive ? 'true' : 'false'}
                 >
-                  <span><span className="font-bold">{firstLetter}</span>{restOfWord}</span>
+                  <span>
+                    <span className="font-bold">{firstLetter}</span>
+                    {restOfWord}
+                  </span>
                 </button>
               )
             })}
           </div>
         </div>
 
-        {/* Scroll indicators */}
-        {showLeftIndicator && (
-          <div
-            className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r to-transparent pointer-events-none"
-            style={currentBgIsLight ? { background: 'linear-gradient(to right, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to right, rgba(10, 10, 11, 0.95), transparent)' }}
-          ></div>
-        )}
-        {showRightIndicator && (
-          <div
-            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l to-transparent pointer-events-none"
-            style={currentBgIsLight ? { background: 'linear-gradient(to left, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to left, rgba(10, 10, 11, 0.95), transparent)' }}
-          ></div>
-        )}
+        {showLeftIndicator && <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r to-transparent pointer-events-none" style={currentBgIsLight ? { background: 'linear-gradient(to right, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to right, rgba(10, 10, 11, 0.95), transparent)' }}></div>}
+        {showRightIndicator && <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l to-transparent pointer-events-none" style={currentBgIsLight ? { background: 'linear-gradient(to left, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to left, rgba(10, 10, 11, 0.95), transparent)' }}></div>}
       </div>
     </nav>
   )

@@ -1,15 +1,13 @@
 'use client'
 
+import { getTheme } from '@/lib/design-system'
+
 interface MLTeamCollaborationProps {
   isLightBackground?: boolean
 }
 
 export default function MLTeamCollaboration({ isLightBackground = false }: MLTeamCollaborationProps) {
-  const textColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
-  const bgColor = isLightBackground ? 'bg-black/5' : 'bg-white/5'
-  const accentColor = 'var(--accent-teal)'
+  const t = getTheme(isLightBackground)
 
   const team = [
     { role: 'Me', responsibility: 'Sole UX owner for ML Functions' },
@@ -33,59 +31,43 @@ export default function MLTeamCollaboration({ isLightBackground = false }: MLTea
   ]
 
   return (
-    <div className={`${bgColor} rounded-lg border ${borderColor} p-8 md:p-12`}>
+    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
       <div className="space-y-8">
-        {/* Header */}
         <div className="text-center space-y-3">
-          <h3 className={`${textColor} text-2xl md:text-3xl font-serif`}>
-            Aligning and Leading the Team
-          </h3>
-          <p className={`${mutedColor} text-base md:text-lg max-w-3xl mx-auto`}>
+          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>Aligning and Leading the Team</h3>
+          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>
             This wasn&apos;t just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
           </p>
         </div>
 
-        {/* Team Composition */}
         <div>
-          <h4 className={`${textColor} text-lg font-semibold mb-4`}>Team Composition</h4>
+          <h4 className={`${t.text} text-lg font-semibold mb-4`}>Team Composition</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {team.map((member, idx) => (
-              <div
-                key={idx}
-                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg`}
-                style={{ borderColor: accentColor + '40' }}
-              >
-                <h5 className={`${textColor} text-sm font-semibold mb-2`}>{member.role}</h5>
-                <p className={`${mutedColor} text-xs leading-relaxed`}>{member.responsibility}</p>
+            {team.map((m, i) => (
+              <div key={i} className={`${t.cardBg} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
+                <h5 className={`${t.text} text-sm font-semibold mb-2`}>{m.role}</h5>
+                <p className={`${t.textMuted} text-xs leading-relaxed`}>{m.responsibility}</p>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Timeline */}
         <div>
-          <h4 className={`${textColor} text-lg font-semibold mb-4`}>Timeline (6–8 months)</h4>
+          <h4 className={`${t.text} text-lg font-semibold mb-4`}>Timeline (6–8 months)</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {timeline.map((phase, idx) => (
-              <div
-                key={idx}
-                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-5`}
-                style={{ borderColor: accentColor + '40' }}
-              >
+            {timeline.map((p, i) => (
+              <div key={i} className={`${t.cardBg} rounded-lg border-2 p-5`} style={{ borderColor: `${t.accentVar}40` }}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0"
-                    style={{ backgroundColor: accentColor }}
-                  >
-                    {idx + 1}
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" style={{ backgroundColor: t.accentVar }}>
+                    {i + 1}
                   </div>
-                  <h5 className={`${textColor} text-sm font-semibold`}>{phase.phase}</h5>
+                  <h5 className={`${t.text} text-sm font-semibold`}>{p.phase}</h5>
                 </div>
                 <ul className="space-y-2">
-                  {phase.activities.map((activity, actIdx) => (
-                    <li key={actIdx} className={`${mutedColor} text-xs flex items-start gap-2`}>
-                      <span className="text-[var(--accent-teal)] mt-1">•</span>
-                      <span>{activity}</span>
+                  {p.activities.map((a, j) => (
+                    <li key={j} className={`${t.textMuted} text-xs flex items-start gap-2`}>
+                      <span className={`${t.textAccent} mt-1`}>•</span>
+                      <span>{a}</span>
                     </li>
                   ))}
                 </ul>
@@ -94,21 +76,16 @@ export default function MLTeamCollaboration({ isLightBackground = false }: MLTea
           </div>
         </div>
 
-        {/* Constraints */}
         <div>
-          <h4 className={`${textColor} text-lg font-semibold mb-4`}>Constraints I Worked Within</h4>
+          <h4 className={`${t.text} text-lg font-semibold mb-4`}>Constraints I Worked Within</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {constraints.map((constraint, idx) => (
-              <div
-                key={idx}
-                className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg border-2 p-5`}
-                style={{ borderColor: accentColor + '40' }}
-              >
-                <h5 className={`${textColor} text-sm font-semibold mb-3`}>{constraint.type}</h5>
+            {constraints.map((c, i) => (
+              <div key={i} className={`${t.cardBg} rounded-lg border-2 p-5`} style={{ borderColor: `${t.accentVar}40` }}>
+                <h5 className={`${t.text} text-sm font-semibold mb-3`}>{c.type}</h5>
                 <ul className="space-y-2">
-                  {constraint.items.map((item, itemIdx) => (
-                    <li key={itemIdx} className={`${mutedColor} text-xs flex items-start gap-2`}>
-                      <span className="text-[var(--accent-teal)] mt-1">•</span>
+                  {c.items.map((item, j) => (
+                    <li key={j} className={`${t.textMuted} text-xs flex items-start gap-2`}>
+                      <span className={`${t.textAccent} mt-1`}>•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -118,20 +95,18 @@ export default function MLTeamCollaboration({ isLightBackground = false }: MLTea
           </div>
         </div>
 
-        {/* Collaboration Note */}
-        <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-6 border-l-4 mt-8`} style={{ borderLeftColor: accentColor }}>
-          <p className={`${textColor} text-sm leading-relaxed`}>
-            <span className="font-semibold" style={{ color: accentColor }}>Weekly UX + ML meetings:</span> I led these sessions — asking why certain behaviors were necessary, pushing back when suggestions added complexity without real user value, and clarifying what we would ship now versus what would move to a future release.
+        <div className={`${t.cardBg} rounded-lg p-6 border-l-4 mt-8`} style={{ borderLeftColor: t.accentVar }}>
+          <p className={`${t.text} text-sm leading-relaxed`}>
+            <span className={`font-semibold ${t.textAccent}`}>Weekly UX + ML meetings:</span> I led these sessions — asking why certain behaviors were necessary, pushing back when suggestions added complexity without real user value, and clarifying what we would ship now versus what would move to a future release.
           </p>
         </div>
 
-        {/* Aha Moment */}
-        <div className={`${isLightBackground ? 'bg-white' : 'bg-black/10'} rounded-lg p-6 border-2 mt-6`} style={{ borderColor: accentColor + '60' }}>
+        <div className={`${t.cardBg} rounded-lg p-6 border-2 mt-6`} style={{ borderColor: `${t.accentVar}60` }}>
           <div className="flex items-start gap-3">
             <span className="text-2xl flex-shrink-0">💡</span>
             <div>
-              <h5 className={`${textColor} text-sm font-semibold mb-2`} style={{ color: accentColor }}>Aha moment — realizing I&apos;d crossed from &quot;outsider&quot; to &quot;owner&quot;</h5>
-              <p className={`${mutedColor} text-sm leading-relaxed`}>
+              <h5 className={`text-sm font-semibold mb-2 ${t.textAccent}`}>Aha moment — realizing I&apos;d crossed from &quot;outsider&quot; to &quot;owner&quot;</h5>
+              <p className={`${t.textMuted} text-sm leading-relaxed`}>
                 At some point, I stopped just asking questions and started saying: &quot;No, we&apos;re not doing that in this release — it adds complexity without value. Let&apos;s park it for v2.&quot; That&apos;s when it shifted from &quot;designer executing tickets&quot; to &quot;designer leading an ML initiative.&quot;
               </p>
             </div>
@@ -141,4 +116,3 @@ export default function MLTeamCollaboration({ isLightBackground = false }: MLTea
     </div>
   )
 }
-

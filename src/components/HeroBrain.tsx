@@ -19,49 +19,29 @@ export function HeroBrain() {
 
 
   useEffect(() => {
-    console.log('[Gear Animation] HeroBrain component mounted, initializing...')
     const container = containerRef.current
-    if (!container) {
-      console.error('[Gear Animation] Container ref is null!')
-      return
-    }
-    console.log('[Gear Animation] Container found')
+    if (!container) return
 
     let cleanup: (() => void) | null = null
 
     const setup = () => {
-      console.log('[Gear Animation] Setup function called')
       const svgRoot = container.querySelector<SVGSVGElement>('svg')
       if (!svgRoot) {
-        console.log('[Gear Animation] SVG not found yet, retrying...')
         setTimeout(setup, 100)
         return
       }
-      console.log('[Gear Animation] SVG found')
       svgRootRef.current = svgRoot
       let brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears-copy')
       if (!brainGearsGroup) {
         brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
       }
-      if (!brainGearsGroup) {
-        console.error('[Gear Animation] Brain gears group not found!')
-        return
-      }
-      console.log('[Gear Animation] Brain gears group found')
+      if (!brainGearsGroup) return
 
       const setupGearRotations = () => {
-        console.log('[Gear Animation] Starting gear rotation setup...')
-
         // Simplified: All gears fade in rotating (0-2s), then slow down at 2s
         const fadeInDuration = 2.0 // seconds - all gears fade in rotating
         const slowDownTime = 2.0 // seconds - when gears slow down
         const mainGearSlowDownPercent = 0.30 // Main gears slow down by 30% (multiply speed by 0.7)
-
-        console.log('[Gear Animation] Configuration:', {
-          fadeInDuration: `${fadeInDuration}s (all gears fade in rotating)`,
-          slowDownTime: `${slowDownTime}s (gears slow down)`,
-          mainGearSlowDown: `${(mainGearSlowDownPercent * 100).toFixed(0)}% slower after ${slowDownTime}s`
-        })
 
         // Cache all gear groups upfront to avoid repeated DOM queries
         const gearGroups = new Map<string, SVGGElement>()
@@ -72,15 +52,10 @@ export function HeroBrain() {
           }
         })
 
-        console.log(`[Gear Animation] Found ${gearGroups.size} gear groups`)
-
         // Main gears - use cached references
         gearGroups.forEach((gearGroup, gearId) => {
           const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
-          if (!gearBase) {
-            console.warn(`[Gear Animation] No gear-base found for ${gearId}`)
-            return
-          }
+          if (!gearBase) return
 
           const isClockwise = Math.random() > 0.5
           // Main gears: varying speeds (20-40 seconds per full rotation)
@@ -118,42 +93,6 @@ export function HeroBrain() {
             gearHover.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
           }
 
-          // Calculate angular velocities for comparison
-          const fastAngularVelocity = Math.abs(fadeInRotationAmount) / fadeInDuration // degrees per second during fade-in (0-2s)
-          const slowAngularVelocity = 360 / slowRotationSpeed // degrees per second after slow-down (after 2s)
-          const speedDifferencePercent = ((fastAngularVelocity - slowAngularVelocity) / slowAngularVelocity) * 100
-
-          // Verify animation and CSS variables are set correctly (use setTimeout to ensure DOM is updated)
-          setTimeout(() => {
-            const computedAnimation = getComputedStyle(gearBase).animation || getComputedStyle(gearBase).getPropertyValue('animation')
-            const computedFadeInRotation = getComputedStyle(gearBase).getPropertyValue('--fade-in-rotation').trim()
-            const computedRotationDuration = getComputedStyle(gearBase).getPropertyValue('--rotation-duration').trim()
-            const computedRotationAmount = getComputedStyle(gearBase).getPropertyValue('--rotation-amount').trim()
-
-            console.log(`[Gear Animation] ${gearId} - Verification:`, {
-              animation: computedAnimation || 'NOT SET',
-              fadeInRotation: computedFadeInRotation || 'NOT SET',
-              rotationDuration: computedRotationDuration || 'NOT SET',
-              rotationAmount: computedRotationAmount || 'NOT SET',
-              expectedDuration: `${slowRotationSpeed}s`,
-              slowDownTime: `${slowDownTime}s`
-            })
-
-            if (!computedFadeInRotation || !computedRotationDuration || !computedAnimation) {
-              console.warn(`[Gear Animation] ${gearId}: Animation or CSS variables not set!`)
-            }
-          }, 100)
-
-          // Debug: log to verify values for all gears
-          console.log(`[Gear Animation] ${gearId}:`, {
-            direction: isClockwise ? 'clockwise' : 'counter-clockwise',
-            fastSpeed: `${fastRotationSpeed.toFixed(2)}s per rotation (0-2s)`,
-            slowSpeed: `${slowRotationSpeed.toFixed(2)}s per rotation (after 2s, 30% slower)`,
-            fadeInRotation: `${fadeInRotationAmount.toFixed(2)}deg over ${fadeInDuration}s`,
-            fastAngularVelocity: `${fastAngularVelocity.toFixed(2)} deg/s (fade-in)`,
-            slowAngularVelocity: `${slowAngularVelocity.toFixed(2)} deg/s (after slow-down)`,
-            speedDifference: `${speedDifferencePercent.toFixed(1)}% slower after 2s`
-          })
         })
 
         // Background gears: fade in rotating (0-2s), then slow down dramatically at 2s
@@ -161,12 +100,10 @@ export function HeroBrain() {
           brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
         )
 
-        console.log(`[Gear Animation] Found ${bgGears.length} background gears`)
-
         // Use average main gear speed for fade-in calculation
         const avgMainGearSpeed = 30 // seconds per full rotation
 
-        bgGears.forEach((gear, index) => {
+        bgGears.forEach((gear) => {
           const isClockwise = Math.random() > 0.5
           // Background gears: fast during fade-in, then dramatically slower (3x slower than main gears)
           const fastBgRotationSpeed = avgMainGearSpeed // Fast speed during fade-in
@@ -182,25 +119,7 @@ export function HeroBrain() {
 
           // Simplified animation: fade-in rotating (0-2s), then slow continuous rotation (starts at 2s)
           gear.style.setProperty('animation', `gear-fade-in-bg ${fadeInDuration}s linear forwards, gear-rotate-bg-slow ${slowBgRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
-
-          if (index === 0) {
-            const bgFadeInAngularVelocity = Math.abs(fadeInRotationAmount) / fadeInDuration
-            const bgSlowAngularVelocity = 360 / slowBgRotationSpeed
-            const bgSpeedDifferencePercent = ((bgFadeInAngularVelocity - bgSlowAngularVelocity) / bgSlowAngularVelocity) * 100
-
-            console.log(`[Gear Animation] Background gear (sample):`, {
-              direction: isClockwise ? 'clockwise' : 'counter-clockwise',
-              fastSpeed: `${fastBgRotationSpeed.toFixed(2)}s per rotation (0-2s)`,
-              slowSpeed: `${slowBgRotationSpeed.toFixed(2)}s per rotation (after 2s, dramatically slower)`,
-              fadeInRotation: `${fadeInRotationAmount.toFixed(2)}deg over ${fadeInDuration}s`,
-              fadeInAngularVelocity: `${bgFadeInAngularVelocity.toFixed(2)} deg/s (fade-in)`,
-              slowAngularVelocity: `${bgSlowAngularVelocity.toFixed(2)} deg/s (after slow-down)`,
-              speedDifference: `${bgSpeedDifferencePercent.toFixed(1)}% slower after 2s`
-            })
-          }
         })
-
-        console.log('[Gear Animation] Gear rotation setup complete!')
       }
 
       const setTransformOrigins = () => {

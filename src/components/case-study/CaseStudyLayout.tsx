@@ -12,7 +12,6 @@ import UXPrinciples from './UXPrinciples'
 import SectionBlock from './SectionBlock'
 import PrototypeBlock from './PrototypeBlock'
 import PasswordGate from './PasswordGate'
-import FinalSummary from './FinalSummary'
 import CaseStudySignatureBadge from '@/components/brand/CaseStudySignatureBadge'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 import SectionDivider from '@/components/brand/SectionDivider'
@@ -30,9 +29,6 @@ import LoadingSpinner from '@/components/ui/LoadingSpinner'
 
 // Dynamic imports for heavy components - loaded on demand with loading states
 // Note: Next.js requires options to be object literals, not variables
-const ProcessTimelineNav = dynamic(() => import('./ProcessTimelineNav'), {
-  ssr: false
-})
 const ImpactVisual = dynamic(() => import('./ImpactVisual'), {
   ssr: false,
   loading: () => <LoadingSpinner />
@@ -122,10 +118,6 @@ const MLPersonaCards = dynamic(() => import('./MLPersonaCards'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const UnifiedSubsystemsVisual = dynamic(() => import('./UnifiedSubsystemsVisual'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
 const MLRecommendations = dynamic(() => import('./MLRecommendations'), {
   ssr: false,
   loading: () => <LoadingSpinner />
@@ -154,16 +146,11 @@ const IQChallengesBreakdown = dynamic(() => import('./IQChallengesBreakdown'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-// IQLearningTransformation removed - content integrated into section body
 const IQValidationSources = dynamic(() => import('./IQValidationSources'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
 const ReportCasterTimeline = dynamic(() => import('./ReportCasterTimeline'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const ReportCasterArchitecture = dynamic(() => import('./ReportCasterArchitecture'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -176,14 +163,6 @@ const IQPluginTimeline = dynamic(() => import('./IQPluginTimeline'), {
   loading: () => <LoadingSpinner />
 })
 const IQPluginArchitecture = dynamic(() => import('./IQPluginArchitecture'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const VideoEmbed = dynamic(() => import('./VideoEmbed'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const IQPatternConnections = dynamic(() => import('./IQPatternConnections'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -294,16 +273,19 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
   // Password state for ML and RC case studies
   const [mlRcPassword, setMlRcPassword] = useState('')
   const [mlRcError, setMlRcError] = useState('')
-  const [mlRcUnlocked, setMlRcUnlocked] = useState(() => {
-    if (typeof window !== 'undefined' && (data.slug === 'ml-functions' || data.slug === 'reportcaster')) {
-      const storageKey = 'portfolio-globally-unlocked'
-      const caseKey = `case-study-unlocked-${data.slug}`
-      const globalUnlocked = sessionStorage.getItem(storageKey) === 'true'
-      const caseUnlocked = sessionStorage.getItem(caseKey) === 'true'
-      return globalUnlocked || caseUnlocked
+  // Always start as false to avoid hydration mismatch - useEffect will set correct value
+  const [mlRcUnlocked, setMlRcUnlocked] = useState(false)
+
+  // Track if user should be redirected to prototype after unlock
+  const [shouldRedirectToPrototype, setShouldRedirectToPrototype] = useState(false)
+
+  // Check for redirect-to-prototype flag on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const shouldRedirect = sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'
+      setShouldRedirectToPrototype(shouldRedirect)
     }
-    return false
-  })
+  }, [data.slug])
 
   const handlePasswordCorrect = () => {
     if (typeof window !== 'undefined') {
@@ -423,6 +405,16 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           <section className="relative surface-light overflow-hidden min-h-[80vh] flex items-center">
             <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
               <div className="max-w-2xl mx-auto text-center space-y-8 py-16 md:py-24">
+                {/* Case Study Navigation - Links to other case studies */}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="mb-4"
+                >
+                  <CaseStudyNav />
+                </motion.div>
+
                 {/* Lock Icon */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -614,91 +606,80 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           description={data.passwordGate.description}
           learnItems={data.passwordGate.learnItems}
           caseStudySlug={data.slug}
-          redirectToPrototype={typeof window !== 'undefined' && sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'}
+          redirectToPrototype={shouldRedirectToPrototype}
         />
       )}
 
       {/* ============================================
           PASSWORD UNLOCK SECTION FOR ML AND RC (Before Quick Overview)
           ============================================ */}
-      {(data.slug === 'ml-functions' || data.slug === 'reportcaster') && (() => {
-        // Check if unlocked in sessionStorage - show password UI if NOT unlocked
-        if (typeof window !== 'undefined') {
-          const storageKey = 'portfolio-globally-unlocked'
-          const caseKey = `case-study-unlocked-${data.slug}`
-          const globalUnlocked = sessionStorage.getItem(storageKey) === 'true'
-          const caseUnlocked = sessionStorage.getItem(caseKey) === 'true'
-          const isUnlocked = globalUnlocked || caseUnlocked
-          return !isUnlocked
-        }
-        return true // Show on server side (SSR) - will be hidden by useEffect if unlocked
-      })() && (
-          <MotionSection className="surface-light py-8 md:py-12">
-            <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
-              <div className="max-w-2xl mx-auto space-y-6">
-                <div className="text-center space-y-4">
-                  <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
-                    Parts of the case study are locked due to sensitive company data and NDA restrictions. To unlock them all enter password here or continue scrolling to see the public version.
-                  </p>
-                </div>
+      {(data.slug === 'ml-functions' || data.slug === 'reportcaster') && !mlRcUnlocked && (
+        <MotionSection className="surface-light py-8 md:py-12">
+          <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
+            <div className="max-w-2xl mx-auto space-y-6">
+              <div className="text-center space-y-4">
+                <p className="text-[var(--text-primary-light)] text-base md:text-lg leading-relaxed">
+                  Parts of the case study are locked due to sensitive company data and NDA restrictions. To unlock them all enter password here or continue scrolling to see the public version.
+                </p>
+              </div>
 
-                {/* Password Input with Circular Button */}
-                <form onSubmit={handleMlRcPasswordSubmit} className="w-full max-w-md mx-auto">
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="password"
-                      value={mlRcPassword}
-                      onChange={(e) => {
-                        setMlRcPassword(e.target.value)
-                        setMlRcError('')
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          handleMlRcPasswordSubmit()
-                        }
-                      }}
-                      placeholder="Enter password"
-                      className="flex-1 px-4 py-3 rounded-full border border-black/20 text-[var(--text-primary-light)] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent placeholder:text-[var(--text-muted-light)] shadow-sm"
-                      autoFocus
-                    />
-                    <button
-                      type="submit"
-                      className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white flex items-center justify-center hover:bg-[var(--accent-teal-soft)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 shadow-md"
-                      aria-label="Submit password"
-                    >
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                  {mlRcError && (
-                    <p className="mt-2 text-sm text-red-600 text-center">{mlRcError}</p>
-                  )}
-                </form>
-
-                {/* Contact link */}
-                <div className="pt-4 text-center">
-                  <a
-                    href="/#lets-talk"
-                    className="text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] text-sm transition-colors underline"
+              {/* Password Input with Circular Button */}
+              <form onSubmit={handleMlRcPasswordSubmit} className="w-full max-w-md mx-auto">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="password"
+                    value={mlRcPassword}
+                    onChange={(e) => {
+                      setMlRcPassword(e.target.value)
+                      setMlRcError('')
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleMlRcPasswordSubmit()
+                      }
+                    }}
+                    placeholder="Enter password"
+                    className="flex-1 px-4 py-3 rounded-full border border-black/20 text-[var(--text-primary-light)] bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:border-transparent placeholder:text-[var(--text-muted-light)] shadow-sm"
+                    autoFocus
+                  />
+                  <button
+                    type="submit"
+                    className="flex-shrink-0 w-12 h-12 rounded-full bg-[var(--accent-teal)] text-white flex items-center justify-center hover:bg-[var(--accent-teal-soft)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2 shadow-md"
+                    aria-label="Submit password"
                   >
-                    Contact me for password
-                  </a>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </button>
                 </div>
+                {mlRcError && (
+                  <p className="mt-2 text-sm text-red-600 text-center">{mlRcError}</p>
+                )}
+              </form>
+
+              {/* Contact link */}
+              <div className="pt-4 text-center">
+                <a
+                  href="/#lets-talk"
+                  className="text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] text-sm transition-colors underline"
+                >
+                  Contact me for password
+                </a>
               </div>
             </div>
-          </MotionSection>
-        )}
+          </div>
+        </MotionSection>
+      )}
 
       {/* ============================================
           CASE STUDY CONTENT (Only visible when unlocked)
@@ -1434,10 +1415,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
             )
           })}
 
-          {/* Process Timeline removed - redundant with ProcessTimelineNav */}
-
-          {/* Final Summary Section */}
-          {/* FinalSummary is now combined with Section 08 */}
 
           {/* Design System Showcase - Subtle, Not Prominent */}
           <MotionSection className="surface-light py-8 md:py-12">
