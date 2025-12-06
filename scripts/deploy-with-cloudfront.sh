@@ -42,9 +42,13 @@ else
     echo "✅ Bucket exists: $BUCKET_NAME"
 fi
 
+# Clean build cache first
+echo "🧹 Cleaning build cache..."
+rm -rf .next out node_modules/.cache .turbo || true
+
 # Build the site
 echo "📦 Building site..."
-npm run build
+NODE_ENV=production npm run build
 
 if [ $? -ne 0 ]; then
     echo "❌ Build failed. Please fix errors and try again."
