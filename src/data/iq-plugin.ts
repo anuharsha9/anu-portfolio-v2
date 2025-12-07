@@ -3,9 +3,9 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const iqPluginCaseStudy: CaseStudyData = {
   slug: 'iq-plugin',
   heroTitle: 'IQ PLUGIN',
-  heroSubheading: 'The DSML Hub WebFOCUS needed',
+  heroSubheading: 'Designing for Business Outcomes',
   heroSubtitle:
-    'Three powerful features scattered across the platform. One strategic initiative to bring them home. I took a PM\'s napkin idea and built the entire product vision.',
+    'Three powerful features, scattered across the platform. The PM had an idea to bring them together. I figured out how to make it work—and make it easy.',
   coverImage: {
     src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
     alt: 'IQ Plugin Discover Page - Navigation Tiles',
@@ -33,34 +33,34 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'PM came to me with an idea on a napkin: "What if we brought these together?" That was it. No requirements. No specs. No tickets. I took that seed and built the entire product vision—the architecture, the flows, the Discover page, the tutorial system, everything. PM literally created Jira tickets *after* I finished the designs. This wasn\'t execution. This was invention.',
+      'PM came to me with an idea: "What if we brought these together?" No requirements. No specs. I owned it from there—architecture, flows, onboarding, tutorial system. Led alignment across teams. Designed for business outcomes, not just screens. The work speaks for itself: a unified DSML experience that makes enterprise data science accessible to everyone.',
     scopeOfPractice: [
       {
-        tag: 'PRODUCT_VISION',
+        tag: 'PRODUCT_DEFINITION',
         tagColor: 'blue',
-        headline: 'Built from Zero',
-        body: 'PM had an idea. I built the **entire product**—architecture, flows, onboarding, everything. Tickets came after designs.',
+        headline: 'End-to-End Ownership',
+        body: 'From concept to complete design system—architecture, flows, onboarding, tutorials. Shaped the product direction.',
         icon: 'architect',
       },
       {
-        tag: 'BUSINESS_STRATEGY',
+        tag: 'COMPETITIVE_POSITIONING',
         tagColor: 'amber',
-        headline: 'Strategic Initiative',
-        body: 'Competitive pressure from **Power BI, Tableau, Qlik**. IQ Plugin positions WebFOCUS as a DSML-first platform.',
+        headline: 'Market Context',
+        body: 'Competitors have DSML features. We focused on **making them easy to find and use**. That\'s the gap.',
         icon: 'archaeologist',
       },
       {
-        tag: 'DISCOVERABILITY',
+        tag: 'BUSINESS_FOCUS',
         tagColor: 'purple',
-        headline: '1-Click Access',
-        body: 'Before: 3 tools in 3 places. After: **One hub, one click**. Tutorials built-in. Dataset selection unified.',
+        headline: 'Designed for Outcomes',
+        body: 'HUB adoption. DSML discoverability. **Connected design decisions to business goals**, not just user needs.',
         icon: 'strategist',
       },
       {
-        tag: 'ADOPTION_ENGINE',
+        tag: 'ACCESSIBILITY',
         tagColor: 'emerald',
-        headline: 'Discover Page',
-        body: 'Custom landing with **tutorials, documentation, and YouTube links**—users learn while they explore.',
+        headline: 'Lowered the Barrier',
+        body: '3 tools → 1 click. Tutorials built-in. **Data science accessible to business users**, not just experts.',
         icon: 'multiplier',
       },
     ],
@@ -546,16 +546,16 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `This wasn't a design execution project. The PM came to me with a concept—"bring these features together"—and I built everything else. The architecture. The flows. The Discover page. The tutorial system. The tickets came after the designs.
+    body: `The work speaks for itself. From a single idea to a complete product vision—architecture, flows, onboarding, tutorial system. I led this end-to-end because I cared about making it right.
 
-IQ Plugin turns WebFOCUS into a DSML-first platform. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. That's what discoverability looks like.`,
+IQ Plugin brings three scattered features into one home. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. Enterprise data science, made accessible.`,
     keyPoints: [
-      'Built entire product vision from a PM\'s napkin idea',
-      '3 tools → 1 hub. One-click access to all DSML capabilities.',
+      'Led end-to-end from concept to complete design system',
+      '3 tools → 1 hub. Simplified access to all DSML capabilities.',
       'Discover page with tutorials, documentation, and video links',
       'Unified dataset selection—pick once, explore across all features',
       'Shipping 2027. NLQ + Insights live now. ML Functions in 2026.',
-      'This is what it looks like when design leads product, not follows it.',
+      'Designed for business outcomes—competitive positioning, adoption, discoverability.',
     ],
   },
   // ----------------------------
