@@ -143,34 +143,9 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'Discover Deeply: Three Workflows I Built',
-      summary: 'I designed NLQ. I designed Insights. I designed ML. Then I unified them.',
-      body: `**I built all three workflows independently:**
-- **NLQ:** Complete workflow from empty state to visualization. Shipping now.
-- **Insights:** Automatic pattern detection and narrative generation. Shipping now.
-- **ML Functions:** Full redesign of train/run model experience. Shipping 2026.
-
-**The Problem:**
-Three powerful workflows. Three different entry points. All scattered across the platform.
-- NLQ and Insights: buried in the Plus menu
-- ML: hidden in the Reporting Server
-- Users didn't know half of this existed
-
-**Then I unified them.** IQ Plugin brings all three home.`,
-      images: [
-        {
-          src: '/images/case-study/iq-plugin/Explore Data _ NLQ _ Empty State Illustration 1.png',
-          alt: 'Explore Data NLQ - Standalone experience before IQ',
-          caption: '// DIAGNOSTIC: FRAGMENTED_ENTRY_POINT — NLQ existed in isolation, disconnected from the broader analytics workflow.',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/Insights - Results - Tile View 1.png',
-          alt: 'Explore Data Insights - Results view',
-          caption: '// DIAGNOSTIC: DISCONNECTED_WORKFLOW — Insights generated, but no path to action or deeper analysis.',
-          sensitive: true,
-        },
-      ],
+      title: 'Discover Deeply: The Foundation',
+      summary: 'Three workflows. Three entry points. All designed by me.',
+      // Body and images removed - IQWorkflowsBuilt component handles this visually
     },
     {
       id: 'section-02',
