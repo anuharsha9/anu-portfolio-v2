@@ -16,8 +16,8 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
       details: 'Defined user-first lifecycle: Select Data → Choose Action → Train → Compare → Run → Save → Designer. This mapping became the foundation for the entire redesign, ensuring every decision aligned with user mental models rather than technical constraints.',
       type: 'standard' as const,
       evidenceImage: {
-        src: '/images/case-study/ml-functions/1. ML UI Structure.png',
-        alt: 'ML UI Structure mapping diagram',
+        src: '/images/case-study/ml-functions/entire ML workflow flowchart.png',
+        alt: 'Complete ML workflow flowchart',
         isBlurred: true,
       },
     },
