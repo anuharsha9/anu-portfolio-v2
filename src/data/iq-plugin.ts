@@ -175,35 +175,16 @@ Three powerful workflows. Three different entry points. All scattered across the
     {
       id: 'section-02',
       index: 'E',
-      title: 'Empathize with the Ecosystem: Owning the Entire DSML Surface',
-      summary: 'I owned NLQ, Insights, AND the IQ Hub. Not just the unification—every workflow.',
-      body: `PM had an idea to unify. I owned the execution—and I owned more than just the hub.
+      title: 'Empathize with the Ecosystem: Who Are We Building For?',
+      summary: 'Business users, not just BI experts. I built personas to prove it.',
+      body: `We had technical users. We wanted business users. I built the research to make the case.
 
-**My Scope:**
-- **NLQ workflow:** Complete UI design, interactions, responsive layouts
-- **Insights workflow:** Complete UI design, interactions, responsive layouts  
-- **IQ Hub:** Architecture, navigation, Discover page, tutorials, onboarding
-- **Pattern consistency:** Ensured all 3 features felt like one system
+**2 personas created from scratch.** SME discussions, customer reps, AI synthesis. Targeted the business user gap—people who could benefit from DSML but weren't touching our tools.
 
-**The Research:**
-- Built 4 personas from scratch—SME discussions, customer reps, AI synthesis
-- Targeted business users, not just our regular BI audience
-- Initiated technical conversations, got engineers in the room
+**2 personas inherited.** Technical users we already understood. I mapped their journeys into the new system.
 
-I didn't just bring features together. I designed each one.`,
+The architecture and data flows below show how all 4 personas navigate the unified system.`,
       images: [
-        {
-          src: '/images/case-study/iq-plugin/IQ Structure flowchart.png',
-          alt: 'IQ Plugin structure flowchart',
-          caption: '// ARTIFACT_01: INFORMATION_ARCHITECTURE — The structure map showing how four pillars connect into one unified system.',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/IQ Dataset Selection Workflow 2.png',
-          alt: 'IQ Dataset selection workflow',
-          caption: '// ARTIFACT_02: UNIFIED_DATA_FLOW — Consistent dataset selection pattern across all IQ features.',
-          sensitive: true,
-        },
       ],
     },
     {
