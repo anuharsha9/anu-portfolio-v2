@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'PM came to me with an idea: "What if we brought these together?" No requirements. No specs. I owned it from there—architecture, flows, onboarding, tutorial system. Led alignment across teams. Designed for business outcomes, not just screens. The work speaks for itself: a unified DSML experience that makes enterprise data science accessible to everyone.',
+      'PM came to me with an idea: "What if we brought these together?" No requirements. No specs. I owned it from there—defined the architecture, designed the flows, built the onboarding system, created the tutorial framework. Led alignment across engineering and product. Designed for business outcomes: competitive positioning, HUB adoption, DSML discoverability.',
     scopeOfPractice: [
       {
         tag: 'PRODUCT_DEFINITION',
@@ -546,12 +546,12 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `The work speaks for itself. From a single idea to a complete product vision—architecture, flows, onboarding, tutorial system. I led this end-to-end because I cared about making it right.
+    body: `From a PM's idea to a complete product vision. Defined the architecture. Designed every flow. Built the onboarding and tutorial system. Led alignment across teams.
 
 IQ Plugin brings three scattered features into one home. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. Enterprise data science, made accessible.`,
     keyPoints: [
-      'Led end-to-end from concept to complete design system',
-      '3 tools → 1 hub. Simplified access to all DSML capabilities.',
+      'End-to-end ownership from concept to design system',
+      '3 tools → 1 hub. One-click access to all DSML capabilities.',
       'Discover page with tutorials, documentation, and video links',
       'Unified dataset selection—pick once, explore across all features',
       'Shipping 2027. NLQ + Insights live now. ML Functions in 2026.',
