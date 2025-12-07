@@ -55,8 +55,8 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
       details: 'Personally audited every screen after handoff, flagged issues, opened QA tickets, and ensured nothing shipped until it met the bar. This rigorous quality control ensured the final product maintained design intent.',
       type: 'milestone' as const,
       evidenceImage: {
-        src: '/images/case-study/ml-functions/8. Train Model Workflow - Compare Models.png',
-        alt: 'Compare Models screen - final delivery',
+        src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
+        alt: 'Explainability popup - interpretable ML insights',
         isBlurred: true,
       },
     },
