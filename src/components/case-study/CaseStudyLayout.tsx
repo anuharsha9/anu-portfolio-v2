@@ -217,6 +217,14 @@ const IQWorkflowComparison = dynamic(() => import('./IQWorkflowComparison'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
+const IQEmptyStateShowcase = dynamic(() => import('./IQEmptyStateShowcase'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const IQEvolution = dynamic(() => import('./IQEvolution'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
 
 interface CaseStudyLayoutProps {
   data: CaseStudyData
@@ -1540,6 +1548,17 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQPluginArchitecture isLightBackground={true} />
                     </MotionSection>
+                    {/* Design Evolution */}
+                    <MotionSection className="surface-light py-0">
+                      <LockedContent
+                        password={data.passwordGate?.password || 'anu-access'}
+                        caseStudySlug={data.slug}
+                        unlockMessage="Password required to view design evolution"
+                        isLightBackground={true}
+                      >
+                        <IQEvolution isLightBackground={true} />
+                      </LockedContent>
+                    </MotionSection>
                     {/* Architectural Directives */}
                     {data.uxPrinciples && (
                       <MotionSection className="surface-light py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20">
@@ -1574,19 +1593,32 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
                 {/* IQ Plugin Visuals - Section 05 (G - Architectural Decision Records) */}
                 {section.id === 'section-05' && data.slug === 'iq-plugin' && (
-                  <MotionSection className="surface-light py-8 md:py-12">
-                    <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                  <>
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <LockedContent
+                          isUnlocked={showPasswordContent}
+                          password="access"
+                          caseStudySlug={data.slug}
+                          unlockMessage="Password required to view architectural decisions"
+                          isLightBackground={true}
+                        >
+                          <IQChallengesBreakdown isLightBackground={true} />
+                        </LockedContent>
+                      </div>
+                    </MotionSection>
+                    {/* Empty State Showcase - UX Decisions */}
+                    <MotionSection className="surface-light py-0">
                       <LockedContent
-                        isUnlocked={showPasswordContent}
-                        password="access"
+                        password={data.passwordGate?.password || 'anu-access'}
                         caseStudySlug={data.slug}
-                        unlockMessage="Password required to view architectural decisions"
+                        unlockMessage="Password required to view empty states"
                         isLightBackground={true}
                       >
-                        <IQChallengesBreakdown isLightBackground={true} />
+                        <IQEmptyStateShowcase isLightBackground={true} />
                       </LockedContent>
-                    </div>
-                  </MotionSection>
+                    </MotionSection>
+                  </>
                 )}
 
                 {/* IQ Plugin Visuals - Section 06 (N - Strategic Outcomes) */}

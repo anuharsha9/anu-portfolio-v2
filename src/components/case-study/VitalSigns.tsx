@@ -346,25 +346,25 @@ export const reportCasterVitalSigns = [
 // Pre-configured metrics for IQ Plugin case study
 export const iqPluginVitalSigns = [
   {
-    label: 'DSML_HUB',
-    value: '3-in-1',
-    context: 'NLQ + Insights + ML',
+    label: 'WORKFLOWS_OWNED',
+    value: '3',
+    context: 'NLQ + Insights + IQ Hub',
   },
   {
-    label: 'TARGET_AUDIENCE',
-    value: 'Business Users',
-    context: 'Not Just BI Experts',
-  },
-  {
-    label: 'CLICK_REDUCTION',
-    value: '1-Click',
-    context: 'Was 2+ Across Contexts',
+    label: 'PATTERN_PARITY',
+    value: '100%',
+    context: 'Same UI Across All 3',
     color: 'text-emerald-600',
   },
   {
-    label: 'PERSONAS_BUILT',
-    value: '4',
-    context: 'Research + SMEs + AI',
+    label: 'RESPONSIVE',
+    value: 'All 3',
+    context: 'Every Feature, Every Size',
+  },
+  {
+    label: 'PERSONAS',
+    value: '2 + 2',
+    context: 'Created 2, Inherited 2',
   },
 ]
 

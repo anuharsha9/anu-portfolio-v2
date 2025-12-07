@@ -33,34 +33,34 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'Business requirement: increase DSML adoption. PM had an idea—we collaborated on the vision. From there, I drove it. Built user personas through research, SME discussions, customer reps, and AI—targeting business users, not just our regular BI audience. Initiated technical conversations, got engineers in the room. Defined the architecture, designed the flows, built the onboarding and tutorial system.',
+      'I owned all three DSML workflows—NLQ, Insights, AND the IQ Hub that unified them. Not just the hub: I designed each individual feature\'s UI, ensured pattern consistency across all three, and made everything responsive. PM had the idea to unify; I built every piece of it.',
     scopeOfPractice: [
       {
-        tag: 'INITIATIVE_DRIVER',
+        tag: 'FULL_OWNERSHIP',
         tagColor: 'blue',
-        headline: 'Drove the Initiative',
-        body: 'PM had the idea. I drove it—**initiated conversations, got engineers together**, figured out what was possible.',
+        headline: 'Owned All 3 Workflows',
+        body: 'Not just the hub—**I owned NLQ, Insights, AND IQ Plugin**. Designed each feature\'s complete UI and workflow.',
         icon: 'architect',
       },
       {
-        tag: 'PERSONA_RESEARCH',
+        tag: 'SYSTEM_CONSISTENCY',
         tagColor: 'amber',
-        headline: 'Built the Personas',
-        body: '**4 personas from scratch**—SME discussions, customer reps, AI synthesis. Targeted business users, not just BI experts.',
+        headline: 'Unified the Patterns',
+        body: '**Ensured UI, structure, and interactions matched** across all 3 features. Learn one, know them all.',
         icon: 'archaeologist',
       },
       {
-        tag: 'BUSINESS_OUTCOMES',
+        tag: 'RESPONSIVE_DESIGN',
         tagColor: 'purple',
-        headline: 'Designed for Adoption',
-        body: 'Business requirement: increase DSML adoption. **Connected every decision to that goal**—discoverability, ease of use.',
+        headline: 'Made It All Responsive',
+        body: 'Spent significant effort making **all 3 features work across screen sizes**. Enterprise BI, mobile-ready.',
         icon: 'strategist',
       },
       {
-        tag: 'PRODUCT_ARCHITECTURE',
+        tag: 'PERSONA_RESEARCH',
         tagColor: 'emerald',
-        headline: 'Built the System',
-        body: 'Architecture, flows, onboarding, tutorials, Discover page. **Complete design system** from concept to spec.',
+        headline: 'Built 2 New Personas',
+        body: '**Created 2 business user personas** from scratch. Inherited 2 technical personas. 4 total guiding the design.',
         icon: 'multiplier',
       },
     ],
@@ -174,20 +174,22 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-02',
       index: 'E',
-      title: 'Empathize with the Ecosystem: Building from Nothing',
-      summary: 'PM had an idea. I built the product.',
-      body: `Business requirement: how do we increase DSML adoption? PM had an idea—bring NLQ, Insights, and ML together. We collaborated on the vision. But I was the one driving it forward.
+      title: 'Empathize with the Ecosystem: Owning the Entire DSML Surface',
+      summary: 'I owned NLQ, Insights, AND the IQ Hub. Not just the unification—every workflow.',
+      body: `PM had an idea to unify. I owned the execution—and I owned more than just the hub.
 
-**What That Meant:**
-- Built user personas from scratch—research, SME discussions, customer reps, AI-assisted synthesis
-- Targeted business users, not just our regular BI tool users. That was the growth opportunity.
-- Initiated conversations with engineering to understand what was feasible
-- Got the right people in the room
-- Defined the architecture and information design
-- Designed the hub navigation, dataset selection, Discover page
-- Built the tutorial and onboarding framework
+**My Scope:**
+- **NLQ workflow:** Complete UI design, interactions, responsive layouts
+- **Insights workflow:** Complete UI design, interactions, responsive layouts  
+- **IQ Hub:** Architecture, navigation, Discover page, tutorials, onboarding
+- **Pattern consistency:** Ensured all 3 features felt like one system
 
-Collaboration with PM? Yes. But I was the driver.`,
+**The Research:**
+- Built 4 personas from scratch—SME discussions, customer reps, AI synthesis
+- Targeted business users, not just our regular BI audience
+- Initiated technical conversations, got engineers in the room
+
+I didn't just bring features together. I designed each one.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/IQ Structure flowchart.png',
@@ -386,32 +388,32 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'PM had an idea. I drove it—initiated conversations, got engineers together, figured out what was possible.',
-        systemLogic: "drive(initiative).fromConceptToReality();",
+        description: 'Owned all 3 workflows—NLQ, Insights, AND the hub. Ensured pattern consistency across everything.',
+        systemLogic: "own([NLQ, Insights, IQHub]).unify(patterns);",
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '3 tools, 3 places → 1 hub, 1 click. Unified dataset selection. Tutorials built-in.',
-        systemLogic: "consolidate([NLQ, Insights, ML]).into(IQHub);",
+        description: '3 tools, 3 places → 1 hub, 1 click. Made all 3 responsive. Same UI, any screen size.',
+        systemLogic: "consolidate(all).responsive(true);",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Validated with 4 personas across comfort levels. Discover page refined through testing.',
-        systemLogic: "validate(IQHub).with(allPersonas);",
+        description: 'Validated with 4 personas across comfort levels. Refined patterns across all 3 features.',
+        systemLogic: "validate(allFeatures).with(allPersonas);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Built within existing HUB ecosystem. Respected patterns while pushing them forward.',
+        description: 'Built within existing HUB ecosystem. Every feature respects existing patterns while advancing them.',
         systemLogic: "design(within).constraints(existingHUB);",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'Shipping 2027. NLQ + Insights live now. ML Functions in 2026. IQ Plugin brings it all home.',
-        systemLogic: "ship(IQPlugin).timeline(2027);",
+        description: 'NLQ + Insights live now. ML in 2026. IQ Plugin unifies all in 2027.',
+        systemLogic: "ship(unified).timeline(2027);",
       },
     ],
   },
@@ -421,12 +423,12 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   impactSummary: {
     heading: 'Impact & Outcomes',
     bullets: [
-      '3 scattered features → 1 unified DSML Hub',
-      '1-click discoverability (down from 2+ clicks across different contexts)',
-      'Built-in tutorials and documentation for self-service adoption',
-      'Unified dataset selection across all 3 features',
+      'Owned all 3 workflows: NLQ, Insights, AND the IQ Hub',
+      'Ensured 100% pattern consistency across all 3 features',
+      'Made all 3 features fully responsive across screen sizes',
+      'Built 4 personas from research, SMEs, customer reps, AI',
+      'Created unified dataset selection and onboarding system',
       'Competitive positioning against Power BI, Tableau, Qlik',
-      'PM had the idea. I built the entire product.',
     ],
   },
   // ----------------------------
@@ -434,16 +436,16 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `Business requirement: increase DSML adoption. PM had the idea. I drove the execution—initiated the technical conversations, got engineers in the room, defined the architecture, designed every flow, built the onboarding system.
+    body: `I didn't just create a hub—I owned the entire DSML surface. Designed NLQ. Designed Insights. Designed the IQ Hub that unified them. Made all three responsive. Ensured pattern consistency across every interaction.
 
-IQ Plugin brings three scattered features into one home. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. Enterprise data science, made accessible.`,
+PM had the vision to unify. I built every piece of it.`,
     keyPoints: [
-      'Drove the initiative from concept to complete design system',
-      '3 tools → 1 hub. One-click access to all DSML capabilities.',
-      'Discover page with tutorials, documentation, and video links',
-      'Unified dataset selection—pick once, explore across all features',
-      'Shipping 2027. NLQ + Insights live now. ML Functions in 2026.',
-      'Designed for business outcomes—competitive positioning, adoption, discoverability.',
+      'Owned all 3 workflows: NLQ, Insights, AND the IQ Hub',
+      '100% pattern consistency across all features',
+      'All 3 features fully responsive',
+      'Created 2 business user personas; inherited 2 technical',
+      'Unified dataset selection and onboarding system',
+      'Shipping 2027. NLQ + Insights live now. ML in 2026.',
     ],
   },
   // ----------------------------
