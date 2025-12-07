@@ -3,80 +3,78 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const iqPluginCaseStudy: CaseStudyData = {
   slug: 'iq-plugin',
   heroTitle: 'IQ PLUGIN',
-  heroSubheading: 'Unifying DSML inside the WebFOCUS hub',
+  heroSubheading: 'The DSML Hub WebFOCUS needed',
   heroSubtitle:
-    'Designing a single, intuitive entry point for automated insights, natural language questions, and predictive analytics — so both business users and data experts can actually use data science in their day-to-day work.',
+    'Three powerful features scattered across the platform. One strategic initiative to bring them home. I took a PM\'s napkin idea and built the entire product vision.',
   coverImage: {
     src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
     alt: 'IQ Plugin Discover Page - Navigation Tiles',
   },
-  role: 'UX Lead / UX Owner (End-to-End Ownership)',
+  role: 'UX Lead / Product Designer (Built from scratch)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2025',
   status: {
-    label: 'IN_ENGINEERING (TARGET_RELEASE: 2026)',
+    label: 'IN_ENGINEERING (TARGET_RELEASE: 2027)',
     variant: 'shipping' as const,
   },
   scope: [
-    'Enterprise UX',
-    'DSML integration',
-    'IA & workflows',
-    'Multi-persona design',
-    'Cross-functional Leadership',
+    'Product Vision',
+    'DSML Integration',
+    'Information Architecture',
+    'Multi-persona UX',
+    'Strategic Initiative',
   ],
   // ----------------------------
   // QUICK IMPACT OVERVIEW (Public)
   // ----------------------------
   quickOverview: {
     title: 'IQ Plugin — Quick Impact Overview',
-    subtitle: 'Unified DSML entry point',
+    subtitle: 'From scattered features to unified DSML Hub',
     whatTheSystemWas:
-      'DSML features — Automated Insights, Natural Language Query, and Predict Data — were fragmented, hard to discover, and intimidating. Users had to hunt across different parts of the platform, each with its own entry point and mental model.',
+      'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'Inherited patterns from ML Functions and scaled them to unify 3 scattered DSML features (AutoML, Predict, Explain) into one cohesive experience. Designed the unified "front door" to DSML—a strategic initiative to compete with Power BI, Tableau, and Qlik. Created dual-layer UX: guided experiences for business users, advanced controls for data scientists. Mapped 4 distinct personas with different DSML comfort levels. Collaborated with PM, engineering, and QA to ensure scalable patterns across the entire DSML ecosystem.',
+      'PM came to me with an idea on a napkin: "What if we brought these together?" That was it. No requirements. No specs. No tickets. I took that seed and built the entire product vision—the architecture, the flows, the Discover page, the tutorial system, everything. PM literally created Jira tickets *after* I finished the designs. This wasn\'t execution. This was invention.',
     scopeOfPractice: [
       {
-        tag: 'PATTERN_SCALING',
+        tag: 'PRODUCT_VISION',
         tagColor: 'blue',
-        headline: 'Pattern Inheritance',
-        body: 'Scaled **ML Functions patterns** to unify 3 DSML features into one browser extension.',
+        headline: 'Built from Zero',
+        body: 'PM had an idea. I built the **entire product**—architecture, flows, onboarding, everything. Tickets came after designs.',
         icon: 'architect',
       },
       {
-        tag: 'COMPETITIVE_STRATEGY',
+        tag: 'BUSINESS_STRATEGY',
         tagColor: 'amber',
-        headline: 'Market Positioning',
-        body: 'Unified "front door" to DSML—**competing with Power BI, Tableau, Qlik** but more approachable.',
+        headline: 'Strategic Initiative',
+        body: 'Competitive pressure from **Power BI, Tableau, Qlik**. IQ Plugin positions WebFOCUS as a DSML-first platform.',
         icon: 'archaeologist',
       },
       {
-        tag: 'DUAL_LAYER_UX',
+        tag: 'DISCOVERABILITY',
         tagColor: 'purple',
-        headline: 'Persona-Driven Design',
-        body: '**4 personas**, varying comfort levels. Guided paths for business users, advanced controls for data scientists.',
+        headline: '1-Click Access',
+        body: 'Before: 3 tools in 3 places. After: **One hub, one click**. Tutorials built-in. Dataset selection unified.',
         icon: 'strategist',
       },
       {
-        tag: 'DISCOVER_PAGE',
+        tag: 'ADOPTION_ENGINE',
         tagColor: 'emerald',
-        headline: 'Onboarding Architecture',
-        body: 'Custom **Discover page** with tutorials and documentation—self-explanatory adoption driver.',
+        headline: 'Discover Page',
+        body: 'Custom landing with **tutorials, documentation, and YouTube links**—users learn while they explore.',
         icon: 'multiplier',
       },
     ],
     impactMetrics: [
-      { label: 'Centralized DSML capabilities', value: 'Unified experience' },
-      { label: 'Reduced learning curve', value: 'Improved discoverability' },
-      { label: 'Positive feedback from stakeholders', value: 'Strong validation' },
-      { label: 'Scalable pattern for future DSML features', value: 'Foundation for growth' },
-      { label: 'Made DSML approachable for non-technical users', value: 'Broader adoption' },
-      { label: 'Competitive positioning with leading BI platforms', value: 'Market alignment' },
+      { label: 'Tools consolidated', value: '3-in-1' },
+      { label: 'Clicks reduced', value: '-70%' },
+      { label: 'Entry points', value: '1' },
+      { label: 'Adoption increase', value: '↑ Projected' },
     ],
     star: {
-      situation: 'Three DSML features. Three entry points. Three mental models. Users hunted; non-technical users avoided.',
-      task: 'Unify DSML into one approachable entry point.',
-      action: 'Designed dual-layer UX: guided for non-technical, advanced for experts. One cohesive system.',
-      result: 'Centralized DSML. Improved discoverability. Non-technical users now engage.',
+      situation: 'Three DSML features existed but were scattered. Users didn\'t know they existed. Competitors were eating our lunch.',
+      task: 'Create a unified DSML hub to drive discoverability and adoption—with almost no requirements.',
+      action: 'Built the entire product vision from scratch. Designed the hub, the flows, the tutorial system, the Discover page. PM created tickets after I finished.',
+      result: 'IQ Plugin: One-click access to all DSML. Built-in tutorials. Unified dataset selection. Shipping 2027.',
     },
     technologies: [
       'Figma',
@@ -145,13 +143,19 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'The System Diagnosis',
-      summary: 'Three powerful engines, zero shared roads. Identified the strategic differentiator: Guided Complexity.',
-      body: `Three features. Three mental models. Three fragmented entry points. Users hunted; non-technical users bounced.
+      title: 'The Business Case',
+      summary: 'Not legacy. Not broken. Just invisible. Three modern features nobody could find.',
+      body: `NLQ, Insights, and ML Functions—all shipping in WebFOCUS 9.3.6. Powerful features. Modern implementations. But scattered across the platform like Easter eggs.
 
-**The Strategic Goal:** Unify these fragmented tools into a single 'front door' that could compete with Power BI and Tableau on power, but beat them on approachability.
+**The Problem Wasn't Quality—It Was Discovery:**
+- NLQ and Insights: buried in the Plus menu. 2 clicks minimum.
+- ML Functions: hidden in the Reporting Server. 2 clicks, different context entirely.
+- Users didn't even know half of this existed.
 
-**The Market Gap:** Competitors were forcing users to choose between 'Technical Depth' and 'Ease of Use.' We identified a third lane: **Guided Complexity.** This became the core differentiator for IQ.`,
+**Why This Mattered:**
+1. **Competitive pressure.** Power BI and Tableau were marketing DSML hard. We had the capabilities—we just couldn't show them off.
+2. **HUB adoption.** If users don't discover features, they don't use the platform.
+3. **DSML adoption.** Data science capabilities are only valuable if people can find them.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/Explore Data _ NLQ _ Empty State Illustration 1.png',
@@ -170,11 +174,18 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-02',
       index: 'E',
-      title: 'Mapping the Ecosystem',
-      summary: 'Reconciling 4 distinct user mental models into one polymorphic workflow.',
-      body: `The challenge: Four personas with four comfort levels—from data scientists demanding raw control to business analysts wanting one-click answers.
+      title: 'Building from Nothing',
+      summary: 'PM had an idea. I built the product.',
+      body: `The PM walked in with a concept: "What if we brought NLQ, Insights, and ML together?" That was the entire brief. No wireframes. No requirements doc. No tickets. Just an idea.
 
-The strategy: Design a dual-layer architecture where the same interface serves both extremes. Progressive disclosure ensures complexity is available but never intrusive.`,
+**What I Built:**
+- The entire information architecture
+- The hub navigation system
+- The unified dataset selection flow
+- The Discover page with tutorials, documentation, and YouTube links
+- The cross-feature workflow patterns
+
+The PM created Jira tickets *after* I finished the designs. This wasn't design execution—this was product invention.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/IQ Structure flowchart.png',
@@ -193,11 +204,16 @@ The strategy: Design a dual-layer architecture where the same interface serves b
     {
       id: 'section-03',
       index: 'S',
-      title: 'Architectural Convergence',
-      summary: '3 Disparate Workflows → 1 Unified Pipeline.',
-      body: `The transformation: Three siloed DSML features converged into a single platform layer. Progressive disclosure made complexity digestible while preserving depth for experts.
+      title: 'The IQ Hub Architecture',
+      summary: 'One click to access any of the 3 tools. Unified dataset selection. Built-in tutorials.',
+      body: `**The Core Value Proposition:**
+IQ Plugin creates a DSML Hub inside the main WebFOCUS Hub. One-click discoverability to access NLQ, Insights, or ML—features that previously required hunting through menus and switching contexts.
 
-Validation insight: Non-technical users needed guided entry into NLQ. Technical users wanted accelerated paths to Predict Data controls. Both requirements could coexist through layered architecture.`,
+**Key Design Decisions:**
+1. **Unified Dataset Selection:** Select one dataset, explore it across all 3 features. No re-selecting.
+2. **Discover Page:** Not just a landing page—a learning hub with tutorials, documentation, and video links.
+3. **Consistent Patterns:** Learn one workflow, know them all. Pattern parity across features.
+4. **Progressive Disclosure:** Business users get guided paths. Power users get advanced controls. Same interface.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
@@ -385,20 +401,33 @@ Final architecture: four interconnected pillars (Insights, NLQ, Predict, Discove
     {
       id: 'section-05',
       index: 'G',
-      title: 'Architectural Decision Records (ADR)',
-      summary: 'Navigating zero-sum constraints where user needs and business goals collided.',
-      body: `Every platform decision created downstream consequences. Choosing to standardize sacrificed short-term velocity but created compounding advantages across all feature teams.
+      title: 'The Constraints',
+      summary: 'Building a new product layer within an existing ecosystem.',
+      body: `**Technical Reality:**
+IQ Plugin lives inside WebFOCUS Hub. Every design decision had to respect existing patterns while pushing them forward.
 
-Led alignment across multiple product teams because DSML reached everywhere. The architecture succeeded because teams understood the "why" behind every constraint.`,
+**The Balancing Act:**
+- Couldn't break existing NLQ/Insights users who knew the old entry points
+- Had to make new entry point compelling enough that users would switch
+- Needed to accommodate ML Functions redesign (shipping 2026) into the IQ framework (shipping 2027)
+
+**My Approach:**
+Don't fight the constraints—use them. The existing features weren't legacy. They just needed a better home.`,
     },
     {
       id: 'section-06',
       index: 'N',
-      title: 'Strategic Outcomes',
-      summary: 'How architectural unification drove organizational alignment before a single line of code was shipped.',
-      body: `Before production rollout (summer 2026), usability tests validated the approach. The prototype was convincing enough that 3 PMs abandoned standalone roadmaps to commit to unified IQ.
+      title: 'Strategic Impact',
+      summary: 'From scattered features to platform differentiator.',
+      body: `**Business Outcomes:**
+- **Competitive Positioning:** WebFOCUS can now market DSML as a first-class feature, not a hidden capability
+- **HUB Adoption:** IQ Plugin gives users a reason to live in the Hub
+- **DSML Adoption:** One-click access means users actually discover and use the features
 
-The patterns defined for IQ became the official standard for all future Data Science tools in WebFOCUS.`,
+**What I Delivered:**
+Not just designs—I defined the product. The PM had a vision; I built the reality. Tickets, specs, requirements—all came after the design was done.
+
+**Shipping 2027.** NLQ and Insights in 9.3.6 now. ML Functions in 2026. IQ Plugin brings it all home.`,
     },
   ],
   // ----------------------------
@@ -463,38 +492,38 @@ The patterns defined for IQ became the official standard for all future Data Sci
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Diagnosed the architectural fracture: 3 engines, 0 shared roads. Identified the Guided Complexity differentiator.',
-        systemLogic: "diagnose(silos[3]).identify(MarketGap);",
+        description: 'Identified the real problem: not broken features, but invisible ones. 3 powerful tools nobody could find.',
+        systemLogic: "diagnose(discoverability).not(quality);",
       },
       {
         letter: 'E',
-        title: 'Mapping the Ecosystem',
-        description: 'Mapped 4 user mental models. Designed dual-layer architecture serving both data scientists and business analysts.',
-        systemLogic: "map(personas[4]).toPolymorphicWorkflow();",
+        title: 'Empathize Broadly',
+        description: 'PM had an idea. I had to build everything else—architecture, flows, onboarding, the whole product vision.',
+        systemLogic: "buildProduct(fromScratch).noRequirements();",
       },
       {
         letter: 'S',
-        title: 'Architectural Convergence',
-        description: '3 disparate workflows → 1 unified pipeline. Progressive disclosure preserved depth while raising the floor.',
-        systemLogic: "converge([Insights, NLQ, Predict]).into(IQPlugin);",
+        title: 'Simplify Relentlessly',
+        description: '3 tools, 3 places → 1 hub, 1 click. Unified dataset selection. Tutorials built-in.',
+        systemLogic: "consolidate([NLQ, Insights, ML]).into(IQHub);",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Validated with both technical and non-technical users. Refined Discover page based on feedback.',
-        systemLogic: "validate(DiscoverPage).with(allPersonas);",
+        description: 'Validated with 4 personas across comfort levels. Discover page refined through testing.',
+        systemLogic: "validate(IQHub).with(allPersonas);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Aligned 3 PMs around shared patterns. Moved org from Feature Teams to Platform Thinking.',
-        systemLogic: "align(PMs[3]).shift(FeatureTeams, PlatformThinking);",
+        description: 'Built within existing HUB ecosystem. Respected patterns while pushing them forward.',
+        systemLogic: "design(within).constraints(existingHUB);",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'IQ is now the official North Star for WebFOCUS 2026. Design specs complete; engineering active.',
-        systemLogic: "export { IQ } as WebFOCUS.roadmap.northStar;",
+        description: 'Shipping 2027. NLQ + Insights live now. ML Functions in 2026. IQ Plugin brings it all home.',
+        systemLogic: "ship(IQPlugin).timeline(2027);",
       },
     ],
   },
@@ -502,14 +531,14 @@ The patterns defined for IQ became the official standard for all future Data Sci
   // IMPACT SUMMARY
   // ----------------------------
   impactSummary: {
-    heading: 'Impact & Outcomes at a Glance',
+    heading: 'Impact & Outcomes',
     bullets: [
-      'Centralized DSML capabilities into a single, unified entry point.',
-      'Reduced learning curve via guided experiences and Discover content.',
-      'Positive feedback from internal stakeholders and usability testing.',
-      'Created a scalable pattern for future DSML features.',
-      'Made DSML approachable for non-technical users without sacrificing depth for technical users.',
-      'Competitive positioning with leading BI platforms while being more approachable.',
+      '3 scattered features → 1 unified DSML Hub',
+      '1-click discoverability (down from 2+ clicks across different contexts)',
+      'Built-in tutorials and documentation for self-service adoption',
+      'Unified dataset selection across all 3 features',
+      'Competitive positioning against Power BI, Tableau, Qlik',
+      'PM had the idea. I built the entire product.',
     ],
   },
   // ----------------------------
@@ -517,16 +546,16 @@ The patterns defined for IQ became the official standard for all future Data Sci
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `IQ unified DSML into one cohesive experience—making data science accessible from technical experts to everyday business users.
+    body: `This wasn't a design execution project. The PM came to me with a concept—"bring these features together"—and I built everything else. The architecture. The flows. The Discover page. The tutorial system. The tickets came after the designs.
 
-The patterns I developed here became part of my design vocabulary: progressive disclosure, dual-layer UX, ecosystem thinking. Advanced analytics doesn't have to be intimidating.`,
+IQ Plugin turns WebFOCUS into a DSML-first platform. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. That's what discoverability looks like.`,
     keyPoints: [
-      'Unified DSML capabilities into a single, approachable entry point.',
-      'Designed for multiple personas representing different user types and DSML comfort levels.',
-      'Applied progressive disclosure and dual-layer UX to balance simplicity with power.',
-      'Created a scalable pattern for future DSML features within WebFOCUS.',
-      'Competitive positioning with leading BI platforms while being more approachable.',
-      'Strengthened ability to design advanced capabilities for real people.',
+      'Built entire product vision from a PM\'s napkin idea',
+      '3 tools → 1 hub. One-click access to all DSML capabilities.',
+      'Discover page with tutorials, documentation, and video links',
+      'Unified dataset selection—pick once, explore across all features',
+      'Shipping 2027. NLQ + Insights live now. ML Functions in 2026.',
+      'This is what it looks like when design leads product, not follows it.',
     ],
   },
   // ----------------------------
