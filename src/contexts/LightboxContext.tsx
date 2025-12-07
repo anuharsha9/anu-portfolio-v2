@@ -9,8 +9,14 @@ interface LightboxImage {
   caption?: string
 }
 
+// Flexible type to handle multiple calling conventions
+type OpenLightboxArgs = 
+  | [image: LightboxImage, images?: LightboxImage[], startIndex?: number]
+  | [src: string, alt: string, caption?: string]
+  | [images: LightboxImage[], startIndex: number]
+
 interface LightboxContextType {
-  openLightbox: (image: LightboxImage, images?: LightboxImage[], startIndex?: number) => void
+  openLightbox: (...args: OpenLightboxArgs) => void
   closeLightbox: () => void
   isOpen: boolean
 }
@@ -23,7 +29,39 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
   const [imageSet, setImageSet] = useState<LightboxImage[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const openLightbox = useCallback((image: LightboxImage, images?: LightboxImage[], startIndex?: number) => {
+  // Flexible openLightbox that handles multiple calling conventions
+  const openLightbox = useCallback((...args: OpenLightboxArgs) => {
+    // Case 1: openLightbox(images[], startIndex) - array of images with index
+    if (Array.isArray(args[0])) {
+      const images = args[0] as LightboxImage[]
+      const startIndex = (args[1] as number) ?? 0
+      if (images.length > 0) {
+        setCurrentImage(images[startIndex] || images[0])
+        setImageSet(images)
+        setCurrentIndex(startIndex)
+        setIsOpen(true)
+      }
+      return
+    }
+
+    // Case 2: openLightbox(src, alt, caption?) - string arguments
+    if (typeof args[0] === 'string') {
+      const src = args[0]
+      const alt = args[1] as string
+      const caption = args[2] as string | undefined
+      const image: LightboxImage = { src, alt, caption }
+      setCurrentImage(image)
+      setImageSet([image])
+      setCurrentIndex(0)
+      setIsOpen(true)
+      return
+    }
+
+    // Case 3: openLightbox(image, images?, startIndex?) - object with optional array
+    const image = args[0] as LightboxImage
+    const images = args[1] as LightboxImage[] | undefined
+    const startIndex = args[2] as number | undefined
+    
     setCurrentImage(image)
     if (images && images.length > 0) {
       setImageSet(images)

@@ -39,6 +39,8 @@ export default function ImageLightbox({
   
   // Store scroll position in ref to persist across re-renders
   const scrollPositionRef = useRef<number>(0)
+  // Track if scroll was locked (to properly restore on close)
+  const wasLockedRef = useRef(false)
 
   // Navigation state
   const hasNavigation = images && images.length > 1 && onNavigate
@@ -79,29 +81,26 @@ export default function ImageLightbox({
     setImageLoaded(false)
   }, [imageSrc])
 
-  // Scroll lock - only runs when isOpen changes
+  // Scroll lock - properly tracks open/close state
   useEffect(() => {
-    if (isOpen) {
-      // Capture scroll position ONCE when opening
+    if (isOpen && !wasLockedRef.current) {
+      // Opening - capture scroll position and lock
       scrollPositionRef.current = window.scrollY
       document.body.style.position = 'fixed'
       document.body.style.top = `-${scrollPositionRef.current}px`
       document.body.style.width = '100%'
       document.body.style.overflow = 'hidden'
-    }
-    
-    return () => {
-      if (isOpen) {
-        // Restore scroll position when closing
-        document.body.style.position = ''
-        document.body.style.top = ''
-        document.body.style.width = ''
-        document.body.style.overflow = ''
-        // Use requestAnimationFrame to ensure DOM is ready
-        requestAnimationFrame(() => {
-          window.scrollTo(0, scrollPositionRef.current)
-        })
-      }
+      wasLockedRef.current = true
+    } else if (!isOpen && wasLockedRef.current) {
+      // Closing - restore scroll position
+      const scrollY = scrollPositionRef.current
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
+      document.body.style.overflow = ''
+      wasLockedRef.current = false
+      // Restore scroll position after styles are cleared
+      window.scrollTo(0, scrollY)
     }
   }, [isOpen])
 
