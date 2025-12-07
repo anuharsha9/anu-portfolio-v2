@@ -181,7 +181,7 @@ const IQCompetitiveAnalysis = dynamic(() => import('./IQCompetitiveAnalysis'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const IQDualPersonaJourney = dynamic(() => import('./IQDualPersonaJourney'), {
+const IQBusinessCase = dynamic(() => import('./IQBusinessCase'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -1502,6 +1502,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQWorkflowsBuilt isLightBackground={true} />
                     </MotionSection>
+                    {/* Business Case - Why IQ Plugin Exists */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <IQBusinessCase isLightBackground={true} />
+                      </div>
+                    </MotionSection>
                     {/* Strategic Release Log */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQPluginTimeline isLightBackground={true} />
@@ -1529,20 +1535,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           isLightBackground={true}
                         >
                           <IQPersonaCards isLightBackground={true} />
-                        </LockedContent>
-                      </div>
-                    </MotionSection>
-                    {/* Dual-Path Architecture */}
-                    <MotionSection className="surface-light py-8 md:py-12">
-                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <LockedContent
-                          isUnlocked={showPasswordContent}
-                          password="anu-access"
-                          caseStudySlug={data.slug}
-                          unlockMessage="Password required to view interface architecture"
-                          isLightBackground={true}
-                        >
-                          <IQDualPersonaJourney isLightBackground={true} />
                         </LockedContent>
                       </div>
                     </MotionSection>
