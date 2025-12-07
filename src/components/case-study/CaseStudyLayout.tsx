@@ -1506,29 +1506,19 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                 {/* IQ Plugin - Section 01 (D - System Diagnosis) */}
                 {section.id === 'section-01' && data.slug === 'iq-plugin' && (
                   <>
-                    {/* What I Built - The 3 Workflows (PUBLIC) */}
-                    <MotionSection className="surface-light py-8 md:py-12">
-                      <IQWorkflowsBuilt isLightBackground={true} />
-                    </MotionSection>
-                    {/* NLQ & Insights Deep Dive (PUBLIC) */}
-                    <MotionSection className="surface-light py-8 md:py-12">
-                      <IQNLQInsightsShowcase isLightBackground={true} />
-                    </MotionSection>
-                    {/* Business Case - Why IQ Plugin Exists */}
+                    {/* 1. The Problem First (PUBLIC) */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <IQBusinessCase isLightBackground={true} />
                       </div>
                     </MotionSection>
-                    {/* Strategic Release Log */}
+                    {/* 2. What I Owned - The 3 Workflows (PUBLIC) */}
                     <MotionSection className="surface-light py-8 md:py-12">
-                      <IQPluginTimeline isLightBackground={true} />
+                      <IQWorkflowsBuilt isLightBackground={true} />
                     </MotionSection>
-                    {/* Market Gap Analysis */}
+                    {/* 3. NLQ & Insights Deep Dive (PUBLIC) */}
                     <MotionSection className="surface-light py-8 md:py-12">
-                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <IQCompetitiveAnalysis isLightBackground={true} />
-                      </div>
+                      <IQNLQInsightsShowcase isLightBackground={true} />
                     </MotionSection>
                   </>
                 )}
@@ -1646,11 +1636,24 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
                 {/* IQ Plugin Visuals - Section 06 (N - Strategic Outcomes) */}
                 {section.id === 'section-06' && data.slug === 'iq-plugin' && (
-                  <MotionSection className="surface-light py-8 md:py-12">
-                    <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                      <IQValidationSources isLightBackground={true} />
-                    </div>
-                  </MotionSection>
+                  <>
+                    {/* Strategic Timeline */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <IQPluginTimeline isLightBackground={true} />
+                    </MotionSection>
+                    {/* Competitive Positioning */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <IQCompetitiveAnalysis isLightBackground={true} />
+                      </div>
+                    </MotionSection>
+                    {/* Validation Sources */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <IQValidationSources isLightBackground={true} />
+                      </div>
+                    </MotionSection>
+                  </>
                 )}
 
               </div>

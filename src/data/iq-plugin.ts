@@ -3,14 +3,14 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const iqPluginCaseStudy: CaseStudyData = {
   slug: 'iq-plugin',
   heroTitle: 'IQ PLUGIN',
-  heroSubheading: 'Designing for Business Outcomes',
+  heroSubheading: 'Unifying DSML Inside WebFOCUS',
   heroSubtitle:
-    'Three powerful features, scattered across the platform. The PM had an idea to bring them together. I figured out how to make it work—and make it easy.',
+    'Three powerful features. Scattered across the platform. I brought them together—and owned every piece of the journey.',
   coverImage: {
     src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
     alt: 'IQ Plugin Discover Page - Navigation Tiles',
   },
-  role: 'UX Lead / Product Designer (Built from scratch)',
+  role: 'Principal Product Designer (Full Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
   timeframe: '2023–2025',
   status: {
@@ -31,50 +31,50 @@ export const iqPluginCaseStudy: CaseStudyData = {
     title: 'IQ Plugin — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
     whatTheSystemWas:
-      'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
+      'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
     myRole:
-      'I owned all three DSML workflows—NLQ, Insights, AND the IQ Hub that unified them. Not just the hub: I designed each individual feature\'s UI, ensured pattern consistency across all three, and made everything responsive. PM had the idea to unify; I built every piece of it.',
+      'I owned everything. Designed NLQ. Designed Insights. Designed the IQ Hub that unified them. Made all three responsive. Ensured every pattern matched. PM had the idea; I built the reality.',
     scopeOfPractice: [
       {
         tag: 'FULL_OWNERSHIP',
         tagColor: 'blue',
         headline: 'Owned All 3 Workflows',
-        body: 'Not just the hub—**I owned NLQ, Insights, AND IQ Plugin**. Designed each feature\'s complete UI and workflow.',
+        body: 'NLQ, Insights, AND the IQ Hub. Every screen, every flow, every interaction—mine.',
         icon: 'architect',
       },
       {
-        tag: 'SYSTEM_CONSISTENCY',
+        tag: 'PATTERN_PARITY',
         tagColor: 'amber',
-        headline: 'Unified the Patterns',
-        body: '**Ensured UI, structure, and interactions matched** across all 3 features. Learn one, know them all.',
+        headline: '100% Consistency',
+        body: 'Same patterns across all 3 features. Learn one, know them all.',
         icon: 'archaeologist',
       },
       {
-        tag: 'RESPONSIVE_DESIGN',
+        tag: 'RESPONSIVE',
         tagColor: 'purple',
-        headline: 'Made It All Responsive',
-        body: 'Spent significant effort making **all 3 features work across screen sizes**. Enterprise BI, mobile-ready.',
+        headline: 'All 3 Responsive',
+        body: 'Enterprise BI on any screen. All features, all breakpoints.',
         icon: 'strategist',
       },
       {
-        tag: 'PERSONA_RESEARCH',
+        tag: 'PERSONAS',
         tagColor: 'emerald',
-        headline: 'Built 2 New Personas',
-        body: '**Created 2 business user personas** from scratch. Inherited 2 technical personas. 4 total guiding the design.',
+        headline: '2 Created + 2 Inherited',
+        body: 'Built business user personas from scratch. Mapped all 4 into the system.',
         icon: 'multiplier',
       },
     ],
     impactMetrics: [
-      { label: 'Tools consolidated', value: '3-in-1' },
-      { label: 'Clicks reduced', value: '-70%' },
+      { label: 'Workflows owned', value: '3' },
+      { label: 'Pattern parity', value: '100%' },
       { label: 'Entry points', value: '1' },
-      { label: 'Adoption increase', value: '↑ Projected' },
+      { label: 'Personas mapped', value: '4' },
     ],
     star: {
-      situation: 'Three DSML features existed but were scattered. Users didn\'t know they existed. Competitors were eating our lunch.',
-      task: 'Create a unified DSML hub to drive discoverability and adoption—with almost no requirements.',
-      action: 'Built the entire product vision from scratch. Designed the hub, the flows, the tutorial system, the Discover page. PM created tickets after I finished.',
-      result: 'IQ Plugin: One-click access to all DSML. Built-in tutorials. Unified dataset selection. Shipping 2027.',
+      situation: 'Three DSML features existed but were invisible. Different entry points, different patterns, low adoption.',
+      task: 'Unify them. Make them discoverable. Drive adoption.',
+      action: 'Owned everything—NLQ, Insights, AND the hub. Built the architecture, the flows, the tutorial system. Ensured pattern consistency. Made everything responsive.',
+      result: 'IQ Plugin: One-click access to all DSML. Pattern parity across features. Shipping 2027.',
     },
     technologies: [
       'Figma',
@@ -86,14 +86,12 @@ export const iqPluginCaseStudy: CaseStudyData = {
       'Stakeholder Alignment',
     ],
     keyAchievements: [
-      'Unified three fragmented DSML features into one cohesive experience',
-      'Only designer who worked on all major WebFOCUS features; owned entire IQ Plugin initiative solo while simultaneously leading ReportCaster and ML Functions',
-      'Established IQ patterns as foundational for entire DSML experience; seamless integrations across WebFOCUS ecosystem',
-      'Mapped distinct user journeys for multiple personas representing different DSML comfort levels',
-      'Created dual-layer UX balancing guided simplicity with expert flexibility',
-      'Built scalable pattern for future DSML features',
-      'Delivered organization-wide design demos to 150-200 person business unit, presenting IQ Plugin design strategy',
-      'Ensured competitive positioning with leading BI platforms',
+      'Owned all 3 DSML workflows: NLQ, Insights, and the IQ Hub',
+      'Achieved 100% pattern consistency across all features',
+      'Made all features fully responsive across screen sizes',
+      'Created 2 business user personas; inherited 2 technical',
+      'Defined product vision with minimal requirements—PM created tickets after design was done',
+      'Competitive positioning against Power BI, Tableau, Qlik',
     ],
     dataSheetUrl: 'https://www.ibi.com/products/ibi-webfocus',
     dataSheetLabel: 'View WebFOCUS Product Page',
@@ -105,34 +103,33 @@ export const iqPluginCaseStudy: CaseStudyData = {
   // ----------------------------
   // VERSION TIMELINE
   // ----------------------------
-  // No version timeline for IQ Plugin case study
   versionTimeline: [],
   // ----------------------------
   // UX PRINCIPLES (Public)
   // ----------------------------
   uxPrinciples: {
-    title: 'Architectural Directives',
-    intro: 'Defining the immutable rules that govern interaction logic across the unified platform.',
+    title: 'Design Principles',
+    intro: 'The rules that governed every decision across all three features.',
     principles: [
       {
-        title: 'The Speed Invariant.',
+        title: 'Pattern Parity',
         description:
-          'The system must support sub-second execution for experts (via shortcuts) *without* breaking the guided "Happy Path" for novices. Dual velocity is non-negotiable.',
+          'Learn NLQ, know Insights, know Predict. Same navigation, same data selection, same error handling. Interaction cost stays constant.',
       },
       {
-        title: 'The Unification Invariant.',
+        title: 'Progressive Disclosure',
         description:
-          'Interaction cost must remain identical across all modules. If you learn to query "Insights", you effectively know how to train "Predict". Pattern parity is mandatory.',
+          'Business users get guided paths. Power users get advanced controls. Same interface, different depths. Complexity exists but hides until needed.',
       },
       {
-        title: 'The Discovery Invariant.',
+        title: 'Cognitive Offloading',
         description:
-          'The system absorbs the "Thinking Cost." Tooltips and contextual guides preemptively surface knowledge before the user realizes they need it. Cognitive offloading by design.',
+          'The system does the thinking. Tooltips surface before users need them. Tutorials live inside the interface. Nobody has to guess.',
       },
       {
-        title: 'The Signal Invariant.',
+        title: 'One Click Away',
         description:
-          'Complexity is preserved but concealed. Advanced configurations exist in the DOM but remain hidden until an explicit "Show Advanced" signal is received. Complexity abstraction without loss.',
+          'Every DSML feature accessible from Hub homepage. No hunting through menus. No switching contexts. One click to any workflow.',
       },
     ],
   },
@@ -143,132 +140,45 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'Discover Deeply: The Foundation',
-      summary: 'Three workflows. Three entry points. All designed by me.',
-      // Body and images removed - IQWorkflowsBuilt component handles this visually
+      title: 'Discover: The Strategic Problem',
+      summary: 'Not broken. Just invisible.',
+      // Components: IQBusinessCase, then IQWorkflowsBuilt + IQNLQInsightsShowcase showing what I owned
     },
     {
       id: 'section-02',
       index: 'E',
-      title: 'Empathize with the Ecosystem: Who Are We Building For?',
-      summary: '2 personas created. 2 inherited. All 4 mapped into the new system.',
-      // Body removed - IQPersonaCards component handles this with better visuals
-      images: [
-      ],
+      title: 'Empathize: Who We\'re Building For',
+      summary: 'Business users, not just BI experts.',
+      // Components: IQPersonaCards (locked)
     },
     {
       id: 'section-03',
       index: 'S',
-      title: 'Simplify the Chaos: The IQ Hub Architecture',
-      summary: 'One click to access any of the 3 tools. Unified dataset selection. Built-in tutorials.',
-      body: `**The Core Value Proposition:**
-IQ Plugin creates a DSML Hub inside the main WebFOCUS Hub. One-click discoverability to access NLQ, Insights, or ML—features that previously required hunting through menus and switching contexts.
-
-**Key Design Decisions:**
-1. **Unified Dataset Selection:** Select one dataset, explore it across all 3 features. No re-selecting.
-2. **Discover Page:** Not just a landing page—a learning hub with tutorials, documentation, and video links.
-3. **Consistent Patterns:** Learn one workflow, know them all. Pattern parity across features.
-4. **Progressive Disclosure:** Business users get guided paths. Power users get advanced controls. Same interface.`,
-      images: [
-        {
-          src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
-          alt: 'IQ Plugin - 3 in 1 Hub visual',
-          caption: 'IQ Plugin visual: 3 in 1 IQ Hub — unified entry point bringing together Automated Insights, NLQ, and Predict Data into one cohesive experience.',
-          fullWidth: true,
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/IQ Wireframes.png',
-          alt: 'IQ Plugin wireframes',
-          caption: 'Low-fidelity wireframes for IQ components',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
-          alt: 'IQ Plugin navigation tiles',
-          caption: 'IQ navigation tiles showing the four pillars: Automated Insights, Ask a Question, Predict Data, and Discover.',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/Structure Layout in HUB 1.png',
-          alt: 'IQ Plugin structure layout in HUB',
-          caption: 'IQ Plugin structure and layout within the WebFOCUS Hub.',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/iq-plugin/Mockups for IQ Plugin Reponsive UI 1.png',
-          alt: 'IQ Plugin responsive UI mockups',
-          caption: 'Responsive UI mockups showing IQ across different screen sizes',
-          sensitive: true,
-        },
-      ],
-      subsections: [
-        {
-          title: 'The Evolution of the IQ Plugin',
-          description: 'Design evolution showing the iterative process from early concept through multiple iterations to the final design.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/iq-plugin/Early concept.png',
-              alt: 'IQ Plugin - Early concept',
-              caption: 'Early concept exploration for IQ Plugin',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/iq-plugin/Iteration 8.png',
-              alt: 'IQ Plugin - Iteration 8',
-              caption: 'Design iteration 8: Further refinements based on testing',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/iq-plugin/Iteration 12.png',
-              alt: 'IQ Plugin - Iteration 12',
-              caption: 'Design iteration 12: Final refinements before high-fidelity',
-              sensitive: true,
-            },
-          ],
-        },
-      ],
+      title: 'Simplify: The Architecture',
+      summary: 'Three tools. One hub. Every pattern unified.',
+      // Components: IQPluginArchitecture, IQArchitectureBlueprint (locked), IQEvolution (locked)
     },
     {
       id: 'section-04',
       index: 'I',
-      title: 'Iterate with Inclusion: Current vs. IQ Plugin',
-      summary: 'Same features. Better discoverability. One unified hub.',
-      body: `Three features existed in WebFOCUS 9.3.6. Not legacy—just scattered. NLQ and Insights buried in the Plus menu. ML hidden in the Reporting Server.
-
-IQ Plugin brings them home. Same capabilities, now in one place. Drag the sliders below to compare.`,
+      title: 'Iterate: Before & After',
+      summary: 'Same features. Better together.',
+      body: 'Drag the sliders to see the transformation.',
+      // Components: IQIterationLog, IQWorkflowComparison
     },
     {
       id: 'section-05',
       index: 'G',
-      title: 'Grow Through Constraints',
-      summary: 'Building a new product layer within an existing ecosystem.',
-      body: `**Technical Reality:**
-IQ Plugin lives inside WebFOCUS Hub. Every design decision had to respect existing patterns while pushing them forward.
-
-**The Balancing Act:**
-- Couldn't break existing NLQ/Insights users who knew the old entry points
-- Had to make new entry point compelling enough that users would switch
-- Needed to accommodate ML Functions redesign (shipping 2026) into the IQ framework (shipping 2027)
-
-**My Approach:**
-Don't fight the constraints—use them. The existing features weren't legacy. They just needed a better home.`,
+      title: 'Grow: Constraints & Decisions',
+      summary: 'Building inside an existing ecosystem.',
+      // Components: IQEmptyStateShowcase
     },
     {
       id: 'section-06',
       index: 'N',
-      title: 'Navigate Forward: Strategic Impact',
-      summary: 'From scattered features to platform differentiator.',
-      body: `**Business Outcomes:**
-- **Competitive Positioning:** WebFOCUS can now market DSML as a first-class feature, not a hidden capability
-- **HUB Adoption:** IQ Plugin gives users a reason to live in the Hub
-- **DSML Adoption:** One-click access means users actually discover and use the features
-
-**What I Delivered:**
-Not just designs—I defined the product. The PM had a vision; I built the reality. Tickets, specs, requirements—all came after the design was done.
-
-**Shipping 2027.** NLQ and Insights in 9.3.6 now. ML Functions in 2026. IQ Plugin brings it all home.`,
+      title: 'Navigate: Impact',
+      summary: 'What shipped. What\'s shipping.',
+      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. IQ Plugin unifies everything in 2027.',
     },
   ],
   // ----------------------------
@@ -278,7 +188,6 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
     title: 'Transformation in Motion',
     description:
       'See the transformation unfold in real-time. Compare the three fragmented workflows with the new unified IQ Plugin design.',
-    // Multiple before videos (3 old fragmented workflows) vs 1 new consolidated workflow
     multiBeforeAfter: {
       before: {
         title: 'Fragmented Workflows',
@@ -307,20 +216,20 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
         title: 'Unified IQ Plugin',
         videoUrl: '/videos/iq-prototype-walkthrough.mp4',
         videoPoster: '/images/case-study/iq-plugin/iq-prototype-poster.jpg',
-        description: 'The new unified IQ Plugin: all three DSML capabilities (NLQ, Insights, Predict Data) consolidated into one cohesive entry point with consistent patterns.',
+        description: 'The new unified IQ Plugin: all three DSML capabilities consolidated into one cohesive entry point.',
       },
       comparisonNotes: {
         before: [
           'Three separate entry points',
-          'Different mental models for each feature',
+          'Different patterns for each feature',
           'Users had to hunt for features',
-          'Intimidating for non-technical users',
+          'Intimidating for business users',
         ],
         after: [
           'Single unified entry point',
-          'Consistent patterns across all features',
-          'All DSML capabilities in one place',
-          'Approachable for all user types',
+          'Consistent patterns everywhere',
+          'All DSML in one place',
+          'Approachable for all users',
         ],
       },
     },
@@ -333,38 +242,38 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Identified the real problem: not broken features, but invisible ones. 3 powerful tools nobody could find.',
-        systemLogic: "diagnose(discoverability).not(quality);",
+        description: 'The problem wasn\'t quality—it was visibility. Three powerful tools nobody could find.',
+        systemLogic: "diagnose(visibility).not(quality);",
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Owned all 3 workflows—NLQ, Insights, AND the hub. Ensured pattern consistency across everything.',
-        systemLogic: "own([NLQ, Insights, IQHub]).unify(patterns);",
+        description: 'Built 2 business personas. Inherited 2 technical. Mapped all 4 into unified journeys.',
+        systemLogic: "build(personas).map(journeys);",
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '3 tools, 3 places → 1 hub, 1 click. Made all 3 responsive. Same UI, any screen size.',
-        systemLogic: "consolidate(all).responsive(true);",
+        description: 'Owned all 3 workflows. Unified the patterns. Made everything responsive.',
+        systemLogic: "own(all).unify(patterns).responsive(true);",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Validated with 4 personas across comfort levels. Refined patterns across all 3 features.',
-        systemLogic: "validate(allFeatures).with(allPersonas);",
+        description: 'Validated with all personas. Refined until patterns matched perfectly.',
+        systemLogic: "validate(allPersonas).iterate(toMatch);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Built within existing HUB ecosystem. Every feature respects existing patterns while advancing them.',
-        systemLogic: "design(within).constraints(existingHUB);",
+        description: 'Built within existing Hub. Respected legacy while pushing forward.',
+        systemLogic: "build(within).respect(existing);",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'NLQ + Insights live now. ML in 2026. IQ Plugin unifies all in 2027.',
-        systemLogic: "ship(unified).timeline(2027);",
+        description: 'NLQ + Insights: now. ML: 2026. IQ Plugin: 2027.',
+        systemLogic: "ship(2027);",
       },
     ],
   },
@@ -372,13 +281,13 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // IMPACT SUMMARY
   // ----------------------------
   impactSummary: {
-    heading: 'Impact & Outcomes',
+    heading: 'Impact',
     bullets: [
-      'Owned all 3 workflows: NLQ, Insights, AND the IQ Hub',
-      'Ensured 100% pattern consistency across all 3 features',
-      'Made all 3 features fully responsive across screen sizes',
-      'Built 4 personas from research, SMEs, customer reps, AI',
-      'Created unified dataset selection and onboarding system',
+      'Owned all 3 workflows: NLQ, Insights, IQ Hub',
+      '100% pattern consistency across all features',
+      'All features fully responsive',
+      'Created 2 business personas; inherited 2 technical',
+      'Unified dataset selection and onboarding',
       'Competitive positioning against Power BI, Tableau, Qlik',
     ],
   },
@@ -386,17 +295,14 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // FINAL SUMMARY
   // ----------------------------
   finalSummary: {
-    title: 'The Takeaway',
-    body: `I didn't just create a hub—I owned the entire DSML surface. Designed NLQ. Designed Insights. Designed the IQ Hub that unified them. Made all three responsive. Ensured pattern consistency across every interaction.
-
-PM had the vision to unify. I built every piece of it.`,
+    title: 'The Work',
+    body: 'I owned every piece of the DSML surface. NLQ. Insights. The IQ Hub that unified them. Made all three responsive. Ensured every pattern matched.',
     keyPoints: [
-      'Owned all 3 workflows: NLQ, Insights, AND the IQ Hub',
-      '100% pattern consistency across all features',
-      'All 3 features fully responsive',
-      'Created 2 business user personas; inherited 2 technical',
-      'Unified dataset selection and onboarding system',
-      'Shipping 2027. NLQ + Insights live now. ML in 2026.',
+      'Owned NLQ, Insights, AND IQ Hub',
+      '100% pattern parity',
+      'All features responsive',
+      '4 personas mapped',
+      'Shipping 2027',
     ],
   },
   // ----------------------------
@@ -407,11 +313,10 @@ PM had the vision to unify. I built every piece of it.`,
     description: 'This case study contains confidential company information and cannot be made public. Enter the password to view the full case study.',
     learnItems: [
       'Complete system architecture and information design',
-      'Multi-persona journey mapping and dual-layer UX patterns',
-      'Step-by-step workflow details for NLQ, Insights, and Predict Data',
-      'Competitive analysis and strategic positioning',
-      'Cross-functional collaboration process with PM, engineering, and QA',
-      'Behind-the-scenes design decisions and trade-offs',
+      'Multi-persona journey mapping',
+      'Detailed workflow screens for NLQ, Insights, and Predict Data',
+      'Design evolution and iteration process',
+      'Strategic decisions and trade-offs',
     ],
   },
 }
