@@ -47,6 +47,7 @@ export { default as MLFunctionsTimeline } from './MLFunctionsTimeline'
 
 // Visuals & Media
 export { default as ImageLightbox } from './ImageLightbox'
+export { default as HeroTerminal } from './HeroTerminal'
 export { default as SensitiveImage } from './SensitiveImage'
 export { default as BeforeAfterComparison } from './BeforeAfterComparison'
 

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ImageLightbox from './ImageLightbox'
+import HeroTerminal from './HeroTerminal'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 import CaseStudyNav from './CaseStudyNav'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
@@ -233,34 +234,38 @@ export default function HeroMeta({
                 )}
               </div>
 
-              {/* Right Column: Laptop Visual with Drop Shadow */}
+              {/* Right Column: System Window with Bleed Effect */}
               {coverImage && (
                 <motion.div
-                  className="relative flex items-center justify-center"
+                  className="relative h-[320px] sm:h-[380px] md:h-[420px] lg:h-[460px] overflow-hidden rounded-xl"
                   variants={fadeIn}
                   initial="hidden"
                   animate="visible"
                   transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div
-                    className="relative cursor-pointer hover:scale-[1.02] transition-transform duration-500 w-full"
-                    style={{ maxWidth: '600px' }}
-                    onClick={() => openLightbox(coverImage.src, coverImage.alt)}
+                  {/* The "Cut" Effect - Terminal bleeds off edges */}
+                  <div 
+                    className="absolute top-0 left-0 transform translate-y-2 sm:translate-y-4 lg:translate-y-6 translate-x-2 sm:translate-x-4 lg:translate-x-8 scale-[1.02] sm:scale-105 lg:scale-110 origin-top-left"
+                    style={{ width: 'calc(100% + 40px)' }}
                   >
-                    {/* Drop Shadow */}
-                    <div className="absolute inset-0 translate-y-4 blur-2xl bg-black/10 rounded-3xl scale-95"></div>
-                    
-                    {/* Image */}
-                    <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
-                      <Image
-                        src={coverImage.src}
-                        alt={coverImage.alt}
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                        priority
-                        sizes="(max-width: 1024px) 100vw, 600px"
-                      />
-                    </div>
+                    <HeroTerminal
+                      imageSrc={coverImage.src}
+                      fileName={
+                        caseStudySlug === 'iq-plugin' 
+                          ? 'iq_hub_unified_view.tsx'
+                          : caseStudySlug === 'ml-functions'
+                            ? 'ml_wizard_pipeline.py'
+                            : 'legacy_scheduler_refactor.js'
+                      }
+                      accentColor={
+                        caseStudySlug === 'iq-plugin'
+                          ? '#8B5CF6' // Violet for IQ
+                          : caseStudySlug === 'ml-functions'
+                            ? '#0BA2B5' // Teal for ML
+                            : '#F59E0B' // Amber for RC
+                      }
+                      alt={coverImage.alt}
+                    />
                   </div>
                 </motion.div>
               )}

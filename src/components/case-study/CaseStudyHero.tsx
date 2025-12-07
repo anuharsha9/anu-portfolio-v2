@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ImageLightbox from './ImageLightbox'
 import CaseStudyNav from './CaseStudyNav'
+import HeroTerminal from './HeroTerminal'
 import { heroTitleVariant, heroSubVariant, fadeIn } from '@/lib/animations'
 
 interface CaseStudyHeroProps {
@@ -17,6 +18,12 @@ interface CaseStudyHeroProps {
   heroImage?: {
     src: string
     alt: string
+  }
+  
+  // Terminal style config (new)
+  terminalConfig?: {
+    fileName: string
+    accentColor: string
   }
   
   // Status badge
@@ -38,6 +45,7 @@ export default function CaseStudyHero({
   subtitle,
   scaleMetric,
   heroImage,
+  terminalConfig,
   status,
   scopeTags = [],
   dataSheetUrl,
@@ -187,43 +195,61 @@ export default function CaseStudyHero({
             {/* Right Column: Hero Image */}
             {heroImage && (
               <motion.div
-                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible"
+                className={`relative ${terminalConfig ? 'h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] overflow-hidden' : 'flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible'}`}
                 variants={fadeIn}
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Shadow glow */}
-                <div
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
-                    filter: 'blur(60px)',
-                    width: '85%',
-                    height: '85%',
-                  }}
-                />
-
-                {/* Image Container */}
-                <div
-                  className="relative cursor-pointer hover:opacity-90 transition-opacity w-full z-10"
-                  style={{ maxWidth: '650px' }}
-                  onClick={() => openLightbox(heroImage.src, heroImage.alt)}
-                >
-                  <div
-                    className="relative w-full"
-                    style={{ aspectRatio: '16/10', width: '100%', maxWidth: '650px' }}
+                {terminalConfig ? (
+                  /* Terminal Style with Bleed Effect */
+                  <div 
+                    className="absolute top-0 left-0 right-0 transform translate-y-4 lg:translate-y-8 translate-x-4 lg:translate-x-12 scale-105 lg:scale-110 origin-top-left"
+                    style={{ width: 'calc(100% + 60px)' }}
                   >
-                    <Image
-                      src={heroImage.src}
+                    <HeroTerminal
+                      imageSrc={heroImage.src}
+                      fileName={terminalConfig.fileName}
+                      accentColor={terminalConfig.accentColor}
                       alt={heroImage.alt}
-                      fill
-                      className="object-contain"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 600px"
                     />
                   </div>
-                </div>
+                ) : (
+                  /* Original Style */
+                  <>
+                    {/* Shadow glow */}
+                    <div
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
+                      style={{
+                        background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
+                        filter: 'blur(60px)',
+                        width: '85%',
+                        height: '85%',
+                      }}
+                    />
+
+                    {/* Image Container */}
+                    <div
+                      className="relative cursor-pointer hover:opacity-90 transition-opacity w-full z-10"
+                      style={{ maxWidth: '650px' }}
+                      onClick={() => openLightbox(heroImage.src, heroImage.alt)}
+                    >
+                      <div
+                        className="relative w-full"
+                        style={{ aspectRatio: '16/10', width: '100%', maxWidth: '650px' }}
+                      >
+                        <Image
+                          src={heroImage.src}
+                          alt={heroImage.alt}
+                          fill
+                          className="object-contain"
+                          priority
+                          sizes="(max-width: 1024px) 100vw, 600px"
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </motion.div>
             )}
           </div>
