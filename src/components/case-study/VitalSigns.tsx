@@ -346,25 +346,25 @@ export const reportCasterVitalSigns = [
 // Pre-configured metrics for IQ Plugin case study
 export const iqPluginVitalSigns = [
   {
-    label: 'INTEGRATION',
+    label: 'DSML_HUB',
     value: '3-in-1',
-    context: 'DSML Features Unified',
+    context: 'NLQ + Insights + ML',
   },
   {
-    label: 'TIME_TO_INSIGHT',
-    value: '-70%',
-    context: 'Analysis Speed',
+    label: 'TARGET_AUDIENCE',
+    value: 'Business Users',
+    context: 'Not Just BI Experts',
+  },
+  {
+    label: 'CLICK_REDUCTION',
+    value: '1-Click',
+    context: 'Was 2+ Across Contexts',
     color: 'text-emerald-600',
   },
   {
-    label: 'USER_TIERS',
-    value: '2',
-    context: 'Basic + Advanced',
-  },
-  {
-    label: 'PATTERN_REUSE',
-    value: '100%',
-    context: 'From ML Functions',
+    label: 'PERSONAS_BUILT',
+    value: '4',
+    context: 'Research + SMEs + AI',
   },
 ]
 

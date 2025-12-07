@@ -11,8 +11,8 @@ interface IQPersonaCardsProps {
 
 export default function IQPersonaCards({
   isLightBackground = false,
-  title = 'The Persona Matrix',
-  description = 'The central architectural challenge: Reconciling diametrically opposed needs—**Raw Technical Control** vs. **Guided Simplicity**—within a single interface.'
+  title = 'User Personas',
+  description = 'Built through SME discussions, customer rep interviews, and AI-assisted synthesis. The goal: expand beyond regular BI users to reach **business users** who never touched data science tools before.'
 }: IQPersonaCardsProps) {
   const personas = [
     {
