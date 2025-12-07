@@ -12,7 +12,7 @@ interface IQPersonaCardsProps {
 export default function IQPersonaCards({
   isLightBackground = false,
   title = 'User Personas',
-  description = 'Built through SME discussions, customer rep interviews, and AI-assisted synthesis. The goal: expand beyond regular BI users to reach **business users** who never touched data science tools before.'
+  description = '2 personas created from scratch (SME discussions, customer reps, AI synthesis). 2 inherited from existing research. All 4 mapped into the unified system—targeting business users who never touched data science tools before.'
 }: IQPersonaCardsProps) {
   const personas = [
     {

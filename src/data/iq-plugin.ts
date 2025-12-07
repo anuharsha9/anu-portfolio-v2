@@ -151,14 +151,8 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-02',
       index: 'E',
       title: 'Empathize with the Ecosystem: Who Are We Building For?',
-      summary: 'Business users, not just BI experts. I built personas to prove it.',
-      body: `We had technical users. We wanted business users. I built the research to make the case.
-
-**2 personas created from scratch.** SME discussions, customer reps, AI synthesis. Targeted the business user gap—people who could benefit from DSML but weren't touching our tools.
-
-**2 personas inherited.** Technical users we already understood. I mapped their journeys into the new system.
-
-The architecture and data flows below show how all 4 personas navigate the unified system.`,
+      summary: '2 personas created. 2 inherited. All 4 mapped into the new system.',
+      // Body removed - IQPersonaCards component handles this with better visuals
       images: [
       ],
     },
