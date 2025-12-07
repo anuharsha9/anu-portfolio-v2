@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'Business requirement: increase DSML adoption. PM had an idea—we collaborated on the vision. From there, I drove it. Initiated the technical conversations. Got engineers in the room to understand what was possible. Defined the architecture, designed the flows, built the onboarding and tutorial system. I was the one pushing this forward, week after week.',
+      'Business requirement: increase DSML adoption. PM had an idea—we collaborated on the vision. From there, I drove it. Built user personas through research, SME discussions, customer reps, and AI—targeting business users, not just our regular BI audience. Initiated technical conversations, got engineers in the room. Defined the architecture, designed the flows, built the onboarding and tutorial system.',
     scopeOfPractice: [
       {
         tag: 'PRODUCT_DEFINITION',
@@ -179,12 +179,13 @@ export const iqPluginCaseStudy: CaseStudyData = {
       body: `Business requirement: how do we increase DSML adoption? PM had an idea—bring NLQ, Insights, and ML together. We collaborated on the vision. But I was the one driving it forward.
 
 **What That Meant:**
+- Built user personas from scratch—research, SME discussions, customer reps, AI-assisted synthesis
+- Targeted business users, not just our regular BI tool users. That was the growth opportunity.
 - Initiated conversations with engineering to understand what was feasible
 - Got the right people in the room
 - Defined the architecture and information design
 - Designed the hub navigation, dataset selection, Discover page
 - Built the tutorial and onboarding framework
-- Pushed it forward week after week until it was real
 
 Collaboration with PM? Yes. But I was the driver.`,
       images: [
