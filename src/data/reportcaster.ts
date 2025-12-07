@@ -7,8 +7,8 @@ export const reportcasterCaseStudy: CaseStudyData = {
   heroSubtitle:
     'A journey of taking on a 50-year-old system driven by flooding customer requests for modernization and turning it into clarity, structure, and a scalable future.',
   coverImage: {
-    src: '/images/case-study/ReportCaster/rc-cover.png',
-    alt: 'ReportCaster case study cover image',
+    src: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
+    alt: 'ReportCaster Explorer - Unified Schedule Management',
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',

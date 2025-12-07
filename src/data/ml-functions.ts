@@ -8,8 +8,8 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   heroSubtitle:
     'A true story of bringing practical, accessible machine learning to WebFOCUS users — especially those without data-science backgrounds. Turning a traditionally technical process into a guided, intuitive, low-friction experience.',
   coverImage: {
-    src: '/images/case-study/ml-functions/ml-functions-cover.png',
-    alt: 'ML Functions case study cover image',
+    src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
+    alt: 'ML Functions Confusion Matrix - Model Performance Visualization',
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',

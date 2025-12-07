@@ -7,8 +7,8 @@ export const iqPluginCaseStudy: CaseStudyData = {
   heroSubtitle:
     'Designing a single, intuitive entry point for automated insights, natural language questions, and predictive analytics — so both business users and data experts can actually use data science in their day-to-day work.',
   coverImage: {
-    src: '/images/case-study/iq-plugin/iq-cover.png',
-    alt: 'IQ Plugin case study cover image',
+    src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
+    alt: 'IQ Plugin Discover Page - Navigation Tiles',
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
