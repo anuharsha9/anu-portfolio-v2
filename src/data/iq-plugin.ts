@@ -267,7 +267,120 @@ Validation insight: Non-technical users needed guided entry into NLQ. Technical 
       body: `Prototyped and tested with both technical and non-technical users. Validated that a single interface pattern could serve diametrically opposed needs.
 
 Final architecture: four interconnected pillars (Insights, NLQ, Predict, Discover) sharing consistent patterns—one cohesive system.`,
-      // Note: Workflow details are rendered by IQIterationLog component
+      subsections: [
+        {
+          title: 'IQ NLQ Workflow',
+          description: 'Natural language query workflow within IQ Plugin — from empty state through data selection, query execution, and results visualization.',
+          sensitive: true,
+          images: [
+            {
+              src: '/images/case-study/iq-plugin/IQ - Ask a Question _ Empty State 1.png',
+              alt: 'IQ NLQ - Empty state',
+              caption: 'Empty state with tutorial guidance',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Ask a Question _ Data Selected 1.png',
+              alt: 'IQ NLQ - Data selected',
+              caption: 'Data selected, ready to ask questions',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Ask a Question - Vertical Stacked Bar 1.png',
+              alt: 'IQ NLQ - Chart visualization',
+              caption: 'Results visualized as vertical stacked bar chart',
+              sensitive: true,
+            },
+          ],
+        },
+        {
+          title: 'IQ Insights Workflow',
+          description: 'Automated Insights workflow — generating instant summaries and patterns from datasets with filtering and visualization options.',
+          sensitive: true,
+          images: [
+            {
+              src: '/images/case-study/iq-plugin/IQ - Insights _ Empty State 1.png',
+              alt: 'IQ Insights - Empty state',
+              caption: 'Empty state with data selection prompt',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Insights _ Data Selected 1.png',
+              alt: 'IQ Insights - Data selected',
+              caption: 'Data selected, insights generating',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Insights - Tile View 1.png',
+              alt: 'IQ Insights - Tile view',
+              caption: 'Insights displayed in tile view',
+              sensitive: true,
+            },
+          ],
+        },
+        {
+          title: 'IQ ML Workflow (Predict Data)',
+          description: 'Machine learning workflow within IQ — training models and running predictions with guided 4-step flow.',
+          sensitive: true,
+          images: [
+            {
+              src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Models - landing page - model tile view.png',
+              alt: 'IQ Predict Data - Train models landing',
+              caption: 'Train models landing page with model tiles',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Model Workflow - Compare models.png',
+              alt: 'IQ Predict Data - Compare models',
+              caption: 'Model comparison view',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Model Workflow - Results - Fitted Values.png',
+              alt: 'IQ Predict Data - Model results',
+              caption: 'Model training results with fitted values',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Predict Data - Run Model - results.png',
+              alt: 'IQ Predict Data - Results',
+              caption: 'Model execution results',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Predict Data - Run Model - explanability.png',
+              alt: 'IQ Predict Data - Explanability',
+              caption: 'Model explanability visualization',
+              sensitive: true,
+            },
+          ],
+        },
+        {
+          title: 'IQ Preview Data Workflow',
+          description: 'Preview Data workflow — exploring datasets with key analysis, sample data, and time-series views.',
+          sensitive: true,
+          images: [
+            {
+              src: '/images/case-study/iq-plugin/IQ - Preview Data Sample Tab 1.png',
+              alt: 'IQ Preview Data - Sample tab',
+              caption: 'Sample data tab view',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Preview Data Key Analysis Tab 1.png',
+              alt: 'IQ Preview Data - Key analysis tab',
+              caption: 'Key analysis tab with insights',
+              sensitive: true,
+            },
+            {
+              src: '/images/case-study/iq-plugin/IQ - Preview Data Time-series report tab 1.png',
+              alt: 'IQ Preview Data - Time-series tab',
+              caption: 'Time-series report visualization',
+              sensitive: true,
+            },
+          ],
+        },
+      ],
     },
     {
       id: 'section-05',

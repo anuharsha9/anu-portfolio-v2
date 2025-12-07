@@ -1,23 +1,33 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { ArrowDown, Mail } from 'lucide-react'
 import BrainGears from '@/assets/brain-gears.svg'
-import VideoModal from '@/components/video/VideoModal'
 import { GEAR_LABELS } from '@/data/gear-labels-preserved'
 
+// Gear IDs for rotation setup
 const GEAR_IDS = Object.keys(GEAR_LABELS)
 
-/**
- * HeroSplit - Split screen hero with Designer-Led positioning
- * Left: Editorial text, Right: BrainGears animation
- */
+// Impact metrics for the bottom bar
+const impactMetrics = [
+  { value: '50yr', label: 'Legacy Modernized' },
+  { value: '20M+', label: 'Weekly Schedules' },
+  { value: '75%', label: 'Fewer Clicks' },
+  { value: '100%', label: 'SME Validation' },
+]
+
 export default function HeroSplit() {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [showVideoModal, setShowVideoModal] = useState(false)
   const [hoverText, setHoverText] = useState<string | null>(null)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isClient) return
     const container = containerRef.current
     if (!container) return
 
@@ -29,7 +39,7 @@ export default function HeroSplit() {
         setTimeout(setup, 100)
         return
       }
-      
+
       let brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears-copy')
       if (!brainGearsGroup) {
         brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
@@ -43,7 +53,7 @@ export default function HeroSplit() {
 
         const gearGroups = new Map<string, SVGGElement>()
         GEAR_IDS.forEach((gearId) => {
-          const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
+          const gearGroup = brainGearsGroup!.querySelector<SVGGElement>(`#${gearId}`)
           if (gearGroup) {
             gearGroups.set(gearId, gearGroup)
           }
@@ -55,9 +65,8 @@ export default function HeroSplit() {
 
           const isClockwise = Math.random() > 0.5
           const baseRotationSpeed = 20 + Math.random() * 20
-          const fastRotationSpeed = baseRotationSpeed
           const slowRotationSpeed = baseRotationSpeed / (1 - mainGearSlowDownPercent)
-          const fadeInRotationAmount = (360 / fastRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
+          const fadeInRotationAmount = (360 / baseRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
           const rotationAmountValue = isClockwise ? '360deg' : '-360deg'
 
           gearGroup.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
@@ -77,7 +86,8 @@ export default function HeroSplit() {
           }
         })
 
-        const bgGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]'))
+        // Background gears
+        const bgGears = Array.from(brainGearsGroup!.querySelectorAll<SVGGElement>('[id^="bg-gear-"]'))
         const avgMainGearSpeed = 30
 
         bgGears.forEach((gear) => {
@@ -95,7 +105,7 @@ export default function HeroSplit() {
       }
 
       const setTransformOrigins = () => {
-        const allGears = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="gear-base"], [id^="bg-gear-"], [id^="gear-hover"]')
+        const allGears = brainGearsGroup!.querySelectorAll<SVGGElement>('[id^="gear-base"], [id^="bg-gear-"], [id^="gear-hover"]')
         allGears.forEach((gear) => {
           try {
             const bbox = gear.getBBox()
@@ -110,51 +120,12 @@ export default function HeroSplit() {
         })
       }
 
-      const setupLineDrawing = () => {
-        const linesBackground = brainGearsGroup.querySelector<SVGGElement>('#lines-background')
-        if (!linesBackground) return
-
-        const paths = Array.from(linesBackground.querySelectorAll<SVGPathElement>('path'))
-        if (paths.length === 0) return
-
-        paths.forEach((path) => {
-          path.style.opacity = '0'
-          path.setAttribute('opacity', '0')
-        })
-
-        const durationPerLine = 24000
-        const initialDelay = 3000
-
-        paths.forEach((path) => {
-          setTimeout(() => {
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                try {
-                  const pathLength = path.getTotalLength()
-                  if (pathLength > 0 && !isNaN(pathLength) && isFinite(pathLength)) {
-                    path.style.setProperty('--path-length', String(pathLength))
-                    path.setAttribute('stroke-dasharray', String(pathLength))
-                    path.setAttribute('stroke-dashoffset', String(pathLength))
-                    path.style.opacity = '0'
-                    path.setAttribute('opacity', '0')
-                    const delay = initialDelay
-                    path.style.animation = `line-draw-path ${durationPerLine}ms ease-out ${delay}ms forwards`
-                  }
-                } catch {
-                  // Silent fail
-                }
-              })
-            })
-          }, 100)
-        })
-      }
-
       const setupHoverListeners = () => {
         const allHoverTimeouts = new Map<string, NodeJS.Timeout | null>()
         const eventListeners = new Map<string, { element: Element; type: string; handler: EventListener }[]>()
 
         GEAR_IDS.forEach((gearId) => {
-          const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
+          const gearGroup = brainGearsGroup!.querySelector<SVGGElement>(`#${gearId}`)
           if (!gearGroup) return
 
           const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
@@ -163,12 +134,6 @@ export default function HeroSplit() {
 
           gearGroup.style.pointerEvents = 'none'
           gearBase.style.pointerEvents = 'none'
-          const basePaths = gearBase.querySelectorAll('*')
-          basePaths.forEach((element) => {
-            if (element instanceof SVGElement) {
-              element.style.pointerEvents = 'none'
-            }
-          })
 
           try {
             const bbox = gearBase.getBBox()
@@ -188,16 +153,11 @@ export default function HeroSplit() {
                 overlay.setAttribute('stroke', 'none')
                 overlay.style.pointerEvents = 'auto'
                 overlay.style.cursor = 'pointer'
-                overlay.style.zIndex = '1000'
                 gearGroup.appendChild(overlay)
-              } else {
-                overlay.setAttribute('cx', String(centerX))
-                overlay.setAttribute('cy', String(centerY))
-                overlay.setAttribute('r', String(radius))
               }
             }
           } catch {
-            // Continue anyway
+            // Continue
           }
 
           if (!GEAR_LABELS[gearId]) return
@@ -219,7 +179,7 @@ export default function HeroSplit() {
               allHoverTimeouts.set(gearId, null)
             }
 
-            const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
+            const allActiveGears = brainGearsGroup!.querySelectorAll<SVGGElement>('.gear-main--active')
             allActiveGears.forEach((activeGear) => {
               if (activeGear.id !== gearId) {
                 activeGear.classList.remove('gear-main--active')
@@ -228,10 +188,8 @@ export default function HeroSplit() {
 
             gearGroup.classList.add('gear-main--active')
             const label = GEAR_LABELS[gearId] || ''
-            if (!label) return
-            const singleLineLabel = label.replace(/\n/g, ' • ')
-            if (singleLineLabel.trim()) {
-              setHoverText(singleLineLabel)
+            if (label.trim()) {
+              setHoverText(label)
             }
           }
 
@@ -245,7 +203,7 @@ export default function HeroSplit() {
             hoverTimeout = setTimeout(() => {
               gearGroup.classList.remove('gear-main--active')
               requestAnimationFrame(() => {
-                const activeGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active'))
+                const activeGears = Array.from(brainGearsGroup!.querySelectorAll<SVGGElement>('.gear-main--active'))
                 if (activeGears.length === 0) {
                   setHoverText(null)
                 }
@@ -263,24 +221,9 @@ export default function HeroSplit() {
           if (overlay) {
             overlay.addEventListener('mouseenter', handleEnter)
             overlay.addEventListener('mouseleave', handleLeave)
-            overlay.addEventListener('touchstart', handleEnter, { passive: true })
             listeners.push(
               { element: overlay, type: 'mouseenter', handler: handleEnter },
-              { element: overlay, type: 'mouseleave', handler: handleLeave },
-              { element: overlay, type: 'touchstart', handler: handleEnter }
-            )
-          } else {
-            gearGroup.style.pointerEvents = 'auto'
-            if (gearHover) {
-              gearHover.style.pointerEvents = 'auto'
-            }
-            gearGroup.addEventListener('mouseenter', handleEnter)
-            gearGroup.addEventListener('mouseleave', handleLeave)
-            gearGroup.addEventListener('touchstart', handleEnter, { passive: true })
-            listeners.push(
-              { element: gearGroup, type: 'mouseenter', handler: handleEnter },
-              { element: gearGroup, type: 'mouseleave', handler: handleLeave },
-              { element: gearGroup, type: 'touchstart', handler: handleEnter }
+              { element: overlay, type: 'mouseleave', handler: handleLeave }
             )
           }
 
@@ -291,25 +234,18 @@ export default function HeroSplit() {
           allHoverTimeouts.forEach((timeout) => {
             if (timeout) clearTimeout(timeout)
           })
-          allHoverTimeouts.clear()
           eventListeners.forEach((listeners) => {
             listeners.forEach(({ element, type, handler }) => {
               element.removeEventListener(type, handler)
             })
           })
-          eventListeners.clear()
         }
       }
 
       setTransformOrigins()
       setTimeout(setTransformOrigins, 200)
       setupGearRotations()
-      setupLineDrawing()
-      const hoverCleanup = setupHoverListeners()
-
-      cleanup = () => {
-        if (hoverCleanup) hoverCleanup()
-      }
+      cleanup = setupHoverListeners()
     }
 
     setup()
@@ -317,194 +253,167 @@ export default function HeroSplit() {
     return () => {
       if (cleanup) cleanup()
     }
-  }, [])
+  }, [isClient])
 
   return (
-    <>
-      <section
-        id="hero"
-        className="bg-slate-50 relative min-h-screen flex items-center overflow-hidden border-b border-slate-200"
-      >
-        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
-          {/* Split Layout: Text Left (40%), Gears Right (60%) - Gears more prominent */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-4 items-center py-8 lg:py-0">
-            
-            {/* Left Side - Editorial Text (2 of 5 columns = 40%) */}
-            <motion.div
-              className="order-2 lg:order-1 lg:col-span-2 flex flex-col justify-center space-y-6 md:space-y-8 text-center lg:text-left"
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Headline - Serif Editorial - Swiss Style */}
-              <h1 
-                className="font-serif text-slate-900 leading-[1.1] tracking-tight"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+    <section
+      id="hero"
+      className="bg-slate-50 relative min-h-screen flex items-center overflow-hidden border-b border-slate-200"
+    >
+      <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 py-16 lg:py-0">
+        {/* Split Layout: Text Left (40%), Gears Right (60%) */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center min-h-[80vh]">
+
+          {/* Left Side - Text & CTAs (2 cols = 40%) */}
+          <motion.div
+            className="lg:col-span-2 order-2 lg:order-1 flex flex-col justify-center space-y-6"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Tag */}
+            <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
+              // PRINCIPAL_PRODUCT_DESIGNER
+            </span>
+
+            {/* Headline */}
+            <h1 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
+              Principal Product Designer
+              <span className="block text-slate-500 text-lg md:text-xl lg:text-2xl font-sans font-normal mt-2">
+                Design Systems Architect · AI-Native
+              </span>
+            </h1>
+
+            {/* Subtext */}
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-md">
+              I design through complexity — from Figma to production. Modernizing legacy systems with 50+ years of technical debt.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-start gap-4 pt-2">
+              <a
+                href="#work-overview"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal-700)] transition-all duration-300 hover:scale-105 shadow-sm"
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById('work-overview')?.scrollIntoView({ behavior: 'smooth' })
+                }}
               >
-                Designing through the complexity.
-              </h1>
+                <span>View Case Studies</span>
+                <ArrowDown className="w-4 h-4" />
+              </a>
 
-              {/* Subhead - Monospace Signature - Teal Accent */}
-              <p className="font-mono text-[#0BA2B5] text-sm md:text-base tracking-wide font-medium">
-                Principal Product Designer · Design Systems Architect · AI-Driven
-              </p>
-
-              {/* Body Copy - slate-600 for readability */}
-              <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-                I bridge the gap between complex requirements and clear interfaces. From legacy systems to modern experiences at scale.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-4">
-                {/* Primary CTA - Teal Accent */}
-                <a
-                  href="#work-overview"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all duration-300 hover:scale-105 shadow-sm"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const section = document.getElementById('work-overview')
-                    if (section) {
-                      section.scrollIntoView({ behavior: 'smooth' })
-                    }
-                  }}
-                >
-                  <span>See the Work</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
-
-                {/* Secondary CTA - Clean border style */}
-                <button
-                  onClick={() => setShowVideoModal(true)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-300 text-slate-700 font-medium hover:border-slate-400 hover:bg-white transition-all duration-300"
-                >
-                  <svg className="w-4 h-4 text-[#0BA2B5]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span>My Process</span>
-                </button>
-              </div>
-
-              {/* Thought Inspector - Left column, below CTAs */}
-              <div className="pt-8 min-h-[100px] hidden lg:block">
-                <AnimatePresence mode="wait">
-                  {!hoverText ? (
-                    <motion.div
-                      key="hint"
-                      className="flex items-center gap-3"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <div className="w-8 h-px bg-slate-300" />
-                      <motion.span 
-                        className="font-mono text-slate-400 text-xs tracking-wide"
-                        animate={{ opacity: [0.5, 1, 0.5] }}
-                        transition={{ duration: 2.5, repeat: Infinity }}
-                      >
-                        Hover the gears to explore my thinking →
-                      </motion.span>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key={`thought-${hoverText}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="border-l-2 border-[var(--accent-teal)] pl-4"
-                    >
-                      <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest block mb-2">
-                        // THOUGHT
-                      </span>
-                      <p className="font-serif text-slate-700 text-base leading-relaxed italic">
-                        "{hoverText}"
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Right Side - Brain Gears (3 of 5 columns = 60%) - More prominent */}
-            <div className="order-1 lg:order-2 lg:col-span-3 relative gears-light-theme lg:-mr-12 xl:-mr-20">
-              <div
-                ref={containerRef}
-                className="relative w-full max-w-[500px] mx-auto lg:max-w-none lg:scale-110 xl:scale-115 origin-center"
-                style={{ aspectRatio: '1 / 1' }}
+              <a
+                href="mailto:anuja.harsha@gmail.com"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-300 text-slate-700 font-medium hover:border-slate-400 hover:bg-white transition-all duration-300"
               >
-                <motion.div
-                  className="absolute inset-0 pointer-events-auto"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.5, ease: 'easeOut' }}
-                >
-                  <BrainGears
-                    className="h-full w-full"
-                    style={{ pointerEvents: 'auto', opacity: 1 }}
-                    id="brain-gears-svg"
-                  />
-                </motion.div>
-
-                {/* Floating Caption */}
-                <motion.div
-                  className="absolute bottom-4 right-4 md:bottom-8 md:right-8 text-right"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <span className="font-mono text-slate-400 text-xs md:text-sm tracking-wide italic">
-                    Visualizing my mental model
-                  </span>
-                </motion.div>
-              </div>
+                <Mail className="w-4 h-4 text-slate-500" />
+                <span>Get in Touch</span>
+              </a>
             </div>
-          </div>
-        </div>
 
-        {/* Impact Proof Bar - Bottom of Hero */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 border-t border-slate-200/60 bg-white/80 backdrop-blur-sm"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
-            <div className="grid grid-cols-4 divide-x divide-slate-200/60">
-              {[
-                { value: '50yr', label: 'Legacy Modernized' },
-                { value: '20M+', label: 'Weekly Schedules' },
-                { value: '75%', label: 'Fewer Clicks' },
-                { value: '100%', label: 'SME Validation' },
-              ].map((metric, index) => (
+            {/* Gear Inspector - Terminal Log Style (only shows when hovering) */}
+            <AnimatePresence>
+              {hoverText && (
                 <motion.div
-                  key={metric.label}
-                  className="py-4 md:py-5 px-2 md:px-4 text-center"
+                  key="gear-thought"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="mt-6 bg-slate-900 rounded-xl p-4 shadow-xl border border-slate-700/50 backdrop-blur-sm"
                 >
-                  <div className="font-mono text-lg md:text-2xl font-semibold text-[var(--accent-teal)]">
-                    {metric.value}
+                  {/* Window Chrome */}
+                  <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-700/50">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+                    </div>
+                    <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest ml-2">
+                      // THOUGHT_PROCESS
+                    </span>
                   </div>
-                  <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5">
-                    {metric.label}
+                  {/* Thought Content */}
+                  <div className="font-mono text-sm text-slate-300 leading-relaxed">
+                    <span className="text-emerald-400">&gt; </span>
+                    {hoverText}
                   </div>
                 </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </section>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
-      <VideoModal
-        isOpen={showVideoModal}
-        onClose={() => setShowVideoModal(false)}
-        videoSrc="/videos/portfolio-teaser.mp4"
-      />
-    </>
+          {/* Right Side - Brain Gears (3 cols = 60%) */}
+          <motion.div
+            className="lg:col-span-3 order-1 lg:order-2 relative"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div
+              ref={containerRef}
+              className="relative w-full gears-light-theme"
+              style={{
+                aspectRatio: '1943.4 / 1835',
+                transform: 'scale(1.1)',
+                transformOrigin: 'center center'
+              }}
+            >
+              {isClient && (
+                <BrainGears
+                  className="h-full w-full"
+                  style={{ pointerEvents: 'auto' }}
+                  id="brain-gears-svg"
+                />
+              )}
+            </div>
+
+            {/* Caption with Hover Hint */}
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <p className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+                Visualizing my mental model
+              </p>
+              <motion.span
+                animate={{ x: [0, -5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="text-[var(--accent-teal)] font-mono text-xs"
+              >
+                ← Hover to explore
+              </motion.span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Impact Metrics Bar - Bottom */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 border-t border-slate-200/60 bg-white/80 backdrop-blur-sm"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid grid-cols-4 divide-x divide-slate-200/60">
+            {impactMetrics.map((metric, index) => (
+              <motion.div
+                key={metric.label}
+                className="py-4 md:py-5 px-2 md:px-4 text-center"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+              >
+                <div className="font-mono text-lg md:text-2xl font-semibold text-[var(--accent-teal)]">
+                  {metric.value}
+                </div>
+                <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5">
+                  {metric.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </section>
   )
 }
-

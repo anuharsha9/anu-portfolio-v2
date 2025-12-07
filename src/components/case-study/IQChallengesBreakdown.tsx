@@ -37,7 +37,7 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
   }
 
   return (
-      <div className="space-y-8">
+    <div className="space-y-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -84,8 +84,8 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
               </span>
               <p className="text-slate-600 text-sm leading-relaxed">
                 {decision.conflict}
-          </p>
-        </div>
+              </p>
+            </div>
 
             {/* The Resolution */}
             <div className="mt-auto pt-4 border-t border-slate-200">
@@ -97,7 +97,7 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
               </p>
             </div>
           </motion.div>
-          ))}
+        ))}
       </div>
 
       {/* Strategic Insight Footer */}

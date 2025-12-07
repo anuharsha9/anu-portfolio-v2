@@ -28,7 +28,7 @@ export default function TestimonialCard({
       className="bg-white rounded-2xl p-8 border border-slate-200 h-full flex flex-col hover:-translate-y-1 hover:shadow-lg hover:border-[var(--accent-teal)]/30 transition-all duration-300 group relative overflow-hidden"
     >
       {/* Giant Quotation Mark - Subtle Watermark */}
-      <span className="absolute top-4 right-6 text-[80px] md:text-[100px] text-blue-100 font-serif leading-none select-none pointer-events-none">
+      <span className="absolute top-4 right-6 text-[80px] md:text-[100px] text-[var(--accent-teal-100)] font-serif leading-none select-none pointer-events-none">
         &ldquo;
       </span>
 

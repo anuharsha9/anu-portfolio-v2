@@ -40,19 +40,19 @@ export default function Home() {
     <>
       {/* 1. HERO - Who you are + Impact Proof Bar at bottom */}
       <HeroSplit />
-      
+
       {/* 2. WORK GRID - WebFOCUS context + 3 Case Studies */}
       <WorkGrid />
-      
+
       {/* 3. GROWTH STORY - The Transformation (emotional hook) */}
       <GrowthStory />
-      
+
       {/* 4. QUOTE - Social Proof */}
       <FeaturedQuote />
-      
+
       {/* 5. ARCHIVE - Past Work */}
       <CollapsibleWorkArchive />
-      
+
       {/* 6. CONTACT - CTA */}
       <TalkSection />
     </>

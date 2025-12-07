@@ -59,14 +59,14 @@ export default function EmpathizeStrategyGrid({ isLightBackground = true }: Empa
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg"
+          className="bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal-400)] p-6 rounded-r-lg"
         >
           <div className="flex items-start gap-4">
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <Network className="w-5 h-5 text-blue-600" />
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[var(--accent-teal-100)] flex items-center justify-center">
+              <Network className="w-5 h-5 text-[var(--accent-teal)]" />
             </div>
             <div className="space-y-2">
-              <h4 className="font-mono text-xs uppercase tracking-widest text-blue-700">
+              <h4 className="font-mono text-xs uppercase tracking-widest text-[var(--accent-teal-700)]">
                 STRATEGY: THE_PROXY_NETWORK
               </h4>
               <p className="text-slate-700 text-sm leading-relaxed">
@@ -92,4 +92,5 @@ export default function EmpathizeStrategyGrid({ isLightBackground = true }: Empa
     </div>
   )
 }
+
 

@@ -39,7 +39,7 @@ export default function IQValidationSources({ isLightBackground = false }: IQVal
   ]
 
   return (
-      <div className="space-y-8">
+    <div className="space-y-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
@@ -55,11 +55,11 @@ export default function IQValidationSources({ isLightBackground = false }: IQVal
         </h3>
         <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
           How architectural unification drove organizational alignment before a single line of code was shipped.
-          </p>
+        </p>
       </motion.div>
 
       {/* Outcome Matrix - 3 Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {outcomes.map((outcome, index) => {
           const IconComponent = outcome.icon
           return (
@@ -93,7 +93,7 @@ export default function IQValidationSources({ isLightBackground = false }: IQVal
             </motion.div>
           )
         })}
-        </div>
+      </div>
 
       {/* Architect's Log Footer */}
       <motion.div

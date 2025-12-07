@@ -73,7 +73,7 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/50 rounded-full px-4 py-1.5"
+            className="inline-flex items-center gap-2 bg-blue-600/20 text-blue-400 border border-[var(--accent-teal)]/50 rounded-full px-4 py-1.5"
           >
             <Volume2 className="w-4 h-4" />
             <span className="text-sm font-medium">Sound On · Director&apos;s Commentary</span>

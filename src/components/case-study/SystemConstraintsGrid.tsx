@@ -22,8 +22,8 @@ const constraintMeta: Record<string, {
   borderColor: string,
   labelColor: string 
 }> = {
-  '01': { icon: Cpu, borderColor: 'border-l-blue-500', labelColor: 'text-blue-600' },
-  '02': { icon: Network, borderColor: 'border-l-blue-500', labelColor: 'text-blue-600' },
+  '01': { icon: Cpu, borderColor: 'border-l-blue-500', labelColor: 'text-[var(--accent-teal)]' },
+  '02': { icon: Network, borderColor: 'border-l-blue-500', labelColor: 'text-[var(--accent-teal)]' },
   '03': { icon: Undo2, borderColor: 'border-l-emerald-500', labelColor: 'text-emerald-600' },
   '04': { icon: Scale, borderColor: 'border-l-emerald-500', labelColor: 'text-emerald-600' },
 }
