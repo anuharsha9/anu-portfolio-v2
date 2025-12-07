@@ -213,6 +213,10 @@ const IQIterationLog = dynamic(() => import('./IQIterationLog'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
+const IQWorkflowComparison = dynamic(() => import('./IQWorkflowComparison'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
 
 interface CaseStudyLayoutProps {
   data: CaseStudyData
@@ -1293,6 +1297,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                         <IQIterationLog isLightBackground={true} />
                       </LockedContent>
                     </div>
+                  </MotionSection>
+                )}
+
+                {/* IQ Plugin Workflow Comparison - Section 04 (After Iteration Log) */}
+                {section.id === 'section-04' && data.slug === 'iq-plugin' && (
+                  <MotionSection className="surface-light py-0">
+                    <LockedContent
+                      password={data.passwordGate?.password || 'anu-access'}
+                      caseStudySlug={data.slug}
+                      unlockMessage="Password required to view workflow comparison"
+                      isLightBackground={true}
+                    >
+                      <IQWorkflowComparison isLightBackground={true} />
+                    </LockedContent>
                   </MotionSection>
                 )}
 
