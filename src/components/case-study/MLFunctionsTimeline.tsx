@@ -29,9 +29,9 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
       details: 'Added dataset switching without breaking workflows. This landing page became the central hub for all ML operations, eliminating the need to navigate through multiple disconnected interfaces.',
       type: 'milestone' as const,
       evidenceImage: {
-        src: '/images/case-study/ml-functions/Machine learning functions-handdrawn-wireframes.png',
-        alt: 'Hand-drawn wireframes for ML landing page',
-        isBlurred: false,
+        src: '/images/case-study/ml-functions/1. Predict Data - Train Models - Empty State.png',
+        alt: 'Train Models landing page with tiles',
+        isBlurred: true,
       },
     },
     {
