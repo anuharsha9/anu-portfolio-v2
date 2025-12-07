@@ -143,7 +143,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'The Business Case',
+      title: 'Discover Deeply: The Business Case',
       summary: 'Not legacy. Not broken. Just invisible. Three modern features nobody could find.',
       body: `NLQ, Insights, and ML Functions—all shipping in WebFOCUS 9.3.6. Powerful features. Modern implementations. But scattered across the platform like Easter eggs.
 
@@ -174,7 +174,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-02',
       index: 'E',
-      title: 'Building from Nothing',
+      title: 'Empathize with the Ecosystem: Building from Nothing',
       summary: 'PM had an idea. I built the product.',
       body: `The PM walked in with a concept: "What if we brought NLQ, Insights, and ML together?" That was the entire brief. No wireframes. No requirements doc. No tickets. Just an idea.
 
@@ -204,7 +204,7 @@ The PM created Jira tickets *after* I finished the designs. This wasn't design e
     {
       id: 'section-03',
       index: 'S',
-      title: 'The IQ Hub Architecture',
+      title: 'Simplify the Chaos: The IQ Hub Architecture',
       summary: 'One click to access any of the 3 tools. Unified dataset selection. Built-in tutorials.',
       body: `**The Core Value Proposition:**
 IQ Plugin creates a DSML Hub inside the main WebFOCUS Hub. One-click discoverability to access NLQ, Insights, or ML—features that previously required hunting through menus and switching contexts.
@@ -278,7 +278,7 @@ IQ Plugin creates a DSML Hub inside the main WebFOCUS Hub. One-click discoverabi
     {
       id: 'section-04',
       index: 'I',
-      title: 'System Iteration Log',
+      title: 'Iterate with Inclusion: System Iteration Log',
       summary: 'Validating shared patterns across 4 distinct data pillars.',
       body: `Prototyped and tested with both technical and non-technical users. Validated that a single interface pattern could serve diametrically opposed needs.
 
@@ -401,7 +401,7 @@ Final architecture: four interconnected pillars (Insights, NLQ, Predict, Discove
     {
       id: 'section-05',
       index: 'G',
-      title: 'The Constraints',
+      title: 'Grow Through Constraints',
       summary: 'Building a new product layer within an existing ecosystem.',
       body: `**Technical Reality:**
 IQ Plugin lives inside WebFOCUS Hub. Every design decision had to respect existing patterns while pushing them forward.
@@ -417,7 +417,7 @@ Don't fight the constraints—use them. The existing features weren't legacy. Th
     {
       id: 'section-06',
       index: 'N',
-      title: 'Strategic Impact',
+      title: 'Navigate Forward: Strategic Impact',
       summary: 'From scattered features to platform differentiator.',
       body: `**Business Outcomes:**
 - **Competitive Positioning:** WebFOCUS can now market DSML as a first-class feature, not a hidden capability
@@ -497,13 +497,13 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
       },
       {
         letter: 'E',
-        title: 'Empathize Broadly',
-        description: 'PM had an idea. I had to build everything else—architecture, flows, onboarding, the whole product vision.',
-        systemLogic: "buildProduct(fromScratch).noRequirements();",
+        title: 'Empathize with the Ecosystem',
+        description: 'PM had an idea. I owned it from there—architecture, flows, onboarding, tutorial system.',
+        systemLogic: "own(concept).to(productVision);",
       },
       {
         letter: 'S',
-        title: 'Simplify Relentlessly',
+        title: 'Simplify the Chaos',
         description: '3 tools, 3 places → 1 hub, 1 click. Unified dataset selection. Tutorials built-in.',
         systemLogic: "consolidate([NLQ, Insights, ML]).into(IQHub);",
       },
