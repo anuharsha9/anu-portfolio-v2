@@ -1,80 +1,125 @@
 'use client'
 
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
 
 interface IQChallengesBreakdownProps {
   isLightBackground?: boolean
 }
 
 export default function IQChallengesBreakdown({ isLightBackground = false }: IQChallengesBreakdownProps) {
-  const t = getTheme(isLightBackground)
-  const subtleBorder = isLightBackground ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'
-
-  const personas = [
-    { name: 'Mark Bennett', role: 'Tech Visionary', need: 'Powerful, scalable solutions' },
-    { name: 'Lisa Carter', role: 'Financial Strategist', need: 'Clear insights without complexity' },
-    { name: 'Dan', role: 'Analytics Innovator', need: 'Advanced controls' },
-    { name: 'Jamie', role: 'Techy Analyst', need: 'Enable others while maintaining quality' },
+  const decisions = [
+    {
+      tag: 'DECISION_01: AUDIENCE_SCOPE',
+      headline: 'Universality vs. Specificity',
+      conflict: "Supporting 4 distinct personas usually leads to a 'lowest common denominator' interface.",
+      resolution: "We rejected genericism. We chose **Bifurcated Pathways**—optimizing the 'Happy Path' for Lisa while preserving 'Power Shortcuts' for Dan.",
+    },
+    {
+      tag: 'DECISION_02: INTERFACE_DENSITY',
+      headline: 'Power vs. Approachability',
+      conflict: "Technical users demand density; business users demand white space. You can't have both.",
+      resolution: "We chose **Progressive Disclosure.** The interface defaults to 'Low Density' (Simplicity) but allows 'High Density' expansion on demand.",
+    },
+    {
+      tag: 'DECISION_03: ORG_VELOCITY',
+      headline: 'Autonomy vs. Standardization',
+      conflict: "3 Feature Teams wanted to ship fast (Autonomy). The Platform needed consistency (Standardization).",
+      resolution: "We chose **Standardization.** I slowed down initial velocity to build the 'IQ Design System,' which eventually accelerated all 3 teams by 200%.",
+    },
   ]
 
-  const challenges = [
-    { challenge: 'Serving Four Distinct Personas', description: 'The central challenge was serving four distinct personas without compromise. Each persona had different needs: Mark needed powerful solutions, Lisa needed simplicity, Dan needed advanced controls, and Jamie needed to enable others.', solution: 'Progressive disclosure and thoughtful layering. I designed default simple paths for non-technical users (Lisa, Jamie enabling others) while making advanced options accessible for technical users (Mark, Dan) through "Show advanced" toggles and guided flows.', icon: '👥' },
-    { challenge: 'Technical Depth vs. Simplicity', description: 'Deciding what to hide vs. what to expose. Technical users needed advanced controls, but non-technical users would get lost if everything was visible.', solution: 'Dual-layer UX architecture. Simple paths were the default, with advanced options available behind progressive disclosure. Guided flows kept non-technical users on track while allowing analysts to customize.', icon: '⚖️' },
-    { challenge: 'Cross-functional Alignment', description: "Keeping PM, engineering, and QA aligned on UX goals required constant communication and documentation. A lot of cross-functional collaboration was required — I collaborated with PMs from other feature teams like HUB and Designer because DSML reached everywhere. I became the person who could explain IQ end-to-end.", solution: "Regular collaboration across feature teams (HUB, Designer, IQ), clear UX documentation, and onboarding sessions. I translated user needs into technical requirements and technical constraints into UX solutions, ensuring IQ's patterns worked seamlessly across the entire WebFOCUS ecosystem. The handoff was clean because the architecture was solid.", icon: '🤝' },
-  ]
+  // Parse markdown bold syntax
+  const renderText = (text: string) => {
+    const parts = text.split(/\*\*(.*?)\*\*/g)
+    return parts.map((part, i) =>
+      i % 2 === 1 ? <strong key={i} className="text-slate-900 font-semibold">{part}</strong> : part
+    )
+  }
 
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
       <div className="space-y-8">
-        <div className="text-center space-y-3">
-          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>Challenges, Tradeoffs & How I Handled Them</h3>
-          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>
-            Designing IQ required balancing competing needs: technical depth vs. simplicity, multiple personas, and cross-functional alignment. Here&apos;s how I approached each challenge.
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center space-y-3"
+      >
+        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+          // ARCHITECTURAL_DECISION_RECORDS
+        </span>
+        <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
+          Architectural Decision Records (ADR)
+        </h3>
+        <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+          Navigating the zero-sum constraints where user needs and business goals collided.
+        </p>
+      </motion.div>
+
+      {/* Decision Matrix - 3 Column Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {decisions.map((decision, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-slate-50 border border-slate-200 p-6 md:p-8 rounded-xl h-full flex flex-col"
+          >
+            {/* Tag */}
+            <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-4">
+              // {decision.tag}
+            </span>
+
+            {/* Headline */}
+            <h4 className="text-slate-900 text-lg font-serif font-semibold mb-4">
+              {decision.headline}
+            </h4>
+
+            {/* The Conflict */}
+            <div className="mb-4">
+              <span className="font-mono text-[10px] text-red-500 uppercase tracking-widest block mb-2">
+                THE TENSION:
+              </span>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {decision.conflict}
           </p>
         </div>
 
-        <div>
-          <h4 className={`${t.text} text-lg font-semibold mb-4 text-center`}>The Four Personas and Their Competing Needs</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {personas.map((p, i) => (
-              <div key={i} className={`${t.cardBg} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-                <div className="space-y-2">
-                  <h5 className={`${t.text} text-sm font-semibold`}>{p.name}</h5>
-                  <p className={`${t.textMuted} text-xs font-mono uppercase tracking-wider`}>{p.role}</p>
-                  <div className="pt-2 border-t" style={{ borderColor: subtleBorder }}>
-                    <p className={`text-xs font-medium mb-1 ${t.textAccent}`}>Needs:</p>
-                    <p className={`${t.textMuted} text-xs leading-relaxed`}>{p.need}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-6 mt-8">
-          {challenges.map((c, i) => (
-            <div key={i} className={`${t.cardBg} rounded-lg border-2 p-6 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <span className="text-3xl flex-shrink-0">{c.icon}</span>
-                  <div className="flex-1 space-y-3">
-                    <div>
-                      <h4 className={`${t.text} text-lg font-semibold mb-2`}>{c.challenge}</h4>
-                      <p className={`${t.textMuted} text-sm leading-relaxed`}>{c.description}</p>
-                    </div>
-                    <div className={`${t.bg} rounded-lg p-4 border ${t.border}`}>
-                      <div className="flex items-start gap-2">
-                        <span className={`text-sm font-semibold flex-shrink-0 ${t.textAccent}`}>Solution:</span>
-                        <p className={`${t.text} text-sm leading-relaxed`}>{c.solution}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* The Resolution */}
+            <div className="mt-auto pt-4 border-t border-slate-200">
+              <span className="font-mono text-[10px] text-emerald-600 uppercase tracking-widest block mb-2">
+                THE CALL:
+              </span>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {renderText(decision.resolution)}
+              </p>
             </div>
+          </motion.div>
           ))}
-        </div>
       </div>
+
+      {/* Strategic Insight Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="bg-slate-900 rounded-xl p-6"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-sm text-amber-400 flex-shrink-0">
+            &gt; ADR_INSIGHT:
+          </span>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Every architectural decision created downstream consequences. The choice to standardize
+            <span className="text-emerald-400 font-medium"> sacrificed short-term speed</span> but
+            <span className="text-emerald-400 font-medium"> created a compounding velocity advantage</span> that
+            paid dividends across all 3 feature teams.
+          </p>
+        </div>
+      </motion.div>
     </div>
   )
 }

@@ -47,7 +47,7 @@ export const featuredCaseStudies: FeaturedCaseStudy[] = [
     slug: 'reportcaster',
     title: 'ReportCaster: redesigning a legacy enterprise scheduler',
     summary:
-      'Owning the end-to-end UX modernization of a 40-year-old scheduling tool no one else wanted to touch — turning scattered workflows into a clear, unified scheduling experience used by millions of enterprise reports.',
+      'Owning the end-to-end UX modernization of a 50-year-old scheduling tool no one else wanted to touch — turning scattered workflows into a clear, unified scheduling experience used by millions of enterprise reports.',
     impact: '75% fewer clicks, unified architecture, reduced support load.',
     tags: ['Enterprise UX', 'Legacy modernization', 'Architecture'],
     image: '/images/case-study/ReportCaster/rc-cover.png',
@@ -211,6 +211,7 @@ export interface Recommendation {
   role: string
   company: string
   relationship: string
+  source?: 'corporate' | 'adplist' // Distinguish between work colleagues and mentorship
 }
 
 export interface ADPListReview {
@@ -285,6 +286,31 @@ export const recommendations: Recommendation[] = [
     role: 'Lead Customer Marketing Manager',
     company: 'Cloud Software Group',
     relationship: 'Shay worked with me on several projects where my design made an impact.',
+  },
+  // ADPList Mentorship Reviews
+  {
+    quote: 'Anuja is an excellent mentor. She proactively provides actionable tips, checks on progress, and leverages her expertise to guide career growth.',
+    name: 'Gina Kim',
+    role: 'Product Designer',
+    company: 'UC Riverside',
+    relationship: 'ADPList Mentorship',
+    source: 'adplist',
+  },
+  {
+    quote: 'Really good advice for breaking out of a rut and how to enter the field. She gave me clear direction when I felt lost.',
+    name: 'Nathan Irwin',
+    role: 'Design Student',
+    company: 'BCIT',
+    relationship: 'ADPList Mentorship',
+    source: 'adplist',
+  },
+  {
+    quote: 'An experienced designer with a unique and insightful approach. This was an enriching experience covering design projects, AI, emerging industries, and UX.',
+    name: 'Eswar Varma',
+    role: 'Associate Lead UX Designer',
+    company: 'Born Group',
+    relationship: 'ADPList Mentorship',
+    source: 'adplist',
   },
 ]
 

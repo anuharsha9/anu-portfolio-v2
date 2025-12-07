@@ -117,20 +117,47 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
 
   if (isUnlocked) return <>{children}</>
 
+  // Extract a short title from the unlock message
+  const bannerTitle = unlockMessage.includes('discovery') 
+    ? 'Deep Dive: System Discovery Strategy'
+    : unlockMessage.includes('persona') 
+    ? 'Deep Dive: User Personas'
+    : unlockMessage.includes('iteration') 
+    ? 'Deep Dive: Design Iterations'
+    : unlockMessage.includes('mapping') 
+    ? 'Deep Dive: System Mapping'
+    : 'Deep Dive: Protected Content'
+
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-16 md:py-20">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200/50 px-8 py-12 max-w-md w-full text-center">
-          <div className="flex justify-center mb-6">
-            <svg className="w-16 h-16 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
-              <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-            </svg>
+      {/* Locked Insight Banner - Inline callout style */}
+      <div className="bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-4 my-8 rounded-r-lg">
+        <div className="flex items-start gap-4">
+          {/* Lock Icon */}
+          <span className="text-2xl flex-shrink-0">🔒</span>
+          
+          <div className="flex-1 space-y-2">
+            {/* Headline */}
+            <h4 className="font-serif text-[var(--text-heading)] text-lg font-semibold">
+              {bannerTitle}
+            </h4>
+            
+            {/* Description */}
+            <p className="text-[var(--text-body)] text-sm leading-relaxed">
+              Detailed artifacts and sensitive diagrams are available for authorized reviewers.
+            </p>
+            
+            {/* Ghost Button */}
+            <button 
+              onClick={() => setShowPasswordModal(true)} 
+              className="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm font-medium text-[var(--accent-teal)] border border-[var(--accent-teal)]/30 rounded-lg hover:bg-[var(--accent-teal-soft)] transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+              </svg>
+              Enter Password
+            </button>
           </div>
-          <h3 className="text-gray-900 font-bold text-lg mb-3">{unlockMessage}</h3>
-          <p className="text-gray-600 text-sm mb-6 leading-relaxed">This content contains company-specific information and requires password access.</p>
-          <button onClick={() => setShowPasswordModal(true)} className={`${t.textAccent} hover:opacity-80 underline text-sm font-medium transition-colors`}>
-            Unlock
-          </button>
         </div>
       </div>
 
@@ -139,8 +166,8 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPasswordModal(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className={`relative ${t.cardBg} rounded-2xl border-2 ${t.border} p-8 max-w-md w-full shadow-2xl`} onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setShowPasswordModal(false)} className={`absolute top-4 right-4 ${t.text} hover:opacity-70 transition-colors`}>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-primary)] p-8 max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setShowPasswordModal(false)} className="absolute top-4 right-4 text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -148,9 +175,9 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
 
               <div className="space-y-6">
                 <div className="text-center space-y-2">
-                  <h3 className={`${t.text} text-2xl font-serif`}>Unlock Content</h3>
-                  <p className={`${t.textMuted} text-sm`}>Enter password to view sensitive content</p>
-                  {caseStudySlug !== 'iq-plugin' && <p className={`${t.textAccent} text-xs font-medium mt-2`}>✓ Unlocking this section will unlock all protected content across the entire website</p>}
+                  <h3 className="text-[var(--text-heading)] text-2xl font-serif">Unlock Content</h3>
+                  <p className="text-[var(--text-body)] text-sm">Enter password to view sensitive content</p>
+                  {caseStudySlug !== 'iq-plugin' && <p className="text-[var(--accent-teal)] text-xs font-medium mt-2">✓ Unlocking this section will unlock all protected content across the entire website</p>}
                 </div>
 
                 <form onSubmit={handleUnlock} className="space-y-4">
@@ -170,7 +197,7 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
                         }
                       }}
                       placeholder="Enter password"
-                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors ${error ? 'border-red-400 focus:border-red-500' : success ? 'border-green-400 focus:border-green-500' : `${t.border} focus:border-[var(--accent-teal)]`} ${isLightBackground ? 'bg-white text-[#1A1A1A] placeholder:text-[#999999]' : 'bg-white/10 text-white placeholder:text-white/50'} focus:outline-none`}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors bg-[var(--bg-secondary)] text-[var(--text-heading)] placeholder:text-[var(--text-muted)] focus:outline-none ${error ? 'border-[var(--color-error)]' : success ? 'border-[var(--color-success)]' : 'border-[var(--border-primary)] focus:border-[var(--accent-teal)]'}`}
                       autoFocus
                       disabled={success}
                     />

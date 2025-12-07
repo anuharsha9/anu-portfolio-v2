@@ -48,31 +48,48 @@
 
 @layer base {
   body {
-    background-color: var(--bg-dark);
-    color: var(--text-primary-dark);
+    background-color: var(--bg-primary);
+    color: var(--text-body);
     font-family: var(--font-sans);
+  }
+
+  /* Headings use high-contrast color */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
   }
 }
 
 @layer components {
+  /* Light Theme Surfaces - Swiss Style */
   .surface-dark {
-    background: var(--bg-dark);
-    color: var(--text-primary-dark);
+    background: var(--bg-primary);
+    color: var(--text-heading);
   }
 
   .surface-dark-alt {
-    background: var(--bg-dark-alt);
-    color: var(--text-primary-dark);
+    background: var(--bg-secondary);
+    color: var(--text-heading);
   }
 
   .surface-light {
-    background: var(--bg-light);
-    color: var(--text-primary-light);
+    background: var(--bg-primary);
+    color: var(--text-heading);
   }
 
   .surface-light-alt {
-    background: var(--bg-light-alt);
-    color: var(--text-primary-light);
+    background: var(--bg-secondary);
+    color: var(--text-heading);
+  }
+
+  /* Card component - white with subtle border and shadow */
+  .surface-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-card);
+  }
+
+  .surface-card:hover {
+    box-shadow: var(--shadow-card-hover);
   }
 
   /* Accessibility: Screen reader only */
@@ -506,6 +523,22 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* ============================================
+   LIGHT THEME - MATTE ALUMINUM GEARS
+   Applies filters to create a light, metallic look
+   ============================================ */
+.gears-light-theme #brain-gears,
+.gears-light-theme #brain-gears-copy {
+  /* Invert colors for light theme, adjust saturation for matte aluminum look */
+  filter: invert(1) brightness(0.92) contrast(0.85) saturate(0.4);
+}
+
+/* Teal accent tint for hover state in light theme */
+.gears-light-theme #brain-gears .gear-main--active,
+.gears-light-theme #brain-gears-copy .gear-main--active {
+  filter: invert(1) brightness(0.88) contrast(0.9) saturate(0.5) sepia(0.2) hue-rotate(160deg);
 }
 
 /* Performance optimizations for rotating gears - but allow drop shadows on child elements */

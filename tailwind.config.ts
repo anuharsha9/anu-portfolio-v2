@@ -11,6 +11,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)'],
         serif: ['var(--font-serif)'],
+        mono: ['var(--font-mono)'],
       },
       colors: {
         'bg-dark': 'var(--bg-dark)',
@@ -33,6 +34,10 @@ const config: Config = {
         'accent-teal-700': 'var(--accent-teal-700)',
         'accent-teal-800': 'var(--accent-teal-800)',
         'accent-teal-900': 'var(--accent-teal-900)',
+        'highlight': 'var(--highlight)',
+        'highlight-soft': 'var(--highlight-soft)',
+        'highlight-hover': 'var(--highlight-hover)',
+        'highlight-active': 'var(--highlight-active)',
         'color-success': 'var(--color-success)',
         'color-warning': 'var(--color-warning)',
         'color-error': 'var(--color-error)',

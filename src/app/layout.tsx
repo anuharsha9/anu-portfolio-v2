@@ -5,6 +5,7 @@ import PageShell from '@/components/layout/PageShell'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import StructuredData from '@/components/structured-data/StructuredData'
 import LoadingScreen from '@/components/loading/LoadingScreen'
+import { LightboxProvider } from '@/contexts/LightboxContext'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
@@ -101,7 +102,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -112,7 +113,9 @@ export default function RootLayout({
         </Suspense>
         <StructuredData type="website" />
         <StructuredData type="person" />
-        <PageShell>{children}</PageShell>
+        <LightboxProvider>
+          <PageShell>{children}</PageShell>
+        </LightboxProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

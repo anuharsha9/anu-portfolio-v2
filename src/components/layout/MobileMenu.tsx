@@ -41,11 +41,13 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
     { label: 'Work Archive', href: '/#work-archive' },
   ]
 
-  // Me page section links - simplified navigation
+  // Me page section links - matches AboutMeSectionNav
   const mePageSections = [
-    { label: 'How I Work with AI', href: '/me#how-i-work-with-ai' },
-    { label: 'ADP List', href: '/me#adp-list' },
-    { label: 'Design Writing', href: '/me#design-writing' },
+    { label: 'Profile', href: '/me#profile' },
+    { label: 'Framework', href: '/me#design-framework' },
+    { label: 'Toolkit', href: '/me#toolkit' },
+    { label: 'Testimonials', href: '/me#social-proof' },
+    { label: 'Personal', href: '/me#outside-of-work' },
   ]
 
   // Check if we're on landing page
@@ -82,25 +84,27 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
   return (
     <>
       {/* Hamburger Button - Hide when menu is open */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.button
-            onClick={toggleMenu}
-            className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 relative pointer-events-auto"
-            style={{ zIndex: 10003 }}
-            aria-label="Open menu"
-            aria-expanded={false}
-            type="button"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
-            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
-            <span className={`w-6 h-0.5 rounded-full ${isLightBackground ? 'bg-[var(--text-primary-light)]' : 'bg-white'}`} />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <div suppressHydrationWarning>
+        <AnimatePresence>
+          {!isOpen && (
+            <motion.button
+              onClick={toggleMenu}
+              className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 relative pointer-events-auto"
+              style={{ zIndex: 10003 }}
+              aria-label="Open menu"
+              aria-expanded={false}
+              type="button"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <span className="w-6 h-0.5 rounded-full bg-slate-700" />
+              <span className="w-6 h-0.5 rounded-full bg-slate-700" />
+              <span className="w-6 h-0.5 rounded-full bg-slate-700" />
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Overlay */}
       <AnimatePresence>
@@ -276,7 +280,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
 
               {/* Footer */}
               <div className="p-6 border-t border-refined-dark flex-shrink-0">
-                <p className="text-white/40 text-xs text-center">
+                <p className="text-white/40 text-xs text-center" suppressHydrationWarning>
                   © {new Date().getFullYear()}
                 </p>
               </div>

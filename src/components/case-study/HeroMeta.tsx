@@ -79,252 +79,249 @@ export default function HeroMeta({
     setLightboxImage(null)
   }
 
+  // Get case study number for eyebrow
+  const getCaseStudyNumber = () => {
+    if (caseStudySlug === 'reportcaster') return '001'
+    if (caseStudySlug === 'ml-functions') return '002'
+    if (caseStudySlug === 'iq-plugin') return '003'
+    return '001'
+  }
+
   return (
     <>
       <motion.header
-        className="relative min-h-[70vh] xs:min-h-[75vh] sm:min-h-[80vh] flex items-center py-12 xs:py-14 sm:py-16 md:py-20 lg:py-24"
+        className="relative min-h-[70vh] xs:min-h-[75vh] sm:min-h-[80vh] flex items-center py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 bg-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Subtle Noise Texture Overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.015] pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: 'repeat',
-          }}
-        />
-
-        {/* Subtle Logo Watermark - Top Right Corner */}
-        <div className="absolute top-8 right-8 opacity-[0.03] pointer-events-none hidden lg:block">
-          <div className="w-32 h-32">
-            <SignatureLogo className="w-full h-full text-[var(--text-primary-light)]" />
-          </div>
-        </div>
-
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          {/* Social Share Buttons - Above case study nav, centered */}
-          {shareUrl && (
-            <div className="flex justify-center mb-3">
-              <SocialShareButtons
-                title={heroTitle}
-                url={shareUrl}
-                description={heroSubtitle}
-              />
-            </div>
-          )}
-
-          {/* Case Study Navigation - Above title, centered */}
-          <div className="text-center mb-4 sm:mb-5 md:mb-6">
+          {/* Case Study Navigation - Above Blueprint */}
+          <div className="text-center mb-6 md:mb-8">
             <CaseStudyNav />
           </div>
 
-          {/* Centered Title */}
-          <div className="text-center mb-8 sm:mb-10 md:mb-12">
-            <motion.h1
-              variants={heroTitleVariant}
-              initial="hidden"
-              animate="visible"
-              className="text-[var(--text-primary-light)] text-3xl xs:text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif leading-tight tracking-tight"
-            >
-              {heroTitle === 'REPORTCASTER' ? 'REPORT CASTER' : heroTitle}
-            </motion.h1>
-          </div>
+          {/* ============================================
+              PHASE 1: THE BLUEPRINT CONTAINER
+              ============================================ */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-slate-50 rounded-3xl border border-slate-200 p-6 md:p-8 lg:p-12 mx-0 md:mx-4 shadow-sm"
+          >
+            {/* 2-Column Grid: Text Left (45%), Laptop Right (55%) */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 xl:gap-16 items-center">
 
-          {/* 2-Column Layout - Content and Laptop */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.4fr] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-24 items-start lg:items-center">
-
-            {/* Left Column: Text Content */}
-            <div className="space-y-5 sm:space-y-6 md:space-y-7">
-
-              {/* Combined Subtitle - heroSubheading and heroSubtitle as one paragraph */}
-              <motion.p
-                variants={heroSubVariant}
-                initial="hidden"
-                animate="visible"
-                className="text-[var(--text-muted-light)] text-base sm:text-lg md:text-xl font-serif italic leading-relaxed tracking-normal"
-              >
-                {heroSubheading && <>{heroSubheading} </>}
-                {heroSubtitle}
-              </motion.p>
-
-              {/* Status Badge - Subtle, informational */}
-              {status && (
+              {/* Left Column: Typography */}
+              <div className="space-y-5 md:space-y-6">
+                {/* Eyebrow */}
                 <motion.div
                   variants={heroSubVariant}
                   initial="hidden"
                   animate="visible"
-                  className="pt-2"
+                  className="flex items-center gap-3"
                 >
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans font-medium ${status.variant === 'live'
-                        ? 'bg-green-100 text-green-700 border border-green-300'
-                        : status.variant === 'shipping'
-                          ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                          : 'bg-amber-100 text-amber-700 border border-amber-300'
-                      }`}
-                  >
-                    {status.variant === 'live' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-600"></span>
-                    )}
-                    {status.variant === 'shipping' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-                    )}
-                    {status.variant === 'development' && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
-                    )}
-                    {status.label}
+                  <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest font-semibold">
+                    Case Study {getCaseStudyNumber()}
                   </span>
+                  <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
                 </motion.div>
-              )}
 
-              {/* Data Sheet Link - Simple link style */}
-              {dataSheetUrl && (
-                <motion.div
+                {/* H1 - Primary Headline */}
+                <motion.h1
+                  variants={heroTitleVariant}
+                  initial="hidden"
+                  animate="visible"
+                  className="text-slate-900 text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight"
+                >
+                  {caseStudySlug === 'reportcaster' 
+                    ? 'Modernizing a 50-Year-Old Enterprise Scheduler'
+                    : caseStudySlug === 'ml-functions'
+                      ? 'Making Enterprise ML Usable for Non-Experts'
+                      : heroTitle}
+                </motion.h1>
+
+                {/* Sub-headline */}
+                <motion.p
                   variants={heroSubVariant}
                   initial="hidden"
                   animate="visible"
-                  className="pt-2"
+                  className="text-slate-600 text-base md:text-lg leading-relaxed"
                 >
-                  <a
-                    href={dataSheetUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[var(--text-muted-light)] hover:text-[var(--accent-teal)] transition-colors duration-normal text-sm sm:text-base font-sans"
+                  {caseStudySlug === 'reportcaster' 
+                    ? 'Consolidating 5 disparate tools into one React workflow for 20M+ users.'
+                    : caseStudySlug === 'ml-functions'
+                      ? 'Turning a black-box data science process into a guided, 4-step workflow.'
+                      : (
+                        <>
+                          {heroSubheading && <>{heroSubheading} </>}
+                          {heroSubtitle}
+                        </>
+                      )
+                  }
+                </motion.p>
+
+                {/* System Status Bar */}
+                {status && (
+                  <motion.div
+                    variants={heroSubVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex items-center gap-2 pt-2"
                   >
-                    <svg
-                      className="w-3.5 h-3.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    {status.variant === 'shipping' ? (
+                      // Shipping status - Amber badge style (signals "In Progress")
+                      <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                        <span className="font-mono text-xs text-amber-700 uppercase tracking-wider">
+                          // STATUS: {status.label.toUpperCase().replace(/\s+/g, '_')}
+                        </span>
+                      </div>
+                    ) : (
+                      // Live or other status - Default style
+                      <>
+                        <span className={`w-2 h-2 rounded-full ${
+                          status.variant === 'live' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                        }`}></span>
+                        <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">
+                          {status.label}
+                        </span>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Data Sheet Link */}
+                {dataSheetUrl && (
+                  <motion.div
+                    variants={heroSubVariant}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <a
+                      href={dataSheetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-slate-500 hover:text-[var(--accent-teal)] transition-colors text-sm font-mono"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                    <span>{dataSheetLabel || 'ibi ReportCaster Data Sheet'}</span>
-                  </a>
-                </motion.div>
-              )}
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                      <span>{dataSheetLabel || 'View Data Sheet'}</span>
+                    </a>
+                  </motion.div>
+                )}
 
-              {/* Scope Tags - Moved up */}
-              {scope.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-4 sm:pt-5 md:pt-6">
-                  {scope.map((item, index) => (
-                    <span
-                      key={index}
-                      className="text-[var(--text-primary-light)]/80 text-[11px] uppercase tracking-widest font-sans px-2.5 py-1 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
+                {/* Technical Spec Tags */}
+                {scope.length > 0 && (
+                  <motion.div
+                    variants={heroSubVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex flex-wrap gap-2 pt-2"
+                  >
+                    {scope.map((item, index) => (
+                      <span
+                        key={index}
+                        className="font-mono text-[10px] text-slate-500 uppercase tracking-wider px-2 py-1 bg-white border border-slate-200 rounded"
+                      >
+                        {item.replace(/\s+/g, '_')}
+                      </span>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
 
-            {/* Right Column: Laptop Visual - Macro Photography Feel with Enhanced Composition */}
-            {coverImage && (
-              <motion.div
-                className="relative flex flex-col items-center justify-center -mx-6 md:-mx-10 lg:mx-0 lg:ml-8 overflow-visible"
-                variants={fadeIn}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {/* Subtle black shadow glow behind laptop for floating effect */}
-                <div
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
-                    filter: 'blur(60px)',
-                    width: '85%',
-                    height: '85%',
-                  }}
-                />
-
-                {/* Laptop Container - Floating animation */}
-                <div
-                  className="relative cursor-pointer hover:opacity-90 transition-opacity laptop-macro-scale animate-float w-full z-10"
-                  style={{
-                    '--laptop-scale': '1.5',
-                    transformOrigin: 'center center',
-                    maxWidth: '650px',
-                    width: '100%',
-                  } as React.CSSProperties}
-                  onClick={() => openLightbox(coverImage.src, coverImage.alt)}
+              {/* Right Column: Laptop Visual with Drop Shadow */}
+              {coverImage && (
+                <motion.div
+                  className="relative flex items-center justify-center"
+                  variants={fadeIn}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div
-                    className="relative w-full"
-                    style={{
-                      aspectRatio: '16/10',
-                      width: '100%',
-                      maxWidth: '650px',
-                    }}
+                    className="relative cursor-pointer hover:scale-[1.02] transition-transform duration-500 w-full"
+                    style={{ maxWidth: '600px' }}
+                    onClick={() => openLightbox(coverImage.src, coverImage.alt)}
                   >
-                    <Image
-                      src={coverImage.src}
-                      alt={coverImage.alt}
-                      fill
-                      className="object-contain"
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 600px"
-                    />
+                    {/* Drop Shadow */}
+                    <div className="absolute inset-0 translate-y-4 blur-2xl bg-black/10 rounded-3xl scale-95"></div>
+                    
+                    {/* Image */}
+                    <div className="relative w-full" style={{ aspectRatio: '16/10' }}>
+                      <Image
+                        src={coverImage.src}
+                        alt={coverImage.alt}
+                        fill
+                        className="object-contain drop-shadow-2xl"
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 600px"
+                      />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            )}
-          </div>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
 
-          {/* Testimonial and Role/Company/Timeframe Tile - Below 2-column layout */}
+          {/* ============================================
+              PHASE 2: PROJECT META (Outside Blueprint)
+              ============================================ */}
           <motion.div
-            variants={heroSubVariant}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 sm:mt-16 md:mt-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 md:mt-12 mx-0 md:mx-4"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-              {/* Role/Company/Timeframe Tile */}
-              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-black/10 shadow-sm">
-                <div className="space-y-4">
-                  <h3 className="text-[var(--text-primary-light)] text-sm uppercase tracking-wider font-sans font-semibold mb-4">
-                    Project Details
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    {/* Role */}
-                    <div className="flex items-start gap-4">
-                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                        Role
-                      </span>
-                      <span className="text-[var(--text-primary-light)] font-sans">{role}</span>
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {/* Project Details Card */}
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Role */}
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
+                      Role
+                    </span>
+                    <p className="font-semibold text-slate-900 text-sm">{role}</p>
+                  </div>
 
-                    {/* Company */}
-                    <div className="flex items-start gap-4">
-                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                        Company
-                      </span>
-                      <span className="text-[var(--text-primary-light)] font-sans">{company}</span>
-                    </div>
+                  {/* Company */}
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
+                      Company
+                    </span>
+                    <p className="font-semibold text-slate-900 text-sm">{company}</p>
+                  </div>
 
-                    {/* Timeframe */}
-                    <div className="flex items-start gap-4">
-                      <span className="text-[var(--text-muted-light)] text-xs uppercase tracking-wider font-sans font-medium w-[90px] flex-shrink-0">
-                        Timeframe
-                      </span>
-                      <span className="text-[var(--text-primary-light)] font-sans">{timeframe}</span>
-                    </div>
+                  {/* Timeframe */}
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
+                      Timeframe
+                    </span>
+                    <p className="font-semibold text-slate-900 text-sm">{timeframe}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Testimonial */}
+              {/* Testimonial Card - Editorial Style */}
               {testimonial && (
-                <div>
-                  <HeroTestimonial testimonial={testimonial} />
+                <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-center">
+                  <blockquote className="space-y-3">
+                    <p className="font-serif italic text-base md:text-lg text-slate-700 leading-relaxed">
+                      &ldquo;{testimonial.quote.length > 150 
+                        ? testimonial.quote.substring(0, 150) + '...' 
+                        : testimonial.quote}&rdquo;
+                    </p>
+                    <footer className="flex items-center gap-3 pt-2 border-t border-slate-100">
+                      <div>
+                        <p className="font-sans font-bold text-sm text-slate-900">{testimonial.name}</p>
+                        <p className="text-slate-500 text-xs font-mono">{testimonial.role}</p>
+                      </div>
+                    </footer>
+                  </blockquote>
                 </div>
               )}
             </div>

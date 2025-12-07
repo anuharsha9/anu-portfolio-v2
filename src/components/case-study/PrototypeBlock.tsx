@@ -30,24 +30,24 @@ interface PrototypeBlockProps {
   password?: string
 }
 
-export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightBackground = false, password = 'anu-access' }: PrototypeBlockProps) {
+export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightBackground = true, password = 'anu-access' }: PrototypeBlockProps) {
   if (!prototypeMedia) return null
-  const t = getTheme(isLightBackground)
+  const t = getTheme(true)
 
   return (
-    <MotionSection id="prototype" className={`py-16 md:py-24 ${isLightBackground ? 'bg-white' : 'surface-dark'} border-t ${t.border}`}>
+    <MotionSection id="prototype" className={`py-16 md:py-24 ${t.bgAlt} border-t ${t.border}`}>
       <div className="space-y-8">
         {prototypeMedia.multiBeforeAfter ? (
-          <MultiBeforeAfterVideo before={prototypeMedia.multiBeforeAfter.before} after={prototypeMedia.multiBeforeAfter.after} isLightBackground={isLightBackground} comparisonNotes={prototypeMedia.multiBeforeAfter.comparisonNotes} password={password} caseStudySlug={caseStudySlug} />
+          <MultiBeforeAfterVideo before={prototypeMedia.multiBeforeAfter.before} after={prototypeMedia.multiBeforeAfter.after} isLightBackground={true} comparisonNotes={prototypeMedia.multiBeforeAfter.comparisonNotes} password={password} caseStudySlug={caseStudySlug} />
         ) : prototypeMedia.beforeAfter ? (
-          <BeforeAfterVideo before={prototypeMedia.beforeAfter.before} after={prototypeMedia.beforeAfter.after} isLightBackground={isLightBackground} comparisonNotes={prototypeMedia.beforeAfter.comparisonNotes} password={password} caseStudySlug={caseStudySlug} />
+          <BeforeAfterVideo before={prototypeMedia.beforeAfter.before} after={prototypeMedia.beforeAfter.after} isLightBackground={true} comparisonNotes={prototypeMedia.beforeAfter.comparisonNotes} password={password} caseStudySlug={caseStudySlug} />
         ) : (
           <>
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <div className={`h-px flex-1 ${isLightBackground ? 'bg-[var(--accent-teal)]/20' : 'bg-[var(--accent-teal)]/30'}`}></div>
+                <div className={`h-px flex-1 ${t.textAccent}/20`}></div>
                 <h2 className={`${t.text} text-4xl md:text-5xl font-serif`}>{prototypeMedia.title}</h2>
-                <div className={`h-px flex-1 ${isLightBackground ? 'bg-[var(--accent-teal)]/20' : 'bg-[var(--accent-teal)]/30'}`}></div>
+                <div className={`h-px flex-1 ${t.textAccent}/20`}></div>
               </div>
               {prototypeMedia.description && <p className={`${t.textMuted} text-lg md:text-xl leading-relaxed max-w-3xl mx-auto`}>{prototypeMedia.description}</p>}
             </div>
@@ -61,7 +61,7 @@ export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightB
               <p className={`${t.textMuted} text-base max-w-2xl mx-auto`}>This is an actual video walkthrough created and narrated by me. Watch to see how the final design works in practice.</p>
             </div>
             <div className="max-w-[1200px] mx-auto">
-              <div className={`relative w-full aspect-video rounded-2xl border-2 ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/50'} bg-gradient-to-br from-[var(--bg-dark-alt)] to-[var(--bg-dark)] overflow-hidden shadow-2xl`}>
+              <div className={`relative w-full aspect-video rounded-2xl border-2 ${t.borderAccent} ${t.bg} overflow-hidden shadow-xl`}>
                 <CustomVideoPlayer src={prototypeMedia.videoUrl} className="rounded-2xl" />
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightB
               <p className={`${t.textMuted} text-base max-w-2xl mx-auto`}>Watch the walkthrough to see how the final design works in practice.</p>
             </div>
             <div className="max-w-[1200px] mx-auto">
-              <div className={`relative w-full aspect-video rounded-2xl border-2 ${isLightBackground ? 'border-[var(--accent-teal)]/30' : 'border-[var(--accent-teal)]/50'} bg-[var(--bg-dark-alt)] overflow-hidden shadow-2xl`}>
+              <div className={`relative w-full aspect-video rounded-2xl border-2 ${t.borderAccent} ${t.bg} overflow-hidden shadow-xl`}>
                 <iframe src={prototypeMedia.videoEmbedUrl} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Video Walkthrough" />
               </div>
             </div>

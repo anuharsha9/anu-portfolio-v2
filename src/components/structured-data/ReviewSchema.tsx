@@ -35,7 +35,7 @@ export default function ReviewSchema({ recommendations }: ReviewSchemaProps) {
       bestRating: '5',
       worstRating: '1',
     },
-    datePublished: new Date().toISOString().split('T')[0],
+    datePublished: '2025-01-01', // Fixed date for SEO schema
   }))
 
   const schema = {

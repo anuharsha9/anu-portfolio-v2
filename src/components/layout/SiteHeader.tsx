@@ -13,6 +13,7 @@ export default function SiteHeader() {
   const pathname = usePathname()
   const isLandingPage = pathname === '/'
   const isCaseStudyPage = pathname?.startsWith('/work/') ?? false
+  const isAboutPage = pathname === '/me' || pathname === '/me/'
 
   // Always visible on case study pages, otherwise start hidden
   const [isVisible, setIsVisible] = useState(isCaseStudyPage)
@@ -45,112 +46,50 @@ export default function SiteHeader() {
     }
   }, [])
 
-  const [isLightBackground, setIsLightBackground] = useState(false)
   const [hasShadow, setHasShadow] = useState(false)
 
-  // Use centralized scroll manager
+  // Use centralized scroll manager - simplified for light theme
   useScrollManager((scrollY) => {
-    // Show header on any scroll (not just 50px)
     const hasScrolled = scrollY > 0
     setIsVisible(hasScrolled)
     setHasShadow(hasScrolled)
-
-    // Detect background color based on what's behind the header
-    if (typeof window !== 'undefined' && hasScrolled) {
-      const headerElement = document.querySelector('header')
-      if (headerElement) {
-        const headerRect = headerElement.getBoundingClientRect()
-        // Sample multiple points to get a better sense of the background
-        const samplePoints = [
-          { x: window.innerWidth / 4, y: headerRect.bottom + 5 },
-          { x: window.innerWidth / 2, y: headerRect.bottom + 5 },
-          { x: (window.innerWidth * 3) / 4, y: headerRect.bottom + 5 },
-        ]
-
-        let lightCount = 0
-        let darkCount = 0
-
-        samplePoints.forEach(point => {
-          const elementBelow = document.elementFromPoint(point.x, point.y)
-          if (elementBelow) {
-            // Walk up the DOM tree to find the actual background
-            let currentElement: Element | null = elementBelow
-            let bgColor = ''
-
-            while (currentElement && !bgColor) {
-              const computedStyle = window.getComputedStyle(currentElement)
-              bgColor = computedStyle.backgroundColor
-
-              // Check if background is transparent or has an image
-              if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-                const bgImage = computedStyle.backgroundImage
-                if (bgImage && bgImage !== 'none') {
-                  // If there's a background image, assume it might be light or dark
-                  // For safety, we'll use a semi-transparent overlay approach
-                  break
-                }
-                currentElement = currentElement.parentElement
-              } else {
-                break
-              }
-            }
-
-            if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
-              const rgb = bgColor.match(/\d+/g)
-              if (rgb && rgb.length >= 3) {
-                const r = parseInt(rgb[0])
-                const g = parseInt(rgb[1])
-                const b = parseInt(rgb[2])
-                const brightness = (r * 299 + g * 587 + b * 114) / 1000
-
-                if (brightness > 128) {
-                  lightCount++
-                } else {
-                  darkCount++
-                }
-              }
-            } else {
-              // If we can't determine, check for surface classes
-              const hasLightSurface = currentElement?.classList.contains('surface-light') ||
-                currentElement?.classList.contains('surface-light-alt')
-              const hasDarkSurface = currentElement?.classList.contains('surface-dark') ||
-                currentElement?.classList.contains('surface-dark-alt')
-
-              if (hasLightSurface) {
-                lightCount++
-              } else if (hasDarkSurface) {
-                darkCount++
-              }
-            }
-          }
-        })
-
-        // Determine if background is predominantly light or dark
-        setIsLightBackground(lightCount > darkCount)
-      }
-    } else if (!hasScrolled) {
-      // At top of page, default to dark
-      setIsLightBackground(false)
-    }
   }, [isLandingPage, isCaseStudyPage])
 
-  // Use semi-transparent background with backdrop blur for better readability over images
-  const headerBgStyle = isLightBackground
-    ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' } // Light background with transparency
-    : { backgroundColor: 'rgba(10, 10, 11, 0.85)' } // Dark background with transparency
+  // Scroll to archive section
+  const scrollToArchive = (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (typeof window === 'undefined') return
+    
+    // If on landing page, scroll to section
+    if (isLandingPage) {
+      const element = document.getElementById('work-archive')
+      if (element) {
+        const headerHeight = 80
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - headerHeight
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        })
+        window.history.pushState(null, '', '#work-archive')
+      }
+    } else {
+      // Navigate to home with hash
+      window.location.href = '/#work-archive'
+    }
+  }
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible
+      className={`fixed top-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-500 ${isVisible
         ? 'opacity-100 translate-y-0 h-auto'
         : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'
-        } ${hasShadow ? 'shadow-lg' : ''}`}
+        } ${hasShadow ? 'shadow-sm' : ''}`}
       style={{
         zIndex: 10000,
         isolation: 'isolate',
         position: 'fixed',
-        ...headerBgStyle,
-        borderBottom: isVisible ? (isLightBackground ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent'
       }}
     >
       <nav className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4 flex items-center justify-center relative">
@@ -159,7 +98,7 @@ export default function SiteHeader() {
           href="/"
           className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
         >
-          <div className={`w-[33.6px] h-[33.6px] ${isLightBackground ? 'text-[var(--text-primary-light)] group-hover:text-green-500' : 'text-white group-hover:text-green-400'} group-hover:drop-shadow-[0_0_8px_rgba(34,197,94,0.4)] transition-all duration-300`}>
+          <div className="w-[33.6px] h-[33.6px] text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
             <AnimatedSignatureLogo
               className="w-full h-full"
               duration={16000}
@@ -167,49 +106,76 @@ export default function SiteHeader() {
             />
           </div>
         </Link>
+
         {/* Centered Navigation Links */}
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Desktop Navigation - Minimal: Work, Me, Resume */}
-          <div className="hidden lg:flex items-center gap-4 md:gap-6">
+          {/* Desktop Navigation - Work, Me, Archive */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* Work - with dropdown */}
             <CaseStudiesDropdown
-              className={`${isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'} transition-colors hover:text-[var(--accent-teal)]`}
+              className={`font-sans font-medium transition-colors ${
+                isLandingPage 
+                  ? 'text-slate-900' 
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             />
+            
+            {/* Me */}
             <Link
               href="/me"
-              className={`${isLightBackground ? 'text-[var(--text-primary-light)]' : 'text-white'} transition-colors hover:text-[var(--accent-teal)]`}
+              className={`font-sans font-medium transition-colors relative ${
+                isAboutPage 
+                  ? 'text-slate-900' 
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             >
               Me
+              {/* Active indicator dot */}
+              {isAboutPage && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0BA2B5]" />
+              )}
             </Link>
-          </div>
-          {/* Resume Button - positioned absolutely on the right */}
-          <a
-            href="/resume.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackResumeDownload()}
-            className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--accent-teal)]/10 text-white text-sm font-semibold transition-all duration-300 hover:bg-[var(--accent-teal)]/20 hover:shadow-[0_0_20px_rgba(0,162,183,0.3)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
-            aria-label="View Resume"
-          >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+
+            {/* Archive */}
+            <a
+              href="/#work-archive"
+              onClick={scrollToArchive}
+              className="font-sans font-medium text-slate-600 hover:text-slate-900 transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-            <span>Resume</span>
-          </a>
+              Archive
+            </a>
+          </div>
         </div>
-        {/* Mobile Menu - positioned absolutely on the right for mobile, outside centered container */}
+
+        {/* Resume Button - Pill Style CTA */}
+        <a
+          href="/resume.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackResumeDownload()}
+          className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-medium transition-all duration-300 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5] shadow-sm"
+          aria-label="View Resume"
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          <span>Resume</span>
+        </a>
+
+        {/* Mobile Menu */}
         <div className="lg:hidden absolute right-4 xs:right-5 sm:right-6 md:right-8 z-[60]">
-          <MobileMenu isLandingPage={isLandingPage} isLightBackground={isLightBackground} />
+          <MobileMenu isLandingPage={isLandingPage} isLightBackground={true} />
         </div>
       </nav>
     </header>

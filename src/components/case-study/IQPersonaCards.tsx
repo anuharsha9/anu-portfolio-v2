@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
 
 interface IQPersonaCardsProps {
   isLightBackground?: boolean
@@ -11,112 +11,239 @@ interface IQPersonaCardsProps {
 
 export default function IQPersonaCards({
   isLightBackground = false,
-  title = 'Who I Designed IQ For',
-  description = 'IQ needed to serve four distinct personas with different needs. The central tension: How do you keep the depth technical users need without overwhelming everyone else?'
+  title = 'The Persona Matrix',
+  description = 'The central architectural challenge: Reconciling diametrically opposed needs—**Raw Technical Control** vs. **Guided Simplicity**—within a single interface.'
 }: IQPersonaCardsProps) {
-  const t = getTheme(isLightBackground)
-
   const personas = [
     {
       name: 'Mark Bennett',
-      title: 'The Tech Visionary (Technical Business User)',
+      type: 'TECHNICAL_USER',
+      title: 'The Tech Visionary',
       image: '/images/case-study/iq-plugin/Persona - Reporting Guru-technical 1.png',
-      quote: 'I focus on driving innovation through data and creating scalable, secure solutions',
-      goals: ['Drive technological innovation and integration', 'Leverage data to optimize business processes'],
-      painPoints: ['Ensuring seamless integration of various data sources', 'Managing and securing large volumes of data'],
-      needs: ['Powerful, scalable solutions', 'Advanced controls and configuration options'],
+      goals: [
+        'Direct model parameter access',
+        'Batch processing automation',
+      ],
+      painPoints: [
+        'Abstraction hides critical controls',
+        'Wizard-based flows feel slow',
+      ],
+      needs: [
+        'Raw SQL/API exposure',
+        'Keyboard-first navigation',
+      ],
     },
     {
       name: 'Lisa Carter',
-      title: 'The Financial Strategist (Non-Technical Business User)',
+      type: 'BUSINESS_USER',
+      title: 'The Financial Strategist',
       image: '/images/case-study/iq-plugin/Persona - Reporting Guru 1.png',
-      quote: 'I focus on making informed financial decisions that drive profitability and ensure compliance.',
-      goals: ['Enhance financial planning and forecasting', 'Monitor key financial metrics'],
-      painPoints: ['Difficulty accessing and interpreting complex financial data', 'Reliance on IT for data extraction and report generation'],
-      needs: ['Intuitive tools for data analysis', 'Automation of data processing tasks'],
+      goals: [
+        'One-click insight generation',
+        'Plain-language explanations',
+      ],
+      painPoints: [
+        'Technical jargon = abandonment',
+        'Configuration paralysis',
+      ],
+      needs: [
+        'Guided "happy paths"',
+        'Auto-generated summaries',
+      ],
     },
     {
       name: 'Dan',
-      title: 'The Analytics Innovator (BI Developer)',
+      type: 'DEVELOPER',
+      title: 'The Analytics Innovator',
       image: '/images/case-study/iq-plugin/Persona - BI Developer - With Data 1.png',
-      quote: "Sometimes it takes a long time before you realize you could have done something... you didn't know about",
-      goals: ['Provide innovative and user-friendly experiences', 'Ensure consistent data with 100% quality'],
-      painPoints: ['Data quality issues', 'Troubleshooting issues'],
-      needs: ['Advanced controls and configuration options', 'Better system support for high-value tasks'],
+      goals: [
+        'Consistent component behavior',
+        'Debuggable error states',
+      ],
+      painPoints: [
+        'Inconsistent APIs across features',
+        'Silent failures in pipelines',
+      ],
+      needs: [
+        'Verbose logging modes',
+        'Component-level documentation',
+      ],
     },
     {
       name: 'Jamie',
-      title: 'The Techy Analyst (Business Analyst)',
+      type: 'POWER_USER',
+      title: 'The Techy Analyst',
       image: '/images/case-study/iq-plugin/Persona - Techy Analyst 1.png',
-      quote: "They rely on us because they can't wrap their heads around the tools",
-      goals: ['Change culture and push data-driven decision making', 'Enable others to self-serve and explore'],
-      painPoints: ['Manual data cleansing', 'Ad hoc requests from others'],
-      needs: ['Self-sufficient, motivated, detail-oriented, resourceful', 'Tools to enable self-service and exploration'],
+      goals: [
+        'Self-service without IT tickets',
+        'Shareable, repeatable queries',
+      ],
+      painPoints: [
+        'Manual data prep overhead',
+        'Results locked in silos',
+      ],
+      needs: [
+        'Template-based workflows',
+        'Export-anywhere capability',
+      ],
     },
   ]
 
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case 'TECHNICAL_USER': return { bg: 'bg-blue-600', text: 'text-[var(--accent-teal)]', border: 'border-[var(--accent-teal-200)]', soft: 'bg-[var(--accent-teal-50)]' }
+      case 'BUSINESS_USER': return { bg: 'bg-emerald-600', text: 'text-emerald-600', border: 'border-emerald-200', soft: 'bg-emerald-50' }
+      case 'DEVELOPER': return { bg: 'bg-purple-600', text: 'text-purple-600', border: 'border-purple-200', soft: 'bg-purple-50' }
+      case 'POWER_USER': return { bg: 'bg-amber-600', text: 'text-amber-600', border: 'border-amber-200', soft: 'bg-amber-50' }
+      default: return { bg: 'bg-slate-600', text: 'text-slate-600', border: 'border-slate-200', soft: 'bg-slate-50' }
+    }
+  }
+
+  // Parse markdown bold syntax in description
+  const renderDescription = (text: string) => {
+    const parts = text.split(/\*\*(.*?)\*\*/g)
+    return parts.map((part, i) =>
+      i % 2 === 1 ? <strong key={i} className="text-slate-900 font-semibold">{part}</strong> : part
+    )
+  }
+
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
-      <div className="space-y-8">
-        <div className="text-center space-y-3">
-          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>{title}</h3>
-          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>{description}</p>
-        </div>
+    <div className="space-y-8">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center space-y-4"
+      >
+        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+          // USER_TOPOLOGY
+        </span>
+        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
+          {title}
+        </h3>
+        <p className="text-slate-600 text-base max-w-3xl mx-auto">
+          {renderDescription(description)}
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {personas.map((p, i) => (
-            <div key={i} className={`${t.cardBg} rounded-lg border-2 p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-              <div className="mb-4 relative w-full h-48 rounded-lg border overflow-hidden" style={{ borderColor: `${t.accentVar}40` }}>
-                <Image src={p.image} alt={p.name} fill className="object-cover" />
+      {/* 2x2 Grid of Vertical Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {personas.map((p, i) => {
+          const colors = getTypeColor(p.type)
+          return (
+            <motion.div
+              key={p.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="flex flex-col bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal)]/30 transition-all duration-300 group"
+            >
+              {/* Top - Image with Overlay - Desaturated by default, color on hover */}
+              <div className="relative h-48 bg-slate-100 overflow-hidden">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  fill
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+                {/* Name & Tag Overlay - Bottom Left */}
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <div className="flex items-end justify-between gap-3">
+                    <div>
+                      <h4 className="font-serif text-white text-xl mb-1">
+                        {p.name}
+                      </h4>
+                      <p className="font-mono text-white/70 text-[10px] uppercase tracking-widest">
+                        {p.title}
+                      </p>
+                    </div>
+                    <span className={`
+                      font-mono text-[9px] px-2 py-1 rounded uppercase tracking-widest text-white ${colors.bg}
+                    `}>
+                      [{p.type}]
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <div>
-                  <h4 className={`${t.text} text-xl font-serif mb-1`}>{p.name}</h4>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider block mb-2`}>{p.title}</span>
-                  <p className={`text-sm italic mb-3 ${t.textAccent}`}>&quot;{p.quote}&quot;</p>
-                </div>
+              {/* Bottom - Data Grid */}
+              <div className="p-5 flex-1">
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Goals */}
+                  <div>
+                    <h5 className="font-mono text-[9px] text-[var(--accent-blue)] uppercase tracking-widest mb-2">
+                      // GOALS
+                    </h5>
+                    <div className="space-y-1.5">
+                      {p.goals.map((g, j) => (
+                        <p key={j} className="text-slate-700 text-[11px] leading-snug flex items-start gap-1.5">
+                          <span className="text-[var(--accent-blue)] mt-0.5 text-[10px]">+</span>
+                          <span>{g}</span>
+                        </p>
+                      ))}
+                    </div>
+                  </div>
 
-                <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Goals</span>
-                  <ul className="space-y-1">
-                    {p.goals.map((g, j) => (
-                      <li key={j} className={`${t.text} text-xs flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>✓</span>
-                        <span>{g}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  {/* Pain Points */}
+                  <div>
+                    <h5 className="font-mono text-[9px] text-red-500 uppercase tracking-widest mb-2">
+                      // PAINS
+                    </h5>
+                    <div className="space-y-1.5">
+                      {p.painPoints.map((pp, j) => (
+                        <p key={j} className="text-slate-600 text-[11px] leading-snug flex items-start gap-1.5">
+                          <span className="text-red-500 mt-0.5 text-[10px]">×</span>
+                          <span>{pp}</span>
+                        </p>
+                      ))}
+                    </div>
+                  </div>
 
-                <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Pain Points</span>
-                  <ul className="space-y-1">
-                    {p.painPoints.map((pp, j) => (
-                      <li key={j} className={`${t.textMuted} text-xs flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>×</span>
-                        <span>{pp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Design Needs</span>
-                  <ul className="space-y-1">
-                    {p.needs.map((n, j) => (
-                      <li key={j} className={`${t.text} text-xs flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>→</span>
-                        <span>{n}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Needs */}
+                  <div>
+                    <h5 className="font-mono text-[9px] text-emerald-500 uppercase tracking-widest mb-2">
+                      // NEEDS
+                    </h5>
+                    <div className="space-y-1.5">
+                      {p.needs.map((n, j) => (
+                        <p key={j} className="text-slate-700 text-[11px] leading-snug flex items-start gap-1.5">
+                          <span className="text-emerald-500 mt-0.5 text-[10px]">&gt;</span>
+                          <span>{n}</span>
+                        </p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.div>
+          )
+        })}
       </div>
+
+      {/* Design Implication Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="bg-slate-900 rounded-xl p-6"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
+            // DESIGN_IMPLICATION
+          </span>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Four personas, one interface. The solution: <span className="text-emerald-400 font-medium">layered progressive disclosure</span> that
+            surfaces simplicity by default while keeping power accessible on demand.
+          </p>
+        </div>
+      </motion.div>
     </div>
   )
 }

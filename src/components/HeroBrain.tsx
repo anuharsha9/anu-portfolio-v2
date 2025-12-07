@@ -411,7 +411,7 @@ export function HeroBrain() {
     <>
       <section
         id="hero-brain"
-        className="surface-dark relative flex flex-col items-center justify-center overflow-visible px-4 md:px-6 pt-0 md:pt-16 pb-6 border-t border-white/5 min-h-screen"
+        className="surface-light relative flex flex-col items-center justify-center overflow-visible px-4 md:px-6 pt-0 md:pt-16 pb-6 border-t border-slate-200 min-h-screen"
       >
         {/* SVG Container - on mobile this is at top, on desktop it's positioned normally */}
         <div
@@ -459,7 +459,7 @@ export function HeroBrain() {
                 {hoverText && typeof hoverText === 'string' && hoverText.trim() ? (
                   <motion.div
                     key={`hover-text-${hoverText}`}
-                    className="text-xl md:text-2xl text-white leading-relaxed text-center px-6"
+                    className="text-xl md:text-2xl text-slate-700 leading-relaxed text-center px-6"
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -582,7 +582,7 @@ export function HeroBrain() {
                   >
                     {/* Welcome to my mind */}
                     <p
-                      className="font-serif font-medium text-white text-center px-3 md:px-6 mb-2"
+                      className="font-serif font-medium text-slate-900 text-center px-3 md:px-6 mb-2"
                       style={{
                         fontSize: 'clamp(1.75rem, 8vw, 3.5rem)',
                       }}
@@ -614,7 +614,7 @@ export function HeroBrain() {
             >
               {/* Subtext - Inter font, regular body text */}
               <motion.p
-                className="font-sans text-white/70 text-center px-3 md:px-6 mb-4 md:mb-5"
+                className="font-sans text-slate-600 text-center px-3 md:px-6 mb-4 md:mb-5"
                 style={{
                   fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
                   fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
@@ -636,7 +636,7 @@ export function HeroBrain() {
                 {/* Portfolio video - Primary CTA */}
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 text-white px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)]/80 hover:bg-[var(--accent-teal)]/10 hover:text-[var(--accent-teal)] group"
+                  className="pointer-events-auto inline-flex items-center justify-center gap-2.5 rounded-full border border-slate-300 bg-white text-slate-900 px-5 py-2.5 md:px-6 md:py-3 text-xs md:text-sm font-medium transition-all duration-300 hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/5 hover:text-[var(--accent-teal)] shadow-sm group"
                 >
                   <svg
                     className="w-4 h-4 md:w-5 md:h-5 text-[var(--accent-teal)]"
@@ -676,11 +676,11 @@ export function HeroBrain() {
                       }
                     }, 100)
                   }}
-                  className="pointer-events-auto inline-flex flex-col items-center justify-center gap-1 text-white/70 text-xs md:text-sm font-medium transition-all duration-300 hover:text-white/90 group"
+                  className="pointer-events-auto inline-flex flex-col items-center justify-center gap-1 text-slate-500 text-xs md:text-sm font-medium transition-all duration-300 hover:text-slate-700 group"
                 >
                   <span>Case Studies</span>
                   <svg
-                    className="w-4 h-4 md:w-5 md:h-5 text-white/70 transition-all duration-300 group-hover:text-white/90"
+                    className="w-4 h-4 md:w-5 md:h-5 text-slate-400 transition-all duration-300 group-hover:text-slate-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -717,7 +717,7 @@ export function HeroBrain() {
                 {hoverText && typeof hoverText === 'string' && hoverText.trim() ? (
                   <motion.div
                     key={`hover-text-mobile-${hoverText}`}
-                    className="text-xl text-white leading-relaxed text-center px-6"
+                    className="text-xl text-slate-700 leading-relaxed text-center px-6"
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -834,7 +834,7 @@ export function HeroBrain() {
                   >
                     {/* Welcome to my mind */}
                     <p
-                      className="font-serif font-medium text-white text-center px-3 mb-2"
+                      className="font-serif font-medium text-slate-900 text-center px-3 mb-2"
                       style={{
                         fontSize: 'clamp(1.75rem, 8vw, 3.5rem)',
                       }}

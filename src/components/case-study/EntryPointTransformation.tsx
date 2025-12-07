@@ -1,130 +1,277 @@
 'use client'
 
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
 
 interface EntryPointTransformationProps {
   isLightBackground?: boolean
 }
 
-export default function EntryPointTransformation({ isLightBackground = false }: EntryPointTransformationProps) {
-  const t = getTheme(isLightBackground)
-  const subtleBorder = isLightBackground ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)'
-  const subtleDivider = isLightBackground ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'
-
+export default function EntryPointTransformation({ isLightBackground = true }: EntryPointTransformationProps) {
   const oldPath = [
     { step: 'Click on + menu', clicks: 1 },
     { step: 'Click on create data flow', clicks: 1 },
-    { step: 'New reporting server tab opens', clicks: 0 },
+    { step: 'New reporting server tab opens', clicks: 0, isNewTab: true },
     { step: 'Drag a data on the data flow', clicks: 1 },
-    { step: 'Navigate to Train models plugin in reporting server', clicks: 1 },
-    { step: 'Drag and drop the problem type on the data flow', clicks: 1 },
-    { step: 'Immediately a popup comes up - select target', clicks: 1 },
-    { step: 'Underneath it - select predictors', clicks: 1 },
-    { step: "After saving you're staring at an empty state that looks like an error message - asking you to click the play button in the toolbar above - that actually will begin the training process", clicks: 1 },
-    { step: 'You see a compare models popup', clicks: 0 },
-    { step: 'You click on it to close it to see your model details', clicks: 1 },
-    { step: 'Right click on the data flow problem type pill to get cascading menus drilling down 3 levels to actually get to configure hyperparameters', clicks: 1 },
-    { step: 'The model trains again', clicks: 0 },
-    { step: 'Then final results come', clicks: 0 },
-    { step: 'Save model icon is visible on each model tab to save it', clicks: 1 },
+    { step: 'Navigate to Train models plugin', clicks: 1 },
+    { step: 'Drag and drop problem type', clicks: 1 },
+    { step: 'Select target in popup', clicks: 1 },
+    { step: 'Select predictors underneath', clicks: 1 },
+    { step: 'Click play button for training', clicks: 1 },
+    { step: 'Click to close compare models popup', clicks: 1 },
+    { step: 'Right-click for 3-level cascading menu', clicks: 1 },
+    { step: 'Save model icon on each tab', clicks: 1 },
   ]
 
   const newPath = [
-    { step: 'Right click on dataset > Predict Data', clicks: 2 },
-    { step: 'User is redirected to Predict Data Landing page in the reporting server in a new browser tab', clicks: 0 },
-    { step: 'User clicks CTA: Train new Model', clicks: 1 },
-    { step: 'User goes through step 1, 2, 3, 4 - covering problem selection, target and predictor selection, optional configuring hyperparameters, and then lands on a model details page, where first tab is compare model where he actually lands', clicks: 4, range: '4-6' },
-    { step: 'He can click on other tabs to navigate between the different model details of different model types', clicks: 1 },
-    { step: 'Save model option is available on each model tab to save it', clicks: 1 },
+    { step: 'Right-click dataset → Predict Data', clicks: 2 },
+    { step: 'Click CTA: Train new Model', clicks: 1 },
+    { step: 'Step 1-4: Problem, Target, Predictors, Config', clicks: '4-6' },
+    { step: 'Land on Compare Models tab', clicks: 0 },
+    { step: 'Navigate between model tabs', clicks: 1 },
+    { step: 'Save model from any tab', clicks: 1 },
   ]
 
   const entryPoints = [
-    { method: 'Right-click on dataset', description: 'Access Predict Data directly from data source' },
-    { method: 'Right-click on folder', description: 'Access Predict Data from folder context menu' },
-    { method: '+Data button menu', description: 'Predict Data as first-class feature in Hub' },
+    { 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      ),
+      method: 'Right-click on dataset', 
+      description: 'Access Predict Data directly from data source' 
+    },
+    { 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+        </svg>
+      ),
+      method: 'Right-click on folder', 
+      description: 'Access Predict Data from folder context menu' 
+    },
+    { 
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+      ),
+      method: '+Data button menu', 
+      description: 'Predict Data as first-class feature in Hub' 
+    },
   ]
 
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
-      <div className="space-y-8">
-        <div className="text-center space-y-3">
-          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>Entry Point Transformation</h3>
-          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>
-            Right-click entry points were driven by the Techy Analyst persona who thinks in terms of &quot;I&apos;m in the data, now let me run ML on it.&quot;
+    <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] p-8 md:p-12 shadow-sm">
+      <div className="space-y-10">
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-3"
+        >
+          <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
+            // ENTRY_POINT_TRANSFORMATION
+          </span>
+          <h3 className="text-[var(--text-heading)] text-2xl md:text-3xl font-serif">
+            12+ Clicks → 7-9 Clicks
+          </h3>
+          <p className="text-[var(--text-body)] text-base md:text-lg max-w-3xl mx-auto">
+            Right-click entry points driven by the Techy Analyst persona: &ldquo;I&apos;m in the data, now let me run ML on it.&rdquo;
           </p>
+        </motion.div>
+
+        {/* Hero Metrics */}
+        <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="inline-flex items-center gap-6 bg-[var(--bg-tertiary)] rounded-full px-8 py-4 border border-[var(--border-primary)]"
+          >
+            <div className="text-center">
+              <div className="font-mono text-4xl font-bold text-[var(--text-muted)] line-through decoration-[var(--color-error)]">12+</div>
+              <div className="text-xs text-[var(--text-muted)]">Old clicks</div>
+            </div>
+            <div className="text-3xl text-[var(--text-muted)]">→</div>
+            <div className="text-center">
+              <div className="font-mono text-4xl font-bold text-[var(--accent-teal)]">7-9</div>
+              <div className="text-xs text-[var(--accent-teal)]">New clicks</div>
+            </div>
+            <div className="w-px h-12 bg-[var(--border-primary)]"></div>
+            <div className="text-center">
+              <div className="font-mono text-4xl font-bold text-[var(--color-success)]">~40%</div>
+              <div className="text-xs text-[var(--text-muted)]">Reduction</div>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className={`${t.cardBg} rounded-lg border-2 p-6`} style={{ borderColor: subtleBorder }}>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider`}>Old: 12+ Clicks</span>
-                <div className="h-px flex-1" style={{ backgroundColor: subtleDivider }}></div>
-              </div>
-              <div className="space-y-2">
-                {oldPath.map((item, i) => (
-                  <div key={i} className={`${t.bg} rounded-lg p-3 border ${t.border}`}>
-                    <div className="flex items-start justify-between gap-2">
-                      <p className={`${t.text} text-xs leading-relaxed flex-1`}>{item.step}</p>
-                      {item.clicks > 0 && <span className={`${t.textMuted} text-xs font-mono flex-shrink-0`}>{item.clicks} click{item.clicks > 1 ? 's' : ''}</span>}
+        {/* Workflow Comparison */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* OLD: Chaotic Path */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--color-error)]">
+                ⚠ OLD: 12+ CLICKS
+              </span>
+            </div>
+            
+            <div className="bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-primary)] max-h-[400px] overflow-y-auto">
+              <div className="space-y-1.5">
+                {oldPath.map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 0.25 + idx * 0.03 }}
+                    className={`flex items-center gap-2 p-2 rounded-lg text-xs ${
+                      item.isNewTab 
+                        ? 'bg-amber-50 border border-amber-200' 
+                        : 'bg-white border border-[var(--border-primary)]'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0 ${
+                      item.isNewTab 
+                        ? 'bg-[var(--color-warning)] text-white' 
+                        : 'bg-[var(--border-secondary)] text-white'
+                    }`}>
+                      {item.isNewTab ? '↗' : idx + 1}
                     </div>
-                  </div>
+                    <span className="text-[var(--text-body)] flex-1 truncate">{item.step}</span>
+                    {item.clicks > 0 && (
+                      <span className="text-[var(--text-muted)] font-mono">+{item.clicks}</span>
+                    )}
+                  </motion.div>
                 ))}
               </div>
-              <div className={`${t.bg} rounded-lg p-3 border ${t.border} mt-4`}>
-                <p className={`${t.textMuted} text-xs text-center`}>
-                  <span className="font-semibold">Total:</span> ~12+ clicks + multiple mental hops + 3-level cascading menus for hyperparameters
-                </p>
-              </div>
             </div>
-          </div>
+            
+            <div className="bg-[var(--bg-tertiary)] rounded-lg p-3 border border-[var(--border-primary)]">
+              <p className="text-[var(--text-muted)] text-xs text-center">
+                New tab opens • 3-level cascading menus • Multiple mental hops
+              </p>
+            </div>
+          </motion.div>
 
-          <div className={`${t.cardBg} rounded-lg border-2 p-6`} style={{ borderColor: `${t.accentVar}60` }}>
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <span className={`text-xs font-mono uppercase tracking-wider font-semibold ${t.textAccent}`}>New: 7-9 Clicks</span>
-                <div className="h-px flex-1" style={{ backgroundColor: `${t.accentVar}30` }}></div>
-              </div>
-              <div className="space-y-2">
-                {newPath.map((item, i) => (
-                  <div key={i} className={`${t.bg} rounded-lg border-2 p-3`} style={{ borderColor: `${t.accentVar}60` }}>
-                    <div className="flex items-start justify-between gap-2">
-                      <p className={`${t.text} text-xs leading-relaxed flex-1`}>{item.step}</p>
-                      {item.clicks > 0 && (
-                        <span className={`text-xs font-mono font-semibold flex-shrink-0 ${t.textAccent}`}>
-                          {(item as { range?: string }).range || item.clicks} click{(item as { range?: string }).range ? 's' : item.clicks > 1 ? 's' : ''}
-                        </span>
-                      )}
+          {/* NEW: Streamlined Path */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent-teal)]">
+                NEW: 7-9 CLICKS
+              </span>
+            </div>
+            
+            <div className="bg-[var(--accent-teal-50)] rounded-xl p-4 border-2 border-[var(--accent-teal)]/30 min-h-[400px] flex flex-col justify-center">
+              <div className="space-y-3">
+                {newPath.map((item, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.35 + idx * 0.1 }}
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-3 p-3 bg-white border-2 border-[var(--accent-teal)]/40 rounded-xl hover:shadow-sm transition-all duration-200"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-[var(--accent-teal)] flex items-center justify-center text-white font-mono text-sm font-bold flex-shrink-0">
+                      {idx + 1}
                     </div>
-                  </div>
+                    <span className="text-[var(--text-heading)] text-sm font-medium flex-1">{item.step}</span>
+                    {item.clicks !== 0 && (
+                      <span className="text-[var(--accent-teal)] font-mono text-sm font-bold">
+                        {typeof item.clicks === 'string' ? item.clicks : `+${item.clicks}`}
+                      </span>
+                    )}
+                  </motion.div>
                 ))}
               </div>
-              <div className={`${t.bg} rounded-lg p-3 border-2 mt-4`} style={{ borderColor: `${t.accentVar}60` }}>
-                <p className={`text-xs text-center font-semibold ${t.textAccent}`}>
-                  <span>Total:</span> 7-9 clicks from entry to training (more if configuring hyperparameters) → smooth, linear progression with guided 4-step flow
-                </p>
-              </div>
             </div>
-          </div>
+            
+            <div className="bg-[var(--accent-teal)] rounded-lg p-3">
+              <p className="text-white text-xs text-center font-medium">
+                Smooth, linear progression with guided 4-step flow
+              </p>
+            </div>
+          </motion.div>
         </div>
 
-        <div>
-          <h4 className={`${t.text} text-lg font-semibold mb-4 text-center`}>Multiple Entry Points</h4>
+        {/* Multiple Entry Points */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="space-y-6"
+        >
+          <div className="text-center">
+            <h4 className="text-[var(--text-heading)] text-lg font-serif mb-2">Multiple Entry Points</h4>
+            <p className="text-[var(--text-muted)] text-sm">
+              All paths lead to the same unified experience
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {entryPoints.map((p, i) => (
-              <div key={i} className={`${t.cardBg} rounded-lg border-2 p-5 transition-all duration-300 hover:scale-105 hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-                <h5 className={`${t.text} text-sm font-semibold mb-2`}>{p.method}</h5>
-                <p className={`${t.textMuted} text-xs leading-relaxed`}>{p.description}</p>
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.45 + i * 0.1 }}
+                whileHover={{ y: -4 }}
+                className="bg-white border border-[var(--border-primary)] rounded-xl p-5 text-center hover:shadow-md hover:border-[var(--accent-teal)]/30 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-full bg-[var(--accent-teal-50)] flex items-center justify-center text-[var(--accent-teal)] mx-auto mb-3">
+                  {p.icon}
+                </div>
+                <h5 className="text-[var(--text-heading)] text-sm font-semibold mb-1">{p.method}</h5>
+                <p className="text-[var(--text-muted)] text-xs leading-relaxed">{p.description}</p>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className={`${t.cardBg} rounded-lg p-6 border-l-4 mt-8`} style={{ borderLeftColor: t.accentVar }}>
-          <p className={`${t.text} text-sm leading-relaxed text-center`}>
-            <span className={`font-semibold ${t.textAccent}`}>100% discoverability:</span> All 5 SMEs found Predict Data from right-click without being told — validating the entry point strategy driven by the Techy Analyst persona.
-          </p>
-        </div>
+        {/* Validation Badge */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="bg-[var(--accent-teal-50)] rounded-xl p-6 border-l-4 border-l-[var(--accent-teal)]"
+        >
+          <div className="flex items-start gap-4">
+            <div className="font-mono text-4xl font-bold text-[var(--accent-teal)]">
+              100%
+            </div>
+            <div>
+              <p className="text-[var(--text-heading)] font-semibold mb-1">Discoverability</p>
+              <p className="text-[var(--text-body)] text-sm leading-relaxed">
+                All 5 SMEs found Predict Data from right-click without being told — validating the entry point strategy driven by the Techy Analyst persona.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   )

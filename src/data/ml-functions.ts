@@ -2,8 +2,9 @@ import { CaseStudyData } from '@/types/caseStudy'
 
 export const mlFunctionsCaseStudy: CaseStudyData = {
   slug: 'ml-functions',
-  heroTitle: 'ML FUNCTIONS',
-  heroSubheading: 'Making enterprise ML usable for real people',
+  // Blueprint Hero - Architect Design System
+  heroTitle: 'Making Enterprise ML Usable for Non-Experts',
+  heroSubheading: 'Turning a black-box data science process into a guided, 4-step workflow',
   heroSubtitle:
     'A true story of bringing practical, accessible machine learning to WebFOCUS users — especially those without data-science backgrounds. Turning a traditionally technical process into a guided, intuitive, low-friction experience.',
   coverImage: {
@@ -18,10 +19,10 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     variant: 'shipping' as const,
   },
   scope: [
-    'Enterprise UX',
-    'ML workflows',
-    'Information Architecture',
-    'Step-based flows',
+    'AI_UX',
+    'Complex_Workflows',
+    'Zero_to_One',
+    'ML_Democratization',
     'Cross-functional Leadership',
   ],
   // ----------------------------
@@ -33,7 +34,37 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
-      'Self-learned ML from scratch through courses, domain expert collaboration, and AI tools. Owned end-to-end redesign from ambiguity to production-ready flows (launching 2026). Owned entire redesign solo while leading 3 Principal-level initiatives simultaneously. Led weekly "UX + ML" meetings, bridging technical complexity with user needs. Collaborated cross-functionally with product, engineering, and data science to ensure feasibility while maintaining accessibility. Onboarded 2 designers during maternity leave with seamless knowledge transfer.',
+      'Self-learned ML from scratch—zero domain knowledge to leading the UX vision in weeks. Owned end-to-end redesign from ambiguity to production-ready 4-step guided workflow (launching 2026). Led weekly "UX + ML" meetings with the Principal Data Scientist, bridging technical complexity with user needs. Designed the confusion matrix that the DS called "the best screen in the entire UX revamp." Collaborated cross-functionally with product, engineering, and data science to ensure feasibility while maintaining accessibility.',
+    scopeOfPractice: [
+      {
+        tag: 'DOMAIN_MASTERY',
+        tagColor: 'blue',
+        headline: 'ML Self-Education',
+        body: '**Zero ML knowledge → MIT certification**. Embedded weekly with data scientists. Fluent enough to challenge technical assumptions.',
+        icon: 'architect',
+      },
+      {
+        tag: 'COMPLEXITY_TRANSLATION',
+        tagColor: 'amber',
+        headline: 'Black Box → Guided Flow',
+        body: '**12+ clicks → 4-step wizard**. Confusion matrix the Principal DS called "the best screen in the entire UX revamp."',
+        icon: 'archaeologist',
+      },
+      {
+        tag: 'CROSS_FUNCTIONAL_BRIDGE',
+        tagColor: 'purple',
+        headline: 'UX + ML Alignment',
+        body: '**Weekly syncs** with Data Science, Engineering, Product. Bridged technical feasibility with user accessibility.',
+        icon: 'strategist',
+      },
+      {
+        tag: 'TRUST_EARNED',
+        tagColor: 'emerald',
+        headline: 'Subject Matter Trust',
+        body: 'Principal DS: **"That\'s why I trust you."** Deep understanding of explainability unlocked full creative ownership.',
+        icon: 'multiplier',
+      },
+    ],
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
@@ -70,10 +101,10 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       },
     ],
     star: {
-      situation: 'Fragmented 4+ step ML training path with hidden hyperparameters and confusing "results not generated" errors. Process was opaque and error-prone.',
-      task: 'Make ML training accessible to non-technical users while maintaining power for experts.',
-      action: 'Designed guided 4-step workflow with early validation, dual-experience approach (guided + advanced), and eliminated dead-end errors through inline feedback.',
-      result: '100% discoverability in testing. Reduced clicks from 12+ to 7-9. Zero dead-end errors.',
+      situation: 'Fragmented ML training. Hidden hyperparameters. "Results not generated" dead-ends. Opaque and error-prone.',
+      task: 'Make ML accessible to non-technical users. Maintain power for experts.',
+      action: 'Designed 4-step guided flow. Early validation. Dual-experience (guided + advanced). Eliminated dead-ends.',
+      result: '100% discoverability. 12+ clicks → 7-9. Zero dead-end errors in testing.',
     },
     technologies: [
       'Figma',
@@ -109,28 +140,28 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   // UX PRINCIPLES (Public)
   // ----------------------------
   uxPrinciples: {
-    title: 'UX principles behind the ML Functions redesign',
-    intro: 'The redesign applied established UX principles to make ML accessible without dumbing it down:',
+    title: 'Architectural Directives',
+    intro: 'Defining the immutable rules required to move ML from a "Black Box" to a "Glass Box".',
     principles: [
       {
-        title: 'Progressive Disclosure: Complexity revealed gradually',
+        title: 'The Glass Box Invariant.',
         description:
-          'Applied progressive disclosure to break complex ML workflows into digestible steps. Show only what users need at each stage, preventing information overload while maintaining full functionality for experts.',
+          'The system must never execute "Magic." Every automated decision (e.g., auto-cleaning data) must be surfaced, logged, and reversible by the user. Explainability first.',
       },
       {
-        title: 'Hick\'s Law & Cognitive Load: Step-based decision making',
+        title: 'The Tunnel Invariant.',
         description:
-          'Structured the experience as a linear journey (problem type → target → predictors → hyperparameters) to reduce decision time and cognitive overhead. Each step builds on the previous, minimizing choice paralysis.',
+          'Complex ML workflows must be serialized. Branching logic is permitted *internal* to a step, but the macro-flow must remain a rigid 1-2-3-4 linear tunnel to prevent abandonment. Linear constancy.',
       },
       {
-        title: 'Visibility of System Status: Transparent ML states',
+        title: 'The Guardrail Invariant.',
         description:
-          'Applied Nielsen\'s visibility heuristic to translate technical ML states into human-readable summaries. Users always know what the model is doing, what it means, and what actions are available — in plain language.',
+          'Validation occurs *upstream.* The system shall not permit the user to proceed to "Training" if the dataset contains fatal errors (e.g., NaN values). Fail fast, fail early. Error preemption.',
       },
       {
-        title: 'Error Prevention: Early validation, clear feedback',
+        title: 'The Pulse Invariant.',
         description:
-          'Eliminated dead-end "results not generated" errors through early validation and inline feedback. Applied Nielsen\'s error prevention heuristic by catching issues before they become problems, with plain-language explanations.',
+          'Long-running ML processes (>5s) must provide deterministic feedback. A spinning loader is insufficient; the system must broadcast "Training... Validating... Scoring..." status updates. System state visibility.',
       },
     ],
   },
@@ -143,340 +174,52 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
       summary: 'Took ownership of ML Functions redesign with zero ML background. Self-learned ML concepts while designing, becoming the bridge between data scientists and users.',
-      methodologies: ['Self-Directed Learning', 'Domain Expert Collaboration', 'Competitive Analysis'],
-      body: `The mandate was clear: make predictive modeling usable, understandable, and trustworthy — for analysts and everyday business users.
-
-ML tools in the BI market were powerful but inaccessible to non-technical users. Existing predictive workflows required external tools, coding, or specialized knowledge.
-
-WebFOCUS needed a native, guided, user-friendly predictive layer that fit naturally into its ecosystem.
-
-I said yes to owning the end-to-end UX — from ambiguity to production-ready flows (launching in 2026).
-
-I had no ML background, but that became a strength. I learned ML fast enough to design it responsibly through competitive analysis, online courses, constant questions to our domain expert, and AI tools to fill knowledge gaps. I became the bridge between technical complexity and human understanding.
-
-I designed with incomplete knowledge but high responsibility, using practical learning to make Principal-level decisions.`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        "I don't wait for expertise — I build it while designing, even when starting from zero knowledge",
-        'I learn complex domains quickly through competitive analysis, courses, and relentless questions — then apply that learning directly to design decisions',
-        'I build bridges between technical teams and end users by translating domain expertise into accessible UX patterns',
-        'I design with incomplete knowledge but high responsibility, using practical learning to make Principal-level decisions',
-      ],
-      images: [
-        {
-          src: '/images/case-study/ml-functions/Legacy Explanability UI.png',
-          alt: 'Legacy Explanability UI',
-          caption: 'Legacy Explanability UI - Before redesign',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/ml-functions/Legacy Run Model Landing Page.png',
-          alt: 'Legacy Run Model Landing Page',
-          caption: 'Legacy Run Model Landing Page - Before redesign',
-          sensitive: true,
-        },
-        {
-          src: '/images/case-study/ml-functions/Legacy Train Model UI.png',
-          alt: 'Legacy Train Model UI',
-          caption: 'Legacy Train Model UI - Before redesign',
-          sensitive: true,
-        },
-      ],
+      body: '', // Removed - context established by hero, STAR, and VitalSigns components
+      // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
     },
     {
       id: 'section-02',
       index: 'E',
       title: 'Empathize with the Ecosystem: Understanding Users and Workflows',
       summary: 'Documented the fragmented 4+ step ML workflow, identified pain points, and mapped user journeys to understand how different personas interacted with ML capabilities.',
-      methodologies: ['Workflow Mapping', 'User Journey Analysis', 'Usability Testing', 'Iterative Prototyping'],
-      body: `I designed for the entire ML ecosystem: data scientists who needed technical depth, business users who needed simplicity, and analysts who needed both. I translated between domain expertise and non-technical users' need for clarity, becoming the bridge that made ML accessible.
+      body: `Three personas. Three different needs: data scientists wanted depth, business users wanted simplicity, analysts wanted both. The existing experience served none of them well.
 
-The existing ML experience was opaque. I documented every workflow step, every user decision point, and every place where users got stuck.
-
-Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, a new user trying to adopt ML for the first time has almost no chance.
-
-That realization directly pushed me toward inventing a guided, step-based workflow.`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'Reverse-engineer systems → translate technical to user language',
-        'Document workflows exhaustively → principled redesign foundation',
-        'Three critical pivots → simplified UX and implementation',
-      ],
-      subsections: [
-        {
-          title: 'Workflow Planning & Architecture',
-          description: 'Systematic mapping of the existing workflow, user journeys, and system architecture to inform the redesign strategy. These diagrams became the foundation for understanding how users thought about ML workflows and how the system architecture needed to support the new guided experience.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/1. ML UI Structure.png',
-              alt: 'ML UI Structure',
-              caption: 'ML UI Structure: The system architecture and information architecture that became the foundation for the redesign, mapping how users think about ML workflows within WebFOCUS',
-              fullWidth: true,
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/Overview of ML workflow based on user.png',
-              alt: 'Overview of ML workflow based on user',
-              caption: 'Overview of ML workflow based on user: User-based workflow mapping',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/ML functions inital workflow.png',
-              alt: 'ML functions initial workflow',
-              caption: 'ML functions initial workflow: Early workflow planning',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/all model types architecture map.png',
-              alt: 'All model types architecture map',
-              caption: 'All model types architecture map: Complete system architecture',
-              fullWidth: true,
-              sensitive: true,
-            },
-          ],
-        },
-      ],
+After documenting every workflow and decision point, I realized: if I find this frustrating after weeks of study, a first-time user has no chance. That insight drove the redesign.`,
+      // Note: Workflow Planning & Architecture moved to SystemTopologyBlueprint component in Simplify section
     },
     {
       id: 'section-03',
       index: 'S',
       title: 'Simplify the Chaos: From Black Box to Guided Flow',
       summary: 'Documented the fragmented 4+ step ML workflow, identified pain points, and designed a structured 4-step guided flow that reduced clicks from 12+ to 7-9.',
-      methodologies: ['Workflow Mapping', 'User Journey Analysis', 'Usability Testing', 'Iterative Prototyping'],
       body: `The mapping revealed the problems, but solving them required multiple iterations. Three critical pivots shaped the final design.
 
 Breakthrough: structured guided flow based on what a model needs to train responsibly. Our domain expert's answer to "What do you absolutely need?" → problem type, target, predictors, hyperparameters. That became the UX spine.`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'Reverse-engineer systems → translate technical to user language',
-        'Structure from domain expertise → structured guided flow from "What do you absolutely need?"',
-        'Design for multiple users → personas drive decisions (Techy Analyst: right-click entry, non-technical: guided flows)',
-      ],
-      subsections: [
-        {
-          title: 'Early Ideation: Hand-Drawn Wireframes',
-          description: 'The design process started with hand-drawn wireframes — capturing initial thoughts, exploring different approaches, and mapping out the user journey before moving to digital tools.',
-          images: [
-            {
-              src: '/images/case-study/ml-functions/Machine learning functions-handdrawn-wireframes.png',
-              alt: 'Machine learning functions hand-drawn wireframes',
-              caption: 'Hand-drawn wireframes: The foundation of the ML Functions redesign — early ideation, concept exploration, and workflow mapping',
-              fullWidth: true,
-            },
-          ],
-        },
-      ],
+      // Note: Hand-drawn wireframes subsection removed - repurposed in SystemTopologyBlueprint component
     },
     {
       id: 'section-04',
       index: 'I',
       title: 'Iterate with Inclusion: Balancing Control with Simplicity',
-      body: `After mapping the existing workflow and designing the structured guided flow, I needed to set up the right structure to actually solve them. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
+      body: `Led cross-functional alignment across Product, Engineering, and Data Science over 6–8 months. Weekly syncs. Shared Figma. Screen-reviewed design reviews.
 
-I worked with Product to co-define scope, with Engineering to validate feasibility, with Data Scientists to validate ML logic, and with SMEs to exercise flows. Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews.
-
-With our domain expert, collaboration was constant and deeply detailed. The confusion matrix screen alone went through 10+ iterations as we aligned on layout, order of tabs, and what users should see first after training. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'I lead cross-functional teams through complex technical projects over 6–8 month timelines, managing constraints and juggling multiple projects',
-        'I translate between technical and user perspectives by learning enough to say "no" to scope creep while earning respect from domain experts',
-        'I make Principal-level decisions with incomplete but sufficient knowledge — moving from "outsider learning ML" to trusted design leader',
-      ],
-      subsections: [
-        {
-          title: 'Multiple ways to launch ML Functions from the HUB',
-          description: 'Right-click entry points driven by Techy Analyst persona. Users access Predict Data via right-click on dataset/folder or +Data menu — 100% discoverability in testing.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/Launch ML from the HUB - right click dataset.png',
-              alt: 'Launch ML from the HUB - right click dataset',
-              caption: 'Right-click on dataset: Access Predict Data directly from data source',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/Launch ML from the HUB - right click folder.png',
-              alt: 'Launch ML from the HUB - right click folder',
-              caption: 'Right-click on folder: Access Predict Data from folder context menu',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/Launch ML from the HUB - right click +Data button.png',
-              alt: 'Launch ML from the HUB - right click +Data button',
-              caption: '+Data button menu: Predict Data as first-class feature in Hub',
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'The main step workflow UI',
-          description: 'Structured guided flow: problem type → target → predictors → hyperparameters. Based on our domain expert\'s "What do you absolutely need?" — makes ML feel like a guided tour, not a black box.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/4. Train Model Workflow - Step 1 - Select Problem Type.png',
-              alt: 'Train Model Workflow - Step 1 - Select Problem Type',
-              caption: 'Step 1: Select Problem Type (classification/regression)',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/5. Train Model Workflow - Step 2 - Specify Problem.png',
-              alt: 'Train Model Workflow - Step 2 - Specify Problem',
-              caption: 'Step 2: Specify Problem details',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/6. Train Model Workflow - Step 3 - Select Predictors.png',
-              alt: 'Train Model Workflow - Step 3 - Select Predictors',
-              caption: 'Step 3: Select Predictors and features',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/7. Train Model Workflow - Step 4 - Configure Hyperparameters.png',
-              alt: 'Train Model Workflow - Step 4 - Configure Hyperparameters',
-              caption: 'Step 4: Configure Hyperparameters (optional for experts)',
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'Prototyping and Testing',
-          description: `The biggest design challenge: how much control to expose? Too much = intimidating. Too little = limiting for experts.
-
-Solution: Layered disclosure serving multiple user types. Worked with data scientists to identify what to show, hide, or make optional. Result: simple for beginners, powerful for experts.
-
-I worked through 10+ iterations on confusion matrix and results screens with our domain expert, balancing technical accuracy with UX clarity. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."
-
-We surface edge cases early in plain language. SME testing: zero "I don't know what to do" moments. Invalid inputs? Users knew exactly what to change.`,
-        },
-        {
-          title: 'Component Design',
-          description: 'Design system with ML-specific patterns. 12-column grid ensures 4-step workflow works across screen sizes.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/12 Column Grid for the Step Workflow.png',
-              alt: '12 Column Grid for the Step Workflow',
-              caption: '12 Column Grid for Step Workflow: The responsive grid system that ensures the 4-step workflow works seamlessly across screen sizes while maintaining design system consistency',
-              fullWidth: true,
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/Important Styling and Structure Decisions w/Model Tile UI Guide.png',
-              alt: 'Model Tile UI Guide',
-              caption: 'Model Tile UI Guide: Component-level design precision for model cards — a key pivot from legacy tables that improved scanning and comparison, despite initial pushback',
-              fullWidth: true,
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'Model Details UI',
-          description: 'Advanced metrics balancing DS needs (comprehensive) with user needs (scannable). Made complex outputs accessible.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/10. Binary Classfication - ROC Precision.png',
-              alt: 'Binary Classification - ROC Precision',
-              caption: 'ROC Precision: One of the advanced metrics screens that balances data scientist needs (comprehensive metrics) with user needs (scannable, understandable results)',
-              sensitive: true,
-            },
-            {
-              src: '/images/case-study/ml-functions/17. Optimize Model Popup.png',
-              alt: 'Optimize Model Popup',
-              caption: 'Optimize Model: Advanced controls for expert users — showing how we made Steps 3 and 4 editable post-training while locking Steps 1 and 2 to preserve modeling intent',
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'Significant UI screens',
-          description: 'Confusion matrix: 10+ iterations. Balanced DS priorities (metrics, accuracy) with UX (clarity, scan-ability).',
-          quote: {
-            text: "This is the best screen in the entire UX revamp — I couldn't have designed it better.",
-            attribution: 'Principal Data Scientist',
-          },
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/8. Train Model Workflow - Compare Models.png',
-              alt: 'Train Model Workflow - Compare Models',
-              caption: 'Compare Models: View and compare multiple trained models side by side — the model cards approach that replaced legacy tables, improving scanning and decision-making',
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'Explanability UI',
-          description: 'Explains why predictions were made. Transforms complex outputs into accessible insights, building trust.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
-              alt: 'Run Model - Explanability Popup',
-              caption: 'Explanability Popup: The workflow culmination — making ML understandable and trustworthy by explaining why predictions were made, transforming complex model outputs into accessible insights',
-              sensitive: true,
-            },
-          ],
-        },
-        {
-          title: 'Entry Points',
-          description: 'Empty state explains capabilities. Landing page provides clear entry to Train or Run workflows.',
-          sensitive: true,
-          images: [
-            {
-              src: '/images/case-study/ml-functions/1. Predict Data - Train Models - Empty State.png',
-              alt: 'Predict Data - Train Models - Empty State',
-              caption: 'Empty State: Initial view when no models exist — explains what ML Functions can do and guides users to start training their first model',
-              sensitive: true,
-            },
-          ],
-        },
-      ],
+The confusion matrix screen alone went through 10+ iterations. Our Principal DS pushed for advanced metrics; I pushed for clarity. That productive tension produced what he called "the best screen in the entire UX revamp."`,
+      // Note: Subsections removed - replaced by DesignIterationLog component
     },
     {
       id: 'section-05',
       index: 'G',
-      title: 'Grow Through Constraints: Aligning and Leading the Team',
-      body: `After prototyping and testing the structured guided flow, I needed to align the team and ensure technical feasibility. This wasn't just a design project — it was a cross-functional collaboration that I effectively led over 6–8 months of iterative work.
-
-I led alignment across product, engineering, data science, and QA: co-defined scope, validated feasibility, validated ML logic, and collaborated on test cases.
-
-Working remotely, collaboration happened through weekly "UX + ML" meetings, shared Figma files, async documentation, and screen-shared design reviews.
-
-With our domain expert, collaboration was constant and deeply detailed. The confusion matrix screen alone went through 10+ iterations as we aligned on layout and order. He often pushed for more advanced metrics; I pushed for clarity and scan-ability. That tension produced the best results — he called it "the best screen in the entire UX revamp."
-
-I was also redesigning ReportCaster simultaneously while having a 1 year old at home. This taught me to prioritize ruthlessly: architecture first, polish second.
-
-I learned to delegate — identifying what only I could do (UX architecture, team alignment) versus what could be handed off. The team could execute because they understood the "why" behind every decision, not just the "what."`,
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'I lead cross-functional teams through complex technical projects over 6–8 month timelines, managing constraints and juggling multiple projects',
-        'I translate between technical and user perspectives by learning enough to say "no" to scope creep while earning respect from domain experts',
-        'I make Principal-level decisions with incomplete but sufficient knowledge — moving from "outsider learning ML" to trusted design leader',
-      ],
-      images: [
-        {
-          src: '/images/case-study/ml-functions/ml-leading-team',
-          alt: 'ML Functions leading team collaboration',
-          caption: 'Leading the team: Weekly UX + ML meeting notes, whiteboard sketches, and design iterations showing the cross-functional collaboration process',
-        },
-      ],
+      title: 'Grow Through Constraints: Earning Trust & Leading the Team',
+      summary: 'Trust is the currency of innovation. Here\'s how I earned it — and used it to lead.',
+      body: '', // Narrative removed - flow goes directly to visual components
     },
     {
       id: 'section-06',
       index: 'N',
       title: 'Navigate Forward: Impact, Validation, and Reflection',
-      body: `Validation from SME tests and org-wide demos: transformed intimidating, error-prone flow into understandable, navigable experience.
+      body: `SME tests validated the transformation: error-prone flow became navigable. Internal demos (150-200 people) earned leadership support. For the first time, ML in WebFOCUS felt demo-ready—understandable, not just technically correct.
 
-Internal demos (150-200 people) received strong leadership support. First time ML in WebFOCUS felt demo-ready — understandable and teachable, not just technically correct.
-
-The patterns developed here (structured guided flows, inline teaching, right-click entry) directly shaped IQ Plugin.
-
-This project taught me that you don't need to become a domain expert to design responsibly. You need to learn fast enough to translate between domain expertise and user needs, then make principled decisions about what to expose and what to hide.
-
-I started as an "outsider" learning ML, and became a trusted design leader making Principal-level decisions. That transformation became a core part of how I approach technical design challenges.`,
+The patterns I developed here—structured flows, inline teaching, right-click entry—became the foundation for IQ Plugin.`,
       beforeAfter: {
         before: {
           src: '/images/case-study/ml-functions/Legacy Train Model Resuls UI.png',
@@ -493,14 +236,6 @@ I started as an "outsider" learning ML, and became a trusted design leader makin
         beforeLabel: 'Before',
         afterLabel: 'After',
       },
-      revealsTitle: 'What this reveals',
-      revealsPoints: [
-        'Enable new capabilities → all SMEs found Predict Data without help, "much easier" workflow',
-        'Eliminate barriers → zero dead-ends, demo-ready for 150-200 person sessions',
-        'Create strategic value → gateway for ML adoption, not niche expert-only',
-        'Redesign myself through difficult work → learned ML domain while designing, becoming trusted design leader',
-        'Make complex systems accessible while respecting the science',
-      ],
       images: [
         {
           src: '/images/case-study/ml-functions/ml-functions-reflections.jpg',
@@ -561,32 +296,38 @@ I started as an "outsider" learning ML, and became a trusted design leader makin
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'I self-learned ML through courses, constant questions to our domain expert, and AI tools. I studied competitive landscapes, mapped user journeys, and built complete context before designing any solutions.',
+        description: 'Zero ML knowledge. MIT certification, weekly DS embedding, AI tools. Built context before designing.',
+        systemLogic: "if (ml_knowledge === 0) { learn(courses, experts, AI); }",
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'I bridged two worlds: data scientists who needed technical depth and business users who needed simplicity. I translated between domain expertise and non-technical users\' need for clarity, becoming the bridge that made ML accessible.',
+        description: 'Bridged data scientists (depth) and business users (simplicity). Became the translator.',
+        systemLogic: "bridge(DataScientist.depth, BusinessUser.clarity);",
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: 'I mapped the existing workflow and clustered it into a structured guided flow. I prioritized patterns, eliminated dead-end errors, and made ML complexity digestible for non-technical users while maintaining power for experts.',
+        description: 'Mapped workflows into structured guided flow. Eliminated dead-ends. Made ML digestible.',
+        systemLogic: "return guidedFlow(chaos.reduce(patterns));",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'I worked through 10+ iterations on confusion matrix and results screens with our domain expert, balancing technical accuracy with UX clarity. Weekly "UX + ML" meetings ensured technical accuracy met user understanding.',
+        description: '10+ iterations on confusion matrix with Principal DS. Weekly UX + ML syncs. Technical accuracy meets UX clarity.',
+        systemLogic: "for (let i = 0; i < 10; i++) refine(confusionMatrix);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'ML technical constraints, engineering limitations, and the need for platform integration forced hard choices. I pivoted from unified Train+Run view to separate tabs, removed data flow from ML UI despite pushback — each constraint refined the solution.',
+        description: 'Pivoted from unified Train+Run to separate tabs. Removed data flow from ML UI. Constraints refined solution.',
+        systemLogic: "pivot(unifiedView, separateTabs); // constraint-driven",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'I conducted usability testing with 5 SMEs (100% discoverability), iterated based on feedback, and ensured the patterns I developed (structured guided flows, progressive disclosure) could scale to future ML features and directly shape IQ Plugin.',
+        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Structured flows became foundation.',
+        systemLogic: "export patterns to IQPlugin; // 100% SME approval",
       },
     ],
   },
@@ -609,13 +350,11 @@ I started as an "outsider" learning ML, and became a trusted design leader makin
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `ML Functions transformed expert-only ML workflows into guided, accessible experiences — enabling non-technical users to train models within minutes.
+    body: `ML Functions transformed expert-only ML workflows into guided, accessible experiences. Non-technical users could train models within minutes.
 
-The patterns I developed here (structured guided flows, progressive disclosure, right-click entry) directly shaped IQ Plugin.
+The patterns I developed—structured guided flows, progressive disclosure, right-click entry—became the foundation for IQ Plugin.
 
-The key insight: you don't need to become a domain expert to design responsibly. You need to learn fast enough to translate between domain expertise and user needs, then make principled decisions about what to expose and what to hide.
-
-ML Functions proved that accessibility and power aren't opposites — they're complementary when you design with both in mind from the start.`,
+Key insight: accessibility and power aren't opposites. They're complementary when designed together from the start.`,
     keyPoints: [
       'Transformed expert-only ML workflows into guided, accessible experiences — enabling non-technical users to train models within minutes',
       'Learned ML domain while designing, becoming trusted design leader making Principal-level decisions',

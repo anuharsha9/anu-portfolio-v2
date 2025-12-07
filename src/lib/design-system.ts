@@ -36,47 +36,61 @@ export const cssVars = {
 // TAILWIND CLASS CONSTANTS
 // =============================================================================
 
-// Text colors (using Tailwind's arbitrary value syntax)
+// Text colors (using CSS variables from tokens.css)
 const TEXT = {
-  light: 'text-[#111111]',            // --text-primary-light
-  dark: 'text-white',                  // Pure white for better contrast
-  mutedLight: 'text-[#666666]',       // --text-muted-light
-  mutedDark: 'text-white/70',         // White at 70% opacity
-  accent: 'text-accent-teal',
+  // Light theme text (for light backgrounds)
+  heading: 'text-[var(--text-heading)]',    // slate-900
+  body: 'text-[var(--text-body)]',          // slate-600
+  muted: 'text-[var(--text-muted)]',        // slate-500
+  accent: 'text-[var(--accent-teal)]',
+  // Legacy aliases
+  light: 'text-[var(--text-primary)]',      // slate-900
+  dark: 'text-white',
+  mutedLight: 'text-[var(--text-body)]',    // slate-600
+  mutedDark: 'text-white/70',
 } as const
 
-// Background colors
+// Background colors (using CSS variables)
 const BG = {
-  light: 'bg-bg-light',
-  lightAlt: 'bg-bg-light-alt',
-  dark: 'bg-bg-dark',
-  darkAlt: 'bg-bg-dark-alt',
+  primary: 'bg-[var(--bg-primary)]',        // slate-50
+  secondary: 'bg-[var(--bg-secondary)]',    // white
+  tertiary: 'bg-[var(--bg-tertiary)]',      // slate-100
+  // Legacy aliases
+  light: 'bg-[var(--bg-light)]',
+  lightAlt: 'bg-[var(--bg-light-alt)]',
+  dark: 'bg-[var(--bg-dark)]',
+  darkAlt: 'bg-[var(--bg-dark-alt)]',
   surface: {
-    light: 'bg-white',
-    lightSubtle: 'bg-black/5',
-    dark: 'bg-black/10',
-    darkSubtle: 'bg-white/5',
+    light: 'bg-[var(--bg-secondary)]',      // white
+    lightSubtle: 'bg-[var(--bg-tertiary)]', // slate-100
+    dark: 'bg-[var(--bg-tertiary)]',        // slate-100 (light theme)
+    darkSubtle: 'bg-[var(--bg-primary)]',   // slate-50
   },
   accent: {
-    light: 'bg-accent-teal/10',
-    dark: 'bg-accent-teal/20',
+    light: 'bg-[var(--accent-teal-soft)]',
+    dark: 'bg-[var(--accent-teal-soft)]',
   },
 } as const
 
-// Border colors
+// Border colors (using CSS variables)
 const BORDER = {
-  light: 'border-black/10',
-  dark: 'border-white/10',
+  primary: 'border-[var(--border-primary)]',  // slate-200
+  secondary: 'border-[var(--border-secondary)]', // slate-300
+  subtle: 'border-[var(--border-subtle)]',    // slate-100
+  // Legacy aliases
+  light: 'border-[var(--border-primary)]',
+  dark: 'border-[var(--border-primary)]',
   accent: {
-    light: 'border-accent-teal/30',
-    dark: 'border-accent-teal/50',
+    light: 'border-[var(--accent-teal)]/30',
+    dark: 'border-[var(--accent-teal)]/30',
   },
 } as const
 
 // Divider colors
 const DIVIDER = {
-  light: 'bg-black/10',
-  dark: 'bg-white/10',
+  primary: 'bg-[var(--border-primary)]',
+  light: 'bg-[var(--border-primary)]',
+  dark: 'bg-[var(--border-primary)]',
 } as const
 
 // =============================================================================
@@ -112,32 +126,34 @@ export interface Theme {
 
 /**
  * Get all theme-aware classes for a component
- * @param isLight - Whether component is on a light background
+ * Now always returns light theme values (Architect aesthetic)
+ * @param isLight - Deprecated, always uses light theme
  * @returns Theme object with all class strings
  * 
  * @example
  * const t = getTheme(true)
  * return <div className={`${t.bg} ${t.text}`}>...</div>
  */
-export function getTheme(isLight: boolean): Theme {
+export function getTheme(isLight: boolean = true): Theme {
+  // Always use light theme (Architect aesthetic)
   return {
-    text: isLight ? TEXT.light : TEXT.dark,
-    textMuted: isLight ? TEXT.mutedLight : TEXT.mutedDark,
-    textAccent: TEXT.accent,
+    text: TEXT.heading,           // slate-900
+    textMuted: TEXT.body,         // slate-600
+    textAccent: TEXT.accent,      // teal
 
-    bg: isLight ? BG.surface.lightSubtle : BG.surface.darkSubtle,
-    bgAlt: isLight ? BG.surface.light : BG.surface.dark,
-    bgAccent: isLight ? BG.accent.light : BG.accent.dark,
+    bg: BG.primary,               // slate-50
+    bgAlt: BG.secondary,          // white
+    bgAccent: BG.accent.light,    // teal soft
 
-    border: isLight ? BORDER.light : BORDER.dark,
-    borderAccent: isLight ? BORDER.accent.light : BORDER.accent.dark,
+    border: BORDER.primary,       // slate-200
+    borderAccent: BORDER.accent.light,
 
-    divider: isLight ? DIVIDER.light : DIVIDER.dark,
-    surface: isLight ? 'surface-light' : 'surface-dark',
-    cardBg: isLight ? BG.surface.light : BG.surface.dark,
+    divider: DIVIDER.primary,     // slate-200
+    surface: 'bg-[var(--bg-secondary)]',
+    cardBg: BG.secondary,         // white
 
     accentVar: cssVars.accent,
-    isLight,
+    isLight: true,
   }
 }
 

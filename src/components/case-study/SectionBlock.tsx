@@ -298,17 +298,17 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
     setLightboxImage(null)
   }
 
-  // Use design system for theming
-  const t = getTheme(isLightBackground)
+  // Use design system (Architect aesthetic)
+  const t = getTheme(true)
   const textColor = t.text
   const mutedColor = t.textMuted
-  const borderColor = isLightBackground ? 'border-refined-light' : 'border-refined-dark'
+  const borderColor = t.border
   const bgColor = t.bg
   const dividerColor = t.divider
 
   // Light shadow for depth, minimal design
-  const imageShadow = isLightBackground ? 'elevation-sm' : ''
-  const imageBorderRadius = 'rounded'
+  const imageShadow = 'shadow-[var(--shadow-sm)]'
+  const imageBorderRadius = 'rounded-[var(--radius-lg)]'
   const imageOutline = ''
 
   const images = section.images || []
@@ -350,78 +350,35 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   const renderBodyAtTop = !hasVisualContent
 
   // Split header and body content for sensitive sections
-  // Header Section (always visible)
+  // Header Section (always visible) - Senior energy: no letter badges
+  
   const sectionHeader = (
-    <div className="space-y-4">
-      <div className="flex items-baseline gap-4">
-        <span className={`${isLightBackground ? 'bg-black/5' : 'bg-white/10'} ${textColor} text-base md:text-lg font-mono uppercase tracking-wider font-bold px-3 py-1.5`}>
-          {frameworkMapping && frameworkMapping[section.id] ? frameworkMapping[section.id] : section.index}
-        </span>
-      </div>
-      <div className="flex items-start gap-3">
-        <h2 className={`${textColor} text-3xl md:text-4xl font-serif leading-snug tracking-tight flex-1`}>
+    <div className="space-y-6 relative">
+      {/* Section Title - Clean, confident, no academic badges */}
+      <div className="relative">
+        <h2 className="text-slate-900 text-3xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight">
           {section.title}
           {section.id === 'version-3' && (
-            <span className="block mt-2 text-xl md:text-2xl font-normal italic" style={{ color: 'var(--accent-teal)' }}>
+            <span className="block mt-2 text-xl md:text-2xl font-normal italic text-[var(--accent-teal)]">
               The solution that balanced everything
             </span>
           )}
         </h2>
       </div>
 
-      {/* Section Summary (TL;DR) - Enhanced as Visual Summary Card */}
+      {/* Section Summary (TL;DR) - System Note style */}
       {section.summary && (
-        <VisualSummaryCard
-          icon={
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          }
-          title="TL;DR"
-          summary={section.summary}
-          isLightBackground={isLightBackground}
-        />
-      )}
-
-      {/* Methodology Tags - Enhanced with Tooltips */}
-      {section.methodologies && section.methodologies.length > 0 && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className={`${mutedColor} text-xs font-mono uppercase tracking-wider mr-1`}>Methods:</span>
-          {section.methodologies.map((method, index) => {
-            // Method descriptions for tooltips
-            const methodDescriptions: Record<string, string> = {
-              'System Exploration': 'Mapped undocumented workflows through sandbox environments and system analysis',
-              'Support Ticket Analysis': 'Analyzed customer support tickets to identify pain points and user needs',
-              'Customer Rep Interviews': 'Interviewed customer representatives as proxies for direct user research',
-              'Competitive Analysis': 'Studied how competitors handle similar features to identify best practices',
-              'Workflow Documentation': 'Documented existing workflows to understand system behavior',
-              'User Journey Analysis': 'Mapped user journeys to identify friction points and opportunities',
-              'Usability Testing': 'Conducted usability tests to validate design decisions',
-              'Iterative Prototyping': 'Built and refined prototypes based on feedback',
-              'Self-Directed Learning': 'Learned complex domains quickly through courses and research',
-              'Domain Expert Collaboration': 'Worked closely with domain experts to understand technical requirements',
-            }
-            const description = methodDescriptions[method] || method
-
-            return (
-              <div key={index} className="group relative">
-                <span
-                  className={`${isLightBackground ? 'bg-black/5 hover:bg-black/10' : 'bg-white/10 hover:bg-white/20'} ${textColor} text-xs px-3 py-1.5 font-medium rounded cursor-help transition-colors duration-200 border ${borderColor} hover:border-[var(--accent-teal)]/50`}
-                >
-                  {method}
-                </span>
-                {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 pointer-events-none">
-                  <div className={`${isLightBackground ? 'bg-[#1A1A1A] text-white' : 'bg-white text-[#1A1A1A]'} rounded-lg px-3 py-2 text-xs max-w-xs shadow-lg border ${borderColor} whitespace-normal`}>
-                    {description}
-                    <div className={`absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 ${isLightBackground ? 'border-[#1A1A1A]' : 'border-white'} border-transparent`}></div>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
+        <div className="border-l-2 border-slate-300 pl-4 py-2 mt-6">
+          <span className="font-mono text-xs uppercase tracking-widest text-slate-400 block mb-2">
+            TL;DR
+          </span>
+          <p className="font-mono text-sm text-slate-600 leading-relaxed">
+            {section.summary}
+          </p>
         </div>
       )}
+
+      {/* Methodology Tags removed - at Principal level, methods are assumed */}
 
       {/* Extract and Display Metrics */}
       {section.body && (() => {
@@ -432,7 +389,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
             {metrics.slice(0, 5).map((metric, index) => (
               <span
                 key={index}
-                className={`${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} text-[var(--accent-teal)] text-xs px-3 py-1 font-semibold`}
+                className="bg-[var(--accent-teal-soft)] text-[var(--accent-teal)] text-xs px-3 py-1 font-semibold"
               >
                 {metric}
               </span>
@@ -446,70 +403,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
   // Body Content (can be locked)
   const sectionBody = (
     <div className="space-y-6">
-      {/* "What this reveals" - Enhanced for Skimmability & Readability */}
-      {section.revealsPoints && Array.isArray(section.revealsPoints) && section.revealsPoints.length > 0 && (
-        <div className="space-y-6">
-          {/* Header */}
-          <div className="flex items-center gap-3">
-            <div className={`h-px flex-1 ${dividerColor}`}></div>
-            <h3 className={`${textColor} text-lg md:text-xl font-serif font-semibold whitespace-nowrap`}>
-              {section.revealsTitle || 'What this reveals'}
-            </h3>
-            <div className={`h-px flex-1 ${dividerColor}`}></div>
-            <div className={`h-px w-8 ${isLightBackground ? 'bg-[var(--accent-teal)]' : 'bg-[var(--accent-teal)]'}`}></div>
-          </div>
-
-          {/* Insights Grid - Card-based for better scanning */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {section.revealsPoints.map((point, index) => {
-              // Extract key phrase (text before → or : or —)
-              const keyPhraseMatch = point.match(/^([^→:—]+?)(→|:|—)/)
-              const keyPhrase = keyPhraseMatch ? keyPhraseMatch[1].trim() : null
-              const restOfText = keyPhraseMatch ? point.substring(keyPhraseMatch[0].length).trim() : point
-
-              return (
-                <div
-                  key={`reveal-${index}`}
-                  className={`${isLightBackground ? 'bg-white/50 border-black/10' : 'bg-white/5 border-white/10'} rounded-lg p-5 md:p-6 border hover:shadow-elevation-2 hover-lift transition-all duration-300 group`}
-                >
-                  <div className="space-y-3">
-                    {/* Number Badge */}
-                    <div className="flex items-center gap-2">
-                      <div className={`w-6 h-6 rounded-full ${isLightBackground ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} flex items-center justify-center flex-shrink-0`}>
-                        <span className={`text-[var(--accent-teal)] text-xs font-mono font-bold`}>
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-                      </div>
-                      <div className={`h-px flex-1 ${dividerColor}`}></div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="space-y-2">
-                      {keyPhrase ? (
-                        <>
-                          <div className={`${textColor} text-sm md:text-base font-semibold leading-snug`}>
-                            {keyPhrase}
-                          </div>
-                          <div className={`${mutedColor} text-sm md:text-base leading-relaxed`}>
-                            {restOfText}
-                          </div>
-                        </>
-                      ) : (
-                        <div className={`${textColor} text-sm md:text-base leading-relaxed font-medium`}>
-                          {point}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Accent Line */}
-                    <div className={`h-px w-12 ${isLightBackground ? 'bg-[var(--accent-teal)]/30' : 'bg-[var(--accent-teal)]/40'} group-hover:bg-[var(--accent-teal)] transition-colors duration-300`}></div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )}
+      {/* "What this reveals" - REMOVED: Redundant self-praise. Evidence speaks for itself. */}
 
       {/* Body Text - Render at top only if no visual content */}
       {renderBodyAtTop && section.body && (
@@ -551,9 +445,10 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                 ]
 
                 return (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {paragraphs.map((para, pIndex) => {
                       const trimmedPara = para.trim()
+                      const isFirstParagraph = pIndex === 0
 
                       // Check if this paragraph contains a pull quote candidate
                       let hasPullQuote = false
@@ -581,14 +476,18 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                         const remainingText = trimmedPara.replace(pullQuoteText, '').trim()
                         return (
                           <div key={`para-${pIndex}`} className="space-y-4">
-                            <p className="whitespace-pre-line">{remainingText}</p>
+                            <p className={`whitespace-pre-line ${isFirstParagraph ? 'text-lg text-slate-700 leading-relaxed' : ''}`}>{remainingText}</p>
                             <PullQuote quote={pullQuoteText} isLightBackground={isLightBackground} />
                           </div>
                         )
                       }
 
+                      // First paragraph gets "lead" styling for better visual hierarchy
                       return (
-                        <p key={`para-${pIndex}`} className="whitespace-pre-line">
+                        <p 
+                          key={`para-${pIndex}`} 
+                          className={`whitespace-pre-line ${isFirstParagraph ? 'text-lg text-slate-700 leading-relaxed font-medium' : ''}`}
+                        >
                           {trimmedPara}
                         </p>
                       )
@@ -603,8 +502,8 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
 
       {/* Challenge Breakdown now integrated into DiscoveryVisual component - shown in CaseStudyLayout */}
 
-      {/* Team Onboarding Process integrated into Section 06 - ReportCaster only */}
-      {section.id === 'section-06' && caseStudySlug === 'reportcaster' && (
+      {/* Team Onboarding Process integrated into Section 05 (G - Grow) - ReportCaster only */}
+      {section.id === 'section-05' && caseStudySlug === 'reportcaster' && (
         <div className="pt-6">
           <TeamOnboardingProcess isLightBackground={isLightBackground} />
         </div>
@@ -1015,7 +914,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                           <span
                             className={`text-2xl font-mono transition-all duration-300`}
                             style={{
-                              color: isExpanded ? 'var(--accent-teal)' : (isLightBackground ? '#666666' : 'rgba(255,255,255,0.7)')
+                              color: isExpanded ? 'var(--accent-teal)' : 'var(--text-muted)'
                             }}
                           >
                             {isExpanded ? '−' : '+'}

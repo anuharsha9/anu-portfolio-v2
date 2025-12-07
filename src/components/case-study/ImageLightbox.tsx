@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 
 interface ImageItem {
@@ -17,9 +18,9 @@ interface ImageLightboxProps {
   imageSrc: string
   imageAlt: string
   imageCaption?: string
-  images?: ImageItem[] // Array of all images in the current set
-  currentIndex?: number // Current image index in the array
-  onNavigate?: (index: number) => void // Callback for navigation
+  images?: ImageItem[]
+  currentIndex?: number
+  onNavigate?: (index: number) => void
 }
 
 export default function ImageLightbox({
@@ -33,16 +34,20 @@ export default function ImageLightbox({
   onNavigate,
 }: ImageLightboxProps) {
   const containerRef = useFocusTrap(isOpen)
+  const [isZoomed, setIsZoomed] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  
+  // Store scroll position in ref to persist across re-renders
+  const scrollPositionRef = useRef<number>(0)
 
-  // Determine if navigation is available
+  // Navigation state
   const hasNavigation = images && images.length > 1 && onNavigate
   const canGoPrev = hasNavigation && currentIndex > 0
   const canGoNext = hasNavigation && currentIndex < images.length - 1
 
-  // Handle touch gestures for mobile
+  // Touch gesture state
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
-
   const minSwipeDistance = 50
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -68,20 +73,47 @@ export default function ImageLightbox({
     }
   }
 
-  // Handle keyboard navigation and prevent scrolling
+  // Reset zoom when image changes
+  useEffect(() => {
+    setIsZoomed(false)
+    setImageLoaded(false)
+  }, [imageSrc])
+
+  // Scroll lock - only runs when isOpen changes
+  useEffect(() => {
+    if (isOpen) {
+      // Capture scroll position ONCE when opening
+      scrollPositionRef.current = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollPositionRef.current}px`
+      document.body.style.width = '100%'
+      document.body.style.overflow = 'hidden'
+    }
+    
+    return () => {
+      if (isOpen) {
+        // Restore scroll position when closing
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.width = ''
+        document.body.style.overflow = ''
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          window.scrollTo(0, scrollPositionRef.current)
+        })
+      }
+    }
+  }, [isOpen])
+
+  // Keyboard navigation - separate effect to avoid scroll issues
   useEffect(() => {
     if (!isOpen) return
-
-    // Prevent body scroll when lightbox is open
-    const scrollY = window.scrollY
-    document.body.style.position = 'fixed'
-    document.body.style.top = `-${scrollY}px`
-    document.body.style.width = '100%'
-    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
+      } else if (e.key === 'z' || e.key === 'Z') {
+        setIsZoomed(prev => !prev)
       } else if (hasNavigation) {
         if (e.key === 'ArrowLeft' && canGoPrev) {
           onNavigate(currentIndex - 1)
@@ -95,180 +127,207 @@ export default function ImageLightbox({
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
-      // Restore scroll position
-      document.body.style.position = ''
-      document.body.style.top = ''
-      document.body.style.width = ''
-      document.body.style.overflow = ''
-      window.scrollTo(0, scrollY)
     }
   }, [isOpen, hasNavigation, canGoPrev, canGoNext, currentIndex, onNavigate, onClose])
 
-  if (!isOpen) return null
-
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (canGoPrev && onNavigate) {
       onNavigate(currentIndex - 1)
     }
-  }
+  }, [canGoPrev, currentIndex, onNavigate])
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (canGoNext && onNavigate) {
       onNavigate(currentIndex + 1)
     }
-  }
+  }, [canGoNext, currentIndex, onNavigate])
+
+  if (!isOpen) return null
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-[9999]">
+          {/* Backdrop - Dark with blur */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-950/95 backdrop-blur-xl"
             onClick={onClose}
           />
 
-          {/* Lightbox Content */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 pointer-events-none">
-            <motion.div
-              ref={containerRef as React.RefObject<HTMLDivElement>}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-7xl max-h-[85vh] flex flex-col items-center justify-center pointer-events-auto"
-              onClick={(e) => e.stopPropagation()}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="lightbox-image"
-            >
+          {/* Top Bar - Technical Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-4 bg-gradient-to-b from-slate-950/80 to-transparent"
+          >
+            {/* Technical Label */}
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[11px] text-slate-500 uppercase tracking-widest">
+                // SYSTEM_INSPECTION
+              </span>
+              {hasNavigation && (
+                <span className="font-mono text-xs text-slate-400">
+                  [{String(currentIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}]
+                </span>
+              )}
+            </div>
+
+            {/* Controls */}
+            <div className="flex items-center gap-2">
+              {/* Zoom Toggle */}
+              <button
+                onClick={() => setIsZoomed(prev => !prev)}
+                className="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
+                aria-label={isZoomed ? 'Zoom out' : 'Zoom in'}
+              >
+                {isZoomed ? <ZoomOut className="w-5 h-5" /> : <ZoomIn className="w-5 h-5" />}
+              </button>
+
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 z-10 text-white/90 hover:text-white transition-colors p-2 bg-black/50 hover:bg-black/70 rounded-full backdrop-blur-sm"
+                className="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
                 aria-label="Close lightbox"
               >
-                <svg
-                  className="w-6 h-6 md:w-7 md:h-7"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <X className="w-5 h-5" />
               </button>
+            </div>
+          </motion.div>
 
-              {/* Previous Button */}
-              {hasNavigation && canGoPrev && (
-                <button
-                  onClick={handlePrev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full backdrop-blur-sm"
-                  aria-label="Previous image"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-              )}
-
-              {/* Next Button */}
-              {hasNavigation && canGoNext && (
-                <button
-                  onClick={handleNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white/80 hover:text-white transition-colors p-3 bg-black/40 hover:bg-black/60 rounded-full backdrop-blur-sm"
-                  aria-label="Next image"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              )}
-
-              {/* Image Container - Touch Gesture Support */}
-              <div 
-                className="relative w-full flex-shrink-0 bg-black/20 rounded-lg overflow-hidden" 
-                style={{ maxHeight: 'calc(85vh - 120px)' }}
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
+          {/* Main Content Area */}
+          <div
+            ref={containerRef as React.RefObject<HTMLDivElement>}
+            className="absolute inset-0 flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lightbox-image"
+          >
+            {/* Navigation Arrows */}
+            {hasNavigation && canGoPrev && (
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                onClick={handlePrev}
+                className="absolute left-4 md:left-8 z-10 p-3 md:p-4 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 rounded-xl border border-slate-700/50 hover:border-slate-600 backdrop-blur-sm transition-all duration-200 group"
+                aria-label="Previous image"
               >
-                <div className="relative w-full" style={{ aspectRatio: 'auto', minHeight: '300px', maxHeight: 'calc(85vh - 120px)' }}>
+                <ChevronLeft className="w-6 h-6 md:w-7 md:h-7 group-hover:-translate-x-0.5 transition-transform" />
+              </motion.button>
+            )}
+
+            {hasNavigation && canGoNext && (
+              <motion.button
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                onClick={handleNext}
+                className="absolute right-4 md:right-8 z-10 p-3 md:p-4 text-slate-400 hover:text-white bg-slate-900/60 hover:bg-slate-800/80 rounded-xl border border-slate-700/50 hover:border-slate-600 backdrop-blur-sm transition-all duration-200 group"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6 md:w-7 md:h-7 group-hover:translate-x-0.5 transition-transform" />
+              </motion.button>
+            )}
+
+            {/* Image Container */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className={`relative flex flex-col items-center px-4 md:px-20 py-20 max-w-full ${isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
+              onClick={() => setIsZoomed(prev => !prev)}
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={onTouchEnd}
+            >
+              {/* Image Wrapper with Border */}
+              <div 
+                className={`relative bg-slate-900 rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl shadow-black/50 transition-all duration-500 ${
+                  isZoomed ? 'max-w-none' : 'max-w-6xl'
+                }`}
+              >
+                {/* Loading State */}
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+                    <div className="w-8 h-8 border-2 border-slate-700 border-t-[var(--accent-teal)] rounded-full animate-spin" />
+                  </div>
+                )}
+
+                {/* The Image */}
+                <div 
+                  className={`relative transition-all duration-500 ${
+                    isZoomed 
+                      ? 'w-[95vw] h-[90vh]' 
+                      : 'w-[90vw] md:w-[85vw] lg:w-[80vw] h-[60vh] md:h-[70vh] lg:h-[75vh]'
+                  }`}
+                >
                   <Image
                     id="lightbox-image"
                     src={imageSrc}
                     alt={imageAlt}
                     fill
-                    className="object-contain"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1400px"
+                    className={`transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${
+                      isZoomed ? 'object-contain' : 'object-contain'
+                    }`}
+                    sizes="100vw"
                     priority
+                    quality={100}
+                    onLoad={() => setImageLoaded(true)}
                   />
                 </div>
               </div>
 
-              {/* Image Counter */}
-              {hasNavigation && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-white/70 text-sm font-medium bg-black/50 px-3 py-1.5 rounded-full backdrop-blur-sm">
-                  {currentIndex + 1} / {images.length}
-                </div>
-              )}
-
-              {/* Caption */}
+              {/* Caption - Technical Style */}
               {imageCaption && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.3 }}
-                  className="mt-4 text-center flex-shrink-0 w-full"
+                  transition={{ delay: 0.2, duration: 0.3 }}
+                  className="mt-6 text-center max-w-3xl"
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed max-w-3xl mx-auto px-4">
+                  <p className="font-mono text-sm text-slate-400 leading-relaxed">
                     {imageCaption}
                   </p>
                 </motion.div>
               )}
-
-              {/* Hint */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mt-2 text-center flex-shrink-0"
-              >
-                <p className="text-white/40 text-xs">
-                  {hasNavigation ? 'Press ESC to close • Use arrow keys to navigate' : 'Press ESC to close'}
-                </p>
-              </motion.div>
             </motion.div>
           </div>
-        </>
+
+          {/* Bottom Hint Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
+            className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center px-6 py-4 bg-gradient-to-t from-slate-950/80 to-transparent"
+          >
+            <div className="flex items-center gap-6 font-mono text-[10px] text-slate-500 uppercase tracking-widest">
+              <span className="flex items-center gap-2">
+                <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">ESC</kbd>
+                Close
+              </span>
+              <span className="flex items-center gap-2">
+                <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">Z</kbd>
+                Zoom
+              </span>
+              {hasNavigation && (
+                <span className="flex items-center gap-2">
+                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">←</kbd>
+                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">→</kbd>
+                  Navigate
+                </span>
+              )}
+            </div>
+          </motion.div>
+        </div>
       )}
     </AnimatePresence>
   )

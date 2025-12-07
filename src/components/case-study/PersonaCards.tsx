@@ -1,107 +1,183 @@
 'use client'
 
 import Image from 'next/image'
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
 
 interface PersonaCardsProps {
   isLightBackground?: boolean
 }
 
-export default function PersonaCards({ isLightBackground = false }: PersonaCardsProps) {
-  const t = getTheme(isLightBackground)
-  const subtleBorder = isLightBackground ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.1)'
-
+export default function PersonaCards({ isLightBackground = true }: PersonaCardsProps) {
   const personas = [
     {
       name: 'BI Developer',
       image: '/images/case-study/ReportCaster/Persona - BI Developer - No Data.png',
-      role: 'Technical User',
+      type: 'TECHNICAL_USER',
       description: 'Developers who need to schedule reports but may not have existing data infrastructure',
-      goals: ['Schedule reports reliably', 'Understand system behavior', 'Integrate with existing workflows'],
+      goals: ['Schedule reports reliably', 'Understand system behavior', 'Integrate with workflows'],
       painPoints: ['Fragmented interfaces', 'Unclear system behavior', 'Complex configuration'],
-      needs: ['Clear, predictable workflows', 'Documentation and guidance', 'Consistent patterns'],
+      needs: ['Clear, predictable UX', 'Documentation & guidance', 'Consistent patterns'],
     },
     {
       name: 'Reporting Guru',
       image: '/images/case-study/ReportCaster/Persona - Reporting Guru.png',
-      role: 'Power User',
+      type: 'POWER_USER',
       description: 'Power users who understand the system deeply but still struggle with the fragmented interface',
-      goals: ['Efficient schedule management', 'Advanced configuration options', 'Quick access to all features'],
-      painPoints: ['Multiple tabs and dialogs', 'Context switching', 'Hidden features'],
-      needs: ['Unified interface', 'Fast workflows', 'Advanced controls accessible'],
+      goals: ['Efficient management', 'Advanced configuration', 'Quick feature access'],
+      painPoints: ['Multiple tabs/dialogs', 'Context switching', 'Hidden features'],
+      needs: ['Unified interface', 'Fast workflows', 'Accessible controls'],
     },
   ]
 
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
-      <div className="space-y-8">
-        <div className="text-center space-y-3">
-          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>User Personas</h3>
-          <p className={`${t.textMuted} text-base md:text-lg max-w-2xl mx-auto`}>
-            Personas and journey maps were created by a previous researcher. I inherited this foundational work and used it to guide design decisions throughout the redesign.
-          </p>
+    <div className="space-y-8">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-center space-y-4"
+      >
+        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+          // USER_PROFILES
+        </span>
+        <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
+          User Personas
+        </h3>
+        
+        {/* Context Note - Inline at top */}
+        <div className="inline-block font-mono text-xs text-slate-500 bg-slate-100 py-2 px-4 rounded-lg border border-slate-200">
+          // CONTEXT: Inherited foundational research. Used to guide architectural decisions.
         </div>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {personas.map((p, i) => (
-            <div key={i} className={`${t.cardBg} rounded-lg border ${t.border} p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg`}>
-              <div className="mb-4 relative w-full h-48 rounded-lg border overflow-hidden" style={{ borderColor: subtleBorder }}>
-                <Image src={p.image} alt={p.name} fill className="object-cover" />
+      {/* Persona Cards - Stacked Horizontal Layout */}
+      <div className="flex flex-col gap-6">
+        {personas.map((p, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 + i * 0.15 }}
+            className="flex flex-col md:flex-row bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal-400)]/30 transition-all duration-300"
+          >
+            {/* Left Side - Persona Image (25%) */}
+            <div className="relative w-full md:w-[25%] bg-slate-100">
+              <div className="relative h-48 md:h-full md:min-h-[280px]">
+                <Image 
+                  src={p.image} 
+                  alt={p.name} 
+                  fill 
+                  className="object-cover" 
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+              </div>
+              {/* Role Type Badge - Mobile */}
+              <div className="md:hidden absolute top-3 right-3">
+                <span className={`
+                  font-mono text-[10px] px-2 py-1 rounded uppercase tracking-widest text-white
+                  ${p.type === 'TECHNICAL_USER' ? 'bg-[var(--accent-teal)]' : 'bg-purple-600'}
+                `}>
+                  [{p.type}]
+                </span>
+              </div>
+            </div>
+
+            {/* Right Side - Content (75%) */}
+            <div className="flex-1 p-6 md:p-8">
+              {/* Header Section */}
+              <div className="mb-6">
+                <div className="flex items-start justify-between gap-4 mb-2">
+                  <h4 className="font-serif text-slate-900 text-xl md:text-2xl">
+                    {p.name}
+                  </h4>
+                  {/* Role Type Badge - Desktop */}
+                  <span className={`
+                    hidden md:inline-block font-mono text-[10px] px-3 py-1 rounded uppercase tracking-widest border
+                    ${p.type === 'TECHNICAL_USER' 
+                      ? 'text-[var(--accent-teal)] bg-[var(--accent-teal-50)] border-[var(--accent-teal-200)]' 
+                      : 'text-purple-600 bg-purple-50 border-purple-200'}
+                  `}>
+                    [{p.type}]
+                  </span>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {p.description}
+                </p>
               </div>
 
-              <div className="space-y-4">
+              {/* Attributes Grid - 3 Columns */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 border-t border-slate-100 pt-5">
+                {/* Goals Column */}
                 <div>
-                  <h4 className={`${t.text} text-xl font-serif mb-1`}>{p.name}</h4>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider`}>{p.role}</span>
-                  <p className={`${t.textMuted} text-sm mt-2 leading-relaxed`}>{p.description}</p>
-                </div>
-
-                <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Goals</span>
-                  <ul className="space-y-1">
+                  <h5 className="font-mono text-[10px] text-[var(--accent-blue)] uppercase tracking-widest mb-3">
+                    // GOALS
+                  </h5>
+                  <div className="space-y-2">
                     {p.goals.map((g, j) => (
-                      <li key={j} className={`${t.text} text-sm flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-1`}>✓</span>
+                      <p key={j} className="text-slate-700 text-xs leading-relaxed flex items-start gap-2">
+                        <span className="text-[var(--accent-blue)] mt-0.5">+</span>
                         <span>{g}</span>
-                      </li>
+                      </p>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
+                {/* Pain Points Column */}
                 <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Pain Points</span>
-                  <ul className="space-y-1">
+                  <h5 className="font-mono text-[10px] text-red-500 uppercase tracking-widest mb-3">
+                    // PAINS
+                  </h5>
+                  <div className="space-y-2">
                     {p.painPoints.map((pp, j) => (
-                      <li key={j} className={`${t.textMuted} text-sm flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-1`}>×</span>
+                      <p key={j} className="text-slate-600 text-xs leading-relaxed flex items-start gap-2">
+                        <span className="text-red-500 mt-0.5">×</span>
                         <span>{pp}</span>
-                      </li>
+                      </p>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
+                {/* Needs Column */}
                 <div>
-                  <span className={`${t.textMuted} text-xs font-mono uppercase tracking-wider mb-2 block`}>Needs</span>
-                  <ul className="space-y-1">
+                  <h5 className="font-mono text-[10px] text-emerald-500 uppercase tracking-widest mb-3">
+                    // NEEDS
+                  </h5>
+                  <div className="space-y-2">
                     {p.needs.map((n, j) => (
-                      <li key={j} className={`${t.text} text-sm flex items-start gap-2`}>
-                        <span className={`${t.textAccent} mt-1`}>→</span>
+                      <p key={j} className="text-slate-700 text-xs leading-relaxed flex items-start gap-2">
+                        <span className="text-emerald-500 mt-0.5">&gt;</span>
                         <span>{n}</span>
-                      </li>
+                      </p>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </motion.div>
+        ))}
+      </div>
 
-        <div className={`${t.cardBg} rounded-lg p-6 border ${t.border} mt-8`}>
-          <p className={`${t.text} text-sm leading-relaxed`}>
-            <span className="font-semibold">Note:</span> These personas were created by a user researcher who left the company before I joined. I inherited this foundational work and built upon it, using the personas to guide design decisions while supplementing with insights from Customer Support and customer reps.
+      {/* Design Implication Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="bg-slate-900 rounded-xl p-6"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
+            // DESIGN_IMPLICATION
+          </span>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Both personas share the same pain: <span className="text-emerald-400 font-medium">fragmented interfaces and context switching</span>. 
+            The solution unified scheduling into a single, predictable workflow.
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

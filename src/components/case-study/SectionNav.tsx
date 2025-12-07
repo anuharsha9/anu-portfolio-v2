@@ -13,70 +13,16 @@ export default function SectionNav({ sections }: SectionNavProps) {
   const [activeSection, setActiveSection] = useState<string>('')
   const [showLeftIndicator, setShowLeftIndicator] = useState(false)
   const [showRightIndicator, setShowRightIndicator] = useState(false)
-  const [currentBgIsLight, setCurrentBgIsLight] = useState(false)
-  const [hasShadow, setHasShadow] = useState(false)
-  const [mainNavHeight, setMainNavHeight] = useState(72)
+  const [mainNavHeight, setMainNavHeight] = useState(64)
   const navRef = useRef<HTMLElement>(null)
 
+  // Show nav after scrolling past hero
   useScrollManager((scrollY) => {
-    const hasScrolled = scrollY > 0
+    const hasScrolled = scrollY > 300
     setIsVisible(hasScrolled)
-    setHasShadow(hasScrolled)
   }, [])
 
-  useScrollManager((scrollY) => {
-    if (typeof window !== 'undefined' && scrollY > 0 && navRef.current) {
-      const navRect = navRef.current.getBoundingClientRect()
-      const samplePoints = [
-        { x: window.innerWidth / 4, y: navRect.top - 5 },
-        { x: window.innerWidth / 2, y: navRect.top - 5 },
-        { x: (window.innerWidth * 3) / 4, y: navRect.top - 5 },
-      ]
-
-      let lightCount = 0
-      let darkCount = 0
-
-      samplePoints.forEach((point) => {
-        const elementBelow = document.elementFromPoint(point.x, point.y)
-        if (elementBelow) {
-          let currentElement: Element | null = elementBelow
-          let bgColor = ''
-
-          while (currentElement && !bgColor) {
-            const computedStyle = window.getComputedStyle(currentElement)
-            bgColor = computedStyle.backgroundColor
-
-            if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
-              const hasLightSurface = currentElement.classList.contains('surface-light') || currentElement.classList.contains('surface-light-alt')
-              const hasDarkSurface = currentElement.classList.contains('surface-dark') || currentElement.classList.contains('surface-dark-alt')
-
-              if (hasLightSurface) {
-                lightCount++
-                break
-              } else if (hasDarkSurface) {
-                darkCount++
-                break
-              }
-              currentElement = currentElement.parentElement
-            } else {
-              const rgb = bgColor.match(/\d+/g)
-              if (rgb && rgb.length >= 3) {
-                const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000
-                if (brightness > 128) lightCount++
-                else darkCount++
-              }
-              break
-            }
-          }
-        }
-      })
-
-      setCurrentBgIsLight(lightCount > darkCount)
-    } else if (scrollY === 0) {
-      setCurrentBgIsLight(false)
-    }
-  }, [])
-
+  // Track active section based on scroll position
   useEffect(() => {
     const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 }
 
@@ -100,13 +46,14 @@ export default function SectionNav({ sections }: SectionNavProps) {
     }
   }, [sections])
 
+  // Scroll to section handler
   const scrollToSection = (sectionId: string) => {
     if (typeof window === 'undefined') return
     const element = document.getElementById(sectionId)
     if (element) {
       const header = document.querySelector('header')
       const sectionNav = navRef.current
-      const mainNav = header ? header.getBoundingClientRect().height : 72
+      const mainNav = header ? header.getBoundingClientRect().height : 64
       const secNav = sectionNav ? sectionNav.getBoundingClientRect().height : 48
       const offset = mainNav + secNav + 20
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
@@ -117,6 +64,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
     }
   }
 
+  // Check scroll indicators for mobile
   useEffect(() => {
     if (!isVisible) return
 
@@ -136,6 +84,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
     return () => window.removeEventListener('resize', checkScrollIndicators)
   }, [isVisible])
 
+  // Track main nav height for positioning
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -162,13 +111,24 @@ export default function SectionNav({ sections }: SectionNavProps) {
 
   if (!isVisible) return null
 
-  const bgStyle = currentBgIsLight ? { backgroundColor: 'rgba(250, 250, 249, 0.85)' } : { backgroundColor: 'rgba(10, 10, 11, 0.85)' }
-
   return (
-    <nav ref={navRef} className={`fixed left-0 right-0 backdrop-blur-md transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0 h-auto' : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'} ${hasShadow ? 'shadow-lg' : ''}`} style={{ top: `${mainNavHeight}px`, zIndex: 9999, isolation: 'isolate', position: 'fixed', ...bgStyle, borderBottom: isVisible ? (currentBgIsLight ? '1px solid rgba(0,0,0,0.05)' : '1px solid rgba(255,255,255,0.05)') : 'transparent' }} aria-label="Case study section navigation">
-      <div className="relative">
+    <nav 
+      ref={navRef} 
+      className={`
+        fixed left-0 right-0 z-40
+        h-12 
+        bg-white/90 backdrop-blur-md 
+        border-b border-slate-200
+        transition-all duration-300
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}
+      `} 
+      style={{ top: `${mainNavHeight}px` }} 
+      aria-label="Case study section navigation"
+    >
+      <div className="relative h-full">
+        {/* Scrollable Container */}
         <div
-          className="overflow-x-auto scrollbar-hide"
+          className="overflow-x-auto scrollbar-hide h-full"
           onScroll={(e) => {
             if (typeof window === 'undefined') return
             const target = e.currentTarget
@@ -177,12 +137,14 @@ export default function SectionNav({ sections }: SectionNavProps) {
             setShowRightIndicator(scrollLeft < scrollWidth - clientWidth - 10)
           }}
         >
-          <div className="flex gap-2 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-1 sm:py-1.5 min-w-max max-w-[1200px] mx-auto justify-center">
+          {/* Tab Links - Centered */}
+          <div className="flex items-center justify-center gap-6 md:gap-8 px-4 md:px-8 h-full min-w-max max-w-[1200px] mx-auto">
             {sections.map((section) => {
               const isActive = activeSection === section.id
               const firstWord = section.title.split(' ')[0]
               const firstLetter = firstWord.charAt(0)
               const restOfWord = firstWord.slice(1)
+              
               return (
                 <button
                   key={section.id}
@@ -193,22 +155,48 @@ export default function SectionNav({ sections }: SectionNavProps) {
                       scrollToSection(section.id)
                     }
                   }}
-                  className={`flex items-center gap-2 px-3 md:px-4 py-1 rounded-lg text-xs md:text-sm whitespace-nowrap transition-all duration-200 min-h-[32px] md:min-h-[36px] touch-manipulation focus:outline-none ${isActive ? `bg-[var(--accent-teal)]/20 text-[var(--accent-teal)] font-semibold border-0` : currentBgIsLight ? 'text-[var(--text-primary-light)] hover:text-[var(--text-primary-light)] hover:bg-black/5 border-0' : 'text-white/80 hover:text-white hover:bg-white/10 border-0'}`}
+                  className={`
+                    relative
+                    font-mono text-xs uppercase tracking-widest
+                    whitespace-nowrap
+                    transition-all duration-200
+                    h-full flex items-center
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0BA2B5]/50
+                    ${isActive 
+                      ? 'text-[#0BA2B5] font-semibold' 
+                      : 'text-slate-500 hover:text-[#0BA2B5]'
+                    }
+                  `}
                   aria-label={`Navigate to ${section.title}`}
                   aria-current={isActive ? 'true' : 'false'}
                 >
-                  <span>
-                    <span className="font-bold">{firstLetter}</span>
-                    {restOfWord}
-                  </span>
+                  {/* Bold first letter, rest normal */}
+                  <span className="font-bold">{firstLetter}</span>
+                  <span>{restOfWord}</span>
+                  
+                  {/* Active Indicator - Bottom Border */}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0BA2B5]" />
+                  )}
                 </button>
               )
             })}
           </div>
         </div>
 
-        {showLeftIndicator && <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r to-transparent pointer-events-none" style={currentBgIsLight ? { background: 'linear-gradient(to right, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to right, rgba(10, 10, 11, 0.95), transparent)' }}></div>}
-        {showRightIndicator && <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l to-transparent pointer-events-none" style={currentBgIsLight ? { background: 'linear-gradient(to left, rgba(250, 250, 249, 0.95), transparent)' } : { background: 'linear-gradient(to left, rgba(10, 10, 11, 0.95), transparent)' }}></div>}
+        {/* Scroll Indicators (for mobile) */}
+        {showLeftIndicator && (
+          <div 
+            className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent)' }}
+          />
+        )}
+        {showRightIndicator && (
+          <div 
+            className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, rgba(255, 255, 255, 0.95), transparent)' }}
+          />
+        )}
       </div>
     </nav>
   )

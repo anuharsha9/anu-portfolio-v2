@@ -3,11 +3,20 @@ export interface HighlightMetric {
   value: string
 }
 
+export interface ScopeCard {
+  tag: string
+  tagColor: 'blue' | 'amber' | 'purple' | 'emerald'
+  headline: string
+  body: string
+  icon: 'architect' | 'archaeologist' | 'strategist' | 'multiplier'
+}
+
 export interface QuickOverview {
   title: string
   subtitle: string
   whatTheSystemWas: string
   myRole: string
+  scopeOfPractice?: ScopeCard[]
   credentials?: string
   keyActions?: string[]
   impactMetrics: HighlightMetric[]

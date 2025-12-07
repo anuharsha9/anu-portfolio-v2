@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { Unplug, ArrowDown, Link2, Layers } from 'lucide-react'
 import { getTheme } from '@/lib/design-system'
 
 interface IQPluginArchitectureProps {
@@ -9,74 +9,149 @@ interface IQPluginArchitectureProps {
 }
 
 export default function IQPluginArchitecture({ isLightBackground = true }: IQPluginArchitectureProps) {
-  const [hoveredId, setHoveredId] = useState<string | null>(null)
   const t = getTheme(true) // Force light background
 
-  const features = [
-    { id: 'insights', title: 'Automated Insights', description: 'Surfacing patterns and highlights automatically', status: 'Unified' },
-    { id: 'nlq', title: 'Natural Language Query', description: 'Ask questions in plain language and get charts back', status: 'Unified' },
-    { id: 'predict', title: 'Predict Data / ML Functions', description: 'Step-based ML workflow embedded directly in IQ', status: 'Connected' },
+  const siloFeatures = [
+    { id: 'insights', title: 'Automated Insights', status: 'Isolated Codebase' },
+    { id: 'nlq', title: 'Natural Language Query', status: 'Separate Entry Point' },
+    { id: 'predict', title: 'Predict Data', status: 'Different Shell' },
+  ]
+
+  const unifiedFeatures = [
+    { id: 'insights', title: 'Insights', description: 'Pattern surfacing' },
+    { id: 'nlq', title: 'Ask a Question', description: 'Natural language interface' },
+    { id: 'predict', title: 'Predict Data', description: 'ML workflows' },
+    { id: 'discover', title: 'Discover', description: 'Onboarding & tutorials' },
   ]
 
   return (
     <div className="bg-[var(--bg-light)]">
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12">
-        <div className="space-y-6">
-          <div className="flex items-center gap-3">
-            <div className={`h-px flex-1 ${t.divider}`}></div>
-            <h3 className={`${t.text} text-lg md:text-xl font-serif font-semibold whitespace-nowrap`}>The Three DSML Features</h3>
-            <div className={`h-px flex-1 ${t.divider}`}></div>
-            <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
+        {/* System Convergence Diagram */}
+        <div className="bg-slate-50/50 border border-slate-200 rounded-2xl p-8 md:p-12 space-y-12">
+
+          {/* Header */}
+          <div className="text-center space-y-2">
+            <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
+              // SYSTEM_CONVERGENCE
+            </span>
+            <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>
+              From Silos to Platform
+            </h3>
+            <p className={`${t.textMuted} text-sm md:text-base max-w-2xl mx-auto`}>
+              Three fragmented tools converged into one unified architecture.
+            </p>
           </div>
 
-          <div className="space-y-6">
-            <p className={`${t.textMuted} text-sm md:text-base leading-relaxed`}>
-              DSML features were fragmented across the product — Automated Insights, NLQ, and Predict Data existed but were scattered, invisible to business users, and inconsistent in UX.
-            </p>
-
-            <div className={`${t.cardBg} rounded-lg p-4 md:p-5 border ${t.border} shadow-sm`}>
-              <div className="space-y-3">
-                <div className={`${t.textMuted} text-xs font-mono uppercase tracking-wider`}>Before: Fragmented</div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {features.map((feature) => (
-                    <div key={feature.id} className={`bg-black/5 rounded p-3 border ${t.border}`}>
-                      <div className={`${t.text} text-sm font-semibold mb-1`}>{feature.title}</div>
-                      <div className={`${t.textMuted} text-xs`}>Scattered across different parts of platform</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* PART A: THE LEGACY STATE (The Silos) */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-red-600 text-[10px] uppercase tracking-widest">
+                // STATE_01: FRAGMENTED_SILOS
+              </span>
             </div>
 
-            <div className={`${t.cardBg} rounded-lg p-4 md:p-5 border-2 border-[var(--accent-teal)] shadow-sm`}>
-              <div className="space-y-3">
-                <div className={`${t.textMuted} text-xs font-mono uppercase tracking-wider`}>After: Unified in IQ Plugin</div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {features.map((feature) => (
+            <div className="flex items-center justify-center gap-4 md:gap-8">
+              {siloFeatures.map((feature, index) => (
+                <motion.div
+                  key={feature.id}
+                  initial={{ opacity: 0, y: -10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex-1 max-w-[200px]"
+                >
+                  <div className="bg-white border-l-4 border-l-red-200 border border-dashed border-slate-200 p-4 md:p-6 opacity-75 text-center">
+                    <div className={`${t.text} text-sm md:text-base font-semibold mb-1`}>
+                      {feature.title}
+                    </div>
+                    <div className={`${t.textMuted} text-[10px] font-mono uppercase tracking-wider`}>
+                      {feature.status}
+                    </div>
+                  </div>
+
+                  {/* Disconnect Icon between cards */}
+                  {index < siloFeatures.length - 1 && (
+                    <div className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2">
+                      <Unplug className="w-4 h-4 text-red-300" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* PART B: THE ACTION (The Converge) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col items-center py-6"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-12 bg-slate-300"></div>
+              <ArrowDown className="w-8 h-8 text-slate-400" />
+              <div className="h-px w-12 bg-slate-300"></div>
+            </div>
+            <span className="font-mono text-slate-400 text-[10px] uppercase tracking-widest">
+              ↓ ARCHITECTURAL_UNIFICATION
+            </span>
+          </motion.div>
+
+          {/* PART C: THE TARGET STATE (The Unified Hub) */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-emerald-600 text-[10px] uppercase tracking-widest">
+                // STATE_02: UNIFIED_PLATFORM
+              </span>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-white border-2 border-emerald-200 shadow-xl rounded-xl overflow-hidden"
+            >
+              {/* Header Bar */}
+              <div className="bg-emerald-50 border-b border-emerald-100 px-6 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Layers className="w-5 h-5 text-emerald-600" />
+                  <span className={`${t.text} font-semibold`}>WebFOCUS IQ Plugin</span>
+                </div>
+                <span className="font-mono text-[10px] text-emerald-600 uppercase tracking-widest">
+                  UNIFIED_ENTRY_POINT
+                </span>
+              </div>
+
+              {/* Integrated Modules */}
+              <div className="p-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {unifiedFeatures.map((feature, index) => (
                     <motion.div
                       key={feature.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true, amount: 0.3 }}
-                      transition={{ duration: 0.4 }}
-                      className={`bg-[var(--accent-teal)]/10 rounded p-3 border border-[var(--accent-teal)]/30 cursor-pointer transition-all duration-300 ${hoveredId === feature.id ? 'bg-[var(--accent-teal)]/20 border-[var(--accent-teal)]/50 shadow-lg' : ''}`}
-                      whileHover={{ scale: 1.03, y: -2, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
-                      whileTap={{ scale: 0.98 }}
-                      onMouseEnter={() => setHoveredId(feature.id)}
-                      onMouseLeave={() => setHoveredId(null)}
+                      transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                      className="bg-emerald-50/50 border border-emerald-100 rounded-lg p-4 text-center hover:bg-emerald-50 transition-colors"
                     >
-                      <div className={`${t.text} text-sm font-semibold mb-1 transition-colors ${hoveredId === feature.id ? 'text-[var(--accent-teal)]' : ''}`}>{feature.title}</div>
-                      <div className={`${t.textAccent} text-xs font-medium`}>{feature.status}</div>
-                      {hoveredId === feature.id && (
-                        <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className={`${t.textMuted} text-xs mt-2 pt-2 border-t border-[var(--accent-teal)]/20`}>
-                          {feature.description}
-                        </motion.p>
-                      )}
+                      <Link2 className="w-4 h-4 text-emerald-500 mx-auto mb-2" />
+                      <div className={`${t.text} text-sm font-semibold`}>{feature.title}</div>
+                      <div className={`${t.textMuted} text-[10px] mt-1`}>{feature.description}</div>
                     </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
+          </div>
+
+          {/* Outcome Note */}
+          <div className="text-center pt-4">
+            <p className={`${t.textMuted} text-sm italic`}>
+              One plugin. One mental model. Four capabilities. Zero context switching.
+            </p>
           </div>
         </div>
       </div>

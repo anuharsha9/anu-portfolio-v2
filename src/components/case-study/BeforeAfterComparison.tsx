@@ -40,17 +40,8 @@ export default function BeforeAfterComparison({
   caseStudySlug,
   sectionTitle = 'this section',
 }: BeforeAfterComparisonProps) {
-  // Check unlock state
-  const [actuallyUnlocked, setActuallyUnlocked] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const globalUnlockState = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-      const caseUnlockState = caseStudySlug
-        ? sessionStorage.getItem(`case-study-unlocked-${caseStudySlug}`) === 'true'
-        : false
-      return isUnlocked || globalUnlockState || caseUnlockState
-    }
-    return isUnlocked
-  })
+  // Check unlock state - initialize with prop only to avoid hydration mismatch
+  const [actuallyUnlocked, setActuallyUnlocked] = useState(isUnlocked)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -168,17 +159,14 @@ export default function BeforeAfterComparison({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [viewMode])
 
-  const borderColor = isLightBackground ? 'border-black/10' : 'border-white/10'
-  const imageShadow = isLightBackground
-    ? 'shadow-[0_4px_12px_rgba(0,0,0,0.15)]'
-    : ''
-  const imageBorderRadius = 'rounded-[10px]'
-  const imageOutline = isLightBackground
-    ? 'outline outline-1 outline-black/5 outline-offset-[-1px]'
-    : 'outline outline-1 outline-white/5 outline-offset-[-1px]'
-  const labelColor = isLightBackground ? 'text-[#1A1A1A]' : 'text-white'
-  const mutedColor = isLightBackground ? 'text-[#666666]' : 'text-white/70'
-  const bgColor = isLightBackground ? 'bg-white/50' : 'bg-white/5'
+  // Use design system tokens (Architect aesthetic)
+  const borderColor = 'border-[var(--border-primary)]'
+  const imageShadow = 'shadow-[var(--shadow-md)]'
+  const imageBorderRadius = 'rounded-[var(--radius-lg)]'
+  const imageOutline = 'outline outline-1 outline-[var(--border-subtle)] outline-offset-[-1px]'
+  const labelColor = 'text-[var(--text-heading)]'
+  const mutedColor = 'text-[var(--text-body)]'
+  const bgColor = 'bg-[var(--bg-secondary)]'
 
   // If before image is sensitive and locked, wrap entire component
   if (isBeforeLocked) {

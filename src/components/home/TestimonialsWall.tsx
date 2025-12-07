@@ -1,170 +1,113 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useMemo, memo } from 'react'
+import { memo } from 'react'
 import { Recommendation } from '@/data/home'
-import SignatureLogo from '@/components/brand/SignatureLogo'
-import SectionDivider from '@/components/brand/SectionDivider'
-import TopQuoteIcon from '@/assets/top-quote.svg'
-import BottomQuoteIcon from '@/assets/bottom-quote.svg'
 
 interface TestimonialsWallProps {
   recommendations: Recommendation[]
 }
 
+// Extract the "pull quote" (most impactful sentence) from each recommendation
+// These are manually curated for maximum impact
+const pullQuotes: Record<string, string> = {
+  'Vijay Raman': 'A rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams.',
+  'Dave Pfeiffer': 'She approaches her work with a fearless attitude and is never afraid to explore new ideas.',
+  'Anita George': 'Anticipating the next move of the user — that is next level UI!',
+  'Yingchun Chen': 'How quickly she grasped all aspects of a highly intricate system.',
+  'Karishma Khadge': 'Her design thinking workshops often became the foundation for key product decisions.',
+  'Aniket Awchare': 'Exceptional ability to understand intricate workflows and translate them into elegant designs.',
+  'Marcus Horbach': 'The clarity of her designs, in spite of the underlying data science complexity, is impressive.',
+  'Vikram Patel': 'She quickly became the designer we trusted for everything.',
+  'Shay Bagwell': 'A collaborative teammate, strong advocate for user research and great designer.',
+}
 
-// Memoized testimonial tile component to prevent unnecessary re-renders
-const TestimonialTile = memo(function TestimonialTile({
+// Strategic ordering: Leadership first, then engineers, then others
+const strategicOrder = [
+  'Vijay Raman',      // VP of Product - Leadership
+  'Dave Pfeiffer',    // Director of Design - Leadership
+  'Anita George',     // Short punchy quote - attention grabber
+  'Marcus Horbach',   // Data Scientist - Technical credibility
+  'Yingchun Chen',    // Engineer - Technical partnership
+  'Karishma Khadge',  // PM - Cross-functional
+  'Aniket Awchare',   // PM - Cross-functional
+  'Vikram Patel',     // Co-Founder - Early career
+  'Shay Bagwell',     // Marketing - Broad impact
+]
+
+// Memoized testimonial card with new hierarchy
+const TestimonialCard = memo(function TestimonialCard({
   rec,
   index,
-  wordCount,
-  top3Shortest,
 }: {
   rec: Recommendation
   index: number
-  wordCount: number
-  top3Shortest: number[]
 }) {
-  const staggerDelay = index * 0.08
+  const pullQuote = pullQuotes[rec.name] || rec.quote.split('.')[0] + '.'
+  const fullQuote = rec.quote
+  const showFullQuote = pullQuote !== fullQuote && fullQuote.length > pullQuote.length + 20
 
-  // Create more visual variety for Pinterest feel with varied sizes
-  // SHORTER quotes get LARGER text, LONGER quotes get SMALLER text
-  // More granular size categories for better visual play
-  const isVeryShortQuote = wordCount <= 15  // Extra extra large text
-  const isShortQuote = wordCount > 15 && wordCount <= 30  // Extra large text
-  const isMediumQuote = wordCount > 30 && wordCount <= 50  // Large text
-  const isLongQuote = wordCount > 50 && wordCount <= 75  // Medium text
-  const isVeryLongQuote = wordCount > 75  // Small text
-
-  // Varied padding for more organic mosaic - scaled down
-  const paddingClass = isVeryShortQuote
-    ? 'p-3 md:p-4'
-    : isShortQuote
-      ? 'p-4 md:p-5'
-      : isMediumQuote
-        ? 'p-5 md:p-6'
-        : isLongQuote
-          ? 'p-6 md:p-7'
-          : 'p-7 md:p-8'
-
-  // Varied typography sizes - INVERSE relationship with more granular steps (scaled down)
-  const textSize = isVeryShortQuote
-    ? 'text-xl md:text-2xl lg:text-3xl'  // Very short quotes get extra large text
-    : isShortQuote
-      ? 'text-lg md:text-xl lg:text-2xl'  // Short quotes get large text
-      : isMediumQuote
-        ? 'text-base md:text-lg lg:text-xl'  // Medium quotes get medium-large text
-        : isLongQuote
-          ? 'text-sm md:text-base lg:text-lg'  // Long quotes get medium text
-          : 'text-xs md:text-sm lg:text-base'  // Very long quotes get smallest text
-
-  // Varied font weights - only make the 3 shortest quotes bold
-  // Use memoized top3Shortest
-  const isOneOfShortest = top3Shortest.includes(wordCount)
-
-  // Vijay Raman gets extra bold weight as leadership recommendation
-  const isVijayRaman = rec.name === 'Vijay Raman'
-
-  const fontWeight = isVijayRaman
-    ? 'font-bold'  // Extra bold for leadership recommendation
-    : isOneOfShortest
-      ? 'font-semibold'
-      : 'font-normal'
-
-  // Add random offset for uneven tops - create organic feel at top and bottom
-  // Use index to create pseudo-random but consistent offsets
-  // Create more variation: some tiles start higher, some lower
-  const offsetPattern = [0, -12, 24, -8, 16, -16, 8, -20, 12]
-  const topOffset = offsetPattern[index % offsetPattern.length]
+  // Alternate backgrounds for texture: every 3rd card gets slate-50
+  const isAlternate = index % 3 === 2
+  const bgClass = isAlternate ? 'bg-slate-50' : 'bg-white'
 
   return (
     <motion.div
-      key={`${rec.name}-${index}`}
-      initial={{ opacity: 0, y: 20, visibility: 'hidden' as const }}
-      whileInView={{ opacity: 1, y: 0, visibility: 'visible' as const }}
-      viewport={{ once: true, amount: 0.15, margin: '0px 0px -50px 0px' }}
-      style={{
-        willChange: 'opacity, transform',
-        opacity: 0,
-        visibility: 'hidden',
-        marginTop: `${topOffset}px`,
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
         duration: 0.5,
-        delay: staggerDelay,
+        delay: index * 0.05,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="w-full break-inside-avoid mb-3 md:mb-4 lg:mb-5 group inline-block"
+      className="break-inside-avoid mb-6"
     >
-      {/* Tile - Consistent styling with rest of website, varied padding for organic feel */}
       <div
-        className={`w-full ${paddingClass} rounded-lg border border-refined-dark bg-white/5 flex flex-col hover-lift transition-all duration-normal hover:border-white/20`}
+        className={`${bgClass} rounded-xl border border-slate-200 shadow-sm p-6 hover:shadow-md hover:border-[#0BA2B5]/30 transition-all duration-300 relative overflow-hidden`}
       >
-
-        {/* Opening quote icon */}
-        <div className="relative mb-2" style={{
-          paddingLeft: isVeryShortQuote || isShortQuote ? '1.3em' : '1.1em',
-        }}>
-          <TopQuoteIcon
-            style={{
-              position: 'absolute',
-              left: '0',
-              top: isVeryShortQuote || isShortQuote ? '-0.1em' : '-0.2em',
-              width: isVeryShortQuote || isShortQuote ? '1.5em' : isMediumQuote ? '1.3em' : '1.2em',
-              height: isVeryShortQuote || isShortQuote ? '1.5em' : isMediumQuote ? '1.3em' : '1.2em',
-            }}
-            className="text-[var(--accent-teal)]"
-          />
+        {/* Large quotation mark watermark */}
+        <div className="absolute top-4 right-4 text-[#0BA2B5] opacity-20 pointer-events-none">
+          <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+          </svg>
         </div>
 
-        {/* Quote */}
-        <blockquote className="flex-1 flex flex-col space-y-4 mt-2">
-          <p
-            className={`text-white leading-relaxed font-sans flex-1 ${textSize} ${fontWeight} relative`}
-            style={{
-              lineHeight: isVeryShortQuote || isShortQuote
-                ? '1.3'
-                : isMediumQuote
-                  ? '1.5'
-                  : isLongQuote
-                    ? '1.6'
-                    : '1.7',
-              paddingRight: '1.2em',
-              paddingBottom: '2.4em',
-              paddingLeft: isVeryShortQuote || isShortQuote ? '0.2em' : '0.1em',
-            }}
-          >
-            {rec.quote}
-            {/* Closing quote icon */}
-            <BottomQuoteIcon
-              style={{
-                position: 'absolute',
-                right: '0',
-                bottom: '0',
-                width: isVeryShortQuote || isShortQuote ? '1.5em' : isMediumQuote ? '1.3em' : '1.2em',
-                height: isVeryShortQuote || isShortQuote ? '1.5em' : isMediumQuote ? '1.3em' : '1.2em',
-              }}
-              className="text-[var(--accent-teal)]"
-            />
-          </p>
+        {/* Eyebrow: Role/Title - Most important for recruiters */}
+        <div className="mb-4">
+          <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider font-semibold">
+            {rec.role}
+          </span>
+          {rec.company && (
+            <span className="font-mono text-slate-400 text-xs uppercase tracking-wider ml-2">
+              · {rec.company}
+            </span>
+          )}
+        </div>
 
-          {/* Attribution */}
-          <footer className="pt-4 mt-auto flex-shrink-0">
-            <p className={`text-white font-semibold ${isVeryLongQuote || isLongQuote ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
-              {rec.name}
+        {/* Headline: The Pull Quote - Editorial serif */}
+        <h3 className="font-serif text-slate-900 text-lg md:text-xl leading-tight mb-4">
+          &ldquo;{pullQuote}&rdquo;
+        </h3>
+
+        {/* Body: Full quote (if different and longer) */}
+        {showFullQuote && (
+          <p className="text-slate-600 text-sm leading-relaxed mb-4">
+            {fullQuote}
+          </p>
+        )}
+
+        {/* Footer: Name and relationship */}
+        <div className="pt-4 border-t border-slate-100">
+          <p className="font-sans font-semibold text-slate-900 text-sm">
+            {rec.name}
+          </p>
+          {rec.relationship && (
+            <p className="font-mono text-slate-500 text-xs mt-1 leading-relaxed">
+              {rec.relationship}
             </p>
-            <p className={`text-white/70 mt-1 ${isVeryLongQuote || isLongQuote ? 'text-sm md:text-base' : 'text-xs md:text-sm'}`}>
-              {rec.role} {rec.company && `at ${rec.company}`}
-            </p>
-            {rec.relationship && (
-              <div className="mt-3 pt-3">
-                <p className={`text-white/90 mt-2 font-light italic ${isVeryLongQuote || isLongQuote ? 'text-xs md:text-sm' : 'text-xs'} leading-relaxed`}>
-                  {rec.relationship}
-                </p>
-              </div>
-            )}
-          </footer>
-        </blockquote>
+          )}
+        </div>
       </div>
     </motion.div>
   )
@@ -173,82 +116,87 @@ const TestimonialTile = memo(function TestimonialTile({
 export default function TestimonialsWall({
   recommendations,
 }: TestimonialsWallProps) {
-  // Memoize word count calculations to avoid recalculating on every render
-  // Hooks must be called before any early returns
-  const wordCounts = useMemo(() => {
-    if (!recommendations || recommendations.length === 0) return []
-    return recommendations.map(r => r.quote.trim().split(/\s+/).filter(word => word.length > 0).length)
-  }, [recommendations])
-
-  const sortedCounts = useMemo(() => {
-    return [...wordCounts].sort((a, b) => a - b)
-  }, [wordCounts])
-
-  const top3Shortest = useMemo(() => {
-    return sortedCounts.slice(0, 3)
-  }, [sortedCounts])
-
   if (!recommendations || recommendations.length === 0) {
     return null
   }
 
+  // Sort recommendations by strategic order
+  const sortedRecommendations = [...recommendations].sort((a, b) => {
+    const indexA = strategicOrder.indexOf(a.name)
+    const indexB = strategicOrder.indexOf(b.name)
+    // If not in strategic order, put at end
+    const orderA = indexA === -1 ? 999 : indexA
+    const orderB = indexB === -1 ? 999 : indexB
+    return orderA - orderB
+  })
+
   return (
     <section
       id="testimonials"
-      className="surface-dark-alt py-10 md:py-12 lg:py-16 relative"
+      className="bg-slate-50 py-16 md:py-24 lg:py-32 border-t border-slate-200"
     >
-      {/* Section Divider */}
-      <SectionDivider isLightBackground={false} />
-
-      {/* Subtle Logo Watermark - Top Right Corner */}
-      <div className="absolute top-8 right-8 opacity-[0.02] pointer-events-none hidden lg:block">
-        <div className="w-24 h-24">
-          <SignatureLogo className="w-full h-full text-black" />
-        </div>
-      </div>
-
-      <div className="max-w-[1125px] mx-auto px-6 md:px-8 lg:px-10">
-        {/* Section Title */}
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15, margin: '0px 0px -50px 0px' }}
-          transition={{
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mb-10 md:mb-12"
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-12 md:mb-16 text-center"
         >
-          <div className="text-center space-y-2">
-            <h2 className="text-white text-2xl xs:text-2xl sm:text-3xl md:text-4xl font-serif text-center relative">
-              People I&apos;ve worked with say…
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-[var(--accent-teal)] opacity-60"></span>
-            </h2>
+          {/* Section Label */}
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
+            <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
+              Social Proof
+            </span>
+            <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
           </div>
+
+          <h2 className="font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl">
+            People I&apos;ve worked with say…
+          </h2>
         </motion.div>
 
-        {/* Masonry Layout - Enhanced Pinterest style with more variation */}
+        {/* Masonry Grid - CSS Columns */}
         <div
-          className="columns-1 md:columns-2 lg:columns-3 gap-3 md:gap-4 lg:gap-5"
-          style={{
-            columnFill: 'balance' as const,
-          }}
+          className="columns-1 md:columns-2 lg:columns-3 gap-6"
+          style={{ columnFill: 'balance' }}
         >
-          {recommendations.map((rec, index) => (
-            <TestimonialTile
+          {sortedRecommendations.map((rec, index) => (
+            <TestimonialCard
               key={`${rec.name}-${index}`}
               rec={rec}
               index={index}
-              wordCount={wordCounts[index]}
-              top3Shortest={top3Shortest}
             />
           ))}
         </div>
-      </div>
 
-      {/* Section Divider at bottom */}
-      <div className="pt-8 md:pt-10">
-        <SectionDivider isLightBackground={true} />
+        {/* ADPList Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-12 text-center"
+        >
+          <a
+            href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-[#0BA2B5] font-medium hover:text-[#0990A2] transition-colors duration-300 group"
+          >
+            <span>See more reviews on ADPList</span>
+            <svg 
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </motion.div>
       </div>
     </section>
   )

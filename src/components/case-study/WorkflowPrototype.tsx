@@ -21,16 +21,17 @@ interface WorkflowPrototypeProps {
   isLightBackground?: boolean
 }
 
-export default function WorkflowPrototype({ title, description, steps, workflowType, isLightBackground = false }: WorkflowPrototypeProps) {
+export default function WorkflowPrototype({ title, description, steps, workflowType, isLightBackground = true }: WorkflowPrototypeProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption?: string } | null>(null)
-  const t = getTheme(isLightBackground)
+  const t = getTheme(true) // Always use light theme
 
-  const imageShadow = isLightBackground ? 'shadow-[0_4px_12px_rgba(0,0,0,0.15)]' : ''
-  const imageOutline = isLightBackground ? 'outline outline-1 outline-black/5 outline-offset-[-1px]' : 'outline outline-1 outline-white/5 outline-offset-[-1px]'
-  const buttonBg = isLightBackground ? 'bg-black/10 hover:bg-black/20' : 'bg-white/10 hover:bg-white/20'
+  // Use design tokens for styling
+  const imageShadow = 'shadow-[var(--shadow-md)]'
+  const imageOutline = 'outline outline-1 outline-[var(--border-subtle)] outline-offset-[-1px]'
+  const buttonBg = 'bg-[var(--bg-tertiary)] hover:bg-[var(--border-primary)]'
 
   const openLightbox = (src: string, alt: string, caption?: string) => setLightboxImage({ src, alt, caption })
   const closeLightbox = () => setLightboxImage(null)
@@ -164,7 +165,7 @@ export default function WorkflowPrototype({ title, description, steps, workflowT
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <span className={`${t.textMuted} text-sm font-mono`}>Step {currentStep + 1} of {steps.length}</span>
-            <div className={`h-2 flex-1 max-w-xs ${isLightBackground ? 'bg-black/10' : 'bg-white/10'} rounded-full overflow-hidden`}>
+            <div className="h-2 flex-1 max-w-xs bg-[var(--border-primary)] rounded-full overflow-hidden">
               <div className="h-full bg-[var(--accent-teal)] transition-all duration-300 ease-in-out" style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }} />
             </div>
           </div>
@@ -203,7 +204,7 @@ export default function WorkflowPrototype({ title, description, steps, workflowT
 
           <div className="flex items-center gap-2 flex-1 justify-center max-w-md overflow-x-auto px-4">
             {steps.map((_, index) => (
-              <button key={index} onClick={() => goToStep(index)} className={`w-2 h-2 rounded-full transition-all ${index === currentStep ? 'bg-[var(--accent-teal)] w-8' : isLightBackground ? 'bg-black/20 hover:bg-black/40' : 'bg-white/20 hover:bg-white/40'}`} aria-label={`Go to step ${index + 1}`} />
+              <button key={index} onClick={() => goToStep(index)} className={`w-2 h-2 rounded-full transition-all ${index === currentStep ? 'bg-[var(--accent-teal)] w-8' : 'bg-[var(--border-secondary)] hover:bg-[var(--text-muted)]'}`} aria-label={`Go to step ${index + 1}`} />
             ))}
           </div>
 

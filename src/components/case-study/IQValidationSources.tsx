@@ -1,52 +1,119 @@
 'use client'
 
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
+import { FlaskConical, GitMerge, Compass } from 'lucide-react'
 
 interface IQValidationSourcesProps {
   isLightBackground?: boolean
 }
 
 export default function IQValidationSources({ isLightBackground = false }: IQValidationSourcesProps) {
-  const t = getTheme(isLightBackground)
-
-  const sources = [
-    { source: 'Internal Usability Tests', description: 'Internal usability tests highlighted how much easier it was to find and understand DSML features when everything lived in one place. Users who had to navigate between three different systems could now access everything from a single entry point.', icon: '🧪' },
-    { source: 'Stakeholder Feedback', description: 'Stakeholders and internal teams called out the clarity of the workflows and the balance between depth and simplicity. The dual-persona approach resonated — technical users felt empowered, non-technical users felt supported.', icon: '💬' },
-    { source: 'Learning Curve Reduction', description: 'The learning curve dropped: new users needed fewer explanations to get started, and non-technical users were more willing to try features they previously avoided. IQ demonstrated that DSML features could be both powerful and approachable.', icon: '📉' },
+  const outcomes = [
+    {
+      tag: 'OUTCOME_01: CONCEPT_VALIDATION',
+      tagColor: 'text-emerald-600',
+      headline: "The 'Dual-Layer' Proof.",
+      body: "Usability testing settled the internal 'Power vs. Ease' debate. We proved that a single interface could serve both personas via progressive disclosure, ending months of circular design arguments.",
+      icon: FlaskConical,
+      iconBg: 'bg-emerald-100',
+      iconColor: 'text-emerald-600',
+    },
+    {
+      tag: 'OUTCOME_02: ROADMAP_CONVERGENCE',
+      tagColor: 'text-blue-600',
+      headline: '3 Roadmaps → 1.',
+      body: "The visual prototype was so convincing that 3 distinct Product Managers (NLQ, Insights, Predict) agreed to abandon their standalone roadmaps and commit to the unified IQ Plugin strategy.",
+      icon: GitMerge,
+      iconBg: 'bg-blue-100',
+      iconColor: 'text-blue-600',
+    },
+    {
+      tag: 'OUTCOME_03: SYSTEM_STANDARDIZATION',
+      tagColor: 'text-purple-600',
+      headline: "The New 'North Star'.",
+      body: "The patterns defined for IQ (Guided Wizards, Dual-Layer configs) were formally adopted into the WebFOCUS Design System as the standard for all future Data Science tools.",
+      icon: Compass,
+      iconBg: 'bg-purple-100',
+      iconColor: 'text-purple-600',
+    },
   ]
 
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-8 md:p-12`}>
       <div className="space-y-8">
-        <div className="text-center space-y-3">
-          <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>Impact & Validation</h3>
-          <p className={`${t.textMuted} text-base md:text-lg max-w-3xl mx-auto`}>
-            Even before full production rollout (scheduled for summer 2026), IQ showed strong promise. The validation came from multiple sources, demonstrating that thoughtful UX architecture could serve both technical experts and everyday business users.
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center space-y-3"
+      >
+        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+          // IMPACT_ASSESSMENT
+        </span>
+        <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
+          Strategic Outcomes
+        </h3>
+        <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+          How architectural unification drove organizational alignment before a single line of code was shipped.
           </p>
-        </div>
+      </motion.div>
 
+      {/* Outcome Matrix - 3 Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {sources.map((s, i) => (
-            <div key={i} className={`${t.cardBg} rounded-lg border-2 p-6 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl flex-shrink-0" style={{ backgroundColor: `${t.accentVar}20` }}>
-                    {s.icon}
-                  </div>
-                  <h4 className={`${t.text} text-lg font-semibold`}>{s.source}</h4>
-                </div>
-                <p className={`${t.textMuted} text-sm leading-relaxed`}>{s.description}</p>
+        {outcomes.map((outcome, index) => {
+          const IconComponent = outcome.icon
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white border border-slate-200 p-6 md:p-8 rounded-xl h-full flex flex-col hover:shadow-lg hover:border-slate-300 transition-all duration-300"
+            >
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl ${outcome.iconBg} flex items-center justify-center mb-4`}>
+                <IconComponent className={`w-6 h-6 ${outcome.iconColor}`} />
               </div>
-            </div>
-          ))}
+
+              {/* Tag */}
+              <span className={`font-mono text-[10px] ${outcome.tagColor} uppercase tracking-widest mb-3`}>
+                // {outcome.tag}
+              </span>
+
+              {/* Headline */}
+              <h4 className="text-slate-900 text-lg font-serif font-semibold mb-3">
+                {outcome.headline}
+              </h4>
+
+              {/* Body */}
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {outcome.body}
+              </p>
+            </motion.div>
+          )
+        })}
         </div>
 
-        <div className={`${t.cardBg} rounded-lg p-6 border-l-4 mt-8`} style={{ borderLeftColor: t.accentVar }}>
-          <p className={`${t.text} text-base leading-relaxed text-center`}>
-            <span className={`font-semibold ${t.textAccent}`}>The result:</span> IQ demonstrated that we didn&apos;t have to choose between depth and simplicity — we could design for both through thoughtful UX architecture. The patterns I developed became part of my design vocabulary and directly influenced how I approach complex, multi-persona design challenges.
-          </p>
+      {/* Architect's Log Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="bg-slate-900 rounded-xl p-6 md:p-8 mt-12"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-sm text-amber-400 flex-shrink-0">
+            &gt; ARCHITECT&apos;S_LOG: THE_PRINCIPAL_SHIFT
+          </span>
         </div>
-      </div>
+        <p className="text-slate-300 text-sm md:text-base leading-relaxed mt-3">
+          IQ Plugin taught me that the hardest part of Enterprise UX isn&apos;t designing the pixels—it&apos;s designing the
+          <span className="text-emerald-400 font-semibold"> consensus</span>. By visualizing a unified future, I gave the organization
+          the confidence to stop building silos and start building a platform.
+        </p>
+      </motion.div>
     </div>
   )
 }

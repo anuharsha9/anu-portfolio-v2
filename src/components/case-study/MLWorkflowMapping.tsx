@@ -1,82 +1,154 @@
 'use client'
 
-import { getTheme } from '@/lib/design-system'
+import { motion } from 'framer-motion'
+import { ArrowRight, AlertCircle } from 'lucide-react'
 
 interface MLWorkflowMappingProps {
   isLightBackground?: boolean
 }
 
 export default function MLWorkflowMapping({ isLightBackground = false }: MLWorkflowMappingProps) {
-  const t = getTheme(isLightBackground)
-
   const mappedAreas = [
-    { area: 'Data Selection', items: ['How users selected data', 'Data flow integration', 'Dataset compatibility'] },
-    { area: 'Training Configuration', items: ['How they configured training', 'Hyperparameter access', 'Model type selection'] },
-    { area: 'Model Execution', items: ['How models ran (or failed)', 'Tiny toolbar play icon', 'Hidden execution states'] },
-    { area: 'Results Interpretation', items: ['How results were interpreted', 'Confusing "results not generated" errors', 'Unclear error messaging'] },
+    { 
+      area: 'Data Selection', 
+      items: ['How users selected data', 'Data flow integration', 'Dataset compatibility'] 
+    },
+    { 
+      area: 'Training Configuration', 
+      items: ['How they configured training', 'Hyperparameter access', 'Model type selection'] 
+    },
+    { 
+      area: 'Model Execution', 
+      items: ['How models ran (or failed)', 'Tiny toolbar play icon', 'Hidden execution states'] 
+    },
+    { 
+      area: 'Results Interpretation', 
+      items: ['How results were interpreted', 'Confusing error messages', 'Unclear model outputs'] 
+    },
   ]
 
   const coreProblems = [
     'Technical language everywhere',
-    'Fragmented flows across multiple screens',
+    'Fragmented flows across screens',
     'No guidance for non-experts',
-    'Hidden states and unclear errors',
-    'No connection to existing WebFOCUS workflows',
+    'Hidden states and errors',
+    'No WebFOCUS integration',
   ]
 
   return (
-    <div className={`${t.bg} rounded-lg border ${t.border} p-6 md:p-8`}>
-      <div className="space-y-6">
-        <div className="text-center space-y-2">
-          <h3 className={`${t.text} text-xl md:text-2xl font-serif`}>Mapping the Existing Black-Box Workflow</h3>
-          <p className={`${t.textMuted} text-sm md:text-base max-w-2xl mx-auto`}>
-            I documented every workflow step, every user decision point, and every place where users got stuck. This mapping became the foundation for the redesign.
-          </p>
-        </div>
+    <div className="space-y-8">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center space-y-3"
+      >
+        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+          // WORKFLOW_MAPPING
+        </span>
+        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
+          Mapping the Existing Black-Box Workflow
+        </h3>
+        <p className="text-slate-600 text-base max-w-2xl mx-auto">
+          I documented every workflow step, every user decision point, and every place where users got stuck.
+        </p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {mappedAreas.map((a, i) => (
-            <div key={i} className={`${t.cardBg} rounded-lg border-2 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`} style={{ borderColor: `${t.accentVar}40` }}>
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs flex-shrink-0" style={{ backgroundColor: t.accentVar }}>
-                    {i + 1}
-                  </div>
-                  <h4 className={`${t.text} text-sm font-semibold`}>{a.area}</h4>
+      {/* 4-Step Flow with Connectors */}
+      <div className="flex flex-col lg:flex-row items-stretch gap-4 lg:gap-0">
+        {mappedAreas.map((a, i) => (
+          <div key={i} className="flex items-center flex-1">
+            {/* Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="flex-1 bg-white border border-slate-200 rounded-xl p-5 hover:border-teal-400 transition-colors"
+            >
+              <div className="space-y-4">
+                {/* Step Number - Monospace Index */}
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-2xl font-bold text-teal-600">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h4 className="font-serif text-lg text-slate-900">{a.area}</h4>
                 </div>
-                <ul className="space-y-1.5">
+
+                {/* Items List */}
+                <ul className="space-y-2">
                   {a.items.map((item, j) => (
-                    <li key={j} className={`${t.textMuted} text-xs leading-relaxed flex items-start gap-1.5`}>
-                      <span className={`${t.textAccent} font-bold flex-shrink-0 mt-0.5`}>•</span>
-                      <span>{item}</span>
+                    <li key={j} className="flex items-start gap-2">
+                      <span className="font-mono text-teal-500 text-xs mt-0.5">&gt;</span>
+                      <span className="text-slate-600 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Arrow Connector (not after last card) */}
+            {i < mappedAreas.length - 1 && (
+              <div className="hidden lg:flex items-center justify-center px-3">
+                <ArrowRight className="w-6 h-6 text-slate-300" />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Core Problems - System Error Tags */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="space-y-4"
+      >
+        <div className="flex items-center gap-2 pb-2 border-b border-slate-200">
+          <span className="w-2 h-2 rounded-full bg-red-500"></span>
+          <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest">
+            CORE_PROBLEMS_IDENTIFIED
+          </span>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {coreProblems.map((p, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.5 + i * 0.05 }}
+              className="bg-red-50 border border-red-100 rounded-md px-3 py-2 flex items-center gap-2"
+            >
+              <AlertCircle className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
+              <span className="text-red-700 font-mono text-xs">{p}</span>
+            </motion.div>
           ))}
         </div>
+      </motion.div>
 
-        <div className={`${t.cardBg} rounded-lg border-2 p-4 mt-4`} style={{ borderColor: `${t.accentVar}60` }}>
-          <h4 className={`text-sm font-semibold mb-3 ${t.textAccent}`}>Core Problems Identified</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
-            {coreProblems.map((p, i) => (
-              <div key={i} className={`${t.bg} rounded p-2 border ${t.border}`}>
-                <p className={`${t.textMuted} text-xs flex items-start gap-1.5`}>
-                  <span className={`${t.textAccent} mt-0.5 flex-shrink-0`}>×</span>
-                  <span className="leading-tight">{p}</span>
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className={`${t.cardBg} rounded-lg p-4 border-l-4 mt-4`} style={{ borderLeftColor: t.accentVar }}>
-          <p className={`${t.text} text-xs leading-relaxed`}>
-            <span className={`font-semibold ${t.textAccent}`}>The insight:</span> Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, a new user trying to adopt ML for the first time has almost no chance. That realization directly pushed me toward inventing a guided, step-based workflow.
+      {/* Insight Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="bg-slate-900 rounded-xl p-6"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
+            // INSIGHT
+          </span>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, 
+            <span className="text-emerald-400 font-medium"> a new user trying to adopt ML for the first time has almost no chance.</span> 
+            That realization directly pushed me toward inventing a guided, step-based workflow.
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

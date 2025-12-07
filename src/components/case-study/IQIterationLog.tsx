@@ -1,0 +1,327 @@
+'use client'
+
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import { useLightbox } from '@/contexts/LightboxContext'
+
+interface IQIterationLogProps {
+  isLightBackground?: boolean
+}
+
+interface TabImage {
+  src: string
+  alt: string
+  caption: string
+  figNumber: string
+}
+
+interface Tab {
+  id: string
+  index: string
+  label: string
+  title: string
+  description: string
+  images: TabImage[]
+  specCaption: string
+}
+
+export default function IQIterationLog({ isLightBackground = false }: IQIterationLogProps) {
+  const [activeTab, setActiveTab] = useState('01_NLQ_WORKFLOW')
+  const { openLightbox } = useLightbox()
+
+  const tabs: Tab[] = [
+    {
+      id: '01_NLQ_WORKFLOW',
+      index: '01',
+      label: 'Natural Language Query',
+      title: 'Ask a Question Workflow',
+      description: 'From empty state to visualization. Validating the "Ask a Question" mental model with non-technical users.',
+      specCaption: 'FIG_01: QUERY_PARSING_LOGIC',
+      images: [
+        {
+          src: '/images/case-study/iq-plugin/IQ - Ask a Question _ Empty State 1.png',
+          alt: 'IQ NLQ - Empty state',
+          caption: 'Empty State: Tutorial guidance on first visit',
+          figNumber: 'FIG_01A',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Ask a Question _ Data Selected 1.png',
+          alt: 'IQ NLQ - Data selected',
+          caption: 'Data Selected: Ready to receive natural language input',
+          figNumber: 'FIG_01B',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Ask a Question - Vertical Stacked Bar 1.png',
+          alt: 'IQ NLQ - Chart visualization',
+          caption: 'Query Result: Auto-generated visualization',
+          figNumber: 'FIG_01C',
+        },
+      ],
+    },
+    {
+      id: '02_INSIGHTS_ENGINE',
+      index: '02',
+      label: 'Automated Insights',
+      title: 'Pattern Recognition Engine',
+      description: 'Generating instant summaries. Testing the "auto-generate" pattern to reduce time-to-value.',
+      specCaption: 'FIG_02: PATTERN_RECOGNITION_UI',
+      images: [
+        {
+          src: '/images/case-study/iq-plugin/IQ - Insights _ Empty State 1.png',
+          alt: 'IQ Insights - Empty state',
+          caption: 'Empty State: Data selection prompt',
+          figNumber: 'FIG_02A',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Insights _ Data Selected 1.png',
+          alt: 'IQ Insights - Data selected',
+          caption: 'Processing: Insights generation in progress',
+          figNumber: 'FIG_02B',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Insights - Tile View 1.png',
+          alt: 'IQ Insights - Tile view',
+          caption: 'Results: Scannable tile-based insights display',
+          figNumber: 'FIG_02C',
+        },
+      ],
+    },
+    {
+      id: '03_PREDICT_WORKFLOW',
+      index: '03',
+      label: 'Predictive Analytics',
+      title: 'Guided Model Training Flow',
+      description: 'The guided 4-step ML flow. Re-using the "ML Functions" wizard pattern within the IQ Hub context.',
+      specCaption: 'FIG_03: GUIDED_MODEL_TRAINING',
+      images: [
+        {
+          src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Models - landing page - model tile view.png',
+          alt: 'IQ Predict Data - Train models landing',
+          caption: 'Landing: Model tile overview with quick actions',
+          figNumber: 'FIG_03A',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Model Workflow - Compare models.png',
+          alt: 'IQ Predict Data - Compare models',
+          caption: 'Compare: Side-by-side model performance analysis',
+          figNumber: 'FIG_03B',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Predict Data - Train Model Workflow - Results - Fitted Values.png',
+          alt: 'IQ Predict Data - Model results',
+          caption: 'Results: Fitted values with confidence intervals',
+          figNumber: 'FIG_03C',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Predict Data - Run Model - results.png',
+          alt: 'IQ Predict Data - Results',
+          caption: 'Execution: Live prediction results',
+          figNumber: 'FIG_03D',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Predict Data - Run Model - explanability.png',
+          alt: 'IQ Predict Data - Explanability',
+          caption: 'Explanability: Making ML decisions transparent',
+          figNumber: 'FIG_03E',
+        },
+      ],
+    },
+    {
+      id: '04_DATA_PREVIEW',
+      index: '04',
+      label: 'Data Exploration',
+      title: 'Quick-Look Dataset Analysis',
+      description: 'Ensuring consistent table interactions and time-series views. The first step in any data workflow.',
+      specCaption: 'FIG_04: DATA_QUALITY_INSPECTION',
+      images: [
+        {
+          src: '/images/case-study/iq-plugin/IQ - Preview Data Sample Tab 1.png',
+          alt: 'IQ Preview Data - Sample tab',
+          caption: 'Sample Tab: Quick data inspection',
+          figNumber: 'FIG_04A',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Preview Data Key Analysis Tab 1.png',
+          alt: 'IQ Preview Data - Key analysis tab',
+          caption: 'Key Analysis: Column statistics and distribution',
+          figNumber: 'FIG_04B',
+        },
+        {
+          src: '/images/case-study/iq-plugin/IQ - Preview Data Time-series report tab 1.png',
+          alt: 'IQ Preview Data - Time-series tab',
+          caption: 'Time-series: Temporal pattern visualization',
+          figNumber: 'FIG_04C',
+        },
+      ],
+    },
+  ]
+
+  const activeTabData = tabs.find(t => t.id === activeTab)
+
+  return (
+    <div className="space-y-8">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center space-y-4"
+      >
+        <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
+          // SYSTEM_ITERATION_LOG
+        </span>
+        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
+          System Iteration Log
+        </h3>
+        <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+          Prototyping the unified experience: Validating shared patterns across 4 distinct data pillars.
+        </p>
+      </motion.div>
+
+      {/* IDE Layout - Large Feature Display */}
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
+        <div className="flex flex-col md:flex-row">
+
+          {/* Sidebar - File Tree */}
+          <div className="w-full md:w-[24%] border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 bg-slate-50/30">
+            <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
+              // PILLAR_INDEX
+            </span>
+
+            <nav className="space-y-1">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
+                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg
+                    ${activeTab === tab.id
+                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900'
+                      : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
+                  `}
+                >
+                  <span className="font-mono text-xs opacity-50 mr-3">{tab.index}</span>
+                  <span className="font-sans font-medium text-sm">{tab.label}</span>
+                </button>
+              ))}
+            </nav>
+          </div>
+
+          {/* Preview Pane - The Stage */}
+          <div className="flex-1 p-6 md:p-10 min-h-[550px]">
+            <AnimatePresence mode="wait">
+              {activeTabData && (
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Content Header */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest">
+                        // {activeTabData.specCaption}
+                      </span>
+                    </div>
+                    <h4 className="font-serif text-2xl md:text-3xl text-slate-900 mb-3">
+                      {activeTabData.title}
+                    </h4>
+                    <p className="text-slate-500 text-sm leading-relaxed max-w-3xl">
+                      {activeTabData.description}
+                    </p>
+                  </div>
+
+                  {/* Image Grid - Large Display */}
+                  <div className={`grid gap-5 ${activeTabData.images.length <= 3 ? 'grid-cols-1 md:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'}`}>
+                    {activeTabData.images.map((img, i) => {
+                      // Prepare images array for gallery navigation
+                      const galleryImages = activeTabData.images.map(image => ({
+                        src: image.src,
+                        alt: image.alt,
+                        caption: `// ${image.figNumber}: ${image.caption}`
+                      }))
+
+                      return (
+                        <div
+                          key={i}
+                          className="group cursor-pointer"
+                          onClick={() => openLightbox(
+                            { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
+                            galleryImages,
+                            i
+                          )}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault()
+                              openLightbox(
+                                { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
+                                galleryImages,
+                                i
+                              )
+                            }
+                          }}
+                          aria-label={`View ${img.alt} in fullscreen`}
+                        >
+                          <div className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-50 group-hover:shadow-lg group-hover:border-[var(--accent-teal-300)] transition-all duration-300">
+                            <div className="relative aspect-[4/3]">
+                              <Image
+                                src={img.src}
+                                alt={img.alt}
+                                fill
+                                className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              />
+                              {/* Hover Overlay */}
+                              <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                  <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-lg">
+                                    <span className="font-mono text-[10px] text-slate-600 uppercase tracking-widest">
+                                      Click to expand
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {/* Technical Caption */}
+                          <p className="font-mono text-[10px] text-slate-400 uppercase tracking-widest mt-2.5">
+                            // {img.figNumber}: {img.caption}
+                          </p>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+
+      {/* Validation Outcome Footer */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-slate-900 rounded-xl p-6"
+      >
+        <div className="flex items-start gap-3">
+          <span className="font-mono text-sm text-emerald-400 flex-shrink-0">
+            &gt; VALIDATION_OUTCOME:
+          </span>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            User testing confirmed that the &quot;Unified Hub&quot; architecture successfully abstracted the complexity.
+            <span className="text-emerald-400 font-medium"> Non-technical users could execute NLQ queries without training</span>, while
+            <span className="text-emerald-400 font-medium"> Data Scientists accepted the &quot;Predict&quot; wizard as a valid accelerator</span>.
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}

@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { Volume2 } from 'lucide-react'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
-import { getTheme } from '@/lib/design-system'
 
 interface MultiBeforeAfterVideoProps {
   before: { title: string; videos: { title: string; videoUrl: string; videoPoster?: string; description?: string }[] }
@@ -13,12 +14,11 @@ interface MultiBeforeAfterVideoProps {
   caseStudySlug?: string
 }
 
-export default function MultiBeforeAfterVideo({ before, after, isLightBackground = false, comparisonNotes, password = 'anu-access', caseStudySlug = 'default' }: MultiBeforeAfterVideoProps) {
+export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, password = 'anu-access', caseStudySlug = 'default' }: MultiBeforeAfterVideoProps) {
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [passwordInput, setPasswordInput] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const t = getTheme(isLightBackground)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -55,167 +55,251 @@ export default function MultiBeforeAfterVideo({ before, after, isLightBackground
   }
 
   return (
-    <div className="space-y-8">
-      <div className="text-center space-y-3">
-        <div className="flex items-center justify-center gap-3 mb-2">
-          <div className={`h-px flex-1 ${isLightBackground ? 'bg-[var(--accent-teal)]/20' : 'bg-[var(--accent-teal)]/30'}`}></div>
-          <h2 className={`${t.text} text-3xl md:text-4xl font-serif`}>Transformation in Motion</h2>
-          <div className={`h-px flex-1 ${isLightBackground ? 'bg-[var(--accent-teal)]/20' : 'bg-[var(--accent-teal)]/30'}`}></div>
-        </div>
-        <p className={`${t.textMuted} text-base md:text-lg leading-relaxed max-w-2xl mx-auto`}>
-          Compare the fragmented workflows with the new unified design. These are actual video walkthroughs — the prototype walkthrough is created and narrated by me.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></div>
-            <h3 className={`${t.text} text-xl font-serif font-semibold`}>{before.title}</h3>
-          </div>
-          <div className="space-y-4">
-            {before.videos.map((video, index) => (
-              <div key={index} className="space-y-2">
-                <h4 className={`${t.text} text-sm font-medium`}>{video.title}</h4>
-                {video.description && <p className={`${t.textMuted} text-xs leading-relaxed`}>{video.description}</p>}
-                <div
-                  className="relative w-full aspect-video rounded-lg border-2 border-red-500/30 bg-gradient-to-br from-[var(--bg-dark-alt)] to-[var(--bg-dark)] overflow-hidden shadow-lg cursor-pointer group"
-                  onClick={handleVideoClick}
-                >
-                  {!isUnlocked && (
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center z-10">
-                      <div className="text-center space-y-2">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <svg
-                            className="w-6 h-6 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                            />
-                          </svg>
-                        </div>
-                        <p className={`${t.text} text-xs font-medium`}>Password Required</p>
-                        <p className={`${t.textMuted} text-[10px]`}>Click to unlock video</p>
-                      </div>
-                    </div>
-                  )}
-                  {isUnlocked && (
-                    <CustomVideoPlayer
-                      src={video.videoUrl}
-                      className="rounded-lg"
-                    />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
-            <h3 className={`${t.text} text-xl font-serif font-semibold`}>{after.title}</h3>
-          </div>
-          {after.description && <p className={`${t.textMuted} text-sm leading-relaxed`}>{after.description}</p>}
-          <div
-            className="relative w-full aspect-video rounded-xl border-2 border-[var(--accent-teal)] bg-gradient-to-br from-[var(--bg-dark-alt)] to-[var(--bg-dark)] overflow-hidden shadow-lg cursor-pointer group"
-            onClick={handleVideoClick}
+    <motion.div 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8 }}
+      className="bg-slate-950 py-16 md:py-24 -mx-4 xs:-mx-5 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
+    >
+      <div className="max-w-[1200px] mx-auto space-y-10">
+        {/* ============================================
+            HEADER (The Hook)
+            ============================================ */}
+        <div className="text-center space-y-6">
+          {/* Audio Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/50 rounded-full px-4 py-1.5"
           >
-            {!isUnlocked && (
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center z-10">
-                <div className="text-center space-y-3">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+            <Volume2 className="w-4 h-4" />
+            <span className="text-sm font-medium">Sound On · Director&apos;s Commentary</span>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-white text-4xl md:text-5xl font-serif"
+          >
+            The Transformation
+          </motion.h2>
+
+          {/* Subhead */}
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-slate-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+          >
+            Narrated walkthrough of the fragmented legacy workflows vs. the unified modern experience.
+          </motion.p>
+        </div>
+
+        {/* ============================================
+            VIDEO STAGE (The Monitors)
+            ============================================ */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="bg-slate-900/50 rounded-2xl p-4 md:p-6 lg:p-8 border border-slate-800"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* BEFORE - Multiple Videos */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse flex-shrink-0"></div>
+                <h3 className="text-white text-lg font-serif font-semibold">{before.title}</h3>
+              </div>
+              <div className="space-y-4">
+                {before.videos.map((video, index) => (
+                  <div key={index} className="space-y-2">
+                    <h4 className="text-slate-300 text-sm font-medium">{video.title}</h4>
+                    {video.description && (
+                      <p className="text-slate-500 text-xs leading-relaxed">{video.description}</p>
+                    )}
+                    <div
+                      className="relative w-full aspect-video rounded-lg border-4 border-slate-800 overflow-hidden shadow-2xl shadow-red-900/20 cursor-pointer group"
+                      onClick={handleVideoClick}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                      />
-                    </svg>
+                      {!isUnlocked ? (
+                        /* Locked State */
+                        <div className="absolute inset-0 bg-slate-900">
+                          <div 
+                            className="absolute inset-0 opacity-20"
+                            style={{
+                              backgroundImage: `
+                                linear-gradient(45deg, #334155 25%, transparent 25%),
+                                linear-gradient(-45deg, #334155 25%, transparent 25%),
+                                linear-gradient(45deg, transparent 75%, #334155 75%),
+                                linear-gradient(-45deg, transparent 75%, #334155 75%)
+                              `,
+                              backgroundSize: '16px 16px',
+                              backgroundPosition: '0 0, 0 8px, 8px -8px, -8px 0px',
+                            }}
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-center space-y-2">
+                              <div className="w-10 h-10 mx-auto rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                              </div>
+                              <p className="text-slate-400 text-xs font-medium">Click to unlock</p>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <CustomVideoPlayer src={video.videoUrl} className="rounded-none" />
+                      )}
+                    </div>
                   </div>
-                  <p className={`${t.text} text-sm font-medium`}>Password Required</p>
-                  <p className={`${t.textMuted} text-xs`}>Click to unlock video</p>
+                ))}
+              </div>
+            </div>
+
+            {/* AFTER - Single Video */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-[var(--accent-teal)] animate-pulse flex-shrink-0"></div>
+                <h3 className="text-white text-lg font-serif font-semibold">{after.title}</h3>
+              </div>
+              {after.description && (
+                <p className="text-slate-400 text-sm leading-relaxed">{after.description}</p>
+              )}
+              <div
+                className="relative w-full aspect-video rounded-lg border-4 border-slate-800 overflow-hidden shadow-2xl shadow-blue-900/20 cursor-pointer group"
+                onClick={handleVideoClick}
+              >
+                {!isUnlocked ? (
+                  <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                    <div className="text-center space-y-3">
+                      <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 border border-[var(--accent-teal)]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <p className="text-slate-300 text-sm font-medium">Password Required</p>
+                      <p className="text-slate-500 text-xs">Click to unlock unified workflow</p>
+                    </div>
+                  </div>
+                ) : (
+                  <CustomVideoPlayer src={after.videoUrl} className="rounded-none" />
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================
+              KEY DIFFERENCES (Dark Theme Specs)
+              ============================================ */}
+          {comparisonNotes && (
+            <div className="mt-8 pt-8 border-t border-slate-800">
+              <h4 className="text-white font-serif text-lg font-semibold mb-6 text-center">
+                Key Differences
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Before Column */}
+                <div className="bg-slate-900 rounded-xl p-5 border border-slate-800">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                    <span className="text-red-400 text-xs font-mono uppercase tracking-widest font-semibold">
+                      Before
+                    </span>
+                  </div>
+                  <ul className="text-slate-300 text-sm space-y-2.5">
+                    {comparisonNotes.before.map((note, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-red-400 mt-0.5 font-bold">•</span>
+                        <span>{note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* After Column */}
+                <div className="bg-slate-900 rounded-xl p-5 border border-slate-800">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+                    <span className="text-emerald-400 text-xs font-mono uppercase tracking-widest font-semibold">
+                      After
+                    </span>
+                  </div>
+                  <ul className="text-slate-300 text-sm space-y-2.5">
+                    {comparisonNotes.after.map((note, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-emerald-400 mt-0.5 font-bold">•</span>
+                        <span>{note}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-            )}
-            {isUnlocked && (
-              <CustomVideoPlayer
-                src={after.videoUrl}
-                className="rounded-xl"
-              />
-            )}
-          </div>
-        </div>
+            </div>
+          )}
+        </motion.div>
       </div>
 
-      {comparisonNotes && (
-        <div className={`${t.bg} rounded-xl p-6 border ${t.border} mt-8`}>
-          <h4 className={`${t.text} font-semibold mb-3`}>Key Differences</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-red-500"></div>
-                <span className={`${t.textMuted} text-sm font-medium`}>Before</span>
-              </div>
-              <ul className={`${t.textMuted} text-sm space-y-1 ml-4`}>
-                {comparisonNotes.before.map((note, index) => (
-                  <li key={index}>• {note}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)]"></div>
-                <span className={`${t.textMuted} text-sm font-medium`}>After</span>
-              </div>
-              <ul className={`${t.textMuted} text-sm space-y-1 ml-4`}>
-                {comparisonNotes.after.map((note, index) => (
-                  <li key={index}>• {note}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
+      {/* ============================================
+          PASSWORD MODAL
+          ============================================ */}
       {showPasswordModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className={`${t.cardBg} rounded-2xl p-8 max-w-md w-full border ${t.border} shadow-2xl`}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-slate-900 rounded-2xl p-8 max-w-md w-full border border-slate-700 shadow-2xl"
+          >
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/20 flex items-center justify-center mb-4">
+                <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 flex items-center justify-center mb-4">
                   <svg className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
-                <h3 className={`${t.text} text-2xl font-serif font-semibold`}>Unlock Videos</h3>
-                <p className={`${t.textMuted} text-sm`}>Enter the password to view the actual video walkthroughs and unlock the full case study. The prototype walkthrough is created and narrated by me.</p>
+                <h3 className="text-white text-2xl font-serif font-semibold">Unlock Videos</h3>
+                <p className="text-slate-400 text-sm">
+                  Enter the password to view the actual video walkthroughs.
+                </p>
               </div>
               <form onSubmit={(e) => { e.preventDefault(); handleUnlock() }} className="space-y-4">
-                <input type="password" value={passwordInput} onChange={(e) => { setPasswordInput(e.target.value); setPasswordError('') }} placeholder="Enter password" className={`w-full px-4 py-3 rounded-lg border ${t.border} ${t.bg} ${t.text} focus:outline-none focus:border-[var(--accent-teal)]/50 transition-colors`} autoFocus />
+                <input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => { setPasswordInput(e.target.value); setPasswordError('') }}
+                  placeholder="Enter password"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-[var(--accent-teal)]/50 focus:ring-2 focus:ring-[var(--accent-teal)]/20 transition-all"
+                  autoFocus
+                />
                 {passwordError && <p className="text-red-400 text-sm">{passwordError}</p>}
                 <div className="flex gap-3">
-                  <button type="button" onClick={() => { setShowPasswordModal(false); setPasswordInput(''); setPasswordError('') }} className={`flex-1 px-4 py-3 rounded-lg border ${t.border} ${t.textMuted} hover:opacity-90 transition-opacity`}>Cancel</button>
-                  <button type="submit" className="flex-1 px-4 py-3 rounded-lg bg-[var(--accent-teal)] text-white hover:bg-[var(--accent-teal)]/90 transition-colors font-medium">Unlock</button>
+                  <button
+                    type="button"
+                    onClick={() => { setShowPasswordModal(false); setPasswordInput(''); setPasswordError('') }}
+                    className="flex-1 px-4 py-3 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-4 py-3 rounded-lg bg-[var(--accent-teal)] text-white hover:bg-[var(--accent-teal)]/90 transition-colors font-medium"
+                  >
+                    Unlock
+                  </button>
                 </div>
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }
-

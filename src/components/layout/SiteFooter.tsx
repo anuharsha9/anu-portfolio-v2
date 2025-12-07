@@ -2,85 +2,24 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 
 export default function SiteFooter() {
   const pathname = usePathname()
   const router = useRouter()
   const currentYear = new Date().getFullYear()
-  const [footerBg, setFooterBg] = useState<string>('var(--bg-dark)')
-  const [isLightBg, setIsLightBg] = useState(false)
-
-  // Detect the last section's background color
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const detectLastSection = () => {
-      // Find all sections on the page
-      const sections = document.querySelectorAll('section, [class*="surface-"]')
-      if (sections.length === 0) return
-
-      const lastSection = sections[sections.length - 1]
-      const computedStyle = window.getComputedStyle(lastSection)
-
-      // Check for surface classes first
-      const hasLightSurface = lastSection.classList.contains('surface-light') ||
-        lastSection.classList.contains('surface-light-alt')
-      const hasDarkSurface = lastSection.classList.contains('surface-dark') ||
-        lastSection.classList.contains('surface-dark-alt')
-
-      if (hasLightSurface) {
-        setFooterBg('var(--bg-light)')
-        setIsLightBg(true)
-        return
-      } else if (hasDarkSurface) {
-        setFooterBg('var(--bg-dark)')
-        setIsLightBg(false)
-        return
-      }
-
-      // Fallback: check computed background color
-      const bgColor = computedStyle.backgroundColor
-      const rgb = bgColor.match(/\d+/g)
-      if (rgb && rgb.length >= 3) {
-        const r = parseInt(rgb[0])
-        const g = parseInt(rgb[1])
-        const b = parseInt(rgb[2])
-        const brightness = (r * 299 + g * 587 + b * 114) / 1000
-
-        if (brightness > 128) {
-          setFooterBg('var(--bg-light)')
-          setIsLightBg(true)
-        } else {
-          setFooterBg('var(--bg-dark)')
-          setIsLightBg(false)
-        }
-      }
-    }
-
-    // Run on mount and when pathname changes
-    detectLastSection()
-
-    // Also check after a short delay to ensure DOM is ready
-    const timeout = setTimeout(detectLastSection, 100)
-
-    return () => clearTimeout(timeout)
-  }, [pathname])
 
   const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
     if (pathname === '/') {
-      // Already on homepage, wait a bit for any animations to settle, then scroll
       setTimeout(() => {
         const section = document.getElementById(sectionId)
         if (section) {
-          // Account for both main nav (60px) and section nav (60px) if visible
-          const mainNavHeight = 72 // Main nav is now taller
-          const sectionNavHeight = 48 // Section nav is now shorter
+          const mainNavHeight = 72
+          const sectionNavHeight = 48
           const sectionNavVisible = document.querySelector('[aria-label="Landing page section navigation"]')?.getBoundingClientRect().height || 0
           const totalNavHeight = mainNavHeight + (sectionNavVisible > 0 ? sectionNavHeight : 0)
-          const offset = totalNavHeight + 20 // Extra padding
+          const offset = totalNavHeight + 20
 
           const elementPosition = section.getBoundingClientRect().top + window.pageYOffset
           const offsetPosition = Math.max(0, elementPosition - offset)
@@ -90,86 +29,76 @@ export default function SiteFooter() {
             behavior: 'smooth',
           })
 
-          // Update URL hash
           window.history.pushState(null, '', `#${sectionId}`)
         }
       }, 100)
     } else {
-      // On other pages (case studies, /me), use Next.js router to navigate
-      // This ensures proper page transition and hash handling
       router.push(`/#${sectionId}`)
     }
   }
 
   return (
-    <footer
-      className="transition-colors duration-300"
-      style={{
-        backgroundColor: footerBg,
-        borderTop: 'none',
-        boxShadow: 'none'
-      }}
-    >
-      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+    <footer className="bg-slate-900 border-t border-slate-800">
+      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+          {/* Logo & Name */}
           <Link
             href="/"
             className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity duration-300 group"
           >
             <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
-              <SignatureLogo className={`w-full h-full ${isLightBg ? 'text-[var(--text-primary-light)]' : 'text-[var(--text-primary-dark)]'} group-hover:text-[var(--accent-teal)] transition-colors duration-300`} />
+              <SignatureLogo className="w-full h-full text-slate-50 group-hover:text-[#0BA2B5] transition-colors duration-300" />
             </div>
-            <span className={`${isLightBg ? 'text-[var(--text-primary-light)]' : 'text-[var(--text-primary-dark)]'} font-medium text-sm md:text-base group-hover:text-[var(--accent-teal)] transition-colors duration-300`}>
+            <span className="text-slate-50 font-medium text-sm md:text-base group-hover:text-[#0BA2B5] transition-colors duration-300">
               Anuja Harsha Nimmagadda
             </span>
           </Link>
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 lg:gap-6">
-            {/* Navigation Links - Hidden on mobile (use hamburger menu instead) */}
-            <nav className="hidden md:flex flex-wrap items-center justify-center gap-4 md:gap-6">
+          
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            {/* Navigation Links */}
+            <nav className="hidden md:flex flex-wrap items-center justify-center gap-6">
               <Link
                 href="/#work-overview"
                 onClick={(e) => {
                   e.preventDefault()
                   if (pathname === '/') {
-                    // Already on homepage, scroll to section
                     handleSectionClick(e, 'work-overview')
                   } else {
-                    // Navigate to landing page work overview section
                     router.push('/#work-overview')
                   }
                 }}
-                className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
+                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
               >
                 Work
               </Link>
               <Link
                 href="/me"
                 onClick={(e) => {
-                  // Always navigate to /me page (landing)
                   if (pathname !== '/me') {
                     e.preventDefault()
                     router.push('/me')
                   }
                 }}
-                className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
+                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
               >
                 About Me
               </Link>
               <Link
                 href="/#lets-talk"
                 onClick={(e) => handleSectionClick(e, 'lets-talk')}
-                className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
+                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
               >
                 Contact
               </Link>
             </nav>
+            
             {/* Social Icons */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-4">
               <a
                 href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} hover:text-[var(--accent-teal)] transition-colors duration-300`}
+                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +109,7 @@ export default function SiteFooter() {
                 href="https://medium.com/@anu.anuja"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} hover:text-[var(--accent-teal)] transition-colors duration-300`}
+                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300"
                 aria-label="Medium"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -188,11 +117,13 @@ export default function SiteFooter() {
                 </svg>
               </a>
             </div>
-            <span className={`hidden md:inline ${isLightBg ? 'text-[var(--text-muted-light)]/30' : 'text-[var(--text-muted-dark)]/30'}`}>·</span>
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 lg:gap-4">
-              <div className={`${isLightBg ? 'text-[var(--text-muted-light)]' : 'text-[var(--text-muted-dark)]'} text-xs md:text-sm`}>
-                © {currentYear}
-              </div>
+            
+            {/* Separator & Copyright */}
+            <span className="hidden md:inline text-slate-700">·</span>
+            <div className="flex items-center gap-3">
+              <p className="text-slate-500 text-xs md:text-sm" suppressHydrationWarning>
+                Designed in Figma. Built with Cursor. © {currentYear}
+              </p>
             </div>
           </div>
         </div>

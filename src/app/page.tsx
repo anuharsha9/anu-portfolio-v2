@@ -1,53 +1,59 @@
 import type { Metadata } from 'next'
-import WebFOCUSOverview from '@/components/home/WebFOCUSOverview'
+import HeroSplit from '@/components/home/HeroSplit'
+import WorkGrid from '@/components/home/WorkGrid'
+import GrowthStory from '@/components/home/GrowthStory'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
-import TestimonialsWall from '@/components/home/TestimonialsWall'
+import FeaturedQuote from '@/components/home/FeaturedQuote'
 import TalkSection from '@/components/home/TalkSection'
-import ExecutiveSummary from '@/components/home/ExecutiveSummary'
-import ForEngineeringLeaders from '@/components/home/ForEngineeringLeaders'
-import { recommendations } from '@/data/home'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'Principal UX Designer | Enterprise Design & AI/ML UX',
+  title: 'Principal Product Designer | Design Systems Architect | AI-Driven',
   description:
-    'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX. Transforming complex systems like WebFOCUS and ReportCaster into intuitive experiences used by millions.',
+    'Principal Product Designer specializing in design systems architecture, legacy modernization, and AI-driven workflows. Designing through complexity — from Figma to Production.',
   openGraph: {
-    title: 'Anuja Harsha Nimmagadda | Principal UX Designer',
+    title: 'Anuja Harsha Nimmagadda | Principal Product Designer',
     description:
-      'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX. Transforming complex systems into intuitive experiences at scale.',
+      'Principal Product Designer specializing in design systems architecture, legacy modernization, and AI-driven workflows. Transforming complex systems into intuitive experiences at scale.',
     url: siteUrl,
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Anuja Harsha Nimmagadda - Principal UX Designer',
+        alt: 'Anuja Harsha Nimmagadda - Principal Product Designer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anuja Harsha Nimmagadda | Principal UX Designer',
+    title: 'Anuja Harsha Nimmagadda | Principal Product Designer',
     description:
-      'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX.',
+      'Principal Product Designer specializing in design systems architecture, legacy modernization, and AI-driven workflows.',
     images: ['/images/og-image.jpg'],
   },
 }
 
-// Import HeroBrain directly instead of dynamic to ensure it loads
-import { HeroBrain } from '@/components/HeroBrain'
-
 export default function Home() {
   return (
     <>
-      <HeroBrain />
-      <ExecutiveSummary />
-      <ForEngineeringLeaders />
-      <WebFOCUSOverview />
-      <TestimonialsWall recommendations={recommendations} />
+      {/* 1. HERO - Who you are + Impact Proof Bar at bottom */}
+      <HeroSplit />
+      
+      {/* 2. WORK GRID - WebFOCUS context + 3 Case Studies */}
+      <WorkGrid />
+      
+      {/* 3. GROWTH STORY - The Transformation (emotional hook) */}
+      <GrowthStory />
+      
+      {/* 4. QUOTE - Social Proof */}
+      <FeaturedQuote />
+      
+      {/* 5. ARCHIVE - Past Work */}
       <CollapsibleWorkArchive />
+      
+      {/* 6. CONTACT - CTA */}
       <TalkSection />
     </>
   )
