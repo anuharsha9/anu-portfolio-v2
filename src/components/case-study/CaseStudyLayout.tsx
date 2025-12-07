@@ -205,6 +205,14 @@ const IQPluginTimeline = dynamic(() => import('./IQPluginTimeline'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
+const IQArchitectureBlueprint = dynamic(() => import('./IQArchitectureBlueprint'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const IQNLQInsightsShowcase = dynamic(() => import('./IQNLQInsightsShowcase'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
 const IQPluginArchitecture = dynamic(() => import('./IQPluginArchitecture'), {
   ssr: false,
   loading: () => <LoadingSpinner />
@@ -1502,6 +1510,10 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQWorkflowsBuilt isLightBackground={true} />
                     </MotionSection>
+                    {/* NLQ & Insights Deep Dive (PUBLIC) */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <IQNLQInsightsShowcase isLightBackground={true} />
+                    </MotionSection>
                     {/* Business Case - Why IQ Plugin Exists */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -1547,6 +1559,17 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     {/* System Convergence Diagram */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQPluginArchitecture isLightBackground={true} />
+                    </MotionSection>
+                    {/* Architecture Blueprint - Building the System */}
+                    <MotionSection className="surface-light py-0">
+                      <LockedContent
+                        password={data.passwordGate?.password || 'anu-access'}
+                        caseStudySlug={data.slug}
+                        unlockMessage="Password required to view architecture blueprint"
+                        isLightBackground={true}
+                      >
+                        <IQArchitectureBlueprint isLightBackground={true} />
+                      </LockedContent>
                     </MotionSection>
                     {/* Design Evolution */}
                     <MotionSection className="surface-light py-0">
