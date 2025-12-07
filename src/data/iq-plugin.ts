@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three powerful DSML features—NLQ, Insights, and ML—all shipping in 9.3.6. Not legacy. Not broken. Just... scattered. NLQ and Insights lived in the Plus menu (2 clicks). ML lived in the Reporting Server (2 clicks). All in different places. Users didn\'t even know half of this existed.',
     myRole:
-      'PM came to me with an idea: "What if we brought these together?" No requirements. No specs. I owned it from there—defined the architecture, designed the flows, built the onboarding system, created the tutorial framework. Led alignment across engineering and product. Designed for business outcomes: competitive positioning, HUB adoption, DSML discoverability.',
+      'Business requirement: increase DSML adoption. PM had an idea—we collaborated on the vision. From there, I drove it. Initiated the technical conversations. Got engineers in the room to understand what was possible. Defined the architecture, designed the flows, built the onboarding and tutorial system. I was the one pushing this forward, week after week.',
     scopeOfPractice: [
       {
         tag: 'PRODUCT_DEFINITION',
@@ -176,16 +176,17 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'E',
       title: 'Empathize with the Ecosystem: Building from Nothing',
       summary: 'PM had an idea. I built the product.',
-      body: `The PM walked in with a concept: "What if we brought NLQ, Insights, and ML together?" That was the entire brief. No wireframes. No requirements doc. No tickets. Just an idea.
+      body: `Business requirement: how do we increase DSML adoption? PM had an idea—bring NLQ, Insights, and ML together. We collaborated on the vision. But I was the one driving it forward.
 
-**What I Built:**
-- The entire information architecture
-- The hub navigation system
-- The unified dataset selection flow
-- The Discover page with tutorials, documentation, and YouTube links
-- The cross-feature workflow patterns
+**What That Meant:**
+- Initiated conversations with engineering to understand what was feasible
+- Got the right people in the room
+- Defined the architecture and information design
+- Designed the hub navigation, dataset selection, Discover page
+- Built the tutorial and onboarding framework
+- Pushed it forward week after week until it was real
 
-The PM created Jira tickets *after* I finished the designs. This wasn't design execution—this was product invention.`,
+Collaboration with PM? Yes. But I was the driver.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/IQ Structure flowchart.png',
@@ -498,8 +499,8 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'PM had an idea. I owned it from there—architecture, flows, onboarding, tutorial system.',
-        systemLogic: "own(concept).to(productVision);",
+        description: 'PM had an idea. I drove it—initiated conversations, got engineers together, figured out what was possible.',
+        systemLogic: "drive(initiative).fromConceptToReality();",
       },
       {
         letter: 'S',
@@ -546,11 +547,11 @@ Not just designs—I defined the product. The PM had a vision; I built the reali
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `From a PM's idea to a complete product vision. Defined the architecture. Designed every flow. Built the onboarding and tutorial system. Led alignment across teams.
+    body: `Business requirement: increase DSML adoption. PM had the idea. I drove the execution—initiated the technical conversations, got engineers in the room, defined the architecture, designed every flow, built the onboarding system.
 
 IQ Plugin brings three scattered features into one home. One click to access NLQ, Insights, or ML. Tutorials built-in. Dataset selection unified. Enterprise data science, made accessible.`,
     keyPoints: [
-      'End-to-end ownership from concept to design system',
+      'Drove the initiative from concept to complete design system',
       '3 tools → 1 hub. One-click access to all DSML capabilities.',
       'Discover page with tutorials, documentation, and video links',
       'Unified dataset selection—pick once, explore across all features',
