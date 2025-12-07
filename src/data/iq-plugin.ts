@@ -143,19 +143,20 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'Discover Deeply: The Business Case',
-      summary: 'Not legacy. Not broken. Just invisible. Three modern features nobody could find.',
-      body: `NLQ, Insights, and ML Functions—all shipping in WebFOCUS 9.3.6. Powerful features. Modern implementations. But scattered across the platform like Easter eggs.
+      title: 'Discover Deeply: Three Workflows I Built',
+      summary: 'I designed NLQ. I designed Insights. I designed ML. Then I unified them.',
+      body: `**I built all three workflows independently:**
+- **NLQ:** Complete workflow from empty state to visualization. Shipping now.
+- **Insights:** Automatic pattern detection and narrative generation. Shipping now.
+- **ML Functions:** Full redesign of train/run model experience. Shipping 2026.
 
-**The Problem Wasn't Quality—It Was Discovery:**
-- NLQ and Insights: buried in the Plus menu. 2 clicks minimum.
-- ML Functions: hidden in the Reporting Server. 2 clicks, different context entirely.
-- Users didn't even know half of this existed.
+**The Problem:**
+Three powerful workflows. Three different entry points. All scattered across the platform.
+- NLQ and Insights: buried in the Plus menu
+- ML: hidden in the Reporting Server
+- Users didn't know half of this existed
 
-**Why This Mattered:**
-1. **Competitive pressure.** Power BI and Tableau were marketing DSML hard. We had the capabilities—we just couldn't show them off.
-2. **HUB adoption.** If users don't discover features, they don't use the platform.
-3. **DSML adoption.** Data science capabilities are only valuable if people can find them.`,
+**Then I unified them.** IQ Plugin brings all three home.`,
       images: [
         {
           src: '/images/case-study/iq-plugin/Explore Data _ NLQ _ Empty State Illustration 1.png',

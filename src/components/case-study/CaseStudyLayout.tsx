@@ -225,6 +225,10 @@ const IQEvolution = dynamic(() => import('./IQEvolution'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
+const IQWorkflowsBuilt = dynamic(() => import('./IQWorkflowsBuilt'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
 
 interface CaseStudyLayoutProps {
   data: CaseStudyData
@@ -1494,6 +1498,10 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                 {/* IQ Plugin - Section 01 (D - System Diagnosis) */}
                 {section.id === 'section-01' && data.slug === 'iq-plugin' && (
                   <>
+                    {/* What I Built - The 3 Workflows (PUBLIC) */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <IQWorkflowsBuilt isLightBackground={true} />
+                    </MotionSection>
                     {/* Strategic Release Log */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <IQPluginTimeline isLightBackground={true} />
