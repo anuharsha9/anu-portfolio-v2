@@ -55,31 +55,6 @@ export default function SiteHeader() {
     setHasShadow(hasScrolled)
   }, [isLandingPage, isCaseStudyPage])
 
-  // Scroll to archive section
-  const scrollToArchive = (e: React.MouseEvent) => {
-    e.preventDefault()
-    if (typeof window === 'undefined') return
-    
-    // If on landing page, scroll to section
-    if (isLandingPage) {
-      const element = document.getElementById('work-archive')
-      if (element) {
-        const headerHeight = 80
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-        const offsetPosition = elementPosition - headerHeight
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        })
-        window.history.pushState(null, '', '#work-archive')
-      }
-    } else {
-      // Navigate to home with hash
-      window.location.href = '/#work-archive'
-    }
-  }
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-500 ${isVisible
@@ -109,7 +84,7 @@ export default function SiteHeader() {
 
         {/* Centered Navigation Links */}
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Desktop Navigation - Work, Me, Archive */}
+          {/* Desktop Navigation - Work, Me */}
           <div className="hidden lg:flex items-center gap-6">
             {/* Work - with dropdown */}
             <CaseStudiesDropdown
@@ -135,43 +110,45 @@ export default function SiteHeader() {
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0BA2B5]" />
               )}
             </Link>
-
-            {/* Archive */}
-            <a
-              href="/#work-archive"
-              onClick={scrollToArchive}
-              className="font-sans font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Archive
-            </a>
           </div>
         </div>
 
-        {/* Resume Button - Pill Style CTA */}
-        <a
-          href="/resume.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackResumeDownload()}
-          className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-medium transition-all duration-300 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5] shadow-sm"
-          aria-label="View Resume"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+        {/* Right Side CTAs */}
+        <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-3">
+          {/* Let's Talk - Primary CTA */}
+          <a
+            href="mailto:anuja.harsha@gmail.com"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0BA2B5] text-white text-sm font-medium transition-all duration-300 hover:bg-[#0990A2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5] shadow-sm"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-          <span>Resume</span>
-        </a>
+            <span>Let&apos;s Talk</span>
+          </a>
+          
+          {/* Resume - Secondary CTA */}
+          <a
+            href="/resume.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackResumeDownload()}
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5]"
+            aria-label="View Resume"
+          >
+            <span>Resume</span>
+            <svg
+              className="w-3.5 h-3.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </a>
+        </div>
 
         {/* Mobile Menu */}
         <div className="lg:hidden absolute right-4 xs:right-5 sm:right-6 md:right-8 z-[60]">

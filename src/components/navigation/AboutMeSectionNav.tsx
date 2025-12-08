@@ -12,9 +12,9 @@ interface Section {
 const sections: Section[] = [
   { id: 'profile', label: 'Profile' },
   { id: 'design-framework', label: 'Framework' },
-  { id: 'toolkit', label: 'Toolkit' },
-  { id: 'social-proof', label: 'Testimonials' },
-  { id: 'outside-of-work', label: 'Personal' },
+  { id: 'toolkit', label: 'Stack' },
+  { id: 'social-proof', label: 'Voices' },
+  { id: 'outside-of-work', label: 'Life' },
 ]
 
 export default function AboutMeSectionNav() {
