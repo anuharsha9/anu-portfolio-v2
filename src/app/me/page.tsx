@@ -55,21 +55,6 @@ const frameworkItems = [
   },
 ]
 
-// Categorized Toolkit
-const toolkitCategories = [
-  {
-    title: 'Strategy',
-    items: ['User Research', 'Systems Thinking', 'Workshops', 'Stakeholder Alignment', 'Journey Mapping'],
-  },
-  {
-    title: 'Design',
-    items: ['Figma (Advanced)', 'Prototyping', 'Accessibility', 'Design Systems', 'Motion Design'],
-  },
-  {
-    title: 'Build',
-    items: ['React', 'Tailwind', 'AI Agents (Cursor)', 'Next.js', 'TypeScript'],
-  },
-]
 
 export default function AboutPage() {
   return (
@@ -272,9 +257,9 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 3 — THE TOOLKIT (Categorized) */}
-      <MotionSection id="toolkit" className="bg-slate-50 py-16 md:py-24 lg:py-32 border-t border-slate-200">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+      {/* SECTION 3 — THE HYBRID STACK (30-Day Sprint Story) */}
+      <MotionSection id="toolkit" className="bg-slate-50 py-24 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -282,7 +267,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-12"
           >
-            {/* Section Header */}
+            {/* Section Header - The Contrast */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
               <div className="flex items-center gap-4 justify-center">
                 <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
@@ -292,54 +277,140 @@ export default function AboutPage() {
                 <div className="h-px w-12 bg-[#0BA2B5]"></div>
               </div>
               <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-                The Toolkit
+                The Hybrid Stack.
               </h2>
-              <p className="text-slate-500 text-base md:text-lg leading-relaxed">
-                Organized by discipline — from strategy to shipping.
+              <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
+                13 Years of Design Depth. <strong className="text-purple-600">30 Days of High-Velocity Engineering.</strong>
               </p>
             </div>
 
-            {/* 3-Column Grid with Vertical Dividers */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-              {toolkitCategories.map((category, catIndex) => (
-                <motion.div
-                  key={category.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.6,
-                    delay: catIndex * 0.1,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`p-6 md:p-8 ${catIndex < toolkitCategories.length - 1 ? 'md:border-r md:border-slate-200' : ''} ${catIndex > 0 ? 'border-t md:border-t-0 border-slate-200' : ''}`}
-                >
-                  {/* Category Title - Technical Label Style */}
-                  <h3 className="font-mono text-[#0BA2B5] text-sm uppercase tracking-widest mb-6 pb-4 border-b border-slate-100 font-semibold">
-                    {category.title}
-                  </h3>
+            {/* 3-Column Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              
+              {/* Column 1: Strategy (Core Foundation) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0 }}
+                className="bg-white border border-slate-200 p-8 rounded-xl"
+              >
+                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-6">
+                  // CORE_COMPETENCY: STRATEGY
+                </span>
+                <ul className="space-y-4">
+                  {['Systems Thinking', 'User Research', 'Stakeholder Alignment', 'Workshop Facilitation', 'Journey Mapping'].map((item, i) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.05 }}
+                      className="flex items-center gap-3 text-slate-700"
+                    >
+                      <span className="text-slate-300">→</span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
 
-                  {/* Items */}
-                  <ul className="space-y-3">
-                    {category.items.map((item, itemIndex) => (
-                      <motion.li
-                        key={item}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.4,
-                          delay: catIndex * 0.1 + itemIndex * 0.05,
-                        }}
-                        className="flex items-center gap-3 text-slate-700 text-sm md:text-base"
-                      >
-                        <span className="text-slate-400 text-xs">→</span>
-                        {item}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+              {/* Column 2: Design (Core Foundation) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="bg-white border border-slate-200 p-8 rounded-xl"
+              >
+                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-6">
+                  // CORE_COMPETENCY: DESIGN
+                </span>
+                <ul className="space-y-4">
+                  {['Figma (Advanced)', 'Design Systems', 'Prototyping', 'Accessibility', 'Motion Design'].map((item, i) => (
+                    <motion.li
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
+                      className="flex items-center gap-3 text-slate-700"
+                    >
+                      <span className="text-slate-300">→</span>
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Column 3: AI Engineering (THE HERO - The Accelerator) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white border-2 border-purple-500 shadow-xl p-8 rounded-xl relative overflow-hidden"
+              >
+                {/* Subtle Code Pattern Background */}
+                <div 
+                  className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239333ea' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  }}
+                />
+
+                {/* Badge - Top Right */}
+                <div className="absolute top-4 right-4">
+                  <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-[10px] font-mono font-bold uppercase tracking-wider">
+                    Acquired in 30 Days
+                  </span>
+                </div>
+
+                <span className="font-mono text-purple-600 text-xs uppercase tracking-widest block mb-6">
+                  // VELOCITY_LAYER: AI_ENGINEERING
+                </span>
+
+                {/* The Stack List */}
+                <ul className="space-y-4 mb-6">
+                  {[
+                    { name: 'React', via: 'via Cursor' },
+                    { name: 'Next.js', via: 'via Vercel' },
+                    { name: 'Tailwind CSS', via: 'via Prompting' },
+                    { name: 'AI Agents', via: 'The Orchestrator' },
+                  ].map((item, i) => (
+                    <motion.li
+                      key={item.name}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
+                      className="flex items-center justify-between text-slate-700"
+                    >
+                      <span className="flex items-center gap-3">
+                        <span className="text-purple-400">→</span>
+                        <span className="font-medium">{item.name}</span>
+                      </span>
+                      <span className="text-slate-400 text-xs font-mono">{item.via}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                {/* Divider */}
+                <div className="border-t border-purple-100 my-6" />
+
+                {/* The Sprint Context */}
+                <div className="space-y-4 relative z-10">
+                  <p className="text-slate-600 text-sm leading-relaxed">
+                    After a career inflection point, I went all-in. In 30 days, I moved from &ldquo;Static Mocks&rdquo; to &ldquo;Shipping to Vercel.&rdquo;
+                  </p>
+                  
+                  {/* The Outcome - Empathy */}
+                  <p className="text-slate-700 text-sm leading-relaxed">
+                    The biggest gain wasn&apos;t just React knowledge—it was <strong className="text-purple-600">Engineering Empathy</strong>. I now feel the &ldquo;build cost&rdquo; of every pixel I design, making me a better partner to dev teams.
+                  </p>
+                </div>
+              </motion.div>
+
             </div>
           </motion.div>
         </div>
