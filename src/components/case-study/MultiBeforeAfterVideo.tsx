@@ -5,14 +5,36 @@ import { motion } from 'framer-motion'
 import { Volume2 } from 'lucide-react'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 
+interface VideoItem {
+  title: string
+  videoUrl?: string
+  videoEmbedUrl?: string
+  videoPoster?: string
+  description?: string
+}
+
 interface MultiBeforeAfterVideoProps {
-  before: { title: string; videos: { title: string; videoUrl: string; videoPoster?: string; description?: string }[] }
-  after: { title: string; videoUrl: string; videoPoster?: string; description?: string }
+  before: { title: string; videos: VideoItem[] }
+  after: { title: string; videoUrl?: string; videoEmbedUrl?: string; videoPoster?: string; description?: string }
   isLightBackground?: boolean
   comparisonNotes?: { before: string[]; after: string[] }
   password?: string
   caseStudySlug?: string
 }
+
+// Helper to check if URL is YouTube
+const isYouTubeUrl = (url: string) => url.includes('youtube.com') || url.includes('youtu.be')
+
+// YouTube embed component
+const YouTubeEmbed = ({ url, className = '' }: { url: string; className?: string }) => (
+  <iframe
+    src={url}
+    className={`w-full h-full ${className}`}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    title="YouTube video"
+  />
+)
 
 export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, password = 'anu-access', caseStudySlug = 'default' }: MultiBeforeAfterVideoProps) {
   const [isUnlocked, setIsUnlocked] = useState(false)
@@ -158,7 +180,12 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                           </div>
                         </div>
                       ) : (
-                        <CustomVideoPlayer src={video.videoUrl} className="rounded-none" />
+                        // Check if it's a YouTube embed URL or regular video
+                        video.videoEmbedUrl && isYouTubeUrl(video.videoEmbedUrl) ? (
+                          <YouTubeEmbed url={video.videoEmbedUrl} className="rounded-none" />
+                        ) : video.videoUrl ? (
+                          <CustomVideoPlayer src={video.videoUrl} className="rounded-none" />
+                        ) : null
                       )}
                     </div>
                   </div>
@@ -192,7 +219,12 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                     </div>
                   </div>
                 ) : (
-                  <CustomVideoPlayer src={after.videoUrl} className="rounded-none" />
+                  // Check if it's a YouTube embed URL or regular video
+                  after.videoEmbedUrl && isYouTubeUrl(after.videoEmbedUrl) ? (
+                    <YouTubeEmbed url={after.videoEmbedUrl} className="rounded-none" />
+                  ) : after.videoUrl ? (
+                    <CustomVideoPlayer src={after.videoUrl} className="rounded-none" />
+                  ) : null
                 )}
               </div>
             </div>

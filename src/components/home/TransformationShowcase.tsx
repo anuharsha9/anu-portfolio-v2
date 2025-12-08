@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { GripVertical } from 'lucide-react'
+import { GripVertical, Play } from 'lucide-react'
 import Link from 'next/link'
 
 /**
@@ -170,6 +170,18 @@ export default function TransformationShowcase() {
             <p className="text-slate-500 text-sm font-mono">
               {'<'} Drag to compare {'>'}
             </p>
+            
+            {/* Watch Demo Button */}
+            <a
+              href="https://www.youtube.com/watch?v=NvNFN6sz41M"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#0BA2B5] hover:bg-[#0BA2B5]/80 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
+            >
+              <Play className="w-4 h-4" />
+              <span>Watch Demo</span>
+            </a>
+            
             <div className="flex items-center gap-4">
               <Link
                 href="/work/reportcaster"
