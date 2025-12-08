@@ -24,7 +24,7 @@ export default function GrowthStory() {
           <div className="flex items-start gap-4 mb-10">
             <div className="hidden md:block w-1 h-16 bg-gradient-to-b from-[var(--accent-teal)] to-[var(--accent-teal)]/20 rounded-full mt-2" />
             <h3 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-              WebFOCUS <span className="text-[var(--accent-teal)]">changed me.</span>
+              WebFOCUS <span className="text-[var(--accent-teal)]">transformed me.</span>
             </h3>
           </div>
           
