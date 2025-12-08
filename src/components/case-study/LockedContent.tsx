@@ -119,15 +119,25 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
   if (isUnlocked) return <>{children}</>
 
   // Extract a short title from the unlock message
-  const bannerTitle = unlockMessage.includes('discovery') 
-    ? 'Deep Dive: System Discovery Strategy'
-    : unlockMessage.includes('persona') 
-    ? 'Deep Dive: User Personas'
-    : unlockMessage.includes('iteration') 
-    ? 'Deep Dive: Design Iterations'
-    : unlockMessage.includes('mapping') 
-    ? 'Deep Dive: System Mapping'
-    : 'Deep Dive: Protected Content'
+  const getBannerTitle = () => {
+    const msg = unlockMessage.toLowerCase()
+    if (msg.includes('persona')) return 'User Personas'
+    if (msg.includes('discovery')) return 'System Discovery Strategy'
+    if (msg.includes('iteration') && msg.includes('log')) return 'Design Iteration Log'
+    if (msg.includes('iteration')) return 'Design Iterations'
+    if (msg.includes('mapping')) return 'System Mapping'
+    if (msg.includes('research')) return 'Research Methods'
+    if (msg.includes('pivot')) return 'Design Pivots'
+    if (msg.includes('disclosure')) return 'Layered Disclosure Strategy'
+    if (msg.includes('artifact')) return 'Design Artifacts'
+    if (msg.includes('evolution')) return 'Design Evolution'
+    if (msg.includes('workflow comparison')) return 'Workflow Comparison'
+    if (msg.includes('architecture') || msg.includes('architectural')) return 'Architecture Blueprint'
+    if (msg.includes('empty state')) return 'Empty States'
+    if (msg.includes('v1') || msg.includes('v2') || msg.includes('v3')) return 'Version Iterations (V1, V2, V3)'
+    return 'Protected Content'
+  }
+  const bannerTitle = getBannerTitle()
 
   return (
     <>
