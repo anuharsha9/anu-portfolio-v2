@@ -379,7 +379,7 @@ export default function AboutPage() {
                 <ul className="space-y-4 mb-6">
                   {[
                     { name: 'Cursor AI', via: 'Primary IDE' },
-                    { name: 'Claude / GPT', via: 'Pair Programming' },
+                    { name: 'Claude / GPT / Gemini', via: 'Pair Programming' },
                     { name: 'AWS S3 + CloudFront', via: 'Deploy Pipeline' },
                     { name: 'Prompt Engineering', via: 'The Skill' },
                   ].map((item, i) => (
