@@ -39,8 +39,8 @@ export default function GrowthStory() {
             {/* Right Column */}
             <div className="text-slate-600 text-lg leading-relaxed">
               <p>
-                My Director of Design became my anchor. Daily mentorship. He taught me to lead, 
-                to present, to carry myself with confidence. He saw something in me I hadn't seen yet. 
+                Through daily mentorship from my Director of Design, I learned to lead, to present, 
+                and to carry myself with confidence. He saw something in me I hadn't seen yet. 
                 He called me a <strong className="text-slate-900">UX Leader</strong>—before I realized I was one.
               </p>
               <p className="mt-4 text-slate-900 font-medium">
