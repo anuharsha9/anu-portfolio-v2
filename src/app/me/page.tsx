@@ -140,11 +140,11 @@ export default function AboutPage() {
                         <div className="w-3 h-3 rounded-full bg-green-400/80" />
                       </div>
                       <span className="font-mono text-slate-400 text-xs">
-                        intro_video.mp4
+                        meet_anuja.mp4
                       </span>
                     </div>
                     <span className="font-mono text-emerald-600 text-xs tracking-widest">
-                      [VELOCITY: 2_WEEKS]
+                      [20s INTRO]
                     </span>
                   </div>
 
@@ -157,7 +157,7 @@ export default function AboutPage() {
                   {/* Video Footer */}
                   <div className="px-4 py-3 bg-slate-50/90 border-t border-slate-200/60">
                     <p className="font-mono text-slate-500 text-[10px] uppercase tracking-widest text-center">
-                      // PROOF_OF_CONCEPT: FROM_ZERO_TO_PRODUCTION
+                      // A_QUICK_HELLO: WHO_I_AM_AND_WHAT_I_DO
                     </p>
                   </div>
                 </div>
