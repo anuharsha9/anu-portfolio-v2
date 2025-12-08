@@ -684,8 +684,8 @@
 .gears-dark-theme #brain-gears #lines-background path,
 .gears-dark-theme #brain-gears-copy #lines-background path {
   opacity: 1 !important;
-  stroke-width: 2.5px !important;
-  stroke: #1A1A1A !important; /* Dark = becomes BRIGHT after invert */
+  stroke-width: 2px !important;
+  stroke: #555555 !important; /* Medium gray = becomes ~70% brightness after invert */
 }
 
 /* Dark theme: Brighten the INTERNAL decorative lines/circles inside gears */
