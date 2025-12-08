@@ -37,7 +37,7 @@ const caseStudies = [
     subtitle: '3 Tools + Discover Page',
     metric: '1',
     metricLabel: 'unified hub',
-    description: 'Unified 3 DSML tools into one browser extension with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
+    description: 'Unified 3 DSML tools into one Hub plugin with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
     accentColor: '#8B5CF6',

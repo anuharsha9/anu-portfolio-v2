@@ -151,7 +151,7 @@ export default function IQPluginSection() {
 
               {/* Description */}
               <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-                Consolidated 4 disparate data science tools into a single browser extension. Zero context switching, instant discoverability from the Hub.
+                Consolidated 3 DSML tools into a single Hub plugin. Zero context switching, instant discoverability—like File Explorer or Management Settings.
               </p>
 
               {/* Metrics Grid - 2x2 */}
