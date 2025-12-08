@@ -1,67 +1,81 @@
 'use client'
 
-import ProjectTimeline from './ProjectTimeline'
+import UnifiedTimeline from './UnifiedTimeline'
 
 interface MLFunctionsTimelineProps {
   isLightBackground?: boolean
 }
 
 export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunctionsTimelineProps) {
-  const events = [
+  const phases = [
     {
-      id: 'mapping',
-      label: 'S1',
-      title: 'Mapping Current vs Ideal ML Lifecycle',
-      description: 'Documented Train and Run as they existed, identified dead-ends, errors, broken flows, and destructive patterns.',
-      details: 'Defined user-first lifecycle: Select Data → Choose Action → Train → Compare → Run → Save → Designer. This mapping became the foundation for the entire redesign, ensuring every decision aligned with user mental models rather than technical constraints.',
-      type: 'standard' as const,
-      evidenceImage: {
+      id: 'phase-01',
+      phase: '01',
+      title: 'MAPPING_ML_LIFECYCLE',
+      body: 'Documented Train and Run as they existed, identified dead-ends, errors, broken flows, and destructive patterns. Defined user-first lifecycle: Select Data → Choose Action → Train → Compare → Run → Save → Designer.',
+      status: 'COMPLETED' as const,
+      image: {
         src: '/images/case-study/ml-functions/entire ML workflow flowchart.png',
         alt: 'Complete ML workflow flowchart',
+        caption: 'System mapping: Documenting the entire ML workflow structure',
         isBlurred: true,
       },
     },
     {
-      id: 'landing',
-      label: 'S2',
-      title: 'Designing the Smart Landing Page',
-      description: 'Introduced a home for ML that lived outside the destructive Data Flow panel, with Train/Run tabs, dataset context, and model discovery.',
-      details: 'Added dataset switching without breaking workflows. This landing page became the central hub for all ML operations, eliminating the need to navigate through multiple disconnected interfaces.',
-      type: 'milestone' as const,
-      evidenceImage: {
+      id: 'phase-02',
+      phase: '02',
+      title: 'SMART_LANDING_PAGE',
+      body: 'Introduced a home for ML that lived outside the destructive Data Flow panel, with Train/Run tabs, dataset context, and model discovery. Added dataset switching without breaking workflows.',
+      status: 'COMPLETED' as const,
+      isCriticalPivot: true,
+      image: {
         src: '/images/case-study/ml-functions/1. Predict Data - Train Models - Empty State.png',
         alt: 'Train Models landing page with tiles',
+        caption: 'The Smart Landing Page: Central hub for all ML operations',
         isBlurred: true,
       },
     },
     {
-      id: 'stepper',
-      label: 'S3',
-      title: 'Building the Guided Stepper & Model Comparison',
-      description: 'Built clear, predictable workflow with explanatory text and clean navigation.',
-      details: 'Redesigned model comparison from pop-up with tabs to stable left-navigation model explorer. The guided stepper broke down complex ML training into digestible steps, reducing cognitive load and decision paralysis.',
-      type: 'standard' as const,
-      evidenceImage: {
+      id: 'phase-03',
+      phase: '03',
+      title: 'GUIDED_STEPPER_SYSTEM',
+      body: 'Built clear, predictable workflow with explanatory text and clean navigation. Redesigned model comparison from pop-up with tabs to stable left-navigation model explorer.',
+      status: 'COMPLETED' as const,
+      image: {
         src: '/images/case-study/ml-functions/4. Train Model Workflow - Step 1 - Select Problem Type.png',
         alt: 'Guided stepper Step 1 - Select Problem Type',
+        caption: 'Step-based wizard: Breaking down complex ML into digestible steps',
         isBlurred: true,
       },
     },
     {
-      id: 'explainability',
-      label: 'S4',
-      title: 'Integrating Explainability & QA Delivery',
-      description: 'Integrated one-click access to interpretable ML insights and personally audited every screen before ship.',
-      details: 'Personally audited every screen after handoff, flagged issues, opened QA tickets, and ensured nothing shipped until it met the bar. This rigorous quality control ensured the final product maintained design intent.',
-      type: 'milestone' as const,
-      evidenceImage: {
-        src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
+      id: 'phase-04',
+      phase: '04',
+      title: 'EXPLAINABILITY_&_QA',
+      body: 'Integrated one-click access to interpretable ML insights. Personally audited every screen after handoff, flagged issues, opened QA tickets, and ensured nothing shipped until it met the bar.',
+      status: 'COMPLETED' as const,
+      image: {
+        src: '/images/case-study/ml-functions/6. Run Model - Explanability Popup.png',
         alt: 'Explainability popup - interpretable ML insights',
+        caption: 'Explainability: Making ML decisions transparent and trustworthy',
         isBlurred: true,
       },
     },
   ]
 
-  return <ProjectTimeline events={events} isLightBackground={isLightBackground} />
+  return (
+    <UnifiedTimeline
+      phases={phases}
+      header={{
+        tag: '// DESIGN_SPRINT_LOG',
+        title: 'Design Evolution',
+        subtitle: 'Four phases that transformed a black-box script into a guided Glass Box wizard.'
+      }}
+      footer={{
+        tag: 'CURRENT_STATE:',
+        body: 'ML Functions redesign shipped in WebFOCUS 9.3. The "Glass Box" approach is now the standard for all ML interfaces in the platform.'
+      }}
+      accentColor="teal"
+    />
+  )
 }
-

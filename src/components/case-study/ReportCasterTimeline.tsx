@@ -1,85 +1,109 @@
 'use client'
 
-import ProjectTimeline from './ProjectTimeline'
+import UnifiedTimeline from './UnifiedTimeline'
 
 interface ReportCasterTimelineProps {
   isLightBackground?: boolean
 }
 
 export default function ReportCasterTimeline({ isLightBackground = false }: ReportCasterTimelineProps) {
-  const events = [
+  const phases = [
     {
-      id: 'week-1',
-      label: 'W1',
-      title: 'Taking Ownership',
-      description: 'One week into joining, volunteered for the legacy project no one else wanted. Given ownership immediately.',
-      type: 'standard' as const,
+      id: 'phase-01',
+      phase: '01',
+      title: 'TAKING_OWNERSHIP',
+      body: 'One week into joining, volunteered for the legacy project no one else wanted. Given full ownership of a 50-year-old system with zero documentation.',
+      status: 'COMPLETED' as const,
     },
     {
-      id: 'research',
-      label: 'M1-3',
-      title: 'Learning the Undocumented System',
-      description: 'Took hundreds of screenshots, mapped workflows, interviewed support team, customer reps, and the one engineer who built it in the 80s. Created comprehensive mind maps.',
-      type: 'standard' as const,
-      evidenceImage: {
-        src: '/images/case-study/ReportCaster/System Map - Detail (crop).png',
+      id: 'phase-02',
+      phase: '02',
+      title: 'SYSTEM_ARCHAEOLOGY',
+      body: 'Took hundreds of screenshots, mapped workflows, interviewed support team, customer reps, and the one engineer who built it. Created comprehensive mind maps and became the first to document the entire ecosystem.',
+      status: 'COMPLETED' as const,
+      image: {
+        src: '/images/case-study/ReportCaster/ReportCaster Basic Map Workflow.png',
         alt: 'Mind Map of ReportCaster System',
+        caption: 'System mapping: Documenting the undocumented',
         isBlurred: true,
       },
     },
     {
-      id: 'discovery',
-      label: 'M3',
-      title: 'The Realization',
-      description: 'Discovered ReportCaster wasn\'t a feature—it was a product with 5 independent subsystems: Scheduling, Distribution Lists, Access Lists, Explorer, and Admin.',
-      type: 'milestone' as const,
+      id: 'phase-03',
+      phase: '03',
+      title: 'DISCOVERY_REALIZATION',
+      body: 'Discovered ReportCaster wasn\'t a feature—it was a product with 5 independent subsystems: Scheduling, Distribution Lists, Access Lists, Explorer, and Admin.',
+      status: 'COMPLETED' as const,
     },
     {
-      id: 'v1',
-      label: 'V1',
-      title: 'Version 1: Independent Product',
-      description: 'Designed as standalone product (like Designer, Data Flow). Unified all 5 subsystems in one place. This aligned with industry standards—complex scheduling tools like Control-M and Tableau Prep operate as independent apps.',
-      details: 'Rejected: "Leadership wants workflows centralized in the hub."',
-      type: 'pivot' as const,
-      evidenceImage: {
-        src: '/images/case-study/ReportCaster/version-iterations/v1-concept.png',
-        alt: 'Version 1 Rejected Concept',
+      id: 'phase-04',
+      phase: '04',
+      title: 'V1_INDEPENDENT_PRODUCT',
+      body: 'Designed as standalone product (like Designer, Data Flow). Unified all 5 subsystems in one place. Aligned with industry standards—complex scheduling tools like Control-M and Tableau Prep operate as independent apps.',
+      status: 'REJECTED' as const,
+      image: {
+        src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - Home.png',
+        alt: 'Version 1 - Independent Product Concept',
+        caption: 'V1 Rejected: Leadership wanted workflows centralized in the hub',
+        isBlurred: true,
       },
     },
     {
-      id: 'v2',
-      label: 'V2',
-      title: 'Version 2: Plugin Integration',
-      description: 'Brought RC into hub as a plugin with fully integrated navigation. This preserved feature parity while embedding in the platform ecosystem.',
-      details: 'Rejected: "Too much engineering effort for this release cycle."',
-      type: 'pivot' as const,
-      evidenceImage: {
-        src: '/images/case-study/ReportCaster/version-iterations/v2-concept.png',
-        alt: 'Version 2 Rejected Concept',
+      id: 'phase-05',
+      phase: '05',
+      title: 'V2_PLUGIN_INTEGRATION',
+      body: 'Brought RC into hub as a plugin with fully integrated navigation. Preserved feature parity while embedding in the platform ecosystem.',
+      status: 'REJECTED' as const,
+      image: {
+        src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Home - Create new schedule.png',
+        alt: 'Version 2 - Plugin Integration Concept',
+        caption: 'V2 Rejected: Too much engineering effort for release cycle',
+        isBlurred: true,
       },
     },
     {
-      id: 'v3',
-      label: 'V3',
-      title: 'Version 3: The Breakthrough',
-      description: 'Designed WITH platform patterns: Modal creation from + menu, Explorer in Home view, Admin in Management Center. Aligned with architecture, constraints, and scalability.',
-      type: 'milestone' as const,
+      id: 'phase-06',
+      phase: '06',
+      title: 'V3_PLATFORM_NATIVE',
+      body: 'Designed WITH platform patterns: Modal creation from + menu, Explorer in Home view, Admin in Management Center. Aligned with architecture, constraints, and scalability.',
+      status: 'COMPLETED' as const,
+      isCriticalPivot: true,
+      image: {
+        src: '/images/case-study/ReportCaster/Initiating ReportCaster from the HUB.png',
+        alt: 'Version 3 - Platform Native Design',
+        caption: 'V3 Breakthrough: Modal-based creation from + menu',
+        isBlurred: true,
+      },
     },
     {
-      id: 'onboarding',
-      label: 'M6-9',
-      title: 'Team Onboarding & Alignment',
-      description: 'Onboarded lead architect, lead engineer, full engineering squad, PM, QA, Documentation, SMEs, Support. Ran dozens of demos, translated tribal knowledge into UX rationale.',
-      type: 'standard' as const,
+      id: 'phase-07',
+      phase: '07',
+      title: 'TEAM_ONBOARDING',
+      body: 'Onboarded lead architect, lead engineer, full engineering squad, PM, QA, Documentation, SMEs, Support. Ran dozens of demos, translated tribal knowledge into UX rationale.',
+      status: 'COMPLETED' as const,
     },
     {
-      id: 'shipping',
-      label: 'M12',
-      title: 'Shipping Impact',
-      description: '4-6 clicks → 1 click. Multi-tab workflows → single contextual workflow. Support tickets dropped. Customer praised redesign in Virtual User Group session.',
-      type: 'milestone' as const,
+      id: 'phase-08',
+      phase: '08',
+      title: 'SHIPPING_IMPACT',
+      body: '44-56% fewer clicks. Multi-tab workflows eliminated entirely. Support tickets dropped. Customers praised redesign in Virtual User Group session.',
+      status: 'COMPLETED' as const,
     },
   ]
 
-  return <ProjectTimeline events={events} isLightBackground={isLightBackground} />
+  return (
+    <UnifiedTimeline
+      phases={phases}
+      header={{
+        tag: '// PROJECT_EVOLUTION',
+        title: 'Project Timeline',
+        subtitle: 'From volunteer ownership to shipped product—8 phases of legacy modernization.'
+      }}
+      footer={{
+        tag: 'CURRENT_STATE:',
+        body: 'ReportCaster redesign shipped in WebFOCUS 9.3, impacting millions of users daily across enterprise deployments.'
+      }}
+      accentColor="amber"
+    />
+  )
 }

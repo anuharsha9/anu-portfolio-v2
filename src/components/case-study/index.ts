@@ -42,8 +42,10 @@ export { default as SectionNav } from './SectionNav'
 
 // Timeline
 export { default as ProjectTimeline } from './ProjectTimeline'
+export { default as UnifiedTimeline } from './UnifiedTimeline'
 export { default as ReportCasterTimeline } from './ReportCasterTimeline'
 export { default as MLFunctionsTimeline } from './MLFunctionsTimeline'
+export { default as IQPluginTimeline } from './IQPluginTimeline'
 
 // Visuals & Media
 export { default as ImageLightbox } from './ImageLightbox'
