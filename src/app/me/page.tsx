@@ -280,7 +280,7 @@ export default function AboutPage() {
                 The Hybrid Stack.
               </h2>
               <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
-                13 Years of Design Depth. <strong className="text-purple-600">30 Days of High-Velocity Engineering.</strong>
+                13 Years of Design Depth. <strong className="text-purple-600">30 Days of AI-Powered Building.</strong>
               </p>
             </div>
 
@@ -367,16 +367,21 @@ export default function AboutPage() {
                 </div>
 
                 <span className="font-mono text-purple-600 text-xs uppercase tracking-widest block mb-6">
-                  // VELOCITY_LAYER: AI_ENGINEERING
+                  // VELOCITY_LAYER: AI_ORCHESTRATION
                 </span>
+
+                {/* Foundation Note */}
+                <p className="text-slate-500 text-xs mb-4 font-mono">
+                  Foundation: HTML/CSS
+                </p>
 
                 {/* The Stack List */}
                 <ul className="space-y-4 mb-6">
                   {[
-                    { name: 'React', via: 'via Cursor' },
-                    { name: 'Next.js', via: 'via Vercel' },
-                    { name: 'Tailwind CSS', via: 'via Prompting' },
-                    { name: 'AI Agents', via: 'The Orchestrator' },
+                    { name: 'Cursor AI', via: 'Primary IDE' },
+                    { name: 'Claude / GPT', via: 'Pair Programming' },
+                    { name: 'Vercel', via: 'Deploy Pipeline' },
+                    { name: 'Prompt Engineering', via: 'The Skill' },
                   ].map((item, i) => (
                     <motion.li
                       key={item.name}
@@ -401,12 +406,12 @@ export default function AboutPage() {
                 {/* The Sprint Context */}
                 <div className="space-y-4 relative z-10">
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    After a career inflection point, I went all-in. In 30 days, I moved from &ldquo;Static Mocks&rdquo; to &ldquo;Shipping to Vercel.&rdquo;
+                    I don&apos;t write code—I <strong className="text-slate-800">orchestrate AI to build it</strong>. In 30 days, I went from static mocks to shipping this portfolio to production.
                   </p>
                   
                   {/* The Outcome - Empathy */}
                   <p className="text-slate-700 text-sm leading-relaxed">
-                    The biggest gain wasn&apos;t just React knowledge—it was <strong className="text-purple-600">Engineering Empathy</strong>. I now feel the &ldquo;build cost&rdquo; of every pixel I design, making me a better partner to dev teams.
+                    The gain? <strong className="text-purple-600">Engineering Empathy</strong>. I now understand the &ldquo;build cost&rdquo; of every design decision, making me a sharper partner to dev teams.
                   </p>
                 </div>
               </motion.div>
