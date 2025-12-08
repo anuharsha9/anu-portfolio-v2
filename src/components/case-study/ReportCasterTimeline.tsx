@@ -12,7 +12,7 @@ export default function ReportCasterTimeline({ isLightBackground = false }: Repo
       id: 'phase-01',
       phase: '01',
       title: 'TAKING_OWNERSHIP',
-      body: 'One week into joining, volunteered for the legacy project no one else wanted. Given full ownership of a 50-year-old system with zero documentation.',
+      body: 'Took ownership of a deferred legacy project. Given full ownership of a 50-year-old system with zero documentation.',
       status: 'COMPLETED' as const,
     },
     {

@@ -3,7 +3,7 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const reportcasterCaseStudy: CaseStudyData = {
   slug: 'reportcaster',
   heroTitle: 'REPORTCASTER',
-  heroSubheading: 'Rebuilding a legacy product and rebuilding myself',
+  heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
   heroSubtitle:
     'A journey of taking on a 50-year-old system driven by flooding customer requests for modernization and turning it into clarity, structure, and a scalable future.',
   coverImage: {
@@ -33,7 +33,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'Took full ownership one week into joining—delivered Principal-level impact autonomously on a 50-year-old legacy system. First to document the complete end-to-end ecosystem, turning tribal knowledge into a single source of truth. Reverse-engineered 5 undocumented subsystems and unified them into one coherent architecture. Collaborated with Directors of Design, Engineering, and Product on strategic decisions. Onboarded 2 designers for shipping and remained the knowledge hub for all RC decisions.',
+      'First to document the complete ecosystem. Reverse-engineered 5 undocumented subsystems into one architecture. Collaborated with Directors on strategy. Onboarded 2 designers and remained the knowledge hub.',
     scopeOfPractice: [
       {
         tag: 'SYSTEM_AUTHORITY',
@@ -75,7 +75,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     star: {
       situation: '50-year-old scheduler. 20M+ weekly schedules. Five fragmented subsystems, no documentation, modernization requests flooding in.',
       task: 'Modernize without breaking mission-critical workflows.',
-      action: 'Owned end-to-end one week in. Reverse-engineered undocumented rules. Unified five subsystems into one architecture. Delivered modal-based creation model.',
+      action: 'Owned end-to-end. Reverse-engineered undocumented rules. Unified five subsystems into one architecture. Delivered modal-based creation model.',
       result: '44–56% fewer clicks. Multi-tab sprawl eliminated. Shipped in WebFOCUS 9.3.',
     },
     technologies: [
@@ -169,7 +169,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Volunteered for a deferred 50-year-old legacy system one week into joining. Built structure from scratch with only sandbox access and tribal knowledge.',
+      summary: 'Took ownership of a deferred 50-year-old legacy system. Built structure from scratch with only sandbox access and tribal knowledge.',
       // Note: Body and images removed - replaced by SystemArchaeology component for visual impact
       body: '',
     },

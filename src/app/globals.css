@@ -436,7 +436,7 @@
   /* CSS animation removed - set dynamically in HeroBrain.tsx */
 }
 
-/* Background gears: fade in with rotation, then very slow continuous rotation */
+/* Background gears: full opacity, very slow continuous rotation */
 #brain-gears #gears-background [id^="bg-gear-"],
 #brain-gears #gears-background g[id^="bg-gear-"],
 #brain-gears #gears-background [id^="gear-base"],
@@ -445,7 +445,7 @@
 #brain-gears-copy #gears-background g[id^="bg-gear-"] {
   transform-origin: center;
   transform-box: fill-box;
-  opacity: 0;
+  opacity: 1;
   will-change: transform, opacity;
   backface-visibility: hidden;
   contain: layout style paint;
@@ -488,7 +488,7 @@
 }
 
 /* Background gears: fade in with rotation (2s), then very slow continuous rotation */
-/* Background gears have 50% opacity (half of main gears) */
+/* Background gears at full opacity */
 @keyframes gear-fade-in-bg {
   0% {
     opacity: 0;
@@ -496,7 +496,7 @@
   }
 
   100% {
-    opacity: 0.5;
+    opacity: 1;
     transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
   }
 }

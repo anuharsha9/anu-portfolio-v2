@@ -33,7 +33,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
     myRole:
-      'I owned everything. Designed NLQ. Designed Insights. Designed the IQ Hub that unified them. Made all three responsive. Ensured every pattern matched. PM had the idea; I built the reality.',
+      'Owned all three workflows: NLQ, Insights, and the IQ Hub. Made them responsive. Ensured pattern parity. PM had the idea—I built it.',
     scopeOfPractice: [
       {
         tag: 'FULL_OWNERSHIP',

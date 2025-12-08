@@ -73,7 +73,7 @@ export const reportcasterResearchApproach: ResearchApproachData = {
 
 export const mlFunctionsResearchApproach: ResearchApproachData = {
   sectionTag: 'LEARNING_CURVE',
-  title: 'From Zero ML Knowledge to Trusted Design Lead',
+  title: 'Building ML Fluency to Lead Design',
   subtitle: 'How I learned an entirely new domain while designing, becoming the bridge between data scientists and users.',
   constraint: {
     type: 'warning',

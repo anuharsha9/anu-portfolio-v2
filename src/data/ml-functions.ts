@@ -34,13 +34,13 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
-      'Self-learned ML from scratch—zero domain knowledge to leading the UX vision in weeks. Owned end-to-end redesign from ambiguity to production-ready 4-step guided workflow (launching 2026). Led weekly "UX + ML" meetings with the Principal Data Scientist, bridging technical complexity with user needs. Designed the confusion matrix that the DS called "the best screen in the entire UX revamp." Collaborated cross-functionally with product, engineering, and data science to ensure feasibility while maintaining accessibility.',
+      'Owned end-to-end redesign: ambiguity to production-ready 4-step workflow. Led weekly syncs with the Principal Data Scientist. Designed the confusion matrix he called "the best screen in the entire UX revamp."',
     scopeOfPractice: [
       {
         tag: 'DOMAIN_MASTERY',
         tagColor: 'blue',
-        headline: 'ML Self-Education',
-        body: '**Zero ML knowledge → MIT certification**. Embedded weekly with data scientists. Fluent enough to challenge technical assumptions.',
+        headline: 'ML Fluency',
+        body: '**MIT certified in ML Product Design**. Embedded weekly with data scientists. Fluent enough to challenge technical assumptions.',
         icon: 'architect',
       },
       {
@@ -296,7 +296,7 @@ The patterns I developed here—structured flows, inline teaching, right-click e
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Zero ML knowledge. MIT certification, weekly DS embedding, AI tools. Built context before designing.',
+        description: 'MIT certification in ML Product Design. Weekly DS embedding. Built deep context before designing.',
         systemLogic: "if (ml_knowledge === 0) { learn(courses, experts, AI); }",
       },
       {
@@ -357,7 +357,7 @@ The patterns I developed—structured guided flows, progressive disclosure, righ
 Key insight: accessibility and power aren't opposites. They're complementary when designed together from the start.`,
     keyPoints: [
       'Transformed expert-only ML workflows into guided, accessible experiences — enabling non-technical users to train models within minutes',
-      'Learned ML domain while designing, becoming trusted design leader making Principal-level decisions',
+      'Became the trusted design leader for ML—owning vision, strategy, and cross-functional alignment',
       'Patterns became reusable — structured guided flows, progressive disclosure, and right-click entry directly shaped IQ Plugin design',
       'Proved accessibility and power are complementary — the dual-experience approach balanced simplicity with expert flexibility',
     ],
