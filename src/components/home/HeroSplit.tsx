@@ -456,17 +456,6 @@ export default function HeroSplit() {
                   />
                 </motion.div>
 
-                {/* Floating Caption */}
-                <motion.div
-                  className="absolute bottom-4 right-4 md:bottom-8 md:right-8 text-right"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <span className="font-mono text-slate-400 text-xs md:text-sm tracking-wide italic">
-                    Visualizing my mental model
-                  </span>
-                </motion.div>
               </div>
             </div>
           </div>
