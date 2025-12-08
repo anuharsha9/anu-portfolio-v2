@@ -144,7 +144,7 @@ export default function AboutPage() {
                       </span>
                     </div>
                     <span className="font-mono text-emerald-600 text-xs tracking-widest">
-                      [20s INTRO]
+                      [53s INTRO]
                     </span>
                   </div>
 
