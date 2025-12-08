@@ -259,263 +259,165 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 3 — THE HYBRID STACK (30-Day Sprint Story) */}
-      <MotionSection id="toolkit" className="bg-slate-50 py-24 border-y border-slate-200">
+      {/* SECTION 3 — CAPABILITIES (Stack + Writing Combined) */}
+      <MotionSection id="toolkit" className="bg-slate-50 py-16 md:py-20 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-12"
           >
-            {/* Section Header - The Contrast */}
-            <div className="text-center space-y-4 max-w-3xl mx-auto">
-              <div className="flex items-center gap-4 justify-center">
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
-                  03
-                </span>
-                <div className="h-px flex-1 bg-slate-200 max-w-xs"></div>
-                <div className="h-px w-12 bg-[#0BA2B5]"></div>
-              </div>
-              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-                The Hybrid Stack.
-              </h2>
-              <p className="text-slate-600 text-lg md:text-xl leading-relaxed">
-                13 Years of Design Depth. <strong className="text-purple-600">30 Days of AI-Powered Building.</strong>
-              </p>
-            </div>
-
-            {/* 3-Column Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Two Column Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
               
-              {/* Column 1: Strategy (Core Foundation) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0 }}
-                className="bg-white border border-slate-200 p-8 rounded-xl"
-              >
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-6">
-                  // CORE_COMPETENCY: STRATEGY
-                </span>
-                <ul className="space-y-4">
-                  {['Systems Thinking', 'User Research', 'Stakeholder Alignment', 'Workshop Facilitation', 'Journey Mapping'].map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.05 }}
-                      className="flex items-center gap-3 text-slate-700"
-                    >
-                      <span className="text-slate-300">→</span>
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Column 2: Design (Core Foundation) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white border border-slate-200 p-8 rounded-xl"
-              >
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-6">
-                  // CORE_COMPETENCY: DESIGN
-                </span>
-                <ul className="space-y-4">
-                  {['Figma (Advanced)', 'Design Systems', 'Prototyping', 'Accessibility', 'Motion Design'].map((item, i) => (
-                    <motion.li
-                      key={item}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.1 + i * 0.05 }}
-                      className="flex items-center gap-3 text-slate-700"
-                    >
-                      <span className="text-slate-300">→</span>
-                      {item}
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Column 3: AI Engineering (THE HERO - The Accelerator) */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white border-2 border-purple-500 shadow-xl p-8 rounded-xl relative overflow-hidden"
-              >
-                {/* Subtle Code Pattern Background */}
-                <div 
-                  className="absolute inset-0 opacity-[0.03] pointer-events-none"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239333ea' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                  }}
-                />
-
-                {/* Badge - Top Right */}
-                <div className="absolute top-4 right-4">
-                  <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-[10px] font-mono font-bold uppercase tracking-wider">
-                    Acquired in 30 Days
+              {/* LEFT COLUMN: The Stack */}
+              <div className="space-y-6">
+                <div>
+                  <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-2">
+                    // CAPABILITIES: HYBRID_STACK
                   </span>
+                  <h2 className="font-serif text-slate-900 text-2xl md:text-3xl mb-1">
+                    13 Years Design. <span className="text-purple-600">30 Days AI.</span>
+                  </h2>
                 </div>
 
-                <span className="font-mono text-purple-600 text-xs uppercase tracking-widest block mb-6">
-                  // VELOCITY_LAYER: AI_ORCHESTRATION
-                </span>
-
-                {/* Foundation Note */}
-                <p className="text-slate-500 text-xs mb-4 font-mono">
-                  Foundation: HTML/CSS
-                </p>
-
-                {/* The Stack List */}
-                <ul className="space-y-4 mb-6">
-                  {[
-                    { name: 'Cursor AI', via: 'Primary IDE' },
-                    { name: 'Claude / GPT / Gemini', via: 'Pair Programming' },
-                    { name: 'AWS S3 + CloudFront', via: 'Deploy Pipeline' },
-                    { name: 'Prompt Engineering', via: 'The Skill' },
-                  ].map((item, i) => (
-                    <motion.li
-                      key={item.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.2 + i * 0.05 }}
-                      className="flex items-center justify-between text-slate-700"
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className="text-purple-400">→</span>
-                        <span className="font-medium">{item.name}</span>
-                      </span>
-                      <span className="text-slate-400 text-xs font-mono">{item.via}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-
-                {/* Divider */}
-                <div className="border-t border-purple-100 my-6" />
-
-                {/* The Sprint Context */}
-                <div className="space-y-4 relative z-10">
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    I don&apos;t write code—I <strong className="text-slate-800">orchestrate AI to build it</strong>. In 30 days, I went from static mocks to shipping this portfolio to production.
-                  </p>
+                {/* Compact Skills Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Strategy */}
+                  <div className="bg-white border border-slate-200 rounded-lg p-4">
+                    <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider block mb-3">Strategy</span>
+                    <ul className="space-y-1.5 text-sm text-slate-600">
+                      {['Systems Thinking', 'User Research', 'Stakeholder Alignment'].map(item => (
+                        <li key={item} className="flex items-center gap-2">
+                          <span className="text-slate-300 text-xs">→</span>{item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                   
-                  {/* The Outcome - Empathy */}
-                  <p className="text-slate-700 text-sm leading-relaxed">
-                    The gain? <strong className="text-purple-600">Engineering Empathy</strong>. I now understand the &ldquo;build cost&rdquo; of every design decision, making me a sharper partner to dev teams.
+                  {/* Design */}
+                  <div className="bg-white border border-slate-200 rounded-lg p-4">
+                    <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider block mb-3">Design</span>
+                    <ul className="space-y-1.5 text-sm text-slate-600">
+                      {['Figma (Advanced)', 'Design Systems', 'Prototyping'].map(item => (
+                        <li key={item} className="flex items-center gap-2">
+                          <span className="text-slate-300 text-xs">→</span>{item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* AI Orchestration - Hero Card */}
+                <div className="bg-white border-2 border-purple-500 rounded-xl p-5 relative overflow-hidden">
+                  <div className="absolute top-3 right-3">
+                    <span className="text-[9px] font-mono font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      30 Days
+                    </span>
+                  </div>
+                  
+                  <span className="font-mono text-purple-600 text-[10px] uppercase tracking-widest block mb-3">
+                    AI_ORCHESTRATION
+                  </span>
+                  
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm mb-4">
+                    {[
+                      { name: 'Cursor AI', note: 'IDE' },
+                      { name: 'Claude/GPT/Gemini', note: 'Pair' },
+                      { name: 'AWS S3+CloudFront', note: 'Deploy' },
+                      { name: 'Prompt Engineering', note: 'Skill' },
+                    ].map(item => (
+                      <div key={item.name} className="flex items-center justify-between">
+                        <span className="text-slate-700">{item.name}</span>
+                        <span className="text-slate-400 text-[10px] font-mono">{item.note}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <p className="text-slate-600 text-xs leading-relaxed border-t border-purple-100 pt-3">
+                    I don&apos;t write code—I orchestrate AI to build it. The gain? <strong className="text-purple-600">Engineering Empathy</strong>.
                   </p>
                 </div>
-              </motion.div>
-
-            </div>
-          </motion.div>
-        </div>
-      </MotionSection>
-
-      {/* SECTION 3.5 — DESIGN WRITING */}
-      <MotionSection id="writing" className="bg-slate-50 py-16 md:py-20 border-y border-slate-200">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-8"
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-2">
-                  // OUTPUT: PUBLISHED_THOUGHTS
-                </span>
-                <h2 className="font-serif text-slate-900 text-2xl md:text-3xl">
-                  Design Writing
-                </h2>
               </div>
-              <a
-                href="https://medium.com/@anu.anuja"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-2 text-slate-500 hover:text-[#0BA2B5] transition-colors text-sm font-medium"
-              >
-                <span>All on Medium</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
 
-            {/* Articles Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                {
-                  title: "The Secret Behind Better BI: Who's Your Business User?",
-                  topic: 'UX_RESEARCH',
-                  href: 'https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/',
-                  source: 'ibi Community'
-                },
-                {
-                  title: 'Enhancing User Experience in WebFOCUS DSML',
-                  topic: 'AI_ML_UX',
-                  href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
-                  source: 'ibi Community'
-                },
-              ].map((article, index) => (
-                <motion.a
-                  key={article.title}
-                  href={article.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="group bg-white border border-slate-200 rounded-xl p-5 hover:border-[#0BA2B5]/40 hover:shadow-md transition-all"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <span className="font-mono text-[10px] text-[#0BA2B5] uppercase tracking-wider block mb-2">
-                        {article.topic}
-                      </span>
-                      <h3 className="font-medium text-slate-900 group-hover:text-[#0BA2B5] transition-colors leading-snug mb-2">
-                        {article.title}
-                      </h3>
-                      <span className="text-slate-400 text-xs">
-                        {article.source}
-                      </span>
-                    </div>
-                    <svg className="w-4 h-4 text-slate-300 group-hover:text-[#0BA2B5] transition-colors flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* RIGHT COLUMN: Writing */}
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-2">
+                      // OUTPUT: PUBLISHED_THOUGHTS
+                    </span>
+                    <h2 className="font-serif text-slate-900 text-2xl md:text-3xl">
+                      Design Writing
+                    </h2>
+                  </div>
+                  <a
+                    href="https://medium.com/@anu.anuja"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden sm:inline-flex items-center gap-1.5 text-slate-400 hover:text-[#0BA2B5] transition-colors text-xs font-mono"
+                  >
+                    Medium
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
-                  </div>
-                </motion.a>
-              ))}
-            </div>
+                  </a>
+                </div>
 
-            {/* Mobile Medium Link */}
-            <div className="sm:hidden text-center">
-              <a
-                href="https://medium.com/@anu.anuja"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] font-medium text-sm"
-              >
-                <span>View all on Medium</span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+                {/* Articles */}
+                <div className="space-y-3">
+                  {[
+                    {
+                      title: "The Secret Behind Better BI: Who's Your Business User?",
+                      topic: 'UX_RESEARCH',
+                      href: 'https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/',
+                    },
+                    {
+                      title: 'Enhancing User Experience in WebFOCUS DSML',
+                      topic: 'AI_ML_UX',
+                      href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
+                    },
+                  ].map((article) => (
+                    <a
+                      key={article.title}
+                      href={article.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block bg-white border border-slate-200 rounded-lg p-4 hover:border-[#0BA2B5]/40 hover:shadow-sm transition-all"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <span className="font-mono text-[9px] text-[#0BA2B5] uppercase tracking-wider block mb-1.5">
+                            {article.topic}
+                          </span>
+                          <h3 className="text-sm font-medium text-slate-900 group-hover:text-[#0BA2B5] transition-colors leading-snug">
+                            {article.title}
+                          </h3>
+                        </div>
+                        <svg className="w-3.5 h-3.5 text-slate-300 group-hover:text-[#0BA2B5] transition-colors flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Mobile Medium Link */}
+                <div className="sm:hidden">
+                  <a
+                    href="https://medium.com/@anu.anuja"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[#0BA2B5] font-medium text-sm"
+                  >
+                    View all on Medium
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
