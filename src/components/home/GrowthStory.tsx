@@ -27,24 +27,24 @@ export default function GrowthStory() {
             {/* Left Column */}
             <div className="text-slate-600 text-lg leading-relaxed">
               <p>
-                I joined this team and quickly realized I was out of my depth. My only option was{' '}
-                <strong className="text-slate-900">radical curiosity</strong>—talking to everyone, 
-                learning obsessively, earning trust through understanding.
+                When I joined this team, I realized I was out of my depth. My first instinct?{' '}
+                <strong className="text-slate-900">Radical curiosity.</strong> Talking to everyone, 
+                learning obsessively, earning trust in the process.
               </p>
               <p className="mt-4">
-                That curiosity earned me everything: autonomy, respect, and immense growth.
+                That earned me a seat at the table. My voice mattered. My opinions shaped decisions.
               </p>
             </div>
             
             {/* Right Column */}
             <div className="text-slate-600 text-lg leading-relaxed">
               <p>
-                My Director of Design became my anchor. Daily 1:1s. He taught me to lead, to present, 
-                to believe in myself. He called me a <strong className="text-slate-900">UX Leader</strong>{' '}
-                before I could call myself one.
+                My Director of Design became my anchor. Daily mentorship. He taught me to lead, 
+                to present, to carry myself with confidence. He saw something in me I hadn't seen yet. 
+                He called me a <strong className="text-slate-900">UX Leader</strong>—before I realized I was one.
               </p>
               <p className="mt-4 text-slate-900 font-medium">
-                Today, I mentor others because he mentored me.
+                His investment in me is why I mentor others today. That kind of transformation? Everyone deserves to experience it.
               </p>
             </div>
           </div>
