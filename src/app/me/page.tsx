@@ -167,21 +167,19 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 2 — THE D.E.S.I.G.N. FRAMEWORK (Dark Mode Kernel) */}
-      <MotionSection id="design-framework" className="bg-slate-950 py-16 md:py-24 lg:py-32 text-slate-300 relative overflow-hidden">
-        {/* Background Grid Pattern */}
+      {/* SECTION 2 — THE D.E.S.I.G.N. FRAMEWORK (Light Mode) */}
+      <MotionSection id="design-framework" className="bg-white py-16 md:py-24 lg:py-32 border-y border-slate-200 relative overflow-hidden">
+        {/* Subtle Background Pattern */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)
             `,
-            backgroundSize: '50px 50px',
+            backgroundSize: '40px 40px',
           }}
         />
-        {/* Subtle Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
           <motion.div
@@ -193,13 +191,17 @@ export default function AboutPage() {
           >
             {/* Section Header */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
-              <span className="font-mono text-emerald-500 text-xs tracking-widest uppercase block">
-                // OPERATING_SYSTEM: KERNEL_LOGIC
-              </span>
-              <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
-                The Framework.
+              <div className="flex items-center gap-4 justify-center">
+                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
+                  02
+                </span>
+                <div className="h-px flex-1 bg-slate-200 max-w-xs"></div>
+                <div className="h-px w-12 bg-[#0BA2B5]"></div>
+              </div>
+              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
+                The D.E.S.I.G.N. Framework
               </h2>
-              <p className="text-slate-400 text-base md:text-lg leading-relaxed">
+              <p className="text-slate-500 text-base md:text-lg leading-relaxed">
                 My mental model for tackling complexity. Design decisions that survive engineering.
               </p>
             </div>
@@ -221,25 +223,25 @@ export default function AboutPage() {
                       delay: index * 0.1,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="group bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 hover:border-slate-600 transition-all duration-300"
+                    className="group bg-slate-50 border border-slate-200 rounded-xl p-6 md:p-8 hover:border-[#0BA2B5]/30 hover:shadow-lg transition-all duration-300"
                   >
                     {/* File Tab */}
-                    <span className="font-mono text-blue-400 text-xs block mb-4">
+                    <span className="font-mono text-[#0BA2B5] text-xs block mb-4">
                       {fileName}
                     </span>
 
                     {/* Title */}
-                    <h3 className="font-serif text-white text-xl mb-3 group-hover:text-emerald-400 transition-colors">
+                    <h3 className="font-serif text-slate-900 text-xl mb-3 group-hover:text-[#0BA2B5] transition-colors">
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
                       {item.mainText}
                     </p>
 
-                    {/* Code Block */}
-                    <div className="bg-slate-950/50 border border-slate-800/50 rounded-lg p-4 font-mono text-xs">
+                    {/* Code Block - Keep dark for contrast */}
+                    <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 font-mono text-xs">
                       <code className="text-slate-300">
                         <span className="text-purple-400">{'> '}</span>
                         <span dangerouslySetInnerHTML={{
