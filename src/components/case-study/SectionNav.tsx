@@ -141,9 +141,11 @@ export default function SectionNav({ sections }: SectionNavProps) {
           <div className="flex items-center justify-center gap-6 md:gap-8 px-4 md:px-8 h-full min-w-max max-w-[1200px] mx-auto">
             {sections.map((section) => {
               const isActive = activeSection === section.id
-              const firstWord = section.title.split(' ')[0]
-              const firstLetter = firstWord.charAt(0)
-              const restOfWord = firstWord.slice(1)
+              const rawFirstWord = section.title.split(' ')[0]
+              // Remove any trailing colon so nav shows DISCOVER not DISCOVER:
+              const cleanedWord = rawFirstWord.replace(/:$/, '')
+              const firstLetter = cleanedWord.charAt(0)
+              const restOfWord = cleanedWord.slice(1)
               
               return (
                 <button
