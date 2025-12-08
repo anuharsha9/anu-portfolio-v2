@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import BrainGears from '@/assets/brain-gears.svg'
 import VideoModal from '@/components/video/VideoModal'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import GearBottomSheet from '@/components/home/GearBottomSheet'
 import { GEAR_INSPECTOR, GearInspectorItem } from '@/data/gear-inspector'
 
 const GEAR_IDS = Object.keys(GEAR_INSPECTOR)
@@ -22,6 +23,8 @@ export default function HeroSplit() {
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [activeGear, setActiveGear] = useState<GearInspectorItem | null>(null)
   const [isCardHovered, setIsCardHovered] = useState(false)
+  const [showMobileSheet, setShowMobileSheet] = useState(false)
+  const [mobileGear, setMobileGear] = useState<GearInspectorItem | null>(null)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -293,32 +296,47 @@ export default function HeroSplit() {
             }
           }
 
-          // Mobile tap handler - toggle the gear inspector
+          // Mobile tap handler - open bottom sheet
           const handleTap = (e: Event) => {
             e.preventDefault()
             e.stopPropagation()
             
-            // Check if this gear is already active
-            const isCurrentlyActive = gearGroup.classList.contains('gear-main--active')
+            // Check if we're on mobile (no hover capability)
+            const isMobile = window.matchMedia('(max-width: 1023px)').matches
             
-            // Clear all active gears first
-            const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
-            allActiveGears.forEach((activeGear) => {
-              activeGear.classList.remove('gear-main--active')
-              activeGear.style.removeProperty('--gear-accent')
-            })
+            const gearData = GEAR_INSPECTOR[gearId]
+            if (!gearData) return
             
-            if (!isCurrentlyActive) {
-              // Activate this gear
+            if (isMobile) {
+              // Mobile: Open bottom sheet
+              setMobileGear(gearData)
+              setShowMobileSheet(true)
+              
+              // Visual feedback - highlight the tapped gear
+              const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
+              allActiveGears.forEach((ag) => {
+                ag.classList.remove('gear-main--active')
+                ag.style.removeProperty('--gear-accent')
+              })
               gearGroup.classList.add('gear-main--active')
-              const gearData = GEAR_INSPECTOR[gearId]
-              if (gearData) {
+              gearGroup.style.setProperty('--gear-accent', gearData.accentColor)
+            } else {
+              // Desktop: Toggle behavior (fallback for click)
+              const isCurrentlyActive = gearGroup.classList.contains('gear-main--active')
+              
+              const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
+              allActiveGears.forEach((ag) => {
+                ag.classList.remove('gear-main--active')
+                ag.style.removeProperty('--gear-accent')
+              })
+              
+              if (!isCurrentlyActive) {
+                gearGroup.classList.add('gear-main--active')
                 gearGroup.style.setProperty('--gear-accent', gearData.accentColor)
                 setActiveGear(gearData)
+              } else {
+                setActiveGear(null)
               }
-            } else {
-              // Deactivate - hide the card
-              setActiveGear(null)
             }
           }
 
@@ -480,7 +498,26 @@ export default function HeroSplit() {
                 </button>
               </div>
 
-              {/* GEAR INSPECTOR - The Magic Happens Here */}
+              {/* Mobile hint - tap the gears */}
+              <div className="pt-4 lg:hidden">
+                <motion.div
+                  className="flex items-center gap-3"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5 }}
+                >
+                  <div className="w-8 h-px bg-slate-600" />
+                  <motion.span 
+                    className="font-mono text-slate-400 text-xs tracking-wide"
+                    animate={{ opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 2.5, repeat: Infinity }}
+                  >
+                    Tap a gear to peek inside my brain →
+                  </motion.span>
+                </motion.div>
+              </div>
+
+              {/* GEAR INSPECTOR - Desktop Only */}
               <div className="pt-4 min-h-[160px] hidden lg:block">
                 <AnimatePresence mode="wait">
                   {!activeGear ? (
@@ -666,6 +703,26 @@ export default function HeroSplit() {
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
         videoSrc="/videos/portfolio-teaser.mp4"
+      />
+
+      {/* Mobile Bottom Sheet for Gear Inspector */}
+      <GearBottomSheet
+        gear={mobileGear}
+        isOpen={showMobileSheet}
+        onClose={() => {
+          setShowMobileSheet(false)
+          // Clear the active gear highlight after a short delay
+          setTimeout(() => {
+            const container = containerRef.current
+            if (container) {
+              const allActiveGears = container.querySelectorAll<SVGGElement>('.gear-main--active')
+              allActiveGears.forEach((ag) => {
+                ag.classList.remove('gear-main--active')
+                ag.style.removeProperty('--gear-accent')
+              })
+            }
+          }, 300)
+        }}
       />
     </>
   )
