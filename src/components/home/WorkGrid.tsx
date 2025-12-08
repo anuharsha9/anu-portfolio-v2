@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Lock, Youtube, ExternalLink } from 'lucide-react'
+import { ArrowRight, Lock, Youtube } from 'lucide-react'
 import { useState } from 'react'
 
 const caseStudies = [
@@ -15,8 +15,7 @@ const caseStudies = [
     metricLabel: 'fewer clicks',
     description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Integrated 5 legacy subsystems intelligently into the main product hub.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
-    accentColor: '#F59E0B', // Amber
-    accentBg: 'from-amber-500/20 to-amber-600/5',
+    fileName: 'legacy_scheduler_refactor.js',
     locked: false,
   },
   {
@@ -27,8 +26,7 @@ const caseStudies = [
     metricLabel: 'discoverability',
     description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Zero dead-end errors in testing.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
-    accentColor: '#0BA2B5', // Teal
-    accentBg: 'from-teal-500/20 to-teal-600/5',
+    fileName: 'ml_wizard_pipeline.py',
     locked: false,
   },
   {
@@ -38,9 +36,8 @@ const caseStudies = [
     metric: '1',
     metricLabel: 'unified hub',
     description: 'Unified 3 DSML tools into one browser extension with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
-    image: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
-    accentColor: '#8B5CF6', // Violet
-    accentBg: 'from-violet-500/20 to-violet-600/5',
+    image: '/images/case-study/iq-plugin/Final Look.png',
+    fileName: 'iq_hub_unified_view.tsx',
     locked: true,
   },
 ]
@@ -110,7 +107,7 @@ export default function WorkGrid() {
           </motion.div>
         </motion.div>
 
-        {/* Work Grid - 3 Equal Cards with Enhanced Visuals */}
+        {/* Work Grid - 3 Cards with Terminal Style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => (
             <motion.div
@@ -127,112 +124,88 @@ export default function WorkGrid() {
                 href={`/work/${study.slug}`}
                 className="block h-full"
               >
-                {/* Card Container with Accent Border on Hover */}
-                <div 
-                  className="relative bg-white rounded-2xl overflow-hidden h-full transition-all duration-500 hover:shadow-2xl"
-                  style={{
-                    boxShadow: hoveredIndex === index 
-                      ? `0 25px 50px -12px ${study.accentColor}30, 0 0 0 1px ${study.accentColor}40`
-                      : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)',
-                  }}
-                >
-                  {/* Image Container with Accent Gradient */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    {/* Background Pattern */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${study.accentBg}`} />
-                    
-                    {/* Main Image */}
-                    <div className="absolute inset-4 rounded-lg overflow-hidden shadow-xl border border-slate-200/50">
+                <div className="flex flex-col h-full">
+                  {/* Terminal Window */}
+                  <div 
+                    className="rounded-t-xl overflow-hidden border border-slate-200 bg-white transition-all duration-500"
+                    style={{
+                      boxShadow: hoveredIndex === index 
+                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+                        : '0 10px 40px -10px rgba(0, 0, 0, 0.1)',
+                    }}
+                  >
+                    {/* Terminal Header */}
+                    <div className="bg-slate-100 border-b border-slate-200 px-4 py-3 flex items-center gap-4">
+                      {/* Traffic Lights */}
+                      <div className="flex gap-2">
+                        <span className="w-3 h-3 rounded-full bg-[#FF5F57]"></span>
+                        <span className="w-3 h-3 rounded-full bg-[#FEBC2E]"></span>
+                        <span className="w-3 h-3 rounded-full bg-[#28C840]"></span>
+                      </div>
+                      {/* Filename */}
+                      <span className="font-mono text-xs text-slate-500 tracking-wide flex-grow text-center">
+                        {study.fileName}
+                      </span>
+                      {/* Spacer for centering */}
+                      <div className="w-12"></div>
+                    </div>
+
+                    {/* Image Area */}
+                    <div className="relative aspect-[4/3] bg-slate-50">
                       <Image
                         src={study.image}
                         alt={study.title}
                         fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                        className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
-                    </div>
-                    
-                    {/* Metric Badge - Floating */}
-                    <div className="absolute bottom-0 left-4 translate-y-1/2 z-10">
-                      <div 
-                        className="rounded-xl px-4 py-2.5 shadow-lg border"
-                        style={{ 
-                          backgroundColor: 'white',
-                          borderColor: `${study.accentColor}30`,
-                        }}
-                      >
-                        <div className="flex items-baseline gap-1.5">
-                          <span 
-                            className="font-mono text-2xl font-bold"
-                            style={{ color: study.accentColor }}
-                          >
-                            {study.metric}
-                          </span>
-                          <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
-                            {study.metricLabel}
-                          </span>
+                      
+                      {/* Locked Badge */}
+                      {study.locked && (
+                        <div className="absolute top-3 right-3">
+                          <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
+                            <Lock className="w-3.5 h-3.5 text-white" />
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
-
-                    {/* Locked Badge */}
-                    {study.locked && (
-                      <div className="absolute top-4 right-4">
-                        <div 
-                          className="backdrop-blur-sm rounded-full p-2.5 shadow-lg"
-                          style={{ backgroundColor: `${study.accentColor}20` }}
-                        >
-                          <Lock className="w-4 h-4" style={{ color: study.accentColor }} />
-                        </div>
-                      </div>
-                    )}
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6 pt-8">
+                  {/* Card Content */}
+                  <div className="bg-white border border-t-0 border-slate-200 rounded-b-xl p-5 flex-grow flex flex-col">
+                    {/* Metric Badge */}
+                    <div className="mb-4">
+                      <div className="inline-flex items-baseline gap-1.5 bg-slate-50 rounded-lg px-3 py-1.5 border border-slate-100">
+                        <span className="font-mono text-xl font-bold text-[var(--accent-teal)]">
+                          {study.metric}
+                        </span>
+                        <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
+                          {study.metricLabel}
+                        </span>
+                      </div>
+                    </div>
+
                     {/* Title Row */}
-                    <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-start justify-between mb-2">
                       <div>
-                        <h3 
-                          className="font-serif text-xl text-slate-900 transition-colors duration-300"
-                          style={{ color: hoveredIndex === index ? study.accentColor : undefined }}
-                        >
+                        <h3 className="font-serif text-lg text-slate-900 group-hover:text-[var(--accent-teal)] transition-colors">
                           {study.title}
                         </h3>
-                        <p className="font-mono text-xs text-slate-400 uppercase tracking-wider mt-1">
+                        <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">
                           {study.subtitle}
                         </p>
                       </div>
-                      <div 
-                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
-                        style={{ 
-                          backgroundColor: hoveredIndex === index ? `${study.accentColor}15` : 'transparent',
-                        }}
-                      >
-                        <ArrowRight 
-                          className="w-4 h-4 transition-all duration-300"
-                          style={{ 
-                            color: hoveredIndex === index ? study.accentColor : '#94a3b8',
-                            transform: hoveredIndex === index ? 'translateX(2px)' : 'translateX(0)',
-                          }}
-                        />
-                      </div>
+                      <ArrowRight 
+                        className={`w-4 h-4 text-slate-400 group-hover:text-[var(--accent-teal)] transition-all duration-300 flex-shrink-0 mt-1 ${
+                          hoveredIndex === index ? 'translate-x-1' : ''
+                        }`}
+                      />
                     </div>
 
                     {/* Description */}
-                    <p className="text-slate-600 text-sm leading-relaxed">
+                    <p className="text-slate-600 text-sm leading-relaxed flex-grow">
                       {study.description}
                     </p>
-
-                    {/* View Case Study Link */}
-                    <div className="mt-4 pt-4 border-t border-slate-100">
-                      <span 
-                        className="font-mono text-xs uppercase tracking-wider transition-colors duration-300"
-                        style={{ color: hoveredIndex === index ? study.accentColor : '#94a3b8' }}
-                      >
-                        View Case Study →
-                      </span>
-                    </div>
                   </div>
                 </div>
               </Link>
