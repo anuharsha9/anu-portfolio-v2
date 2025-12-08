@@ -143,7 +143,7 @@ Anuja has a remarkable ability to utilize practical design principles to effecti
     company: 'Cloud Software Group',
     relationship: 'Shay worked with me on several projects where my design made an impact.',
     category: 'customer',
-    shortQuote: 'She is a collaborative teammate, strong advocate for user research and great designer.',
+    shortQuote: 'She is a collaborative teammate, strong advocate for user research, and great designer. She impressed everyone with how quickly she grasped all aspects of a highly intricate system.',
     fullQuote: `I had the pleasure of working closely with Anuja Harsha Nimmagadda on a project to modernize the UI of a complex business intelligence product using the latest HTML standards. From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design. Beyond her technical and design talent, she's a collaborative, thoughtful teammate who makes every project better. I truly enjoyed working with her. She's the kind of UX leader any team would be lucky to have.`,
   },
 

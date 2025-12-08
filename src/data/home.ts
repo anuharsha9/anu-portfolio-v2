@@ -316,6 +316,13 @@ export const recommendations: Recommendation[] = [
     company: 'Kedazzle (EdTech)',
     relationship: 'I worked with Radhika for 3 years during my freelance period on her EdTech startup.',
   },
+  {
+    quote: 'She is a collaborative teammate, strong advocate for user research, and great designer. She impressed everyone with how quickly she grasped all aspects of a highly intricate system.',
+    name: 'Shay Bagwell',
+    role: 'Lead Customer Marketing Manager',
+    company: 'Cloud Software Group',
+    relationship: 'Shay worked with me on several projects where my design made an impact.',
+  },
 
   // ═══════════════════════════════════════════════════════════════
   // ADPLIST MENTORSHIP
