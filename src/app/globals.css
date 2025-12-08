@@ -679,28 +679,37 @@
   }
 }
 
-/* Dark theme: Boost line visibility */
-/* After invert filter, lines should be light - just boost opacity */
+/* Dark theme: Boost BACKGROUND line visibility (connecting lines between gears) */
+/* Colors are set BEFORE invert filter: dark → becomes light after invert */
 .gears-dark-theme #brain-gears #lines-background path,
 .gears-dark-theme #brain-gears-copy #lines-background path {
   opacity: 1 !important;
-  stroke-width: 2px !important;
+  stroke-width: 2.5px !important;
+  stroke: #1A1A1A !important; /* Dark = becomes BRIGHT after invert */
 }
 
-/* Dark theme: Make internal gear strokes/circles lighter */
-.gears-dark-theme #brain-gears [id^="gear-"] circle,
-.gears-dark-theme #brain-gears [id^="gear-"] ellipse,
-.gears-dark-theme #brain-gears-copy [id^="gear-"] circle,
-.gears-dark-theme #brain-gears-copy [id^="gear-"] ellipse {
-  stroke: rgba(255, 255, 255, 0.3) !important;
+/* Dark theme: Brighten the INTERNAL decorative lines/circles inside gears */
+/* These are the concentric circles and patterns within gear faces */
+/* Target all stroked elements within gears - the invert filter will make dark→light */
+.gears-dark-theme #brain-gears [id^="gear-base"] path:not([fill]),
+.gears-dark-theme #brain-gears [id^="gear-base"] circle:not([fill]),
+.gears-dark-theme #brain-gears [id^="gear-base"] ellipse:not([fill]),
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] path:not([fill]),
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] circle:not([fill]),
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] ellipse:not([fill]) {
+  stroke: #222222 !important; /* Dark = becomes BRIGHT (~#DDDDDD) after invert */
+  stroke-opacity: 1 !important;
 }
 
-.gears-dark-theme #brain-gears [id^="gear-base"] path[stroke],
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] path[stroke] {
-  stroke: rgba(255, 255, 255, 0.4) !important;
+/* Increase stroke width for better visibility */
+.gears-dark-theme #brain-gears [id^="gear-base"] path,
+.gears-dark-theme #brain-gears [id^="gear-base"] circle,
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] path,
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] circle {
+  stroke-width: 1.5px !important;
 }
 
-/* Ensure lines start invisible */
+/* Ensure lines start invisible but end bright */
 #brain-gears #lines-background path,
 #brain-gears-copy #lines-background path {
   opacity: 0;
