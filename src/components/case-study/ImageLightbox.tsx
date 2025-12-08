@@ -99,8 +99,13 @@ export default function ImageLightbox({
       document.body.style.width = ''
       document.body.style.overflow = ''
       wasLockedRef.current = false
-      // Restore scroll position after styles are cleared
-      window.scrollTo(0, scrollY)
+      // Use requestAnimationFrame to ensure DOM is ready before scrolling
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: scrollY,
+          behavior: 'instant'
+        })
+      })
     }
   }, [isOpen])
 

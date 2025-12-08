@@ -226,7 +226,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                         <div className="lg:w-[60%]">
                           {version.section.images && version.section.images.length > 0 && (
                             <div className={`grid gap-4 ${version.section.images.length > 1 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
-                              {version.section.images.slice(0, isSuccess ? 4 : 2).map((image, idx) => (
+                              {version.section.images.slice(0, 4).map((image, idx) => (
                                 <div 
                                   key={idx} 
                                   className="space-y-2 cursor-pointer group"
