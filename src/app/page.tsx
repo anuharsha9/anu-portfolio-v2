@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HeroSplit from '@/components/home/HeroSplit'
+import TransformationShowcase from '@/components/home/TransformationShowcase'
 import WorkGrid from '@/components/home/WorkGrid'
 import GrowthStory from '@/components/home/GrowthStory'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
@@ -41,7 +42,10 @@ export default function Home() {
       {/* 1. HERO - Who you are + Impact Proof Bar at bottom */}
       <HeroSplit />
 
-      {/* 2. WORK GRID - WebFOCUS context + 3 Case Studies */}
+      {/* 2. TRANSFORMATION SHOWCASE - The scroll-stopper */}
+      <TransformationShowcase />
+
+      {/* 3. WORK GRID - WebFOCUS context + 3 Case Studies */}
       <WorkGrid />
 
       {/* 3. GROWTH STORY - The Transformation (emotional hook) */}
