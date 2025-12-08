@@ -47,7 +47,7 @@ export const metadata: Metadata = {
       'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX. Transforming complex systems into intuitive experiences at scale.',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Anuja Harsha Nimmagadda - Principal UX Designer',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: 'Anuja Harsha Nimmagadda | Principal UX Designer',
     description:
       'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX.',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/og-image.png'],
     creator: '@anujaharsha', // Update with actual Twitter handle if available
   },
   robots: {
