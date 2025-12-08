@@ -35,28 +35,6 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
     setIsOpen(false)
   }, [pathname])
 
-  // Landing page section links - simplified navigation
-  const landingPageSections = [
-    { label: 'Case Studies', href: '/#work-overview' },
-    { label: 'Testimonials', href: '/#testimonials' },
-    { label: 'Work Archive', href: '/#work-archive' },
-  ]
-
-  // Me page section links - matches AboutMeSectionNav
-  const mePageSections = [
-    { label: 'Profile', href: '/me#profile' },
-    { label: 'Framework', href: '/me#design-framework' },
-    { label: 'Toolkit', href: '/me#toolkit' },
-    { label: 'Testimonials', href: '/me#social-proof' },
-    { label: 'Personal', href: '/me#outside-of-work' },
-  ]
-
-  // Check if we're on landing page
-  const isOnLandingPage = pathname === '/'
-
-  // Check if we're on me page
-  const isOnMePage = pathname === '/me' || pathname === '/me/'
-
   // Check if we're on a case study page and get sections
   const caseStudySections = useMemo(() => {
     if (!pathname?.startsWith('/work/')) return null
@@ -243,64 +221,22 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                   </a>
                 </div>
 
-                {/* Landing Page Sections */}
-                {isOnLandingPage && (
-                  <div>
-                    <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs uppercase tracking-wider mb-4 px-2`}>
-                      Sections
-                    </p>
-                    {landingPageSections.map((section) => (
-                      <Link
-                        key={section.href}
-                        href={section.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block px-6 py-3 rounded-lg text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                          isLight
-                            ? 'text-slate-700 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                            : 'text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                        }`}
-                      >
-                        {section.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                {/* Me Page Sections */}
-                {isOnMePage && (
-                  <div>
-                    <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs uppercase tracking-wider mb-4 px-2`}>
-                      Sections
-                    </p>
-                    {mePageSections.map((section) => (
-                      <Link
-                        key={section.href}
-                        href={section.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`block px-6 py-3 rounded-lg text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                          isLight
-                            ? 'text-slate-700 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                            : 'text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                        }`}
-                      >
-                        {section.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                {/* Case Study Sections */}
+                {/* Case Study Sections - only show on case study pages */}
                 {isOnCaseStudyPage && caseStudySections && (
                   <div>
-                    <p className="text-white/40 text-xs uppercase tracking-wider mb-4 px-2">
-                      Sections
+                    <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs uppercase tracking-wider mb-4 px-2`}>
+                      Case Study Sections
                     </p>
                     {caseStudySections.map((section) => (
                       <Link
                         key={section.href}
                         href={section.href}
                         onClick={() => setIsOpen(false)}
-                        className="block px-6 py-3 rounded-lg text-white/80 text-base hover:bg-white/10 hover:text-[var(--accent-teal)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                        className={`block px-6 py-3 rounded-lg text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                          isLight
+                            ? 'text-slate-700 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
+                            : 'text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
+                        }`}
                       >
                         {section.label}
                       </Link>
@@ -310,8 +246,8 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
               </nav>
 
               {/* Footer */}
-              <div className="p-6 border-t border-refined-dark flex-shrink-0">
-                <p className="text-white/40 text-xs text-center" suppressHydrationWarning>
+              <div className={`p-6 border-t flex-shrink-0 ${isLight ? 'border-slate-200' : 'border-refined-dark'}`}>
+                <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs text-center`} suppressHydrationWarning>
                   © {new Date().getFullYear()}
                 </p>
               </div>

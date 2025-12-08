@@ -447,13 +447,7 @@ export default function AboutPage() {
         />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-16"
-          >
+          <div className="space-y-16">
             {/* Section Header */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
               <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
@@ -671,20 +665,14 @@ export default function AboutPage() {
                 <span>Portfolio Source</span>
               </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </MotionSection>
 
       {/* SECTION 5 — LIFE OUTSIDE THE TERMINAL */}
       <MotionSection id="outside-of-work" className="bg-white py-24 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-12"
-          >
+          <div className="space-y-12">
             {/* Section Header */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
               <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
@@ -790,7 +778,7 @@ export default function AboutPage() {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </MotionSection>
 
@@ -809,13 +797,7 @@ export default function AboutPage() {
         </div>
 
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center space-y-8"
-          >
+          <div className="text-center space-y-8">
             <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
               Let&apos;s build something meaningful together.
             </h2>
@@ -839,7 +821,7 @@ export default function AboutPage() {
             <p className="text-slate-500 text-sm pt-8">
               Designed in Figma. Built with Cursor. © 2025
             </p>
-          </motion.div>
+          </div>
         </div>
       </MotionSection>
     </main>
