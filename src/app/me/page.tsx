@@ -366,17 +366,21 @@ export default function AboutPage() {
                 </div>
 
                 {/* Articles */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {[
                     {
                       title: "The Secret Behind Better BI: Who's Your Business User?",
                       topic: 'UX_RESEARCH',
                       href: 'https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/',
+                      excerpt: "Most BI tools are built for analysts—but the real opportunity is the business user who just needs answers. I break down how understanding this distinction changes everything about how you design data products.",
+                      readTime: '5 min read'
                     },
                     {
                       title: 'Enhancing User Experience in WebFOCUS DSML',
                       topic: 'AI_ML_UX',
                       href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
+                      excerpt: "A deep dive into how we redesigned the ML workflow experience in WebFOCUS—from fragmented tools to a guided, step-based system that non-technical users can actually navigate.",
+                      readTime: '8 min read'
                     },
                   ].map((article) => (
                     <a
@@ -384,21 +388,28 @@ export default function AboutPage() {
                       href={article.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group block bg-white border border-slate-200 rounded-lg p-4 hover:border-[#0BA2B5]/40 hover:shadow-sm transition-all"
+                      className="group block bg-white border border-slate-200 rounded-xl p-5 hover:border-[#0BA2B5]/40 hover:shadow-md transition-all"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <span className="font-mono text-[9px] text-[#0BA2B5] uppercase tracking-wider block mb-1.5">
-                            {article.topic}
-                          </span>
-                          <h3 className="text-sm font-medium text-slate-900 group-hover:text-[#0BA2B5] transition-colors leading-snug">
-                            {article.title}
-                          </h3>
-                        </div>
-                        <svg className="w-3.5 h-3.5 text-slate-300 group-hover:text-[#0BA2B5] transition-colors flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <span className="font-mono text-[9px] text-[#0BA2B5] uppercase tracking-wider">
+                          {article.topic}
+                        </span>
+                        <span className="text-slate-400 text-[10px] font-mono">
+                          {article.readTime}
+                        </span>
                       </div>
+                      <h3 className="text-base font-medium text-slate-900 group-hover:text-[#0BA2B5] transition-colors leading-snug mb-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-3">
+                        {article.excerpt}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-[#0BA2B5] text-xs font-medium group-hover:gap-2 transition-all">
+                        Read article
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
                     </a>
                   ))}
                 </div>

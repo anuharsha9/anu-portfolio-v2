@@ -217,37 +217,37 @@ export default function CaseStudyHero({
                 ) : (
                   /* Original Style */
                   <>
-                    {/* Shadow glow */}
-                    <div
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
-                      style={{
-                        background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
-                        filter: 'blur(60px)',
-                        width: '85%',
-                        height: '85%',
-                      }}
-                    />
+                {/* Shadow glow */}
+                <div
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 30%, rgba(0, 0, 0, 0.04) 50%, transparent 70%)',
+                    filter: 'blur(60px)',
+                    width: '85%',
+                    height: '85%',
+                  }}
+                />
 
-                    {/* Image Container */}
-                    <div
-                      className="relative cursor-pointer hover:opacity-90 transition-opacity w-full z-10"
-                      style={{ maxWidth: '650px' }}
-                      onClick={() => openLightbox(heroImage.src, heroImage.alt)}
-                    >
-                      <div
-                        className="relative w-full"
-                        style={{ aspectRatio: '16/10', width: '100%', maxWidth: '650px' }}
-                      >
-                        <Image
-                          src={heroImage.src}
-                          alt={heroImage.alt}
-                          fill
-                          className="object-contain"
-                          priority
-                          sizes="(max-width: 1024px) 100vw, 600px"
-                        />
-                      </div>
-                    </div>
+                {/* Image Container */}
+                <div
+                  className="relative cursor-pointer hover:opacity-90 transition-opacity w-full z-10"
+                  style={{ maxWidth: '650px' }}
+                  onClick={() => openLightbox(heroImage.src, heroImage.alt)}
+                >
+                  <div
+                    className="relative w-full"
+                    style={{ aspectRatio: '16/10', width: '100%', maxWidth: '650px' }}
+                  >
+                    <Image
+                      src={heroImage.src}
+                      alt={heroImage.alt}
+                      fill
+                      className="object-contain"
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 600px"
+                    />
+                  </div>
+                </div>
                   </>
                 )}
               </motion.div>
