@@ -66,13 +66,13 @@ export const featuredCaseStudies: FeaturedCaseStudy[] = [
   },
   {
     slug: 'iq-plugin',
-    title: 'IQ Plugin: unifying insights inside the WebFOCUS hub',
+    title: 'DSML Hub: unifying insights inside the WebFOCUS hub',
     summary:
-      'Designing a new plugin that brings scattered DSML services into one responsive experience — so business users can discover, run, and interpret insights without leaving their analytics hub.',
+      'Designing a unified hub that brings scattered DSML services into one responsive experience — so business users can discover, run, and interpret insights without leaving their analytics hub.',
     impact: 'Reduced context switching and made insights discoverable.',
-    tags: ['Plugin UX', 'Information architecture'],
+    tags: ['DSML Integration', 'Information Architecture'],
     image: '/images/case-study/iq-plugin/iq-cover.png',
-    ctaText: 'View IQ Plugin case study',
+    ctaText: 'View DSML Hub case study',
   },
 ]
 

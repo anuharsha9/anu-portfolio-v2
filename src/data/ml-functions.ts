@@ -119,7 +119,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       'Achieved 100% discoverability in SME usability testing',
       'Reduced ML workflow from 12+ clicks to 7-9 clicks',
       'Delivered 2-click entry point, 50% faster setup, 60% fewer configuration errors',
-      'Only designer who worked on all major WebFOCUS features; owned entire ML Functions redesign solo while simultaneously leading ReportCaster and IQ Plugin',
+      'Only designer who worked on all major WebFOCUS features; owned entire ML Functions redesign solo while simultaneously leading ReportCaster and DSML Hub',
       'Onboarded 2 designers during maternity leave transition, ensuring seamless knowledge transfer and continuity',
       'Eliminated all dead-end "results not generated" errors',
       'Created dual-experience approach for technical and non-technical users',

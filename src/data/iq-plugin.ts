@@ -2,13 +2,13 @@ import { CaseStudyData } from '@/types/caseStudy'
 
 export const iqPluginCaseStudy: CaseStudyData = {
   slug: 'iq-plugin',
-  heroTitle: 'IQ PLUGIN',
-  heroSubheading: 'Unifying DSML Inside WebFOCUS',
+  heroTitle: 'DSML HUB',
+  heroSubheading: 'Unifying Data Science & ML Inside WebFOCUS',
   heroSubtitle:
     'Three powerful features. Scattered across the platform. I brought them together—and owned every piece of the journey.',
   coverImage: {
-    src: '/images/case-study/iq-plugin/IQ Navigation Tiles 1.png',
-    alt: 'IQ Plugin Discover Page - Navigation Tiles',
+    src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
+    alt: 'DSML Hub - Unified Data Science & Machine Learning',
   },
   role: 'Principal Product Designer (Full Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
@@ -28,18 +28,18 @@ export const iqPluginCaseStudy: CaseStudyData = {
   // QUICK IMPACT OVERVIEW (Public)
   // ----------------------------
   quickOverview: {
-    title: 'IQ Plugin — Quick Impact Overview',
+    title: 'DSML Hub — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
     whatTheSystemWas:
       'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
     myRole:
-      'Owned all three workflows: NLQ, Insights, and the IQ Hub. Made them responsive. Ensured pattern parity. PM had the idea—I built it.',
+      'Owned all three workflows: NLQ, Insights, and the DSML Hub. Made them responsive. Ensured pattern parity. PM had the idea—I built it.',
     scopeOfPractice: [
       {
         tag: 'FULL_OWNERSHIP',
         tagColor: 'blue',
         headline: 'Owned All 3 Workflows',
-        body: 'NLQ, Insights, AND the IQ Hub. Every screen, every flow, every interaction—mine.',
+        body: 'NLQ, Insights, AND the DSML Hub. Every screen, every flow, every interaction—mine.',
         icon: 'architect',
       },
       {
@@ -74,7 +74,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       situation: 'Three DSML features existed but were invisible. Different entry points, different patterns, low adoption.',
       task: 'Unify them. Make them discoverable. Drive adoption.',
       action: 'Owned everything—NLQ, Insights, AND the hub. Built the architecture, the flows, the tutorial system. Ensured pattern consistency. Made everything responsive.',
-      result: 'IQ Plugin: One-click access to all DSML. Pattern parity across features. Shipping 2027.',
+      result: 'DSML Hub: One-click access to all DSML. Pattern parity across features. Shipping 2027.',
     },
     technologies: [
       'Figma',
@@ -86,7 +86,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       'Stakeholder Alignment',
     ],
     keyAchievements: [
-      'Owned all 3 DSML workflows: NLQ, Insights, and the IQ Hub',
+      'Owned all 3 DSML workflows: NLQ, Insights, and the DSML Hub',
       'Achieved 100% pattern consistency across all features',
       'Made all features fully responsive across screen sizes',
       'Created 2 business user personas; inherited 2 technical',
@@ -178,7 +178,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'N',
       title: 'Navigate: Impact',
       summary: 'What shipped. What\'s shipping.',
-      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. IQ Plugin unifies everything in 2027.',
+      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027.',
     },
   ],
   // ----------------------------
@@ -187,10 +187,10 @@ export const iqPluginCaseStudy: CaseStudyData = {
   prototypeMedia: {
     title: 'Transformation in Motion',
     description:
-      'See the transformation unfold in real-time. Compare the three fragmented workflows with the new unified IQ Plugin design.',
+      'See the transformation unfold in real-time. Compare the three existing workflows with the new unified DSML Hub design.',
     multiBeforeAfter: {
       before: {
-        title: 'Fragmented Workflows',
+        title: 'Current Workflows (Public)',
         videos: [
           {
             title: 'NLQ (Natural Language Query)',
@@ -208,15 +208,16 @@ export const iqPluginCaseStudy: CaseStudyData = {
             title: 'ML Functions (Predict Data)',
             videoEmbedUrl: 'https://www.youtube.com/embed/VWxMJ0E5aL0',
             videoPoster: '/images/case-study/iq-plugin/iq-ml-old-poster.jpg',
-            description: 'ML Functions from Reporting Server — moved to IQ Plugin, redesigned with unified patterns.',
+            description: 'ML Functions from Reporting Server — redesigned with unified patterns.',
           },
         ],
       },
       after: {
-        title: 'Unified IQ Plugin',
+        title: 'Unified DSML Hub (Password Protected)',
         videoUrl: '/videos/iq-prototype-walkthrough.mp4',
         videoPoster: '/images/case-study/iq-plugin/iq-prototype-poster.jpg',
-        description: 'The new unified IQ Plugin: all three DSML capabilities consolidated into one cohesive entry point.',
+        description: 'The new unified DSML Hub: all three DSML capabilities consolidated into one cohesive entry point.',
+        sensitive: true,
       },
       comparisonNotes: {
         before: [
@@ -306,14 +307,26 @@ export const iqPluginCaseStudy: CaseStudyData = {
     ],
   },
   // ----------------------------
-  // PASSWORD GATE
+  // PUBLIC SECTIONS (visible without password)
+  // ----------------------------
+  publicSections: [
+    {
+      id: 'section-01',
+      index: 'D',
+      title: 'Discover: The Strategic Problem',
+      summary: 'Not broken. Just invisible.',
+      body: 'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed. I owned all three workflows and unified them into one DSML Hub.',
+    },
+  ],
+  // ----------------------------
+  // PASSWORD GATE (locks sections 02-06)
   // ----------------------------
   passwordGate: {
     password: 'anu-access',
-    description: 'This case study contains confidential company information and cannot be made public. Enter the password to view the full case study.',
+    description: 'The DSML Hub is shipping in 2027 and cannot be shown publicly. Enter the password to view the detailed design process.',
     learnItems: [
-      'Complete system architecture and information design',
-      'Multi-persona journey mapping',
+      'Complete DSML Hub architecture and information design',
+      'Multi-persona journey mapping (4 personas)',
       'Detailed workflow screens for NLQ, Insights, and Predict Data',
       'Design evolution and iteration process',
       'Strategic decisions and trade-offs',

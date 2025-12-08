@@ -33,7 +33,7 @@ const caseStudies = [
   },
   {
     slug: 'iq-plugin',
-    title: 'IQ Plugin',
+    title: 'DSML Hub',
     subtitle: '3 Tools + Discover Page',
     metric: '1',
     metricLabel: 'unified hub',

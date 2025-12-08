@@ -145,7 +145,7 @@ export const iqPluginMarketAnalysis = {
     },
   ],
   ourSolution: {
-    name: 'IQ Plugin',
+    name: 'DSML Hub',
     tag: 'STRATEGY: GUIDED_COMPLEXITY',
     headline: 'The Third Lane.',
     body: 'While competitors optimized for "Technical Depth," we optimized for "Guidance." We didn\'t lower the ceiling; we raised the floor.',

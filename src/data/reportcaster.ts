@@ -90,7 +90,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       'Unified five fragmented subsystems into one coherent mental model',
       'Reduced schedule creation clicks by 44–56% with zero new tabs',
       'Eliminated multi-tab sprawl entirely',
-      'Only designer who worked on all major WebFOCUS features; owned entire ReportCaster redesign solo initially while simultaneously leading ML Functions and IQ Plugin',
+      'Only designer who worked on all major WebFOCUS features; owned entire ReportCaster redesign solo initially while simultaneously leading ML Functions and DSML Hub',
       'Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition',
       'Continued to be looped in for critical architectural decisions as knowledge hub even after transitioning focus to other projects',
       'Delivered multiple organization-wide design demos to 150-200 person business unit, presenting design walkthroughs and architectural decisions',
