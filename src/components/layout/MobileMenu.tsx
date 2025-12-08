@@ -90,7 +90,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
           {!isOpen && (
             <motion.button
               onClick={toggleMenu}
-              className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 relative pointer-events-auto"
+              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 relative pointer-events-auto -mr-1"
               style={{ zIndex: 10003 }}
               aria-label="Open menu"
               aria-expanded={isOpen}
@@ -99,9 +99,9 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <span className={`w-6 h-0.5 rounded-full ${isLight ? 'bg-slate-700' : 'bg-white'}`} />
-              <span className={`w-6 h-0.5 rounded-full ${isLight ? 'bg-slate-700' : 'bg-white'}`} />
-              <span className={`w-6 h-0.5 rounded-full ${isLight ? 'bg-slate-700' : 'bg-white'}`} />
+              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
+              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
+              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
             </motion.button>
           )}
         </AnimatePresence>

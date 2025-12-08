@@ -70,13 +70,13 @@ export default function SiteHeader() {
         position: 'fixed',
       }}
     >
-      <nav className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-3 sm:py-4 flex items-center justify-center relative">
+      <nav className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]">
         {/* Logo - positioned absolutely on the left */}
         <Link
           href="/"
           className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
         >
-          <div className="w-[33.6px] h-[33.6px] text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
+          <div className="w-9 h-9 sm:w-[33.6px] sm:h-[33.6px] text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
             <AnimatedSignatureLogo
               className="w-full h-full"
               duration={16000}
