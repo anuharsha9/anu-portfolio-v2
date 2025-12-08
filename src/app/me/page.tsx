@@ -423,6 +423,104 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
+      {/* SECTION 3.5 — DESIGN WRITING */}
+      <MotionSection id="writing" className="bg-slate-50 py-16 md:py-20 border-y border-slate-200">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-8"
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-2">
+                  // OUTPUT: PUBLISHED_THOUGHTS
+                </span>
+                <h2 className="font-serif text-slate-900 text-2xl md:text-3xl">
+                  Design Writing
+                </h2>
+              </div>
+              <a
+                href="https://medium.com/@anu.anuja"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-2 text-slate-500 hover:text-[#0BA2B5] transition-colors text-sm font-medium"
+              >
+                <span>All on Medium</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Articles Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                {
+                  title: "The Secret Behind Better BI: Who's Your Business User?",
+                  topic: 'UX_RESEARCH',
+                  href: 'https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/',
+                  source: 'ibi Community'
+                },
+                {
+                  title: 'Enhancing User Experience in WebFOCUS DSML',
+                  topic: 'AI_ML_UX',
+                  href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
+                  source: 'ibi Community'
+                },
+              ].map((article, index) => (
+                <motion.a
+                  key={article.title}
+                  href={article.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="group bg-white border border-slate-200 rounded-xl p-5 hover:border-[#0BA2B5]/40 hover:shadow-md transition-all"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <span className="font-mono text-[10px] text-[#0BA2B5] uppercase tracking-wider block mb-2">
+                        {article.topic}
+                      </span>
+                      <h3 className="font-medium text-slate-900 group-hover:text-[#0BA2B5] transition-colors leading-snug mb-2">
+                        {article.title}
+                      </h3>
+                      <span className="text-slate-400 text-xs">
+                        {article.source}
+                      </span>
+                    </div>
+                    <svg className="w-4 h-4 text-slate-300 group-hover:text-[#0BA2B5] transition-colors flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Mobile Medium Link */}
+            <div className="sm:hidden text-center">
+              <a
+                href="https://medium.com/@anu.anuja"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#0BA2B5] font-medium text-sm"
+              >
+                <span>View all on Medium</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </MotionSection>
+
       {/* SECTION 4 — SOCIAL PROOF (Wall of Trust) - DARK MODE */}
       <MotionSection id="social-proof" className="bg-slate-950 py-24 md:py-32 relative overflow-hidden">
         {/* Background Grid */}

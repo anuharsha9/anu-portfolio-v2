@@ -13,6 +13,7 @@ const sections: Section[] = [
   { id: 'profile', label: 'Profile' },
   { id: 'design-framework', label: 'Framework' },
   { id: 'toolkit', label: 'Stack' },
+  { id: 'writing', label: 'Writing' },
   { id: 'social-proof', label: 'Voices' },
   { id: 'outside-of-work', label: 'Life' },
 ]
