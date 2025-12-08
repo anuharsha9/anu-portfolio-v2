@@ -128,9 +128,9 @@ export default function WorkGrid() {
                 className="block h-full"
               >
                 <div className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 h-full flex flex-col">
-                  {/* HeroTerminal Image with Bleed Effect - terminal bleeds off bottom */}
-                  <div className="relative h-[320px] overflow-hidden px-5 pt-5" onClick={(e) => e.preventDefault()}>
-                    <div className="h-[350px]">
+                  {/* HeroTerminal Image with Bleed Effect - bleeds off RIGHT and BOTTOM */}
+                  <div className="relative h-[300px] overflow-hidden pl-5 pt-5" onClick={(e) => e.preventDefault()}>
+                    <div className="h-[340px] w-[calc(100%+40px)]">
                       <HeroTerminal
                         imageSrc={study.image}
                         fileName={study.fileName}
@@ -141,7 +141,7 @@ export default function WorkGrid() {
                     
                     {/* Locked Badge - Overlay on terminal */}
                     {study.locked && (
-                      <div className="absolute top-9 right-9 z-10">
+                      <div className="absolute top-9 right-4 z-10">
                         <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
                           <Lock className="w-4 h-4 text-white" />
                         </div>
