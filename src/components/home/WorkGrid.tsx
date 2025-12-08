@@ -128,24 +128,26 @@ export default function WorkGrid() {
                 className="block h-full"
               >
                 <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-slate-300 transition-all duration-500 h-full flex flex-col">
-                  {/* HeroTerminal Image */}
-                  <div className="p-4 pb-0" onClick={(e) => e.preventDefault()}>
-                    <HeroTerminal
-                      imageSrc={study.image}
-                      fileName={study.fileName}
-                      accentColor={study.accentColor}
-                      alt={study.title}
-                    />
-                  </div>
-                  
-                  {/* Locked Badge - Overlay on terminal */}
-                  {study.locked && (
-                    <div className="absolute top-8 right-8 z-10">
-                      <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
-                        <Lock className="w-4 h-4 text-white" />
-                      </div>
+                  {/* HeroTerminal Image with Bleed Effect */}
+                  <div className="relative h-[280px] overflow-hidden" onClick={(e) => e.preventDefault()}>
+                    <div className="absolute inset-x-4 top-4 bottom-[-60px]">
+                      <HeroTerminal
+                        imageSrc={study.image}
+                        fileName={study.fileName}
+                        accentColor={study.accentColor}
+                        alt={study.title}
+                      />
                     </div>
-                  )}
+                    
+                    {/* Locked Badge - Overlay on terminal */}
+                    {study.locked && (
+                      <div className="absolute top-8 right-8 z-10">
+                        <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
+                          <Lock className="w-4 h-4 text-white" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   {/* Card Content */}
                   <div className="p-6 flex-grow flex flex-col">
