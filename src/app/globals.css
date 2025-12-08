@@ -534,7 +534,22 @@
 /* Dark theme gears - for dark backgrounds */
 .gears-dark-theme #brain-gears,
 .gears-dark-theme #brain-gears-copy {
+  -webkit-filter: invert(1) hue-rotate(180deg);
   filter: invert(1) hue-rotate(180deg);
+  /* Safari fix: ensure hardware acceleration */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Safari-specific: Force color rendering */
+@supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
+  .gears-dark-theme #brain-gears,
+  .gears-dark-theme #brain-gears-copy {
+    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.2);
+    filter: invert(1) hue-rotate(180deg) saturate(1.2);
+  }
 }
 
 /* Dark theme: Hide the hover gear variant entirely - just use base gear with glow */
