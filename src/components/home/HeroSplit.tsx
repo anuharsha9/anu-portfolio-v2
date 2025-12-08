@@ -325,7 +325,7 @@ export default function HeroSplit() {
         id="hero"
         className="bg-slate-50 relative min-h-screen flex items-center overflow-hidden border-b border-slate-200"
       >
-        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 pb-24 md:pb-28">
           {/* Split Layout: Text Left (40%), Gears Right (60%) - Gears more prominent */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-4 items-center py-8 lg:py-0">
             
