@@ -211,7 +211,7 @@ export interface Recommendation {
   role: string
   company: string
   relationship: string
-  source?: 'corporate' | 'adplist' // Distinguish between work colleagues and mentorship
+  source?: 'corporate' | 'adplist' | 'mentor' // Distinguish between work colleagues, mentorship, and personal mentor
 }
 
 export interface ADPListReview {
@@ -225,6 +225,14 @@ export interface ADPListReview {
 
 export const recommendations: Recommendation[] = [
   {
+    quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Anuja is a natural leader who elevates everyone around her.',
+    name: 'Dave Pfeiffer',
+    role: 'Director of Design',
+    company: 'Cloud Software Group',
+    relationship: 'Dave was my manager for over 3 years and I collaborated with him closely every single day I was at the company.',
+    source: 'mentor' as const,
+  },
+  {
     quote: 'From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design.',
     name: 'Yingchun Chen',
     role: 'Principal System Software Engineer',
@@ -237,13 +245,6 @@ export const recommendations: Recommendation[] = [
     role: 'VP of Product Management',
     company: 'Cloud Software Group',
     relationship: 'Vijay was the main leadership figure at my workplace, overseeing product strategy across the organization.',
-  },
-  {
-    quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions.',
-    name: 'Dave Pfeiffer',
-    role: 'Director of Design',
-    company: 'Cloud Software Group',
-    relationship: 'Dave was my manager for over 3 years and I collaborated with him closely every single day I was at the company.',
   },
   {
     quote: 'Anticipating the next move of the user, that is next level UI!',
