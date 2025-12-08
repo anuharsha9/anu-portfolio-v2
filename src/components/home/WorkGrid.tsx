@@ -127,10 +127,10 @@ export default function WorkGrid() {
                 href={`/work/${study.slug}`}
                 className="block h-full"
               >
-                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-slate-300 transition-all duration-500 h-full flex flex-col">
-                  {/* HeroTerminal Image with Bleed Effect */}
-                  <div className="relative h-[280px] overflow-hidden" onClick={(e) => e.preventDefault()}>
-                    <div className="absolute inset-x-4 top-4 bottom-[-60px]">
+                <div className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 h-full flex flex-col">
+                  {/* HeroTerminal Image with Bleed Effect - terminal bleeds off bottom */}
+                  <div className="relative h-[320px] overflow-hidden px-5 pt-5" onClick={(e) => e.preventDefault()}>
+                    <div className="h-[350px]">
                       <HeroTerminal
                         imageSrc={study.image}
                         fileName={study.fileName}
@@ -141,7 +141,7 @@ export default function WorkGrid() {
                     
                     {/* Locked Badge - Overlay on terminal */}
                     {study.locked && (
-                      <div className="absolute top-8 right-8 z-10">
+                      <div className="absolute top-9 right-9 z-10">
                         <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
                           <Lock className="w-4 h-4 text-white" />
                         </div>

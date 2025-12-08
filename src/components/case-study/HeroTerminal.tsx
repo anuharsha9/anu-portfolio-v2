@@ -20,7 +20,7 @@ export default function HeroTerminal({
 
   return (
     <div 
-      className="rounded-t-xl overflow-hidden border border-slate-200 bg-white cursor-pointer group"
+      className="rounded-t-xl overflow-hidden border-t border-x border-slate-200 bg-white cursor-pointer group h-full"
       style={{
         boxShadow: `0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px ${accentColor}10, 0 20px 40px -20px ${accentColor}30`
       }}
