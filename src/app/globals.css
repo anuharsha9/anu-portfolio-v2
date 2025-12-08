@@ -537,18 +537,28 @@
   -webkit-filter: invert(1) hue-rotate(180deg);
   filter: invert(1) hue-rotate(180deg);
   /* Safari fix: ensure hardware acceleration */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  will-change: filter, transform;
 }
 
-/* Safari-specific: Force color rendering */
-@supports (-webkit-appearance: none) and (not (-moz-appearance: none)) {
+/* Safari-specific: Force color rendering with stronger filter */
+@supports (-webkit-appearance: none) and (stroke-color: transparent) {
   .gears-dark-theme #brain-gears,
   .gears-dark-theme #brain-gears-copy {
-    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.2);
-    filter: invert(1) hue-rotate(180deg) saturate(1.2);
+    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.3) brightness(1.1);
+    filter: invert(1) hue-rotate(180deg) saturate(1.3) brightness(1.1);
+  }
+}
+
+/* iOS Safari specific fix */
+@supports (-webkit-touch-callout: none) {
+  .gears-dark-theme #brain-gears,
+  .gears-dark-theme #brain-gears-copy {
+    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.5) brightness(1.2) !important;
+    filter: invert(1) hue-rotate(180deg) saturate(1.5) brightness(1.2) !important;
   }
 }
 

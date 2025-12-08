@@ -293,16 +293,46 @@ export default function HeroSplit() {
             }
           }
 
+          // Mobile tap handler - toggle the gear inspector
+          const handleTap = (e: Event) => {
+            e.preventDefault()
+            e.stopPropagation()
+            
+            // Check if this gear is already active
+            const isCurrentlyActive = gearGroup.classList.contains('gear-main--active')
+            
+            // Clear all active gears first
+            const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
+            allActiveGears.forEach((activeGear) => {
+              activeGear.classList.remove('gear-main--active')
+              activeGear.style.removeProperty('--gear-accent')
+            })
+            
+            if (!isCurrentlyActive) {
+              // Activate this gear
+              gearGroup.classList.add('gear-main--active')
+              const gearData = GEAR_INSPECTOR[gearId]
+              if (gearData) {
+                gearGroup.style.setProperty('--gear-accent', gearData.accentColor)
+                setActiveGear(gearData)
+              }
+            } else {
+              // Deactivate - hide the card
+              setActiveGear(null)
+            }
+          }
+
           if (overlay) {
             overlay.addEventListener('mouseenter', handleEnter)
             overlay.addEventListener('mouseleave', handleLeave)
             overlay.addEventListener('click', handleClick)
-            overlay.addEventListener('touchstart', handleEnter, { passive: true })
+            // Mobile: use touchend for better tap handling
+            overlay.addEventListener('touchend', handleTap, { passive: false })
             listeners.push(
               { element: overlay, type: 'mouseenter', handler: handleEnter },
               { element: overlay, type: 'mouseleave', handler: handleLeave },
               { element: overlay, type: 'click', handler: handleClick },
-              { element: overlay, type: 'touchstart', handler: handleEnter }
+              { element: overlay, type: 'touchend', handler: handleTap }
             )
           } else {
             gearGroup.style.pointerEvents = 'auto'
@@ -312,12 +342,13 @@ export default function HeroSplit() {
             gearGroup.addEventListener('mouseenter', handleEnter)
             gearGroup.addEventListener('mouseleave', handleLeave)
             gearGroup.addEventListener('click', handleClick)
-            gearGroup.addEventListener('touchstart', handleEnter, { passive: true })
+            // Mobile: use touchend for better tap handling
+            gearGroup.addEventListener('touchend', handleTap, { passive: false })
             listeners.push(
               { element: gearGroup, type: 'mouseenter', handler: handleEnter },
               { element: gearGroup, type: 'mouseleave', handler: handleLeave },
               { element: gearGroup, type: 'click', handler: handleClick },
-              { element: gearGroup, type: 'touchstart', handler: handleEnter }
+              { element: gearGroup, type: 'touchend', handler: handleTap }
             )
           }
 
