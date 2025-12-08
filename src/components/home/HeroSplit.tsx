@@ -461,10 +461,10 @@ export default function HeroSplit() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="w-8 h-px bg-slate-700" />
+                      <div className="w-8 h-px bg-slate-600" />
                       <motion.span 
-                        className="font-mono text-slate-500 text-xs tracking-wide"
-                        animate={{ opacity: [0.5, 1, 0.5] }}
+                        className="font-mono text-slate-400 text-xs tracking-wide"
+                        animate={{ opacity: [0.6, 1, 0.6] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                       >
                         Hover the gears to peek inside my brain →
