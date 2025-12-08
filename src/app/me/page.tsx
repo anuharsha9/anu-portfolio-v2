@@ -421,36 +421,42 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 4 — SOCIAL PROOF (Wall of Trust) */}
-      <MotionSection id="social-proof" className="bg-white py-16 md:py-24 lg:py-32 border-t border-slate-200">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+      {/* SECTION 4 — SOCIAL PROOF (Wall of Trust) - DARK MODE */}
+      <MotionSection id="social-proof" className="bg-slate-950 py-24 md:py-32 relative overflow-hidden">
+        {/* Background Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-12"
+            className="space-y-16"
           >
             {/* Section Header */}
             <div className="text-center space-y-4 max-w-3xl mx-auto">
-              <div className="flex items-center gap-4 justify-center">
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
-                  04
-                </span>
-                <div className="h-px flex-1 bg-slate-200 max-w-xs"></div>
-                <div className="h-px w-12 bg-[#0BA2B5]"></div>
-              </div>
-              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-                What Others Say
+              <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+                // TRUST_NETWORK
+              </span>
+              <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
+                Voices from the Trenches
               </h2>
-              <p className="text-slate-500 text-base md:text-lg leading-relaxed">
-                Trusted by engineers, designers, and product leaders.
+              <p className="text-slate-400 text-lg leading-relaxed">
+                Engineers, PMs, data scientists, and leaders I&apos;ve partnered with.
               </p>
             </div>
 
-            {/* Featured Testimonials Grid - Mentor & Origin */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
-              {/* Featured Mentor Testimonial - Dave Pfeiffer */}
+            {/* Featured Row - Mentor & Origin */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Mentor Card - Dave */}
               {recommendations.filter(r => r.source === 'mentor').map((review) => (
                 <motion.div
                   key={review.name}
@@ -458,46 +464,46 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="relative"
+                  className="relative group"
                 >
-                  <div className="bg-gradient-to-br from-[#0BA2B5]/5 via-white to-slate-50 rounded-2xl border-2 border-[#0BA2B5]/20 p-6 md:p-8 shadow-lg relative overflow-hidden h-full">
-                    {/* Decorative accent */}
-                    <div className="absolute top-0 left-0 w-1.5 h-full bg-[#0BA2B5]" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#0BA2B5]/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:border-[#0BA2B5]/50 transition-all">
+                    {/* Large Quote Mark */}
+                    <div className="absolute top-6 right-8 text-[#0BA2B5]/10 text-8xl font-serif leading-none">&ldquo;</div>
                     
-                    {/* Mentor Badge */}
-                    <div className="mb-4 pl-4">
-                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0BA2B5]/10 text-[#0BA2B5] text-xs font-mono uppercase tracking-wider font-semibold">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                    {/* Badge */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0BA2B5]/20 text-[#0BA2B5] text-xs font-mono uppercase tracking-wider">
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                         </svg>
                         My Mentor
                       </span>
                     </div>
 
                     {/* Quote */}
-                    <div className="pl-4">
-                      <blockquote className="font-serif text-slate-900 text-lg md:text-xl leading-relaxed mb-6">
-                        &ldquo;{review.quote}&rdquo;
-                      </blockquote>
-                      
-                      {/* Attribution */}
-                      <div className="mb-4">
-                        <p className="font-semibold text-slate-900">{review.name}</p>
-                        <p className="font-mono text-[#0BA2B5] text-sm">
-                          {review.role} @ {review.company}
+                    <blockquote className="font-serif text-white text-xl md:text-2xl leading-relaxed mb-6 relative z-10">
+                      &ldquo;{review.quote}&rdquo;
+                    </blockquote>
+                    
+                    {/* Attribution */}
+                    <div className="flex items-start justify-between gap-4 pt-6 border-t border-slate-800">
+                      <div>
+                        <p className="font-semibold text-white text-lg">{review.name}</p>
+                        <p className="font-mono text-[#0BA2B5] text-sm">{review.role}</p>
+                        <p className="text-slate-500 text-xs mt-1">{review.company}</p>
+                      </div>
+                      <div className="text-right max-w-[200px]">
+                        <p className="text-slate-500 text-xs leading-relaxed italic">
+                          {review.relationship}
                         </p>
                       </div>
-
-                      {/* Context */}
-                      <p className="text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        {review.relationship}
-                      </p>
                     </div>
                   </div>
                 </motion.div>
               ))}
 
-              {/* Featured Origin Testimonial - Vikram Patel */}
+              {/* Origin Card - Vikram */}
               {recommendations.filter(r => r.source === 'origin').map((review) => (
                 <motion.div
                   key={review.name}
@@ -505,15 +511,16 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="relative"
+                  className="relative group"
                 >
-                  <div className="bg-gradient-to-br from-purple-500/5 via-white to-slate-50 rounded-2xl border-2 border-purple-500/20 p-6 md:p-8 shadow-lg relative overflow-hidden h-full">
-                    {/* Decorative accent */}
-                    <div className="absolute top-0 left-0 w-1.5 h-full bg-purple-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 hover:border-purple-500/50 transition-all">
+                    {/* Large Quote Mark */}
+                    <div className="absolute top-6 right-8 text-purple-500/10 text-8xl font-serif leading-none">&ldquo;</div>
                     
-                    {/* Origin Badge */}
-                    <div className="mb-4 pl-4">
-                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-600 text-xs font-mono uppercase tracking-wider font-semibold">
+                    {/* Badge */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-mono uppercase tracking-wider">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
@@ -522,42 +529,46 @@ export default function AboutPage() {
                     </div>
 
                     {/* Quote */}
-                    <div className="pl-4">
-                      <blockquote className="font-serif text-slate-900 text-lg md:text-xl leading-relaxed mb-6">
-                        &ldquo;{review.quote}&rdquo;
-                      </blockquote>
-                      
-                      {/* Attribution */}
-                      <div className="mb-4">
-                        <p className="font-semibold text-slate-900">{review.name}</p>
-                        <p className="font-mono text-purple-600 text-sm">
-                          {review.role} @ {review.company}
+                    <blockquote className="font-serif text-white text-xl md:text-2xl leading-relaxed mb-6 relative z-10">
+                      &ldquo;{review.quote}&rdquo;
+                    </blockquote>
+                    
+                    {/* Attribution */}
+                    <div className="flex items-start justify-between gap-4 pt-6 border-t border-slate-800">
+                      <div>
+                        <p className="font-semibold text-white text-lg">{review.name}</p>
+                        <p className="font-mono text-purple-400 text-sm">{review.role}</p>
+                        <p className="text-slate-500 text-xs mt-1">{review.company}</p>
+                      </div>
+                      <div className="text-right max-w-[200px]">
+                        <p className="text-slate-500 text-xs leading-relaxed italic">
+                          {review.relationship}
                         </p>
                       </div>
-
-                      {/* Context */}
-                      <p className="text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        {review.relationship}
-                      </p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Masonry Wall of Trust - ALL testimonials (Corporate + Mentorship) */}
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
+            {/* Rest of Testimonials - Bento Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recommendations.filter(r => r.source !== 'mentor' && r.source !== 'origin').map((review, index) => {
-                // Extract the "hook" - first compelling sentence
-                const hookSentence = review.quote.split('.')[0] + '.'
-                const restOfQuote = review.quote.slice(hookSentence.length).trim()
-                const hasMoreContent = restOfQuote.length > 20
-
-                // ADPList reviews get a special tint
+                // Color coding by role type
+                const isDataScience = review.role.toLowerCase().includes('data') || review.role.toLowerCase().includes('scientist')
+                const isEngineering = review.role.toLowerCase().includes('engineer') || review.role.toLowerCase().includes('software')
+                const isProduct = review.role.toLowerCase().includes('product')
                 const isADPList = review.source === 'adplist'
-                const bgClass = isADPList
-                  ? 'bg-sky-50/70'
-                  : (index % 3 === 2 ? 'bg-slate-50' : 'bg-white')
+                
+                const accentColor = isADPList ? 'sky' : isDataScience ? 'purple' : isEngineering ? 'teal' : isProduct ? 'amber' : 'emerald'
+                const colorClasses = {
+                  sky: { border: 'hover:border-sky-500/50', text: 'text-sky-400', bg: 'bg-sky-500/20', glow: 'from-sky-500/10' },
+                  purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400', bg: 'bg-purple-500/20', glow: 'from-purple-500/10' },
+                  teal: { border: 'hover:border-[#0BA2B5]/50', text: 'text-[#0BA2B5]', bg: 'bg-[#0BA2B5]/20', glow: 'from-[#0BA2B5]/10' },
+                  amber: { border: 'hover:border-amber-500/50', text: 'text-amber-400', bg: 'bg-amber-500/20', glow: 'from-amber-500/10' },
+                  emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-400', bg: 'bg-emerald-500/20', glow: 'from-emerald-500/10' },
+                }
+                const colors = colorClasses[accentColor as keyof typeof colorClasses]
 
                 return (
                   <motion.div
@@ -566,45 +577,43 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className={`${bgClass} break-inside-avoid mb-6 rounded-xl border border-slate-200 p-6 hover:border-[#0BA2B5]/30 hover:shadow-lg transition-all duration-300 relative`}
+                    className="group relative"
                   >
-                    {/* ADPList Badge (for mentorship reviews) */}
-                    {isADPList && (
-                      <div className="absolute top-4 right-4">
-                        <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-sky-100 text-sky-700 text-[10px] font-mono uppercase tracking-wider font-semibold">
-                          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                          </svg>
-                          ADPList
+                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.glow} to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity`} />
+                    <div className={`relative bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-xl p-6 ${colors.border} transition-all h-full flex flex-col`}>
+                      
+                      {/* ADPList Badge */}
+                      {isADPList && (
+                        <div className="absolute top-4 right-4">
+                          <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${colors.bg} ${colors.text} text-[10px] font-mono uppercase tracking-wider`}>
+                            ADPList
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Role Tag */}
+                      <div className="mb-4">
+                        <span className={`font-mono ${colors.text} text-xs uppercase tracking-widest`}>
+                          {review.role}
                         </span>
                       </div>
-                    )}
 
-                    {/* Top: Authority (Role/Company) */}
-                    <div className="mb-3 pr-20">
-                      <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest font-semibold">
-                        {review.role}
-                        {review.company && (
-                          <span className="text-slate-400"> @ {review.company}</span>
-                        )}
-                      </span>
-                    </div>
-
-                    {/* Middle: The Hook (Best sentence as headline) */}
-                    <h3 className="font-serif text-slate-900 text-lg leading-tight mb-3">
-                      &ldquo;{hookSentence}&rdquo;
-                    </h3>
-
-                    {/* Bottom: Rest of quote (if meaningful length) */}
-                    {hasMoreContent && (
-                      <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                        {restOfQuote}
-                      </p>
-                    )}
-
-                    {/* Footer: Author Name */}
-                    <div className="pt-3 border-t border-slate-100">
-                      <p className="font-semibold text-slate-800 text-sm">{review.name}</p>
+                      {/* Quote */}
+                      <blockquote className="font-serif text-slate-200 text-base leading-relaxed mb-6 flex-grow">
+                        &ldquo;{review.quote}&rdquo;
+                      </blockquote>
+                      
+                      {/* Attribution + Context */}
+                      <div className="pt-4 border-t border-slate-800/50 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <p className="font-semibold text-white text-sm">{review.name}</p>
+                          <p className="text-slate-600 text-xs">{review.company}</p>
+                        </div>
+                        {/* Relationship Context */}
+                        <p className="text-slate-500 text-xs leading-relaxed italic">
+                          {review.relationship}
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 )
@@ -613,47 +622,40 @@ export default function AboutPage() {
 
             {/* Links Row */}
             <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 pt-8">
-              {/* ADPList Link */}
               <a
                 href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-[#0990A2] transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
               >
                 <span>More reviews on ADPList</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-
-              <span className="text-slate-300">·</span>
-
-              {/* Medium Link */}
+              <span className="text-slate-700">·</span>
               <a
                 href="https://medium.com/@anu.anuja"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-[#0990A2] transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
               >
                 <span>Read my writing on Medium</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-
-              <span className="text-slate-300">·</span>
-
-              {/* GitHub Link */}
+              <span className="text-slate-700">·</span>
               <a
                 href="https://github.com/anuharsha9/anu-portfolio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-[#0990A2] transition-colors font-medium"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
-                <span>Portfolio Source Code</span>
+                <span>Portfolio Source</span>
               </a>
             </div>
           </motion.div>
