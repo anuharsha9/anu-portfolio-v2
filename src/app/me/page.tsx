@@ -372,65 +372,106 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* Featured Mentor Testimonial - Dave Pfeiffer */}
-            {recommendations.filter(r => r.source === 'mentor').map((review) => (
-              <motion.div
-                key={review.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="mb-10 relative"
-              >
-                <div className="bg-gradient-to-br from-[#0BA2B5]/5 via-white to-slate-50 rounded-2xl border-2 border-[#0BA2B5]/20 p-8 md:p-10 shadow-lg relative overflow-hidden">
-                  {/* Decorative accent */}
-                  <div className="absolute top-0 left-0 w-1.5 h-full bg-[#0BA2B5]" />
-                  
-                  {/* Mentor Badge */}
-                  <div className="absolute top-6 right-6">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0BA2B5]/10 text-[#0BA2B5] text-xs font-mono uppercase tracking-wider font-semibold">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                      </svg>
-                      My Mentor
-                    </span>
-                  </div>
+            {/* Featured Testimonials Grid - Mentor & Origin */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+              {/* Featured Mentor Testimonial - Dave Pfeiffer */}
+              {recommendations.filter(r => r.source === 'mentor').map((review) => (
+                <motion.div
+                  key={review.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative"
+                >
+                  <div className="bg-gradient-to-br from-[#0BA2B5]/5 via-white to-slate-50 rounded-2xl border-2 border-[#0BA2B5]/20 p-6 md:p-8 shadow-lg relative overflow-hidden h-full">
+                    {/* Decorative accent */}
+                    <div className="absolute top-0 left-0 w-1.5 h-full bg-[#0BA2B5]" />
+                    
+                    {/* Mentor Badge */}
+                    <div className="mb-4 pl-4">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0BA2B5]/10 text-[#0BA2B5] text-xs font-mono uppercase tracking-wider font-semibold">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                        My Mentor
+                      </span>
+                    </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                    {/* Quote - Takes 2 columns */}
-                    <div className="lg:col-span-2 pl-4">
-                      <blockquote className="font-serif text-slate-900 text-xl md:text-2xl leading-relaxed mb-6">
+                    {/* Quote */}
+                    <div className="pl-4">
+                      <blockquote className="font-serif text-slate-900 text-lg md:text-xl leading-relaxed mb-6">
                         &ldquo;{review.quote}&rdquo;
                       </blockquote>
                       
                       {/* Attribution */}
-                      <div className="flex items-center gap-4">
-                        <div>
-                          <p className="font-semibold text-slate-900 text-lg">{review.name}</p>
-                          <p className="font-mono text-[#0BA2B5] text-sm">
-                            {review.role} @ {review.company}
-                          </p>
-                        </div>
+                      <div className="mb-4">
+                        <p className="font-semibold text-slate-900">{review.name}</p>
+                        <p className="font-mono text-[#0BA2B5] text-sm">
+                          {review.role} @ {review.company}
+                        </p>
                       </div>
-                    </div>
 
-                    {/* Context Card */}
-                    <div className="bg-white/80 rounded-xl p-5 border border-slate-200">
-                      <p className="font-mono text-[10px] text-slate-400 uppercase tracking-widest mb-2">
-                        // RELATIONSHIP
-                      </p>
-                      <p className="text-slate-600 text-sm leading-relaxed">
+                      {/* Context */}
+                      <p className="text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-4">
                         {review.relationship}
                       </p>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+
+              {/* Featured Origin Testimonial - Vikram Patel */}
+              {recommendations.filter(r => r.source === 'origin').map((review) => (
+                <motion.div
+                  key={review.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="relative"
+                >
+                  <div className="bg-gradient-to-br from-purple-500/5 via-white to-slate-50 rounded-2xl border-2 border-purple-500/20 p-6 md:p-8 shadow-lg relative overflow-hidden h-full">
+                    {/* Decorative accent */}
+                    <div className="absolute top-0 left-0 w-1.5 h-full bg-purple-500" />
+                    
+                    {/* Origin Badge */}
+                    <div className="mb-4 pl-4">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-600 text-xs font-mono uppercase tracking-wider font-semibold">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        My First Boss
+                      </span>
+                    </div>
+
+                    {/* Quote */}
+                    <div className="pl-4">
+                      <blockquote className="font-serif text-slate-900 text-lg md:text-xl leading-relaxed mb-6">
+                        &ldquo;{review.quote}&rdquo;
+                      </blockquote>
+                      
+                      {/* Attribution */}
+                      <div className="mb-4">
+                        <p className="font-semibold text-slate-900">{review.name}</p>
+                        <p className="font-mono text-purple-600 text-sm">
+                          {review.role} @ {review.company}
+                        </p>
+                      </div>
+
+                      {/* Context */}
+                      <p className="text-slate-500 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                        {review.relationship}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
             {/* Masonry Wall of Trust - ALL testimonials (Corporate + Mentorship) */}
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-              {recommendations.filter(r => r.source !== 'mentor').map((review, index) => {
+              {recommendations.filter(r => r.source !== 'mentor' && r.source !== 'origin').map((review, index) => {
                 // Extract the "hook" - first compelling sentence
                 const hookSentence = review.quote.split('.')[0] + '.'
                 const restOfQuote = review.quote.slice(hookSentence.length).trim()

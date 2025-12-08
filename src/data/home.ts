@@ -211,7 +211,7 @@ export interface Recommendation {
   role: string
   company: string
   relationship: string
-  source?: 'corporate' | 'adplist' | 'mentor' // Distinguish between work colleagues, mentorship, and personal mentor
+  source?: 'corporate' | 'adplist' | 'mentor' | 'origin' // Distinguish between work colleagues, mentorship, personal mentor, and origin story
 }
 
 export interface ADPListReview {
@@ -224,35 +224,66 @@ export interface ADPListReview {
 }
 
 export const recommendations: Recommendation[] = [
+  // ═══════════════════════════════════════════════════════════════
+  // FEATURED: MY MENTOR
+  // ═══════════════════════════════════════════════════════════════
   {
     quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Anuja is a natural leader who elevates everyone around her.',
     name: 'Dave Pfeiffer',
     role: 'Director of Design',
     company: 'Cloud Software Group',
     relationship: 'Dave was my manager for over 3 years and I collaborated with him closely every single day I was at the company.',
-    source: 'mentor' as const,
+    source: 'mentor',
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // FEATURED: MY ORIGIN
+  // ═══════════════════════════════════════════════════════════════
   {
-    quote: 'From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design.',
-    name: 'Yingchun Chen',
-    role: 'Principal System Software Engineer',
-    company: 'Cloud Software Group',
-    relationship: 'I worked closely with Yingchun on ReportCaster, where he was my engineering partner helping me understand the complex legacy system architecture.',
+    quote: 'She quickly became the designer we trusted for everything. By the time she moved on, she was operating at a level far beyond her experience, ready for enterprise-grade work.',
+    name: 'Vikram Patel',
+    role: 'Co-Founder & CEO',
+    company: '9P Studioz',
+    relationship: 'Vikram was my first ever boss and my first design job, where I learned the fundamentals of design and client work over 4.5 years.',
+    source: 'origin',
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // LEADERSHIP
+  // ═══════════════════════════════════════════════════════════════
   {
-    quote: 'She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams.',
+    quote: 'She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams. Any team would be lucky to have her.',
     name: 'Vijay Raman',
     role: 'VP of Product Management',
     company: 'Cloud Software Group',
     relationship: 'Vijay was the main leadership figure at my workplace, overseeing product strategy across the organization.',
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // DATA SCIENCE / ML
+  // ═══════════════════════════════════════════════════════════════
   {
-    quote: 'Anticipating the next move of the user, that is next level UI!',
-    name: 'Anita George',
-    role: 'Principal Account Technology Strategist',
+    quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive. Her design solutions are rooted in a deep understanding of the purpose of the product.',
+    name: 'Marcus Horbach, Ph.D.',
+    role: 'Principal Data Scientist',
     company: 'Cloud Software Group',
-    relationship: 'Anita was my favorite reliable SME and customer representative for ML Functions and IQ Plugin, providing invaluable user insights.',
+    relationship: "I won Marcus's trust with ML Functions when I was trying to understand and learn ML. He was the data scientist I collaborated with closely on ML initiatives.",
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // ENGINEERING
+  // ═══════════════════════════════════════════════════════════════
+  {
+    quote: "From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system. She's the kind of UX leader any team would be lucky to have.",
+    name: 'Yingchun Chen',
+    role: 'Principal System Software Engineer',
+    company: 'Cloud Software Group',
+    relationship: 'I worked closely with Yingchun on ReportCaster, where he was my engineering partner helping me understand the complex legacy system architecture.',
+  },
+
+  // ═══════════════════════════════════════════════════════════════
+  // PRODUCT MANAGEMENT
+  // ═══════════════════════════════════════════════════════════════
   {
     quote: 'Her design thinking workshops and prototype walkthroughs often became the foundation for key product decisions, driving clarity and alignment across cross-functional teams.',
     name: 'Karishma Khadge',
@@ -261,34 +292,34 @@ export const recommendations: Recommendation[] = [
     relationship: 'Karishma was the PM I collaborated with on ML Functions and IQ Plugin. We had extremely close collaboration—a true partnership.',
   },
   {
-    quote: 'Anuja demonstrated exceptional ability to understand intricate workflows and translate them into elegant, user-centric designs that elevated the product\'s usability and visual appeal.',
+    quote: "Anuja demonstrated exceptional ability to understand intricate workflows and translate them into elegant, user-centric designs that elevated the product's usability.",
     name: 'Aniket Awchare',
     role: 'Senior Product Manager',
     company: 'Cloud Software Group',
     relationship: 'Aniket partnered with me on ML Functions and IQ Plugin after Karishma left the org. We had the same close partnership dynamic.',
   },
+
+  // ═══════════════════════════════════════════════════════════════
+  // CUSTOMER / SME
+  // ═══════════════════════════════════════════════════════════════
   {
-    quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive and has greatly contributed to the success of our products.',
-    name: 'Marcus Horbach',
-    role: 'Principal Data Scientist',
+    quote: 'Anticipating the next move of the user, that is next level UI! Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels.',
+    name: 'Anita George',
+    role: 'Principal Account Technology Strategist',
     company: 'Cloud Software Group',
-    relationship: 'I won Marcus\'s trust with ML Functions when I was trying to understand and learn ML. He was the data scientist I collaborated with closely on ML initiatives.',
+    relationship: 'Anita was my favorite reliable SME and customer representative for ML Functions and IQ Plugin, providing invaluable user insights.',
   },
   {
-    quote: 'She quickly became the designer we trusted for everything. By the time she moved on, she was operating at a level far beyond her experience, ready for enterprise-grade work.',
-    name: 'Vikram Patel',
-    role: 'Co-Founder',
-    company: '9P Studioz',
-    relationship: 'Vikram was my first ever boss and my first design job, where I learned the fundamentals of design and client work.',
+    quote: "Smart and very attuned to user needs, she 'just gets it' and developed intuitive designs that were very well received by our end users.",
+    name: 'Radhika Tekumalla',
+    role: 'Founder',
+    company: 'Kedazzle (EdTech)',
+    relationship: 'I worked with Radhika for 3 years during my freelance period on her EdTech startup.',
   },
-  {
-    quote: 'She is a collaborative teammate, strong advocate for user research and great designer.',
-    name: 'Shay Bagwell',
-    role: 'Lead Customer Marketing Manager',
-    company: 'Cloud Software Group',
-    relationship: 'Shay worked with me on several projects where my design made an impact.',
-  },
-  // ADPList Mentorship Reviews
+
+  // ═══════════════════════════════════════════════════════════════
+  // ADPLIST MENTORSHIP
+  // ═══════════════════════════════════════════════════════════════
   {
     quote: 'Anuja is an excellent mentor. She proactively provides actionable tips, checks on progress, and leverages her expertise to guide career growth.',
     name: 'Gina Kim',
