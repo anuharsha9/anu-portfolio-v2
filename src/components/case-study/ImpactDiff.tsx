@@ -129,46 +129,6 @@ export default function ImpactDiff({
             <GripVertical className="w-5 h-5 text-white" />
           </div>
         </div>
-
-        {/* Floating Win Badges (After Side) */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="absolute bottom-6 right-6 z-10 flex flex-col gap-2"
-          style={{ opacity: sliderPosition < 70 ? 1 : 0.3 }}
-        >
-          <div className="bg-white/90 backdrop-blur text-emerald-700 font-bold px-4 py-2 rounded-full shadow-lg border border-emerald-100 text-sm flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-            83% Fewer Clicks
-          </div>
-          <div className="bg-white/90 backdrop-blur text-emerald-700 font-bold px-4 py-2 rounded-full shadow-lg border border-emerald-100 text-sm flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Unified Context
-          </div>
-        </motion.div>
-
-        {/* Floating Pain Badge (Before Side) */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="absolute bottom-6 left-6 z-10 flex flex-col gap-2"
-          style={{ opacity: sliderPosition > 30 ? 1 : 0.3 }}
-        >
-          <div className="bg-white/90 backdrop-blur text-red-600 font-bold px-4 py-2 rounded-full shadow-lg border border-red-100 text-sm flex items-center gap-2">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            5 Scattered UIs
-          </div>
-        </motion.div>
       </div>
 
       {/* Instruction */}
