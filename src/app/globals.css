@@ -531,22 +531,6 @@
   perspective: 1000px;
 }
 
-/* ============================================
-   LIGHT THEME - MATTE ALUMINUM GEARS
-   Applies filters to create a light, metallic look
-   ============================================ */
-.gears-light-theme #brain-gears,
-.gears-light-theme #brain-gears-copy {
-  /* Invert colors for light theme, adjust saturation for matte aluminum look */
-  filter: invert(1) brightness(0.92) contrast(0.85) saturate(0.4);
-}
-
-/* Teal accent tint for hover state in light theme */
-.gears-light-theme #brain-gears .gear-main--active,
-.gears-light-theme #brain-gears-copy .gear-main--active {
-  filter: invert(1) brightness(0.88) contrast(0.9) saturate(0.5) sepia(0.2) hue-rotate(160deg);
-}
-
 /* Performance optimizations for rotating gears - but allow drop shadows on child elements */
 /* Only apply filter: none to the rotating containers themselves, not their children */
 #brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
