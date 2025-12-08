@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight, Quote, Sparkles, TrendingUp } from 'lucide-react'
+import { ArrowRight, Quote, Sparkles, TrendingUp, Play } from 'lucide-react'
 import { useLightbox } from '@/contexts/LightboxContext'
 
 interface MLExplainabilityHighlightProps {
@@ -159,6 +159,19 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
               <ArrowRight className="w-5 h-5" />
               <div className="h-px w-8 bg-slate-300"></div>
             </div>
+          </div>
+
+          {/* Public Explainability Demo (YouTube) */}
+          <div className="mt-6 flex justify-center">
+            <a
+              href="https://www.youtube.com/watch?v=oPFKkcgNCbo"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[var(--accent-teal)] text-[var(--accent-teal)] text-xs md:text-sm font-mono tracking-wide hover:bg-[var(--accent-teal-50)] hover:border-[var(--accent-teal-soft)] transition-colors"
+            >
+              <Play className="w-4 h-4" />
+              <span>Watch public explainability demo (YouTube)</span>
+            </a>
           </div>
         </div>
 
