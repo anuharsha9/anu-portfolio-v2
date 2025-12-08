@@ -55,7 +55,7 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
       body: 'Integrated one-click access to interpretable ML insights. Personally audited every screen after handoff, flagged issues, opened QA tickets, and ensured nothing shipped until it met the bar.',
       status: 'COMPLETED' as const,
       image: {
-        src: '/images/case-study/ml-functions/6. Run Model - Explanability Popup.png',
+        src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
         alt: 'Explainability popup - interpretable ML insights',
         caption: 'Explainability: Making ML decisions transparent and trustworthy',
         isBlurred: true,
