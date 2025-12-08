@@ -101,24 +101,12 @@ const TeamCollaboration = dynamic(() => import('./TeamCollaboration'), {
 })
 
 // ML Functions specific components
-const MLCompetitiveMatrix = dynamic(() => import('./MLCompetitiveMatrix'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const MLPersonalChallenge = dynamic(() => import('./MLPersonalChallenge'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
 const PatternConnections = dynamic(() => import('./PatternConnections'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
 const ReadingProgress = dynamic(() => import('./ReadingProgress'), { ssr: false }) // No loading state needed for progress bar
 const MLChallengeBreakdown = dynamic(() => import('./MLChallengeBreakdown'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const MLLearningJourney = dynamic(() => import('./MLLearningJourney'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -130,19 +118,11 @@ const MLUserAccessStrategy = dynamic(() => import('./MLUserAccessStrategy'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const CompetitiveAnalysisBreakdown = dynamic(() => import('./CompetitiveAnalysisBreakdown'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
 const MLWorkflowMapping = dynamic(() => import('./MLWorkflowMapping'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
 const ThreeCriticalPivots = dynamic(() => import('./ThreeCriticalPivots'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const MLTeamCollaboration = dynamic(() => import('./MLTeamCollaboration'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -166,10 +146,6 @@ const LayeredDisclosureVisual = dynamic(() => import('./LayeredDisclosureVisual'
   ssr: false,
   loading: () => <LoadingSpinner />
 })
-const EntryPointTransformation = dynamic(() => import('./EntryPointTransformation'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
 const MLImpactMetrics = dynamic(() => import('./MLImpactMetrics'), {
   ssr: false,
   loading: () => <LoadingSpinner />
@@ -187,10 +163,6 @@ const MLRecommendations = dynamic(() => import('./MLRecommendations'), {
   loading: () => <LoadingSpinner />
 })
 const IQPersonaCards = dynamic(() => import('./IQPersonaCards'), {
-  ssr: false,
-  loading: () => <LoadingSpinner />
-})
-const IQCompetitiveAnalysis = dynamic(() => import('./IQCompetitiveAnalysis'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })

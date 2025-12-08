@@ -6,11 +6,9 @@ import { CaseStudySection } from '@/types/caseStudy'
 import WorkflowPrototype from './WorkflowPrototype'
 import ImageLightbox from './ImageLightbox'
 import BeforeAfterComparison from './BeforeAfterComparison'
-import VisualSummaryCard from './VisualSummaryCard'
 import PullQuote from './PullQuote'
 import AhaMoment from './AhaMoment'
 import TeamOnboardingProcess from './TeamOnboardingProcess'
-import EntryPointTransformation from './EntryPointTransformation'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
 import SensitiveImage from './SensitiveImage'
 import LockedContent from './LockedContent'
@@ -937,24 +935,7 @@ export default function SectionBlock({ section, isLightBackground = false, caseS
                           </div>
                         )}
 
-                        {/* Entry Point Transformation for ML Functions Section 06 */}
-                        {section.id === 'section-06' && subsection.title === 'Multiple ways to launch ML Functions from the HUB' && caseStudySlug === 'ml-functions' && (
-                          <div className="pt-4">
-                            {actuallyUnlocked ? (
-                              <EntryPointTransformation isLightBackground={isLightBackground} />
-                            ) : (
-                              <LockedContent
-                                isUnlocked={actuallyUnlocked}
-                                password={password}
-                                caseStudySlug={caseStudySlug}
-                                isLightBackground={isLightBackground}
-                                unlockMessage={`Password required to view ${section.title}`}
-                              >
-                                <div className="min-h-[200px]" />
-                              </LockedContent>
-                            )}
-                          </div>
-                        )}
+                        {/* Entry Point content handled by DesignIterationLog */}
 
                         {/* Four Step Flow Breakdown for ML Functions Section 06 - The main step workflow UI */}
                         {section.id === 'section-06' && subsection.title === 'The main step workflow UI' && caseStudySlug === 'ml-functions' && (
