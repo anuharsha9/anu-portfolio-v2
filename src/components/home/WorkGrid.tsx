@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Lock, Youtube } from 'lucide-react'
 import { useState } from 'react'
+import HeroTerminal from '@/components/case-study/HeroTerminal'
 
 const caseStudies = [
   {
@@ -16,6 +16,7 @@ const caseStudies = [
     description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Integrated 5 legacy subsystems intelligently into the main product hub.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     fileName: 'legacy_scheduler_refactor.js',
+    accentColor: '#F59E0B',
     locked: false,
   },
   {
@@ -27,6 +28,7 @@ const caseStudies = [
     description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Zero dead-end errors in testing.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     fileName: 'ml_wizard_pipeline.py',
+    accentColor: '#0BA2B5',
     locked: false,
   },
   {
@@ -38,6 +40,7 @@ const caseStudies = [
     description: 'Unified 3 DSML tools into one browser extension with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
+    accentColor: '#8B5CF6',
     locked: true,
   },
 ]
@@ -107,7 +110,7 @@ export default function WorkGrid() {
           </motion.div>
         </motion.div>
 
-        {/* Work Grid - 3 Cards with Terminal Style */}
+        {/* Work Grid - 3 Cards with HeroTerminal images */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {caseStudies.map((study, index) => (
             <motion.div
@@ -124,55 +127,28 @@ export default function WorkGrid() {
                 href={`/work/${study.slug}`}
                 className="block h-full"
               >
-                <div className="flex flex-col h-full">
-                  {/* Terminal Window */}
-                  <div 
-                    className="rounded-t-xl overflow-hidden border border-slate-200 bg-white transition-all duration-500"
-                    style={{
-                      boxShadow: hoveredIndex === index 
-                        ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-                        : '0 10px 40px -10px rgba(0, 0, 0, 0.1)',
-                    }}
-                  >
-                    {/* Terminal Header */}
-                    <div className="bg-slate-100 border-b border-slate-200 px-4 py-3 flex items-center gap-4">
-                      {/* Traffic Lights */}
-                      <div className="flex gap-2">
-                        <span className="w-3 h-3 rounded-full bg-[#FF5F57]"></span>
-                        <span className="w-3 h-3 rounded-full bg-[#FEBC2E]"></span>
-                        <span className="w-3 h-3 rounded-full bg-[#28C840]"></span>
-                      </div>
-                      {/* Filename */}
-                      <span className="font-mono text-xs text-slate-500 tracking-wide flex-grow text-center">
-                        {study.fileName}
-                      </span>
-                      {/* Spacer for centering */}
-                      <div className="w-12"></div>
-                    </div>
-
-                    {/* Image Area */}
-                    <div className="relative aspect-[4/3] bg-slate-50">
-                      <Image
-                        src={study.image}
-                        alt={study.title}
-                        fill
-                        className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                      
-                      {/* Locked Badge */}
-                      {study.locked && (
-                        <div className="absolute top-3 right-3">
-                          <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
-                            <Lock className="w-3.5 h-3.5 text-white" />
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-slate-300 transition-all duration-500 h-full flex flex-col">
+                  {/* HeroTerminal Image */}
+                  <div className="p-4 pb-0" onClick={(e) => e.preventDefault()}>
+                    <HeroTerminal
+                      imageSrc={study.image}
+                      fileName={study.fileName}
+                      accentColor={study.accentColor}
+                      alt={study.title}
+                    />
                   </div>
+                  
+                  {/* Locked Badge - Overlay on terminal */}
+                  {study.locked && (
+                    <div className="absolute top-8 right-8 z-10">
+                      <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
+                        <Lock className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Card Content */}
-                  <div className="bg-white border border-t-0 border-slate-200 rounded-b-xl p-5 flex-grow flex flex-col">
+                  <div className="p-6 flex-grow flex flex-col">
                     {/* Metric Badge */}
                     <div className="mb-4">
                       <div className="inline-flex items-baseline gap-1.5 bg-slate-50 rounded-lg px-3 py-1.5 border border-slate-100">
