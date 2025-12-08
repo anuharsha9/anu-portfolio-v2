@@ -166,7 +166,11 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                    className={`w-8 h-8 flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                      isLight
+                        ? 'text-slate-500 hover:text-slate-900 focus-visible:outline-slate-900'
+                        : 'text-white/70 hover:text-white focus-visible:outline-white'
+                    }`}
                     aria-label="Close menu"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

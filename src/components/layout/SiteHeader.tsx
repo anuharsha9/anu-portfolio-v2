@@ -15,41 +15,44 @@ export default function SiteHeader() {
   const isCaseStudyPage = pathname?.startsWith('/work/') ?? false
   const isAboutPage = pathname === '/me' || pathname === '/me/'
 
-  // Always visible on case study pages, otherwise start hidden
+  // Always visible on case study pages, otherwise start hidden (desktop only)
   const [isVisible, setIsVisible] = useState(isCaseStudyPage)
 
+  // Keep track of whether we're on mobile to control visibility behavior
   useEffect(() => {
-    // Only run on client side
     if (typeof window === 'undefined') return
 
-    // Always show header on mobile (for hamburger menu access)
-    const isMobile = window.innerWidth < 1024 // lg breakpoint
-    if (isMobile) {
-      setIsVisible(true)
-      return
-    }
-
-    const handleResize = () => {
-      const isMobileNow = window.innerWidth < 1024
-      if (isMobileNow) {
+    const updateVisibilityForViewport = () => {
+      const isMobile = window.innerWidth < 1024 // lg breakpoint
+      if (isMobile) {
+        // On mobile, header should always be visible for hamburger access
         setIsVisible(true)
       } else {
-        // On desktop, hide nav initially and let scroll manager handle visibility
+        // On desktop, start hidden and let scroll manager handle visibility
         setIsVisible(false)
       }
     }
 
-    window.addEventListener('resize', handleResize)
+    updateVisibilityForViewport()
+    window.addEventListener('resize', updateVisibilityForViewport)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', updateVisibilityForViewport)
     }
   }, [])
 
   const [hasShadow, setHasShadow] = useState(false)
 
-  // Use centralized scroll manager - simplified for light theme
+  // Use centralized scroll manager
   useScrollManager((scrollY) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      // On mobile: header always visible, only toggle shadow
+      setIsVisible(true)
+      setHasShadow(scrollY > 0)
+      return
+    }
+
+    // On desktop: show header only after scrolling
     const hasScrolled = scrollY > 0
     setIsVisible(hasScrolled)
     setHasShadow(hasScrolled)
