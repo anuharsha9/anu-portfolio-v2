@@ -211,7 +211,7 @@ export const recommendations: Recommendation[] = [
   // FEATURED: MY MENTOR
   // ═══════════════════════════════════════════════════════════════
   {
-    quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Anuja is a natural leader who elevates everyone around her.',
+    quote: 'She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Anuja is willing to take on difficult problems and push for creative solutions, even under tight timelines.',
     name: 'Dave Pfeiffer',
     role: 'Director of Design',
     company: 'Cloud Software Group',

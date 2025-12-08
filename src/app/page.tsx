@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import HeroSplit from '@/components/home/HeroSplit'
-import TransformationShowcase from '@/components/home/TransformationShowcase'
 import WorkGrid from '@/components/home/WorkGrid'
+import TransformationShowcase from '@/components/home/TransformationShowcase'
 import GrowthStory from '@/components/home/GrowthStory'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
-import FeaturedQuote from '@/components/home/FeaturedQuote'
 import TalkSection from '@/components/home/TalkSection'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
@@ -39,20 +38,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* 1. HERO - Who you are + Impact Proof Bar at bottom */}
+      {/* 1. HERO - Dark, dramatic, gears as the centerpiece */}
       <HeroSplit />
 
-      {/* 2. TRANSFORMATION SHOWCASE - The scroll-stopper */}
-      <TransformationShowcase />
-
-      {/* 3. WORK GRID - WebFOCUS context + 3 Case Studies */}
+      {/* 2. WORK - Show the work immediately */}
       <WorkGrid />
 
-      {/* 3. GROWTH STORY - The Transformation (emotional hook) */}
-      <GrowthStory />
+      {/* 3. TRANSFORMATION - The scroll-stopper before/after */}
+      <TransformationShowcase />
 
-      {/* 4. QUOTE - Social Proof */}
-      <FeaturedQuote />
+      {/* 4. QUOTE - Dave's testimonial + link to Me page */}
+      <GrowthStory />
 
       {/* 5. ARCHIVE - Past Work */}
       <CollapsibleWorkArchive />

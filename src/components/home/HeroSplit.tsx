@@ -2,20 +2,27 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import BrainGears from '@/assets/brain-gears.svg'
 import VideoModal from '@/components/video/VideoModal'
-import { GEAR_LABELS } from '@/data/gear-labels-preserved'
+import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import { GEAR_INSPECTOR, GearInspectorItem } from '@/data/gear-inspector'
 
-const GEAR_IDS = Object.keys(GEAR_LABELS)
+const GEAR_IDS = Object.keys(GEAR_INSPECTOR)
 
 /**
- * HeroSplit - Split screen hero with Designer-Led positioning
- * Left: Editorial text, Right: BrainGears animation
+ * HeroSplit - "Gear Inspector" Experience
+ * Hover on gears to peek inside my brain - each gear reveals actual work
  */
 export default function HeroSplit() {
+  const router = useRouter()
   const containerRef = useRef<HTMLDivElement | null>(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
-  const [hoverText, setHoverText] = useState<string | null>(null)
+  const [activeGear, setActiveGear] = useState<GearInspectorItem | null>(null)
+  const [isCardHovered, setIsCardHovered] = useState(false)
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
@@ -200,7 +207,7 @@ export default function HeroSplit() {
             // Continue anyway
           }
 
-          if (!GEAR_LABELS[gearId]) return
+          if (!GEAR_INSPECTOR[gearId]) return
 
           let hoverTimeout: NodeJS.Timeout | null = null
           allHoverTimeouts.set(gearId, null)
@@ -219,19 +226,27 @@ export default function HeroSplit() {
               allHoverTimeouts.set(gearId, null)
             }
 
+            // Clear hide timeout if hovering a new gear
+            if (hideTimeoutRef.current) {
+              clearTimeout(hideTimeoutRef.current)
+              hideTimeoutRef.current = null
+            }
+
             const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
             allActiveGears.forEach((activeGear) => {
               if (activeGear.id !== gearId) {
                 activeGear.classList.remove('gear-main--active')
+                // Remove accent color from previously active gear
+                activeGear.style.removeProperty('--gear-accent')
               }
             })
 
             gearGroup.classList.add('gear-main--active')
-            const label = GEAR_LABELS[gearId] || ''
-            if (!label) return
-            const singleLineLabel = label.replace(/\n/g, ' • ')
-            if (singleLineLabel.trim()) {
-              setHoverText(singleLineLabel)
+            const gearData = GEAR_INSPECTOR[gearId]
+            if (gearData) {
+              // Apply accent color to the gear
+              gearGroup.style.setProperty('--gear-accent', gearData.accentColor)
+              setActiveGear(gearData)
             }
           }
 
@@ -242,17 +257,27 @@ export default function HeroSplit() {
               allHoverTimeouts.set(gearId, null)
             }
 
+            // Longer delay to allow user to move to the inspector card
             hoverTimeout = setTimeout(() => {
               gearGroup.classList.remove('gear-main--active')
               requestAnimationFrame(() => {
                 const activeGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active'))
                 if (activeGears.length === 0) {
-                  setHoverText(null)
+                  // Use the ref to schedule hiding (will be cancelled if card is hovered)
+                  if (hideTimeoutRef.current) {
+                    clearTimeout(hideTimeoutRef.current)
+                  }
+                  hideTimeoutRef.current = setTimeout(() => {
+                    setActiveGear((current) => {
+                      // Only clear if not hovering the card
+                      return current
+                    })
+                  }, 300)
                 }
               })
               hoverTimeout = null
               allHoverTimeouts.set(gearId, null)
-            }, 10)
+            }, 150)
 
             allHoverTimeouts.set(gearId, hoverTimeout)
           }
@@ -260,13 +285,23 @@ export default function HeroSplit() {
           const overlay = gearGroup.querySelector<SVGCircleElement>('.gear-hover-overlay')
           const listeners: { element: Element; type: string; handler: EventListener }[] = []
 
+          // Click handler to navigate to the gear's linked content
+          const handleClick = () => {
+            const gearData = GEAR_INSPECTOR[gearId]
+            if (gearData?.link) {
+              router.push(gearData.link)
+            }
+          }
+
           if (overlay) {
             overlay.addEventListener('mouseenter', handleEnter)
             overlay.addEventListener('mouseleave', handleLeave)
+            overlay.addEventListener('click', handleClick)
             overlay.addEventListener('touchstart', handleEnter, { passive: true })
             listeners.push(
               { element: overlay, type: 'mouseenter', handler: handleEnter },
               { element: overlay, type: 'mouseleave', handler: handleLeave },
+              { element: overlay, type: 'click', handler: handleClick },
               { element: overlay, type: 'touchstart', handler: handleEnter }
             )
           } else {
@@ -276,10 +311,12 @@ export default function HeroSplit() {
             }
             gearGroup.addEventListener('mouseenter', handleEnter)
             gearGroup.addEventListener('mouseleave', handleLeave)
+            gearGroup.addEventListener('click', handleClick)
             gearGroup.addEventListener('touchstart', handleEnter, { passive: true })
             listeners.push(
               { element: gearGroup, type: 'mouseenter', handler: handleEnter },
               { element: gearGroup, type: 'mouseleave', handler: handleLeave },
+              { element: gearGroup, type: 'click', handler: handleClick },
               { element: gearGroup, type: 'touchstart', handler: handleEnter }
             )
           }
@@ -323,43 +360,62 @@ export default function HeroSplit() {
     <>
       <section
         id="hero"
-        className="bg-slate-50 relative min-h-screen flex items-center overflow-hidden border-b border-slate-200"
+        className="bg-slate-900 relative min-h-screen flex items-center overflow-hidden"
       >
-        <div className="w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 pb-24 md:pb-28">
-          {/* Split Layout: Text Left (40%), Gears Right (60%) - Gears more prominent */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-4 items-center py-8 lg:py-0">
+        {/* Subtle grid background */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        {/* Glow effect behind gears */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[800px] h-[800px] bg-[#0BA2B5]/10 rounded-full blur-[150px]" />
+        </div>
+
+        {/* Main Content Container */}
+        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-screen py-20 lg:py-0">
             
-            {/* Left Side - Editorial Text (2 of 5 columns = 40%) */}
+            {/* Left Side - Text Content (5 columns) */}
             <motion.div
-              className="order-2 lg:order-1 lg:col-span-2 flex flex-col justify-center space-y-6 md:space-y-8 text-center lg:text-left"
-              initial={{ opacity: 0, x: -40 }}
+              className="lg:col-span-5 flex flex-col justify-center space-y-8 text-center lg:text-left order-2 lg:order-1"
+              initial={{ opacity: 0, x: -60 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Headline - Serif Editorial - Swiss Style */}
-              <h1 
-                className="font-serif text-slate-900 leading-[1.1] tracking-tight"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+              {/* Pre-headline Tag */}
+              <motion.span 
+                className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
               >
-                Designing through the complexity.
+                // PRINCIPAL_PRODUCT_DESIGNER
+              </motion.span>
+
+              {/* Main Headline */}
+              <h1 className="font-serif text-white leading-[1.05] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+                Designing<br />
+                through the<br />
+                <span className="text-[#0BA2B5]">complexity.</span>
               </h1>
 
-              {/* Subhead - Monospace Signature - Teal Accent */}
-              <p className="font-mono text-[#0BA2B5] text-sm md:text-base tracking-wide font-medium">
-                Principal Product Designer · Design Systems Architect · AI-Driven
-              </p>
-
-              {/* Body Copy - slate-600 for readability */}
-              <p className="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
-                I bridge the gap between complex requirements and clear interfaces. From legacy systems to modern experiences at scale.
+              {/* Subhead */}
+              <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
+                I bridge legacy systems and modern experiences. 
+                From ambiguity to clarity, at enterprise scale.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-4">
-                {/* Primary CTA - Teal Accent */}
+              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-2">
                 <a
                   href="#work-overview"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all duration-300 hover:scale-105 shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#0BA2B5]/25"
                   onClick={(e) => {
                     e.preventDefault()
                     const section = document.getElementById('work-overview')
@@ -374,10 +430,9 @@ export default function HeroSplit() {
                   </svg>
                 </a>
 
-                {/* Video Intro CTA - More Prominent */}
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="group inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all duration-300 hover:scale-105 shadow-lg"
+                  className="group inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full border border-slate-700 text-white font-medium hover:border-[#0BA2B5] hover:bg-[#0BA2B5]/10 transition-all duration-300"
                 >
                   <span className="relative flex h-5 w-5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0BA2B5] opacity-75"></span>
@@ -387,17 +442,17 @@ export default function HeroSplit() {
                       </svg>
                     </span>
                   </span>
-                  <span>20s Intro</span>
-                  <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider hidden sm:inline">
-                    — I'm open to roles
+                  <span>Watch Intro</span>
+                  <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider hidden sm:inline">
+                    20s
                   </span>
                 </button>
               </div>
 
-              {/* Thought Inspector - Left column, below CTAs */}
-              <div className="pt-8 min-h-[100px] hidden lg:block">
+              {/* GEAR INSPECTOR - The Magic Happens Here */}
+              <div className="pt-4 min-h-[160px] hidden lg:block">
                 <AnimatePresence mode="wait">
-                  {!hoverText ? (
+                  {!activeGear ? (
                     <motion.div
                       key="hint"
                       className="flex items-center gap-3"
@@ -406,48 +461,110 @@ export default function HeroSplit() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="w-8 h-px bg-slate-300" />
+                      <div className="w-8 h-px bg-slate-700" />
                       <motion.span 
-                        className="font-mono text-slate-400 text-xs tracking-wide"
+                        className="font-mono text-slate-500 text-xs tracking-wide"
                         animate={{ opacity: [0.5, 1, 0.5] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                       >
-                        Hover the gears to explore my thinking →
+                        Hover the gears to peek inside my brain →
                       </motion.span>
                     </motion.div>
                   ) : (
                     <motion.div
-                      key={`thought-${hoverText}`}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
+                      key={`gear-${activeGear.id}`}
+                      initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="border-l-2 border-[var(--accent-teal)] pl-4"
+                      className="bg-slate-800/80 backdrop-blur-sm border border-slate-700 rounded-xl p-4 max-w-md cursor-pointer"
+                      style={{ borderColor: `${activeGear.accentColor}30` }}
+                      onMouseEnter={() => {
+                        setIsCardHovered(true)
+                        if (hideTimeoutRef.current) {
+                          clearTimeout(hideTimeoutRef.current)
+                          hideTimeoutRef.current = null
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        setIsCardHovered(false)
+                        // Hide after leaving the card
+                        hideTimeoutRef.current = setTimeout(() => {
+                          setActiveGear(null)
+                        }, 300)
+                      }}
                     >
-                      <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest block mb-2">
-                        // THOUGHT
-                      </span>
-                      <p className="font-serif text-slate-700 text-base leading-relaxed italic">
-                        "{hoverText}"
+                      {/* Header with thought */}
+                      <div className="flex items-start gap-3 mb-3">
+                        <div 
+                          className="w-1 h-full min-h-[40px] rounded-full flex-shrink-0"
+                          style={{ backgroundColor: activeGear.accentColor }}
+                        />
+                        <div>
+                          <span 
+                            className="font-mono text-[10px] uppercase tracking-widest block mb-1"
+                            style={{ color: activeGear.accentColor }}
+                          >
+                            // {activeGear.title.toUpperCase().replace(/\s+/g, '_')}
+                          </span>
+                          <p className="font-serif text-slate-300 text-sm italic leading-relaxed">
+                            &ldquo;{activeGear.thought}&rdquo;
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Preview Image (if exists) */}
+                      {activeGear.image && (
+                        <div className="relative h-24 rounded-lg overflow-hidden mb-3 border border-slate-700">
+                          <Image
+                            src={activeGear.image}
+                            alt={activeGear.title}
+                            fill
+                            className="object-cover object-top"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                        </div>
+                      )}
+
+                      {/* Insight */}
+                      <p className="text-slate-400 text-xs leading-relaxed mb-3">
+                        {activeGear.insight}
                       </p>
+
+                      {/* Link to dive deeper */}
+                      <Link
+                        href={activeGear.link}
+                        className="inline-flex items-center gap-2 text-xs font-medium transition-colors group"
+                        style={{ color: activeGear.accentColor }}
+                      >
+                        <span>{activeGear.linkLabel}</span>
+                        <svg 
+                          className="w-3 h-3 group-hover:translate-x-1 transition-transform" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             </motion.div>
 
-            {/* Right Side - Brain Gears (3 of 5 columns = 60%) - More prominent */}
-            <div className="order-1 lg:order-2 lg:col-span-3 relative gears-light-theme lg:-mr-12 xl:-mr-20">
+            {/* Right Side - Brain Gears (7 columns) - THE HERO */}
+            <div className="lg:col-span-7 relative order-1 lg:order-2">
               <div
                 ref={containerRef}
-                className="relative w-full max-w-[500px] mx-auto lg:max-w-none lg:scale-110 xl:scale-115 origin-center"
+                className="relative w-full max-w-[550px] mx-auto lg:max-w-none lg:scale-110 xl:scale-125 origin-center gears-dark-theme"
                 style={{ aspectRatio: '1 / 1' }}
               >
                 <motion.div
                   className="absolute inset-0 pointer-events-auto"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.5, ease: 'easeOut' }}
+                  initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <BrainGears
                     className="h-full w-full"
@@ -455,7 +572,6 @@ export default function HeroSplit() {
                     id="brain-gears-svg"
                   />
                 </motion.div>
-
               </div>
             </div>
           </div>
@@ -463,36 +579,55 @@ export default function HeroSplit() {
 
         {/* Impact Proof Bar - Bottom of Hero */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 border-t border-slate-200/60 bg-white/80 backdrop-blur-sm"
+          className="absolute bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-950/80 backdrop-blur-sm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
-            <div className="grid grid-cols-4 divide-x divide-slate-200/60">
+          <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="grid grid-cols-4 divide-x divide-slate-800">
               {[
-                { value: '50yr', label: 'Legacy Modernized' },
-                { value: '20M+', label: 'Weekly Schedules' },
-                { value: '75%', label: 'Fewer Clicks' },
-                { value: '100%', label: 'SME Validation' },
+                { value: '50', suffix: 'yr', label: 'Legacy Modernized' },
+                { value: '20', suffix: 'M+', label: 'Weekly Schedules' },
+                { value: '75', suffix: '%', label: 'Fewer Clicks' },
+                { value: '100', suffix: '%', label: 'SME Validation' },
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  className="py-4 md:py-5 px-2 md:px-4 text-center"
+                  className="py-5 md:py-6 px-2 md:px-4 text-center"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 1.8 + index * 0.1 }}
+                  transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                 >
-                  <div className="font-mono text-lg md:text-2xl font-semibold text-[var(--accent-teal)]">
-                    {metric.value}
+                  <div className="font-mono text-xl md:text-2xl font-semibold text-[#0BA2B5]">
+                    <AnimatedCounter 
+                      value={`${metric.value}${metric.suffix}`} 
+                      duration={1.5 + index * 0.2}
+                    />
                   </div>
-                  <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5">
+                  <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-1">
                     {metric.label}
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div 
+          className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.5 }}
+        >
+          <motion.div
+            className="w-6 h-10 border-2 border-slate-700 rounded-full flex justify-center pt-2"
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <div className="w-1 h-2 bg-[#0BA2B5] rounded-full" />
+          </motion.div>
         </motion.div>
       </section>
 
@@ -504,4 +639,3 @@ export default function HeroSplit() {
     </>
   )
 }
-

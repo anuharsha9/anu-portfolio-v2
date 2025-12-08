@@ -531,6 +531,29 @@
   perspective: 1000px;
 }
 
+/* Dark theme gears - for dark backgrounds */
+.gears-dark-theme #brain-gears,
+.gears-dark-theme #brain-gears-copy {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Dark theme: Hide the hover gear variant entirely - just use base gear with glow */
+.gears-dark-theme #brain-gears .gear-main--active [id^="gear-base"],
+.gears-dark-theme #brain-gears .gear-main--active g[id^="gear-base"],
+.gears-dark-theme #brain-gears-copy .gear-main--active [id^="gear-base"],
+.gears-dark-theme #brain-gears-copy .gear-main--active g[id^="gear-base"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.gears-dark-theme #brain-gears .gear-main--active [id^="gear-hover"],
+.gears-dark-theme #brain-gears .gear-main--active g[id^="gear-hover"],
+.gears-dark-theme #brain-gears-copy .gear-main--active [id^="gear-hover"],
+.gears-dark-theme #brain-gears-copy .gear-main--active g[id^="gear-hover"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 /* Performance optimizations for rotating gears - but allow drop shadows on child elements */
 /* Only apply filter: none to the rotating containers themselves, not their children */
 #brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
@@ -610,6 +633,18 @@
   transition: opacity 0.4s ease-in, visibility 0.4s ease-in !important;
 }
 
+/* Teal glow on active gears */
+#brain-gears .gear-main--active,
+#brain-gears-copy .gear-main--active {
+  filter: drop-shadow(0 0 18px rgba(11, 162, 181, 0.6)) !important;
+}
+
+/* Dark theme: Teal glow on hover - more visible */
+.gears-dark-theme #brain-gears .gear-main--active,
+.gears-dark-theme #brain-gears-copy .gear-main--active {
+  filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4)) !important;
+}
+
 /* Hover lines - hidden by default */
 #brain-gears [id^="hover-line-"],
 #brain-gears-copy [id^="hover-line-"] {
@@ -626,7 +661,7 @@
   /* Opacity will be controlled by JavaScript animation - no !important to allow JS override */
 }
 
-/* Line drawing animation - slow and smooth, final opacity 0.5 (like background gears) */
+/* Line drawing animation - slow and smooth */
 @keyframes line-draw-path {
   0% {
     stroke-dashoffset: var(--path-length, 1000);
@@ -634,14 +669,35 @@
   }
 
   10% {
-    opacity: 0.5;
+    opacity: 0.8;
     /* Fade in quickly at start */
   }
 
   100% {
     stroke-dashoffset: 0;
-    opacity: 0.5;
+    opacity: 1;
   }
+}
+
+/* Dark theme: Boost line visibility */
+/* After invert filter, lines should be light - just boost opacity */
+.gears-dark-theme #brain-gears #lines-background path,
+.gears-dark-theme #brain-gears-copy #lines-background path {
+  opacity: 1 !important;
+  stroke-width: 2px !important;
+}
+
+/* Dark theme: Make internal gear strokes/circles lighter */
+.gears-dark-theme #brain-gears [id^="gear-"] circle,
+.gears-dark-theme #brain-gears [id^="gear-"] ellipse,
+.gears-dark-theme #brain-gears-copy [id^="gear-"] circle,
+.gears-dark-theme #brain-gears-copy [id^="gear-"] ellipse {
+  stroke: rgba(255, 255, 255, 0.3) !important;
+}
+
+.gears-dark-theme #brain-gears [id^="gear-base"] path[stroke],
+.gears-dark-theme #brain-gears-copy [id^="gear-base"] path[stroke] {
+  stroke: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Ensure lines start invisible */

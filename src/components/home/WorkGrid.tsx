@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowRight, Lock, Youtube } from 'lucide-react'
 import { useState } from 'react'
 import HeroTerminal from '@/components/case-study/HeroTerminal'
+import AnimatedCounter from '@/components/ui/AnimatedCounter'
 
 const caseStudies = [
   {
@@ -155,7 +156,7 @@ export default function WorkGrid() {
                     <div className="mb-4">
                       <div className="inline-flex items-baseline gap-1.5 bg-slate-50 rounded-lg px-3 py-1.5 border border-slate-100">
                         <span className="font-mono text-xl font-bold text-[var(--accent-teal)]">
-                          {study.metric}
+                          <AnimatedCounter value={study.metric} duration={1.2} />
                         </span>
                         <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
                           {study.metricLabel}
