@@ -348,7 +348,7 @@ export const iqPluginVitalSigns = [
   {
     label: 'WORKFLOWS_OWNED',
     value: '3',
-    context: 'NLQ + Insights + IQ Hub',
+    context: 'NLQ + Insights + DSML Hub',
   },
   {
     label: 'PATTERN_PARITY',

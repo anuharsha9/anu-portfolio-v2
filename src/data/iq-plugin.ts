@@ -273,7 +273,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'NLQ + Insights: now. ML: 2026. IQ Plugin: 2027.',
+        description: 'NLQ + Insights: now. ML: 2026. DSML Hub: 2027.',
         systemLogic: "ship(2027);",
       },
     ],
@@ -284,7 +284,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   impactSummary: {
     heading: 'Impact',
     bullets: [
-      'Owned all 3 workflows: NLQ, Insights, IQ Hub',
+      'Owned all 3 workflows: NLQ, Insights, DSML Hub',
       '100% pattern consistency across all features',
       'All features fully responsive',
       'Created 2 business personas; inherited 2 technical',
@@ -297,9 +297,9 @@ export const iqPluginCaseStudy: CaseStudyData = {
   // ----------------------------
   finalSummary: {
     title: 'The Work',
-    body: 'I owned every piece of the DSML surface. NLQ. Insights. The IQ Hub that unified them. Made all three responsive. Ensured every pattern matched.',
+    body: 'I owned every piece of the DSML surface. NLQ. Insights. The DSML Hub that unified them. Made all three responsive. Ensured every pattern matched.',
     keyPoints: [
-      'Owned NLQ, Insights, AND IQ Hub',
+      'Owned NLQ, Insights, AND DSML Hub',
       '100% pattern parity',
       'All features responsive',
       '4 personas mapped',
