@@ -374,15 +374,23 @@ export default function HeroSplit() {
                   </svg>
                 </a>
 
-                {/* Secondary CTA - Clean border style */}
+                {/* Video Intro CTA - More Prominent */}
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-slate-300 text-slate-700 font-medium hover:border-slate-400 hover:bg-white transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-all duration-300 hover:scale-105 shadow-lg"
                 >
-                  <svg className="w-4 h-4 text-[#0BA2B5]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                  <span>My Process</span>
+                  <span className="relative flex h-5 w-5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0BA2B5] opacity-75"></span>
+                    <span className="relative inline-flex items-center justify-center rounded-full h-5 w-5 bg-[#0BA2B5]">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span>20s Intro</span>
+                  <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider hidden sm:inline">
+                    — I'm open to roles
+                  </span>
                 </button>
               </div>
 
