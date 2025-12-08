@@ -96,6 +96,22 @@ export default function AboutPage() {
                 <span>Let&apos;s Talk</span>
               </a>
             </div>
+            
+            {/* Personal Signature */}
+            <motion.div 
+              className="pt-12 flex flex-col items-center gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+            >
+              <div className="w-14 h-14 text-slate-500 hover:text-[#0BA2B5] transition-colors duration-500">
+                <AnimatedSignatureLogo 
+                  className="w-full h-full"
+                  duration={10000}
+                  pauseDuration={5000}
+                />
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </MotionSection>

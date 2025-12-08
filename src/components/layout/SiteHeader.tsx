@@ -76,7 +76,7 @@ export default function SiteHeader() {
           href="/"
           className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
         >
-          <div className="w-9 h-9 sm:w-[33.6px] sm:h-[33.6px] text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
             <AnimatedSignatureLogo
               className="w-full h-full"
               duration={16000}

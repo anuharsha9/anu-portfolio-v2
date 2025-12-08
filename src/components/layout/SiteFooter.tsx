@@ -41,12 +41,12 @@ export default function SiteFooter() {
     <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
-          {/* Logo & Name */}
+          {/* Signature & Name */}
           <Link
             href="/"
-            className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity duration-300 group"
+            className="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity duration-300 group"
           >
-            <div className="w-5 h-5 md:w-6 md:h-6 flex-shrink-0">
+            <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
               <SignatureLogo className="w-full h-full text-slate-50 group-hover:text-[#0BA2B5] transition-colors duration-300" />
             </div>
             <span className="text-slate-50 font-medium text-sm md:text-base group-hover:text-[#0BA2B5] transition-colors duration-300">
