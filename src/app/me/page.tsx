@@ -664,9 +664,9 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      {/* SECTION 5 — OUTSIDE OF WORK */}
-      <MotionSection id="outside-of-work" className="bg-slate-50 py-16 md:py-24 lg:py-32 border-t border-slate-200">
-        <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+      {/* SECTION 5 — LIFE OUTSIDE THE TERMINAL */}
+      <MotionSection id="outside-of-work" className="bg-white py-24 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -675,63 +675,105 @@ export default function AboutPage() {
             className="space-y-12"
           >
             {/* Section Header */}
-            <div className="text-center space-y-4">
-              <div className="flex items-center gap-4 justify-center">
-                <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
-                  05
-                </span>
-                <div className="h-px flex-1 bg-slate-200 max-w-xs"></div>
-                <div className="h-px w-12 bg-[#0BA2B5]"></div>
-              </div>
-              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl leading-tight">
-                Outside of Work
+            <div className="text-center space-y-4 max-w-3xl mx-auto">
+              <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+                // RUNTIME: PARALLEL_PROCESSES
+              </span>
+              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
+                Life Outside the Terminal
               </h2>
-            </div>
-
-            {/* Family/Life paragraph */}
-            <div className="max-w-3xl mx-auto">
-              <p className="text-slate-600 text-lg leading-relaxed text-center">
-                I&apos;m a parent of two — a 4-year-old boy and 1-year-old girl — with the most supportive husband.
-                My family plays a very important role in my life. Motherhood shapes my discipline, resilience,
-                empathy, and systems thinking more than anything else. I enjoy slow evenings, quiet rituals,
-                and hobbies that balance the intensity of design work.
+              <p className="text-slate-500 text-base md:text-lg leading-relaxed">
+                Parent of two. Obsessive learner. These hobbies keep me balanced.
               </p>
             </div>
 
-            {/* Hobby Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {/* Core Context - Family */}
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 md:p-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-1 h-full bg-[#0BA2B5] rounded-full flex-shrink-0 self-stretch" />
+                  <div>
+                    <span className="font-mono text-slate-400 text-xs uppercase tracking-widest block mb-3">
+                      // PRIMARY_THREAD
+                    </span>
+                    <p className="text-slate-700 leading-relaxed">
+                      I&apos;m a parent of two — a 4-year-old boy and 1-year-old girl — with the most supportive husband. Motherhood shapes my discipline, resilience, empathy, and systems thinking more than anything else.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Hobby Grid - Technical Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { title: 'Painting', description: 'I do digital and canvas painting. Focusing on Indian mythology.', image: '/assets/painting.jpg' },
-                { title: 'Baking', description: 'I bake everything there is to bake. Cakes, muffins, pastries.', image: '/assets/baking.jpg' },
-                { title: 'Cooking', description: 'I cook more than 400 dishes learned over the years.', image: '/assets/cooking.jpg' },
-                { title: 'Poetry & Writing', description: 'I write poetry and long-form essays.', image: '/assets/poetry.jpg' },
+                { 
+                  id: 'PAINTING',
+                  title: 'Painting', 
+                  desc: 'Digital & canvas. Indian mythology focus.',
+                  image: '/assets/painting.jpg',
+                  tag: 'visual_systems'
+                },
+                { 
+                  id: 'BAKING',
+                  title: 'Baking', 
+                  desc: 'Precision with sugar. Timings & ratios.',
+                  image: '/assets/baking.jpg',
+                  tag: 'structured_craft'
+                },
+                { 
+                  id: 'COOKING',
+                  title: 'Cooking', 
+                  desc: '400+ dishes. Fast iteration.',
+                  image: '/assets/cooking.jpg',
+                  tag: 'rapid_prototyping'
+                },
+                { 
+                  id: 'WRITING',
+                  title: 'Poetry', 
+                  desc: 'Saying a lot with a little.',
+                  image: '/assets/poetry.jpg',
+                  tag: 'content_design'
+                },
               ].map((hobby, index) => (
                 <motion.div
-                  key={hobby.title}
+                  key={hobby.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:shadow-lg hover:border-[#0BA2B5]/30 transition-all duration-300 group"
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group"
                 >
-                  <div className="space-y-4">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden hover:border-[#0BA2B5]/40 hover:shadow-lg transition-all duration-300">
                     {/* Image */}
-                    <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100">
+                    <div className="relative aspect-[4/3] overflow-hidden">
                       <Image
                         src={hobby.image}
                         alt={hobby.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />
+                      {/* Overlay with ID */}
+                      <div className="absolute top-3 left-3">
+                        <span className="font-mono text-[10px] text-white/90 bg-black/50 backdrop-blur-sm px-2 py-1 rounded">
+                          {hobby.id}
+                        </span>
+                      </div>
                     </div>
+                    
                     {/* Content */}
-                    <div className="space-y-2 px-2 pb-2">
-                      <h3 className="font-serif text-slate-900 text-xl group-hover:text-[#0BA2B5] transition-colors">
-                        {hobby.title}
-                      </h3>
-                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                        {hobby.description}
+                    <div className="p-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-semibold text-slate-900 group-hover:text-[#0BA2B5] transition-colors">
+                          {hobby.title}
+                        </h3>
+                      </div>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-3">
+                        {hobby.desc}
                       </p>
+                      <span className="font-mono text-[10px] text-[#0BA2B5] uppercase tracking-wider">
+                        → {hobby.tag}
+                      </span>
                     </div>
                   </div>
                 </motion.div>
