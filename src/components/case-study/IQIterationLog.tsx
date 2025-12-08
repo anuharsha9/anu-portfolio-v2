@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useLightbox } from '@/contexts/LightboxContext'
+import { MessageSquare, Lightbulb, Brain, Database } from 'lucide-react'
 
 interface IQIterationLogProps {
   isLightBackground?: boolean
@@ -20,10 +21,12 @@ interface Tab {
   id: string
   index: string
   label: string
+  icon: React.ReactNode
   title: string
   description: string
   images: TabImage[]
   specCaption: string
+  isKey?: boolean
 }
 
 export default function IQIterationLog({ isLightBackground = false }: IQIterationLogProps) {
@@ -35,6 +38,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
       id: '01_NLQ_WORKFLOW',
       index: '01',
       label: 'Natural Language Query',
+      icon: <MessageSquare className="w-4 h-4" />,
       title: 'Ask a Question Workflow',
       description: 'From empty state to visualization. Validating the "Ask a Question" mental model with non-technical users.',
       specCaption: 'FIG_01: QUERY_PARSING_LOGIC',
@@ -63,6 +67,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
       id: '02_INSIGHTS_ENGINE',
       index: '02',
       label: 'Automated Insights',
+      icon: <Lightbulb className="w-4 h-4" />,
       title: 'Pattern Recognition Engine',
       description: 'Generating instant summaries. Testing the "auto-generate" pattern to reduce time-to-value.',
       specCaption: 'FIG_02: PATTERN_RECOGNITION_UI',
@@ -91,6 +96,8 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
       id: '03_PREDICT_WORKFLOW',
       index: '03',
       label: 'Predictive Analytics',
+      icon: <Brain className="w-4 h-4" />,
+      isKey: true,
       title: 'Guided Model Training Flow',
       description: 'The guided 4-step ML flow. Re-using the "ML Functions" wizard pattern within the IQ Hub context.',
       specCaption: 'FIG_03: GUIDED_MODEL_TRAINING',
@@ -131,6 +138,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
       id: '04_DATA_PREVIEW',
       index: '04',
       label: 'Data Exploration',
+      icon: <Database className="w-4 h-4" />,
       title: 'Quick-Look Dataset Analysis',
       description: 'Ensuring consistent table interactions and time-series views. The first step in any data workflow.',
       specCaption: 'FIG_04: DATA_QUALITY_INSPECTION',
@@ -169,13 +177,13 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-          // SYSTEM_ITERATION_LOG
+          // DESIGN_ITERATION_LOG
         </span>
-        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
-          System Iteration Log
+        <h3 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl">
+          System Inspection: The Design Artifacts
         </h3>
-        <p className="text-slate-500 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-          Prototyping the unified experience: Validating shared patterns across 4 distinct data pillars.
+        <p className="text-slate-500 text-lg max-w-3xl mx-auto leading-relaxed">
+          Navigate through the key design deliverables across all 4 IQ Plugin pillars.
         </p>
       </motion.div>
 
@@ -184,7 +192,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
         <div className="flex flex-col md:flex-row">
 
           {/* Sidebar - File Tree */}
-          <div className="w-full md:w-[24%] border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 bg-slate-50/30">
+          <div className="w-full md:w-[22%] border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 bg-slate-50/30">
             <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
               // PILLAR_INDEX
             </span>
@@ -195,21 +203,31 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`
-                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg
+                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg flex items-center gap-3
                     ${activeTab === tab.id
                       ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900'
                       : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
                   `}
                 >
-                  <span className="font-mono text-xs opacity-50 mr-3">{tab.index}</span>
-                  <span className="font-sans font-medium text-sm">{tab.label}</span>
+                  <span className={`flex-shrink-0 ${activeTab === tab.id ? 'text-[var(--accent-teal)]' : 'text-slate-400'}`}>
+                    {tab.icon}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-mono text-xs opacity-50 mr-2">{tab.index}</span>
+                    <span className="font-sans font-medium text-sm">{tab.label}</span>
+                  </div>
+                  {tab.isKey && (
+                    <span className="flex-shrink-0 bg-violet-100 text-violet-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
+                      Key
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>
           </div>
 
           {/* Preview Pane - The Stage */}
-          <div className="flex-1 p-6 md:p-10 min-h-[550px]">
+          <div className="flex-1 p-6 md:p-10 min-h-[650px]">
             <AnimatePresence mode="wait">
               {activeTabData && (
                 <motion.div

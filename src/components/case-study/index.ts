@@ -61,6 +61,18 @@ export { default as PullQuote } from './PullQuote'
 export { default as RelatedCaseStudies } from './RelatedCaseStudies'
 export { default as SystemIndex } from './SystemIndex'
 
+// Pattern Connections (Navigate Section)
+export { default as PatternConnections } from './PatternConnections'
+export { default as MLPatternConnections } from './MLPatternConnections'
+export { default as IQPatternConnections } from './IQPatternConnections'
+
+// Market Analysis (Unified Component)
+export { default as MarketAnalysis } from './MarketAnalysis'
+
+// Research & Collaboration (Unified Components)
+export { default as ResearchApproach } from './ResearchApproach'
+export { default as TeamCollaboration } from './TeamCollaboration'
+
 // CTA
 export { default as LetsTalkCTA } from './LetsTalkCTA'
 

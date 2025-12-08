@@ -40,7 +40,7 @@ export default function PersonaCards({ isLightBackground = true }: PersonaCardsP
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // USER_PROFILES
+          // USER_PERSONAS
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
           User Personas
@@ -61,7 +61,7 @@ export default function PersonaCards({ isLightBackground = true }: PersonaCardsP
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 + i * 0.15 }}
-            className="flex flex-col md:flex-row bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal-400)]/30 transition-all duration-300"
+            className="flex flex-col md:flex-row bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal-400)]/30 transition-all duration-300 group"
           >
             {/* Left Side - Persona Image (25%) */}
             <div className="relative w-full md:w-[25%] bg-slate-100">
@@ -70,7 +70,7 @@ export default function PersonaCards({ isLightBackground = true }: PersonaCardsP
                   src={p.image} 
                   alt={p.name} 
                   fill 
-                  className="object-cover" 
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
                   sizes="(max-width: 768px) 100vw, 25vw"
                 />
               </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import GearContact from '@/assets/gear-contact.svg'
+import Image from 'next/image'
 
 interface PageTransitionLoaderProps {
   isLoading: boolean
@@ -26,7 +26,14 @@ export default function PageTransitionLoader({ isLoading, message }: PageTransit
           <div className="flex flex-col items-center justify-center space-y-6">
             {/* Rotating Gear SVG */}
             <div className="w-24 h-24 md:w-32 md:h-32 gear-loading">
-              <GearContact className="w-full h-full text-white" />
+              <Image 
+                src="/assets/gear-contact.svg" 
+                alt="Loading" 
+                width={128} 
+                height={128} 
+                className="w-full h-full invert"
+                priority
+              />
             </div>
             {message && (
               <motion.p

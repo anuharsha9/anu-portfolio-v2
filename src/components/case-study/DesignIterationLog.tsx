@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useLightbox } from '@/contexts/LightboxContext'
+import { MousePointer, Workflow, Layout, BarChart3, Sparkles } from 'lucide-react'
 
 interface DesignIterationLogProps {
   isLightBackground?: boolean
@@ -25,10 +26,12 @@ interface Tab {
   id: string
   index: string
   label: string
+  icon: React.ReactNode
   title: string
   description: string
   images: TabImage[]
   quote?: TabQuote
+  isKey?: boolean
 }
 
 export default function DesignIterationLog({ isLightBackground = false }: DesignIterationLogProps) {
@@ -40,6 +43,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       id: '01_ENTRY_POINTS',
       index: '01',
       label: 'Entry Points',
+      icon: <MousePointer className="w-4 h-4" />,
       title: 'Multiple Entry Points from the Hub',
       description: 'Right-click context menus from the Hub, driven by the Techy Analyst persona. Users access Predict Data via right-click on dataset, folder, or +Data menu — achieving 100% discoverability in SME testing.',
       images: [
@@ -73,6 +77,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       id: '03_CORE_WORKFLOW',
       index: '03',
       label: 'Core Workflow',
+      icon: <Workflow className="w-4 h-4" />,
       title: 'The 4-Step Guided Wizard',
       description: 'Structured guided flow: problem type → target → predictors → hyperparameters. Based on our domain expert\'s answer to "What do you absolutely need?" — making ML feel like a guided tour, not a black box.',
       images: [
@@ -106,6 +111,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       id: '04_DESIGN_SYSTEM',
       index: '04',
       label: 'Design System',
+      icon: <Layout className="w-4 h-4" />,
       title: 'ML-Specific Component Architecture',
       description: 'A comprehensive design system built for ML workflows: responsive grids, table styling specifications, and component-level precision for model cards. Every pixel decision was documented.',
       images: [
@@ -145,6 +151,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       id: '05_ADVANCED_METRICS',
       index: '05',
       label: 'Advanced Metrics',
+      icon: <BarChart3 className="w-4 h-4" />,
       title: 'Balancing DS Needs with Readability',
       description: 'Advanced metrics screens that balance data scientist needs (comprehensive metrics) with user needs (scannable, understandable results). The tension between depth and clarity produced the best outcomes.',
       images: [
@@ -166,8 +173,10 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       id: '06_KEY_INTERACTIONS',
       index: '06',
       label: 'Key Interactions',
+      icon: <Sparkles className="w-4 h-4" />,
       title: 'The Confusion Matrix & Explanability',
       description: 'The confusion matrix went through 10+ iterations with our domain expert. Balanced DS priorities (metrics, accuracy) with UX priorities (clarity, scan-ability).',
+      isKey: true,
       quote: {
         text: "This is the best screen in the entire UX revamp — I couldn't have designed it better.",
         attribution: 'Principal Data Scientist',
@@ -233,14 +242,24 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`
-                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg
+                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg flex items-center gap-3
                     ${activeTab === tab.id 
                       ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900' 
                       : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
                   `}
                 >
-                  <span className="font-mono text-xs opacity-50 mr-3">{tab.index}</span>
-                  <span className="font-sans font-medium text-sm">{tab.label}</span>
+                  <span className={`flex-shrink-0 ${activeTab === tab.id ? 'text-[var(--accent-teal)]' : 'text-slate-400'}`}>
+                    {tab.icon}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-mono text-xs opacity-50 mr-2">{tab.index}</span>
+                    <span className="font-sans font-medium text-sm">{tab.label}</span>
+                  </div>
+                  {tab.isKey && (
+                    <span className="flex-shrink-0 bg-amber-100 text-amber-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
+                      Key
+                    </span>
+                  )}
                 </button>
               ))}
             </nav>

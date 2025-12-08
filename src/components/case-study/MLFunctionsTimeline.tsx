@@ -73,7 +73,7 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
       }}
       footer={{
         tag: 'CURRENT_STATE:',
-        body: 'ML Functions redesign shipped in WebFOCUS 9.3. The "Glass Box" approach is now the standard for all ML interfaces in the platform.'
+        body: 'ML Functions redesign shipping in WebFOCUS 9.3.x (2026). The "Glass Box" approach is the new standard for all ML interfaces in the platform.'
       }}
       accentColor="teal"
     />

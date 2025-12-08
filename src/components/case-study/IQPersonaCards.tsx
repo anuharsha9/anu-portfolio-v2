@@ -117,7 +117,7 @@ export default function IQPersonaCards({
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // USER_TOPOLOGY
+          // USER_PERSONAS
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           {title}

@@ -65,7 +65,7 @@ export default function MLPersonaCards({ isLightBackground = false }: MLPersonaC
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // USER_PROFILES
+          // USER_PERSONAS
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           User Personas
@@ -84,7 +84,7 @@ export default function MLPersonaCards({ isLightBackground = false }: MLPersonaC
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="flex flex-col md:flex-row bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal)]/30 transition-all duration-300"
+            className="flex flex-col md:flex-row bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg hover:border-[var(--accent-teal)]/30 transition-all duration-300 group"
           >
             {/* Left Side - Image (30%) */}
             <div className="relative w-full md:w-[30%] bg-slate-50">
@@ -93,7 +93,7 @@ export default function MLPersonaCards({ isLightBackground = false }: MLPersonaC
                   src={p.image} 
                   alt={p.name} 
                   fill 
-                  className="object-cover" 
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
                   sizes="(max-width: 768px) 100vw, 30vw"
                 />
               </div>

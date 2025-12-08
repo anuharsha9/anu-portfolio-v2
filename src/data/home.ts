@@ -139,19 +139,9 @@ export const articleLinks: ArticleLink[] = [
     href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
   },
   {
-    title: 'Designing for Enterprise Complexity',
-    topic: 'UX Design',
-    href: 'https://medium.com/@anu.anuja/designing-for-enterprise-complexity',
-  },
-  {
-    title: 'Modernizing Legacy Systems',
-    topic: 'Product Design',
-    href: 'https://medium.com/@anu.anuja/modernizing-legacy-systems',
-  },
-  {
-    title: 'AI Workflows That Actually Work',
-    topic: 'AI/ML UX',
-    href: 'https://medium.com/@anu.anuja/ai-workflows-that-actually-work',
+    title: 'More Articles on Medium',
+    topic: 'Design Writing',
+    href: 'https://medium.com/@anu.anuja',
   },
 ]
 
@@ -214,14 +204,7 @@ export interface Recommendation {
   source?: 'corporate' | 'adplist' | 'mentor' | 'origin' // Distinguish between work colleagues, mentorship, personal mentor, and origin story
 }
 
-export interface ADPListReview {
-  quote: string
-  name: string
-  role?: string
-  company?: string
-  rating?: number
-  date?: string
-}
+// ADPListReview interface removed - reviews are now in recommendations array with source: 'adplist'
 
 export const recommendations: Recommendation[] = [
   // ═══════════════════════════════════════════════════════════════
@@ -393,34 +376,9 @@ export const brainZones: BrainZone[] = [
     id: 'future-vision',
     label: 'Future',
     title: 'Future vision',
-    description: 'Where I&apos;m heading: Principal/Director, AI UX product strategy, and long-term impact.',
+    description: 'Where I\'m heading: Principal/Director, AI UX product strategy, and long-term impact.',
     // for now no link, purely conceptual
   },
 ]
 
-export const adpListReviews: ADPListReview[] = [
-  {
-    quote: 'Anuja is an excellent mentor. She is proactive, provides actionable tips, checks on progress, and leverages her expertise.',
-    name: 'Gina Kim',
-    role: 'Product Designer',
-    company: 'UC Riverside',
-    date: 'March 05, 2025',
-    rating: 5,
-  },
-  {
-    quote: 'Really good advice for breaking out of a rut and how to enter the field.',
-    name: 'Nathan Irwin',
-    role: 'Design Student',
-    company: 'British Columbia Institute of Technology',
-    date: 'February 05, 2025',
-    rating: 5,
-  },
-  {
-    quote: 'Anuja is an experienced designer with a unique and insightful approach. This was an enriching experience covering design projects, AI, emerging industries, and UX in the USA.',
-    name: 'Eswar Varma',
-    role: 'Associate Lead UX Designer',
-    company: 'Born Group (part of Tech Mahindra)',
-    date: 'February 05, 2025',
-    rating: 5,
-  },
-]
+// Note: ADPList reviews are included in the recommendations array above with source: 'adplist'

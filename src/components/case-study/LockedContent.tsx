@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getTheme } from '@/lib/design-system'
 
@@ -161,73 +162,76 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
         </div>
       </div>
 
-      <AnimatePresence>
-        {showPasswordModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPasswordModal(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {showPasswordModal && (
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPasswordModal(false)} className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative bg-[var(--bg-secondary)] rounded-2xl border-2 border-[var(--border-primary)] p-8 max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setShowPasswordModal(false)} className="absolute top-4 right-4 text-[var(--text-body)] hover:text-[var(--text-heading)] transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative bg-white rounded-2xl border-2 border-slate-200 p-8 max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
+                <button onClick={() => setShowPasswordModal(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900 transition-colors">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
 
-              <div className="space-y-6">
-                <div className="text-center space-y-2">
-                  <h3 className="text-[var(--text-heading)] text-2xl font-serif">Unlock Content</h3>
-                  <p className="text-[var(--text-body)] text-sm">Enter password to view sensitive content</p>
-                  {caseStudySlug !== 'iq-plugin' && <p className="text-[var(--accent-teal)] text-xs font-medium mt-2">✓ Unlocking this section will unlock all protected content across the entire website</p>}
-                </div>
-
-                <form onSubmit={handleUnlock} className="space-y-4">
-                  <div>
-                    <input
-                      type="password"
-                      value={inputPassword}
-                      onChange={(e) => {
-                        setInputPassword(e.target.value)
-                        setError('')
-                        setSuccess(false)
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          e.preventDefault()
-                          handleUnlock(e)
-                        }
-                      }}
-                      placeholder="Enter password"
-                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors bg-[var(--bg-secondary)] text-[var(--text-heading)] placeholder:text-[var(--text-muted)] focus:outline-none ${error ? 'border-[var(--color-error)]' : success ? 'border-[var(--color-success)]' : 'border-[var(--border-primary)] focus:border-[var(--accent-teal)]'}`}
-                      autoFocus
-                      disabled={success}
-                    />
-                    {error && (
-                      <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-red-400 flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {error}
-                      </motion.p>
-                    )}
-                    {success && (
-                      <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-green-400 flex items-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Password correct! Unlocking content...
-                      </motion.p>
-                    )}
+                <div className="space-y-6">
+                  <div className="text-center space-y-2">
+                    <h3 className="text-slate-900 text-2xl font-serif">Unlock Content</h3>
+                    <p className="text-slate-600 text-sm">Enter password to view sensitive content</p>
+                    {caseStudySlug !== 'iq-plugin' && <p className="text-[var(--accent-teal)] text-xs font-medium mt-2">✓ Unlocking this section will unlock all protected content across the entire website</p>}
                   </div>
 
-                  <button type="submit" disabled={success} className={`w-full text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-75 disabled:cursor-not-allowed ${success ? 'bg-green-500 hover:bg-green-600' : 'bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/90'}`}>
-                    {success ? 'Unlocking...' : 'Unlock Content'}
-                  </button>
-                </form>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                  <form onSubmit={handleUnlock} className="space-y-4">
+                    <div>
+                      <input
+                        type="password"
+                        value={inputPassword}
+                        onChange={(e) => {
+                          setInputPassword(e.target.value)
+                          setError('')
+                          setSuccess(false)
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault()
+                            handleUnlock(e)
+                          }
+                        }}
+                        placeholder="Enter password"
+                        className={`w-full px-4 py-3 rounded-lg border-2 transition-colors bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none ${error ? 'border-red-400' : success ? 'border-green-400' : 'border-slate-200 focus:border-[var(--accent-teal)]'}`}
+                        autoFocus
+                        disabled={success}
+                      />
+                      {error && (
+                        <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-red-500 flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {error}
+                        </motion.p>
+                      )}
+                      {success && (
+                        <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-green-500 flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          Password correct! Unlocking content...
+                        </motion.p>
+                      )}
+                    </div>
+
+                    <button type="submit" disabled={success} className={`w-full text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-75 disabled:cursor-not-allowed ${success ? 'bg-green-500 hover:bg-green-600' : 'bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/90'}`}>
+                      {success ? 'Unlocking...' : 'Unlock Content'}
+                    </button>
+                  </form>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   )
 }

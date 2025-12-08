@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import GearContact from '@/assets/gear-contact.svg'
+import Image from 'next/image'
 
 export default function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true)
@@ -39,7 +39,14 @@ export default function LoadingScreen() {
           <div
             className="w-24 h-24 md:w-32 md:h-32 gear-loading"
           >
-            <GearContact className="w-full h-full text-white" />
+            <Image 
+              src="/assets/gear-contact.svg" 
+              alt="Loading" 
+              width={128} 
+              height={128} 
+              className="w-full h-full invert"
+              priority
+            />
           </div>
         </div>
       </div>

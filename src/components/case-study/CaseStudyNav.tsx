@@ -6,7 +6,9 @@ import { featuredCaseStudies } from '@/data/home'
 
 export default function CaseStudyNav() {
   const pathname = usePathname()
-  const currentSlug = pathname.split('/').pop()
+  // Handle trailing slash - filter out empty strings
+  const pathParts = pathname.split('/').filter(Boolean)
+  const currentSlug = pathParts[pathParts.length - 1]
 
   // Get all case studies for navigation
   const allCaseStudies = featuredCaseStudies
@@ -34,17 +36,17 @@ export default function CaseStudyNav() {
             key={cs.slug}
             href={`/work/${cs.slug}`}
             className={`
-              group flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all duration-300
+              group flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300
               ${isActive 
-                ? 'bg-slate-900 border-slate-900 text-white' 
-                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                ? 'bg-[var(--accent-teal)] border-[var(--accent-teal)] text-white shadow-md' 
+                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
               }
             `}
           >
             {/* System ID Badge */}
             <span className={`
               font-mono text-[10px] tracking-wider
-              ${isActive ? 'text-slate-400' : 'text-slate-400 group-hover:text-slate-500'}
+              ${isActive ? 'text-white/70' : 'text-slate-400 group-hover:text-slate-500'}
             `}>
               {getSystemId(cs.slug)}
             </span>
@@ -52,7 +54,7 @@ export default function CaseStudyNav() {
             {/* Divider */}
             <span className={`
               w-px h-3
-              ${isActive ? 'bg-slate-600' : 'bg-slate-200'}
+              ${isActive ? 'bg-white/30' : 'bg-slate-200'}
             `} />
             
             {/* Title */}

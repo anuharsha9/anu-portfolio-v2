@@ -96,6 +96,8 @@ export default function HeroMeta({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
+        
+        
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           {/* Case Study Navigation - Above Blueprint */}
           <div className="text-center mb-6 md:mb-8">
@@ -270,65 +272,38 @@ export default function HeroMeta({
                 </motion.div>
               )}
             </div>
-          </motion.div>
 
-          {/* ============================================
-              PHASE 2: PROJECT META (Outside Blueprint)
-              ============================================ */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 md:mt-12 mx-0 md:mx-4"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {/* Project Details Card */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                <div className="grid grid-cols-3 gap-4">
-                  {/* Role */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
-                      Role
-                    </span>
-                    <p className="font-semibold text-slate-900 text-sm">{role}</p>
-                  </div>
+            {/* Project Meta Strip - Inside the card */}
+            <div className="mt-8 pt-6 border-t border-slate-200">
+              <div className="flex flex-wrap items-center gap-6 md:gap-10 text-sm">
+                {/* Role */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+                    Role:
+                  </span>
+                  <span className="font-medium text-slate-700">{role}</span>
+                </div>
 
-                  {/* Company */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
-                      Company
-                    </span>
-                    <p className="font-semibold text-slate-900 text-sm">{company}</p>
-                  </div>
+                <div className="hidden md:block w-px h-4 bg-slate-200"></div>
 
-                  {/* Timeframe */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 block">
-                      Timeframe
-                    </span>
-                    <p className="font-semibold text-slate-900 text-sm">{timeframe}</p>
-                  </div>
+                {/* Company */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+                    Company:
+                  </span>
+                  <span className="font-medium text-slate-700">{company}</span>
+                </div>
+
+                <div className="hidden md:block w-px h-4 bg-slate-200"></div>
+
+                {/* Timeframe */}
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+                    Timeline:
+                  </span>
+                  <span className="font-medium text-slate-700">{timeframe}</span>
                 </div>
               </div>
-
-              {/* Testimonial Card - Editorial Style */}
-              {testimonial && (
-                <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-center">
-                  <blockquote className="space-y-3">
-                    <p className="font-serif italic text-base md:text-lg text-slate-700 leading-relaxed">
-                      &ldquo;{testimonial.quote.length > 150 
-                        ? testimonial.quote.substring(0, 150) + '...' 
-                        : testimonial.quote}&rdquo;
-                    </p>
-                    <footer className="flex items-center gap-3 pt-2 border-t border-slate-100">
-                      <div>
-                        <p className="font-sans font-bold text-sm text-slate-900">{testimonial.name}</p>
-                        <p className="text-slate-500 text-xs font-mono">{testimonial.role}</p>
-                      </div>
-                    </footer>
-                  </blockquote>
-                </div>
-              )}
             </div>
           </motion.div>
         </div>

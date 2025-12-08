@@ -194,19 +194,19 @@ export const iqPluginCaseStudy: CaseStudyData = {
         videos: [
           {
             title: 'NLQ (Natural Language Query)',
-            videoUrl: '/videos/iq-nlq-old-workflow.mp4',
+            videoEmbedUrl: 'https://www.youtube.com/embed/LDaGvuS4K5Y',
             videoPoster: '/images/case-study/iq-plugin/iq-nlq-old-poster.jpg',
             description: 'Standalone NLQ workflow in Explore Data — separate entry point, different mental model.',
           },
           {
             title: 'Automated Insights',
-            videoUrl: '/videos/iq-insights-old-workflow.mp4',
+            videoEmbedUrl: 'https://www.youtube.com/embed/ggcv8b7EKXo',
             videoPoster: '/images/case-study/iq-plugin/iq-insights-old-poster.jpg',
             description: 'Standalone Automated Insights workflow — another separate entry point with its own interface.',
           },
           {
             title: 'ML Functions (Predict Data)',
-            videoUrl: '/videos/iq-ml-old-workflow.mp4',
+            videoEmbedUrl: 'https://www.youtube.com/embed/VWxMJ0E5aL0',
             videoPoster: '/images/case-study/iq-plugin/iq-ml-old-poster.jpg',
             description: 'ML Functions from Reporting Server — moved to IQ Plugin, redesigned with unified patterns.',
           },

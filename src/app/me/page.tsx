@@ -7,7 +7,7 @@ import MotionSection from '@/components/ui/MotionSection'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 import InsightBadge from '@/components/ui/InsightBadge'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
-import { adpListReviews, recommendations } from '@/data/home'
+import { recommendations } from '@/data/home'
 
 // D.E.S.I.G.N. Framework with Technical Reality code blocks
 const frameworkItems = [
