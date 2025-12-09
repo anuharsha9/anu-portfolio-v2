@@ -68,6 +68,12 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           caption: 'Job Log: Execution history and status',
           figNumber: 'FIG_04',
         },
+        {
+          src: '/images/case-study/ReportCaster/Job log dialog.png',
+          alt: 'Job Log Dialog',
+          caption: 'Job Log Detail: Detailed execution history',
+          figNumber: 'FIG_05',
+        },
       ],
     },
     {
@@ -260,12 +266,6 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           caption: 'Status Dashboard: System health overview',
           figNumber: 'FIG_27',
         },
-        {
-          src: '/images/case-study/ReportCaster/Job log dialog.png',
-          alt: 'Job Log Dialog',
-          caption: 'Job Log: Detailed execution history',
-          figNumber: 'FIG_28',
-        },
       ],
     },
   ]
@@ -288,20 +288,50 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           The Final System: Modal-Based Workflows
         </h3>
         <p className="text-slate-500 text-lg max-w-3xl mx-auto leading-relaxed">
-          All five ReportCaster subsystems unified into platform-native modals. Shipped in WebFOCUS 9.3, impacting millions of users.
+          400+ screens across six subsystems unified into platform-native modals. I designed 250+; onboarded 2 designers who completed 150+. Shipped in WebFOCUS 9.3.
         </p>
       </motion.div>
 
       {/* IDE Layout - Large Feature Display */}
       <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
-        <div className="flex flex-col md:flex-row">
-          
-          {/* Sidebar - File Tree */}
-          <div className="w-full md:w-[22%] border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 bg-slate-50/30">
+        <div className="flex flex-col lg:flex-row">
+
+          {/* Mobile Tabs - Horizontal Scrollable Pills */}
+          <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
+            <div className="px-4 pt-4 pb-2">
+              <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+                // SUBSYSTEM_INDEX
+              </span>
+            </div>
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2 px-4 pb-4 min-w-max">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`
+                      flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200
+                      ${activeTab === tab.id
+                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'}
+                    `}
+                  >
+                    <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
+                      {tab.icon}
+                    </span>
+                    <span>{tab.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Sidebar - File Tree */}
+          <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
             <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
               // SUBSYSTEM_INDEX
             </span>
-            
+
             <nav className="space-y-1">
               {tabs.map((tab) => (
                 <button
@@ -309,8 +339,8 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                   onClick={() => setActiveTab(tab.id)}
                   className={`
                     w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg flex items-center gap-3
-                    ${activeTab === tab.id 
-                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900' 
+                    ${activeTab === tab.id
+                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900'
                       : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
                   `}
                 >
@@ -332,7 +362,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           </div>
 
           {/* Preview Pane - The Stage */}
-          <div className="flex-1 p-6 md:p-10 min-h-[700px]">
+          <div className="flex-1 p-4 md:p-6 lg:p-10 min-h-[400px] lg:min-h-[700px]">
             <AnimatePresence mode="wait">
               {activeTabData && (
                 <motion.div
@@ -343,48 +373,103 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                   transition={{ duration: 0.3 }}
                 >
                   {/* Content Header */}
-                  <div className="mb-10">
-                    <h4 className="font-serif text-3xl md:text-4xl text-slate-900 mb-3">
+                  <div className="mb-6 lg:mb-10">
+                    <h4 className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-900 mb-2 md:mb-3">
                       {activeTabData.title}
                     </h4>
-                    <p className="text-slate-500 text-base leading-relaxed max-w-3xl">
+                    <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-3xl">
                       {activeTabData.description}
                     </p>
-                    
+
                     {/* Highlight Block (for Recurrence) */}
                     {activeTabData.highlight && (
-                      <div className="mt-6 bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
-                        <span className="font-mono text-xs text-amber-700 uppercase tracking-widest block mb-2">
+                      <div className="mt-4 md:mt-6 bg-amber-50 border-l-4 border-amber-400 p-3 md:p-4 rounded-r-lg">
+                        <span className="font-mono text-[10px] md:text-xs text-amber-700 uppercase tracking-widest block mb-1 md:mb-2">
                           {activeTabData.highlight.label}
                         </span>
-                        <p className="font-serif italic text-lg text-slate-700">
+                        <p className="font-serif italic text-sm md:text-lg text-slate-700">
                           {activeTabData.highlight.text}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  {/* Image Grid - Large Display */}
-                  <div className={`grid gap-6 ${
-                    activeTabData.images.length === 1 
-                      ? 'grid-cols-1' 
-                      : activeTabData.images.length === 2 
-                        ? 'grid-cols-1 md:grid-cols-2' 
-                        : activeTabData.images.length <= 4
-                          ? 'grid-cols-1 md:grid-cols-2'
-                          : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'
-                  }`}>
+                  {/* Mobile: Horizontal Scroll Images */}
+                  <div className="md:hidden -mx-4 px-4">
+                    <div className="overflow-x-auto scrollbar-hide">
+                      <div className="flex gap-4 min-w-max pb-4">
+                        {activeTabData.images.map((img, i) => {
+                          const galleryImages = activeTabData.images.map(image => ({
+                            src: image.src,
+                            alt: image.alt,
+                            caption: `// ${image.figNumber}: ${image.caption}`
+                          }))
+
+                          return (
+                            <div
+                              key={i}
+                              className="group cursor-pointer w-[280px] flex-shrink-0"
+                              onClick={() => openLightbox(
+                                { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
+                                galleryImages,
+                                i
+                              )}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`View ${img.alt} in fullscreen`}
+                            >
+                              <div className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-50">
+                                <div className="relative aspect-[4/3]">
+                                  <Image
+                                    src={img.src}
+                                    alt={img.alt}
+                                    fill
+                                    className="object-cover object-top"
+                                    sizes="280px"
+                                  />
+                                  {/* Tap hint */}
+                                  <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm">
+                                    <span className="font-mono text-[9px] text-slate-500 uppercase tracking-wider">
+                                      Tap to expand
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
+                                // {img.figNumber}: {img.caption}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    {/* Scroll hint */}
+                    {activeTabData.images.length > 1 && (
+                      <p className="text-center text-slate-400 text-xs mt-1">
+                        ← Swipe to see more →
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Desktop: Grid Display */}
+                  <div className={`hidden md:grid gap-6 ${activeTabData.images.length === 1
+                    ? 'grid-cols-1'
+                    : activeTabData.images.length === 2
+                      ? 'grid-cols-2'
+                      : activeTabData.images.length <= 4
+                        ? 'grid-cols-2'
+                        : 'grid-cols-2 xl:grid-cols-3'
+                    }`}>
                     {activeTabData.images.map((img, i) => {
-                      // Prepare images array for gallery navigation
                       const galleryImages = activeTabData.images.map(image => ({
                         src: image.src,
                         alt: image.alt,
                         caption: `// ${image.figNumber}: ${image.caption}`
                       }))
-                      
+
                       return (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           className="group cursor-pointer"
                           onClick={() => openLightbox(
                             { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
@@ -412,7 +497,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                                 alt={img.alt}
                                 fill
                                 className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                                sizes="(max-width: 1200px) 50vw, 40vw"
                               />
                               {/* Hover Overlay */}
                               <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
@@ -426,7 +511,6 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                               </div>
                             </div>
                           </div>
-                          {/* Technical Caption */}
                           <p className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mt-3">
                             // {img.figNumber}: {img.caption}
                           </p>
@@ -459,7 +543,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
               30 Years of Checkbox Chaos
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
-              The original recurrence UI was a maze of checkboxes, dropdowns, and obscure terminology. 
+              The original recurrence UI was a maze of checkboxes, dropdowns, and obscure terminology.
               Users couldn&apos;t verify what they&apos;d actually scheduled without running a test.
             </p>
           </div>
@@ -482,7 +566,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
               Human-Readable Summaries
             </h4>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Every configuration now generates a plain English summary: <strong className="text-slate-900">&quot;Runs Monday to Friday at 6:00 PM, recurring every week.&quot;</strong> 
+              Every configuration now generates a plain English summary: <strong className="text-slate-900">&quot;Runs Monday to Friday at 6:00 PM, recurring every week.&quot;</strong>
               Users see exactly what they&apos;ve scheduled before saving.
             </p>
           </div>
@@ -502,10 +586,10 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
             &gt; V3_OUTCOME:
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            28 screens across 6 subsystems — unified into platform-native modals. 
-            <span className="text-emerald-400 font-medium"> 83% fewer clicks</span>, 
-            <span className="text-emerald-400 font-medium"> zero new tabs</span>, and 
-            <span className="text-emerald-400 font-medium"> natural language recurrence summaries</span> that 
+            400+ screens across 6 subsystems — unified into platform-native modals.
+            <span className="text-emerald-400 font-medium"> 83% fewer clicks</span>,
+            <span className="text-emerald-400 font-medium"> zero new tabs</span>, and
+            <span className="text-emerald-400 font-medium"> natural language recurrence summaries</span> that
             eliminate scheduling confusion. Shipped in WebFOCUS 9.3.
           </p>
         </div>

@@ -46,9 +46,9 @@ const FeatureCard = ({ title, description, icon: Icon, iconColor, screens, demoL
         </div>
         <p className={`text-sm ${descColor}`}>{description}</p>
         {demoLink && (
-          <Link 
-            href={demoLink} 
-            target="_blank" 
+          <Link
+            href={demoLink}
+            target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm font-medium mt-3"
           >
@@ -57,17 +57,52 @@ const FeatureCard = ({ title, description, icon: Icon, iconColor, screens, demoL
         )}
       </div>
 
-      {/* Screen Grid */}
-      <div className="grid grid-cols-2 gap-px bg-slate-200">
+      {/* Screen Grid - Mobile Scroll / Desktop Grid */}
+      {/* Mobile: Horizontal Scroll */}
+      <div className="md:hidden overflow-x-auto scrollbar-hide">
+        <div className="flex gap-3 p-3 min-w-max">
+          {screens.map((screen, index) => (
+            <div
+              key={index}
+              className="w-[200px] flex-shrink-0"
+            >
+              <span className={`font-mono text-[9px] uppercase tracking-widest ${labelColor} block mb-2`}>
+                // {screen.label}
+              </span>
+              <div
+                className="relative aspect-video rounded-lg overflow-hidden cursor-pointer group"
+                onClick={() => openLightbox(screen.imageSrc, screen.altText)}
+              >
+                <Image
+                  src={screen.imageSrc}
+                  alt={screen.altText}
+                  fill
+                  className="object-cover"
+                  sizes="200px"
+                />
+                <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm rounded px-1.5 py-0.5 shadow-sm">
+                  <span className="font-mono text-[8px] text-slate-500 uppercase">Tap</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {screens.length > 2 && (
+          <p className="text-center text-slate-400 text-[10px] pb-2">← Swipe →</p>
+        )}
+      </div>
+
+      {/* Desktop: 2-Column Grid */}
+      <div className="hidden md:grid grid-cols-2 gap-px bg-slate-200">
         {screens.map((screen, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={`${bgColor} p-3`}
           >
             <span className={`font-mono text-[9px] uppercase tracking-widest ${labelColor} block mb-2`}>
               // {screen.label}
             </span>
-            <div 
+            <div
               className="relative aspect-video rounded-lg overflow-hidden cursor-pointer group"
               onClick={() => openLightbox(screen.imageSrc, screen.altText)}
             >
@@ -76,7 +111,7 @@ const FeatureCard = ({ title, description, icon: Icon, iconColor, screens, demoL
                 alt={screen.altText}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                sizes="25vw"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity flex items-center justify-center">
                 <span className="text-white text-opacity-0 group-hover:text-opacity-100 transition-opacity text-xs font-medium">
@@ -171,7 +206,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
           NLQ & Insights: The Foundation
         </h2>
         <p className={`text-lg ${summaryColor} max-w-3xl`}>
-          Before IQ Plugin unified everything, I designed and owned these workflows end-to-end. 
+          Before IQ Plugin unified everything, I designed and owned these workflows end-to-end.
           Both are shipping now in WebFOCUS 9.3.6—fully responsive, with consistent patterns that made the IQ Plugin integration seamless.
         </p>
       </motion.div>
@@ -202,8 +237,8 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
                 // PATTERN_PARITY
               </span>
               <p className={`text-sm leading-relaxed ${summaryColor}`}>
-                Same empty state patterns. Same data selection flow. Same error handling. Same responsive breakpoints. 
-                When I built NLQ and Insights, I designed them as a <span className="font-medium text-[var(--accent-teal)]">system</span>—knowing 
+                Same empty state patterns. Same data selection flow. Same error handling. Same responsive breakpoints.
+                When I built NLQ and Insights, I designed them as a <span className="font-medium text-[var(--accent-teal)]">system</span>—knowing
                 they'd eventually live together. IQ Plugin is the result.
               </p>
             </div>

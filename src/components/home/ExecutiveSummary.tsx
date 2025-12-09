@@ -65,7 +65,7 @@ export default function ExecutiveSummary() {
                   Anuja Harsha Nimmagadda
                 </h1>
                 <p className="text-sm md:text-base text-[var(--text-muted-light)] font-sans">
-                  Principal Product Designer · Design Systems Architect · AI-Driven
+                  Principal Product Designer · AI-Driven · Enterprise Systems Architect
                 </p>
               </div>
             </div>

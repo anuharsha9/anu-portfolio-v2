@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import BrainGears from '@/assets/brain-gears.svg'
+import SignatureLogo from '@/components/brand/SignatureLogo'
 import VideoModal from '@/components/video/VideoModal'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
 import GearBottomSheet from '@/components/home/GearBottomSheet'
@@ -39,7 +40,7 @@ export default function HeroSplit() {
         setTimeout(setup, 100)
         return
       }
-      
+
       let brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears-copy')
       if (!brainGearsGroup) {
         brainGearsGroup = svgRoot.querySelector<SVGGElement>('#brain-gears')
@@ -110,7 +111,7 @@ export default function HeroSplit() {
             }
           })
         }
-        
+
         // Background gears
         const bgGears = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
         bgGears.forEach((gear) => {
@@ -212,7 +213,7 @@ export default function HeroSplit() {
           } catch {
             // Continue anyway
           }
-          
+
           // Reference the gear for the rest of the function (was gearGroup)
           const gearGroup = gear
 
@@ -306,18 +307,18 @@ export default function HeroSplit() {
           const handleTap = (e: Event) => {
             e.preventDefault()
             e.stopPropagation()
-            
+
             // Check if we're on mobile (no hover capability)
             const isMobile = window.matchMedia('(max-width: 1023px)').matches
-            
+
             const gearData = GEAR_INSPECTOR[gearId]
             if (!gearData) return
-            
+
             if (isMobile) {
               // Mobile: Open bottom sheet
               setMobileGear(gearData)
               setShowMobileSheet(true)
-              
+
               // Visual feedback - highlight the tapped gear
               const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
               allActiveGears.forEach((ag) => {
@@ -329,13 +330,13 @@ export default function HeroSplit() {
             } else {
               // Desktop: Toggle behavior (fallback for click)
               const isCurrentlyActive = gearGroup.classList.contains('gear-main--active')
-              
+
               const allActiveGears = brainGearsGroup.querySelectorAll<SVGGElement>('.gear-main--active')
               allActiveGears.forEach((ag) => {
                 ag.classList.remove('gear-main--active')
                 ag.style.removeProperty('--gear-accent')
               })
-              
+
               if (!isCurrentlyActive) {
                 gearGroup.classList.add('gear-main--active')
                 gearGroup.style.setProperty('--gear-accent', gearData.accentColor)
@@ -418,7 +419,7 @@ export default function HeroSplit() {
         className="bg-slate-900 relative min-h-screen flex items-center overflow-hidden"
       >
         {/* Subtle grid background */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -435,7 +436,7 @@ export default function HeroSplit() {
         {/* Main Content Container */}
         <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-screen py-20 lg:py-0">
-            
+
             {/* Left Side - Text Content (5 columns) */}
             <motion.div
               className="lg:col-span-5 flex flex-col justify-center space-y-8 text-center lg:text-left order-2 lg:order-1"
@@ -443,21 +444,31 @@ export default function HeroSplit() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
+              {/* Logo Stamp */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="flex justify-center lg:justify-start"
+              >
+                <SignatureLogo className="w-10 h-10 md:w-12 md:h-12 text-[#0BA2B5]/80" />
+              </motion.div>
+
               {/* Main Headline */}
-              <h1 className="font-serif text-white leading-[1.05] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="font-serif text-white leading-[1.05] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl -mt-2">
                 Designing<br />
                 through the<br />
                 <span className="text-[#0BA2B5]">complexity.</span>
               </h1>
 
               {/* Professional Title */}
-              <p className="text-[#0BA2B5] font-mono text-sm md:text-base tracking-wide">
-                Principal Product Designer · Design Systems Architect · AI-Driven
+              <p className="text-[#0BA2B5] font-mono text-sm md:text-base tracking-wide max-w-md">
+                Principal Product Designer · AI-Driven · Enterprise Systems Architect
               </p>
 
               {/* Subhead */}
               <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
-                I bridge legacy systems and modern experiences. 
+                I bridge legacy systems and modern experiences.
                 From ambiguity to clarity, at enterprise scale.
               </p>
 
@@ -508,7 +519,7 @@ export default function HeroSplit() {
                   transition={{ delay: 1.5 }}
                 >
                   <div className="w-8 h-px bg-slate-600" />
-                  <motion.span 
+                  <motion.span
                     className="font-mono text-slate-400 text-xs tracking-wide"
                     animate={{ opacity: [0.5, 0.8, 0.5] }}
                     transition={{ duration: 2.5, repeat: Infinity }}
@@ -519,19 +530,19 @@ export default function HeroSplit() {
               </div>
 
               {/* GEAR INSPECTOR - Desktop Only */}
-              <div className="pt-4 min-h-[160px] hidden lg:block">
+              <div className="pt-4 h-[280px] hidden lg:block">
                 <AnimatePresence mode="wait">
                   {!activeGear ? (
                     <motion.div
                       key="hint"
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-3 pt-2"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       <div className="w-8 h-px bg-slate-600" />
-                      <motion.span 
+                      <motion.span
                         className="font-mono text-slate-400 text-xs tracking-wide"
                         animate={{ opacity: [0.6, 1, 0.6] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
@@ -565,12 +576,12 @@ export default function HeroSplit() {
                     >
                       {/* Header with thought */}
                       <div className="flex items-start gap-3 mb-3">
-                        <div 
+                        <div
                           className="w-1 h-full min-h-[40px] rounded-full flex-shrink-0"
                           style={{ backgroundColor: activeGear.accentColor }}
                         />
                         <div>
-                          <span 
+                          <span
                             className="font-mono text-[10px] uppercase tracking-widest block mb-1"
                             style={{ color: activeGear.accentColor }}
                           >
@@ -607,10 +618,10 @@ export default function HeroSplit() {
                         style={{ color: activeGear.accentColor }}
                       >
                         <span>{activeGear.linkLabel}</span>
-                        <svg 
-                          className="w-3 h-3 group-hover:translate-x-1 transition-transform" 
-                          fill="none" 
-                          stroke="currentColor" 
+                        <svg
+                          className="w-3 h-3 group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -669,8 +680,8 @@ export default function HeroSplit() {
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                 >
                   <div className="font-mono text-xl md:text-2xl font-semibold text-[#0BA2B5]">
-                    <AnimatedCounter 
-                      value={`${metric.value}${metric.suffix}`} 
+                    <AnimatedCounter
+                      value={`${metric.value}${metric.suffix}`}
                       duration={1.5 + index * 0.2}
                     />
                   </div>
@@ -684,7 +695,7 @@ export default function HeroSplit() {
         </motion.div>
 
         {/* Scroll indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-24 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

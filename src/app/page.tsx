@@ -9,7 +9,7 @@ import TalkSection from '@/components/home/TalkSection'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'Principal Product Designer | Design Systems Architect | AI-Driven',
+  title: 'Principal Product Designer | AI-Driven | Enterprise Systems Architect',
   description:
     'Principal Product Designer specializing in design systems architecture, legacy modernization, and AI-driven workflows. Designing through complexity — from Figma to Production.',
   openGraph: {

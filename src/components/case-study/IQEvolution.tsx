@@ -66,39 +66,58 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Stage Selector - Left Sidebar */}
-          <div className="lg:col-span-3 space-y-2">
+        <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Mobile: Horizontal Scrollable Pills */}
+          <div className="lg:hidden -mx-4 px-4 sm:-mx-6 sm:px-6">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2 min-w-max pb-2">
+                {evolutionStages.map((stage, index) => (
+                  <button
+                    key={stage.id}
+                    onClick={() => setActiveStage(index)}
+                    className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${activeStage === index
+                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                      }`}
+                  >
+                    <span className={`font-mono font-bold ${activeStage === index ? 'text-white' : 'text-slate-300'}`}>
+                      {stage.id}
+                    </span>
+                    <span>{stage.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop: Stage Selector - Left Sidebar */}
+          <div className="hidden lg:block lg:col-span-3 space-y-2">
             {evolutionStages.map((stage, index) => (
               <button
                 key={stage.id}
                 onClick={() => setActiveStage(index)}
-                className={`w-full text-left p-4 rounded-xl border transition-all ${
-                  activeStage === index
+                className={`w-full text-left p-4 rounded-xl border transition-all ${activeStage === index
                     ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] shadow-sm'
                     : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                }`}
+                  }`}
               >
                 <div className="flex items-start gap-3">
                   <span
-                    className={`font-mono text-2xl font-bold ${
-                      activeStage === index ? 'text-[var(--accent-teal)]' : 'text-slate-200'
-                    }`}
+                    className={`font-mono text-2xl font-bold ${activeStage === index ? 'text-[var(--accent-teal)]' : 'text-slate-200'
+                      }`}
                   >
                     {stage.id}
                   </span>
                   <div>
                     <span
-                      className={`font-mono text-[9px] uppercase tracking-widest block mb-1 ${
-                        activeStage === index ? 'text-[var(--accent-teal)]' : 'text-slate-400'
-                      }`}
+                      className={`font-mono text-[9px] uppercase tracking-widest block mb-1 ${activeStage === index ? 'text-[var(--accent-teal)]' : 'text-slate-400'
+                        }`}
                     >
                       // {stage.label}
                     </span>
                     <h4
-                      className={`font-serif text-sm ${
-                        activeStage === index ? 'text-slate-900' : 'text-slate-600'
-                      }`}
+                      className={`font-serif text-sm ${activeStage === index ? 'text-slate-900' : 'text-slate-600'
+                        }`}
                     >
                       {stage.title}
                     </h4>
@@ -163,9 +182,8 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
                 <button
                   key={index}
                   onClick={() => setActiveStage(index)}
-                  className={`w-12 h-1 rounded-full transition-all ${
-                    activeStage === index ? 'bg-[var(--accent-teal)]' : 'bg-slate-200'
-                  }`}
+                  className={`w-12 h-1 rounded-full transition-all ${activeStage === index ? 'bg-[var(--accent-teal)]' : 'bg-slate-200'
+                    }`}
                 />
               ))}
             </div>

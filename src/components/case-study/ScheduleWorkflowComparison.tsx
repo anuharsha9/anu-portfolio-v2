@@ -44,7 +44,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
   return (
     <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] p-6 md:p-10 mt-6 shadow-sm">
       <div className="space-y-8">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,20 +54,19 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // WORKFLOW_TRANSFORMATION
+            // CORE_WORKFLOW: MAIN_SCHEDULER
           </span>
           <h4 className="text-[var(--text-heading)] text-xl md:text-2xl font-serif">
             From 9 Clicks to 4 Clicks
           </h4>
           <p className="text-[var(--text-body)] text-sm max-w-2xl mx-auto">
-            The old workflow required navigating menus, opening new tabs, and mental context switching. 
-            The new workflow is a streamlined modal experience.
+            The Main Scheduler — ReportCaster&apos;s core workflow. The old path required navigating menus, opening new tabs, and mental context switching. The new unified modal eliminates it all.
           </p>
         </motion.div>
 
         {/* Comparison Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
+
           {/* BEFORE: Chaotic Steps */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -95,7 +94,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                 <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <pattern id="chaos-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" />
                     </pattern>
                   </defs>
                   <rect width="100%" height="100%" fill="url(#chaos-grid)" />
@@ -115,16 +114,14 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                     style={{
                       transform: `translateX(${chaosPositions[idx]?.x || 0}px) translateY(${chaosPositions[idx]?.y || 0}px)`,
                     }}
-                    className={`relative bg-white border rounded-lg p-3 shadow-sm transition-all duration-200 ${
-                      item.isNewTab 
-                        ? 'border-[var(--color-warning)] bg-amber-50' 
+                    className={`relative bg-white border rounded-lg p-3 shadow-sm transition-all duration-200 ${item.isNewTab
+                        ? 'border-[var(--color-warning)] bg-amber-50'
                         : 'border-[var(--border-primary)]'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white font-mono text-xs font-bold flex-shrink-0 ${
-                        item.isNewTab ? 'bg-[var(--color-warning)]' : 'bg-[var(--border-secondary)]'
-                      }`}>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white font-mono text-xs font-bold flex-shrink-0 ${item.isNewTab ? 'bg-[var(--color-warning)]' : 'bg-[var(--border-secondary)]'
+                        }`}>
                         {item.isNewTab ? '↗' : idx + 1}
                       </div>
                       <div className="flex-1 min-w-0">

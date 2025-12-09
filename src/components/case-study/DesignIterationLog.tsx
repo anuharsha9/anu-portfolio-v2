@@ -228,14 +228,44 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
 
       {/* IDE Layout - Large Feature Display */}
       <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
-        <div className="flex flex-col md:flex-row">
-          
-          {/* Sidebar - File Tree */}
-          <div className="w-full md:w-[22%] border-b md:border-b-0 md:border-r border-slate-200 p-4 md:p-6 bg-slate-50/30">
+        <div className="flex flex-col lg:flex-row">
+
+          {/* Mobile Tabs - Horizontal Scrollable Pills */}
+          <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
+            <div className="px-4 pt-4 pb-2">
+              <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+                // ITERATION_LOG
+              </span>
+            </div>
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-2 px-4 pb-4 min-w-max">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`
+                      flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200
+                      ${activeTab === tab.id
+                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
+                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'}
+                    `}
+                  >
+                    <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
+                      {tab.icon}
+                    </span>
+                    <span>{tab.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Sidebar - File Tree */}
+          <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
             <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
               // ITERATION_LOG
             </span>
-            
+
             <nav className="space-y-1">
               {tabs.map((tab) => (
                 <button
@@ -243,8 +273,8 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                   onClick={() => setActiveTab(tab.id)}
                   className={`
                     w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg flex items-center gap-3
-                    ${activeTab === tab.id 
-                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900' 
+                    ${activeTab === tab.id
+                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900'
                       : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
                   `}
                 >
@@ -266,7 +296,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
           </div>
 
           {/* Preview Pane - The Stage */}
-          <div className="flex-1 p-6 md:p-10 min-h-[650px]">
+          <div className="flex-1 p-4 md:p-6 lg:p-10 min-h-[400px] lg:min-h-[650px]">
             <AnimatePresence mode="wait">
               {activeTabData && (
                 <motion.div
@@ -284,7 +314,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                     <p className="text-slate-500 text-base leading-relaxed max-w-3xl">
                       {activeTabData.description}
                     </p>
-                    
+
                     {/* Quote Block */}
                     {activeTabData.quote && (
                       <div className="mt-6 bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-4 rounded-r-lg">
@@ -298,19 +328,71 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                     )}
                   </div>
 
-                  {/* Image Grid - Large Display */}
-                  <div className={`grid gap-6 ${activeTabData.images.length === 1 ? 'grid-cols-1' : activeTabData.images.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'}`}>
+                  {/* Mobile: Horizontal Scroll Images */}
+                  <div className="md:hidden -mx-4 px-4">
+                    <div className="overflow-x-auto scrollbar-hide">
+                      <div className="flex gap-4 min-w-max pb-4">
+                        {activeTabData.images.map((img, i) => {
+                          const galleryImages = activeTabData.images.map(image => ({
+                            src: image.src,
+                            alt: image.alt,
+                            caption: `// ${image.figNumber}: ${image.caption}`
+                          }))
+
+                          return (
+                            <div
+                              key={i}
+                              className="group cursor-pointer w-[280px] flex-shrink-0"
+                              onClick={() => openLightbox(
+                                { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
+                                galleryImages,
+                                i
+                              )}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`View ${img.alt} in fullscreen`}
+                            >
+                              <div className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-50">
+                                <div className="relative aspect-[4/3]">
+                                  <Image
+                                    src={img.src}
+                                    alt={img.alt}
+                                    fill
+                                    className="object-cover"
+                                    sizes="280px"
+                                  />
+                                  <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm">
+                                    <span className="font-mono text-[9px] text-slate-500 uppercase tracking-wider">
+                                      Tap to expand
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
+                                // {img.figNumber}: {img.caption}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    {activeTabData.images.length > 1 && (
+                      <p className="text-center text-slate-400 text-xs mt-1">← Swipe to see more →</p>
+                    )}
+                  </div>
+
+                  {/* Desktop: Grid Display */}
+                  <div className={`hidden md:grid gap-6 ${activeTabData.images.length === 1 ? 'grid-cols-1' : activeTabData.images.length === 2 ? 'grid-cols-2' : 'grid-cols-2 xl:grid-cols-3'}`}>
                     {activeTabData.images.map((img, i) => {
-                      // Prepare images array for gallery navigation
                       const galleryImages = activeTabData.images.map(image => ({
                         src: image.src,
                         alt: image.alt,
                         caption: `// ${image.figNumber}: ${image.caption}`
                       }))
-                      
+
                       return (
-                        <div 
-                          key={i} 
+                        <div
+                          key={i}
                           className="group cursor-pointer"
                           onClick={() => openLightbox(
                             { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
@@ -338,9 +420,8 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                                 alt={img.alt}
                                 fill
                                 className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                                sizes="(max-width: 1200px) 50vw, 40vw"
                               />
-                              {/* Hover Overlay */}
                               <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
                                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-lg">
@@ -352,7 +433,6 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                               </div>
                             </div>
                           </div>
-                          {/* Technical Caption */}
                           <p className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mt-3">
                             // {img.figNumber}: {img.caption}
                           </p>
@@ -380,7 +460,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
             &gt; ITERATION_INSIGHT:
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            The tension between <span className="text-emerald-400 font-medium">data scientist depth</span> and <span className="text-emerald-400 font-medium">user clarity</span> produced the best results. 
+            The tension between <span className="text-emerald-400 font-medium">data scientist depth</span> and <span className="text-emerald-400 font-medium">user clarity</span> produced the best results.
             From hand-drawn wireframes to pixel-perfect specs — 21 key artifacts documenting 6–8 months of cross-functional iteration.
           </p>
         </div>

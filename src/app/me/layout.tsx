@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'About Me | Principal Product Designer · Design Systems Architect · AI-Driven',
+  title: 'About Me | Principal Product Designer · AI-Driven · Enterprise Systems Architect',
   description:
     'Learn about Anuja Harsha Nimmagadda, Principal UX Designer with 13+ years of experience in enterprise design, legacy modernization, and AI/ML UX. Discover the journey, philosophy, and approach behind transforming complex systems into intuitive experiences.',
   keywords: [
