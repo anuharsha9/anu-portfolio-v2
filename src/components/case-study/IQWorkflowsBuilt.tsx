@@ -70,7 +70,7 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
             // FOUNDATION: WHAT_I_BUILT
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-slate-900 mb-4">
-            Three Workflows. Three Entry Points. All Mine.
+            Three Workflows. Three Entry Points.
           </h3>
           <p className="text-slate-600 max-w-2xl mx-auto">
             Before IQ Plugin unified them, I designed each of these workflows independently. 

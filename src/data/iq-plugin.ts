@@ -319,17 +319,6 @@ export const iqPluginCaseStudy: CaseStudyData = {
     },
   ],
   // ----------------------------
-  // PASSWORD GATE (locks sections 02-06)
+  // NO PASSWORD GATE - Section 01 is public, sections 02-06 are locked via LockedContent
   // ----------------------------
-  passwordGate: {
-    password: 'anu-access',
-    description: 'The DSML Hub is shipping in 2027 and cannot be shown publicly. Enter the password to view the detailed design process.',
-    learnItems: [
-      'Complete DSML Hub architecture and information design',
-      'Multi-persona journey mapping (4 personas)',
-      'Detailed workflow screens for NLQ, Insights, and Predict Data',
-      'Design evolution and iteration process',
-      'Strategic decisions and trade-offs',
-    ],
-  },
 }

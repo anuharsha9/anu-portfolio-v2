@@ -51,17 +51,14 @@ export default function HeroSplit() {
         const slowDownTime = 2.0
         const mainGearSlowDownPercent = 0.30
 
-        const gearGroups = new Map<string, SVGGElement>()
-        GEAR_IDS.forEach((gearId) => {
-          const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
-          if (gearGroup) {
-            gearGroups.set(gearId, gearGroup)
-          }
-        })
+        // New structure: gears are direct children of #main-gears with IDs like gear-life, gear-career-ambition
+        const mainGearsGroup = brainGearsGroup.querySelector<SVGGElement>('#main-gears')
+        if (!mainGearsGroup) return
 
-        gearGroups.forEach((gearGroup) => {
-          const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
-          if (!gearBase) return
+        GEAR_IDS.forEach((gearId) => {
+          // The gear group IS the gear itself now (not a container with gear-base inside)
+          const gear = mainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
+          if (!gear) return
 
           const isClockwise = Math.random() > 0.5
           const baseRotationSpeed = 20 + Math.random() * 20
@@ -70,21 +67,12 @@ export default function HeroSplit() {
           const fadeInRotationAmount = (360 / fastRotationSpeed) * fadeInDuration * (isClockwise ? 1 : -1)
           const rotationAmountValue = isClockwise ? '360deg' : '-360deg'
 
-          gearGroup.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
-          gearGroup.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
-          gearGroup.style.setProperty('--rotation-amount', rotationAmountValue)
-          gearBase.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
-          gearBase.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
-          gearBase.style.setProperty('--rotation-amount', rotationAmountValue)
-          gearBase.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
-
-          const gearHover = gearGroup.querySelector<SVGGElement>('[id^="gear-hover"]')
-          if (gearHover) {
-            gearHover.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
-            gearHover.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
-            gearHover.style.setProperty('--rotation-amount', rotationAmountValue)
-            gearHover.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
-          }
+          gear.style.setProperty('--fade-in-rotation', `${fadeInRotationAmount}deg`)
+          gear.style.setProperty('--rotation-duration', `${slowRotationSpeed}s`)
+          gear.style.setProperty('--rotation-amount', rotationAmountValue)
+          gear.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
+          gear.style.transformOrigin = 'center'
+          gear.style.transformBox = 'fill-box'
         })
 
         const bgGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]'))
@@ -105,8 +93,27 @@ export default function HeroSplit() {
       }
 
       const setTransformOrigins = () => {
-        const allGears = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="gear-base"], [id^="bg-gear-"], [id^="gear-hover"]')
-        allGears.forEach((gear) => {
+        // Main gears under #main-gears
+        const mainGearsGroup = brainGearsGroup.querySelector<SVGGElement>('#main-gears')
+        if (mainGearsGroup) {
+          const mainGears = mainGearsGroup.querySelectorAll<SVGGElement>(':scope > [id^="gear-"]')
+          mainGears.forEach((gear) => {
+            try {
+              const bbox = gear.getBBox()
+              if (bbox.width > 0 && bbox.height > 0) {
+                gear.style.transformOrigin = 'center'
+                gear.style.transformBox = 'fill-box'
+              }
+            } catch {
+              gear.style.transformOrigin = 'center'
+              gear.style.transformBox = 'fill-box'
+            }
+          })
+        }
+        
+        // Background gears
+        const bgGears = brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]')
+        bgGears.forEach((gear) => {
           try {
             const bbox = gear.getBBox()
             if (bbox.width > 0 && bbox.height > 0) {
@@ -163,31 +170,27 @@ export default function HeroSplit() {
         const allHoverTimeouts = new Map<string, NodeJS.Timeout | null>()
         const eventListeners = new Map<string, { element: Element; type: string; handler: EventListener }[]>()
 
+        // New structure: gears are direct children of #main-gears
+        const mainGearsGroup = brainGearsGroup.querySelector<SVGGElement>('#main-gears')
+        if (!mainGearsGroup) return
+
         GEAR_IDS.forEach((gearId) => {
-          const gearGroup = brainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
-          if (!gearGroup) return
+          // The gear group IS the gear itself now
+          const gear = mainGearsGroup.querySelector<SVGGElement>(`#${gearId}`)
+          if (!gear) return
 
-          const gearBase = gearGroup.querySelector<SVGGElement>('[id^="gear-base"]')
-          const gearHover = gearGroup.querySelector<SVGGElement>('[id^="gear-hover"]')
-          if (!gearBase || !gearHover) return
-
-          gearGroup.style.pointerEvents = 'none'
-          gearBase.style.pointerEvents = 'none'
-          const basePaths = gearBase.querySelectorAll('*')
-          basePaths.forEach((element) => {
-            if (element instanceof SVGElement) {
-              element.style.pointerEvents = 'none'
-            }
-          })
+          // Enable pointer events on the gear itself
+          gear.style.pointerEvents = 'auto'
+          gear.style.cursor = 'pointer'
 
           try {
-            const bbox = gearBase.getBBox()
+            const bbox = gear.getBBox()
             if (bbox.width > 0 && bbox.height > 0) {
               const centerX = bbox.x + bbox.width / 2
               const centerY = bbox.y + bbox.height / 2
               const radius = (Math.max(bbox.width, bbox.height) / 2) * 1.005
 
-              let overlay = gearGroup.querySelector<SVGCircleElement>('.gear-hover-overlay')
+              let overlay = gear.querySelector<SVGCircleElement>('.gear-hover-overlay')
               if (!overlay) {
                 overlay = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
                 overlay.setAttribute('class', 'gear-hover-overlay')
@@ -199,7 +202,7 @@ export default function HeroSplit() {
                 overlay.style.pointerEvents = 'auto'
                 overlay.style.cursor = 'pointer'
                 overlay.style.zIndex = '1000'
-                gearGroup.appendChild(overlay)
+                gear.appendChild(overlay)
               } else {
                 overlay.setAttribute('cx', String(centerX))
                 overlay.setAttribute('cy', String(centerY))
@@ -209,6 +212,9 @@ export default function HeroSplit() {
           } catch {
             // Continue anyway
           }
+          
+          // Reference the gear for the rest of the function (was gearGroup)
+          const gearGroup = gear
 
           if (!GEAR_INSPECTOR[gearId]) return
 
@@ -437,22 +443,17 @@ export default function HeroSplit() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Pre-headline Tag */}
-              <motion.span 
-                className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                // PRINCIPAL_PRODUCT_DESIGNER
-              </motion.span>
-
               {/* Main Headline */}
               <h1 className="font-serif text-white leading-[1.05] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Designing<br />
                 through the<br />
                 <span className="text-[#0BA2B5]">complexity.</span>
               </h1>
+
+              {/* Professional Title */}
+              <p className="text-[#0BA2B5] font-mono text-sm md:text-base tracking-wide">
+                Principal Product Designer · Design Systems Architect · AI-Driven
+              </p>
 
               {/* Subhead */}
               <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">

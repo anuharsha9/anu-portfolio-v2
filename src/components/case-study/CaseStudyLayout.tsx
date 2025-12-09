@@ -656,9 +656,10 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       )}
 
       {/* ============================================
-          PASSWORD GATE (Show first if case study is locked)
+          PASSWORD GATE (Show only for non-IQ-Plugin locked case studies)
+          IQ Plugin has its own locked hero with password form
           ============================================ */}
-      {!showPasswordContent && data.passwordGate && (
+      {!showPasswordContent && data.passwordGate && data.slug !== 'iq-plugin' && (
         <PasswordGate
           onPasswordCorrect={handlePasswordCorrect}
           password={data.passwordGate.password}
@@ -951,27 +952,19 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                         {/* Workflow Transformation Visual - Show separately (not locked) */}
                         <ScheduleWorkflowComparison isLightBackground={sectionBg === 'surface-light'} />
 
-                        {/* Version Iteration Details - Locked */}
+                        {/* Version Iteration Details - NOW PUBLIC */}
                         <div className="mt-8">
-                          <LockedContent
-                            isUnlocked={showPasswordContent}
-                            password="anu-access"
-                            caseStudySlug={data.slug}
-                            unlockMessage="Password required to view architectural iteration details (V1, V2, V3)"
+                          <VersionIteration
+                            v1={(section as any).v1Data}
+                            v2={(section as any).v2Data}
+                            v3={(section as any).v3Data}
                             isLightBackground={sectionBg === 'surface-light'}
-                          >
-                            <VersionIteration
-                              v1={(section as any).v1Data}
-                              v2={(section as any).v2Data}
-                              v3={(section as any).v3Data}
-                              isLightBackground={sectionBg === 'surface-light'}
-                            />
+                          />
 
-                            {/* V3 Design Evolution - Detailed subsystem screens */}
-                            <div className="mt-16 pt-12 border-t border-slate-200">
-                              <RCDesignEvolution isLightBackground={sectionBg === 'surface-light'} />
-                            </div>
-                          </LockedContent>
+                          {/* V3 Design Evolution - Detailed subsystem screens */}
+                          <div className="mt-16 pt-12 border-t border-slate-200">
+                            <RCDesignEvolution isLightBackground={sectionBg === 'surface-light'} />
+                          </div>
                         </div>
                       </div>
                     </MotionSection>
@@ -1082,18 +1075,11 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </>
                 )}
 
-                {/* System Mapping Breakdown - Inside Section 03 (S - Simplify) - ReportCaster only */}
+                {/* System Mapping Breakdown - Inside Section 03 (S - Simplify) - ReportCaster only - NOW PUBLIC */}
                 {section.id === 'section-03' && data.slug === 'reportcaster' && (
                   <MotionSection className={`${sectionBg} py-8 md:py-12`}>
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                      <LockedContent
-                        password={data.passwordGate?.password || 'anu-access'}
-                        caseStudySlug={data.slug}
-                        unlockMessage="Password required to view internal system mapping details"
-                        isLightBackground={sectionBg === 'surface-light'}
-                      >
-                        <SystemMappingBreakdown isLightBackground={sectionBg === 'surface-light'} />
-                      </LockedContent>
+                      <SystemMappingBreakdown isLightBackground={sectionBg === 'surface-light'} />
                     </div>
                   </MotionSection>
                 )}
@@ -1105,14 +1091,14 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </MotionSection>
                 )}
 
-                {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
+                {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only - LOCKED (legacy sandbox UI) */}
                 {section.id === 'section-01' && data.slug === 'reportcaster' && (
                   <MotionSection className="surface-light py-8 md:py-12">
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                       <LockedContent
                         password="anu-access"
                         caseStudySlug={data.slug}
-                        unlockMessage="Password required to view internal discovery details"
+                        unlockMessage="Password required to view legacy sandbox UI screenshots and discovery audit"
                         isLightBackground={true}
                       >
                         <SystemArchaeology isLightBackground={true} />
@@ -1139,19 +1125,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       </div>
                     </MotionSection>
 
-                    {/* Research Methods */}
+                    {/* Research Methods - NOW PUBLIC */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <LockedContent
-                          password={data.passwordGate?.password || 'anu-access'}
-                          caseStudySlug={data.slug}
-                          unlockMessage="Password required to view internal research methods and company information"
-                          isLightBackground={true}
-                        >
-                          <ResearchMethods isLightBackground={true} />
-                        </LockedContent>
+                        <ResearchMethods isLightBackground={true} />
                       </div>
                     </MotionSection>
+                    {/* User Personas - STILL LOCKED */}
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <LockedContent
@@ -1695,10 +1675,21 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           })}
 
 
-          {/* Design System Showcase - Subtle, Not Prominent */}
+          {/* Design System Showcase - Locked for RC, Public for others */}
           <MotionSection className="surface-light py-8 md:py-12">
             <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-              <DesignSystemShowcase isLightBackground={true} caseStudySlug={data.slug} />
+              {data.slug === 'reportcaster' ? (
+                <LockedContent
+                  password="anu-access"
+                  caseStudySlug={data.slug}
+                  unlockMessage="Password required to view design system details"
+                  isLightBackground={true}
+                >
+                  <DesignSystemShowcase isLightBackground={true} caseStudySlug={data.slug} />
+                </LockedContent>
+              ) : (
+                <DesignSystemShowcase isLightBackground={true} caseStudySlug={data.slug} />
+              )}
             </div>
           </MotionSection>
 

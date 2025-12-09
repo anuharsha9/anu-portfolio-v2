@@ -120,7 +120,7 @@ export default function SystemArchaeology({ isLightBackground = true }: SystemAr
                 src={file.image}
                 alt={file.alt}
                 fill
-                className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                className="object-cover object-top group-hover:scale-105 transition-transform duration-300 blur-sm"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
               {/* Hover Overlay */}

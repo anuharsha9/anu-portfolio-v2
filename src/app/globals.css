@@ -419,28 +419,22 @@
 /* Simplified: All gears fade in with rotation (1.2s), then main gears rotate continuously, background gears stop */
 
 /* Main gears: full opacity (100%), rotate continuously after fade-in */
-/* Matches: gear-base, gear-base_2, gear-base_3, etc. */
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears [id^="gear-"]:not(#gears-background) g[id^="gear-base"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) g[id^="gear-base"] {
+/* New structure: gears directly under #main-gears with IDs like gear-life, gear-career-ambition, etc. */
+#brain-gears #main-gears > [id^="gear-"],
+#brain-gears-copy #main-gears > [id^="gear-"] {
   transform-origin: center;
   transform-box: fill-box;
   opacity: 0;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
   backface-visibility: hidden;
   contain: layout style paint;
-  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
-  /* filter: none !important; */
-  /* Animation will be set via JavaScript to ensure correct speed values */
-  /* CSS animation removed - set dynamically in HeroBrain.tsx */
+  cursor: pointer;
+  transition: filter 0.3s ease;
 }
 
 /* Background gears: full opacity, very slow continuous rotation */
 #brain-gears #gears-background [id^="bg-gear-"],
 #brain-gears #gears-background g[id^="bg-gear-"],
-#brain-gears #gears-background [id^="gear-base"],
-#brain-gears #gears-background g[id^="gear-base"],
 #brain-gears-copy #gears-background [id^="bg-gear-"],
 #brain-gears-copy #gears-background g[id^="bg-gear-"] {
   transform-origin: center;
@@ -449,29 +443,26 @@
   will-change: transform, opacity;
   backface-visibility: hidden;
   contain: layout style paint;
-  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
-  /* filter: none !important; */
-  /* Animation will be set via JavaScript to ensure correct speed values */
-  /* CSS animation removed - set dynamically in HeroBrain.tsx */
 }
 
-/* Hover layer hidden by default - matches base gear rotation */
-/* Matches: gear-hover, gear-hover_2, gear-hover_3, etc. */
-/* Hover gears inherit rotation variables from parent gear group to match base gear */
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
-#brain-gears [id^="gear-"]:not(#gears-background) g[id^="gear-hover"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) g[id^="gear-hover"] {
+/* Main interactive gears - animate and allow hover effects */
+#brain-gears #main-gears > [id^="gear-"],
+#brain-gears-copy #main-gears > [id^="gear-"] {
   transform-origin: center;
   transform-box: fill-box;
-  opacity: 0;
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
   backface-visibility: hidden;
   contain: layout style paint;
-  /* Allow drop shadows on child elements - only disable filter on the rotating container itself */
-  /* filter: none !important; */
-  /* Animation will be set via JavaScript to ensure correct speed values */
-  /* CSS animation removed - set dynamically in HeroBrain.tsx */
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+/* Main gears hover glow effect */
+#brain-gears #main-gears > [id^="gear-"]:hover,
+#brain-gears-copy #main-gears > [id^="gear-"]:hover,
+#brain-gears #main-gears > .gear-main--active,
+#brain-gears-copy #main-gears > .gear-main--active {
+  filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4));
 }
 
 /* Main gears: fade in with rotation (2s) */
@@ -485,6 +476,39 @@
     opacity: 1;
     transform: translateZ(0) rotate(var(--fade-in-rotation, 0deg));
   }
+}
+
+/* Center text fade in then out - appears briefly like a whisper */
+@keyframes center-text-appear-disappear {
+  0% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+  10% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+  }
+  75% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
+  }
+  100% {
+    opacity: 0;
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+}
+
+/* Brain center text styling - appears after gears, stays ~7s, then fades */
+#brain-gears #center-text,
+#brain-gears-copy #center-text {
+  opacity: 0;
+  animation: center-text-appear-disappear 10s ease-in-out 2.5s forwards;
+}
+
+/* Ensure white text on dark theme with subtle glow */
+.gears-dark-theme #brain-gears #center-text text,
+.gears-dark-theme #brain-gears-copy #center-text text {
+  fill: white;
 }
 
 /* Background gears: fade in with rotation (2s), then very slow continuous rotation */
@@ -531,63 +555,23 @@
   perspective: 1000px;
 }
 
-/* Dark theme gears - for dark backgrounds */
+/* Dark theme gears - no filter needed, SVG is already white */
 .gears-dark-theme #brain-gears,
 .gears-dark-theme #brain-gears-copy {
-  -webkit-filter: invert(1) hue-rotate(180deg);
-  filter: invert(1) hue-rotate(180deg);
-  /* Safari fix: ensure hardware acceleration */
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: filter, transform;
+  /* SVG has native white colors - no transformation needed */
 }
 
-/* Safari-specific: Force color rendering with stronger filter */
-@supports (-webkit-appearance: none) and (stroke-color: transparent) {
-  .gears-dark-theme #brain-gears,
-  .gears-dark-theme #brain-gears-copy {
-    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.3) brightness(1.1);
-    filter: invert(1) hue-rotate(180deg) saturate(1.3) brightness(1.1);
-  }
+/* Dark theme: Glow effect for active/hovered main gears */
+.gears-dark-theme #brain-gears #main-gears > .gear-main--active,
+.gears-dark-theme #brain-gears-copy #main-gears > .gear-main--active {
+  filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4)) !important;
 }
 
-/* iOS Safari specific fix */
-@supports (-webkit-touch-callout: none) {
-  .gears-dark-theme #brain-gears,
-  .gears-dark-theme #brain-gears-copy {
-    -webkit-filter: invert(1) hue-rotate(180deg) saturate(1.5) brightness(1.2) !important;
-    filter: invert(1) hue-rotate(180deg) saturate(1.5) brightness(1.2) !important;
-  }
-}
-
-/* Dark theme: Hide the hover gear variant entirely - just use base gear with glow */
-.gears-dark-theme #brain-gears .gear-main--active [id^="gear-base"],
-.gears-dark-theme #brain-gears .gear-main--active g[id^="gear-base"],
-.gears-dark-theme #brain-gears-copy .gear-main--active [id^="gear-base"],
-.gears-dark-theme #brain-gears-copy .gear-main--active g[id^="gear-base"] {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.gears-dark-theme #brain-gears .gear-main--active [id^="gear-hover"],
-.gears-dark-theme #brain-gears .gear-main--active g[id^="gear-hover"],
-.gears-dark-theme #brain-gears-copy .gear-main--active [id^="gear-hover"],
-.gears-dark-theme #brain-gears-copy .gear-main--active g[id^="gear-hover"] {
-  opacity: 0 !important;
-  visibility: hidden !important;
-}
-
-/* Performance optimizations for rotating gears - but allow drop shadows on child elements */
-/* Only apply filter: none to the rotating containers themselves, not their children */
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+/* Performance optimizations for rotating gears */
+#brain-gears #main-gears > [id^="gear-"],
 #brain-gears #gears-background [id^="bg-gear-"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-base"],
-#brain-gears-copy [id^="gear-"]:not(#gears-background) [id^="gear-hover"],
+#brain-gears-copy #main-gears > [id^="gear-"],
 #brain-gears-copy #gears-background [id^="bg-gear-"] {
-  /* Allow drop shadows - don't disable filters on child elements */
   will-change: transform, opacity;
   transform: translateZ(0);
   contain: layout style paint;
@@ -611,62 +595,16 @@
   stroke-width: 3;
 }
 
-/* Hover gears - hidden by default */
-#brain-gears [id^="gear-hover"],
-#brain-gears g[id^="gear-hover"],
-#brain-gears-copy [id^="gear-hover"],
-#brain-gears-copy g[id^="gear-hover"] {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
-/* Hover overlay - ensures full gear area is hoverable (including empty spaces inside) */
-#brain-gears .gear-hover-overlay,
-#brain-gears-copy .gear-hover-overlay {
-  pointer-events: auto !important;
+/* Main gears hover - CSS hover effect for desktop */
+#brain-gears #main-gears > [id^="gear-"]:hover,
+#brain-gears-copy #main-gears > [id^="gear-"]:hover {
+  filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4));
   cursor: pointer;
-  fill: transparent !important;
-  stroke: none !important;
-  /* Ensure overlay captures all hover events and is on top */
-  z-index: 1000;
-  /* Prevent any interference from other elements */
-  isolation: isolate;
 }
 
-/* Base gear - hide when hover gear is active */
-#brain-gears .gear-main--active [id^="gear-base"],
-#brain-gears .gear-main--active g[id^="gear-base"],
-#brain-gears-copy .gear-main--active [id^="gear-base"],
-#brain-gears-copy .gear-main--active g[id^="gear-base"] {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  transition: opacity 0.4s ease-out, visibility 0.4s ease-out !important;
-}
-
-/* Hover gear - show when active */
-#brain-gears .gear-main--active [id^="gear-hover"],
-#brain-gears .gear-main--active g[id^="gear-hover"],
-#brain-gears-copy .gear-main--active [id^="gear-hover"],
-#brain-gears-copy .gear-main--active g[id^="gear-hover"] {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-  transition: opacity 0.4s ease-in, visibility 0.4s ease-in !important;
-}
-
-/* Teal glow on active gears */
-#brain-gears .gear-main--active,
-#brain-gears-copy .gear-main--active {
-  filter: drop-shadow(0 0 18px rgba(11, 162, 181, 0.6)) !important;
-}
-
-/* Dark theme: Teal glow on hover - more visible */
-.gears-dark-theme #brain-gears .gear-main--active,
-.gears-dark-theme #brain-gears-copy .gear-main--active {
+/* Teal glow on active gears - applied via JS class */
+#brain-gears #main-gears > .gear-main--active,
+#brain-gears-copy #main-gears > .gear-main--active {
   filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4)) !important;
 }
 
@@ -704,34 +642,11 @@
   }
 }
 
-/* Dark theme: Boost BACKGROUND line visibility (connecting lines between gears) */
-/* Colors are set BEFORE invert filter: dark → becomes light after invert */
+/* Dark theme: Background connecting lines - subtle */
 .gears-dark-theme #brain-gears #lines-background path,
 .gears-dark-theme #brain-gears-copy #lines-background path {
-  opacity: 1 !important;
+  opacity: 0.7 !important;
   stroke-width: 1px !important;
-  stroke: #555555 !important; /* Medium gray = becomes ~70% brightness after invert */
-}
-
-/* Dark theme: Brighten the INTERNAL decorative lines/circles inside gears */
-/* These are the concentric circles and patterns within gear faces */
-/* Target all stroked elements within gears - the invert filter will make dark→light */
-.gears-dark-theme #brain-gears [id^="gear-base"] path:not([fill]),
-.gears-dark-theme #brain-gears [id^="gear-base"] circle:not([fill]),
-.gears-dark-theme #brain-gears [id^="gear-base"] ellipse:not([fill]),
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] path:not([fill]),
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] circle:not([fill]),
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] ellipse:not([fill]) {
-  stroke: #222222 !important; /* Dark = becomes BRIGHT (~#DDDDDD) after invert */
-  stroke-opacity: 1 !important;
-}
-
-/* Increase stroke width for better visibility */
-.gears-dark-theme #brain-gears [id^="gear-base"] path,
-.gears-dark-theme #brain-gears [id^="gear-base"] circle,
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] path,
-.gears-dark-theme #brain-gears-copy [id^="gear-base"] circle {
-  stroke-width: 1.5px !important;
 }
 
 /* Ensure lines start invisible but end bright */
@@ -824,9 +739,8 @@
 @media (prefers-reduced-motion: reduce) {
 
   /* Disable all gear rotations for users who prefer reduced motion */
-  #brain-gears [id^="gear-base"],
-  #brain-gears [id^="bg-gear-"],
-  #brain-gears [id^="gear-hover"] {
+  #brain-gears #main-gears > [id^="gear-"],
+  #brain-gears [id^="bg-gear-"] {
     animation: none !important;
   }
 
@@ -837,7 +751,7 @@
   }
 
   /* Keep fade-in but make it instant */
-  #brain-gears [id^="gear-base"],
+  #brain-gears #main-gears > [id^="gear-"],
   #brain-gears [id^="bg-gear-"] {
     opacity: 1 !important;
     animation: none !important;
