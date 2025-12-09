@@ -17,7 +17,7 @@ export default function AboutPage() {
       ═══════════════════════════════════════════════════════════════════════ */}
       <MotionSection id="profile" className="bg-slate-900 py-20 md:py-28 lg:py-36 relative overflow-hidden">
         {/* Subtle grid background */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -96,16 +96,16 @@ export default function AboutPage() {
                 <span>Let&apos;s Talk</span>
               </a>
             </div>
-            
+
             {/* Personal Signature */}
-            <motion.div 
+            <motion.div
               className="pt-12 flex flex-col items-center gap-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.8 }}
             >
               <div className="w-14 h-14 text-slate-500 hover:text-[#0BA2B5] transition-colors duration-500">
-                <AnimatedSignatureLogo 
+                <AnimatedSignatureLogo
                   className="w-full h-full"
                   duration={10000}
                   pauseDuration={5000}
@@ -123,26 +123,26 @@ export default function AboutPage() {
       <MotionSection className="bg-white py-20 md:py-28 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            
+
             {/* Left - The Story */}
             <div className="space-y-6">
               <span className="font-mono text-purple-600 text-xs uppercase tracking-widest">
                 // PROOF_OF_CONCEPT
               </span>
-              
+
               <h2 className="font-serif text-slate-900 text-3xl md:text-4xl leading-tight">
                 You&apos;re looking at it.
               </h2>
-              
+
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  I built this entire portfolio in <span className="font-semibold text-slate-900">2 weeks</span>. 
-                  Not because I knew React—I didn&apos;t. 
+                  I built this entire portfolio in <span className="font-semibold text-slate-900">2 weeks</span>.
+                  Not because I knew React—I didn&apos;t.
                   Because I know how to <span className="font-semibold text-slate-900">orchestrate AI</span>.
                 </p>
                 <p>
-                  This is my operating system. It&apos;s exactly how I tackled WebFOCUS and ML Functions: 
-                  I didn&apos;t have the domain expertise, so I adapted. I reverse-engineered the problem, 
+                  This is my operating system. It&apos;s exactly how I tackled WebFOCUS and ML Functions:
+                  I didn&apos;t have the domain expertise, so I adapted. I reverse-engineered the problem,
                   learned the tools, and delivered value while others were still planning.
                 </p>
               </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
                     { tool: 'Next.js + Tailwind', role: 'Framework (AI-Assisted)', highlight: false },
                     { tool: 'AWS S3 + CloudFront', role: 'Deployment', highlight: false },
                   ].map((item, index) => (
-                    <div 
+                    <div
                       key={item.tool}
                       className={`flex items-center justify-between py-3 ${index < 4 ? 'border-b border-slate-800' : ''}`}
                     >
@@ -208,7 +208,7 @@ export default function AboutPage() {
 
                 <div className="mt-6 pt-6 border-t border-slate-800">
                   <p className="text-slate-400 text-sm leading-relaxed">
-                    I don&apos;t write code. I <span className="text-purple-400 font-medium">orchestrate AI</span> to build it. 
+                    I don&apos;t write code. I <span className="text-purple-400 font-medium">orchestrate AI</span> to build it.
                     The biggest gain? <span className="text-white font-medium">Engineering empathy</span>—I now feel the build cost of every pixel I design.
                   </p>
                 </div>
@@ -241,18 +241,18 @@ export default function AboutPage() {
             <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
               // THE_ORIGIN_STORY
             </span>
-            
+
             <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
               WebFOCUS transformed me.
             </h2>
 
             <div className="max-w-2xl mx-auto space-y-6 text-slate-600 text-lg leading-relaxed">
               <p>
-                When I joined, I was out of my depth. Legacy systems. Data science. Machine learning. 
+                When I joined, I was out of my depth. Legacy systems. Data science. Machine learning.
                 Enterprise scale. My first instinct was <span className="font-semibold text-slate-900">radical curiosity</span>.
               </p>
               <p>
-                I talked to everyone. Learned obsessively. Earned trust in the process. 
+                I talked to everyone. Learned obsessively. Earned trust in the process.
                 That earned me a seat at the table—where my voice and opinion mattered.
               </p>
             </div>
@@ -267,11 +267,11 @@ export default function AboutPage() {
                   My Mentor
                 </span>
               </div>
-              
+
               <blockquote className="font-serif text-slate-900 text-xl md:text-2xl leading-relaxed mb-6">
                 &ldquo;She approaches her work with a fearless attitude and is never afraid to explore new ideas or directions. Anuja is willing to take on difficult problems and push for creative solutions, even under tight timelines.&rdquo;
               </blockquote>
-              
+
               <div className="text-center">
                 <p className="font-semibold text-slate-900">Dave Pfeiffer</p>
                 <p className="text-sm text-[#0BA2B5]">Director of Design, Cloud Software Group</p>
@@ -280,7 +280,7 @@ export default function AboutPage() {
 
             <div className="max-w-2xl mx-auto space-y-6 text-slate-600 text-lg leading-relaxed pt-4">
               <p>
-                Through daily mentorship, I learned how to lead, to present, and carry myself with confidence. 
+                Through daily mentorship, I learned how to lead, to present, and carry myself with confidence.
                 He saw something in me I didn&apos;t realize I had. He called me a <span className="font-semibold text-slate-900">UX leader</span> before I realized I was one.
               </p>
               <p>
@@ -292,55 +292,47 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SECTION 4: HOW I THINK (D.E.S.I.G.N. - Compact Version)
+          SECTION 4: HOW I THINK (D.E.S.I.G.N. - Minimal Version)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection className="bg-white py-20 md:py-28 border-b border-slate-200">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="text-center space-y-4 mb-12">
+      <MotionSection className="bg-white py-12 md:py-16 border-b border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 md:px-8">
+          <div className="text-center space-y-6">
             <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
               // HOW_I_THINK
             </span>
-            <h2 className="font-serif text-slate-900 text-3xl md:text-4xl leading-tight">
+            <h2 className="font-serif text-slate-900 text-2xl md:text-3xl leading-tight">
               The D.E.S.I.G.N. Framework
             </h2>
-            <p className="text-slate-500 text-base max-w-2xl mx-auto">
-              My mental model for tackling complexity. Design decisions that survive engineering.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { letter: 'D', title: 'Discover', desc: 'Map the system before touching pixels' },
-              { letter: 'E', title: 'Empathize', desc: 'Design for the builders, not just users' },
-              { letter: 'S', title: 'Simplify', desc: 'Reduce entropy until clarity emerges' },
-              { letter: 'I', title: 'Iterate', desc: 'Prototype early, fail fast with the team' },
-              { letter: 'G', title: 'Grow', desc: 'Use constraints to sharpen solutions' },
-              { letter: 'N', title: 'Navigate', desc: 'Stay in the trenches until it ships' },
-            ].map((item) => (
-              <div 
-                key={item.letter}
-                className="bg-slate-50 border border-slate-200 rounded-xl p-5 hover:border-[#0BA2B5]/40 hover:shadow-md transition-all group"
-              >
-                <div className="font-serif text-3xl text-[#0BA2B5] mb-2 group-hover:scale-110 transition-transform">
-                  {item.letter}
+            {/* Minimal 6-word display */}
+            <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-12 gap-y-4 pt-4">
+              {[
+                { letter: 'D', title: 'Discover' },
+                { letter: 'E', title: 'Empathize' },
+                { letter: 'S', title: 'Simplify' },
+                { letter: 'I', title: 'Iterate' },
+                { letter: 'G', title: 'Grow' },
+                { letter: 'N', title: 'Navigate' },
+              ].map((item) => (
+                <div key={item.letter} className="text-center group">
+                  <div className="font-serif text-2xl md:text-3xl text-[#0BA2B5] group-hover:scale-110 transition-transform">
+                    {item.letter}
+                  </div>
+                  <div className="font-medium text-slate-700 text-xs md:text-sm mt-1">
+                    {item.title}
+                  </div>
                 </div>
-                <div className="font-semibold text-slate-900 text-sm mb-1">
-                  {item.title}
-                </div>
-                <div className="text-slate-500 text-xs leading-relaxed">
-                  {item.desc}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SECTION 5: SOCIAL PROOF (Wall of Trust)
+          SECTION 5: SOCIAL PROOF (Curated 6)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection id="social-proof" className="bg-slate-950 py-24 md:py-32 relative overflow-hidden">
-        <div 
+      <MotionSection id="social-proof" className="bg-slate-950 py-20 md:py-24 relative overflow-hidden">
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -348,23 +340,23 @@ export default function AboutPage() {
             backgroundSize: '40px 40px',
           }}
         />
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="space-y-16">
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="space-y-12">
             <div className="text-center space-y-4 max-w-3xl mx-auto">
               <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
                 // TRUST_NETWORK
               </span>
-              <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
+              <h2 className="font-serif text-white text-3xl md:text-4xl leading-tight">
                 Voices from the Trenches
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed">
+              <p className="text-slate-400 text-base leading-relaxed">
                 Engineers, PMs, data scientists, and leaders I&apos;ve partnered with.
               </p>
             </div>
 
-            {/* Featured Row - Origin Story */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Featured - Origin Story (Vikram Patel) */}
+            <div>
               {recommendations.filter(r => r.source === 'origin').map((review) => (
                 <motion.div
                   key={review.name}
@@ -372,13 +364,13 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="relative group lg:col-span-2"
+                  className="relative group"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
-                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 md:p-10 hover:border-purple-500/50 transition-all">
-                    <div className="absolute top-6 right-8 text-purple-500/10 text-8xl font-serif leading-none">&ldquo;</div>
-                    
-                    <div className="flex items-center gap-3 mb-6">
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-purple-500/50 transition-all">
+                    <div className="absolute top-6 right-8 text-purple-500/10 text-6xl font-serif leading-none hidden md:block">&ldquo;</div>
+
+                    <div className="flex items-center gap-3 mb-4">
                       <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-mono uppercase tracking-wider">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -387,17 +379,17 @@ export default function AboutPage() {
                       </span>
                     </div>
 
-                    <blockquote className="font-serif text-white text-xl md:text-2xl leading-relaxed mb-6 relative z-10 max-w-4xl">
+                    <blockquote className="font-serif text-white text-lg md:text-xl leading-relaxed mb-4 relative z-10">
                       &ldquo;{review.quote}&rdquo;
                     </blockquote>
-                    
-                    <div className="flex items-start justify-between gap-4 pt-6 border-t border-slate-800">
+
+                    <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-800">
                       <div>
-                        <p className="font-semibold text-white text-lg">{review.name}</p>
+                        <p className="font-semibold text-white">{review.name}</p>
                         <p className="font-mono text-purple-400 text-sm">{review.role}</p>
                         <p className="text-slate-500 text-xs mt-1">{review.company}</p>
                       </div>
-                      <div className="text-right max-w-[250px]">
+                      <div className="text-right max-w-[200px] hidden md:block">
                         <p className="text-slate-500 text-xs leading-relaxed italic">
                           {review.relationship}
                         </p>
@@ -408,90 +400,81 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* Rest of Testimonials */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {recommendations.filter(r => r.source !== 'mentor' && r.source !== 'origin').map((review, index) => {
-                const isDataScience = review.role.toLowerCase().includes('data') || review.role.toLowerCase().includes('scientist')
-                const isEngineering = review.role.toLowerCase().includes('engineer') || review.role.toLowerCase().includes('software')
-                const isProduct = review.role.toLowerCase().includes('product')
-                const isADPList = review.source === 'adplist'
-                
-                const accentColor = isADPList ? 'sky' : isDataScience ? 'purple' : isEngineering ? 'teal' : isProduct ? 'amber' : 'emerald'
-                const colorClasses = {
-                  sky: { border: 'hover:border-sky-500/50', text: 'text-sky-400', bg: 'bg-sky-500/20', glow: 'from-sky-500/10' },
-                  purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400', bg: 'bg-purple-500/20', glow: 'from-purple-500/10' },
-                  teal: { border: 'hover:border-[#0BA2B5]/50', text: 'text-[#0BA2B5]', bg: 'bg-[#0BA2B5]/20', glow: 'from-[#0BA2B5]/10' },
-                  amber: { border: 'hover:border-amber-500/50', text: 'text-amber-400', bg: 'bg-amber-500/20', glow: 'from-amber-500/10' },
-                  emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-400', bg: 'bg-emerald-500/20', glow: 'from-emerald-500/10' },
-                }
-                const colors = colorClasses[accentColor as keyof typeof colorClasses]
+            {/* Curated 5 Testimonials Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {recommendations
+                .filter(r => ['Marcus Horbach, Ph.D.', 'Vijay Raman', 'Yingchun Chen', 'Karishma Khadge', 'Anita George'].includes(r.name))
+                .map((review, index) => {
+                  const isDataScience = review.role.toLowerCase().includes('data') || review.role.toLowerCase().includes('scientist')
+                  const isEngineering = review.role.toLowerCase().includes('engineer') || review.role.toLowerCase().includes('software')
+                  const isProduct = review.role.toLowerCase().includes('product')
+                  const isCustomer = review.role.toLowerCase().includes('account') || review.role.toLowerCase().includes('strategist')
 
-                return (
-                  <motion.div
-                    key={`${review.name}-${index}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="group relative"
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${colors.glow} to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity`} />
-                    <div className={`relative bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-xl p-6 ${colors.border} transition-all h-full flex flex-col`}>
-                      
-                      {isADPList && (
-                        <div className="absolute top-4 right-4">
-                          <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full ${colors.bg} ${colors.text} text-[10px] font-mono uppercase tracking-wider`}>
-                            ADPList
+                  const accentColor = isDataScience ? 'purple' : isEngineering ? 'teal' : isProduct ? 'amber' : isCustomer ? 'emerald' : 'slate'
+                  const colorClasses = {
+                    purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400', glow: 'from-purple-500/10' },
+                    teal: { border: 'hover:border-[#0BA2B5]/50', text: 'text-[#0BA2B5]', glow: 'from-[#0BA2B5]/10' },
+                    amber: { border: 'hover:border-amber-500/50', text: 'text-amber-400', glow: 'from-amber-500/10' },
+                    emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-400', glow: 'from-emerald-500/10' },
+                    slate: { border: 'hover:border-slate-500/50', text: 'text-slate-400', glow: 'from-slate-500/10' },
+                  }
+                  const colors = colorClasses[accentColor as keyof typeof colorClasses]
+
+                  return (
+                    <motion.div
+                      key={review.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.08 }}
+                      className="group relative"
+                    >
+                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.glow} to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity`} />
+                      <div className={`relative bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-xl p-5 ${colors.border} transition-all h-full flex flex-col`}>
+
+                        <div className="mb-3">
+                          <span className={`font-mono ${colors.text} text-xs uppercase tracking-widest`}>
+                            {review.role}
                           </span>
                         </div>
-                      )}
 
-                      <div className="mb-4">
-                        <span className={`font-mono ${colors.text} text-xs uppercase tracking-widest`}>
-                          {review.role}
-                        </span>
-                      </div>
+                        <blockquote className="font-serif text-slate-200 text-sm leading-relaxed mb-4 flex-grow">
+                          &ldquo;{review.quote}&rdquo;
+                        </blockquote>
 
-                      <blockquote className="font-serif text-slate-200 text-base leading-relaxed mb-6 flex-grow">
-                        &ldquo;{review.quote}&rdquo;
-                      </blockquote>
-                      
-                      <div className="pt-4 border-t border-slate-800/50 space-y-2">
-                        <div className="flex items-center justify-between">
-                          <p className="font-semibold text-white text-sm">{review.name}</p>
-                          <p className="text-slate-600 text-xs">{review.company}</p>
+                        <div className="pt-3 border-t border-slate-800/50">
+                          <div className="flex items-center justify-between">
+                            <p className="font-semibold text-white text-sm">{review.name}</p>
+                            <p className="text-slate-600 text-xs">{review.company}</p>
+                          </div>
                         </div>
-                        <p className="text-slate-500 text-xs leading-relaxed italic">
-                          {review.relationship}
-                        </p>
                       </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    </motion.div>
+                  )
+                })}
             </div>
 
             {/* Links */}
-            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 pt-8">
+            <div className="flex flex-wrap justify-center items-center gap-6 pt-4">
               <a
-                href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
+                href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
               >
-                <span>More on ADPList</span>
+                <span>More on LinkedIn</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
               <span className="text-slate-700">·</span>
               <a
-                href="https://medium.com/@anu.anuja"
+                href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
               >
-                <span>Read on Medium</span>
+                <span>ADPList Reviews</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -507,7 +490,7 @@ export default function AboutPage() {
       <MotionSection className="bg-slate-50 py-16 md:py-20 border-b border-slate-200">
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            
+
             {/* Left - Context */}
             <div className="lg:col-span-1 space-y-4">
               <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
@@ -517,7 +500,7 @@ export default function AboutPage() {
                 Life Outside the Terminal
               </h2>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Parent of two — a 4-year-old boy and 1-year-old girl — with the most supportive husband. 
+                Parent of two — a 4-year-old boy and 1-year-old girl — with the most supportive husband.
                 Motherhood shapes my discipline, resilience, and systems thinking more than anything else.
               </p>
             </div>
@@ -530,7 +513,7 @@ export default function AboutPage() {
                 { id: 'COOKING', title: 'Cooking', image: '/assets/cooking.jpg' },
                 { id: 'POETRY', title: 'Poetry', image: '/assets/poetry.jpg' },
               ].map((hobby) => (
-                <div 
+                <div
                   key={hobby.id}
                   className="group relative aspect-square rounded-xl overflow-hidden"
                 >
@@ -554,40 +537,29 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          SECTION 7: CONTACT CTA
+          SECTION 7: CONTACT (Simplified)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection className="bg-slate-900 py-24 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[400px] h-[500px] opacity-[0.03]">
-            <AnimatedSignatureLogo
-              className="w-full h-full text-white"
-              duration={100000}
-              pauseDuration={4000}
-              autoPlay={true}
-            />
-          </div>
-        </div>
+      <MotionSection className="bg-slate-100 py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 md:px-8 text-center space-y-4">
+          <h3 className="font-serif text-slate-900 text-xl md:text-2xl">
+            Let&apos;s connect.
+          </h3>
 
-        <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10 text-center space-y-8">
-          <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
-            Let&apos;s build something meaningful together.
-          </h2>
-
-          <div className="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-8 gap-y-4">
-            <a href="tel:+17813547394" className="text-slate-50 text-xl font-mono hover:text-[#0BA2B5] transition-colors">
-              +1 781-354-7394
-            </a>
-            <span className="text-slate-700">·</span>
-            <a href="mailto:anu.anuja@outlook.com" className="text-slate-50 text-xl font-mono hover:text-[#0BA2B5] transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-sm md:text-base">
+            <a href="mailto:anu.anuja@outlook.com" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
               anu.anuja@outlook.com
             </a>
-            <span className="text-slate-700">·</span>
-            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-50 text-xl font-mono hover:text-[#0BA2B5] transition-colors">
+            <span className="text-slate-400">·</span>
+            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
               LinkedIn
+            </a>
+            <span className="text-slate-400">·</span>
+            <a href="tel:+17813547394" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
+              +1 781-354-7394
             </a>
           </div>
 
-          <p className="text-slate-500 text-sm pt-8">
+          <p className="text-slate-400 text-xs pt-4">
             Designed in Figma. Built with Cursor + AI. © 2025
           </p>
         </div>

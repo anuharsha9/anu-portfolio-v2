@@ -463,12 +463,6 @@ export default function HeroSplit() {
                 Principal Product Designer · AI-Driven ·<br className="sm:hidden" /> Enterprise Systems Architect
               </p>
 
-              {/* Subhead */}
-              <p className="text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
-                I bridge legacy systems and modern experiences.<br className="hidden sm:inline" />
-                From ambiguity to clarity, at enterprise scale.
-              </p>
-
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <a
