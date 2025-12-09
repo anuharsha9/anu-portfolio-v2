@@ -8,7 +8,6 @@ import HeroTerminal from './HeroTerminal'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 import CaseStudyNav from './CaseStudyNav'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
-import HeroTestimonial from '@/components/home/HeroTestimonial'
 import { heroTitleVariant, heroSubVariant, fadeIn } from '@/lib/animations'
 import { recommendations } from '@/data/home'
 

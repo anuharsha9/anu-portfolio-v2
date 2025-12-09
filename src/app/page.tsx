@@ -3,6 +3,7 @@ import HeroSplit from '@/components/home/HeroSplit'
 import WorkGrid from '@/components/home/WorkGrid'
 import TransformationShowcase from '@/components/home/TransformationShowcase'
 import GrowthStory from '@/components/home/GrowthStory'
+import WritingSection from '@/components/home/WritingSection'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TalkSection from '@/components/home/TalkSection'
 
@@ -47,13 +48,16 @@ export default function Home() {
       {/* 3. TRANSFORMATION - The scroll-stopper before/after */}
       <TransformationShowcase />
 
-      {/* 4. QUOTE - Dave's testimonial + link to Me page */}
+      {/* 4. QUOTE - Dave's testimonial + link to Medium article */}
       <GrowthStory />
 
-      {/* 5. ARCHIVE - Past Work */}
+      {/* 5. WRITING - Articles & thought leadership */}
+      <WritingSection />
+
+      {/* 6. ARCHIVE - Past Work */}
       <CollapsibleWorkArchive />
 
-      {/* 6. CONTACT - CTA */}
+      {/* 7. CONTACT - CTA */}
       <TalkSection />
     </>
   )

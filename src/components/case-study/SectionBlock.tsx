@@ -10,7 +10,6 @@ import PullQuote from './PullQuote'
 import AhaMoment from './AhaMoment'
 import TeamOnboardingProcess from './TeamOnboardingProcess'
 import FourStepFlowBreakdown from './FourStepFlowBreakdown'
-import SensitiveImage from './SensitiveImage'
 import LockedContent from './LockedContent'
 import { getTheme } from '@/lib/design-system'
 

@@ -11,7 +11,6 @@ export { default as HeroMeta } from './HeroMeta'
 // Framework Sections
 export { default as DesignFrameworkSection } from './DesignFrameworkSection'
 export { default as SectionBlock } from './SectionBlock'
-export { default as FrameworkConnection } from './FrameworkConnection'
 
 // Password Protection
 export { default as PasswordGate } from './PasswordGate'
@@ -23,7 +22,6 @@ export { default as PrototypeBlock } from './PrototypeBlock'
 export { default as SectionNav } from './SectionNav'
 
 // Timeline
-export { default as ProjectTimeline } from './ProjectTimeline'
 export { default as UnifiedTimeline } from './UnifiedTimeline'
 export { default as ReportCasterTimeline } from './ReportCasterTimeline'
 export { default as MLFunctionsTimeline } from './MLFunctionsTimeline'
@@ -32,7 +30,6 @@ export { default as IQPluginTimeline } from './IQPluginTimeline'
 // Visuals & Media
 export { default as ImageLightbox } from './ImageLightbox'
 export { default as HeroTerminal } from './HeroTerminal'
-export { default as SensitiveImage } from './SensitiveImage'
 export { default as BeforeAfterComparison } from './BeforeAfterComparison'
 
 // Testimonials & Quotes
@@ -40,7 +37,6 @@ export { default as TestimonialCard } from './TestimonialCard'
 export { default as PullQuote } from './PullQuote'
 
 // Related Content
-export { default as RelatedCaseStudies } from './RelatedCaseStudies'
 export { default as SystemIndex } from './SystemIndex'
 
 // Pattern Connections (Navigate Section)

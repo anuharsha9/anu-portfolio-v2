@@ -21,8 +21,6 @@ const nextConfig = {
   // Performance optimizations
   compress: true, // Enable gzip compression
   poweredByHeader: false, // Remove X-Powered-By header
-  // Optimize production builds
-  swcMinify: true, // Use SWC minifier (faster than Terser)
   webpack(config, { isServer, dev }) {
     // SVG optimization
     config.module.rules.push({

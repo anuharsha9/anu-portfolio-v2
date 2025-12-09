@@ -361,9 +361,6 @@ export default function HeroSplit() {
             )
           } else {
             gearGroup.style.pointerEvents = 'auto'
-            if (gearHover) {
-              gearHover.style.pointerEvents = 'auto'
-            }
             gearGroup.addEventListener('mouseenter', handleEnter)
             gearGroup.addEventListener('mouseleave', handleLeave)
             gearGroup.addEventListener('click', handleClick)
@@ -435,45 +432,45 @@ export default function HeroSplit() {
 
         {/* Main Content Container */}
         <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-screen py-20 lg:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-center min-h-screen py-8 pb-28 sm:py-12 sm:pb-28 lg:py-0 lg:pb-0">
 
             {/* Left Side - Text Content (5 columns) */}
             <motion.div
-              className="lg:col-span-5 flex flex-col justify-center space-y-8 text-center lg:text-left order-2 lg:order-1"
+              className="lg:col-span-5 flex flex-col justify-center space-y-6 lg:space-y-8 text-center lg:text-left order-2 lg:order-1"
               initial={{ opacity: 0, x: -60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Logo Stamp */}
+              {/* Logo Stamp - Desktop Only */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="flex justify-center lg:justify-start"
+                className="hidden lg:flex justify-start"
               >
-                <SignatureLogo className="w-10 h-10 md:w-12 md:h-12 text-[#0BA2B5]/80" />
+                <SignatureLogo className="w-12 h-12 text-[#0BA2B5]/80" />
               </motion.div>
 
               {/* Main Headline */}
-              <h1 className="font-serif text-white leading-[1.05] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl -mt-2">
+              <h1 className="font-serif text-white leading-[1.05] tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Designing<br />
                 through the<br />
                 <span className="text-[#0BA2B5]">complexity.</span>
               </h1>
 
               {/* Professional Title */}
-              <p className="text-[#0BA2B5] font-mono text-sm md:text-base tracking-wide max-w-md">
-                Principal Product Designer · AI-Driven · Enterprise Systems Architect
+              <p className="text-[#0BA2B5] font-mono text-xs sm:text-sm md:text-base tracking-wide max-w-md mx-auto lg:mx-0">
+                Principal Product Designer · AI-Driven ·<br className="sm:hidden" /> Enterprise Systems Architect
               </p>
 
               {/* Subhead */}
-              <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
-                I bridge legacy systems and modern experiences.
+              <p className="text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
+                I bridge legacy systems and modern experiences.<br className="hidden sm:inline" />
                 From ambiguity to clarity, at enterprise scale.
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <a
                   href="#work-overview"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#0BA2B5]/25"
@@ -510,24 +507,7 @@ export default function HeroSplit() {
                 </button>
               </div>
 
-              {/* Mobile hint - tap the gears */}
-              <div className="pt-4 lg:hidden">
-                <motion.div
-                  className="flex items-center gap-3"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.5 }}
-                >
-                  <div className="w-8 h-px bg-slate-600" />
-                  <motion.span
-                    className="font-mono text-slate-400 text-xs tracking-wide"
-                    animate={{ opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2.5, repeat: Infinity }}
-                  >
-                    Tap a gear to peek inside my brain →
-                  </motion.span>
-                </motion.div>
-              </div>
+              {/* Mobile hint - tap the gears - Hidden to prevent overlap with impact strip */}
 
               {/* GEAR INSPECTOR - Desktop Only */}
               <div className="pt-4 h-[280px] hidden lg:block">
@@ -637,7 +617,7 @@ export default function HeroSplit() {
             <div className="lg:col-span-7 relative order-1 lg:order-2">
               <div
                 ref={containerRef}
-                className="relative w-full max-w-[550px] mx-auto lg:max-w-none lg:scale-110 xl:scale-125 origin-center gears-dark-theme"
+                className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] mx-auto lg:max-w-none lg:scale-110 xl:scale-125 origin-center gears-dark-theme"
                 style={{ aspectRatio: '1 / 1' }}
               >
                 <motion.div

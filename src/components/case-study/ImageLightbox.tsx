@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -36,7 +35,7 @@ export default function ImageLightbox({
   const containerRef = useFocusTrap(isOpen)
   const [isZoomed, setIsZoomed] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
-  
+
   // Store scroll position in ref to persist across re-renders
   const scrollPositionRef = useRef<number>(0)
   // Track if scroll was locked (to properly restore on close)
@@ -252,40 +251,28 @@ export default function ImageLightbox({
               onTouchEnd={onTouchEnd}
             >
               {/* Image Wrapper with Border */}
-              <div 
-                className={`relative bg-slate-900 rounded-xl overflow-hidden border border-slate-700/50 shadow-2xl shadow-black/50 transition-all duration-500 ${
-                  isZoomed ? 'max-w-none' : 'max-w-6xl'
-                }`}
+              <div
+                className={`relative bg-slate-900 rounded-xl overflow-auto border border-slate-700/50 shadow-2xl shadow-black/50 transition-all duration-500 ${isZoomed ? 'max-w-none max-h-[95vh]' : 'max-w-[95vw] max-h-[85vh]'
+                  }`}
               >
                 {/* Loading State */}
                 {!imageLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-900 min-h-[200px] min-w-[300px]">
                     <div className="w-8 h-8 border-2 border-slate-700 border-t-[var(--accent-teal)] rounded-full animate-spin" />
                   </div>
                 )}
 
-                {/* The Image */}
-                <div 
-                  className={`relative transition-all duration-500 ${
-                    isZoomed 
-                      ? 'w-[95vw] h-[90vh]' 
-                      : 'w-[90vw] md:w-[85vw] lg:w-[80vw] h-[60vh] md:h-[70vh] lg:h-[75vh]'
-                  }`}
-                >
-                  <Image
-                    id="lightbox-image"
-                    src={imageSrc}
-                    alt={imageAlt}
-                    fill
-                    className={`transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${
-                      isZoomed ? 'object-contain' : 'object-contain'
+                {/* The Image - using img tag for natural sizing */}
+                <img
+                  id="lightbox-image"
+                  src={imageSrc}
+                  alt={imageAlt}
+                  className={`transition-all duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${isZoomed
+                      ? 'max-w-none max-h-none w-auto h-auto'
+                      : 'max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain'
                     }`}
-                    sizes="100vw"
-                    priority
-                    quality={100}
-                    onLoad={() => setImageLoaded(true)}
-                  />
-                </div>
+                  onLoad={() => setImageLoaded(true)}
+                />
               </div>
 
               {/* Caption - Technical Style */}

@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 
 export default function GrowthStory() {
   return (
@@ -20,10 +19,10 @@ export default function GrowthStory() {
             <span className="absolute -top-4 left-1/2 -translate-x-1/2 text-[120px] md:text-[160px] font-serif text-slate-100 leading-none select-none pointer-events-none">
               &ldquo;
             </span>
-            
+
             <blockquote className="relative z-10 font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl leading-relaxed max-w-3xl mx-auto">
-              She approaches her work with a fearless attitude and is never afraid to explore new ideas. 
-              Anuja is willing to take on difficult problems and push for creative solutions, 
+              She approaches her work with a fearless attitude and is never afraid to explore new ideas.
+              Anuja is willing to take on difficult problems and push for creative solutions,
               <span className="text-[#0BA2B5]"> even under tight timelines.</span>
             </blockquote>
           </div>
@@ -35,17 +34,19 @@ export default function GrowthStory() {
             <p className="text-xs text-slate-500 mt-1">My mentor for 3+ years</p>
           </div>
 
-          {/* CTA to Me page */}
+          {/* CTA to Medium article */}
           <div className="mt-10">
-            <Link
-              href="/me"
+            <a
+              href="https://medium.com/@anu.anuja/i-always-thought-i-wasnt-good-enough-until-ibi-webfocus-made-me-someone-new-e1a769f15621"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-mono text-sm text-slate-500 hover:text-[#0BA2B5] transition-colors"
             >
               <span>Read my full story</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </Link>
+            </a>
           </div>
         </motion.div>
       </div>

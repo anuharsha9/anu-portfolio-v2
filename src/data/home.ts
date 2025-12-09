@@ -8,38 +8,10 @@ export interface FeaturedCaseStudy {
   ctaText?: string
 }
 
-export interface WorkArchiveItem {
-  title: string
-  description: string
-  href: string
-  image?: string
-}
-
 export interface ArticleLink {
   title: string
   topic: string
   href: string
-}
-
-export interface PersonalProject {
-  title: string
-  description: string
-  image?: string
-  href?: string
-}
-
-export interface LeadershipHighlight {
-  title: string
-  description: string
-}
-
-export type BrainZone = {
-  id: string
-  label: string
-  title: string
-  description: string
-  href?: string // optional: where the node links to
-  targetId?: string // optional: in-page section id to scroll to
 }
 
 export const featuredCaseStudies: FeaturedCaseStudy[] = [
@@ -76,122 +48,21 @@ export const featuredCaseStudies: FeaturedCaseStudy[] = [
   },
 ]
 
-export const workArchiveItems: WorkArchiveItem[] = [
-  {
-    title: 'Graphic Design Portfolio',
-    description: 'A curated collection of graphic design work spanning brand identity, print design, and visual systems.',
-    href: '/assets/graphic design portfolio.pdf',
-    image: '/images/graphic-cover.png',
-  },
-  {
-    title: 'Kedazzle Case Study',
-    description: 'UX case study exploring e-commerce platform redesign with focus on product discovery and user flow optimization.',
-    href: '/assets/Case Study Kedazzle.pdf',
-    image: '/images/Kedazzle-cover.png',
-  },
-  {
-    title: 'CRBS Case Study',
-    description: 'Conference Room Booking System redesign focusing on enterprise scheduling and calendar integration.',
-    href: '/assets/CRBS case study.pdf',
-    image: '/images/crbs-cover.png',
-  },
-  {
-    title: 'Infinite Case Study',
-    description: 'Analytics dashboard redesign with emphasis on data visualization and real-time business insights.',
-    href: '/assets/Infinite case study.pdf',
-    image: '/images/Infinite-Cover.png',
-  },
-  {
-    title: 'Pelli Case Study',
-    description: 'Mobile-first productivity app design exploring task management and organizational workflows.',
-    href: '/assets/Pelli case study.pdf',
-    image: '/images/Pelli-cover.png',
-  },
-  {
-    title: 'Travel Portal Redesign',
-    description: 'Corporate travel booking and expense management system streamlining complex travel workflows.',
-    href: '/assets/Travel Portal.pdf',
-    image: '/images/travel-cover.png',
-  },
-  {
-    title: 'Suitcase Case Study',
-    description: 'Travel planning and packing app focused on simplifying trip preparation and itinerary management.',
-    href: '/assets/suitcase case study.pdf',
-    image: '/images/suitcase-cover.png',
-  },
-  {
-    title: 'Wordu Case Study',
-    description: 'Word prediction and writing enhancement tool designed to improve writing productivity and quality.',
-    href: '/assets/Wordu case study.pdf',
-    image: '/images/wordu-cover.png',
-  },
-]
-
 export const articleLinks: ArticleLink[] = [
   {
+    title: 'I Always Thought I Wasn\'t Good Enough — Until WebFOCUS Made Me Someone New',
+    topic: 'Personal Growth',
+    href: 'https://medium.com/@anu.anuja/i-always-thought-i-wasnt-good-enough-until-ibi-webfocus-made-me-someone-new-e1a769f15621',
+  },
+  {
     title: 'The Secret Behind Better BI: Who\'s Your Business User?',
-    topic: 'UX Design',
+    topic: 'UX Strategy',
     href: 'https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/',
   },
   {
     title: 'Enhancing User Experience in WebFOCUS DSML',
-    topic: 'AI/ML UX',
+    topic: 'AI/ML Design',
     href: 'https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/',
-  },
-  {
-    title: 'More Articles on Medium',
-    topic: 'Design Writing',
-    href: 'https://medium.com/@anu.anuja',
-  },
-]
-
-export const personalProjects: PersonalProject[] = [
-  {
-    title: 'Painting',
-    description:
-      'Where composition and color come to play. This is where I sharpen my eye for balance, contrast, and visual rhythm—the same principles I bring into product UI.',
-    image: '/assets/painting.jpg',
-  },
-  {
-    title: 'Baking',
-    description:
-      'Precision disguised as comfort. Timings, ratios, and structure—it\'s basically systems thinking with sugar, and it keeps my "measure twice" instincts alive.',
-    image: '/assets/baking.jpg',
-  },
-  {
-    title: 'Cooking',
-    description:
-      'Fast, intuitive experimentation. I rarely follow recipes to the letter—same with design. I like to improvise, taste, adjust, and move quickly toward something that feels right.',
-    image: '/assets/cooking.jpg',
-  },
-  {
-    title: 'Poetry',
-    description:
-      'Language as design material. I\'ve written poems for years. It\'s where I practice saying a lot with a little—which is also how I like my interfaces and product narratives to feel.',
-    image: '/assets/poetry.jpg',
-  },
-]
-
-export const leadershipHighlights: LeadershipHighlight[] = [
-  {
-    title: 'Mentoring on ADPList',
-    description:
-      'Helping designers navigate career transitions and grow their skills through one-on-one mentorship sessions.',
-  },
-  {
-    title: 'Leading cross-functional teams on WebFOCUS',
-    description:
-      'Collaborating with engineering, product, and QA to deliver complex enterprise solutions that balance user needs with technical constraints.',
-  },
-  {
-    title: 'Redesigning ReportCaster and ML Functions in parallel',
-    description:
-      'Managing multiple high-impact projects simultaneously while maintaining design quality and team alignment.',
-  },
-  {
-    title: 'Preparing for talks like Figma Config',
-    description:
-      'Sharing insights on enterprise design patterns and design system architecture with the broader design community.',
   },
 ]
 
@@ -203,8 +74,6 @@ export interface Recommendation {
   relationship: string
   source?: 'corporate' | 'adplist' | 'mentor' | 'origin' // Distinguish between work colleagues, mentorship, personal mentor, and origin story
 }
-
-// ADPListReview interface removed - reviews are now in recommendations array with source: 'adplist'
 
 export const recommendations: Recommendation[] = [
   // ═══════════════════════════════════════════════════════════════
@@ -335,50 +204,3 @@ export const recommendations: Recommendation[] = [
     source: 'adplist',
   },
 ]
-
-export const brainZones: BrainZone[] = [
-  {
-    id: 'systems-enterprise',
-    label: 'Systems',
-    title: 'Systems & Enterprise UX',
-    description: 'How I redesign massive, legacy, multi-layered systems like WebFOCUS and ReportCaster.',
-    targetId: 'work',
-  },
-  {
-    id: 'ai-ml',
-    label: 'AI & ML',
-    title: 'AI, ML & Product Strategy',
-    description: 'Making machine learning usable for non-ML users and aligning interfaces with AI capabilities.',
-    href: '/work/ml-functions',
-  },
-  {
-    id: 'leadership',
-    label: 'Leadership',
-    title: 'Leadership & mentorship',
-    description: 'Leading cross-functional teams, mentoring designers, and shaping how design fits into product.',
-    targetId: 'leadership',
-  },
-  {
-    id: 'storytelling',
-    label: 'Storytelling',
-    title: 'Storytelling & writing',
-    description: 'Long-form case studies, articles, and narrative-driven documentation.',
-    targetId: 'articles',
-  },
-  {
-    id: 'creative-roots',
-    label: 'Creative',
-    title: 'Creative roots',
-    description: 'Painting, cooking, digital art, and the creative practices that fuel my design work.',
-    targetId: 'personal',
-  },
-  {
-    id: 'future-vision',
-    label: 'Future',
-    title: 'Future vision',
-    description: 'Where I\'m heading: Principal/Director, AI UX product strategy, and long-term impact.',
-    // for now no link, purely conceptual
-  },
-]
-
-// Note: ADPList reviews are included in the recommendations array above with source: 'adplist'
