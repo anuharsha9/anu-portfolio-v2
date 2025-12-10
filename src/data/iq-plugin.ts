@@ -30,6 +30,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'DSML Hub — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
+    leadershipSummary: 'Owned all three DSML workflows simultaneously. Defined the product vision before requirements existed — PM wrote tickets from my designs.',
     whatTheSystemWas:
       'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
     myRole:

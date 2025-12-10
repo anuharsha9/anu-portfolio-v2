@@ -159,7 +159,7 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
               <span className="font-mono text-xs text-emerald-400 uppercase tracking-wider">Live in Production</span>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed max-w-2xl mx-auto">
-              Shipped as part of WebFOCUS 9.3 — actively impacting millions of users daily. 
+              Shipped as part of WebFOCUS 9.3 — actively impacting millions of users daily.
               <span className="text-slate-500 italic"> Mission-critical system that couldn&apos;t afford to break.</span>
             </p>
           </div>

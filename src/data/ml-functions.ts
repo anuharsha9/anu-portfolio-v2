@@ -31,6 +31,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ML Functions — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
+    leadershipSummary: 'Onboarded the PM. Earned trust from 30-year veteran engineers within 6 months. Had a seat at the table through competence, not title.',
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:

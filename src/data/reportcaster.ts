@@ -30,6 +30,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
+    leadershipSummary: 'Reverse-engineered a 50-year-old undocumented system from scratch. Made the architectural calls that became "the pattern for everything" — influencing Directors and 30-year veteran engineers.',
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:

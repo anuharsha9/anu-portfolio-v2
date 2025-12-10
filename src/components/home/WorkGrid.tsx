@@ -62,15 +62,15 @@ export default function WorkGrid() {
           <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
             // RECENT_WORK
           </span>
-          
+
           <h2 className="font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl mb-6">
             Modernizing WebFOCUS
           </h2>
-          
+
           <p className="text-slate-600 text-lg leading-relaxed mb-4">
-            <a 
-              href="https://www.ibi.com/products/ibi-webfocus" 
-              target="_blank" 
+            <a
+              href="https://www.ibi.com/products/ibi-webfocus"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--accent-teal)] hover:underline font-medium"
             >
@@ -78,9 +78,9 @@ export default function WorkGrid() {
             </a>
             {' '}is an enterprise analytics platform serving millions of users across hundreds of global organizations.
           </p>
-          
+
           <p className="text-slate-700 text-lg leading-relaxed mb-6">
-            For three years, I was the <strong className="text-slate-900">UX leader for WebFOCUS</strong>—driving modernization of its most complex, highest-impact legacy subsystems with 50+ years of technical debt.
+            I <strong className="text-slate-900">shaped the product direction</strong> of WebFOCUS without formal authority—earning trust from veteran engineers and full autonomy from design leadership through deep system understanding.
           </p>
 
           {/* Virtual User Group Badge */}
@@ -95,7 +95,7 @@ export default function WorkGrid() {
               <span className="text-slate-600 text-sm">
                 Presented at <span className="font-medium text-slate-900">Virtual User Group Sessions</span>
               </span>
-              <a 
+              <a
                 href="https://www.youtube.com/watch?v=fJFqAqBbLnM"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -124,7 +124,7 @@ export default function WorkGrid() {
               onMouseLeave={() => setHoveredIndex(null)}
               className="group"
             >
-              <Link 
+              <Link
                 href={`/work/${study.slug}`}
                 className="block h-full"
               >
@@ -139,7 +139,7 @@ export default function WorkGrid() {
                         alt={study.title}
                       />
                     </div>
-                    
+
                     {/* Locked Badge - Overlay on terminal */}
                     {study.locked && (
                       <div className="absolute top-9 right-4 z-10">
@@ -174,10 +174,9 @@ export default function WorkGrid() {
                           {study.subtitle}
                         </p>
                       </div>
-                      <ArrowRight 
-                        className={`w-4 h-4 text-slate-400 group-hover:text-[var(--accent-teal)] transition-all duration-300 flex-shrink-0 mt-1 ${
-                          hoveredIndex === index ? 'translate-x-1' : ''
-                        }`}
+                      <ArrowRight
+                        className={`w-4 h-4 text-slate-400 group-hover:text-[var(--accent-teal)] transition-all duration-300 flex-shrink-0 mt-1 ${hoveredIndex === index ? 'translate-x-1' : ''
+                          }`}
                       />
                     </div>
 

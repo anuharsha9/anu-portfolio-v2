@@ -746,6 +746,46 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           ============================================ */}
       {(showPasswordContent || !data.passwordGate) && (
         <>
+          {/* Leadership Summary - Right after hero, before metrics */}
+          {data.quickOverview.leadershipSummary && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
+            >
+              <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 md:py-12 overflow-hidden">
+                {/* Accent glow */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-[var(--accent-teal)] to-transparent" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-12 bg-[var(--accent-teal)]/10 blur-3xl" />
+
+                {/* Content */}
+                <div className="relative max-w-[1000px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12">
+                  <div className="flex items-start gap-4 md:gap-6">
+                    {/* Quote mark */}
+                    <div className="hidden md:block text-[var(--accent-teal)]/30 text-6xl lg:text-7xl font-serif leading-none -mt-2">&ldquo;</div>
+
+                    <div className="flex-1 text-center md:text-left">
+                      <p className="text-white text-lg md:text-xl lg:text-2xl font-medium leading-relaxed">
+                        {data.quickOverview.leadershipSummary}
+                      </p>
+
+                      {/* Label */}
+                      <div className="mt-5 flex items-center justify-center md:justify-start gap-3">
+                        <div className="w-10 h-px bg-[var(--accent-teal)]" />
+                        <span className="text-[var(--accent-teal)] text-xs font-mono uppercase tracking-widest">Leading Without Authority</span>
+                      </div>
+                    </div>
+
+                    {/* Closing quote mark */}
+                    <div className="hidden md:block text-[var(--accent-teal)]/30 text-6xl lg:text-7xl font-serif leading-none self-end -mb-2">&rdquo;</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Vital Signs Strip - Key Metrics at a Glance */}
           <VitalSigns
             metrics={

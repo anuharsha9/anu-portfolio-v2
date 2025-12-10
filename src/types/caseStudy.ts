@@ -14,6 +14,7 @@ export interface ScopeCard {
 export interface QuickOverview {
   title: string
   subtitle: string
+  leadershipSummary?: string // One-sentence leadership authority statement
   whatTheSystemWas: string
   myRole: string
   scopeOfPractice?: ScopeCard[]
