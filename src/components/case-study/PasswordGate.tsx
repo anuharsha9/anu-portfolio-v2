@@ -29,7 +29,7 @@ export default function PasswordGate({
     if (typeof window !== 'undefined') {
       const storageKey = `case-study-unlocked-${caseStudySlug}`
       const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-      
+
       // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
       if (caseStudySlug === 'iq-plugin') {
         if (caseUnlocked) {
@@ -67,13 +67,13 @@ export default function PasswordGate({
     e.preventDefault()
     const trimmedPassword = password.trim().toLowerCase()
     const correctPassword = (casePassword || 'anu-access').toLowerCase()
-    
+
     if (trimmedPassword === correctPassword) {
       setError('')
       // Save to sessionStorage so it persists until tab is closed
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
-        
+
         // IQ Plugin only sets its own unlock (doesn't set global unlock)
         if (caseStudySlug === 'iq-plugin') {
           sessionStorage.setItem(storageKey, 'true')
@@ -161,7 +161,7 @@ export default function PasswordGate({
 
           <div className="pt-4">
             <a
-              href="mailto:anu.anuja@outlook.com"
+              href="mailto:anujanimmagadda@gmail.com"
               className="text-white/60 hover:text-white/80 text-sm transition-colors underline"
             >
               Contact me for access

@@ -24,7 +24,7 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
       tag: 'DECISION_03: ORG_VELOCITY',
       headline: 'Autonomy vs. Standardization',
       conflict: "3 Feature Teams wanted to ship fast (Autonomy). The Platform needed consistency (Standardization).",
-      resolution: "We chose **Standardization.** I slowed down initial velocity to build the 'IQ Design System,' which eventually accelerated all 3 teams by 200%.",
+      resolution: "We chose **Standardization.** I slowed down initial velocity to build the 'IQ Design System,' which eventually accelerated all 3 teams significantly.",
     },
   ]
 

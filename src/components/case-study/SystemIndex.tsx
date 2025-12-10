@@ -27,7 +27,7 @@ const projects: Project[] = [
     tagColor: 'text-emerald-500',
     title: 'ReportCaster',
     subtitle: 'Enterprise Scheduler Modernization',
-    hook: 'Refactoring a 50-year-old legacy codebase into a unified React architecture, reducing scheduling errors by 40%.',
+    hook: 'Refactoring a 50-year-old legacy codebase into a unified React architecture, significantly reducing scheduling complexity.',
     link: '/work/reportcaster',
     hoverColor: 'group-hover:border-emerald-500/50',
     arrowColor: 'group-hover:text-emerald-400',

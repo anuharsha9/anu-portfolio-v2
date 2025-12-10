@@ -45,7 +45,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       label: 'Entry Points',
       icon: <MousePointer className="w-4 h-4" />,
       title: 'Multiple Entry Points from the Hub',
-      description: 'Right-click context menus from the Hub, driven by the Techy Analyst persona. Users access Predict Data via right-click on dataset, folder, or +Data menu — achieving 100% discoverability in SME testing.',
+      description: 'Right-click context menus from the Hub, driven by the Techy Analyst persona. Users access Predict Data via right-click on dataset, folder, or +Data menu — all entry points found in SME testing.',
       images: [
         {
           src: '/images/case-study/ml-functions/1. Predict Data - Train Models - Empty State.png',

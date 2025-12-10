@@ -639,12 +639,12 @@ export default function HeroSplit() {
           transition={{ duration: 0.8, delay: 1.8, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
-            <div className="grid grid-cols-4 divide-x divide-slate-800">
+            <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-800">
               {[
-                { value: '50', suffix: 'yr', label: 'Legacy Modernized' },
-                { value: '20', suffix: 'M+', label: 'Weekly Schedules' },
-                { value: '75', suffix: '%', label: 'Fewer Clicks' },
-                { value: '100', suffix: '%', label: 'SME Validation' },
+                { value: '50yr', label: 'Legacy System Modernized' },
+                { value: '20M+', label: 'Schedules Supported Weekly' },
+                { value: 'Reduced Complexity', label: 'Across Core Workflows', isText: true },
+                { value: 'Validated', label: 'with SMEs, Engineering, and Support', isText: true },
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
@@ -653,11 +653,13 @@ export default function HeroSplit() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                 >
-                  <div className="font-mono text-xl md:text-2xl font-semibold text-[#0BA2B5]">
-                    <AnimatedCounter
-                      value={`${metric.value}${metric.suffix}`}
-                      duration={1.5 + index * 0.2}
-                    />
+                  <div className={`font-mono font-semibold text-[#0BA2B5] ${metric.isText ? 'text-sm md:text-base' : 'text-xl md:text-2xl'}`}>
+                    {metric.isText ? metric.value : (
+                      <AnimatedCounter
+                        value={metric.value}
+                        duration={1.5 + index * 0.2}
+                      />
+                    )}
                   </div>
                   <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-1">
                     {metric.label}

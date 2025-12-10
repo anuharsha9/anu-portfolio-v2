@@ -20,7 +20,7 @@ export const featuredCaseStudies: FeaturedCaseStudy[] = [
     title: 'ReportCaster: redesigning a legacy enterprise scheduler',
     summary:
       'Owning the end-to-end UX modernization of a 50-year-old scheduling tool no one else wanted to touch — turning scattered workflows into a clear, unified scheduling experience used by millions of enterprise reports.',
-    impact: '75% fewer clicks, unified architecture, reduced support load.',
+    impact: 'Unified 5 subsystems, eliminated tab sprawl, reduced support load.',
     tags: ['Enterprise UX', 'Legacy modernization', 'Architecture'],
     image: '/images/case-study/ReportCaster/rc-cover.png',
     ctaText: 'View ReportCaster case study',

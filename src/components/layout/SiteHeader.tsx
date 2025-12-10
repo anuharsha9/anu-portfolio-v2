@@ -91,21 +91,19 @@ export default function SiteHeader() {
           <div className="hidden lg:flex items-center gap-6">
             {/* Work - with dropdown */}
             <CaseStudiesDropdown
-              className={`font-sans font-medium transition-colors ${
-                isLandingPage 
-                  ? 'text-slate-900' 
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`font-sans font-medium transition-colors ${isLandingPage
+                ? 'text-slate-900'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             />
-            
+
             {/* Me */}
             <Link
               href="/me"
-              className={`font-sans font-medium transition-colors relative ${
-                isAboutPage 
-                  ? 'text-slate-900' 
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
+              className={`font-sans font-medium transition-colors relative ${isAboutPage
+                ? 'text-slate-900'
+                : 'text-slate-600 hover:text-slate-900'
+                }`}
             >
               Me
               {/* Active indicator dot */}
@@ -119,13 +117,13 @@ export default function SiteHeader() {
         {/* Right Side CTAs */}
         <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-3">
           {/* Let's Talk - Primary CTA */}
-          <a
-            href="mailto:anuja.harsha@gmail.com"
+          <Link
+            href="/#lets-talk"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0BA2B5] text-white text-sm font-medium transition-all duration-300 hover:bg-[#0990A2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5] shadow-sm"
           >
             <span>Let&apos;s Talk</span>
-          </a>
-          
+          </Link>
+
           {/* Resume - Secondary CTA */}
           <a
             href="/resume.html"

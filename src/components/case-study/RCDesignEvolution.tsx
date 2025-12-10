@@ -587,7 +587,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
             400+ screens across 6 subsystems — unified into platform-native modals.
-            <span className="text-emerald-400 font-medium"> 83% fewer clicks</span>,
+            <span className="text-emerald-400 font-medium"> significantly reduced entry steps</span>,
             <span className="text-emerald-400 font-medium"> zero new tabs</span>, and
             <span className="text-emerald-400 font-medium"> natural language recurrence summaries</span> that
             eliminate scheduling confusion. Shipped in WebFOCUS 9.3.

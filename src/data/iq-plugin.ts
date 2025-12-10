@@ -46,7 +46,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         tag: 'PATTERN_PARITY',
         tagColor: 'amber',
-        headline: '100% Consistency',
+        headline: 'Full Consistency',
         body: 'Same patterns across all 3 features. Learn one, know them all.',
         icon: 'archaeologist',
       },
@@ -67,7 +67,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     ],
     impactMetrics: [
       { label: 'Workflows owned', value: '3' },
-      { label: 'Pattern parity', value: '100%' },
+      { label: 'Pattern parity', value: 'Full' },
       { label: 'Entry points', value: '1' },
       { label: 'Personas mapped', value: '4' },
     ],
@@ -88,7 +88,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     ],
     keyAchievements: [
       'Owned all 3 DSML workflows: NLQ, Insights, and the DSML Hub',
-      'Achieved 100% pattern consistency across all features',
+      'Achieved full pattern consistency across all 3 features',
       'Made all features fully responsive across screen sizes',
       'Created 2 business user personas; inherited 2 technical',
       'Defined product vision with minimal requirements—PM created tickets after design was done',
@@ -286,7 +286,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     heading: 'Impact',
     bullets: [
       'Owned all 3 workflows: NLQ, Insights, DSML Hub',
-      '100% pattern consistency across all features',
+      'Full pattern consistency across all features',
       'All features fully responsive',
       'Created 2 business personas; inherited 2 technical',
       'Unified dataset selection and onboarding',
@@ -301,7 +301,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     body: 'I owned every piece of the DSML surface. NLQ. Insights. The DSML Hub that unified them. Made all three responsive. Ensured every pattern matched.',
     keyPoints: [
       'Owned NLQ, Insights, AND DSML Hub',
-      '100% pattern parity',
+      'Full pattern parity',
       'All features responsive',
       '4 personas mapped',
       'Shipping 2027',

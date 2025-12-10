@@ -86,7 +86,7 @@ export default function ReportCasterTimeline({ isLightBackground = false }: Repo
       id: 'phase-08',
       phase: '08',
       title: 'SHIPPING_IMPACT',
-      body: '44-56% fewer clicks. Multi-tab workflows eliminated entirely. Support tickets dropped. Customers praised redesign in Virtual User Group session.',
+      body: 'Entry path from Hub simplified (5+ clicks → 2). Multi-tab workflows eliminated. Support tickets dropped. Customers praised redesign in Virtual User Group session.',
       status: 'COMPLETED' as const,
     },
   ]

@@ -15,17 +15,13 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
       { step: 'Drill down in context menu', clicks: 1 },
       { step: 'Select create schedule', clicks: 1 },
       { step: 'Scheduler opens in new tab', clicks: 0, isNewTab: true },
-      { step: 'Configure properties', clicks: 1 },
-      { step: 'Add task, set distribution, recurrence', clicks: 3 },
-      { step: 'Check other settings', clicks: 1 },
+      { step: 'Configure (properties, task, distribution, recurrence)', clicks: 0, isNote: true },
     ],
     new: [
-      { step: '+ menu → Create Schedule', clicks: 1 },
-      { step: 'Add task', clicks: 1 },
-      { step: 'Select distribution method', clicks: 1 },
-      { step: 'Set recurrence', clicks: 1 },
+      { step: '+ menu → Create Schedule', clicks: 2 },
+      { step: 'Configure (task, distribution, recurrence) — same context', clicks: 0, isNote: true },
     ],
-    reduction: '83% fewer clicks, no new tabs',
+    reduction: 'No new tabs, unified context',
   }
 
   // Positions for "chaotic" step cards on the left
@@ -54,13 +50,13 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // CORE_WORKFLOW: MAIN_SCHEDULER
+            // CORE_WORKFLOW: SCHEDULE_CREATION
           </span>
           <h4 className="text-[var(--text-heading)] text-xl md:text-2xl font-serif">
-            From 9 Clicks to 4 Clicks
+            Entry Point: 5+ Clicks → 2 Clicks
           </h4>
           <p className="text-[var(--text-body)] text-sm max-w-2xl mx-auto">
-            The Main Scheduler — ReportCaster&apos;s core workflow. The old path required navigating menus, opening new tabs, and mental context switching. The new unified modal eliminates it all.
+            Getting to the schedule dialog: the old path required 5+ clicks + a new tab opening. The new unified modal is accessible in 2 clicks from the Hub. Configuration steps are similar, but now happen in the same context.
           </p>
         </motion.div>
 
@@ -83,7 +79,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                 </span>
               </div>
               <div className="font-mono text-2xl font-bold text-[var(--text-heading)]">
-                9<span className="text-sm text-[var(--text-muted)] ml-1">clicks</span>
+                5+<span className="text-sm text-[var(--text-muted)] ml-1">clicks to dialog</span>
               </div>
             </div>
 
@@ -115,21 +111,26 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                       transform: `translateX(${chaosPositions[idx]?.x || 0}px) translateY(${chaosPositions[idx]?.y || 0}px)`,
                     }}
                     className={`relative bg-white border rounded-lg p-3 shadow-sm transition-all duration-200 ${item.isNewTab
-                        ? 'border-[var(--color-warning)] bg-amber-50'
-                        : 'border-[var(--border-primary)]'
+                      ? 'border-[var(--color-warning)] bg-amber-50'
+                      : 'border-[var(--border-primary)]'
                       }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white font-mono text-xs font-bold flex-shrink-0 ${item.isNewTab ? 'bg-[var(--color-warning)]' : 'bg-[var(--border-secondary)]'
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white font-mono text-xs font-bold flex-shrink-0 ${item.isNewTab ? 'bg-[var(--color-warning)]' : item.isNote ? 'bg-slate-300' : 'bg-[var(--border-secondary)]'
                         }`}>
-                        {item.isNewTab ? '↗' : idx + 1}
+                        {item.isNewTab ? '↗' : item.isNote ? '…' : idx + 1}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[var(--text-heading)] text-xs font-medium truncate">{item.step}</p>
+                        <p className={`text-xs font-medium truncate ${item.isNote ? 'text-[var(--text-muted)] italic' : 'text-[var(--text-heading)]'}`}>{item.step}</p>
                       </div>
                       {item.clicks > 0 && (
                         <span className="font-mono text-[10px] text-[var(--text-muted)] flex-shrink-0">
                           +{item.clicks}
+                        </span>
+                      )}
+                      {item.isNote && (
+                        <span className="font-mono text-[10px] text-[var(--text-muted)] flex-shrink-0 italic">
+                          varies
                         </span>
                       )}
                     </div>
@@ -166,11 +167,11 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent-teal)]">
-                  STREAMLINED
+                  UNIFIED
                 </span>
               </div>
               <div className="font-mono text-2xl font-bold text-[var(--accent-teal)]">
-                4<span className="text-sm text-[var(--text-muted)] ml-1">clicks</span>
+                2<span className="text-sm text-[var(--text-muted)] ml-1">clicks to dialog</span>
               </div>
             </div>
 
@@ -185,17 +186,17 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
                     whileHover={{ scale: 1.02, x: 4 }}
-                    className="bg-white border-2 border-[var(--accent-teal)]/40 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200"
+                    className={`border-2 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 ${item.isNote ? 'bg-slate-50 border-slate-200' : 'bg-white border-[var(--accent-teal)]/40'}`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-[var(--accent-teal)] flex items-center justify-center text-white font-mono font-bold flex-shrink-0">
-                        {idx + 1}
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-mono font-bold flex-shrink-0 ${item.isNote ? 'bg-slate-300' : 'bg-[var(--accent-teal)]'}`}>
+                        {item.isNote ? '…' : idx + 1}
                       </div>
                       <div className="flex-1">
-                        <p className="text-[var(--text-heading)] text-sm font-semibold">{item.step}</p>
+                        <p className={`text-sm ${item.isNote ? 'text-[var(--text-muted)] italic' : 'text-[var(--text-heading)] font-semibold'}`}>{item.step}</p>
                       </div>
-                      <span className="font-mono text-sm text-[var(--accent-teal)] font-bold">
-                        {item.clicks} click
+                      <span className={`font-mono text-sm font-bold ${item.isNote ? 'text-slate-400 italic' : 'text-[var(--accent-teal)]'}`}>
+                        {item.isNote ? 'varies' : `${item.clicks} clicks`}
                       </span>
                     </div>
                   </motion.div>
@@ -218,19 +219,22 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex justify-center"
+          className="flex flex-col items-center gap-3"
         >
           <div className="inline-flex items-center gap-3 bg-[var(--bg-tertiary)] rounded-full px-6 py-3 border border-[var(--border-primary)]">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-3xl font-bold text-[var(--text-heading)]">83%</span>
-              <span className="text-[var(--text-muted)] text-sm">fewer clicks</span>
+              <span className="font-mono text-2xl font-bold text-[var(--text-heading)]">5+ → 2</span>
+              <span className="text-[var(--text-muted)] text-sm">clicks to entry</span>
             </div>
             <div className="w-px h-6 bg-[var(--border-primary)]"></div>
             <div className="flex items-center gap-2">
-              <span className="font-mono text-3xl font-bold text-[var(--accent-teal)]">0</span>
+              <span className="font-mono text-2xl font-bold text-[var(--accent-teal)]">0</span>
               <span className="text-[var(--text-muted)] text-sm">new tabs</span>
             </div>
           </div>
+          <p className="text-[var(--text-muted)] text-xs max-w-md text-center">
+            Configuration steps vary by schedule type. The key improvement: unified context, no tab switching.
+          </p>
         </motion.div>
       </div>
     </div>

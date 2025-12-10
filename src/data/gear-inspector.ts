@@ -56,7 +56,7 @@ export const GEAR_INSPECTOR: Record<string, GearInspectorItem> = {
     id: "gear-fragmented-ui",
     thought: "This UI is so fragmented, I have to find a way to unify it.",
     title: "System Unification",
-    insight: "Integrated 5 scattered legacy subsystems into a single, coherent experience. 75% fewer clicks.",
+    insight: "Integrated 5 scattered legacy subsystems into a single, coherent experience. Simplified entry paths.",
     image: "/images/case-study/ReportCaster/After.png",
     link: "/work/reportcaster#section-04",
     linkLabel: "See the Integration",

@@ -90,7 +90,7 @@ export default function AboutPage() {
                 </svg>
               </Link>
               <a
-                href="mailto:anuja.harsha@gmail.com"
+                href="mailto:anujanimmagadda@gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-600 text-white font-medium hover:border-slate-400 hover:bg-slate-800/50 transition-all"
               >
                 <span>Let&apos;s Talk</span>
@@ -546,8 +546,8 @@ export default function AboutPage() {
           </h3>
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-sm md:text-base">
-            <a href="mailto:anu.anuja@outlook.com" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
-              anu.anuja@outlook.com
+            <a href="mailto:anujanimmagadda@gmail.com" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
+              anujanimmagadda@gmail.com
             </a>
             <span className="text-slate-400">·</span>
             <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">

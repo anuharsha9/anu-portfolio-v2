@@ -135,6 +135,11 @@ export default function ImpactDiff({
       <p className="text-center text-slate-500 text-sm font-mono mt-4">
         {'<'} Drag to compare {'>'}
       </p>
+
+      {/* Metrics disclaimer */}
+      <p className="text-center text-slate-400 text-xs mt-3 max-w-2xl mx-auto leading-relaxed">
+        Metrics reflect primary workflow paths observed during system mapping and design validation. Actual interactions vary by configuration and use case.
+      </p>
     </motion.div>
   )
 }

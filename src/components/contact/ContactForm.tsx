@@ -90,7 +90,7 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
 
       // In production, replace this with actual form submission
       // For now, we'll show success and provide mailto link
-      window.location.href = `mailto:anu.anuja@outlook.com?subject=${subject}&body=${body}`
+      window.location.href = `mailto:anujanimmagadda@gmail.com?subject=${subject}&body=${body}`
 
       // Track form submission
       trackContactFormSubmit(formData.projectType)
@@ -106,7 +106,7 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
           projectType: '',
           message: '',
         })
-        
+
         // Close form after a brief delay to show success message
         if (onSuccess) {
           setTimeout(() => {
@@ -119,7 +119,7 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
         console.error('Form submission error:', error)
       }
       setSubmitStatus('error')
-      setErrorMessage('Something went wrong. Please try again or email directly at anu.anuja@outlook.com')
+      setErrorMessage('Something went wrong. Please try again or email directly at anujanimmagadda@gmail.com')
       setIsSubmitting(false)
     }
   }
@@ -251,18 +251,17 @@ export default function ContactForm({ isLightBackground = false, onSuccess }: Co
             <p className={`${mutedColor} text-sm text-center sm:text-left`}>
               Or email directly:{' '}
               <a
-                href="mailto:anu.anuja@outlook.com"
+                href="mailto:anujanimmagadda@gmail.com"
                 className="text-[var(--accent-teal)] hover:underline"
               >
-                anu.anuja@outlook.com
+                anujanimmagadda@gmail.com
               </a>
             </p>
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`px-8 py-3 rounded-full border-2 border-[var(--accent-teal)] text-[var(--accent-teal)] font-medium transition-all duration-300 hover:bg-[var(--accent-teal)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed ${
-                isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
+              className={`px-8 py-3 rounded-full border-2 border-[var(--accent-teal)] text-[var(--accent-teal)] font-medium transition-all duration-300 hover:bg-[var(--accent-teal)] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>

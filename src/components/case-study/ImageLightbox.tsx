@@ -106,6 +106,19 @@ export default function ImageLightbox({
         })
       })
     }
+
+    // Cleanup on unmount - ensure scroll is restored if component unmounts while open
+    return () => {
+      if (wasLockedRef.current) {
+        const scrollY = scrollPositionRef.current
+        document.body.style.position = ''
+        document.body.style.top = ''
+        document.body.style.width = ''
+        document.body.style.overflow = ''
+        wasLockedRef.current = false
+        window.scrollTo({ top: scrollY, behavior: 'instant' })
+      }
+    }
   }, [isOpen])
 
   // Keyboard navigation - separate effect to avoid scroll issues
@@ -268,8 +281,8 @@ export default function ImageLightbox({
                   src={imageSrc}
                   alt={imageAlt}
                   className={`transition-all duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${isZoomed
-                      ? 'max-w-none max-h-none w-auto h-auto'
-                      : 'max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain'
+                    ? 'max-w-none max-h-none w-auto h-auto'
+                    : 'max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain'
                     }`}
                   onLoad={() => setImageLoaded(true)}
                 />

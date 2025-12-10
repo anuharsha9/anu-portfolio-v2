@@ -12,6 +12,10 @@ export default function SiteFooter() {
   const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
     if (pathname === '/') {
+      // First scroll to top instantly to avoid "stuck at bottom" feeling
+      window.scrollTo({ top: 0, behavior: 'instant' })
+
+      // Then smoothly scroll to the section
       setTimeout(() => {
         const section = document.getElementById(sectionId)
         if (section) {
@@ -31,7 +35,7 @@ export default function SiteFooter() {
 
           window.history.pushState(null, '', `#${sectionId}`)
         }
-      }, 100)
+      }, 50)
     } else {
       router.push(`/#${sectionId}`)
     }
@@ -53,7 +57,7 @@ export default function SiteFooter() {
               Anuja Harsha Nimmagadda
             </span>
           </Link>
-          
+
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             {/* Navigation Links */}
             <nav className="hidden md:flex flex-wrap items-center justify-center gap-6">
@@ -91,7 +95,7 @@ export default function SiteFooter() {
                 Contact
               </Link>
             </nav>
-            
+
             {/* Social Icons */}
             <div className="hidden md:flex items-center gap-4">
               <a
@@ -117,7 +121,7 @@ export default function SiteFooter() {
                 </svg>
               </a>
             </div>
-            
+
             {/* Separator & Copyright */}
             <span className="hidden md:inline text-slate-700">·</span>
             <div className="flex items-center gap-3">

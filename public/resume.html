@@ -12,19 +12,19 @@
         }
 
         @page {
-            margin: 0.7in;
+            margin: 0.5in 0.6in;
             size: letter;
         }
 
         body {
             font-family: "Times New Roman", Times, serif;
-            font-size: 11pt;
-            line-height: 1.6;
+            font-size: 10.5pt;
+            line-height: 1.4;
             color: #000000;
             background: #ffffff;
             max-width: 8.5in;
             margin: 0 auto;
-            padding: 0.7in;
+            padding: 0.5in 0.6in;
         }
 
         /* Download Button */
@@ -52,28 +52,24 @@
             background-color: #008a9c;
         }
 
-        .download-button:active {
-            background-color: #007080;
-        }
-
         @media print {
             .download-button {
                 display: none;
             }
         }
 
-        /* Contact Header */
+        /* Contact Header - Single Column, No Tables */
         .header {
             text-align: center;
-            margin-bottom: 12pt;
-            padding-bottom: 10pt;
-            border-bottom: 2pt solid #000000;
+            margin-bottom: 10pt;
+            padding-bottom: 8pt;
+            border-bottom: 1.5pt solid #000000;
         }
 
         .name {
-            font-size: 18pt;
+            font-size: 16pt;
             font-weight: bold;
-            margin-bottom: 6pt;
+            margin-bottom: 4pt;
             color: #000000;
             letter-spacing: 0.5pt;
         }
@@ -81,185 +77,132 @@
         .contact {
             font-size: 10pt;
             color: #000000;
-            line-height: 1.8;
-        }
-
-        .contact span {
-            margin: 0 4pt;
+            line-height: 1.6;
         }
 
         /* Section Headers */
         h1 {
-            font-size: 12pt;
+            font-size: 11pt;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 14pt;
-            margin-bottom: 8pt;
-            padding-bottom: 3pt;
-            border-bottom: 1pt solid #000000;
+            margin-top: 10pt;
+            margin-bottom: 4pt;
+            padding-bottom: 2pt;
+            border-bottom: 0.5pt solid #000000;
             color: #000000;
             page-break-after: avoid;
         }
 
         h2 {
-            font-size: 11pt;
+            font-size: 10.5pt;
             font-weight: bold;
-            margin-top: 10pt;
-            margin-bottom: 4pt;
+            margin-top: 6pt;
+            margin-bottom: 2pt;
             color: #000000;
         }
 
         /* Job Entries */
         .job {
-            margin-bottom: 12pt;
+            margin-bottom: 8pt;
             page-break-inside: avoid;
         }
 
         .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 2pt;
+            display: block;
+            margin-bottom: 1pt;
         }
 
         .job-title {
             font-weight: bold;
-            font-size: 11pt;
+            font-size: 10.5pt;
             color: #000000;
+            display: inline;
         }
 
         .job-date {
             font-weight: normal;
-            font-size: 11pt;
+            font-size: 10.5pt;
             color: #000000;
+            float: right;
         }
 
         .company {
-            font-size: 11pt;
+            font-size: 10.5pt;
             color: #000000;
-            margin-bottom: 6pt;
             font-style: italic;
-        }
-
-        .job-description {
-            margin-top: 6pt;
-            font-size: 11pt;
-            line-height: 1.6;
-            color: #000000;
+            clear: both;
         }
 
         /* Lists */
         ul {
-            margin: 6pt 0;
-            padding-left: 20pt;
+            margin: 3pt 0;
+            padding-left: 16pt;
             list-style-type: disc;
         }
 
         li {
-            margin-bottom: 4pt;
-            font-size: 11pt;
-            line-height: 1.6;
+            margin-bottom: 2pt;
+            font-size: 10.5pt;
+            line-height: 1.4;
             color: #000000;
         }
 
-        /* Skills */
-        .skills {
-            display: block;
-            margin: 8pt 0;
-            line-height: 2;
-            font-size: 11pt;
-        }
-
-        .skills span {
-            display: inline-block;
-            margin-right: 10pt;
-            margin-bottom: 4pt;
+        /* Skills - Single Column, No Tables */
+        .skills-list {
+            font-size: 10.5pt;
+            line-height: 1.5;
             color: #000000;
         }
 
-        /* Summary Paragraphs */
+        .skills-list p {
+            margin-bottom: 2pt;
+        }
+
+        /* Summary */
         .summary p {
-            margin-bottom: 6pt;
+            margin-bottom: 4pt;
             text-align: left;
-            font-size: 11pt;
-            line-height: 1.6;
+            font-size: 10.5pt;
+            line-height: 1.4;
             color: #000000;
-        }
-
-        .summary p:last-child {
-            margin-bottom: 0;
         }
 
         /* Sections */
         .section {
-            margin-bottom: 10pt;
+            margin-bottom: 6pt;
         }
 
-        /* Key Achievements Label */
-        .key-achievements {
+        /* Target Title */
+        .target-title {
+            text-align: center;
+            font-size: 12pt;
             font-weight: bold;
-            text-transform: uppercase;
-            font-size: 10pt;
-            margin-top: 8pt;
-            margin-bottom: 4pt;
+            margin: 6pt 0;
             color: #000000;
-        }
-
-        /* Education Entries */
-        .education-item {
-            margin-bottom: 4pt;
-            font-size: 11pt;
-            color: #000000;
-        }
-
-        /* Technical Skills */
-        .tech-skills {
-            font-size: 11pt;
-            line-height: 1.6;
-            color: #000000;
-        }
-
-        .tech-skills strong {
-            font-weight: bold;
         }
 
         /* Print Styles */
         @media print {
             @page {
-                margin: 0.7in;
+                margin: 0.5in 0.6in;
                 size: letter;
             }
 
             body {
                 padding: 0;
-                color: #000000 !important;
+            }
+
+            .download-button {
+                display: none;
             }
 
             h1 {
                 page-break-after: avoid;
-                border-bottom-color: #000000 !important;
             }
 
             .job {
                 page-break-inside: avoid;
             }
-
-            .section {
-                page-break-inside: avoid;
-            }
-
-            * {
-                color: #000000 !important;
-            }
-        }
-
-        /* Avoid page breaks in bad places */
-        h1, h2 {
-            page-break-after: avoid;
-        }
-
-        .job {
-            page-break-inside: avoid;
         }
     </style>
 </head>
@@ -269,215 +212,149 @@
         Download PDF
     </a>
 
-    <!-- Header -->
+    <!-- ============================================
+         HOT ZONE: TOP 1/3 OF PAGE 1
+         Name → Target Title → Summary → Key Skills
+         ============================================ -->
+
+    <!-- Header (Name & Contact) - In Body, Not Header -->
     <div class="header">
         <div class="name">ANUJA HARSHA NIMMAGADDA</div>
         <div class="contact">
-            <span>anu.anuja@outlook.com</span>
-            <span>|</span>
-            <span>+1 781-354-7394</span>
-            <span>|</span>
-            <span>Portfolio: www.anujaharsha.com</span>
-            <span>|</span>
-            <span>linkedin.com/in/anu159</span>
+            anujanimmagadda@gmail.com | +1 781-354-7394 | www.anujaharsha.com | linkedin.com/in/anu159
         </div>
     </div>
 
-    <!-- Target Job Title -->
-    <h1>Target Job Title</h1>
-    <div class="section">
-        <p>Principal Product Designer, Senior Product Designer, UX Design Lead, Enterprise UX Designer, Lead Systems Designer</p>
-    </div>
+    <!-- Target Job Title - SINGLE TITLE -->
+    <div class="target-title">PRINCIPAL PRODUCT DESIGNER</div>
 
-    <!-- Career Summary -->
-    <h1>Career Summary</h1>
+    <!-- Career Summary - Condensed -->
+    <h1>Summary</h1>
     <div class="summary section">
-        <p><strong>Principal-level Product Designer</strong> with 13 years of end-to-end experience across B2C consumer products, B2B enterprise platforms, AI/ML workflows, systems design, mobile, and web. Specialize in modernizing complex workflows, simplifying multi-step systems, and bringing clarity to ambiguous problem spaces.</p>
-        <p>Operate as a <strong>UX leader</strong>: aligning engineering, data science, and product teams; driving cross-functional clarity; and mentoring designers. Work at the intersection of product strategy, systems architecture, and user-centered design, delivering scalable, high-impact experiences that make measurable business impact.</p>
-        <p>Proven track record of Principal-level impact at scale—redesigning mission-critical systems serving <strong>millions of users</strong>, reducing clicks by <strong>44-56%</strong>, and eliminating support bottlenecks.</p>
+        <p><strong>Principal-level Product Designer</strong> with 13 years of experience across enterprise platforms, AI/ML workflows, and legacy system modernization. Specialize in transforming complex, ambiguous problem spaces into clear, scalable experiences.</p>
+        <p>Led UX strategy for mission-critical systems serving <strong>millions of users</strong>, reducing clicks by <strong>44-56%</strong> and eliminating support bottlenecks. Earned trust from 30-year veteran engineers and full autonomy from design leadership through deep system understanding. Operate as a cross-functional leader: aligning engineering, data science, and product teams.</p>
     </div>
 
-    <!-- AI-Assisted Design & Development -->
-    <h1>AI-Assisted Design & Development</h1>
-    <div class="summary section">
-        <p><strong>Designed and Developed Portfolio Website with AI assistance</strong>. Leverage strong foundational knowledge of HTML/CSS and AI-assisted workflows to bridge design-to-implementation, delivering production-ready front-end code.</p>
-        <p><strong>Approach:</strong> Design the system first (problem framing, user flows, UX strategy), use AI to generate foundation (HTML/CSS scaffolds, React/JavaScript components, layouts), then manually audit, debug, and refine (accessibility, semantic HTML, CSS specificity, interactions). While not a deep React/JavaScript expert, effectively leverage AI to understand code, debug issues, and explore alternatives—treating AI as a managed resource where my role is architecture, direction, and quality control.</p>
-        <p>Portfolio (anujaharsha.com), built with <strong>Next.js, TypeScript, React, Tailwind CSS</strong>, deployed on <strong>AWS S3/CloudFront</strong>. Source code available on GitHub.</p>
-    </div>
-
-    <!-- Key Skills -->
+    <!-- Key Skills - IN THE HOT ZONE -->
     <h1>Key Skills</h1>
-    <div class="skills section">
-        <span>User Experience Design</span>
-        <span>UX Design</span>
-        <span>Product Design</span>
-        <span>User Interface Design</span>
-        <span>UI Design</span>
-        <span>Enterprise UX</span>
-        <span>Artificial Intelligence (AI) / Machine Learning (ML) Product Experiences</span>
-        <span>Workflow Design</span>
-        <span>Information Architecture</span>
-        <span>Systems Thinking</span>
-        <span>Legacy System Modernization</span>
-        <span>User Research</span>
-        <span>Usability Testing</span>
-        <span>Scenario-Based Testing</span>
-        <span>Subject Matter Expert (SME) Collaboration</span>
-        <span>Design System Leadership</span>
-        <span>Cross-functional Leadership</span>
-        <span>Product Strategy</span>
-        <span>UX Strategy</span>
-        <span>Interaction Design</span>
-        <span>Prototyping</span>
-        <span>Figma</span>
-        <span>Heuristic Evaluation</span>
-        <span>Accessibility</span>
-        <span>Visual Design</span>
-        <span>Mobile UX</span>
-        <span>Web UX</span>
-        <span>Requirement Gathering</span>
-        <span>UX Documentation</span>
-        <span>Stakeholder Alignment</span>
-        <span>Design Systems</span>
-        <span>Wireframing</span>
-        <span>User-Centered Design</span>
-        <span>AI-Assisted Development</span>
-        <span>Next.js</span>
-        <span>TypeScript</span>
-        <span>React</span>
-        <span>AWS S3</span>
-        <span>CloudFront</span>
-        <span>GitHub</span>
+    <div class="skills-list section">
+        <p><strong>Design Leadership:</strong> Product Design, UX Strategy, Design Systems, Cross-functional Leadership, Stakeholder Alignment, Mentorship</p>
+        <p><strong>Specializations:</strong> Enterprise UX, AI/ML Product Experiences, Legacy Modernization, Workflow Design, Information Architecture, Systems Thinking</p>
+        <p><strong>Methods:</strong> User Research, Usability Testing, SME Collaboration, Prototyping, Heuristic Evaluation, Accessibility</p>
+        <p><strong>Tools:</strong> Figma, FigJam, Adobe Creative Suite | HTML, CSS, React, Next.js, TypeScript | AWS, GitHub</p>
     </div>
 
-    <!-- Professional Experience -->
+    <!-- ============================================
+         EXPERIENCE - Condensed to Most Relevant
+         ============================================ -->
+    
     <h1>Experience</h1>
 
     <div class="job section">
         <div class="job-header">
-            <div class="job-title">SENIOR UI/UX ENGINEER</div>
-            <div class="job-date">August 2022 - November 2025</div>
+            <span class="job-title">SENIOR UI/UX ENGINEER</span>
+            <span class="job-date">Aug 2022 – Nov 2025</span>
         </div>
         <div class="company">Cloud Software Group (WebFOCUS/IBI)</div>
         
-        <div class="job-description">
-            Led User Experience modernization across multiple legacy product areas, operating as the de-facto Principal Designer in an engineering-first organization with low UX maturity. Established structured discovery, Subject Matter Expert (SME) outreach, and cross-functional alignment processes that became team-wide standards. Elevated UX maturity by mentoring designers and influencing product strategy through research, prototyping, usability testing, and implementation alignment.
-        </div>
-
-        <div class="key-achievements">Key Achievements:</div>
         <ul>
-            <li>Collaborated directly with Directors of Design, Engineering, and Product Management on strategic initiatives, architectural decisions, and platform-wide standards; worked closely with Lead Architect of entire organization and Design System leadership, demonstrating Principal-level strategic influence and executive-level collaboration</li>
-            <li>Delivered a dozen organization-wide design demos to 150-200 person business unit across ReportCaster, Machine Learning (ML) Functions, and IQ Plugin initiatives, presenting design walkthroughs and architectural decisions via Zoom; received widespread praise and recognition for clarity in explaining complex systems to cross-functional audiences</li>
-            <li>Recognized by senior leadership in a company-wide meeting for early impact on ReportCaster and Data Science and Machine Learning (DSML) within first 6 months, solidifying role as cross-functional UX leader</li>
-            <li>Only designer who worked on all major WebFOCUS features; led 3 out of 4 Principal-level initiatives (ReportCaster, Machine Learning (ML) Functions, IQ Plugin) simultaneously while juggling platform constraints; owned ReportCaster and ML Functions solo before onboarding and managing design teams, demonstrating ability to lead multiple complex projects at scale</li>
-            <li>Co-owned and maintained WebFOCUS Design System with Director of Design: migrated entire system from Sketch to Figma, improved Figma design system elements, added components, and established working standards ensuring consistency across platform</li>
-            <li>As the only designer on the team apart from the Director of Design, was eventually given the opportunity to co-host Virtual User Group Sessions for enterprise customers, presenting alongside the Senior PM to showcase design work and gather customer feedback</li>
-            <li>Onboarded and managed design teams across multiple initiatives: onboarded 2 designers on ReportCaster for final polish and shipping, 2 designers on ML Functions during maternity leave transition; served as knowledge hub and continued to be looped in for critical decisions even after transitioning projects</li>
+            <li>Led UX modernization across multiple legacy product areas as de-facto Principal Designer; established discovery, SME outreach, and cross-functional alignment processes that became team-wide standards</li>
+            <li>Collaborated with Directors of Design, Engineering, and Product on strategic initiatives; worked with Lead Architect and Design System leadership on platform-wide standards</li>
+            <li>Only designer to work on all major WebFOCUS features; led 3 of 4 Principal-level initiatives simultaneously (ReportCaster, ML Functions, IQ Plugin)</li>
+            <li>Delivered organization-wide design demos to 150-200 person business unit; co-hosted Virtual User Group Sessions for enterprise customers</li>
         </ul>
 
-        <h2>ReportCaster Modernization (2022–2025)</h2>
+        <h2>ReportCaster Modernization</h2>
         <ul>
-            <li>Redesigned 40-year-old scheduler powering 20 million schedules per week, achieving 44-56% fewer clicks, 50% faster completion, eliminated multi-tab sprawl</li>
-            <li>Consolidated 5 fragmented subsystems into 1 unified guided workflow; became one of the first members of the product team to understand system end-to-end (UX, architecture, and workflows combined), alongside customer support and original engineers</li>
-            <li>Owned entire redesign solo initially; onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition; continued to be looped in for critical architectural decisions as knowledge hub</li>
-            <li>Reduced support load by 25-30%, improved Explorer access by 60-70% fewer clicks; support tickets shifted from "how do I..." to "can I do..."</li>
-            <li>Shipped as part of WebFOCUS 9.3, impacting millions of users daily across enterprise deployments</li>
+            <li>Redesigned 40-year-old scheduler powering 20M+ schedules/week: <strong>44-56% fewer clicks</strong>, 50% faster completion, eliminated multi-tab sprawl</li>
+            <li>Consolidated 5 fragmented subsystems into unified workflow; became first to document system end-to-end; reduced support load by 25-30%</li>
+            <li>Shipped in WebFOCUS 9.3, impacting millions of users across enterprise deployments</li>
         </ul>
 
-        <h2>Machine Learning (ML) Functions Redesign — Model Training Workflows (2023–2025)</h2>
+        <h2>ML Functions Redesign</h2>
         <ul>
-            <li>Redesigned Machine Learning (ML) model training workflows, achieving 100% discoverability in Subject Matter Expert (SME) usability testing, reduced workflow from 12+ clicks to 7-9 clicks</li>
+            <li>Redesigned ML model training workflows: <strong>100% discoverability</strong> in SME testing, reduced workflow from 12+ clicks to 7-9</li>
             <li>Delivered 2-click entry point, 50% faster setup, 60% fewer configuration errors through guided 4-step workflow</li>
-            <li>Owned entire redesign solo while simultaneously leading ReportCaster; onboarded 2 designers during maternity leave transition, ensuring seamless knowledge transfer and continuity</li>
-            <li>Eliminated all dead-end errors; dual-experience approach balancing guided simplicity for novices with advanced flexibility for experts</li>
         </ul>
 
-        <h2>IQ Plugin — Data Science and Machine Learning (DSML) Hub (2023–2025)</h2>
+        <h2>IQ Plugin — DSML Hub</h2>
         <ul>
-            <li>Designed IQ Plugin to bring Data Science and Machine Learning (DSML) features of WebFOCUS into the Hub, unifying three fragmented DSML features (Natural Language Query (NLQ), Machine Learning (ML), Automated Insights) into one cohesive hub, significantly improving discoverability and adoption</li>
-            <li>Established IQ patterns as foundational for entire DSML experience; seamless integrations across WebFOCUS ecosystem</li>
-            <li>Owned entire initiative solo while leading other projects; made complex data science capabilities approachable for business users while maintaining power for experts</li>
-        </ul>
-
-        <h2>Design System Co-Ownership & Platform Standards (2022–2025)</h2>
-        <ul>
-            <li>Migrated design system from Sketch to Figma for entire design and engineering organization; added components, improved system elements</li>
-            <li>Established design system standards and best practices as team-wide templates; foundation for all platform design work</li>
+            <li>Unified three fragmented DSML features (NLQ, ML, Automated Insights) into cohesive hub; established patterns as foundation for entire DSML experience</li>
         </ul>
     </div>
 
     <div class="job section">
         <div class="job-header">
-            <div class="job-title">SENIOR UX/UI DESIGNER (Consultant)</div>
-            <div class="job-date">February 2022 - July 2022</div>
+            <span class="job-title">SENIOR UX/UI DESIGNER (Consultant)</span>
+            <span class="job-date">Feb 2022 – Jul 2022</span>
         </div>
         <div class="company">InfoTriangle Technologies / T3 Solutions</div>
         <ul>
-            <li>Designed matrimony management mobile app concept, including onboarding, dashboards, and guided workflows; provided UX support across multiple client needs</li>
+            <li>Designed mobile app concepts including onboarding, dashboards, and guided workflows for enterprise clients</li>
         </ul>
     </div>
 
     <div class="job section">
         <div class="job-header">
-            <div class="job-title">FREELANCE PRODUCT AND UI/UX DESIGNER</div>
-            <div class="job-date">April 2017 - October 2021</div>
+            <span class="job-title">FREELANCE PRODUCT DESIGNER</span>
+            <span class="job-date">Apr 2017 – Oct 2021</span>
         </div>
         <div class="company">Independent Consultant</div>
         <ul>
-            <li>Delivered UX, UI, mobile app designs, branding, and product concepts for 10+ small businesses and startups; designed CRM systems, marketing sites, dashboards, and mobile experiences</li>
-            <li>Provided end-to-end product support: discovery, Information Architecture (IA), wireframes, visual design, prototypes, and handoff</li>
+            <li>Delivered end-to-end UX/UI for 10+ small businesses and startups: CRM systems, marketing sites, dashboards, and mobile experiences</li>
         </ul>
     </div>
 
     <div class="job section">
         <div class="job-header">
-            <div class="job-title">UX DESIGNER</div>
-            <div class="job-date">December 2016 - March 2017</div>
+            <span class="job-title">UX DESIGNER</span>
+            <span class="job-date">Dec 2016 – Mar 2017</span>
         </div>
         <div class="company">F1 Studioz</div>
         <ul>
-            <li>Designed multiple enterprise B2B products, including conference room booking system and internal tools; worked in fast-paced agency model delivering rapid UX cycles</li>
+            <li>Designed enterprise B2B products including conference room booking system in fast-paced agency environment</li>
         </ul>
     </div>
 
     <div class="job section">
         <div class="job-header">
-            <div class="job-title">UI/UX DESIGNER</div>
-            <div class="job-date">August 2012 - November 2016</div>
+            <span class="job-title">UI/UX DESIGNER</span>
+            <span class="job-date">Aug 2012 – Nov 2016</span>
         </div>
         <div class="company">9P Studioz</div>
         <ul>
-            <li>Sole designer for mobile app development startup, delivering UX/UI for 50+ apps including mobile games, productivity apps, branding, icons, and animations</li>
+            <li>Sole designer for mobile app startup; delivered UX/UI for 50+ apps including games, productivity apps, and branding</li>
         </ul>
     </div>
 
-    <!-- Education -->
+    <!-- ============================================
+         AI-ASSISTED DESIGN - Moved Below Experience
+         ============================================ -->
+    
+    <h1>AI-Assisted Development</h1>
+    <div class="section">
+        <p style="font-size: 10.5pt; line-height: 1.4;">Built portfolio (anujaharsha.com) using AI-assisted workflows: Next.js, TypeScript, React, Tailwind CSS, deployed on AWS S3/CloudFront. Leverage AI to generate foundations, then manually audit, debug, and refine—treating AI as a managed resource with my role as architecture, direction, and quality control. Source code on GitHub.</p>
+    </div>
+
+    <!-- ============================================
+         EDUCATION - Condensed
+         ============================================ -->
+    
     <h1>Education</h1>
-    <div class="section">
-        <div class="education-item"><strong>MIT xPRO</strong> — Artificial Intelligence (AI) & Machine Learning (ML) in Product Design</div>
-        <div class="education-item"><strong>Georgia Tech</strong> — Human-Computer Interaction</div>
-        <div class="education-item" style="margin-top: 8pt;"><strong>Master's Degree</strong> in English</div>
-        <div class="education-item"><strong>Bachelor's Degree</strong> in Animation & Visual Effects</div>
-        <div class="education-item"><strong>Bachelor's Degree</strong> in English Literature</div>
+    <div class="section" style="font-size: 10.5pt; line-height: 1.5;">
+        <p><strong>MIT xPRO</strong> — AI & Machine Learning in Product Design</p>
+        <p><strong>Georgia Tech</strong> — Human-Computer Interaction</p>
+        <p><strong>Master's Degree</strong> in English | <strong>Bachelor's Degrees</strong> in Animation & Visual Effects, English Literature</p>
     </div>
 
-    <!-- Technical Skills -->
-    <h1>Technical Skills</h1>
-    <div class="tech-skills section">
-        <p><strong>Design Tools:</strong> Figma, FigJam, Adobe Creative Suite, Sketch, InVision</p>
-        <p><strong>Front-End Development:</strong> HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS</p>
-        <p><strong>AI-Assisted Development:</strong> Cursor, GPT, Gemini</p>
-        <p><strong>Deployment:</strong> AWS S3, CloudFront, GitHub</p>
-        <p><strong>Artificial Intelligence (AI) / Machine Learning (ML) User Experience:</strong> Machine Learning Platforms, AI Product Design</p>
-    </div>
-
-    <!-- Publications & Portfolio -->
-    <h1>Publications & Portfolio</h1>
-    <div class="section">
-        <p><strong>Portfolio:</strong> www.anujaharsha.com</p>
-        <p><strong>Source Code:</strong> github.com/anuharsha9/anu-portfolio</p>
-        <p><strong>Publications:</strong> "The secret behind better BI: Who's your business user?" and "Enhancing user experience in WebFOCUS DSML" - Published on IBI Community | Design writing and essays on Medium</p>
-        <p><strong>Mentorship:</strong> Active mentor on ADPList (adplist.org/mentors/anuja-harsha-nimmagadda)</p>
+    <!-- ============================================
+         PUBLICATIONS - Condensed
+         ============================================ -->
+    
+    <h1>Publications & Mentorship</h1>
+    <div class="section" style="font-size: 10.5pt; line-height: 1.5;">
+        <p><strong>Publications:</strong> "The secret behind better BI: Who's your business user?" and "Enhancing user experience in WebFOCUS DSML" (IBI Community) | Design writing on Medium</p>
+        <p><strong>Mentorship:</strong> Active mentor on ADPList</p>
     </div>
 
 </body>

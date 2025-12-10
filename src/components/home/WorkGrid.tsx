@@ -12,9 +12,9 @@ const caseStudies = [
     slug: 'reportcaster',
     title: 'ReportCaster',
     subtitle: '50yr Legacy → Modern Hub',
-    metric: '75%',
-    metricLabel: 'fewer clicks',
-    description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Integrated 5 legacy subsystems intelligently into the main product hub.',
+    metric: '5→1',
+    metricLabel: 'unified system',
+    description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Unified 5 legacy subsystems into one coherent experience.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     fileName: 'legacy_scheduler_refactor.js',
     accentColor: '#F59E0B',
@@ -24,8 +24,8 @@ const caseStudies = [
     slug: 'ml-functions',
     title: 'ML Functions',
     subtitle: 'Black Box → Guided Flow',
-    metric: '100%',
-    metricLabel: 'discoverability',
+    metric: '12→8',
+    metricLabel: 'step workflow',
     description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Zero dead-end errors in testing.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     fileName: 'ml_wizard_pipeline.py',
@@ -35,9 +35,9 @@ const caseStudies = [
   {
     slug: 'iq-plugin',
     title: 'DSML Hub',
-    subtitle: '3 Tools + Discover Page',
-    metric: '1',
-    metricLabel: 'unified hub',
+    subtitle: '3 Tools → 1 Hub',
+    metric: '3',
+    metricLabel: 'workflows owned',
     description: 'Unified 3 DSML tools into one Hub plugin with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
@@ -92,23 +92,20 @@ export default function WorkGrid() {
             className="flex flex-col items-center gap-2"
           >
             <div className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-full px-5 py-2.5 shadow-sm">
+              <Youtube className="w-4 h-4 text-[var(--accent-teal)]" />
               <span className="text-slate-600 text-sm">
                 Presented at <span className="font-medium text-slate-900">Virtual User Group Sessions</span>
               </span>
-              <a
-                href="https://www.youtube.com/watch?v=fJFqAqBbLnM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-[var(--accent-teal)] hover:text-[var(--accent-teal-dark)] transition-colors text-sm font-medium"
-              >
-                <Youtube className="w-4 h-4" />
-                Watch
-              </a>
             </div>
             <p className="text-slate-500 text-xs italic">
               Only designer invited to present alongside my Director of Design
             </p>
           </motion.div>
+
+          {/* Skimmer hint */}
+          <p className="text-slate-500 text-sm mt-6">
+            Start with <Link href="/work/reportcaster" className="text-[var(--accent-teal)] hover:underline font-medium">ReportCaster</Link> — the flagship transformation.
+          </p>
         </motion.div>
 
         {/* Work Grid - 3 Cards with HeroTerminal images */}
@@ -190,6 +187,7 @@ export default function WorkGrid() {
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )

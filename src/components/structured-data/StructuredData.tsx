@@ -38,7 +38,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
     jobTitle: 'Principal UX Designer',
     description:
       'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX. 13+ years transforming complex systems into intuitive experiences.',
-    email: 'anu.anuja@outlook.com',
+    email: 'anujanimmagadda@gmail.com',
     telephone: '+1-781-354-7394',
     sameAs: [
       'https://www.linkedin.com/in/anu159',
@@ -82,8 +82,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
       image: data.coverImage && typeof data.coverImage === 'string'
         ? `${siteUrl}${data.coverImage}`
         : data.coverImage?.src
-        ? `${siteUrl}${data.coverImage.src}`
-        : `${siteUrl}/images/og-image.jpg`,
+          ? `${siteUrl}${data.coverImage.src}`
+          : `${siteUrl}/images/og-image.jpg`,
       datePublished: data.publishedDate || '2025-01-02T00:00:00.000Z',
       dateModified: data.updatedDate || '2025-01-02T00:00:00.000Z',
       mainEntityOfPage: {

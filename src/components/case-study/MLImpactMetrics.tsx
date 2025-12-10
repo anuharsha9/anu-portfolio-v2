@@ -19,7 +19,7 @@ export default function MLImpactMetrics({ isLightBackground = false }: MLImpactM
       tag: '// RELIABILITY',
       tagColor: 'text-emerald-600',
       metric: 'Zero Abandonment', 
-      body: 'Eliminating dead-end errors didn\'t just save clicks; it stopped users from quitting. Validated by 100% completion rates in SME testing.',
+      body: 'Eliminating dead-end errors didn\'t just save clicks; it stopped users from quitting. All SME testers completed the full workflow.',
       borderColor: 'border-l-emerald-500'
     },
     { 

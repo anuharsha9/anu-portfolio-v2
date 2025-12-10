@@ -69,43 +69,27 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
-        label: 'SMEs who found Predict Data from right-click without help in usability tests',
-        value: '5 / 5 (100% discoverability)',
+        label: 'Workflow simplification',
+        value: 'From 12+ scattered steps → guided 4-step flow',
       },
       {
-        label: 'Steps to reach ML from the Hub (old: 12+ scattered clicks via data flows, cascading menus, and mental hops, new: right-click → Predict Data → smooth guided flow)',
-        value: 'From 12+ clicks → 7-9',
+        label: 'Entry point',
+        value: '2-click entry (right-click → Predict Data)',
       },
       {
-        label: 'Ability to configure hyperparameters at the right time',
-        value: 'From hidden, post-hoc-only settings → explicit Step 4 in the guided flow',
+        label: 'Dead-end errors',
+        value: 'Eliminated in SME testing sessions',
       },
       {
-        label: 'Entry point to ML training',
-        value: '2-click entry point (right-click → Predict Data)',
-      },
-      {
-        label: 'Setup speed improvement',
-        value: '50% faster setup through guided 4-step workflow',
-      },
-      {
-        label: 'Configuration errors',
-        value: '60% fewer configuration errors through inline validation and guided warnings',
-      },
-      {
-        label: 'Dead-end errors in SME test sessions ("results not generated" confusion from the old UI)',
-        value: 'Reduced to zero through inline validation and guided warnings',
-      },
-      {
-        label: 'SMEs who described the new step workflow as "much easier" and "more guiding" than the previous data flow–based UI',
-        value: '5 / 5 qualitative agreement',
+        label: 'Validation',
+        value: 'Reviewed with SMEs, Engineering, and Data Science',
       },
     ],
     star: {
       situation: 'Fragmented ML training. Hidden hyperparameters. "Results not generated" dead-ends. Opaque and error-prone.',
       task: 'Make ML accessible to non-technical users. Maintain power for experts.',
       action: 'Designed 4-step guided flow. Early validation. Dual-experience (guided + advanced). Eliminated dead-ends.',
-      result: '100% discoverability. 12+ clicks → 7-9. Zero dead-end errors in testing.',
+      result: 'Simplified 12-step workflow to 4 steps. Validated with SMEs, Engineering, and Data Science.',
     },
     technologies: [
       'Figma',
@@ -117,9 +101,9 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       'Stakeholder Alignment',
     ],
     keyAchievements: [
-      'Achieved 100% discoverability in SME usability testing',
+      'Achieved full discoverability in SME usability testing — all entry points found',
       'Reduced ML workflow from 12+ clicks to 7-9 clicks',
-      'Delivered 2-click entry point, 50% faster setup, 60% fewer configuration errors',
+      'Delivered 2-click entry point from Hub, simplified setup flow, reduced configuration errors',
       'Only designer who worked on all major WebFOCUS features; owned entire ML Functions redesign solo while simultaneously leading ReportCaster and DSML Hub',
       'Onboarded 2 designers during maternity leave transition, ensuring seamless knowledge transfer and continuity',
       'Eliminated all dead-end "results not generated" errors',
@@ -328,7 +312,7 @@ The patterns I developed here—structured flows, inline teaching, right-click e
         letter: 'N',
         title: 'Navigate Forward',
         description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Structured flows became foundation.',
-        systemLogic: "export patterns to IQPlugin; // 100% SME approval",
+        systemLogic: "export patterns to IQPlugin; // validated with SMEs",
       },
     ],
   },

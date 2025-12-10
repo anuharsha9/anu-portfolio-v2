@@ -35,11 +35,11 @@ export default function TalkSection() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
             {/* Email */}
             <a
-              href="mailto:anu.anuja@outlook.com"
+              href="mailto:anujanimmagadda@gmail.com"
               className="text-slate-50 font-mono text-lg md:text-xl hover:text-[#0BA2B5] transition-colors duration-300 group"
             >
               <span className="border-b border-slate-50/30 group-hover:border-[#0BA2B5] transition-colors duration-300 pb-1">
-                anu.anuja@outlook.com
+                anujanimmagadda@gmail.com
               </span>
             </a>
 

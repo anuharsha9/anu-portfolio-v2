@@ -265,6 +265,12 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
             </>
           )}
         </div>
+        {/* Footnote for metrics */}
+        <div className="text-center py-2 border-t border-slate-200/50">
+          <p className="text-[9px] text-slate-400 font-mono">
+            Validated through continuous SME, engineering, and support reviews
+          </p>
+        </div>
       </div>
     </motion.div>
   )
@@ -274,72 +280,51 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
 export const mlFunctionsVitalSigns = [
   // Row 1 - Primary Metrics
   {
-    label: 'DISCOVERABILITY',
-    value: '100%',
-    context: '5/5 SMEs found entry point',
-  },
-  {
-    label: 'CLICK_REDUCTION',
-    value: '7-9',
-    context: 'Down from 12+ clicks',
-  },
-  {
-    label: 'SETUP_SPEED',
-    value: '50%',
-    context: 'Faster workflow setup',
-  },
-  {
-    label: 'CONFIG_ERRORS',
-    value: '-60%',
-    context: 'Inline validation',
+    label: 'WORKFLOW',
+    value: '12→4',
+    context: 'Steps simplified',
     color: 'text-emerald-600',
   },
-  // Row 2 - Secondary Metrics
   {
     label: 'ENTRY_POINT',
     value: '2 clicks',
     context: 'Right-click → Predict',
   },
   {
-    label: 'HYPERPARAMS',
-    value: 'Step 4',
-    context: 'Explicit, not hidden',
-  },
-  {
     label: 'DEAD_ENDS',
     value: 'Zero',
-    context: 'No more confusion',
+    context: 'Eliminated in testing',
     color: 'text-emerald-600',
   },
   {
-    label: 'SME_FEEDBACK',
-    value: '5/5',
-    context: '"Much easier"',
+    label: 'VALIDATION',
+    value: 'SME+Eng',
+    context: 'Reviewed & validated',
   },
 ]
 
 // Pre-configured metrics for ReportCaster case study
 export const reportCasterVitalSigns = [
   {
+    label: 'LEGACY_SYSTEM',
+    value: '50yr',
+    context: 'Modernized',
+  },
+  {
+    label: 'SCALE',
+    value: '20M+',
+    context: 'Schedules supported weekly',
+  },
+  {
     label: 'COMPLEXITY',
-    value: '-40%',
-    context: 'UI Simplification',
+    value: '5 → 1',
+    context: 'Unified system',
     color: 'text-emerald-600',
   },
   {
-    label: 'ADOPTION',
-    value: '2x',
-    context: 'Feature Usage',
-  },
-  {
-    label: 'LEGACY_CODE',
-    value: '50yr',
-    context: 'System Modernized',
-  },
-  {
-    label: 'SATISFACTION',
-    value: '↑ NPS',
-    context: 'User Feedback',
+    label: 'VALIDATION',
+    value: 'SME+Eng',
+    context: 'Reviewed & validated',
   },
 ]
 
@@ -352,7 +337,7 @@ export const iqPluginVitalSigns = [
   },
   {
     label: 'PATTERN_PARITY',
-    value: '100%',
+    value: 'Full',
     context: 'Same UI Across All 3',
     color: 'text-emerald-600',
   },

@@ -66,18 +66,16 @@ export const reportcasterCaseStudy: CaseStudyData = {
       },
     ],
     impactMetrics: [
-      { label: 'Schedule creation', value: '44–56% fewer clicks, no new tabs' },
+      { label: 'Workflow complexity', value: 'Reduced across core scheduling paths' },
       { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
-      { label: 'Explorer access', value: '≈60–70% fewer clicks' },
-      { label: 'Creation speed', value: '≈50% faster completion' },
-      { label: 'Support load', value: '≈25–30% reduction (directional)' },
       { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
+      { label: 'Validation', value: 'Reviewed with SMEs, Engineering, and Support' },
     ],
     star: {
       situation: '50-year-old scheduler. 20M+ weekly schedules. Five fragmented subsystems, no documentation, modernization requests flooding in.',
       task: 'Modernize without breaking mission-critical workflows.',
       action: 'Owned end-to-end. Reverse-engineered undocumented rules. Unified five subsystems into one architecture. Delivered modal-based creation model.',
-      result: '44–56% fewer clicks. Multi-tab sprawl eliminated. Shipped in WebFOCUS 9.3.',
+      result: 'Reduced complexity across core workflows. Multi-tab sprawl eliminated. Shipped in WebFOCUS 9.3.',
     },
     technologies: [
       'Figma',
@@ -89,7 +87,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
     ],
     keyAchievements: [
       'Unified five fragmented subsystems into one coherent mental model',
-      'Reduced schedule creation clicks by 44–56% with zero new tabs',
+      'Simplified schedule creation entry (5+ clicks → 2) with zero new tabs',
       'Eliminated multi-tab sprawl entirely',
       'Only designer who worked on all major WebFOCUS features; owned entire ReportCaster redesign solo initially while simultaneously leading ML Functions and DSML Hub',
       'Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition',
@@ -100,8 +98,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       'Onboarded cross-functional teams (engineering, PM, QA, docs, support)',
       'Clarified undocumented rules (bursting, retention, crash recovery)',
     ],
-    publicDemoUrl: 'https://webfocusinfocenter.informationbuilders.com/wfappent/TL2s/TL_ls/source/ReportCaster.htm',
-    publicDemoLabel: 'ReportCaster Public Demo',
+    // Public demo URL removed - legacy link no longer available
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/webfocus-report-caster-data-sheet.pdf',
     dataSheetLabel: 'View ReportCaster Data Sheet',
     demoVideoUrl: 'https://www.youtube.com/watch?v=NvNFN6sz41M',
@@ -554,7 +551,7 @@ The team could execute because they understood the "why" behind every decision, 
   impactSummary: {
     heading: 'Shipping impact at a glance',
     bullets: [
-      'Streamlined workflows — 75% fewer clicks, eliminated multi-tab sprawl.',
+      'Streamlined workflows — reduced complexity, eliminated multi-tab sprawl.',
       'Multi-tab workflows eliminated entirely.',
       'Explorer and Admin surfaced and accessible.',
       'Unified mental model for all RC tasks.',
