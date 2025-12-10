@@ -418,19 +418,19 @@
 /* Main gears: fade in (opacity only) + rotate continuously */
 /* Simplified: All gears fade in with rotation (1.2s), then main gears rotate continuously, background gears stop */
 
-/* Main gears: full opacity (100%), rotate continuously after fade-in */
-/* New structure: gears directly under #main-gears with IDs like gear-life, gear-career-ambition, etc. */
-#brain-gears #main-gears > [id^="gear-"],
-#brain-gears-copy #main-gears > [id^="gear-"] {
+/* Main gears: start hidden, fade in via animation, then JS sets opacity:1 !important */
+#brain-gears #main-gears>[id^="gear-"],
+#brain-gears-copy #main-gears>[id^="gear-"] {
   transform-origin: center;
   transform-box: fill-box;
   opacity: 0;
   will-change: transform, opacity, filter;
   backface-visibility: hidden;
-  contain: layout style paint;
   cursor: pointer;
   transition: filter 0.3s ease;
 }
+
+/* Gears visibility is controlled by animation forwards fill - no base opacity override */
 
 /* Background gears: full opacity, very slow continuous rotation */
 #brain-gears #gears-background [id^="bg-gear-"],
@@ -446,22 +446,21 @@
 }
 
 /* Main interactive gears - animate and allow hover effects */
-#brain-gears #main-gears > [id^="gear-"],
-#brain-gears-copy #main-gears > [id^="gear-"] {
+#brain-gears #main-gears>[id^="gear-"],
+#brain-gears-copy #main-gears>[id^="gear-"] {
   transform-origin: center;
   transform-box: fill-box;
   will-change: transform, opacity, filter;
   backface-visibility: hidden;
-  contain: layout style paint;
   cursor: pointer;
   transition: filter 0.3s ease;
 }
 
 /* Main gears hover glow effect */
-#brain-gears #main-gears > [id^="gear-"]:hover,
-#brain-gears-copy #main-gears > [id^="gear-"]:hover,
-#brain-gears #main-gears > .gear-main--active,
-#brain-gears-copy #main-gears > .gear-main--active {
+#brain-gears #main-gears>[id^="gear-"]:hover,
+#brain-gears-copy #main-gears>[id^="gear-"]:hover,
+#brain-gears #main-gears>.gear-main--active,
+#brain-gears-copy #main-gears>.gear-main--active {
   filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4));
 }
 
@@ -484,14 +483,17 @@
     opacity: 0;
     filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
   }
+
   10% {
     opacity: 0.8;
     filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
   }
+
   75% {
     opacity: 0.8;
     filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4));
   }
+
   100% {
     opacity: 0;
     filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
@@ -561,20 +563,26 @@
   /* SVG has native white colors - no transformation needed */
 }
 
+/* Force SVG to scale to container */
+.gears-dark-theme>svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
 /* Dark theme: Glow effect for active/hovered main gears */
-.gears-dark-theme #brain-gears #main-gears > .gear-main--active,
-.gears-dark-theme #brain-gears-copy #main-gears > .gear-main--active {
+.gears-dark-theme #brain-gears #main-gears>.gear-main--active,
+.gears-dark-theme #brain-gears-copy #main-gears>.gear-main--active {
   filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4)) !important;
 }
 
 /* Performance optimizations for rotating gears */
-#brain-gears #main-gears > [id^="gear-"],
+#brain-gears #main-gears>[id^="gear-"],
 #brain-gears #gears-background [id^="bg-gear-"],
-#brain-gears-copy #main-gears > [id^="gear-"],
+#brain-gears-copy #main-gears>[id^="gear-"],
 #brain-gears-copy #gears-background [id^="bg-gear-"] {
   will-change: transform, opacity;
   transform: translateZ(0);
-  contain: layout style paint;
 }
 
 /* Transition for hover interactions - slow and smooth (4x slower) */
@@ -596,15 +604,15 @@
 }
 
 /* Main gears hover - CSS hover effect for desktop */
-#brain-gears #main-gears > [id^="gear-"]:hover,
-#brain-gears-copy #main-gears > [id^="gear-"]:hover {
+#brain-gears #main-gears>[id^="gear-"]:hover,
+#brain-gears-copy #main-gears>[id^="gear-"]:hover {
   filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4));
   cursor: pointer;
 }
 
 /* Teal glow on active gears - applied via JS class */
-#brain-gears #main-gears > .gear-main--active,
-#brain-gears-copy #main-gears > .gear-main--active {
+#brain-gears #main-gears>.gear-main--active,
+#brain-gears-copy #main-gears>.gear-main--active {
   filter: drop-shadow(0 0 20px rgba(11, 162, 181, 0.7)) drop-shadow(0 0 35px rgba(11, 162, 181, 0.4)) !important;
 }
 
@@ -739,7 +747,7 @@
 @media (prefers-reduced-motion: reduce) {
 
   /* Disable all gear rotations for users who prefer reduced motion */
-  #brain-gears #main-gears > [id^="gear-"],
+  #brain-gears #main-gears>[id^="gear-"],
   #brain-gears [id^="bg-gear-"] {
     animation: none !important;
   }
@@ -751,7 +759,7 @@
   }
 
   /* Keep fade-in but make it instant */
-  #brain-gears #main-gears > [id^="gear-"],
+  #brain-gears #main-gears>[id^="gear-"],
   #brain-gears [id^="bg-gear-"] {
     opacity: 1 !important;
     animation: none !important;

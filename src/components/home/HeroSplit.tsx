@@ -1,11 +1,10 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo, memo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import BrainGears from '@/assets/brain-gears.svg'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 import VideoModal from '@/components/video/VideoModal'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
@@ -13,6 +12,31 @@ import GearBottomSheet from '@/components/home/GearBottomSheet'
 import { GEAR_INSPECTOR, GearInspectorItem } from '@/data/gear-inspector'
 
 const GEAR_IDS = Object.keys(GEAR_INSPECTOR)
+
+// Memoized SVG container to prevent re-renders when activeGear state changes
+const GearsSvgContainer = memo(function GearsSvgContainer({
+  svgContent,
+  containerRef
+}: {
+  svgContent: string
+  containerRef: React.RefObject<HTMLDivElement | null>
+}) {
+  return (
+    <motion.div
+      ref={containerRef}
+      className="gears-dark-theme"
+      style={{
+        width: 'clamp(400px, 56vw, 1120px)',
+        minWidth: 'clamp(400px, 56vw, 1120px)',
+        flexShrink: 0,
+      }}
+      initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
+      dangerouslySetInnerHTML={{ __html: svgContent }}
+    />
+  )
+})
 
 /**
  * HeroSplit - "Gear Inspector" Experience
@@ -27,6 +51,35 @@ export default function HeroSplit() {
   const [showMobileSheet, setShowMobileSheet] = useState(false)
   const [mobileGear, setMobileGear] = useState<GearInspectorItem | null>(null)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [svgContent, setSvgContent] = useState<string>('')
+
+  // Load SVG inline so Turbopack (no SVGR) can manipulate DOM
+  // Strip width/height so SVG scales to container (like SVGR did)
+  useEffect(() => {
+    let isMounted = true
+    fetch('/assets/brain-gears.svg')
+      .then((res) => res.text())
+      .then((text) => {
+        if (isMounted) {
+          // Remove hardcoded width/height and add responsive sizing
+          let processed = text
+            .replace(/width="[^"]*"/g, '')
+            .replace(/height="[^"]*"/g, '')
+          // Add width/height 100% to the SVG element for proper scaling
+          processed = processed.replace(
+            /<svg/,
+            '<svg style="width:100%;height:auto"'
+          )
+          setSvgContent(processed)
+        }
+      })
+      .catch(() => {
+        if (isMounted) setSvgContent('')
+      })
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   useEffect(() => {
     const container = containerRef.current
@@ -74,6 +127,11 @@ export default function HeroSplit() {
           gear.style.setProperty('animation', `gear-fade-in-main ${fadeInDuration}s linear forwards, gear-rotate-continuous ${slowRotationSpeed}s linear infinite ${slowDownTime}s`, 'important')
           gear.style.transformOrigin = 'center'
           gear.style.transformBox = 'fill-box'
+
+          // After fade-in completes, set opacity directly to prevent any hover state issues
+          setTimeout(() => {
+            gear.style.setProperty('opacity', '1', 'important')
+          }, (fadeInDuration + 0.2) * 1000)
         })
 
         const bgGears = Array.from(brainGearsGroup.querySelectorAll<SVGGElement>('[id^="bg-gear-"]'))
@@ -432,7 +490,7 @@ export default function HeroSplit() {
 
         {/* Main Content Container */}
         <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-center min-h-screen py-8 pb-28 sm:py-12 sm:pb-28 lg:py-0 lg:pb-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 lg:gap-5 items-center min-h-[auto] lg:min-h-screen py-6 pb-24 sm:py-8 sm:pb-28 lg:py-0 lg:pb-0">
 
             {/* Left Side - Text Content (5 columns) */}
             <motion.div
@@ -608,25 +666,8 @@ export default function HeroSplit() {
             </motion.div>
 
             {/* Right Side - Brain Gears (7 columns) - THE HERO */}
-            <div className="lg:col-span-7 relative order-1 lg:order-2">
-              <div
-                ref={containerRef}
-                className="relative w-full max-w-[320px] sm:max-w-[400px] md:max-w-[500px] mx-auto lg:max-w-none lg:scale-110 xl:scale-125 origin-center gears-dark-theme"
-                style={{ aspectRatio: '1 / 1' }}
-              >
-                <motion.div
-                  className="absolute inset-0 pointer-events-auto"
-                  initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <BrainGears
-                    className="h-full w-full"
-                    style={{ pointerEvents: 'auto', opacity: 1 }}
-                    id="brain-gears-svg"
-                  />
-                </motion.div>
-              </div>
+            <div className="lg:col-span-7 relative order-1 lg:order-2 flex items-center justify-center">
+              <GearsSvgContainer svgContent={svgContent} containerRef={containerRef} />
             </div>
           </div>
         </div>
