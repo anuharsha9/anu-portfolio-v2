@@ -647,6 +647,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               dataSheetUrl={data.quickOverview.dataSheetUrl}
               status={data.status}
               dataSheetLabel={data.quickOverview.dataSheetLabel}
+              validationLinks={data.quickOverview.validationLinks}
               publicDemoUrl={data.quickOverview.publicDemoUrl}
               publicDemoLabel={data.quickOverview.publicDemoLabel}
               shareUrl={`${typeof window !== 'undefined' ? window.location.origin : ''}/work/${data.slug}`}
@@ -957,7 +958,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         {/* Section Header - Letter badges removed for senior energy */}
                         <div className="space-y-4 mb-8">
-                          <h2 className={`${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-3xl md:text-4xl font-serif leading-snug tracking-tight`}>
+                          <h2 className={`${sectionBg === 'surface-light' ? 'text-slate-900' : 'text-white'} text-3xl md:text-4xl font-serif leading-snug tracking-tight`}>
                             {section.title}
                           </h2>
                           {section.summary && (
@@ -969,8 +970,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                                   </svg>
                                 </div>
                                 <div className="flex-1">
-                                  <div className={`${sectionBg === 'surface-light' ? 'text-[#666666]' : 'text-white/70'} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
-                                  <p className={`${sectionBg === 'surface-light' ? 'text-[#1A1A1A]' : 'text-white'} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
+                                  <div className={`${sectionBg === 'surface-light' ? 'text-slate-500' : 'text-white/70'} text-xs font-mono uppercase tracking-wider mb-1`}>TL;DR</div>
+                                  <p className={`${sectionBg === 'surface-light' ? 'text-slate-900' : 'text-white'} text-sm md:text-base leading-relaxed font-medium`}>{section.summary}</p>
                                 </div>
                               </div>
                             </div>
@@ -1131,18 +1132,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   </MotionSection>
                 )}
 
-                {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only - LOCKED (legacy sandbox UI) */}
+                {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
+                {/* Note: Narrative content is public; only legacy images are locked inside SystemArchaeology */}
                 {section.id === 'section-01' && data.slug === 'reportcaster' && (
                   <MotionSection className="surface-light py-8 md:py-12">
                     <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                      <LockedContent
-                        password="anu-access"
-                        caseStudySlug={data.slug}
-                        unlockMessage="Password required to view legacy sandbox UI screenshots and discovery audit"
-                        isLightBackground={true}
-                      >
-                        <SystemArchaeology isLightBackground={true} />
-                      </LockedContent>
+                      <SystemArchaeology isLightBackground={true} caseStudySlug={data.slug} />
                     </div>
                   </MotionSection>
                 )}
@@ -1155,6 +1150,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     <MotionSection className="surface-light py-8 md:py-12">
                       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <ResearchApproach data={researchApproachData['reportcaster']} accentColor="amber" />
+                      </div>
+                    </MotionSection>
+
+                    {/* Empathize Strategy Grid - Customer Obsession Story */}
+                    <MotionSection className="surface-light py-8 md:py-12">
+                      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                        <EmpathizeStrategyGrid isLightBackground={true} />
                       </div>
                     </MotionSection>
 

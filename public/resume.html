@@ -12,19 +12,19 @@
         }
 
         @page {
-            margin: 0.5in 0.6in;
+            margin: 0.4in 0.5in;
             size: letter;
         }
 
         body {
             font-family: "Times New Roman", Times, serif;
-            font-size: 10.5pt;
-            line-height: 1.4;
+            font-size: 10pt;
+            line-height: 1.3;
             color: #000000;
             background: #ffffff;
             max-width: 8.5in;
             margin: 0 auto;
-            padding: 0.5in 0.6in;
+            padding: 0.4in 0.5in;
         }
 
         /* Download Button */
@@ -61,8 +61,8 @@
         /* Contact Header - Single Column, No Tables */
         .header {
             text-align: center;
-            margin-bottom: 10pt;
-            padding-bottom: 8pt;
+            margin-bottom: 6pt;
+            padding-bottom: 5pt;
             border-bottom: 1.5pt solid #000000;
         }
 
@@ -85,8 +85,8 @@
             font-size: 11pt;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 10pt;
-            margin-bottom: 4pt;
+            margin-top: 6pt;
+            margin-bottom: 3pt;
             padding-bottom: 2pt;
             border-bottom: 0.5pt solid #000000;
             color: #000000;
@@ -94,16 +94,16 @@
         }
 
         h2 {
-            font-size: 10.5pt;
+            font-size: 10pt;
             font-weight: bold;
-            margin-top: 6pt;
-            margin-bottom: 2pt;
+            margin-top: 4pt;
+            margin-bottom: 1pt;
             color: #000000;
         }
 
         /* Job Entries */
         .job {
-            margin-bottom: 8pt;
+            margin-bottom: 5pt;
             page-break-inside: avoid;
         }
 
@@ -135,15 +135,15 @@
 
         /* Lists */
         ul {
-            margin: 3pt 0;
+            margin: 2pt 0;
             padding-left: 16pt;
             list-style-type: disc;
         }
 
         li {
-            margin-bottom: 2pt;
-            font-size: 10.5pt;
-            line-height: 1.4;
+            margin-bottom: 1pt;
+            font-size: 10pt;
+            line-height: 1.3;
             color: #000000;
         }
 
@@ -169,7 +169,7 @@
 
         /* Sections */
         .section {
-            margin-bottom: 6pt;
+            margin-bottom: 4pt;
         }
 
         /* Target Title */
@@ -177,19 +177,21 @@
             text-align: center;
             font-size: 12pt;
             font-weight: bold;
-            margin: 6pt 0;
+            margin: 4pt 0;
             color: #000000;
         }
 
         /* Print Styles */
         @media print {
             @page {
-                margin: 0.5in 0.6in;
+                margin: 0.4in 0.5in;
                 size: letter;
             }
 
             body {
                 padding: 0;
+                font-size: 10pt;
+                line-height: 1.3;
             }
 
             .download-button {
@@ -198,10 +200,16 @@
 
             h1 {
                 page-break-after: avoid;
+                margin-top: 6pt;
             }
 
             .job {
                 page-break-inside: avoid;
+                margin-bottom: 5pt;
+            }
+            
+            li {
+                margin-bottom: 1pt;
             }
         }
     </style>
@@ -231,16 +239,16 @@
     <!-- Career Summary - Condensed -->
     <h1>Summary</h1>
     <div class="summary section">
-        <p><strong>Principal-level Product Designer</strong> with 13 years of experience across enterprise platforms, AI/ML workflows, and legacy system modernization. Specialize in transforming complex, ambiguous problem spaces into clear, scalable experiences.</p>
-        <p>Led UX strategy for mission-critical systems serving <strong>millions of users</strong>, reducing clicks by <strong>44-56%</strong> and eliminating support bottlenecks. Earned trust from 30-year veteran engineers and full autonomy from design leadership through deep system understanding. Operate as a cross-functional leader: aligning engineering, data science, and product teams.</p>
+        <p><strong>Systems-first Product Designer</strong> with 13 years of experience across enterprise SaaS, AI/ML workflows, and legacy modernization. Specialize in navigating ambiguity—transforming undocumented, deeply technical problem spaces into scalable, intuitive experiences.</p>
+        <p>Shaped product direction of mission-critical BI platform (20M+ jobs/week) without formal authority—earning trust from 30-year engineering veterans and full autonomy from design leadership through deep system understanding. Earlier career: shipped <strong>50+ consumer apps</strong> including a game with 12K downloads in week one.</p>
     </div>
 
     <!-- Key Skills - IN THE HOT ZONE -->
     <h1>Key Skills</h1>
     <div class="skills-list section">
-        <p><strong>Design Leadership:</strong> Product Design, UX Strategy, Design Systems, Cross-functional Leadership, Stakeholder Alignment, Mentorship</p>
-        <p><strong>Specializations:</strong> Enterprise UX, AI/ML Product Experiences, Legacy Modernization, Workflow Design, Information Architecture, Systems Thinking</p>
-        <p><strong>Methods:</strong> User Research, Usability Testing, SME Collaboration, Prototyping, Heuristic Evaluation, Accessibility</p>
+        <p><strong>Design Leadership:</strong> Product Design, UX Strategy, Design Systems, Cross-functional Leadership, Engineering Partnership, Mentorship</p>
+        <p><strong>Specializations:</strong> Enterprise UX, AI/ML Workflows, Legacy Modernization, Systems Thinking, Ambiguity Navigation, Constraint-Driven Design</p>
+        <p><strong>Methods:</strong> SME Interviews, Architecture Mapping, Usability Testing, Prototyping, Heuristic Evaluation, Support Ticket Analysis</p>
         <p><strong>Tools:</strong> Figma, FigJam, Adobe Creative Suite | HTML, CSS, React, Next.js, TypeScript | AWS, GitHub</p>
     </div>
 
@@ -252,34 +260,35 @@
 
     <div class="job section">
         <div class="job-header">
-            <span class="job-title">SENIOR UI/UX ENGINEER</span>
+            <span class="job-title">SENIOR UI/UX ENGINEER (Principal-Level Scope)</span>
             <span class="job-date">Aug 2022 – Nov 2025</span>
         </div>
         <div class="company">Cloud Software Group (WebFOCUS/IBI)</div>
         
         <ul>
-            <li>Led UX modernization across multiple legacy product areas as de-facto Principal Designer; established discovery, SME outreach, and cross-functional alignment processes that became team-wide standards</li>
-            <li>Collaborated with Directors of Design, Engineering, and Product on strategic initiatives; worked with Lead Architect and Design System leadership on platform-wide standards</li>
-            <li>Only designer to work on all major WebFOCUS features; led 3 of 4 Principal-level initiatives simultaneously (ReportCaster, ML Functions, IQ Plugin)</li>
-            <li>Delivered organization-wide design demos to 150-200 person business unit; co-hosted Virtual User Group Sessions for enterprise customers</li>
+            <li>Led UX modernization across multiple legacy product areas; embedded in weekly support meetings to surface real customer pain points</li>
+            <li>Partnered with Directors of Design, Engineering, and Product on platform strategy; collaborated closely with Lead Architect and Design System leadership</li>
+            <li>Only designer to work across all major WebFOCUS systems; requested and led 3 high-impact initiatives simultaneously (ReportCaster, ML Functions, IQ Plugin)</li>
+            <li>Delivered org-wide design demos to 150-200 people; co-hosted Virtual User Group Sessions for enterprise customers</li>
         </ul>
 
-        <h2>ReportCaster Modernization</h2>
+        <h2>ReportCaster — Re-architecting a 50-Year-Old Scheduling Engine</h2>
         <ul>
-            <li>Redesigned 40-year-old scheduler powering 20M+ schedules/week: <strong>44-56% fewer clicks</strong>, 50% faster completion, eliminated multi-tab sprawl</li>
-            <li>Consolidated 5 fragmented subsystems into unified workflow; became first to document system end-to-end; reduced support load by 25-30%</li>
-            <li>Shipped in WebFOCUS 9.3, impacting millions of users across enterprise deployments</li>
+            <li>Requested assignment to largest deferred initiative; redesigned mission-critical scheduler (20M+ jobs/week): <strong>5+ clicks → 2</strong> for schedule creation</li>
+            <li>First to document the end-to-end system; consolidated 5 fragmented subsystems into unified architecture by partnering with SMEs and analyzing support tickets</li>
+            <li>Shipped in WebFOCUS 9.3; created the mental model that unblocked engineering, PM, and support</li>
         </ul>
 
-        <h2>ML Functions Redesign</h2>
+        <h2>ML Functions — End-to-End Machine Learning Workflow</h2>
         <ul>
-            <li>Redesigned ML model training workflows: <strong>100% discoverability</strong> in SME testing, reduced workflow from 12+ clicks to 7-9</li>
-            <li>Delivered 2-click entry point, 50% faster setup, 60% fewer configuration errors through guided 4-step workflow</li>
+            <li>Redesigned ML model training to make data science workflows accessible to non-technical users: <strong>12+ clicks → 7-9</strong> with guided 4-step wizard</li>
+            <li>Introduced 2-click entry point; collaborated with Principal Data Scientist to validate model evaluation flows</li>
         </ul>
 
-        <h2>IQ Plugin — DSML Hub</h2>
+        <h2>IQ Plugin — Unified DSML Hub (NLQ + Insights + ML)</h2>
         <ul>
-            <li>Unified three fragmented DSML features (NLQ, ML, Automated Insights) into cohesive hub; established patterns as foundation for entire DSML experience</li>
+            <li>Architected unified hub for 3 fragmented intelligence features; created system architecture organizing insights, NLQ, and ML into single learnable model</li>
+            <li>Defined product vision before requirements existed—PM wrote engineering tickets from my designs; positioned against Power BI, Tableau, Qlik</li>
         </ul>
     </div>
 
@@ -333,7 +342,7 @@
     
     <h1>AI-Assisted Development</h1>
     <div class="section">
-        <p style="font-size: 10.5pt; line-height: 1.4;">Built portfolio (anujaharsha.com) using AI-assisted workflows: Next.js, TypeScript, React, Tailwind CSS, deployed on AWS S3/CloudFront. Leverage AI to generate foundations, then manually audit, debug, and refine—treating AI as a managed resource with my role as architecture, direction, and quality control. Source code on GitHub.</p>
+        <p style="font-size: 10.5pt; line-height: 1.4;">Built portfolio (anujaharsha.com) using AI-assisted development: Next.js, TypeScript, React, Tailwind, AWS. Orchestrated multiple LLMs (Claude, GPT-4, Gemini) for scaffolding while personally handling architecture, debugging, optimization, and design oversight. <a href="https://github.com/anuharsha9/anu-portfolio-v2">Source on GitHub</a>.</p>
     </div>
 
     <!-- ============================================
@@ -342,7 +351,7 @@
     
     <h1>Education</h1>
     <div class="section" style="font-size: 10.5pt; line-height: 1.5;">
-        <p><strong>MIT xPRO</strong> — AI & Machine Learning in Product Design</p>
+        <p><strong>MIT xPRO</strong> — AI & Machine Learning in Product Design (pursued to deepen technical fluency in AI/ML)</p>
         <p><strong>Georgia Tech</strong> — Human-Computer Interaction</p>
         <p><strong>Master's Degree</strong> in English | <strong>Bachelor's Degrees</strong> in Animation & Visual Effects, English Literature</p>
     </div>
@@ -353,8 +362,8 @@
     
     <h1>Publications & Mentorship</h1>
     <div class="section" style="font-size: 10.5pt; line-height: 1.5;">
-        <p><strong>Publications:</strong> "The secret behind better BI: Who's your business user?" and "Enhancing user experience in WebFOCUS DSML" (IBI Community) | Design writing on Medium</p>
-        <p><strong>Mentorship:</strong> Active mentor on ADPList</p>
+        <p><strong>Publications:</strong> <a href="https://community.ibi.com/articles/the-secret-behind-better-bi-who-s-your-business-user-r44/">The Secret Behind Better BI</a> and <a href="https://community.ibi.com/forums/topic/16161-enhancing-user-experience-in-webfocus-dsml/">Enhancing UX in WebFOCUS DSML</a> (IBI Community) | <a href="https://medium.com/@anu.anuja">Medium</a></p>
+        <p><strong>Mentorship:</strong> Active mentor on <a href="https://adplist.org/mentors/anuja-harsha-nimmagadda">ADPList</a>—helping designers break into enterprise UX and level up their craft</p>
     </div>
 
 </body>

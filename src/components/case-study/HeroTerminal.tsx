@@ -10,16 +10,16 @@ interface HeroTerminalProps {
   alt?: string
 }
 
-export default function HeroTerminal({ 
-  imageSrc, 
-  fileName, 
-  accentColor = '#0BA2B5',
+export default function HeroTerminal({
+  imageSrc,
+  fileName,
+  accentColor = 'var(--accent-teal)',
   alt = 'System interface'
 }: HeroTerminalProps) {
   const { openLightbox } = useLightbox()
 
   return (
-    <div 
+    <div
       className="rounded-tl-xl overflow-hidden border-t border-l border-slate-700 bg-slate-900 cursor-pointer group h-full"
       style={{
         boxShadow: `0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px ${accentColor}20, 0 20px 40px -20px ${accentColor}40`
@@ -34,13 +34,13 @@ export default function HeroTerminal({
           <div className="w-3 h-3 rounded-full bg-yellow-500" />
           <div className="w-3 h-3 rounded-full bg-green-500" />
         </div>
-        
+
         {/* File Name */}
         <span className="text-xs text-slate-400 font-mono tracking-wide">
           {fileName}
         </span>
       </div>
-      
+
       {/* Image Area */}
       <div className="relative w-full bg-slate-800">
         <Image
@@ -51,7 +51,7 @@ export default function HeroTerminal({
           className="w-full h-auto object-cover object-top"
           priority
         />
-        
+
         {/* Subtle hover overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>

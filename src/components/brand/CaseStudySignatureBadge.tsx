@@ -22,16 +22,16 @@ export default function CaseStudySignatureBadge({ className = '' }: CaseStudySig
         </span>
         <div className="w-12 h-px bg-slate-300" />
       </div>
-      
+
       {/* Animated Signature - larger and more prominent */}
-      <div className="w-16 h-16 md:w-20 md:h-20 text-slate-600 hover:text-[#0BA2B5] transition-colors duration-500">
-        <AnimatedSignatureLogo 
+      <div className="w-16 h-16 md:w-20 md:h-20 text-slate-600 hover:text-[var(--accent-teal)] transition-colors duration-500">
+        <AnimatedSignatureLogo
           className="w-full h-full"
           duration={8000}
           pauseDuration={4000}
         />
       </div>
-      
+
       {/* Name */}
       <p className="font-mono text-xs text-slate-500 tracking-wide">
         Anuja Harsha Nimmagadda

@@ -84,8 +84,8 @@ export default function CaseStudiesDropdown({ className = '', onNavigate }: Case
 
   const caseStudies = [
     { id: '001', label: 'ReportCaster', href: '/work/reportcaster', tag: 'LEGACY_MODERNIZATION' },
-    { id: '002', label: 'ML Functions', href: '/work/ml-functions', tag: 'AI_UX' },
-    { id: '003', label: 'DSML Hub', href: '/work/iq-plugin', tag: 'PLATFORM_UNIFICATION' },
+    { id: '002', label: 'Democratizing ML', href: '/work/ml-functions', tag: 'AI_UX' },
+    { id: '003', label: 'Data Science Adoption', href: '/work/iq-plugin', tag: 'PLATFORM_UNIFICATION' },
   ]
 
   return (

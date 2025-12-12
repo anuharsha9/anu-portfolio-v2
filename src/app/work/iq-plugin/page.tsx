@@ -5,23 +5,24 @@ import { iqPluginCaseStudy } from '@/data/iq-plugin'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'IQ Plugin: Unifying DSML Inside WebFOCUS Hub',
+  title: 'Driving Data Science Adoption in Enterprise BI',
   description:
-    'How I designed the IQ Plugin to unify automated insights, natural language query, and predictive analytics inside WebFOCUS — making DSML approachable for both technical and non-technical users. A case study in multi-persona design and progressive disclosure.',
+    'How I unified NLQ, Insights, and ML capabilities into one discoverable DSML Hub — driving a 25% adoption boost. A case study in platform vision, multi-persona design, and progressive disclosure.',
   keywords: [
-    'IQ Plugin',
+    'Data Science Adoption',
     'DSML UX',
-    'Data Science UX',
+    'NLQ',
+    'Insights',
     'WebFOCUS',
-    'Plugin Design',
+    'Enterprise BI',
     'Multi-Persona Design',
     'Progressive Disclosure',
     'UX Case Study',
   ],
   openGraph: {
-    title: 'IQ Plugin: Unifying DSML Inside WebFOCUS | Anuja Harsha',
+    title: 'Driving Data Science Adoption in Enterprise BI | Anuja Harsha',
     description:
-      'How I designed the IQ Plugin to unify DSML capabilities into a single, approachable entry point for both technical and non-technical users.',
+      'How I unified NLQ, Insights, and ML into one discoverable DSML Hub — driving 25% adoption boost.',
     url: `${siteUrl}/work/iq-plugin/`,
     type: 'article',
     images: [
@@ -29,15 +30,15 @@ export const metadata: Metadata = {
         url: '/images/case-study/iq-plugin/iq-cover.png',
         width: 1200,
         height: 630,
-        alt: 'IQ Plugin Case Study - DSML UX Design',
+        alt: 'Data Science Adoption Case Study - DSML UX Design',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IQ Plugin: Unifying DSML Inside WebFOCUS',
+    title: 'Driving Data Science Adoption in Enterprise BI',
     description:
-      'How I designed the IQ Plugin to unify DSML capabilities into a single, approachable entry point.',
+      'How I unified NLQ, Insights, and ML into one discoverable DSML Hub — driving 25% adoption boost.',
     images: ['/images/case-study/iq-plugin/iq-cover.png'],
   },
   alternates: {

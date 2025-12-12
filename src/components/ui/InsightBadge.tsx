@@ -19,7 +19,7 @@ interface InsightBadgeProps {
 
 /**
  * InsightBadge - A pill-shaped component for highlighting outcomes
- * Light Theme: Swiss Style with teal accent (#0BA2B5)
+ * Light Theme: Swiss Style with teal accent (var(--accent-teal))
  */
 export default function InsightBadge({
   children,
@@ -30,13 +30,13 @@ export default function InsightBadge({
   className = '',
 }: InsightBadgeProps) {
   const baseStyles = 'inline-flex items-center gap-2 rounded-full font-medium transition-all duration-300'
-  
+
   const variantStyles = {
-    default: 'bg-[#0BA2B5]/10 text-[#0BA2B5] border border-[#0BA2B5]/20 hover:bg-[#0BA2B5]/15 hover:border-[#0BA2B5]/30',
-    highlight: 'bg-[#0BA2B5] text-white border border-[#0BA2B5] hover:bg-[#0990A2]',
+    default: 'bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] border border-[var(--accent-teal)]/20 hover:bg-[var(--accent-teal)]/15 hover:border-[var(--accent-teal)]/30',
+    highlight: 'bg-[var(--accent-teal)] text-white border border-[var(--accent-teal)] hover:bg-[var(--accent-teal-700)]',
     subtle: 'bg-slate-100 text-slate-700 border border-slate-200 hover:bg-slate-200 hover:border-slate-300',
   }
-  
+
   const sizeStyles = {
     sm: 'px-3 py-1 text-xs',
     md: 'px-4 py-1.5 text-sm',

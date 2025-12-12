@@ -45,7 +45,7 @@ export default function TransformationShowcase() {
   return (
     <section className="bg-slate-900 py-20 md:py-28 relative overflow-hidden">
       {/* Subtle grid background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -63,12 +63,12 @@ export default function TransformationShowcase() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-14"
         >
-          <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-4">
+          <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
             // SINGLE-HANDED MODERNIZATION
           </span>
           <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
             50 years of legacy.<br />
-            <span className="text-[#0BA2B5]">One designer.</span>
+            <span className="text-[var(--accent-teal)]">One designer.</span>
           </h2>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             I drove the entire modernization of WebFOCUS DSML capabilities and enterprise scheduling—from fragmented legacy tools to unified, intelligent workflows.
@@ -104,7 +104,7 @@ export default function TransformationShowcase() {
               <div className="flex items-center gap-3">
                 <span className="text-slate-600">reportcaster_modern.tsx</span>
                 <div className="flex gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0BA2B5]"></span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-teal)]"></span>
                 </div>
               </div>
             </div>
@@ -144,10 +144,10 @@ export default function TransformationShowcase() {
               onTouchStart={handleStart}
             >
               {/* Vertical Line */}
-              <div className="w-0.5 h-full bg-[#0BA2B5] shadow-lg shadow-[#0BA2B5]/50"></div>
+              <div className="w-0.5 h-full bg-[var(--accent-teal)] shadow-lg shadow-[var(--accent-teal)]/50"></div>
 
               {/* Drag Handle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#0BA2B5] rounded-full flex items-center justify-center shadow-xl shadow-[#0BA2B5]/30 border-2 border-white cursor-ew-resize hover:scale-110 transition-transform">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[var(--accent-teal)] rounded-full flex items-center justify-center shadow-xl shadow-[var(--accent-teal)]/30 border-2 border-white cursor-ew-resize hover:scale-110 transition-transform">
                 <GripVertical className="w-5 h-5 text-white" />
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function TransformationShowcase() {
               </span>
             </div>
             <div className="absolute bottom-4 right-4 z-20">
-              <span className="bg-[#0BA2B5]/90 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full">
+              <span className="bg-[var(--accent-teal)]/90 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full">
                 MODERN
               </span>
             </div>
@@ -170,22 +170,22 @@ export default function TransformationShowcase() {
             <p className="text-slate-500 text-sm font-mono">
               {'<'} Drag to compare {'>'}
             </p>
-            
+
             {/* Watch Demo Button */}
             <a
               href="https://www.youtube.com/watch?v=NvNFN6sz41M"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#0BA2B5] hover:bg-[#0BA2B5]/80 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
+              className="inline-flex items-center gap-2 bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/80 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
             >
               <Play className="w-4 h-4" />
               <span>Watch Demo</span>
             </a>
-            
+
             <div className="flex items-center gap-4">
               <Link
                 href="/work/reportcaster"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
               >
                 <span>ReportCaster</span>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@ export default function TransformationShowcase() {
               <span className="text-slate-600">·</span>
               <Link
                 href="/work/ml-functions"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
               >
                 <span>ML Functions</span>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +205,7 @@ export default function TransformationShowcase() {
               <span className="text-slate-600">·</span>
               <Link
                 href="/work/iq-plugin"
-                className="inline-flex items-center gap-2 text-[#0BA2B5] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
               >
                 <span>DSML Hub</span>
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

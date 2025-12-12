@@ -25,7 +25,7 @@ export default function WritingSection() {
           className="text-center mb-12"
         >
           {/* Section Label */}
-          <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest block mb-4">
+          <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
             // EXPRESSION
           </span>
 
@@ -53,20 +53,20 @@ export default function WritingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-[#0BA2B5]/50 hover:bg-slate-800/80 transition-all duration-300"
+              className="group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-[var(--accent-teal)]/50 hover:bg-slate-800/80 transition-all duration-300"
             >
               {/* Topic Tag */}
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#0BA2B5] block mb-3">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-teal)] block mb-3">
                 {article.topic}
               </span>
 
               {/* Title */}
-              <h3 className="font-serif text-white text-lg md:text-xl leading-snug mb-4 group-hover:text-[#0BA2B5] transition-colors">
+              <h3 className="font-serif text-white text-lg md:text-xl leading-snug mb-4 group-hover:text-[var(--accent-teal)] transition-colors">
                 {article.title}
               </h3>
 
               {/* Read indicator */}
-              <div className="flex items-center gap-2 text-slate-500 group-hover:text-[#0BA2B5] transition-colors">
+              <div className="flex items-center gap-2 text-slate-500 group-hover:text-[var(--accent-teal)] transition-colors">
                 <span className="font-mono text-xs">Read</span>
                 <svg
                   className="w-4 h-4 group-hover:translate-x-1 transition-transform"
@@ -93,7 +93,7 @@ export default function WritingSection() {
             href="https://medium.com/@anu.anuja"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-slate-400 hover:text-[#0BA2B5] transition-colors group"
+            className="inline-flex items-center gap-3 text-slate-400 hover:text-[var(--accent-teal)] transition-colors group"
           >
             <span className="font-mono text-sm">More articles on Medium</span>
             <svg

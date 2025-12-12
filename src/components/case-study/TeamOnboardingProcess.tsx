@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import { motion } from 'framer-motion'
 
 interface TeamOnboardingProcessProps {
@@ -41,7 +42,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
   return (
     <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] p-8 md:p-12 shadow-sm">
       <div className="space-y-10">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -72,7 +73,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
           <h4 className="text-[var(--text-heading)] text-lg font-serif text-center">
             Cross-Functional Reach
           </h4>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {stakeholderClusters.map((cluster, i) => (
               <motion.div
@@ -89,7 +90,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
                     // {cluster.header}
                   </span>
                 </div>
-                
+
                 {/* Cluster Items */}
                 <div className="flex flex-wrap gap-2">
                   {cluster.items.map((item, j) => (
@@ -123,13 +124,12 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
               Onboarding Activities
             </h4>
           </div>
-          
+
           {/* Process Flow with Arrows */}
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-stretch">
             {activities.map((a, i) => (
-              <>
+              <Fragment key={`activity-${i}`}>
                 <motion.div
-                  key={`activity-${i}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -145,7 +145,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
                       </div>
                       <h5 className="text-[var(--text-heading)] font-serif font-semibold">{a.phase}</h5>
                     </div>
-                    
+
                     {/* Items */}
                     <ul className="space-y-2">
                       {a.items.map((item, j) => (
@@ -157,10 +157,10 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
                     </ul>
                   </div>
                 </motion.div>
-                
+
                 {/* Arrow between cards (not after the last one) */}
-                {i < activities.length - 1 && <ProcessArrow key={`arrow-${i}`} />}
-              </>
+                {i < activities.length - 1 && <ProcessArrow />}
+              </Fragment>
             ))}
           </div>
         </motion.div>
@@ -179,20 +179,20 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
               <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
             </svg>
           </div>
-          
+
           {/* Content */}
           <div className="relative z-10">
             <div className="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-3">
               // TRANSFORMATION_RESULT
             </div>
             <p className="text-white text-base md:text-lg leading-relaxed">
-              Engineers who initially intimidated me became collaborators I respected — and who respected me. 
+              Engineers who initially intimidated me became collaborators I respected — and who respected me.
               <span className="text-slate-400 block mt-2">
                 I became the youngest in the room with unspoken authority on the experience of RC.
               </span>
             </p>
           </div>
-          
+
           {/* Subtle gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
         </motion.div>

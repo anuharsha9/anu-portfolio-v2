@@ -93,10 +93,6 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         {/* Favicon - Signature Logo */}
         <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512x512.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* Font optimization: preconnect and font-display swap for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -76,7 +76,7 @@ export default function SiteHeader() {
           href="/"
           className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
         >
-          <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[#0BA2B5] transition-all duration-300">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[var(--accent-teal)] transition-all duration-300">
             <AnimatedSignatureLogo
               className="w-full h-full"
               duration={16000}
@@ -108,7 +108,7 @@ export default function SiteHeader() {
               Me
               {/* Active indicator dot */}
               {isAboutPage && (
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0BA2B5]" />
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--accent-teal)]" />
               )}
             </Link>
           </div>
@@ -119,7 +119,7 @@ export default function SiteHeader() {
           {/* Let's Talk - Primary CTA */}
           <Link
             href="/#lets-talk"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0BA2B5] text-white text-sm font-medium transition-all duration-300 hover:bg-[#0990A2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5] shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-teal)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
           >
             <span>Let&apos;s Talk</span>
           </Link>
@@ -130,7 +130,7 @@ export default function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackResumeDownload()}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0BA2B5]"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
             aria-label="View Resume"
           >
             <span>Resume</span>

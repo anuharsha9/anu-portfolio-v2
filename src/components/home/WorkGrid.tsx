@@ -17,31 +17,31 @@ const caseStudies = [
     description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Unified 5 legacy subsystems into one coherent experience.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     fileName: 'legacy_scheduler_refactor.js',
-    accentColor: '#F59E0B',
+    accentColor: 'var(--accent-amber)',
     locked: false,
   },
   {
     slug: 'ml-functions',
-    title: 'ML Functions',
+    title: 'Democratizing ML',
     subtitle: 'Black Box → Guided Flow',
     metric: '12→8',
     metricLabel: 'step workflow',
-    description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Zero dead-end errors in testing.',
+    description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Dead-ends → clear guidance.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     fileName: 'ml_wizard_pipeline.py',
-    accentColor: '#0BA2B5',
+    accentColor: 'var(--accent-teal)',
     locked: false,
   },
   {
     slug: 'iq-plugin',
-    title: 'DSML Hub',
+    title: 'Driving Data Science Adoption',
     subtitle: '3 Tools → 1 Hub',
     metric: '3',
     metricLabel: 'workflows owned',
     description: 'Unified 3 DSML tools into one Hub plugin with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
-    accentColor: '#8B5CF6',
+    accentColor: 'var(--accent-violet)',
     locked: true,
   },
 ]
@@ -91,12 +91,17 @@ export default function WorkGrid() {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-center gap-2"
           >
-            <div className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-full px-5 py-2.5 shadow-sm">
-              <Youtube className="w-4 h-4 text-[var(--accent-teal)]" />
-              <span className="text-slate-600 text-sm">
+            <a
+              href="https://www.youtube.com/watch?v=NnMGjEJFIX4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-full px-5 py-2.5 shadow-sm hover:border-[var(--accent-teal)] hover:bg-slate-50 transition-all duration-300 group"
+            >
+              <Youtube className="w-4 h-4 text-[var(--accent-teal)] group-hover:scale-110 transition-transform" />
+              <span className="text-slate-600 text-sm group-hover:text-slate-900">
                 Presented at <span className="font-medium text-slate-900">Virtual User Group Sessions</span>
               </span>
-            </div>
+            </a>
             <p className="text-slate-500 text-xs italic">
               Only designer invited to present alongside my Director of Design
             </p>
@@ -127,7 +132,7 @@ export default function WorkGrid() {
               >
                 <div className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-500 h-full flex flex-col">
                   {/* HeroTerminal Image with Bleed Effect - bleeds off RIGHT and BOTTOM */}
-                  <div className="relative h-[300px] overflow-hidden pl-5 pt-5" onClick={(e) => e.preventDefault()}>
+                  <div className="relative h-[300px] overflow-hidden pl-5 pt-5">
                     <div className="h-[340px] w-[calc(100%+40px)]">
                       <HeroTerminal
                         imageSrc={study.image}

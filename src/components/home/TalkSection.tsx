@@ -36,9 +36,9 @@ export default function TalkSection() {
             {/* Email */}
             <a
               href="mailto:anujanimmagadda@gmail.com"
-              className="text-slate-50 font-mono text-lg md:text-xl hover:text-[#0BA2B5] transition-colors duration-300 group"
+              className="text-slate-50 font-mono text-lg md:text-xl hover:text-[var(--accent-teal)] transition-colors duration-300 group"
             >
-              <span className="border-b border-slate-50/30 group-hover:border-[#0BA2B5] transition-colors duration-300 pb-1">
+              <span className="border-b border-slate-50/30 group-hover:border-[var(--accent-teal)] transition-colors duration-300 pb-1">
                 anujanimmagadda@gmail.com
               </span>
             </a>
@@ -48,9 +48,9 @@ export default function TalkSection() {
             {/* Phone */}
             <a
               href="tel:+17813547394"
-              className="text-slate-50 font-mono text-lg md:text-xl hover:text-[#0BA2B5] transition-colors duration-300 group"
+              className="text-slate-50 font-mono text-lg md:text-xl hover:text-[var(--accent-teal)] transition-colors duration-300 group"
             >
-              <span className="border-b border-slate-50/30 group-hover:border-[#0BA2B5] transition-colors duration-300 pb-1">
+              <span className="border-b border-slate-50/30 group-hover:border-[var(--accent-teal)] transition-colors duration-300 pb-1">
                 +1 781-354-7394
               </span>
             </a>
@@ -71,7 +71,7 @@ export default function TalkSection() {
             </a>
 
             <Link
-              href="/assets/Anuja-Harsha-Resume.pdf"
+              href="/resume.html"
               target="_blank"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-50/20 text-slate-50 font-medium text-sm hover:bg-slate-50/10 hover:border-slate-50/40 transition-all duration-300"
             >

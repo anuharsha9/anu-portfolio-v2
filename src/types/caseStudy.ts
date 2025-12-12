@@ -41,6 +41,10 @@ export interface QuickOverview {
   demoVideoUrl2?: string // Optional second YouTube demo video URL (watch format)
   demoVideoLabel2?: string // Label for the second demo video button
   oldUIDemoUrl?: string // Optional old UI demo URL (for comparison)
+  validationLinks?: Array<{
+    url: string
+    label: string
+  }> // Third-party proof links (blog posts, articles about the work)
 }
 
 export interface CaseStudySubsection {

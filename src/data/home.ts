@@ -27,24 +27,24 @@ export const featuredCaseStudies: FeaturedCaseStudy[] = [
   },
   {
     slug: 'ml-functions',
-    title: 'ML Functions: making enterprise ML training usable',
+    title: 'Democratizing Machine Learning for Everyone',
     summary:
       'Revamping an engineer-driven model-training workflow into a guided, step-by-step experience that helps non-experts configure, run, and interpret machine-learning models with confidence.',
     impact:
       'Step-based flows, clearer mental models, aligned with DSML strategy.',
     tags: ['AI/ML UX', 'Workflow design'],
     image: '/images/case-study/ml-functions/ml-functions-cover.png',
-    ctaText: 'View ML Functions case study',
+    ctaText: 'View case study',
   },
   {
     slug: 'iq-plugin',
-    title: 'DSML Hub: unifying insights inside the WebFOCUS hub',
+    title: 'Driving Data Science Adoption in Enterprise BI',
     summary:
       'Designing a unified hub that brings scattered DSML services into one responsive experience — so business users can discover, run, and interpret insights without leaving their analytics hub.',
     impact: 'Reduced context switching and made insights discoverable.',
     tags: ['DSML Integration', 'Information Architecture'],
     image: '/images/case-study/iq-plugin/iq-cover.png',
-    ctaText: 'View DSML Hub case study',
+    ctaText: 'View case study',
   },
 ]
 

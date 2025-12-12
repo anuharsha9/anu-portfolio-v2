@@ -23,14 +23,14 @@ export default function GrowthStory() {
             <blockquote className="relative z-10 font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl leading-relaxed max-w-3xl mx-auto">
               She approaches her work with a fearless attitude and is never afraid to explore new ideas.
               Anuja is willing to take on difficult problems and push for creative solutions,
-              <span className="text-[#0BA2B5]"> even under tight timelines.</span>
+              <span className="text-[var(--accent-teal)]"> even under tight timelines.</span>
             </blockquote>
           </div>
 
           {/* Attribution */}
           <div className="mt-8 flex flex-col items-center gap-1">
             <p className="font-semibold text-slate-900">Dave Pfeiffer</p>
-            <p className="text-sm text-[#0BA2B5]">Director of Design, Cloud Software Group</p>
+            <p className="text-sm text-[var(--accent-teal)]">Director of Design, Cloud Software Group</p>
             <p className="text-xs text-slate-500 mt-1">My mentor for 3+ years</p>
           </div>
 
@@ -40,7 +40,7 @@ export default function GrowthStory() {
               href="https://medium.com/@anu.anuja/i-always-thought-i-wasnt-good-enough-until-ibi-webfocus-made-me-someone-new-e1a769f15621"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-mono text-sm text-slate-500 hover:text-[#0BA2B5] transition-colors"
+              className="inline-flex items-center gap-2 font-mono text-sm text-slate-500 hover:text-[var(--accent-teal)] transition-colors"
             >
               <span>Read my full story</span>
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

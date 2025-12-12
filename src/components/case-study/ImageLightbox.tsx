@@ -35,6 +35,7 @@ export default function ImageLightbox({
   const containerRef = useFocusTrap(isOpen)
   const [isZoomed, setIsZoomed] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   // Store scroll position in ref to persist across re-renders
   const scrollPositionRef = useRef<number>(0)
@@ -46,23 +47,66 @@ export default function ImageLightbox({
   const canGoPrev = hasNavigation && currentIndex > 0
   const canGoNext = hasNavigation && currentIndex < images.length - 1
 
-  // Touch gesture state
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Touch gesture state - horizontal swipe for navigation
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
+  const [touchEndX, setTouchEndX] = useState<number | null>(null)
+  // Touch gesture state - vertical swipe for close
+  const [touchStartY, setTouchStartY] = useState<number | null>(null)
+  const [touchEndY, setTouchEndY] = useState<number | null>(null)
+  const [dragY, setDragY] = useState(0)
   const minSwipeDistance = 50
+  const closeSwipeDistance = 100
 
   const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
+    if (isZoomed) return // Don't handle gestures when zoomed
+    setTouchEndX(null)
+    setTouchEndY(null)
+    setTouchStartX(e.targetTouches[0].clientX)
+    setTouchStartY(e.targetTouches[0].clientY)
   }
 
   const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    if (isZoomed) return
+    setTouchEndX(e.targetTouches[0].clientX)
+    setTouchEndY(e.targetTouches[0].clientY)
+
+    // Calculate vertical drag for visual feedback
+    if (touchStartY !== null) {
+      const deltaY = e.targetTouches[0].clientY - touchStartY
+      if (deltaY > 0) { // Only drag down
+        setDragY(deltaY * 0.5) // Dampened drag
+      }
+    }
   }
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd || !hasNavigation) return
-    const distance = touchStart - touchEnd
+    if (isZoomed) return
+
+    // Reset drag
+    setDragY(0)
+
+    // Check for vertical swipe down to close
+    if (touchStartY !== null && touchEndY !== null) {
+      const verticalDistance = touchEndY - touchStartY
+      if (verticalDistance > closeSwipeDistance) {
+        onClose()
+        return
+      }
+    }
+
+    // Check for horizontal swipe for navigation
+    if (!touchStartX || !touchEndX || !hasNavigation) return
+    const distance = touchStartX - touchEndX
     const isLeftSwipe = distance > minSwipeDistance
     const isRightSwipe = distance < -minSwipeDistance
 
@@ -180,11 +224,11 @@ export default function ImageLightbox({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 py-4 bg-gradient-to-b from-slate-950/80 to-transparent"
+            className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 md:px-6 py-3 md:py-4 bg-gradient-to-b from-slate-950/90 to-transparent"
           >
-            {/* Technical Label */}
+            {/* Technical Label - Hidden on mobile for cleaner look */}
             <div className="flex items-center gap-4">
-              <span className="font-mono text-[11px] text-slate-500 uppercase tracking-widest">
+              <span className="hidden md:inline font-mono text-[11px] text-slate-500 uppercase tracking-widest">
                 // SYSTEM_INSPECTION
               </span>
               {hasNavigation && (
@@ -195,23 +239,25 @@ export default function ImageLightbox({
             </div>
 
             {/* Controls */}
-            <div className="flex items-center gap-2">
-              {/* Zoom Toggle */}
-              <button
-                onClick={() => setIsZoomed(prev => !prev)}
-                className="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
-                aria-label={isZoomed ? 'Zoom out' : 'Zoom in'}
-              >
-                {isZoomed ? <ZoomOut className="w-5 h-5" /> : <ZoomIn className="w-5 h-5" />}
-              </button>
+            <div className="flex items-center gap-1 md:gap-2">
+              {/* Zoom Toggle - Hidden on mobile (use pinch instead) */}
+              {!isMobile && (
+                <button
+                  onClick={() => setIsZoomed(prev => !prev)}
+                  className="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
+                  aria-label={isZoomed ? 'Zoom out' : 'Zoom in'}
+                >
+                  {isZoomed ? <ZoomOut className="w-5 h-5" /> : <ZoomIn className="w-5 h-5" />}
+                </button>
+              )}
 
-              {/* Close Button */}
+              {/* Close Button - Larger tap target on mobile */}
               <button
                 onClick={onClose}
-                className="p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
+                className="p-3 md:p-2.5 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-all duration-200"
                 aria-label="Close lightbox"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6 md:w-5 md:h-5" />
               </button>
             </div>
           </motion.div>
@@ -254,11 +300,18 @@ export default function ImageLightbox({
             {/* Image Container */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={{
+                opacity: dragY > 0 ? 1 - (dragY / 300) : 1,
+                scale: 1,
+                y: dragY
+              }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative flex flex-col items-center px-4 md:px-20 py-20 max-w-full ${isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'}`}
-              onClick={() => setIsZoomed(prev => !prev)}
+              transition={{
+                duration: dragY > 0 ? 0 : 0.4,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              className={`relative flex flex-col items-center px-4 md:px-20 py-16 md:py-20 max-w-full ${!isMobile && !isZoomed ? 'cursor-zoom-in' : ''} ${!isMobile && isZoomed ? 'cursor-zoom-out' : ''}`}
+              onClick={() => !isMobile && setIsZoomed(prev => !prev)}
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
@@ -305,31 +358,48 @@ export default function ImageLightbox({
             </motion.div>
           </div>
 
-          {/* Bottom Hint Bar */}
+          {/* Bottom Hint Bar - Different for mobile vs desktop */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3, delay: 0.15 }}
-            className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center px-6 py-4 bg-gradient-to-t from-slate-950/80 to-transparent"
+            className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center px-4 md:px-6 py-3 md:py-4 bg-gradient-to-t from-slate-950/90 to-transparent"
           >
-            <div className="flex items-center gap-6 font-mono text-[10px] text-slate-500 uppercase tracking-widest">
-              <span className="flex items-center gap-2">
-                <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">ESC</kbd>
-                Close
-              </span>
-              <span className="flex items-center gap-2">
-                <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">Z</kbd>
-                Zoom
-              </span>
-              {hasNavigation && (
+            {/* Mobile hints */}
+            {isMobile ? (
+              <div className="flex items-center gap-4 font-mono text-[10px] text-slate-500 uppercase tracking-widest">
                 <span className="flex items-center gap-2">
-                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">←</kbd>
-                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">→</kbd>
-                  Navigate
+                  <span className="text-slate-400">↓</span>
+                  Swipe down to close
                 </span>
-              )}
-            </div>
+                {hasNavigation && (
+                  <span className="flex items-center gap-2">
+                    <span className="text-slate-400">←→</span>
+                    Swipe to navigate
+                  </span>
+                )}
+              </div>
+            ) : (
+              /* Desktop hints */
+              <div className="flex items-center gap-6 font-mono text-[10px] text-slate-500 uppercase tracking-widest">
+                <span className="flex items-center gap-2">
+                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">ESC</kbd>
+                  Close
+                </span>
+                <span className="flex items-center gap-2">
+                  <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">Z</kbd>
+                  Zoom
+                </span>
+                {hasNavigation && (
+                  <span className="flex items-center gap-2">
+                    <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">←</kbd>
+                    <kbd className="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-400">→</kbd>
+                    Navigate
+                  </span>
+                )}
+              </div>
+            )}
           </motion.div>
         </div>
       )}

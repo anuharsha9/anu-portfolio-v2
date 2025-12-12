@@ -47,7 +47,7 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
     >
       <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
         {/* Headline */}
-        <motion.h3 
+        <motion.h3
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -56,9 +56,9 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
         >
           Building clarity from complex systems.
         </motion.h3>
-        
+
         {/* Subhead */}
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -67,9 +67,9 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
         >
           Open for Principal Product Design roles.
         </motion.p>
-        
+
         {/* Buttons */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -92,10 +92,10 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </Link>
-          
+
           {/* Secondary Button */}
           <Link
-            href="/resume"
+            href="/resume.html"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-slate-300 text-slate-600 text-lg font-medium hover:border-slate-900 hover:text-slate-900 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
             aria-label="Read my resume"
           >

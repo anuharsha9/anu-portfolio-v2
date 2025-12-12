@@ -79,7 +79,7 @@ export default function CollapsibleWorkArchive() {
             {/* Section Label */}
             <div className="flex items-center justify-center gap-4">
               <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
-              <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-wider">
+              <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-wider">
                 The Vault
               </span>
               <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
@@ -110,7 +110,7 @@ export default function CollapsibleWorkArchive() {
                   delay: index * 0.05,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="group relative bg-slate-100 border border-slate-200 rounded-xl overflow-hidden hover:border-[#0BA2B5]/30 hover:shadow-lg transition-all duration-300"
+                className="group relative bg-slate-100 border border-slate-200 rounded-xl overflow-hidden hover:border-[var(--accent-teal)]/30 hover:shadow-lg transition-all duration-300"
                 style={{ aspectRatio: '3/4' }}
               >
                 {/* Preview Image - fills top portion */}
@@ -127,7 +127,7 @@ export default function CollapsibleWorkArchive() {
 
                 {/* Download icon - appears on hover */}
                 <div className="absolute top-3 right-3 w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-sm">
-                  <svg className="w-4 h-4 text-[#0BA2B5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>

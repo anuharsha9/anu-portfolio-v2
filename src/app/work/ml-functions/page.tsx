@@ -5,7 +5,7 @@ import { mlFunctionsCaseStudy } from '@/data/ml-functions'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'ML Functions: Making Enterprise ML Training Usable for Non-Experts',
+  title: 'Democratizing Machine Learning for Everyone',
   description:
     'How I transformed an engineer-driven ML model training workflow into a guided, step-by-step experience. A case study in AI/ML UX, making machine learning accessible to non-technical users without sacrificing power.',
   keywords: [

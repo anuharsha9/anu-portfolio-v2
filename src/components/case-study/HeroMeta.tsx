@@ -33,6 +33,10 @@ interface HeroMetaProps {
   publicDemoLabel?: string
   dataSheetUrl?: string
   dataSheetLabel?: string
+  validationLinks?: Array<{
+    url: string
+    label: string
+  }>
   status?: {
     label: string
     variant?: 'live' | 'shipping' | 'development'
@@ -60,6 +64,7 @@ export default function HeroMeta({
   publicDemoLabel,
   dataSheetUrl,
   dataSheetLabel,
+  validationLinks,
   status,
   shareUrl,
   testimonialName,
@@ -95,8 +100,8 @@ export default function HeroMeta({
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        
-        
+
+
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           {/* Case Study Navigation - Above Blueprint */}
           <div className="text-center mb-6 md:mb-8">
@@ -137,11 +142,13 @@ export default function HeroMeta({
                   animate="visible"
                   className="text-slate-900 text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight"
                 >
-                  {caseStudySlug === 'reportcaster' 
+                  {caseStudySlug === 'reportcaster'
                     ? 'Modernizing a 50-Year-Old Enterprise Scheduler'
                     : caseStudySlug === 'ml-functions'
-                      ? 'Making Enterprise ML Usable for Non-Experts'
-                      : heroTitle}
+                      ? 'Democratizing Machine Learning for Everyone'
+                      : caseStudySlug === 'iq-plugin'
+                        ? 'Driving Data Science Adoption in Enterprise BI'
+                        : heroTitle}
                 </motion.h1>
 
                 {/* Sub-headline */}
@@ -151,8 +158,8 @@ export default function HeroMeta({
                   animate="visible"
                   className="text-slate-600 text-base md:text-lg leading-relaxed"
                 >
-                  {caseStudySlug === 'reportcaster' 
-                    ? 'Consolidating 5 disparate tools into one React workflow for 20M+ users.'
+                  {caseStudySlug === 'reportcaster'
+                    ? 'Consolidating 5 disparate subsystems into one unified experience for 20M+ weekly schedules.'
                     : caseStudySlug === 'ml-functions'
                       ? 'Turning a black-box data science process into a guided, 4-step workflow.'
                       : (
@@ -183,9 +190,8 @@ export default function HeroMeta({
                     ) : (
                       // Live or other status - Default style
                       <>
-                        <span className={`w-2 h-2 rounded-full ${
-                          status.variant === 'live' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
-                        }`}></span>
+                        <span className={`w-2 h-2 rounded-full ${status.variant === 'live' ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'
+                          }`}></span>
                         <span className="font-mono text-xs text-slate-500 uppercase tracking-wider">
                           {status.label}
                         </span>
@@ -212,6 +218,31 @@ export default function HeroMeta({
                       </svg>
                       <span>{dataSheetLabel || 'View Data Sheet'}</span>
                     </a>
+                  </motion.div>
+                )}
+
+                {/* Validation Links - Third-party proof */}
+                {validationLinks && validationLinks.length > 0 && (
+                  <motion.div
+                    variants={heroSubVariant}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex flex-wrap gap-x-4 gap-y-1"
+                  >
+                    {validationLinks.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-slate-500 hover:text-[var(--accent-teal)] transition-colors text-sm font-mono"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        <span>{link.label}</span>
+                      </a>
+                    ))}
                   </motion.div>
                 )}
 
@@ -245,14 +276,14 @@ export default function HeroMeta({
                   transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {/* The "Cut" Effect - Terminal bleeds off edges */}
-                  <div 
+                  <div
                     className="absolute top-0 left-0 transform translate-y-2 sm:translate-y-4 lg:translate-y-6 translate-x-2 sm:translate-x-4 lg:translate-x-8 scale-[1.02] sm:scale-105 lg:scale-110 origin-top-left"
                     style={{ width: 'calc(100% + 40px)' }}
                   >
                     <HeroTerminal
                       imageSrc={coverImage.src}
                       fileName={
-                        caseStudySlug === 'iq-plugin' 
+                        caseStudySlug === 'iq-plugin'
                           ? 'iq_hub_unified_view.tsx'
                           : caseStudySlug === 'ml-functions'
                             ? 'ml_wizard_pipeline.py'
@@ -260,10 +291,10 @@ export default function HeroMeta({
                       }
                       accentColor={
                         caseStudySlug === 'iq-plugin'
-                          ? '#8B5CF6' // Violet for IQ
+                          ? 'var(--accent-violet)' // Violet for IQ
                           : caseStudySlug === 'ml-functions'
-                            ? '#0BA2B5' // Teal for ML
-                            : '#F59E0B' // Amber for RC
+                            ? 'var(--accent-teal)' // Teal for ML
+                            : 'var(--accent-amber)' // Amber for RC
                       }
                       alt={coverImage.alt}
                     />

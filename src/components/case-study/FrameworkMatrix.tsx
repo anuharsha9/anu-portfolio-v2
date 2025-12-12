@@ -27,12 +27,12 @@ const defaultSystemLogic: Record<string, string> = {
   N: "deploy(vision).to('production');",
 }
 
-export default function FrameworkMatrix({ 
-  principles, 
+export default function FrameworkMatrix({
+  principles,
   sectionMappings,
   caseStudyContext = 'CASE_STUDY'
 }: FrameworkMatrixProps) {
-  
+
   const handleNavigation = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault()
     const element = document.getElementById(sectionId)
@@ -54,14 +54,14 @@ export default function FrameworkMatrix({
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
           // FRAMEWORK_APPLICATION
         </span>
-        <h2 className="text-slate-900 text-2xl md:text-3xl lg:text-4xl font-serif leading-tight">
+        <h2 className="text-slate-900 text-2xl md:text-3xl lg:text-4xl font-serif leading-tight mt-0 py-[9px]">
           D.E.S.I.G.N. Framework in Action
         </h2>
         <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
           How I applied my design methodology to this project
         </p>
-        <Link 
-          href="/me#design-framework" 
+        <Link
+          href="/me#design-framework"
           className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-[var(--accent-teal-700)] text-xs font-mono uppercase tracking-widest transition-colors duration-200 group"
         >
           <span>View full framework</span>
@@ -81,12 +81,12 @@ export default function FrameworkMatrix({
           {principles.map((principle, index) => {
             const sectionId = sectionMappings?.[principle.letter]
             const systemLogic = principle.systemLogic || defaultSystemLogic[principle.letter]
-            
+
             // Calculate border classes for grid lines
             const isLastInRow = (index + 1) % 3 === 0
             const isLastRow = index >= principles.length - (principles.length % 3 || 3)
             const isLastItem = index === principles.length - 1
-            
+
             const CellWrapper = sectionId ? 'a' : 'div'
             const cellProps = sectionId ? {
               href: `#${sectionId}`,

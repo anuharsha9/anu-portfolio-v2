@@ -3,93 +3,93 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const mlFunctionsCaseStudy: CaseStudyData = {
   slug: 'ml-functions',
   // Blueprint Hero - Architect Design System
-  heroTitle: 'Making Enterprise ML Usable for Non-Experts',
+  heroTitle: 'Democratizing Machine Learning for Everyone',
   heroSubheading: 'Turning a black-box data science process into a guided, 4-step workflow',
   heroSubtitle:
-    'A true story of bringing practical, accessible machine learning to WebFOCUS users — especially those without data-science backgrounds. Turning a traditionally technical process into a guided, intuitive, low-friction experience.',
+    '8 months without tickets — I drove the vision, PM wrote tickets after. Only designer on all major WebFOCUS features. Zero ML background → MIT certified → trusted design lead.',
   coverImage: {
     src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     alt: 'ML Functions Confusion Matrix - Model Performance Visualization',
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: '2023–2025',
+  timeframe: 'Jan 2023 – Nov 2023 | Shipping 2026',
   status: {
     label: 'Shipping 2026',
     variant: 'shipping' as const,
   },
   scope: [
-    'AI_UX',
-    'Complex_Workflows',
-    'Zero_to_One',
-    'ML_Democratization',
+    'AI/ML UX',
+    'Systems Thinking',
+    'Zero-to-One',
     'Cross-functional Leadership',
+    'Technical Fluency',
   ],
   // ----------------------------
   // QUICK IMPACT OVERVIEW (Public)
   // ----------------------------
   quickOverview: {
-    title: 'ML Functions — Quick Impact Overview',
+    title: 'Democratizing ML — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
-    leadershipSummary: 'Onboarded the PM. Earned trust from 30-year veteran engineers within 6 months. Had a seat at the table through competence, not title.',
+    leadershipSummary: 'Only designer on all major WebFOCUS features — owned ML Functions solo while leading ReportCaster and IQ Plugin simultaneously. Worked 8 months without tickets — drove the vision, PM wrote tickets after my mockups. Zero ML background → MIT certified. Earned trust from 30-year veteran engineers. Principal DS: "That\'s why I trust you."',
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
       'Owned end-to-end redesign: ambiguity to production-ready 4-step workflow. Led weekly syncs with the Principal Data Scientist. Designed the confusion matrix he called "the best screen in the entire UX revamp."',
     scopeOfPractice: [
       {
-        tag: 'DOMAIN_MASTERY',
+        tag: 'LEARN_BE_CURIOUS',
         tagColor: 'blue',
-        headline: 'ML Fluency',
-        body: '**MIT certified in ML Product Design**. Embedded weekly with data scientists. Fluent enough to challenge technical assumptions.',
+        headline: 'Zero → Expert',
+        body: '**Zero ML background → MIT certified**. Embedded weekly with Principal DS. Fluent enough to challenge technical assumptions.',
         icon: 'architect',
       },
       {
-        tag: 'COMPLEXITY_TRANSLATION',
+        tag: 'DELIVER_RESULTS',
         tagColor: 'amber',
-        headline: 'Black Box → Guided Flow',
-        body: '**12+ clicks → 4-step wizard**. Confusion matrix the Principal DS called "the best screen in the entire UX revamp."',
+        headline: '12+ → 7-9 Clicks',
+        body: '**Dead-ends → clear guidance**. Confusion matrix: "the best screen in the entire UX revamp."',
         icon: 'archaeologist',
       },
       {
-        tag: 'CROSS_FUNCTIONAL_BRIDGE',
+        tag: 'THINK_BIG',
         tagColor: 'purple',
-        headline: 'UX + ML Alignment',
-        body: '**Weekly syncs** with Data Science, Engineering, Product. Bridged technical feasibility with user accessibility.',
+        headline: 'Platform Foundation',
+        body: 'Patterns became **foundation for IQ Plugin** and platform-wide AI strategy. Designed for scale.',
         icon: 'strategist',
       },
       {
-        tag: 'TRUST_EARNED',
+        tag: 'EARN_TRUST',
         tagColor: 'emerald',
-        headline: 'Subject Matter Trust',
-        body: 'Principal DS: **"That\'s why I trust you."** Deep understanding of explainability unlocked full creative ownership.',
+        headline: 'Subject Matter Authority',
+        body: 'Principal DS: **"That\'s why I trust you."** Earned trust from 30-year veteran engineers within 6 months.',
         icon: 'multiplier',
       },
     ],
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
-        label: 'Workflow simplification',
-        value: 'From 12+ scattered steps → guided 4-step flow',
+        label: 'Clicks reduced',
+        value: '12+ → 7-9',
+      },
+      {
+        label: 'SME discoverability',
+        value: '5/5 found entry without help',
+      },
+      {
+        label: 'Error handling',
+        value: 'Dead-ends → clear guidance',
       },
       {
         label: 'Entry point',
-        value: '2-click entry (right-click → Predict Data)',
-      },
-      {
-        label: 'Dead-end errors',
-        value: 'Eliminated in SME testing sessions',
-      },
-      {
-        label: 'Validation',
-        value: 'Reviewed with SMEs, Engineering, and Data Science',
+        value: '2-click access',
       },
     ],
     star: {
-      situation: 'Fragmented ML training. Hidden hyperparameters. "Results not generated" dead-ends. Opaque and error-prone.',
-      task: 'Make ML accessible to non-technical users. Maintain power for experts.',
-      action: 'Designed 4-step guided flow. Early validation. Dual-experience (guided + advanced). Eliminated dead-ends.',
-      result: 'Simplified 12-step workflow to 4 steps. Validated with SMEs, Engineering, and Data Science.',
+      situation: 'Fragmented ML training workflow. 12+ clicks. Hidden hyperparameters. Dead-ends. No designer had tackled this. I was leading ReportCaster and IQ Plugin simultaneously.',
+      task: 'Make ML accessible to non-technical users. Zero ML background to start. No tickets for 8 months.',
+      action: 'Got MIT certified. Embedded weekly with Principal DS for 6+ months. Drove the vision — showed mockups, PM wrote tickets after. Orchestrated connections between engineers.',
+      result: '12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear error guidance. DS: "That\'s why I trust you." Patterns became foundation for platform AI strategy.',
     },
     technologies: [
       'Figma',
@@ -101,20 +101,46 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       'Stakeholder Alignment',
     ],
     keyAchievements: [
-      'Achieved full discoverability in SME usability testing — all entry points found',
-      'Reduced ML workflow from 12+ clicks to 7-9 clicks',
-      'Delivered 2-click entry point from Hub, simplified setup flow, reduced configuration errors',
-      'Only designer who worked on all major WebFOCUS features; owned entire ML Functions redesign solo while simultaneously leading ReportCaster and DSML Hub',
-      'Onboarded 2 designers during maternity leave transition, ensuring seamless knowledge transfer and continuity',
-      'Eliminated all dead-end "results not generated" errors',
-      'Created dual-experience approach for technical and non-technical users',
-      'Delivered organization-wide design demos to 150-200 person business unit, presenting ML workflow redesign',
-      'Self-learned ML concepts and collaborated with Principal Data Scientist',
+      // METRICS (Lead with impact)
+      '12+ clicks → 7-9 clicks for ML workflow',
+      '5/5 SMEs found entry point without help',
+      'Dead-ends → clear error guidance (validation UX)',
+      '2-click entry from Hub',
+      // BEHAVIORS (Show how)
+      'Worked 8 months without tickets — brought ideas, showed mockups, then PM wrote tickets',
+      'Zero ML background → MIT certified in ML Product Design',
+      'Embedded weekly with Principal Data Scientist for 6+ months',
+      'Designed confusion matrix: "the best screen in the entire UX revamp"',
+      'Created dual-experience approach (guided + advanced) for different user types',
+      // OWNERSHIP (Prove depth)
+      'Only designer on all major WebFOCUS features — owned ML Functions solo',
+      'Primary driver of implementation — orchestrated connections between engineers',
+      'Led ReportCaster and DSML Hub simultaneously',
+      'Onboarded 2 designers, ensured seamless transition',
+      // RECOGNITION (Social proof)
+      'Principal DS: "That\'s why I trust you" — earned through deep domain understanding',
+      'Design demos to 150-200 person business unit',
+      // SCALE (Broader impact)
+      'Patterns became foundation for IQ Plugin and platform-wide AI strategy',
     ],
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/ibi-webFOCUS-integrated-data-science-data-sheet.pdf',
     dataSheetLabel: 'View ML Functions Data Sheet',
     demoVideoUrl: 'https://www.youtube.com/watch?v=VWxMJ0E5aL0',
     demoVideoLabel: 'Old UI Public Demo',
+    validationLinks: [
+      {
+        url: 'https://www.ibi.com/press-releases/2023/ibi-webfocus-92-addresses-the-industry-push-for-modern-business-intelligence-cloud-and-user',
+        label: 'WebFOCUS 9.2 Press Release',
+      },
+      {
+        url: 'https://community.ibi.com/articles/using-machine-learning-functions-in-webfocus-r27141/',
+        label: 'ML Functions Article',
+      },
+      {
+        url: 'https://www.ibi.com/resources/november-vug-elevate-your-analytics-game-with-dsml-and-webfocus',
+        label: 'DSML Webinar',
+      },
+    ],
   },
   // ----------------------------
   // VERSION TIMELINE
@@ -158,7 +184,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Took ownership of ML Functions redesign with zero ML background. Self-learned ML concepts while designing, becoming the bridge between data scientists and users.',
+      summary: 'Zero ML background. Got MIT certified. Embedded weekly with Principal DS for 6+ months. Refused to design until I understood the domain deeply.',
       body: '', // Removed - context established by hero, STAR, and VitalSigns components
       // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
     },
@@ -195,16 +221,16 @@ The confusion matrix screen alone went through 10+ iterations. Our Principal DS 
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Earning Trust & Leading the Team',
-      summary: 'Trust is the currency of innovation. Here\'s how I earned it — and used it to lead.',
+      summary: 'Earned trust from 30-year veteran engineers within 6 months. Principal DS: "That\'s why I trust you." Led ReportCaster and DSML Hub simultaneously.',
       body: '', // Narrative removed - flow goes directly to visual components
     },
     {
       id: 'section-06',
       index: 'N',
       title: 'Navigate Forward: Impact, Validation, and Reflection',
-      body: `SME tests validated the transformation: error-prone flow became navigable. Internal demos (150-200 people) earned leadership support. For the first time, ML in WebFOCUS felt demo-ready—understandable, not just technically correct.
+      body: `5/5 SMEs found the entry point without help. Dead-ends → clear guidance. Design demos to 150-200 person business unit earned leadership support.
 
-The patterns I developed here—structured flows, inline teaching, right-click entry—became the foundation for IQ Plugin.`,
+The patterns I developed here — structured flows, upstream validation, right-click entry, dual-experience — became the foundation for IQ Plugin and platform-wide AI strategy.`,
       beforeAfter: {
         before: {
           src: '/images/case-study/ml-functions/Legacy Train Model Resuls UI.png',
@@ -281,37 +307,37 @@ The patterns I developed here—structured flows, inline teaching, right-click e
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'MIT certification in ML Product Design. Weekly DS embedding. Built deep context before designing.',
+        description: 'Zero ML background → MIT certified. Embedded weekly with Principal DS. Refused to design until I understood the domain. Became fluent enough to challenge technical assumptions.',
         systemLogic: "if (ml_knowledge === 0) { learn(courses, experts, AI); }",
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Bridged data scientists (depth) and business users (simplicity). Became the translator.',
+        description: 'Three personas, three needs. Data scientists wanted depth, business users wanted simplicity. I became the translator — designing for both without compromising either.',
         systemLogic: "bridge(DataScientist.depth, BusinessUser.clarity);",
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: 'Mapped workflows into structured guided flow. Eliminated dead-ends. Made ML digestible.',
+        description: '12+ → 7-9 clicks. Mapped fragmented workflow into structured 4-step flow. Dead-ends → clear guidance through validation UX.',
         systemLogic: "return guidedFlow(chaos.reduce(patterns));",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: '10+ iterations on confusion matrix with Principal DS. Weekly UX + ML syncs. Technical accuracy meets UX clarity.',
+        description: '10+ iterations on confusion matrix with Principal DS. Pushed for clarity while he pushed for metrics. That tension produced "the best screen in the entire UX revamp."',
         systemLogic: "for (let i = 0; i < 10; i++) refine(confusionMatrix);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Pivoted from unified Train+Run to separate tabs. Removed data flow from ML UI. Constraints refined solution.',
+        description: 'Pivoted twice based on engineering constraints. Constraints refined solution — separate tabs, upstream validation, dual-experience emerged from technical realities.',
         systemLogic: "pivot(unifiedView, separateTabs); // constraint-driven",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Structured flows became foundation.',
+        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Design demos to 150-200 person business unit. Earned trust to lead platform-wide AI strategy.',
         systemLogic: "export patterns to IQPlugin; // validated with SMEs",
       },
     ],
@@ -322,12 +348,13 @@ The patterns I developed here—structured flows, inline teaching, right-click e
   impactSummary: {
     heading: 'Pre-launch impact at a glance',
     bullets: [
-      '5/5 SMEs found Predict Data without help in usability tests',
-      'Reduced workflow from 12+ clicks to 7-9 clicks via right-click entry and smooth guided flow',
-      'Eliminated "results not generated" dead ends — zero confusion errors in testing',
-      'All 5 SMEs described new workflow as "much easier" and "more guiding" than previous UI',
-      'First time ML in WebFOCUS felt demo-ready for 150–200 person org-wide sessions',
-      'Anticipated reduction in ML-related support requests based on improved error handling and guided workflow',
+      '12+ clicks → 7-9 clicks for ML workflow.',
+      '5/5 SMEs found entry point without help.',
+      'Dead-ends → clear error guidance using design system validation UX.',
+      '2-click entry from Hub.',
+      'Confusion matrix: "the best screen in the entire UX revamp."',
+      'First time ML in WebFOCUS felt demo-ready.',
+      'Patterns became foundation for IQ Plugin and platform-wide AI strategy.',
     ],
   },
   // ----------------------------
@@ -335,16 +362,16 @@ The patterns I developed here—structured flows, inline teaching, right-click e
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `ML Functions transformed expert-only ML workflows into guided, accessible experiences. Non-technical users could train models within minutes.
+    body: `12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear guidance. Zero ML background → trusted design lead for platform-wide AI strategy.
 
-The patterns I developed—structured guided flows, progressive disclosure, right-click entry—became the foundation for IQ Plugin.
+The patterns I developed — structured flows, upstream validation, dual-experience — became the foundation for IQ Plugin.
 
 Key insight: accessibility and power aren't opposites. They're complementary when designed together from the start.`,
     keyPoints: [
-      'Transformed expert-only ML workflows into guided, accessible experiences — enabling non-technical users to train models within minutes',
-      'Became the trusted design leader for ML—owning vision, strategy, and cross-functional alignment',
-      'Patterns became reusable — structured guided flows, progressive disclosure, and right-click entry directly shaped IQ Plugin design',
-      'Proved accessibility and power are complementary — the dual-experience approach balanced simplicity with expert flexibility',
+      '12+ clicks → 7-9 clicks. 5/5 SME discoverability. Dead-ends → clear error guidance.',
+      'Zero ML background → MIT certified → trusted design lead within 6 months',
+      'Patterns scaled to IQ Plugin and platform-wide AI strategy',
+      'Dual-experience approach balanced simplicity with expert flexibility',
     ],
   },
 }

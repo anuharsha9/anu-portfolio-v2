@@ -112,8 +112,8 @@ export default function SectionNav({ sections }: SectionNavProps) {
   if (!isVisible) return null
 
   return (
-    <nav 
-      ref={navRef} 
+    <nav
+      ref={navRef}
       className={`
         fixed left-0 right-0 z-40
         h-12 
@@ -121,8 +121,8 @@ export default function SectionNav({ sections }: SectionNavProps) {
         border-b border-slate-200
         transition-all duration-300
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}
-      `} 
-      style={{ top: `${mainNavHeight}px` }} 
+      `}
+      style={{ top: `${mainNavHeight}px` }}
       aria-label="Case study section navigation"
     >
       <div className="relative h-full">
@@ -146,7 +146,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
               const cleanedWord = rawFirstWord.replace(/:$/, '')
               const firstLetter = cleanedWord.charAt(0)
               const restOfWord = cleanedWord.slice(1)
-              
+
               return (
                 <button
                   key={section.id}
@@ -163,10 +163,10 @@ export default function SectionNav({ sections }: SectionNavProps) {
                     whitespace-nowrap
                     transition-all duration-200
                     h-full flex items-center
-                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0BA2B5]/50
-                    ${isActive 
-                      ? 'text-[#0BA2B5] font-semibold' 
-                      : 'text-slate-500 hover:text-[#0BA2B5]'
+                    focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-teal)]/50
+                    ${isActive
+                      ? 'text-[var(--accent-teal)] font-semibold'
+                      : 'text-slate-500 hover:text-[var(--accent-teal)]'
                     }
                   `}
                   aria-label={`Navigate to ${section.title}`}
@@ -175,10 +175,10 @@ export default function SectionNav({ sections }: SectionNavProps) {
                   {/* Bold first letter, rest normal */}
                   <span className="font-bold">{firstLetter}</span>
                   <span>{restOfWord}</span>
-                  
+
                   {/* Active Indicator - Bottom Border */}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0BA2B5]" />
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--accent-teal)]" />
                   )}
                 </button>
               )
@@ -188,13 +188,13 @@ export default function SectionNav({ sections }: SectionNavProps) {
 
         {/* Scroll Indicators (for mobile) */}
         {showLeftIndicator && (
-          <div 
+          <div
             className="absolute left-0 top-0 bottom-0 w-8 pointer-events-none"
             style={{ background: 'linear-gradient(to right, rgba(255, 255, 255, 0.95), transparent)' }}
           />
         )}
         {showRightIndicator && (
-          <div 
+          <div
             className="absolute right-0 top-0 bottom-0 w-8 pointer-events-none"
             style={{ background: 'linear-gradient(to left, rgba(255, 255, 255, 0.95), transparent)' }}
           />

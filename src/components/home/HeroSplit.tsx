@@ -485,7 +485,7 @@ export default function HeroSplit() {
 
         {/* Glow effect behind gears */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[800px] h-[800px] bg-[#0BA2B5]/10 rounded-full blur-[150px]" />
+          <div className="w-[800px] h-[800px] bg-[var(--accent-teal)]/10 rounded-full blur-[150px]" />
         </div>
 
         {/* Main Content Container */}
@@ -506,18 +506,18 @@ export default function HeroSplit() {
                 transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="hidden lg:flex justify-start"
               >
-                <SignatureLogo className="w-12 h-12 text-[#0BA2B5]/80" />
+                <SignatureLogo className="w-12 h-12 text-[var(--accent-teal)]/80" />
               </motion.div>
 
               {/* Main Headline */}
               <h1 className="font-serif text-white leading-[1.05] tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Designing<br />
                 through the<br />
-                <span className="text-[#0BA2B5]">complexity.</span>
+                <span className="text-[var(--accent-teal)]">complexity.</span>
               </h1>
 
               {/* Professional Title */}
-              <p className="text-[#0BA2B5] font-mono text-xs sm:text-sm md:text-base tracking-wide max-w-md mx-auto lg:mx-0">
+              <p className="text-[var(--accent-teal)] font-mono text-xs sm:text-sm md:text-base tracking-wide max-w-md mx-auto lg:mx-0">
                 Principal Product Designer · AI-Driven ·<br className="sm:hidden" /> Enterprise Systems Architect
               </p>
 
@@ -525,7 +525,7 @@ export default function HeroSplit() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <a
                   href="#work-overview"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#0BA2B5]/25"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal-700)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
                   onClick={(e) => {
                     e.preventDefault()
                     const section = document.getElementById('work-overview')
@@ -542,11 +542,11 @@ export default function HeroSplit() {
 
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="group inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full border border-slate-700 text-white font-medium hover:border-[#0BA2B5] hover:bg-[#0BA2B5]/10 transition-all duration-300"
+                  className="group inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full border border-slate-700 text-white font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300"
                 >
                   <span className="relative flex h-5 w-5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0BA2B5] opacity-75"></span>
-                    <span className="relative inline-flex items-center justify-center rounded-full h-5 w-5 bg-[#0BA2B5]">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-teal)] opacity-75"></span>
+                    <span className="relative inline-flex items-center justify-center rounded-full h-5 w-5 bg-[var(--accent-teal)]">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
@@ -694,7 +694,7 @@ export default function HeroSplit() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                 >
-                  <div className={`font-mono font-semibold text-[#0BA2B5] ${metric.isText ? 'text-sm md:text-base' : 'text-xl md:text-2xl'}`}>
+                  <div className={`font-mono font-semibold text-[var(--accent-teal)] ${metric.isText ? 'text-sm md:text-base' : 'text-xl md:text-2xl'}`}>
                     {metric.isText ? metric.value : (
                       <AnimatedCounter
                         value={metric.value}
@@ -723,7 +723,7 @@ export default function HeroSplit() {
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <div className="w-1 h-2 bg-[#0BA2B5] rounded-full" />
+            <div className="w-1 h-2 bg-[var(--accent-teal)] rounded-full" />
           </motion.div>
         </motion.div>
       </section>

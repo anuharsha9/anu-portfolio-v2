@@ -34,7 +34,7 @@ export default function AboutPage() {
             className="text-center space-y-8"
           >
             {/* Pre-headline */}
-            <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+            <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
               // MEET_ANUJA
             </span>
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
                       meet_anuja.mp4
                     </span>
                   </div>
-                  <span className="font-mono text-[#0BA2B5] text-xs tracking-widest">
+                  <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest">
                     [PERSONAL_INTRO]
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link
                 href="/#work-overview"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#0BA2B5] text-white font-medium hover:bg-[#0990A2] transition-all hover:scale-105 shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal-700)] transition-all hover:scale-105 shadow-lg"
               >
                 <span>See the Work</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +104,7 @@ export default function AboutPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.8 }}
             >
-              <div className="w-14 h-14 text-slate-500 hover:text-[#0BA2B5] transition-colors duration-500">
+              <div className="w-14 h-14 text-slate-500 hover:text-[var(--accent-teal)] transition-colors duration-500">
                 <AnimatedSignatureLogo
                   className="w-full h-full"
                   duration={10000}
@@ -165,7 +165,7 @@ export default function AboutPage() {
                     <div className="text-xs text-slate-500 mt-1">First Deploy</div>
                   </div>
                   <div>
-                    <div className="font-mono text-2xl font-bold text-[#0BA2B5]">Day 14</div>
+                    <div className="font-mono text-2xl font-bold text-[var(--accent-teal)]">Day 14</div>
                     <div className="text-xs text-slate-500 mt-1">Production</div>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function AboutPage() {
       <MotionSection className="bg-slate-50 py-20 md:py-28 border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <div className="text-center space-y-8">
-            <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+            <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
               // THE_ORIGIN_STORY
             </span>
 
@@ -260,7 +260,7 @@ export default function AboutPage() {
             {/* Mentor Quote - Featured */}
             <div className="bg-white border border-slate-200 rounded-2xl p-8 md:p-10 max-w-3xl mx-auto shadow-sm">
               <div className="flex items-center gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0BA2B5]/10 text-[#0BA2B5] text-xs font-mono uppercase tracking-wider">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--accent-teal)]/10 text-[var(--accent-teal)] text-xs font-mono uppercase tracking-wider">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                   </svg>
@@ -274,7 +274,7 @@ export default function AboutPage() {
 
               <div className="text-center">
                 <p className="font-semibold text-slate-900">Dave Pfeiffer</p>
-                <p className="text-sm text-[#0BA2B5]">Director of Design, Cloud Software Group</p>
+                <p className="text-sm text-[var(--accent-teal)]">Director of Design, Cloud Software Group</p>
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export default function AboutPage() {
       <MotionSection className="bg-white py-12 md:py-16 border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
           <div className="text-center space-y-6">
-            <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+            <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
               // HOW_I_THINK
             </span>
             <h2 className="font-serif text-slate-900 text-2xl md:text-3xl leading-tight">
@@ -315,7 +315,7 @@ export default function AboutPage() {
                 { letter: 'N', title: 'Navigate' },
               ].map((item) => (
                 <div key={item.letter} className="text-center group">
-                  <div className="font-serif text-2xl md:text-3xl text-[#0BA2B5] group-hover:scale-110 transition-transform">
+                  <div className="font-serif text-2xl md:text-3xl text-[var(--accent-teal)] group-hover:scale-110 transition-transform">
                     {item.letter}
                   </div>
                   <div className="font-medium text-slate-700 text-xs md:text-sm mt-1">
@@ -344,7 +344,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="space-y-12">
             <div className="text-center space-y-4 max-w-3xl mx-auto">
-              <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+              <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
                 // TRUST_NETWORK
               </span>
               <h2 className="font-serif text-white text-3xl md:text-4xl leading-tight">
@@ -413,7 +413,7 @@ export default function AboutPage() {
                   const accentColor = isDataScience ? 'purple' : isEngineering ? 'teal' : isProduct ? 'amber' : isCustomer ? 'emerald' : 'slate'
                   const colorClasses = {
                     purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400', glow: 'from-purple-500/10' },
-                    teal: { border: 'hover:border-[#0BA2B5]/50', text: 'text-[#0BA2B5]', glow: 'from-[#0BA2B5]/10' },
+                    teal: { border: 'hover:border-[var(--accent-teal)]/50', text: 'text-[var(--accent-teal)]', glow: 'from-[var(--accent-teal)]/10' },
                     amber: { border: 'hover:border-amber-500/50', text: 'text-amber-400', glow: 'from-amber-500/10' },
                     emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-400', glow: 'from-emerald-500/10' },
                     slate: { border: 'hover:border-slate-500/50', text: 'text-slate-400', glow: 'from-slate-500/10' },
@@ -460,7 +460,7 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm"
               >
                 <span>More on LinkedIn</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -472,7 +472,7 @@ export default function AboutPage() {
                 href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-[#0BA2B5] transition-colors font-medium text-sm"
+                className="inline-flex items-center gap-2 text-slate-400 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm"
               >
                 <span>ADPList Reviews</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -493,7 +493,7 @@ export default function AboutPage() {
 
             {/* Left - Context */}
             <div className="lg:col-span-1 space-y-4">
-              <span className="font-mono text-[#0BA2B5] text-xs uppercase tracking-widest">
+              <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
                 // PARALLEL_PROCESSES
               </span>
               <h2 className="font-serif text-slate-900 text-2xl md:text-3xl leading-tight">
@@ -546,15 +546,15 @@ export default function AboutPage() {
           </h3>
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-sm md:text-base">
-            <a href="mailto:anujanimmagadda@gmail.com" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
+            <a href="mailto:anujanimmagadda@gmail.com" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
               anujanimmagadda@gmail.com
             </a>
             <span className="text-slate-400">·</span>
-            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
+            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
               LinkedIn
             </a>
             <span className="text-slate-400">·</span>
-            <a href="tel:+17813547394" className="text-slate-700 font-mono hover:text-[#0BA2B5] transition-colors">
+            <a href="tel:+17813547394" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
               +1 781-354-7394
             </a>
           </div>

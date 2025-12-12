@@ -5,24 +5,24 @@ export const reportcasterCaseStudy: CaseStudyData = {
   heroTitle: 'REPORTCASTER',
   heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
   heroSubtitle:
-    'A journey of taking on a 50-year-old system driven by flooding customer requests for modernization and turning it into clarity, structure, and a scalable future.',
+    'Asked to be assigned to a deferred project. First to document a 50-year-old system. Architecture became "the pattern for everything." Director: "Newest member, contributed the most."',
   coverImage: {
     src: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     alt: 'ReportCaster Explorer - Unified Schedule Management',
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: '2022–2025',
+  timeframe: 'Sept 2022 – Nov 2023 | Shipped April 2024',
   status: {
     label: 'Live in Production',
     variant: 'live' as const,
   },
   scope: [
-    'Enterprise UX',
-    'Legacy modernization',
-    'Architecture & IA',
-    'Workflow Design',
+    'Systems Thinking',
+    'UX Architecture',
+    'Legacy Modernization',
     'Cross-functional Leadership',
+    'Strategic Influence',
   ],
   // ----------------------------
   // QUICK IMPACT OVERVIEW (Public)
@@ -30,7 +30,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'Reverse-engineered a 50-year-old undocumented system from scratch. Made the architectural calls that became "the pattern for everything" — influencing Directors and 30-year veteran engineers.',
+    leadershipSummary: 'Asked to be assigned to a deferred project — and dove in. Only designer to ever document this 50-year-old system end-to-end. Embedded in customer support voluntarily. Made the architectural calls that became "the pattern for everything." Director quote: "Newest member of the team, contributed the most." Handed off to 2 designers after establishing the architecture.',
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
@@ -51,31 +51,31 @@ export const reportcasterCaseStudy: CaseStudyData = {
         icon: 'archaeologist',
       },
       {
-        tag: 'STRATEGIC_ALIGNMENT',
+        tag: 'PLATFORM_INFLUENCE',
         tagColor: 'purple',
-        headline: 'Executive Collaboration',
-        body: 'Partnered with **Directors of Engineering and Product** to define the modernization strategy.',
+        headline: 'Think Big',
+        body: 'Architecture became **"the pattern for everything"** — Explorer filter view scaled to all asset types.',
         icon: 'strategist',
       },
       {
         tag: 'KNOWLEDGE_TRANSFER',
         tagColor: 'emerald',
         headline: 'Team Enablement',
-        body: 'Onboarded **2 senior designers**. Created the documentation hub—engineering\'s Source of Truth.',
+        body: 'Onboarded **2 designers**. Remained knowledge hub. Still accountable post-transition.',
         icon: 'multiplier',
       },
     ],
     impactMetrics: [
-      { label: 'Workflow complexity', value: 'Reduced across core scheduling paths' },
-      { label: 'Multi-tab sprawl', value: 'Eliminated entirely' },
-      { label: 'Subsystems consolidated', value: '5 → 1 unified model' },
-      { label: 'Validation', value: 'Reviewed with SMEs, Engineering, and Support' },
+      { label: 'Subsystems unified', value: '5 → 1' },
+      { label: 'Clicks to create schedule', value: '5+ → 2' },
+      { label: 'Weekly schedules impacted', value: '20M+' },
+      { label: 'Multi-tab sprawl', value: 'Eliminated' },
     ],
     star: {
-      situation: '50-year-old scheduler. 20M+ weekly schedules. Five fragmented subsystems, no documentation, modernization requests flooding in.',
-      task: 'Modernize without breaking mission-critical workflows.',
-      action: 'Owned end-to-end. Reverse-engineered undocumented rules. Unified five subsystems into one architecture. Delivered modal-based creation model.',
-      result: 'Reduced complexity across core workflows. Multi-tab sprawl eliminated. Shipped in WebFOCUS 9.3.',
+      situation: '50-year-old scheduler powering 20M+ weekly schedules. 5 fragmented subsystems. Zero documentation. Deferred for years.',
+      task: 'Modernize mission-critical workflows. First to document the system end-to-end.',
+      action: 'Asked to be assigned. Embedded in support meetings voluntarily. Refused to design until I understood full architecture. Rejected own designs twice. Handed off to 2 designers after establishing architecture.',
+      result: '5 → 1. 5+ clicks → 2. Shipped April 2024. Director: "Newest member, contributed the most." Architecture became "the pattern for everything." Featured on public YouTube.',
     },
     technologies: [
       'Figma',
@@ -86,23 +86,43 @@ export const reportcasterCaseStudy: CaseStudyData = {
       'Stakeholder Alignment',
     ],
     keyAchievements: [
-      'Unified five fragmented subsystems into one coherent mental model',
-      'Simplified schedule creation entry (5+ clicks → 2) with zero new tabs',
-      'Eliminated multi-tab sprawl entirely',
-      'Only designer who worked on all major WebFOCUS features; owned entire ReportCaster redesign solo initially while simultaneously leading ML Functions and DSML Hub',
-      'Onboarded 2 designers for final polish and shipping, providing hand-holding and knowledge transfer until full transition',
-      'Continued to be looped in for critical architectural decisions as knowledge hub even after transitioning focus to other projects',
-      'Delivered multiple organization-wide design demos to 150-200 person business unit, presenting design walkthroughs and architectural decisions',
-      'Co-hosted Virtual User Group Sessions for enterprise customers as only designer alongside Senior PM',
-      'Shipped as part of WebFOCUS 9.3, impacting millions of users daily across enterprise deployments',
-      'Onboarded cross-functional teams (engineering, PM, QA, docs, support)',
-      'Clarified undocumented rules (bursting, retention, crash recovery)',
+      // METRICS (Lead with impact)
+      '5 subsystems → 1 unified mental model',
+      '5+ clicks → 2 clicks for schedule creation',
+      '20M+ weekly schedules impacted',
+      'Multi-tab sprawl → eliminated entirely',
+      // BEHAVIORS (Show how)
+      'Asked to be assigned to deferred project — saw opportunity, dove in',
+      'Embedded in support meetings voluntarily — discovered customers hacking UI out of desperation',
+      'Rejected own designs twice — rebuilt with conviction, refused cosmetic refresh',
+      'Unblocked engineering, PM, support after years of stalled attempts',
+      // OWNERSHIP (Prove depth)
+      'First to document 50-year-old system end-to-end — became single source of truth',
+      'Owned end-to-end: research → architecture → design → handoff',
+      'Gained access to private internal tickets through earned trust',
+      // RECOGNITION (Social proof)
+      'Director quote: "Newest member of the team, contributed the most"',
+      'Direct customer praise at Virtual User Group: "So what are you going to do next?"',
+      'Shipped April 2024 — featured on public YouTube demos to enterprise customers',
+      // SCALE (Broader impact)
+      'Onboarded 2 designers, remained knowledge hub post-transition',
+      'Design demos to 150-200 person business unit',
     ],
     // Public demo URL removed - legacy link no longer available
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/webfocus-report-caster-data-sheet.pdf',
     dataSheetLabel: 'View ReportCaster Data Sheet',
     demoVideoUrl: 'https://www.youtube.com/watch?v=NvNFN6sz41M',
     demoVideoLabel: 'ReportCaster Public Demo',
+    validationLinks: [
+      {
+        url: 'https://www.ibi.com/blog/introducing-webfocus-9-3',
+        label: 'WebFOCUS 9.3 Release Blog',
+      },
+      {
+        url: 'https://community.ibi.com/articles/enhancing-the-ux-of-webfocus-reportcaster-a-path-to-improved-efficiency-and-user-satisfaction-r38/',
+        label: 'UX Enhancement Article',
+      },
+    ],
   },
   // ----------------------------
   // VERSION TIMELINE
@@ -167,7 +187,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Took ownership of a deferred 50-year-old legacy system. Built structure from scratch with only sandbox access and tribal knowledge.',
+      summary: 'Asked to be assigned to a deferred project waiting in the pipeline. Built structure from scratch with only sandbox access and tribal knowledge.',
       // Note: Body and images removed - replaced by SystemArchaeology component for visual impact
       body: '',
     },
@@ -175,7 +195,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
       id: 'section-02',
       index: 'E',
       title: 'Empathize with the Ecosystem: Understanding Users and Constraints',
-      summary: 'Built ecosystem understanding through proxy research when direct user access was blocked.',
+      summary: 'Built relationships with support lead and team. Gained access to private internal tickets and historical insights. Anchored redesign on pain customers actually voiced.',
       // Note: Body content replaced by EmpathizeStrategyGrid component for visual impact
       body: '',
     },
@@ -445,11 +465,13 @@ Final solution: Scheduling and lists → modals from + menu. Explorer → filter
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Aligning and Leading the Team',
-      body: `With the architecture locked, execution began. The challenge: I was redesigning ML Functions simultaneously while having a 1-year-old at home.
+      body: `With the architecture locked, execution began. The challenge: I was redesigning ML Functions simultaneously — two major enterprise systems at once.
 
-This taught me to prioritize ruthlessly — architecture first, polish second. I learned to delegate by identifying what only I could do (UX architecture, team alignment) versus what could be handed off.
+I rejected multiple versions of my own design — not because stakeholders told me to, but because I knew they weren't good enough. I refused to deliver a cosmetic refresh; I demanded structural clarity. This meant rebuilding the approach after two rounds of rejection, each time with stronger conviction.
 
-The team could execute because they understood the "why" behind every decision, not just the "what."`,
+This taught me to prioritize ruthlessly — architecture first, polish second. I learned to delegate by identifying what only I could do (UX architecture, cross-functional alignment) versus what could be handed off to other designers.
+
+The team could execute because they understood the "why" behind every decision, not just the "what." I onboarded 2 designers mid-project and remained the knowledge hub even after transitioning to other work.`,
     },
     {
       id: 'section-06',
@@ -510,37 +532,37 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Sandbox exploration. Support tickets. Customer reps. Built complete context before proposing solutions.',
+        description: 'Asked to be assigned to deferred project. Refused to design until I understood the full architecture. Treated the system like a mystery to solve, not a spec to follow.',
         systemLogic: "explore(sandbox).map(undocumented.workflows);",
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Designed for end users, support teams, engineers, and PMs. Each role\'s constraints shaped the architecture.',
+        description: 'Embedded in support meetings voluntarily. Interviewed every team member. Grilled them. Discovered customers hacking UI out of desperation. Anchored redesign on pain actually voiced.',
         systemLogic: "forEach([users, support, engineers, PMs], align);",
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: 'Unified five subsystems into one mental model. Clarified undocumented rules. Made complexity digestible.',
+        description: '5 → 1. Unified five subsystems into one mental model. Created the first end-to-end documentation. Made complexity digestible for engineering, PM, and support.',
         systemLogic: "const mentalModel = unify(fragmentedSubsystems);",
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Three architectural directions (standalone, plugin, modal). Synthesized feedback from engineering, PM, QA. Modal approach emerged from constraints.',
+        description: 'Rejected my own designs twice. Three architectural directions after two rejections. Rebuilt with conviction. Modal approach emerged from constraints — became "the pattern for everything."',
         systemLogic: "select([standalone, hubPlugin, modal]).from(feedback);",
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Legacy patterns and timelines forced hard choices. Used constraints to refine—modal architecture emerged from platform realities.',
+        description: 'Refused cosmetic refresh — demanded structural clarity. Led two other designers through onboarding. Remained knowledge hub after transitioning to other projects.',
         systemLogic: "constraints.map(c => c.becomes(feature)); // not bugs",
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'First to document RC end-to-end. Created the spec. Onboarded teams. Ensured scalability.',
+        description: 'Shipped April 2024. Featured on public YouTube demos. Unblocked engineering, PM, support. Director quote: "Newest member, contributed the most." Still accountable long after role ended.',
         systemLogic: "role = 'system_architect'; // tribal knowledge → spec",
       },
     ],
@@ -551,13 +573,15 @@ The team could execute because they understood the "why" behind every decision, 
   impactSummary: {
     heading: 'Shipping impact at a glance',
     bullets: [
-      'Streamlined workflows — reduced complexity, eliminated multi-tab sprawl.',
-      'Multi-tab workflows eliminated entirely.',
-      'Explorer and Admin surfaced and accessible.',
-      'Unified mental model for all RC tasks.',
-      'Recurrence redesigned with natural-language summaries.',
-      'Reduced support tickets and onboarding friction.',
-      'RC prepared for future extensibility.',
+      '5 subsystems → 1 unified mental model.',
+      '5+ clicks → 2 clicks for schedule creation.',
+      '20M+ weekly schedules impacted.',
+      'Multi-tab sprawl → eliminated entirely.',
+      'Unblocked engineering, PM, and support after years of stalled attempts.',
+      'Architecture became "the pattern for everything" — reused across platform.',
+      'Direct customer praise at Virtual User Group.',
+      'Featured on public YouTube demos to enterprise customers.',
+      'PM added new features post-launch without breaking the mental model.',
     ],
   },
   // ----------------------------

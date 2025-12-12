@@ -51,9 +51,9 @@ export default function SiteFooter() {
             className="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity duration-300 group"
           >
             <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
-              <SignatureLogo className="w-full h-full text-slate-50 group-hover:text-[#0BA2B5] transition-colors duration-300" />
+              <SignatureLogo className="w-full h-full text-slate-50 group-hover:text-[var(--accent-teal)] transition-colors duration-300" />
             </div>
-            <span className="text-slate-50 font-medium text-sm md:text-base group-hover:text-[#0BA2B5] transition-colors duration-300">
+            <span className="text-slate-50 font-medium text-sm md:text-base group-hover:text-[var(--accent-teal)] transition-colors duration-300">
               Anuja Harsha Nimmagadda
             </span>
           </Link>
@@ -71,7 +71,7 @@ export default function SiteFooter() {
                     router.push('/#work-overview')
                   }
                 }}
-                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
+                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 Work
               </Link>
@@ -83,14 +83,14 @@ export default function SiteFooter() {
                     router.push('/me')
                   }
                 }}
-                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
+                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 About Me
               </Link>
               <Link
                 href="/#lets-talk"
                 onClick={(e) => handleSectionClick(e, 'lets-talk')}
-                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300 text-sm font-medium"
+                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
               >
                 Contact
               </Link>
@@ -102,7 +102,7 @@ export default function SiteFooter() {
                 href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300"
+                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +113,7 @@ export default function SiteFooter() {
                 href="https://medium.com/@anu.anuja"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-[#0BA2B5] transition-colors duration-300"
+                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300"
                 aria-label="Medium"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
