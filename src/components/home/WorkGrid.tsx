@@ -77,7 +77,7 @@ export default function WorkGrid() {
             >
               ibi™ WebFOCUS®
             </a>
-            —an enterprise analytics platform powering 20M+ schedules weekly across hundreds of global organizations. I led the UX modernization of its core workflows, earned trust from veteran engineers, and created patterns that scaled across the platform.
+            —an enterprise analytics platform powering 20M+ schedules weekly. I modernized its core workflows and created patterns that scaled across the platform.
           </p>
 
           {/* Skimmer hint */}
