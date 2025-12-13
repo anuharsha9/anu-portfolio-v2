@@ -5,7 +5,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   heroTitle: 'REPORTCASTER',
   heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
   heroSubtitle:
-    'Requested assignment to a deferred project. Documented the entire 50-year-old system. Architecture became "the pattern for everything."',
+    'When I joined, this project was waiting in the pipeline. I asked to take it on. I spent months documenting a system that had never been fully mapped — and the architecture I created became "the pattern for everything."',
   coverImage: {
     src: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     alt: 'ReportCaster Explorer - Unified Schedule Management',
@@ -30,11 +30,11 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'Requested assignment to deferred project. Documented undocumented 50-year-old system. Handed off to 2 designers.',
+    leadershipSummary: 'I asked to take on this project when I joined. It had been waiting in the pipeline, and I wanted to understand it deeply. I documented the entire system, created the UX architecture, and eventually handed it off to two designers after establishing the foundation.',
     whatTheSystemWas:
-      'A deeply embedded scheduling engine powering 20M+ weekly jobs — undocumented, fragmented, and structurally outdated.',
+      'A 50-year-old scheduling engine powering 20M+ weekly jobs. It worked — but it was undocumented, fragmented across five subsystems, and ready for modernization.',
     myRole:
-      'End-to-end ownership: research → architecture → design → handoff.',
+      'I owned this end-to-end: from research and system documentation, through architecture and design, to team handoff.',
     scopeOfPractice: [],
     impactMetrics: [
       { label: 'Subsystems unified', value: '5 → 1' },
@@ -43,10 +43,10 @@ export const reportcasterCaseStudy: CaseStudyData = {
       { label: 'Multi-tab sprawl', value: 'Eliminated' },
     ],
     star: {
-      situation: '50-year-old scheduler. 5 fragmented subsystems. Zero documentation.',
-      task: 'Modernize mission-critical workflows.',
-      action: 'Requested assignment. Embedded in support. Iterated through 3 directions.',
-      result: '5 → 1. 5+ clicks → 2. Shipped April 2024.',
+      situation: 'A 50-year-old scheduling system with five fragmented subsystems and no documentation. It powered 20M+ weekly schedules but needed modernization.',
+      task: 'Modernize the system while preserving what worked. Document what had never been documented.',
+      action: 'I asked to take this on. Embedded myself in support calls to understand real pain points. Iterated through three architectural directions before finding the right approach.',
+      result: 'Unified five subsystems into one. Reduced schedule creation from 5+ clicks to 2. Shipped April 2024.',
     },
     technologies: [],
     keyAchievements: [
@@ -440,32 +440,32 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Requested assignment. Spent weeks understanding architecture before designing.',
+        description: 'I asked to take on this project when I joined. I spent weeks understanding the full architecture before I started designing.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Embedded in support meetings. Discovered customers hacking UI out of desperation.',
+        description: 'I embedded myself in support meetings to hear real customer pain. I discovered users were hacking the UI just to get their jobs done.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '5 → 1. Unified subsystems into one mental model.',
+        description: 'I unified five fragmented subsystems into one coherent mental model. One experience instead of five.',
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Three architectural directions. Modal approach emerged from constraints.',
+        description: 'I explored three architectural directions before finding the right approach. The modal-based design emerged from platform constraints.',
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Remained knowledge hub post-transition.',
+        description: 'I handed off to two designers and remained the knowledge hub even after moving to other projects.',
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'Shipped April 2024. Featured on public YouTube demos.',
+        description: 'Shipped April 2024. Live in production. Featured in public YouTube demos.',
       },
     ],
   },

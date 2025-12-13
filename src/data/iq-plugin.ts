@@ -5,7 +5,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   heroTitle: 'Driving Data Science Adoption in Enterprise BI',
   heroSubheading: 'Unifying Data Science & ML Inside WebFOCUS',
   heroSubtitle:
-    'From roadmap concept to shipped architecture. Brought mockups first, tickets followed. Owned 3 workflows simultaneously. Handed off to 2 designers.',
+    'This started as a concept in the annual roadmap. I took it from idea to shipped architecture — bringing mockups to the table first, with tickets following after. I owned all three workflows and eventually handed off to two designers.',
   coverImage: {
     src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
     alt: 'DSML Hub - Unified Data Science & Machine Learning',
@@ -30,11 +30,11 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Data Science Adoption — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
-    leadershipSummary: 'Owned all 3 DSML workflows simultaneously. From roadmap concept to shipped architecture.',
+    leadershipSummary: 'I owned all three DSML workflows at the same time — NLQ, Insights, and the DSML Hub. This went from a roadmap concept to shipped architecture, and I handed it off to two designers after establishing the foundation.',
     whatTheSystemWas:
-      'Three DSML features (NLQ, Insights, ML) — all shipping, none legacy, just invisible. Users didn\'t know they existed.',
+      'WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping, none were legacy. But they were invisible. Buried in different menus, different entry points. Users didn\'t know they existed.',
     myRole:
-      'End-to-end ownership: NLQ, Insights, and DSML Hub. Full pattern parity. All features responsive.',
+      'I owned all three workflows end-to-end. Made them responsive, ensured pattern parity across all of them, and unified them into a single discoverable hub.',
     scopeOfPractice: [],
     impactMetrics: [
       { label: 'Workflows owned', value: '3 simultaneously' },
@@ -43,10 +43,10 @@ export const iqPluginCaseStudy: CaseStudyData = {
       { label: 'Designers enabled', value: '2 (1 junior, 1 senior)' },
     ],
     star: {
-      situation: 'Three DSML features existed but were invisible. Low adoption.',
-      task: 'Unify and make discoverable.',
-      action: 'Owned all 3 workflows. Defined architecture.',
-      result: '3 → 1. NLQ + Insights live. DSML Hub shipping 2027.',
+      situation: 'Three powerful data science features existed but were scattered across the platform. Different entry points, different patterns, low adoption. Users didn\'t know they were there.',
+      task: 'Unify them into one discoverable experience. Make data science accessible without hiding it.',
+      action: 'I owned all three workflows simultaneously. Defined the architecture and base screens, ensured pattern parity, and made everything responsive.',
+      result: 'Unified three entry points into one. NLQ and Insights are live in production. DSML Hub shipping 2027.',
     },
     technologies: [],
     keyAchievements: [
@@ -100,28 +100,28 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover: The Strategic Problem',
-      summary: 'Three powerful tools nobody could find. From annual roadmap concept to shipped architecture.',
+      summary: 'WebFOCUS had three powerful data science tools — but nobody could find them. This started as a concept in the annual roadmap. I took it from idea to shipped architecture.',
       // Components: IQBusinessCase, then IQWorkflowsBuilt + IQNLQInsightsShowcase showing what I owned
     },
     {
       id: 'section-02',
       index: 'E',
       title: 'Empathize: Who We\'re Building For',
-      summary: 'Business users, not just BI experts.',
+      summary: 'We were building for business users, not just BI experts. The challenge was making data science accessible without hiding its power.',
       // Components: IQPersonaCards (locked)
     },
     {
       id: 'section-03',
       index: 'S',
       title: 'Simplify: The Architecture',
-      summary: '3 → 1. Defined architecture before tickets existed. Full pattern parity. All features responsive.',
+      summary: 'I unified three entry points into one. I defined the architecture before any tickets existed, ensured pattern parity across all features, and made everything responsive.',
       // Components: IQPluginArchitecture, IQArchitectureBlueprint (locked), IQEvolution (locked)
     },
     {
       id: 'section-04',
       index: 'I',
       title: 'Iterate: Before & After',
-      summary: 'Same features. Better together.',
+      summary: 'Same features, but better together. Drag the sliders to see the transformation.',
       body: 'Drag the sliders to see the transformation.',
       // Components: IQIterationLog, IQWorkflowComparison
     },
@@ -129,15 +129,15 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-05',
       index: 'G',
       title: 'Grow: Constraints & Decisions',
-      summary: 'Built within existing Hub ecosystem. Defined architecture before handoff.',
+      summary: 'I built within the existing Hub ecosystem — no new infrastructure required. I defined the architecture and base screens, then handed off to two designers.',
       // Components: IQEmptyStateShowcase
     },
     {
       id: 'section-06',
       index: 'N',
       title: 'Navigate: Impact',
-      summary: 'NLQ + Insights live in 9.3.6. ML shipping 2026. DSML Hub shipping 2027.',
-      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027.',
+      summary: 'NLQ and Insights are live in production now. ML Functions ships in 2026. The DSML Hub unifies everything in 2027.',
+      body: 'NLQ and Insights are live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027.',
     },
   ],
   // ----------------------------
@@ -202,32 +202,32 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Three powerful tools nobody could find. Problem was visibility, not quality.',
+        description: 'WebFOCUS had three powerful data science tools — but nobody could find them. The problem wasn\'t quality. It was visibility.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: '4 personas (2 created, 2 inherited). Designed for data scientists AND business users.',
+        description: 'I designed for both data scientists and business users. Different needs, same entry point.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '3 → 1. Unified patterns. Full responsiveness.',
+        description: 'I unified three scattered entry points into one. Consistent patterns everywhere. All features fully responsive.',
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Mockups first, tickets followed. Collaborated with PM on architecture.',
+        description: 'I brought mockups first — tickets followed. I collaborated with the PM to define the architecture together.',
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Built within existing Hub ecosystem.',
+        description: 'I built within the existing Hub ecosystem. No new infrastructure — just smart integration with what was already there.',
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'NLQ + Insights live. DSML Hub shipping 2027.',
+        description: 'NLQ and Insights are live in production. The DSML Hub ships in 2027.',
       },
     ],
   },
@@ -257,7 +257,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'D',
       title: 'Discover: The Strategic Problem',
       summary: 'Not broken. Just invisible.',
-      body: 'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed. I owned all three workflows and unified them into one DSML Hub.',
+      body: 'WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping. None were legacy. They just weren\'t visible. NLQ and Insights were buried in menus. ML lived in a completely separate context. Users didn\'t know they existed. I owned all three workflows and unified them into one DSML Hub.',
     },
   ],
   // ----------------------------

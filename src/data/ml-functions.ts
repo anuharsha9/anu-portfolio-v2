@@ -6,7 +6,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   heroTitle: 'Democratizing Machine Learning for Everyone',
   heroSubheading: 'Turning a black-box data science process into a guided, 4-step workflow',
   heroSubtitle:
-    'Worked 8 months without tickets — brought ideas, PM wrote tickets after my mockups. Zero ML background → MIT certified.',
+    'I came in with zero ML background and got MIT certified to do this work. For eight months, I brought ideas to the table — the PM wrote tickets after seeing my mockups.',
   coverImage: {
     src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     alt: 'ML Functions Confusion Matrix - Model Performance Visualization',
@@ -31,11 +31,11 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Democratizing ML — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
-    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Collaborated weekly with Principal DS for 6+ months.',
+    leadershipSummary: 'I owned ML Functions while leading ReportCaster and IQ Plugin at the same time. I collaborated weekly with the Principal Data Scientist for over six months to make sure I understood the domain deeply before designing.',
     whatTheSystemWas:
-      'A fragmented 4+ step path with hidden hyperparameters, confusing errors, and no clear guidance.',
+      'The existing workflow was fragmented — hyperparameters hidden behind right-click menus, confusing error messages, and no clear path from start to finish. It worked for experts, but it wasn\'t accessible to the broader user base.',
     myRole:
-      'End-to-end ownership: ambiguity to production-ready 4-step workflow.',
+      'I took this from ambiguity to a production-ready 4-step workflow. End-to-end ownership, from learning the domain to shipping the design.',
     scopeOfPractice: [],
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
@@ -57,10 +57,10 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       },
     ],
     star: {
-      situation: 'Fragmented ML workflow. 12+ clicks. Hidden hyperparameters. Dead-ends.',
-      task: 'Make ML accessible to non-technical users.',
-      action: 'Got MIT certified. Embedded weekly with Principal DS. Led 3 projects simultaneously.',
-      result: '12+ clicks → 7-9. 5/5 SME discoverability. Confusion matrix: "the best screen."',
+      situation: 'A fragmented ML training workflow with 12+ clicks, hidden hyperparameters, and dead-end error states. It worked for data scientists but wasn\'t accessible to business users.',
+      task: 'Make machine learning accessible to non-technical users without dumbing it down for experts.',
+      action: 'I got MIT certified in AI/ML product design. Embedded weekly with the Principal Data Scientist for six months. Led this alongside two other major projects.',
+      result: 'Reduced workflow from 12+ clicks to 7-9. All five SMEs found the entry point without help. The confusion matrix became "the best screen in the entire UX revamp."',
     },
     technologies: [],
     keyAchievements: [
@@ -117,7 +117,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Embedded weekly with Principal DS for 6+ months. Spent months understanding the domain before designing.',
+      summary: 'I embedded weekly with the Principal Data Scientist for over six months. I spent months understanding the domain before I designed anything.',
       body: '', // Removed - context established by hero, STAR, and VitalSigns components
       // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
     },
@@ -154,7 +154,7 @@ The confusion matrix screen alone went through 10+ iterations. Our Principal DS 
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Earning Trust & Leading the Team',
-      summary: 'Collaborated with 30-year veteran engineers for 6+ months. Led ReportCaster and DSML Hub simultaneously.',
+      summary: 'I collaborated with 30-year veteran engineers over six months. At the same time, I was leading ReportCaster and the DSML Hub.',
       body: '', // Narrative removed - flow goes directly to visual components
     },
     {
@@ -240,32 +240,32 @@ The patterns I developed here — structured flows, upstream validation, right-c
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Spent months learning before designing.',
+        description: 'I came in with zero ML background. I spent months learning the domain before I touched a design file.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Data scientists wanted depth, business users wanted simplicity. Designed for both.',
+        description: 'Data scientists wanted depth and control. Business users wanted simplicity. I had to design for both without compromising either.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '12+ → 7-9 clicks. Structured 4-step flow with clear error guidance.',
+        description: 'I reduced the workflow from 12+ clicks to 7-9. I created a structured 4-step flow with clear error guidance instead of dead-ends.',
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: '10+ iterations on confusion matrix with Principal DS.',
+        description: 'The confusion matrix alone went through 10+ iterations with the Principal Data Scientist. That tension produced the best screen in the project.',
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Dual-experience emerged from engineering constraints.',
+        description: 'The dual-experience approach (guided + advanced) emerged from engineering constraints. What felt like a limitation became a feature.',
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin.',
+        description: 'All five SMEs found the entry point without help. The patterns I developed here scaled to the IQ Plugin and platform-wide AI strategy.',
       },
     ],
   },
