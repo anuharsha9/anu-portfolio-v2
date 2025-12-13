@@ -19,7 +19,7 @@ export default function ReportCasterTimeline({ isLightBackground = false }: Repo
       id: 'phase-02',
       phase: '02',
       title: 'SYSTEM_ARCHAEOLOGY',
-      body: 'Took hundreds of screenshots, mapped workflows, interviewed support team, customer reps, and the one engineer who built it. Created comprehensive mind maps and became the first to document the entire ecosystem.',
+      body: 'Took hundreds of screenshots, mapped workflows, interviewed support team, customer reps, and the one engineer who built it. Created comprehensive mind maps and documented the entire ecosystem.',
       status: 'COMPLETED' as const,
       image: {
         src: '/images/case-study/ReportCaster/ReportCaster Basic Map Workflow.png',

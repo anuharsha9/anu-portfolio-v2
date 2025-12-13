@@ -490,7 +490,7 @@ export default function HeroSplit() {
 
         {/* Main Content Container */}
         <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 lg:gap-5 items-center min-h-[auto] lg:min-h-screen py-6 pb-24 sm:py-8 sm:pb-28 lg:py-0 lg:pb-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 lg:gap-5 items-center min-h-[auto] lg:min-h-screen py-6 pb-36 sm:py-8 sm:pb-40 lg:py-0 lg:pb-0">
 
             {/* Left Side - Text Content (5 columns) */}
             <motion.div
@@ -559,10 +559,27 @@ export default function HeroSplit() {
                 </button>
               </div>
 
-              {/* Mobile hint - tap the gears - Hidden to prevent overlap with impact strip */}
+              {/* Mobile hint - tap the gears */}
+              <div className="lg:hidden pt-2">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-6 h-px bg-slate-600" />
+                  <span className="font-mono text-slate-400 text-[10px] sm:text-xs tracking-wide text-center">
+                    Tap any gear → explore case studies
+                  </span>
+                  <div className="w-6 h-px bg-slate-600" />
+                </div>
+              </div>
 
               {/* GEAR INSPECTOR - Desktop Only */}
               <div className="pt-4 h-[280px] hidden lg:block">
+                {/* Permanent hint */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-px bg-slate-600" />
+                  <span className="font-mono text-slate-400 text-xs tracking-wide">
+                    Each gear links to a case study section — hover to preview, click to explore
+                  </span>
+                </div>
+
                 <AnimatePresence mode="wait">
                   {!activeGear ? (
                     <motion.div
@@ -573,13 +590,12 @@ export default function HeroSplit() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="w-8 h-px bg-slate-600" />
                       <motion.span
-                        className="font-mono text-slate-400 text-xs tracking-wide"
-                        animate={{ opacity: [0.6, 1, 0.6] }}
+                        className="font-mono text-slate-500 text-xs tracking-wide italic"
+                        animate={{ opacity: [0.5, 0.8, 0.5] }}
                         transition={{ duration: 2.5, repeat: Infinity }}
                       >
-                        Hover the gears to peek inside my brain →
+                        ← Try hovering a gear
                       </motion.span>
                     </motion.div>
                   ) : (
@@ -689,12 +705,12 @@ export default function HeroSplit() {
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  className="py-5 md:py-6 px-2 md:px-4 text-center"
+                  className="py-3 sm:py-5 md:py-6 px-1.5 sm:px-2 md:px-4 text-center"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                 >
-                  <div className={`font-mono font-semibold text-[var(--accent-teal)] ${metric.isText ? 'text-sm md:text-base' : 'text-xl md:text-2xl'}`}>
+                  <div className={`font-mono font-semibold text-[var(--accent-teal)] ${metric.isText ? 'text-xs sm:text-sm md:text-base' : 'text-lg sm:text-xl md:text-2xl'}`}>
                     {metric.isText ? metric.value : (
                       <AnimatedCounter
                         value={metric.value}
@@ -702,7 +718,7 @@ export default function HeroSplit() {
                       />
                     )}
                   </div>
-                  <div className="font-mono text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-1">
+                  <div className="font-mono text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5 sm:mt-1 leading-tight">
                     {metric.label}
                   </div>
                 </motion.div>

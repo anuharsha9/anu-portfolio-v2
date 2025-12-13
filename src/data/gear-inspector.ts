@@ -66,7 +66,7 @@ export const GEAR_INSPECTOR: Record<string, GearInspectorItem> = {
 
   "gear-missing-briefs": {
     id: "gear-missing-briefs",
-    thought: "No brief? I thrive here. Turning ambiguity into clarity is my superpower.",
+    thought: "No brief? I dig, ask, research, and piece it together.",
     title: "Self-Directed Learning",
     insight: "Took an MIT course and reverse-engineered an ML system I knew nothing about.",
     image: "/images/case-study/ml-functions/entire ML workflow flowchart.png",

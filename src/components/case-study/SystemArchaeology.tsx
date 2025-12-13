@@ -152,7 +152,7 @@ export default function SystemArchaeology({ isLightBackground = true, caseStudyS
             <strong className="text-slate-900">The project had been deferred for years</strong> — too massive and complicated to prioritize. I happened to join at the right time and asked to be assigned. What others saw as daunting, I saw as a massive opportunity.
           </p>
           <p>
-            I worked directly with the one SME who knew the historical logic — and <strong className="text-slate-900">refused to redesign anything until I understood the full architecture</strong>. I dug into decades-old workflows, edge cases, and inconsistencies. I treated the system like a mystery to solve, not a spec to follow.
+            I worked directly with the one SME who knew the historical logic — and <strong className="text-slate-900">spent weeks understanding the full architecture before designing</strong>. I dug into decades-old workflows, edge cases, and inconsistencies. I treated the system like a mystery to solve, not a spec to follow.
           </p>
         </div>
       </div>

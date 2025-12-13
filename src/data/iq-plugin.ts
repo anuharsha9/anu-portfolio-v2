@@ -5,7 +5,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   heroTitle: 'Driving Data Science Adoption in Enterprise BI',
   heroSubheading: 'Unifying Data Science & ML Inside WebFOCUS',
   heroSubtitle:
-    'From roadmap concept to shipped architecture. Drove the vision — showed final mockups, then tickets came. Owned 3 workflows simultaneously. Handed off to 2 designers.',
+    'From roadmap concept to shipped architecture. Brought mockups first, tickets followed. Owned 3 workflows simultaneously. Handed off to 2 designers.',
   coverImage: {
     src: '/images/case-study/iq-plugin/IQ plugin - visual - 3 in 1 IQ Hub.png',
     alt: 'DSML Hub - Unified Data Science & Machine Learning',
@@ -30,24 +30,24 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Data Science Adoption — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
-    leadershipSummary: 'Owned all three DSML workflows simultaneously. Drove the vision — brought ideas to the table, showed final mockups, THEN tickets came. PM collaborated on opinions, but I defined the architecture. Handed off to 2 designers after establishing base screens and patterns.',
+    leadershipSummary: 'Owned all three DSML workflows simultaneously. Brought ideas to the table, showed final mockups, then tickets came. Collaborated with PM on architecture. Handed off to 2 designers after establishing base screens and patterns.',
     whatTheSystemWas:
       'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
     myRole:
-      'Owned all three workflows: NLQ, Insights, and the DSML Hub. Made them responsive. Ensured pattern parity. Drove the vision from concept to shipped architecture.',
+      'Owned all three workflows: NLQ, Insights, and the DSML Hub. Made them responsive. Ensured pattern parity. From concept to shipped architecture.',
     scopeOfPractice: [
       {
         tag: 'OWNERSHIP',
         tagColor: 'blue',
         headline: 'Owned All 3 Workflows',
-        body: 'NLQ, Insights, AND DSML Hub. **Drove the vision** — showed mockups, then tickets came.',
+        body: 'NLQ, Insights, AND DSML Hub. **Mockups first**, tickets followed.',
         icon: 'architect',
       },
       {
         tag: 'THINK_BIG',
         tagColor: 'amber',
         headline: 'Roadmap → Architecture',
-        body: 'From **annual roadmap concept → shipped architecture**. Defined the future of DSML.',
+        body: 'From **annual roadmap concept → shipped architecture**.',
         icon: 'archaeologist',
       },
       {
@@ -74,7 +74,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     star: {
       situation: 'Three DSML features (NLQ, Insights, ML) existed but were invisible. Different entry points, different patterns, low adoption. Conceptualized in annual roadmap.',
       task: 'Unify them. Make them discoverable. Define the product vision from roadmap concept to shipped architecture.',
-      action: 'Owned all 3 workflows. Drove the vision — brought ideas to table, showed final mockups, then tickets came. Defined architecture and base screens. Made all features responsive. Handed off to 2 designers.',
+      action: 'Owned all 3 workflows. Brought ideas to table, showed final mockups, then tickets came. Defined architecture and base screens. Made all features responsive. Handed off to 2 designers.',
       result: '3 entry points → 1. Full pattern parity. 2 designers enabled. NLQ + Insights live in 9.3.6. DSML Hub shipping 2027.',
     },
     technologies: [
@@ -93,7 +93,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       'Full pattern parity across all features',
       'All features fully responsive',
       // BEHAVIORS (Show how)
-      'Drove the vision — brought ideas to table, showed final mockups, then tickets came',
+      'Brought ideas to table, showed final mockups, then tickets came',
       'From annual roadmap concept → shipped architecture',
       'Defined scope, architecture, base screens before handoff',
       // OWNERSHIP (Prove depth)
@@ -162,7 +162,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover: The Strategic Problem',
-      summary: 'Three powerful tools nobody could find. Conceptualized in annual roadmap — I drove the vision from there.',
+      summary: 'Three powerful tools nobody could find. From annual roadmap concept to shipped architecture.',
       // Components: IQBusinessCase, then IQWorkflowsBuilt + IQNLQInsightsShowcase showing what I owned
     },
     {
@@ -199,7 +199,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'N',
       title: 'Navigate: Impact',
       summary: 'NLQ + Insights live in 9.3.6. ML shipping 2026. DSML Hub shipping 2027.',
-      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027. I defined the future of DSML in WebFOCUS.',
+      body: 'NLQ and Insights live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027.',
     },
   ],
   // ----------------------------
@@ -264,7 +264,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'The problem wasn\'t quality — it was visibility. Three powerful tools nobody could find. Conceptualized in annual roadmap, I drove the vision from there.',
+        description: 'The problem wasn\'t quality — it was visibility. Three powerful tools nobody could find. From annual roadmap concept to shipped architecture.',
         systemLogic: "diagnose(visibility).not(quality);",
       },
       {
@@ -282,7 +282,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Brought ideas to table, showed final mockups, then tickets came. PM collaborated on opinions, but I defined the architecture.',
+        description: 'Brought ideas to table, showed final mockups, then tickets came. Collaborated with PM on architecture decisions.',
         systemLogic: "validate(allPersonas).iterate(toMatch);",
       },
       {
@@ -294,7 +294,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'NLQ + Insights live in 9.3.6. ML shipping 2026. DSML Hub shipping 2027. Defined the future of DSML in WebFOCUS.',
+        description: 'NLQ + Insights live in 9.3.6. ML shipping 2026. DSML Hub shipping 2027.',
         systemLogic: "ship(2027);",
       },
     ],
@@ -309,7 +309,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       '3 workflows owned simultaneously.',
       'Full pattern parity across all features.',
       'All features fully responsive.',
-      'Drove the vision — showed mockups, then tickets came.',
+      'Showed mockups, then tickets came.',
       'Enabled 2 designers with architecture and base screens.',
       'NLQ + Insights live in 9.3.6. DSML Hub shipping 2027.',
     ],
@@ -319,7 +319,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   // ----------------------------
   finalSummary: {
     title: 'The Work',
-    body: 'From annual roadmap concept → shipped architecture. Owned all 3 workflows. Drove the vision — brought ideas to table, showed final mockups, then tickets came. Enabled 2 designers. Defined the future of DSML in WebFOCUS.',
+    body: 'From annual roadmap concept → shipped architecture. Owned all 3 workflows. Brought ideas to table, showed final mockups, then tickets came. Enabled 2 designers.',
     keyPoints: [
       '3 entry points → 1 unified DSML Hub',
       'Drove vision — mockups first, tickets after',

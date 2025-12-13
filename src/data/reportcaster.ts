@@ -5,7 +5,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   heroTitle: 'REPORTCASTER',
   heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
   heroSubtitle:
-    'Asked to be assigned to a deferred project. First to document a 50-year-old system. Architecture became "the pattern for everything." Director: "Newest member, contributed the most."',
+    'Requested assignment to a deferred project. Documented the entire 50-year-old system. Architecture became "the pattern for everything."',
   coverImage: {
     src: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     alt: 'ReportCaster Explorer - Unified Schedule Management',
@@ -30,17 +30,17 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'Asked to be assigned to a deferred project — and dove in. Only designer to ever document this 50-year-old system end-to-end. Embedded in customer support voluntarily. Made the architectural calls that became "the pattern for everything." Director quote: "Newest member of the team, contributed the most." Handed off to 2 designers after establishing the architecture.',
+    leadershipSummary: 'Requested assignment to a deferred project — and dove in. Documented this 50-year-old system end-to-end. Embedded in customer support voluntarily. Made the architectural calls that became "the pattern for everything." Handed off to 2 designers after establishing the architecture.',
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
     myRole:
-      'First to document the complete ecosystem. Reverse-engineered 5 undocumented subsystems into one architecture. Collaborated with Directors on strategy. Onboarded 2 designers and remained the knowledge hub.',
+      'Documented the complete ecosystem. Reverse-engineered 5 undocumented subsystems into one architecture. Collaborated with Directors on strategy. Onboarded 2 designers and remained the knowledge hub.',
     scopeOfPractice: [
       {
-        tag: 'SYSTEM_AUTHORITY',
+        tag: 'SYSTEM_DOCUMENTATION',
         tagColor: 'blue',
         headline: 'End-to-End Ownership',
-        body: '**First to document** the entire scheduling ecosystem. Turned tribal knowledge into a single source of truth.',
+        body: '**Documented** the entire scheduling ecosystem. Turned tribal knowledge into a single source of truth.',
         icon: 'architect',
       },
       {
@@ -73,9 +73,9 @@ export const reportcasterCaseStudy: CaseStudyData = {
     ],
     star: {
       situation: '50-year-old scheduler powering 20M+ weekly schedules. 5 fragmented subsystems. Zero documentation. Deferred for years.',
-      task: 'Modernize mission-critical workflows. First to document the system end-to-end.',
-      action: 'Asked to be assigned. Embedded in support meetings voluntarily. Refused to design until I understood full architecture. Rejected own designs twice. Handed off to 2 designers after establishing architecture.',
-      result: '5 → 1. 5+ clicks → 2. Shipped April 2024. Director: "Newest member, contributed the most." Architecture became "the pattern for everything." Featured on public YouTube.',
+      task: 'Modernize mission-critical workflows. Document the system end-to-end.',
+      action: 'Requested assignment. Embedded in support meetings voluntarily. Spent weeks understanding the full architecture before designing. Iterated through multiple directions. Handed off to 2 designers after establishing architecture.',
+      result: '5 → 1. 5+ clicks → 2. Shipped April 2024. Architecture became "the pattern for everything." Featured on public YouTube.',
     },
     technologies: [
       'Figma',
@@ -94,14 +94,14 @@ export const reportcasterCaseStudy: CaseStudyData = {
       // BEHAVIORS (Show how)
       'Asked to be assigned to deferred project — saw opportunity, dove in',
       'Embedded in support meetings voluntarily — discovered customers hacking UI out of desperation',
-      'Rejected own designs twice — rebuilt with conviction, refused cosmetic refresh',
+      'Iterated through 3 architectural directions before finding the right approach',
       'Unblocked engineering, PM, support after years of stalled attempts',
       // OWNERSHIP (Prove depth)
-      'First to document 50-year-old system end-to-end — became single source of truth',
+      'Documented 50-year-old system end-to-end — became single source of truth',
       'Owned end-to-end: research → architecture → design → handoff',
-      'Gained access to private internal tickets through earned trust',
+      'Gained access to private internal tickets through collaboration with support team',
       // RECOGNITION (Social proof)
-      'Director quote: "Newest member of the team, contributed the most"',
+      'Shipped April 2024 — featured on public YouTube demos',
       'Direct customer praise at Virtual User Group: "So what are you going to do next?"',
       'Shipped April 2024 — featured on public YouTube demos to enterprise customers',
       // SCALE (Broader impact)
@@ -467,7 +467,7 @@ Final solution: Scheduling and lists → modals from + menu. Explorer → filter
       title: 'Grow Through Constraints: Aligning and Leading the Team',
       body: `With the architecture locked, execution began. The challenge: I was redesigning ML Functions simultaneously — two major enterprise systems at once.
 
-I rejected multiple versions of my own design — not because stakeholders told me to, but because I knew they weren't good enough. I refused to deliver a cosmetic refresh; I demanded structural clarity. This meant rebuilding the approach after two rounds of rejection, each time with stronger conviction.
+I iterated through multiple versions of my own design — rebuilding the approach after each round because a cosmetic refresh wasn't enough. The goal was structural clarity.
 
 This taught me to prioritize ruthlessly — architecture first, polish second. I learned to delegate by identifying what only I could do (UX architecture, cross-functional alignment) versus what could be handed off to other designers.
 
@@ -532,7 +532,7 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Asked to be assigned to deferred project. Refused to design until I understood the full architecture. Treated the system like a mystery to solve, not a spec to follow.',
+        description: 'Requested assignment to deferred project. Spent weeks understanding the full architecture before designing. Treated the system like a mystery to solve, not a spec to follow.',
         systemLogic: "explore(sandbox).map(undocumented.workflows);",
       },
       {
@@ -550,7 +550,7 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'Rejected my own designs twice. Three architectural directions after two rejections. Rebuilt with conviction. Modal approach emerged from constraints — became "the pattern for everything."',
+        description: 'Iterated through three architectural directions. Modal approach emerged from constraints — became "the pattern for everything."',
         systemLogic: "select([standalone, hubPlugin, modal]).from(feedback);",
       },
       {
@@ -562,7 +562,7 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: 'Shipped April 2024. Featured on public YouTube demos. Unblocked engineering, PM, support. Director quote: "Newest member, contributed the most." Still accountable long after role ended.',
+        description: 'Shipped April 2024. Featured on public YouTube demos. Unblocked engineering, PM, support. Still accountable long after role ended.',
         systemLogic: "role = 'system_architect'; // tribal knowledge → spec",
       },
     ],

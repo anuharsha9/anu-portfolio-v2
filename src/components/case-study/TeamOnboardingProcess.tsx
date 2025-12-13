@@ -58,7 +58,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
             Onboarding 9 Stakeholder Groups
           </h3>
           <p className="text-[var(--text-body)] text-base md:text-lg max-w-2xl mx-auto">
-            Most had never seen RC end-to-end. I became the person who could explain it all.
+            Most had never seen RC end-to-end. The documentation I created helped the team understand the full picture.
           </p>
         </motion.div>
 
@@ -188,7 +188,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
             <p className="text-white text-base md:text-lg leading-relaxed">
               Engineers who initially intimidated me became collaborators I respected — and who respected me.
               <span className="text-slate-400 block mt-2">
-                I became the youngest in the room with unspoken authority on the experience of RC.
+                The documentation work gave me context to contribute meaningfully in cross-functional discussions.
               </span>
             </p>
           </div>

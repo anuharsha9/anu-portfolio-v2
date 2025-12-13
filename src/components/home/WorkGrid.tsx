@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Lock, Youtube } from 'lucide-react'
+import { ArrowRight, Lock } from 'lucide-react'
 import { useState } from 'react'
 import HeroTerminal from '@/components/case-study/HeroTerminal'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
@@ -67,7 +67,8 @@ export default function WorkGrid() {
             Modernizing WebFOCUS
           </h2>
 
-          <p className="text-slate-600 text-lg leading-relaxed mb-4">
+          <p className="text-slate-600 text-lg leading-relaxed mb-6">
+            I led the UX modernization of{' '}
             <a
               href="https://www.ibi.com/products/ibi-webfocus"
               target="_blank"
@@ -76,39 +77,11 @@ export default function WorkGrid() {
             >
               ibi™ WebFOCUS®
             </a>
-            {' '}is an enterprise analytics platform serving millions of users across hundreds of global organizations.
+            —an enterprise analytics platform powering 20M+ schedules weekly across hundreds of global organizations.
           </p>
-
-          <p className="text-slate-700 text-lg leading-relaxed mb-6">
-            I <strong className="text-slate-900">shaped the product direction</strong> of WebFOCUS without formal authority—earning trust from veteran engineers and full autonomy from design leadership through deep system understanding.
-          </p>
-
-          {/* Virtual User Group Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col items-center gap-2"
-          >
-            <a
-              href="https://www.youtube.com/watch?v=NnMGjEJFIX4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-white border border-slate-200 rounded-full px-5 py-2.5 shadow-sm hover:border-[var(--accent-teal)] hover:bg-slate-50 transition-all duration-300 group"
-            >
-              <Youtube className="w-4 h-4 text-[var(--accent-teal)] group-hover:scale-110 transition-transform" />
-              <span className="text-slate-600 text-sm group-hover:text-slate-900">
-                Presented at <span className="font-medium text-slate-900">Virtual User Group Sessions</span>
-              </span>
-            </a>
-            <p className="text-slate-500 text-xs italic">
-              Only designer invited to present alongside my Director of Design
-            </p>
-          </motion.div>
 
           {/* Skimmer hint */}
-          <p className="text-slate-500 text-sm mt-6">
+          <p className="text-slate-500 text-sm">
             Start with <Link href="/work/reportcaster" className="text-[var(--accent-teal)] hover:underline font-medium">ReportCaster</Link> — the flagship transformation.
           </p>
         </motion.div>

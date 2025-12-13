@@ -6,7 +6,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   heroTitle: 'Democratizing Machine Learning for Everyone',
   heroSubheading: 'Turning a black-box data science process into a guided, 4-step workflow',
   heroSubtitle:
-    '8 months without tickets — I drove the vision, PM wrote tickets after. Only designer on all major WebFOCUS features. Zero ML background → MIT certified → trusted design lead.',
+    'Worked 8 months without tickets — brought ideas, PM wrote tickets after my mockups. Zero ML background → MIT certified.',
   coverImage: {
     src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     alt: 'ML Functions Confusion Matrix - Model Performance Visualization',
@@ -31,7 +31,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Democratizing ML — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
-    leadershipSummary: 'Only designer on all major WebFOCUS features — owned ML Functions solo while leading ReportCaster and IQ Plugin simultaneously. Worked 8 months without tickets — drove the vision, PM wrote tickets after my mockups. Zero ML background → MIT certified. Earned trust from 30-year veteran engineers. Principal DS: "That\'s why I trust you."',
+    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Worked 8 months without tickets — brought ideas, PM wrote tickets after my mockups. Zero ML background → MIT certified. Collaborated weekly with Principal Data Scientist for 6+ months.',
     whatTheSystemWas:
       'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
     myRole:
@@ -41,7 +41,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
         tag: 'LEARN_BE_CURIOUS',
         tagColor: 'blue',
         headline: 'Zero → Expert',
-        body: '**Zero ML background → MIT certified**. Embedded weekly with Principal DS. Fluent enough to challenge technical assumptions.',
+        body: '**Zero ML background → MIT certified**. Embedded weekly with Principal DS for 6+ months.',
         icon: 'architect',
       },
       {
@@ -61,8 +61,8 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       {
         tag: 'EARN_TRUST',
         tagColor: 'emerald',
-        headline: 'Subject Matter Authority',
-        body: 'Principal DS: **"That\'s why I trust you."** Earned trust from 30-year veteran engineers within 6 months.',
+        headline: 'Deep Collaboration',
+        body: 'Collaborated weekly with 30-year veteran engineers for 6+ months.',
         icon: 'multiplier',
       },
     ],
@@ -88,7 +88,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     star: {
       situation: 'Fragmented ML training workflow. 12+ clicks. Hidden hyperparameters. Dead-ends. No designer had tackled this. I was leading ReportCaster and IQ Plugin simultaneously.',
       task: 'Make ML accessible to non-technical users. Zero ML background to start. No tickets for 8 months.',
-      action: 'Got MIT certified. Embedded weekly with Principal DS for 6+ months. Drove the vision — showed mockups, PM wrote tickets after. Orchestrated connections between engineers.',
+      action: 'Got MIT certified. Embedded weekly with Principal DS for 6+ months. Showed mockups, PM wrote tickets after. Orchestrated connections between engineers.',
       result: '12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear error guidance. DS: "That\'s why I trust you." Patterns became foundation for platform AI strategy.',
     },
     technologies: [
@@ -113,7 +113,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       'Designed confusion matrix: "the best screen in the entire UX revamp"',
       'Created dual-experience approach (guided + advanced) for different user types',
       // OWNERSHIP (Prove depth)
-      'Only designer on all major WebFOCUS features — owned ML Functions solo',
+      'Owned ML Functions end-to-end while leading two other major initiatives',
       'Primary driver of implementation — orchestrated connections between engineers',
       'Led ReportCaster and DSML Hub simultaneously',
       'Onboarded 2 designers, ensured seamless transition',
@@ -184,7 +184,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Zero ML background. Got MIT certified. Embedded weekly with Principal DS for 6+ months. Refused to design until I understood the domain deeply.',
+      summary: 'Zero ML background. Got MIT certified. Embedded weekly with Principal DS for 6+ months. Spent months understanding the domain before designing.',
       body: '', // Removed - context established by hero, STAR, and VitalSigns components
       // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
     },
@@ -221,7 +221,7 @@ The confusion matrix screen alone went through 10+ iterations. Our Principal DS 
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Earning Trust & Leading the Team',
-      summary: 'Earned trust from 30-year veteran engineers within 6 months. Principal DS: "That\'s why I trust you." Led ReportCaster and DSML Hub simultaneously.',
+      summary: 'Collaborated with 30-year veteran engineers for 6+ months. Led ReportCaster and DSML Hub simultaneously.',
       body: '', // Narrative removed - flow goes directly to visual components
     },
     {
@@ -251,7 +251,7 @@ The patterns I developed here — structured flows, upstream validation, right-c
         {
           src: '/images/case-study/ml-functions/ml-functions-reflections.jpg',
           alt: 'Portrait: transforming ML complexity into accessible design',
-          caption: 'A visual representation of transforming ML complexity into accessible design. This project strengthened my foundational belief: power means nothing without accessibility. I redesign myself through difficult work — I thrive in technical ambiguity, starting as an "outsider" and becoming a trusted design leader.',
+          caption: 'Transforming ML complexity into accessible design. This project reinforced my belief: power means nothing without accessibility.',
         },
       ],
     },
@@ -307,7 +307,7 @@ The patterns I developed here — structured flows, upstream validation, right-c
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Zero ML background → MIT certified. Embedded weekly with Principal DS. Refused to design until I understood the domain. Became fluent enough to challenge technical assumptions.',
+        description: 'Zero ML background → MIT certified. Embedded weekly with Principal DS. Spent months learning before designing.',
         systemLogic: "if (ml_knowledge === 0) { learn(courses, experts, AI); }",
       },
       {
@@ -337,7 +337,7 @@ The patterns I developed here — structured flows, upstream validation, right-c
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Design demos to 150-200 person business unit. Earned trust to lead platform-wide AI strategy.',
+        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Design demos to 150-200 person business unit.',
         systemLogic: "export patterns to IQPlugin; // validated with SMEs",
       },
     ],
@@ -362,14 +362,14 @@ The patterns I developed here — structured flows, upstream validation, right-c
   // ----------------------------
   finalSummary: {
     title: 'The Takeaway',
-    body: `12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear guidance. Zero ML background → trusted design lead for platform-wide AI strategy.
+    body: `12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear guidance.
 
 The patterns I developed — structured flows, upstream validation, dual-experience — became the foundation for IQ Plugin.
 
 Key insight: accessibility and power aren't opposites. They're complementary when designed together from the start.`,
     keyPoints: [
       '12+ clicks → 7-9 clicks. 5/5 SME discoverability. Dead-ends → clear error guidance.',
-      'Zero ML background → MIT certified → trusted design lead within 6 months',
+      'Zero ML background → MIT certified within 6 months',
       'Patterns scaled to IQ Plugin and platform-wide AI strategy',
       'Dual-experience approach balanced simplicity with expert flexibility',
     ],

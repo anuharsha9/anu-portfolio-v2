@@ -64,14 +64,14 @@ export default function TransformationShowcase() {
           className="text-center mb-10 md:mb-14"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
-            // SINGLE-HANDED MODERNIZATION
+            // TRANSFORMATION
           </span>
           <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
             50 years of legacy.<br />
-            <span className="text-[var(--accent-teal)]">One designer.</span>
+            <span className="text-[var(--accent-teal)]">Modern in 18 months.</span>
           </h2>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            I drove the entire modernization of WebFOCUS DSML capabilities and enterprise scheduling—from fragmented legacy tools to unified, intelligent workflows.
+            Modernizing WebFOCUS DSML capabilities and enterprise scheduling—from fragmented legacy tools to unified, intelligent workflows.
           </p>
         </motion.div>
 

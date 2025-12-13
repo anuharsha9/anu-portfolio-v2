@@ -101,7 +101,7 @@ export default function EmpathizeStrategyGrid({ isLightBackground = true }: Empa
             I asked the support lead to show me actual customer tickets, frustrations, and workarounds. What I discovered was critical: <strong className="text-slate-900">customers were customizing and hacking the UI out of desperation</strong>. They weren&apos;t asking for a cosmetic refresh — they were drowning in fragmentation.
           </p>
           <p>
-            This wasn&apos;t just research — it was <strong className="text-slate-900">earning trust to access truth</strong>. I gained access to private internal tickets and historical insights that no one else had seen. I anchored my redesign on pain customers actually voiced, not what PMs assumed.
+            This wasn&apos;t just research — it was <strong className="text-slate-900">earning trust to access truth</strong>. I gained access to private internal tickets and historical insights. I anchored my redesign on pain customers actually voiced, not assumptions.
           </p>
         </div>
       </motion.div>

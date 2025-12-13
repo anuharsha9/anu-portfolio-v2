@@ -42,7 +42,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
         <div className="bg-white border border-slate-200 shadow-sm p-6 md:p-8 rounded-xl text-center max-w-lg">
           {/* Label */}
           <p className="font-mono text-xs uppercase tracking-widest text-slate-500 mb-3">
-            // THE_SYSTEM_AUTHORITY
+            // SYSTEM_DOCUMENTATION
           </p>
 
           {/* Metric */}
@@ -52,7 +52,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
 
           {/* Body */}
           <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-            Others held fragments of tribal knowledge. I was the first to investigate, map, and document the complete end-to-end ecosystem—turning 50 years of oral history into a single source of truth.
+            Others held fragments of tribal knowledge. I investigated, mapped, and documented the complete end-to-end ecosystem—turning 50 years of oral history into a single source of truth.
           </p>
         </div>
       </motion.div>
@@ -105,7 +105,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
 
           {/* Director Quote */}
           <blockquote className="font-serif text-lg md:text-xl text-slate-900 italic leading-relaxed mb-4 border-l-2 border-[var(--accent-blue)] pl-4">
-            &ldquo;Newest member of the team, contributed the most.&rdquo;
+            &ldquo;The architecture became the pattern for everything.&rdquo;
           </blockquote>
           <p className="text-slate-500 text-sm mb-6">— Director, on my ReportCaster contribution</p>
 
@@ -117,7 +117,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
           {/* Breadth callout */}
           <div className="mt-4 pt-4 border-t border-slate-200">
             <p className="text-slate-500 text-sm leading-relaxed">
-              <strong className="text-slate-700">While ReportCaster shipped</strong>, I was already leading ML Functions and IQ Plugin — <strong className="text-slate-700">the only designer on all major WebFOCUS features</strong>. On a 6-person design team, I onboarded and enabled 3 other designers across these projects.
+              <strong className="text-slate-700">While ReportCaster shipped</strong>, I was already leading ML Functions and IQ Plugin. On a 6-person design team, I onboarded and enabled 3 other designers across these projects.
             </p>
           </div>
         </div>

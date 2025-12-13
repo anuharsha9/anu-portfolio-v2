@@ -16,12 +16,12 @@ export default function EvolutionSplit({ isLightBackground = true }: EvolutionSp
     {
       number: '02',
       title: 'Documentation Is Design',
-      body: 'I realized that documenting the system *was* designing it. The act of mapping forced me to see the unified mental model that no one else could articulate.',
+      body: 'I realized that documenting the system *was* designing it. The act of mapping forced me to see the unified mental model that had been missing.',
     },
     {
       number: '03',
       title: 'Trust Comes Before Autonomy',
-      body: 'Only after I became the system expert did the team give me creative freedom. Understanding earned me the right to propose radical change.',
+      body: 'Deep system understanding opened the door to creative freedom. The team supported radical change once they saw I understood the constraints.',
     },
   ]
 

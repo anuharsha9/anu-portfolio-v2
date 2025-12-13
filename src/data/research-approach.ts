@@ -135,9 +135,8 @@ export const mlFunctionsResearchApproach: ResearchApproachData = {
       description: 'Earning credibility through the Explainability redesign.',
       items: [
         'Delivered Explainability first',
-        'Proved I could handle ML complexity',
-        'Became trusted design voice',
-        'DS quote: "That\'s why I trust you"',
+        'Learned ML complexity through collaboration',
+        'Built strong working relationship with DS team',
       ],
       icon: 'shield',
     },
