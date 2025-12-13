@@ -91,37 +91,14 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       action: 'Got MIT certified. Embedded weekly with Principal DS for 6+ months. Showed mockups, PM wrote tickets after. Orchestrated connections between engineers.',
       result: '12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear error guidance. DS: "That\'s why I trust you." Patterns became foundation for platform AI strategy.',
     },
-    technologies: [
-      'Figma',
-      'User Research',
-      'Competitive Analysis',
-      'Usability Testing',
-      'ML/AI Concepts',
-      'Prototyping',
-      'Stakeholder Alignment',
-    ],
+    technologies: [],
     keyAchievements: [
-      // METRICS (Lead with impact)
       '12+ clicks → 7-9 clicks for ML workflow',
       '5/5 SMEs found entry point without help',
-      'Dead-ends → clear error guidance (validation UX)',
-      '2-click entry from Hub',
-      // BEHAVIORS (Show how)
-      'Worked 8 months without tickets — brought ideas, showed mockups, then PM wrote tickets',
-      'Zero ML background → MIT certified in ML Product Design',
-      'Embedded weekly with Principal Data Scientist for 6+ months',
-      'Designed confusion matrix: "the best screen in the entire UX revamp"',
-      'Created dual-experience approach (guided + advanced) for different user types',
-      // OWNERSHIP (Prove depth)
-      'Owned ML Functions end-to-end while leading two other major initiatives',
-      'Primary driver of implementation — orchestrated connections between engineers',
-      'Led ReportCaster and DSML Hub simultaneously',
-      'Onboarded 2 designers, ensured seamless transition',
-      // RECOGNITION (Social proof)
-      'Principal DS: "That\'s why I trust you" — earned through deep domain understanding',
-      'Design demos to 150-200 person business unit',
-      // SCALE (Broader impact)
-      'Patterns became foundation for IQ Plugin and platform-wide AI strategy',
+      'Zero ML background → MIT certified',
+      'Confusion matrix: "the best screen in the entire UX revamp"',
+      'Dual-experience approach (guided + advanced)',
+      'Patterns became foundation for IQ Plugin',
     ],
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/ibi-webFOCUS-integrated-data-science-data-sheet.pdf',
     dataSheetLabel: 'View ML Functions Data Sheet',
@@ -292,38 +269,32 @@ The patterns I developed here — structured flows, upstream validation, right-c
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Zero ML background → MIT certified. Embedded weekly with Principal DS. Spent months learning before designing.',
-        systemLogic: "if (ml_knowledge === 0) { learn(courses, experts, AI); }",
+        description: 'Zero ML background → MIT certified. Spent months learning before designing.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'Three personas, three needs. Data scientists wanted depth, business users wanted simplicity. I became the translator — designing for both without compromising either.',
-        systemLogic: "bridge(DataScientist.depth, BusinessUser.clarity);",
+        description: 'Data scientists wanted depth, business users wanted simplicity. Designed for both.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: '12+ → 7-9 clicks. Mapped fragmented workflow into structured 4-step flow. Dead-ends → clear guidance through validation UX.',
-        systemLogic: "return guidedFlow(chaos.reduce(patterns));",
+        description: '12+ → 7-9 clicks. Structured 4-step flow with clear error guidance.',
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: '10+ iterations on confusion matrix with Principal DS. Pushed for clarity while he pushed for metrics. That tension produced "the best screen in the entire UX revamp."',
-        systemLogic: "for (let i = 0; i < 10; i++) refine(confusionMatrix);",
+        description: '10+ iterations on confusion matrix with Principal DS.',
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Pivoted twice based on engineering constraints. Constraints refined solution — separate tabs, upstream validation, dual-experience emerged from technical realities.',
-        systemLogic: "pivot(unifiedView, separateTabs); // constraint-driven",
+        description: 'Dual-experience emerged from engineering constraints.',
       },
       {
         letter: 'N',
         title: 'Navigate Forward',
-        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin. Design demos to 150-200 person business unit.',
-        systemLogic: "export patterns to IQPlugin; // validated with SMEs",
+        description: '5/5 SME discoverability. Patterns scaled to IQ Plugin.',
       },
     ],
   },
@@ -333,30 +304,15 @@ The patterns I developed here — structured flows, upstream validation, right-c
   impactSummary: {
     heading: 'Pre-launch impact at a glance',
     bullets: [
-      '12+ clicks → 7-9 clicks for ML workflow.',
-      '5/5 SMEs found entry point without help.',
-      'Dead-ends → clear error guidance using design system validation UX.',
-      '2-click entry from Hub.',
-      'Confusion matrix: "the best screen in the entire UX revamp."',
-      'First time ML in WebFOCUS felt demo-ready.',
-      'Patterns became foundation for IQ Plugin and platform-wide AI strategy.',
+      '12+ clicks → 7-9 clicks for ML workflow',
+      '5/5 SMEs found entry point without help',
+      'Dead-ends → clear error guidance',
+      'Confusion matrix: "the best screen in the entire UX revamp"',
+      'Patterns became foundation for IQ Plugin',
     ],
   },
   // ----------------------------
-  // FINAL SUMMARY
+  // FINAL SUMMARY - Removed (duplicates impactSummary)
   // ----------------------------
-  finalSummary: {
-    title: 'The Takeaway',
-    body: `12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear guidance.
-
-The patterns I developed — structured flows, upstream validation, dual-experience — became the foundation for IQ Plugin.
-
-Key insight: accessibility and power aren't opposites. They're complementary when designed together from the start.`,
-    keyPoints: [
-      '12+ clicks → 7-9 clicks. 5/5 SME discoverability. Dead-ends → clear error guidance.',
-      'Zero ML background → MIT certified within 6 months',
-      'Patterns scaled to IQ Plugin and platform-wide AI strategy',
-      'Dual-experience approach balanced simplicity with expert flexibility',
-    ],
-  },
+  finalSummary: undefined,
 }
