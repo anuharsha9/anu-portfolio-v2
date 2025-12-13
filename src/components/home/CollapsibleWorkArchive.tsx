@@ -65,7 +65,7 @@ const archiveProjects: ArchiveTile[] = [
 
 export default function CollapsibleWorkArchive() {
   return (
-    <MotionSection id="work-archive" className="bg-slate-50 py-16 md:py-24 border-t border-slate-200">
+    <MotionSection id="work-archive" className="bg-white py-16 md:py-24 border-t border-slate-200">
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

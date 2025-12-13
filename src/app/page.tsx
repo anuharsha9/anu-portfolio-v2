@@ -42,22 +42,22 @@ export default function Home() {
       {/* 1. HERO - Dark, dramatic, gears as the centerpiece */}
       <HeroSplit />
 
-      {/* 2. TRANSFORMATION - The scroll-stopper before/after */}
-      <TransformationShowcase />
-
-      {/* 3. WORK - Case studies */}
+      {/* 2. WORK - Case studies (Light) */}
       <WorkGrid />
 
-      {/* 4. ARCHIVE - Past Work */}
+      {/* 3. TRANSFORMATION - Before/after slider (Dark - creates rhythm) */}
+      <TransformationShowcase />
+
+      {/* 4. ARCHIVE - Past Work (White - subtle difference from slate-50) */}
       <CollapsibleWorkArchive />
 
-      {/* 5. QUOTE - Leadership testimonials */}
+      {/* 5. QUOTE - Leadership testimonials (Light slate-50) */}
       <GrowthStory />
 
-      {/* 6. WRITING - Articles & thought leadership */}
+      {/* 6. WRITING - Articles & thought leadership (Dark - creates rhythm) */}
       <WritingSection />
 
-      {/* 7. CONTACT - CTA */}
+      {/* 7. CONTACT - CTA (Dark) */}
       <TalkSection />
     </>
   )
