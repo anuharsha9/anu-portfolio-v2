@@ -30,7 +30,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Data Science Adoption — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
-    leadershipSummary: 'Owned all 3 DSML workflows simultaneously. From roadmap concept to shipped architecture. Handed off to 2 designers.',
+    leadershipSummary: 'Owned all 3 DSML workflows simultaneously. From roadmap concept to shipped architecture.',
     whatTheSystemWas:
       'Three DSML features (NLQ, Insights, ML) — all shipping, none legacy, just invisible. Users didn\'t know they existed.',
     myRole:
@@ -45,7 +45,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     star: {
       situation: 'Three DSML features existed but were invisible. Low adoption.',
       task: 'Unify and make discoverable.',
-      action: 'Owned all 3 workflows. Defined architecture. Enabled 2 designers.',
+      action: 'Owned all 3 workflows. Defined architecture.',
       result: '3 → 1. NLQ + Insights live. DSML Hub shipping 2027.',
     },
     technologies: [],
@@ -129,7 +129,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-05',
       index: 'G',
       title: 'Grow: Constraints & Decisions',
-      summary: 'Built within existing Hub. Enabled 2 designers (1 junior, 1 senior) with architecture and base screens.',
+      summary: 'Built within existing Hub ecosystem. Defined architecture before handoff.',
       // Components: IQEmptyStateShowcase
     },
     {
@@ -222,7 +222,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Built within existing Hub. Enabled 2 designers.',
+        description: 'Built within existing Hub ecosystem.',
       },
       {
         letter: 'N',
@@ -240,7 +240,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       '3 entry points → 1 unified DSML Hub',
       '3 workflows owned simultaneously',
       'Full pattern parity across all features',
-      'Enabled 2 designers with architecture',
+      'Handed off to 2 designers',
       'NLQ + Insights live in 9.3.6. DSML Hub shipping 2027',
     ],
   },

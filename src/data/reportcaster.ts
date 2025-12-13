@@ -30,7 +30,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'Requested assignment to a deferred project. Documented 50-year-old undocumented system end-to-end. Architecture became "the pattern for everything." Handed off to 2 designers.',
+    leadershipSummary: 'Requested assignment to deferred project. Documented undocumented 50-year-old system. Handed off to 2 designers.',
     whatTheSystemWas:
       'A deeply embedded scheduling engine powering 20M+ weekly jobs — undocumented, fragmented, and structurally outdated.',
     myRole:
@@ -460,7 +460,7 @@ The team could execute because they understood the "why" behind every decision, 
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'Onboarded 2 designers. Remained knowledge hub post-transition.',
+        description: 'Remained knowledge hub post-transition.',
       },
       {
         letter: 'N',

@@ -31,7 +31,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Democratizing ML — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
-    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Zero ML background → MIT certified. Collaborated weekly with Principal DS for 6+ months.',
+    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Collaborated weekly with Principal DS for 6+ months.',
     whatTheSystemWas:
       'A fragmented 4+ step path with hidden hyperparameters, confusing errors, and no clear guidance.',
     myRole:
@@ -117,7 +117,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Zero ML background. Got MIT certified. Embedded weekly with Principal DS for 6+ months. Spent months understanding the domain before designing.',
+      summary: 'Embedded weekly with Principal DS for 6+ months. Spent months understanding the domain before designing.',
       body: '', // Removed - context established by hero, STAR, and VitalSigns components
       // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
     },
@@ -240,7 +240,7 @@ The patterns I developed here — structured flows, upstream validation, right-c
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'Zero ML background → MIT certified. Spent months learning before designing.',
+        description: 'Spent months learning before designing.',
       },
       {
         letter: 'E',
