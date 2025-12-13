@@ -52,6 +52,7 @@ export default function HeroSplit() {
   const [mobileGear, setMobileGear] = useState<GearInspectorItem | null>(null)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [svgContent, setSvgContent] = useState<string>('')
+  const [activeSourceIndex, setActiveSourceIndex] = useState<number | null>(null)
 
   // Load SVG inline so Turbopack (no SVGR) can manipulate DOM
   // Strip width/height so SVG scales to container (like SVGR did)
@@ -705,10 +706,11 @@ export default function HeroSplit() {
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  className="py-3 sm:py-5 md:py-6 px-1.5 sm:px-2 md:px-4 text-center relative group cursor-default"
+                  className="py-3 sm:py-5 md:py-6 px-1.5 sm:px-2 md:px-4 text-center relative group cursor-pointer"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
+                  onClick={() => setActiveSourceIndex(activeSourceIndex === index ? null : index)}
                 >
                   <div className={`font-mono font-semibold text-[var(--accent-teal)] ${metric.isText ? 'text-xs sm:text-sm md:text-base' : 'text-lg sm:text-xl md:text-2xl'}`}>
                     {metric.isText ? metric.value : (
@@ -721,20 +723,21 @@ export default function HeroSplit() {
                   <div className="font-mono text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5 sm:mt-1 leading-tight">
                     {metric.label}
                   </div>
-                  {/* Subtle source tooltip - appears on hover */}
+                  {/* Source tooltip - hover on desktop, tap on mobile */}
                   {metric.source && (
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto whitespace-nowrap z-50">
+                    <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg transition-opacity duration-200 z-50 max-w-[200px] sm:max-w-none sm:whitespace-nowrap ${activeSourceIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none'} lg:group-hover:opacity-100 lg:group-hover:pointer-events-auto`}>
                       {metric.sourceUrl ? (
                         <a 
                           href={metric.sourceUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="font-mono text-[10px] text-slate-400 hover:text-[var(--accent-teal)] transition-colors pointer-events-auto"
+                          className="font-mono text-[10px] text-slate-400 hover:text-[var(--accent-teal)] transition-colors block text-center sm:text-left"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           Source: {metric.source} ↗
                         </a>
                       ) : (
-                        <span className="font-mono text-[10px] text-slate-400">
+                        <span className="font-mono text-[10px] text-slate-400 block text-center sm:text-left">
                           Source: {metric.source}
                         </span>
                       )}

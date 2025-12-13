@@ -31,13 +31,12 @@ export default function WritingSection() {
 
           {/* Headline */}
           <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl mb-4">
-            I write because I have to.
+            Lessons that demanded to be shared.
           </h2>
 
           {/* Subhead */}
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Some experiences demand to be shared. The pivots, the breakthroughs,
-            the lessons that shaped how I design — they find their way onto the page.
+            The pivots, the breakthroughs, the lessons that shaped how I design — they find their way onto the page.
           </p>
         </motion.div>
 

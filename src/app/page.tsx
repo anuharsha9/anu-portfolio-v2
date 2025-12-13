@@ -48,14 +48,14 @@ export default function Home() {
       {/* 3. TRANSFORMATION - The scroll-stopper before/after */}
       <TransformationShowcase />
 
-      {/* 4. QUOTE - Dave's testimonial + link to Medium article */}
+      {/* 4. ARCHIVE - Past Work (before testimonials) */}
+      <CollapsibleWorkArchive />
+
+      {/* 5. QUOTE - Leadership testimonials */}
       <GrowthStory />
 
-      {/* 5. WRITING - Articles & thought leadership */}
+      {/* 6. WRITING - Articles & thought leadership */}
       <WritingSection />
-
-      {/* 6. ARCHIVE - Past Work */}
-      <CollapsibleWorkArchive />
 
       {/* 7. CONTACT - CTA */}
       <TalkSection />

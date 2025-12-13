@@ -32,7 +32,7 @@ export default function TalkSection() {
 
           {/* Headline - Large, Serif, White */}
           <h2 className="font-serif text-slate-50 text-3xl md:text-4xl lg:text-5xl leading-tight">
-            Ready to build clarity?
+            Let&apos;s connect.
           </h2>
 
           {/* Contact Row - Large, clickable links */}

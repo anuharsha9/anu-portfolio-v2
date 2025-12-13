@@ -80,11 +80,6 @@ export default function WorkGrid() {
             —an enterprise analytics platform powering 20M+ schedules weekly. I modernized its core workflows and created patterns that scaled across the platform.
           </p>
 
-          {/* Design Philosophy */}
-          <p className="text-slate-500 text-sm italic mb-4">
-            &ldquo;Chaos is just undocumented architecture.&rdquo;
-          </p>
-
           {/* Skimmer hint */}
           <p className="text-slate-500 text-sm">
             Start with <Link href="/work/reportcaster" className="text-[var(--accent-teal)] hover:underline font-medium">ReportCaster</Link> — the flagship transformation.

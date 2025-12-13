@@ -16,7 +16,7 @@ const testimonials = [
     name: 'Vijay Raman',
     role: 'VP of Product Management',
     company: 'Cloud Software Group',
-    relationship: 'Leadership at my company',
+    relationship: 'Oversaw product strategy across my org',
     accentColor: 'var(--accent-amber)',
   },
 ]
