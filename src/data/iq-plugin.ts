@@ -30,41 +30,12 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Data Science Adoption — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
-    leadershipSummary: 'Owned all three DSML workflows simultaneously. Brought ideas to the table, showed final mockups, then tickets came. Collaborated with PM on architecture. Handed off to 2 designers after establishing base screens and patterns.',
+    leadershipSummary: 'Owned all 3 DSML workflows simultaneously. From roadmap concept to shipped architecture. Handed off to 2 designers.',
     whatTheSystemWas:
-      'WebFOCUS had three DSML features—NLQ, Insights, ML. All shipping. None legacy. Just invisible. NLQ and Insights buried in menus. ML in a separate context. Users didn\'t know they existed.',
+      'Three DSML features (NLQ, Insights, ML) — all shipping, none legacy, just invisible. Users didn\'t know they existed.',
     myRole:
-      'Owned all three workflows: NLQ, Insights, and the DSML Hub. Made them responsive. Ensured pattern parity. From concept to shipped architecture.',
-    scopeOfPractice: [
-      {
-        tag: 'OWNERSHIP',
-        tagColor: 'blue',
-        headline: 'Owned All 3 Workflows',
-        body: 'NLQ, Insights, AND DSML Hub. **Mockups first**, tickets followed.',
-        icon: 'architect',
-      },
-      {
-        tag: 'THINK_BIG',
-        tagColor: 'amber',
-        headline: 'Roadmap → Architecture',
-        body: 'From **annual roadmap concept → shipped architecture**.',
-        icon: 'archaeologist',
-      },
-      {
-        tag: 'DELIVER_RESULTS',
-        tagColor: 'purple',
-        headline: '3 → 1 Unified',
-        body: '3 entry points unified. **Full pattern parity**. All features responsive.',
-        icon: 'strategist',
-      },
-      {
-        tag: 'HIRE_DEVELOP',
-        tagColor: 'emerald',
-        headline: 'Enabled 2 Designers',
-        body: 'Defined architecture and base screens. **Handed off to 1 junior + 1 senior**.',
-        icon: 'multiplier',
-      },
-    ],
+      'End-to-end ownership: NLQ, Insights, and DSML Hub. Full pattern parity. All features responsive.',
+    scopeOfPractice: [],
     impactMetrics: [
       { label: 'Workflows owned', value: '3 simultaneously' },
       { label: 'Entry points unified', value: '3 → 1' },
@@ -72,10 +43,10 @@ export const iqPluginCaseStudy: CaseStudyData = {
       { label: 'Designers enabled', value: '2 (1 junior, 1 senior)' },
     ],
     star: {
-      situation: 'Three DSML features (NLQ, Insights, ML) existed but were invisible. Different entry points, different patterns, low adoption. Conceptualized in annual roadmap.',
-      task: 'Unify them. Make them discoverable. Define the product vision from roadmap concept to shipped architecture.',
-      action: 'Owned all 3 workflows. Brought ideas to table, showed final mockups, then tickets came. Defined architecture and base screens. Made all features responsive. Handed off to 2 designers.',
-      result: '3 entry points → 1. Full pattern parity. 2 designers enabled. NLQ + Insights live in 9.3.6. DSML Hub shipping 2027.',
+      situation: 'Three DSML features existed but were invisible. Low adoption.',
+      task: 'Unify and make discoverable.',
+      action: 'Owned all 3 workflows. Defined architecture. Enabled 2 designers.',
+      result: '3 → 1. NLQ + Insights live. DSML Hub shipping 2027.',
     },
     technologies: [],
     keyAchievements: [

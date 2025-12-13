@@ -31,41 +31,12 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Democratizing ML — Quick Impact Overview',
     subtitle: 'Predictive analytics for non-technical users',
-    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Worked 8 months without tickets — brought ideas, PM wrote tickets after my mockups. Zero ML background → MIT certified. Collaborated weekly with Principal Data Scientist for 6+ months.',
+    leadershipSummary: 'Owned ML Functions while leading ReportCaster and IQ Plugin simultaneously. Zero ML background → MIT certified. Collaborated weekly with Principal DS for 6+ months.',
     whatTheSystemWas:
-      'A fragmented 4+ step path: drag a "model pill" onto a data flow, configure in a popup, notice a tiny toolbar play icon, then face confusing "results not generated" errors. Hyperparameters were hidden behind right-click menus, accessible only after training.',
+      'A fragmented 4+ step path with hidden hyperparameters, confusing errors, and no clear guidance.',
     myRole:
-      'Owned end-to-end redesign: ambiguity to production-ready 4-step workflow. Led weekly syncs with the Principal Data Scientist. Designed the confusion matrix he called "the best screen in the entire UX revamp."',
-    scopeOfPractice: [
-      {
-        tag: 'LEARN_BE_CURIOUS',
-        tagColor: 'blue',
-        headline: 'Zero → Expert',
-        body: '**Zero ML background → MIT certified**. Embedded weekly with Principal DS for 6+ months.',
-        icon: 'architect',
-      },
-      {
-        tag: 'DELIVER_RESULTS',
-        tagColor: 'amber',
-        headline: '12+ → 7-9 Clicks',
-        body: '**Dead-ends → clear guidance**. Confusion matrix: "the best screen in the entire UX revamp."',
-        icon: 'archaeologist',
-      },
-      {
-        tag: 'THINK_BIG',
-        tagColor: 'purple',
-        headline: 'Platform Foundation',
-        body: 'Patterns became **foundation for IQ Plugin** and platform-wide AI strategy. Designed for scale.',
-        icon: 'strategist',
-      },
-      {
-        tag: 'EARN_TRUST',
-        tagColor: 'emerald',
-        headline: 'Deep Collaboration',
-        body: 'Collaborated weekly with 30-year veteran engineers for 6+ months.',
-        icon: 'multiplier',
-      },
-    ],
+      'End-to-end ownership: ambiguity to production-ready 4-step workflow.',
+    scopeOfPractice: [],
     credentials: 'Professional Certificate in Product Design for AI & ML — MIT, Boston',
     impactMetrics: [
       {
@@ -86,10 +57,10 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       },
     ],
     star: {
-      situation: 'Fragmented ML training workflow. 12+ clicks. Hidden hyperparameters. Dead-ends. No designer had tackled this. I was leading ReportCaster and IQ Plugin simultaneously.',
-      task: 'Make ML accessible to non-technical users. Zero ML background to start. No tickets for 8 months.',
-      action: 'Got MIT certified. Embedded weekly with Principal DS for 6+ months. Showed mockups, PM wrote tickets after. Orchestrated connections between engineers.',
-      result: '12+ clicks → 7-9. 5/5 SME discoverability. Dead-ends → clear error guidance. DS: "That\'s why I trust you." Patterns became foundation for platform AI strategy.',
+      situation: 'Fragmented ML workflow. 12+ clicks. Hidden hyperparameters. Dead-ends.',
+      task: 'Make ML accessible to non-technical users.',
+      action: 'Got MIT certified. Embedded weekly with Principal DS. Led 3 projects simultaneously.',
+      result: '12+ clicks → 7-9. 5/5 SME discoverability. Confusion matrix: "the best screen."',
     },
     technologies: [],
     keyAchievements: [

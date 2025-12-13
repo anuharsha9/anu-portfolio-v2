@@ -30,41 +30,12 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'Requested assignment to a deferred project — and dove in. Documented this 50-year-old system end-to-end. Embedded in customer support voluntarily. Made the architectural calls that became "the pattern for everything." Handed off to 2 designers after establishing the architecture.',
+    leadershipSummary: 'Requested assignment to a deferred project. Documented 50-year-old undocumented system end-to-end. Architecture became "the pattern for everything." Handed off to 2 designers.',
     whatTheSystemWas:
-      'A deeply embedded scheduling engine powering millions of automated jobs — undocumented, fragmented, and structurally outdated. Customer requests for modernization were flooding in, making this a business-critical priority.',
+      'A deeply embedded scheduling engine powering 20M+ weekly jobs — undocumented, fragmented, and structurally outdated.',
     myRole:
-      'Documented the complete ecosystem. Reverse-engineered 5 undocumented subsystems into one architecture. Collaborated with Directors on strategy. Onboarded 2 designers and remained the knowledge hub.',
-    scopeOfPractice: [
-      {
-        tag: 'SYSTEM_DOCUMENTATION',
-        tagColor: 'blue',
-        headline: 'End-to-End Ownership',
-        body: '**Documented** the entire scheduling ecosystem. Turned tribal knowledge into a single source of truth.',
-        icon: 'architect',
-      },
-      {
-        tag: 'LEGACY_DECONSTRUCTION',
-        tagColor: 'amber',
-        headline: 'System Archaeology',
-        body: 'No spec. Reverse-engineered **5 undocumented subsystems** from code and sandbox testing.',
-        icon: 'archaeologist',
-      },
-      {
-        tag: 'PLATFORM_INFLUENCE',
-        tagColor: 'purple',
-        headline: 'Think Big',
-        body: 'Architecture became **"the pattern for everything"** — Explorer filter view scaled to all asset types.',
-        icon: 'strategist',
-      },
-      {
-        tag: 'KNOWLEDGE_TRANSFER',
-        tagColor: 'emerald',
-        headline: 'Team Enablement',
-        body: 'Onboarded **2 designers**. Remained knowledge hub. Still accountable post-transition.',
-        icon: 'multiplier',
-      },
-    ],
+      'End-to-end ownership: research → architecture → design → handoff.',
+    scopeOfPractice: [],
     impactMetrics: [
       { label: 'Subsystems unified', value: '5 → 1' },
       { label: 'Clicks to create schedule', value: '5+ → 2' },
@@ -72,10 +43,10 @@ export const reportcasterCaseStudy: CaseStudyData = {
       { label: 'Multi-tab sprawl', value: 'Eliminated' },
     ],
     star: {
-      situation: '50-year-old scheduler powering 20M+ weekly schedules. 5 fragmented subsystems. Zero documentation. Deferred for years.',
-      task: 'Modernize mission-critical workflows. Document the system end-to-end.',
-      action: 'Requested assignment. Embedded in support meetings voluntarily. Spent weeks understanding the full architecture before designing. Iterated through multiple directions. Handed off to 2 designers after establishing architecture.',
-      result: '5 → 1. 5+ clicks → 2. Shipped April 2024. Architecture became "the pattern for everything." Featured on public YouTube.',
+      situation: '50-year-old scheduler. 5 fragmented subsystems. Zero documentation.',
+      task: 'Modernize mission-critical workflows.',
+      action: 'Requested assignment. Embedded in support. Iterated through 3 directions.',
+      result: '5 → 1. 5+ clicks → 2. Shipped April 2024.',
     },
     technologies: [],
     keyAchievements: [
@@ -194,25 +165,21 @@ That was a fair constraint — not a design flaw. They liked the experience, but
           {
             src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - Home.png',
             alt: 'RC Independent V1 - Home',
-            caption: 'V1: Independent product approach — matching platform history of isolated environments.',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - New Schedule.png',
             alt: 'RC Independent V1 - New Schedule',
-            caption: 'V1: Unified RC product with consolidated subsystems.',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - Schedule Task.png',
             alt: 'RC Independent V1 - Schedule Task',
-            caption: 'V1: All RC functionality in one dedicated environment.',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - New Schedule Full screen.png',
             alt: 'RC Independent V1 - New Schedule Full screen',
-            caption: 'V1: Dedicated space for complex scheduling workflows.',
             sensitive: true,
           },
         ],
@@ -234,26 +201,22 @@ So I had two rejections. Instead of fighting, I reframed the problem from scratc
         images: [
           {
             src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Home - Create new schedule context menu.png',
-            alt: 'RC Hub Integration V2.1 - Home - Create new schedule context menu',
-            caption: 'V2: Hub plugin approach with unified navigation.',
+            alt: 'RC Hub Integration V2.1 - Home',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Home - Create new schedule.png',
-            alt: 'RC Hub Integration V2.1 - Home - Create new schedule',
-            caption: 'V2: RC integrated as plugin within hub environment.',
+            alt: 'RC Hub Integration V2.1 - Create new schedule',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Admin (Status).png',
-            alt: 'RC Hub Integration V2.1 - Admin (Status)',
-            caption: 'V2: Admin capabilities surfaced in hub plugin.',
+            alt: 'RC Hub Integration V2.1 - Admin',
             sensitive: true,
           },
           {
             src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Home - Create new schedule - New task.png',
-            alt: 'RC Hub Integration V2.1 - Home - Create new schedule - New task',
-            caption: 'V2: Task management integrated in hub.',
+            alt: 'RC Hub Integration V2.1 - New task',
             sensitive: true,
           },
         ],
@@ -277,146 +240,128 @@ Final solution: Scheduling and lists → modals from + menu. Explorer → filter
         subsections: [
           {
             title: 'Schedule Dialog',
-            description: 'Unified schedule creation flow — all properties, distribution, recurrence, tasks, and job monitoring in one modal interface.',
+            description: 'Unified schedule creation — all properties in one modal.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/Initiating ReportCaster from the HUB.png',
                 alt: 'Initiating ReportCaster from + menu',
-                caption: 'V3 breakthrough: Initiating ReportCaster from the + menu — the platform-native approach that aligned with WebFOCUS patterns. Every major workflow starts from the + menu, so RC scheduling, distribution lists, and access lists became modal-based creations.',
                 fullWidth: true,
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Schedule Dialog - Properties.png',
                 alt: 'Schedule Dialog - Properties',
-                caption: 'Schedule Dialog - Properties: The modal-based creation flow showing how all schedule properties are accessible in one unified interface, replacing the fragmented legacy dialogs.',
                 sensitive: true,
               },
             ],
           },
           {
-            title: 'Recurrence Redesign: From Cryptic Settings to Natural Language',
-            description: 'Redesigned recurrence with natural language summaries — "Every Monday at 9 AM" instead of cryptic technical settings. A fundamental rethinking of how users interact with scheduling complexity.',
+            title: 'Recurrence Redesign',
+            description: 'Natural language summaries instead of cryptic settings.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/New SD - Recurrence - Weekly.png',
-                alt: 'Recurrence - Weekly with natural language',
-                caption: 'Natural language summaries: The redesigned recurrence system displays "Every Monday at 9 AM" instead of cryptic technical settings — making complex scheduling rules immediately understandable to all users.',
+                alt: 'Recurrence - Weekly',
                 fullWidth: true,
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/New SD - Recurrence - Monthly - Days of the week.png',
-                alt: 'Recurrence - Monthly by days of week',
-                caption: 'Complex patterns made simple: Monthly recurrences like "First Monday of every month" use the same natural language approach, handling sophisticated scheduling patterns with clarity and precision.',
+                alt: 'Recurrence - Monthly',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/New SD - Recurrence - Days.png',
                 alt: 'Recurrence - Daily',
-                caption: 'Daily patterns: Simple daily recurrences are just as clear — "Every day at 9 AM" instead of technical recurrence rules, making the most common scheduling pattern immediately accessible.',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/New SD - Recurrence - Validation Error.png',
                 alt: 'Recurrence - Validation Error',
-                caption: 'Validation and error handling: Clear error states guide users when recurrence settings are invalid, preventing scheduling mistakes and reducing support tickets.',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/New SD - Recurrence - Once.png',
                 alt: 'Recurrence - One-time',
-                caption: 'One-time scheduling: Even simple "run once" schedules benefit from the redesigned interface, showing that the system handles both simple and complex patterns with the same clarity.',
                 sensitive: true,
               },
             ],
           },
           {
             title: 'Distribution List',
-            description: 'Unified creation model for distribution lists — same modal pattern applied to all RC asset types.',
+            description: 'Same modal pattern for all asset types.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/Distribution List starting point.png',
-                alt: 'Distribution List starting point',
-                caption: 'V3: Distribution List starting point — unified creation model for schedules and lists, all accessible from the + menu modal workflow.',
+                alt: 'Distribution List - Start',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Distribution List - Add new members.png',
-                alt: 'Distribution List - Add new members',
-                caption: 'Distribution List - Add new members: Creating new distribution list members follows the same unified modal pattern, making list management consistent with schedule creation.',
+                alt: 'Distribution List - Add members',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Distribution List - Edit Current List+Search built in.png',
-                alt: 'Distribution List - Edit Current List',
-                caption: 'Distribution List - Edit Current List: Editing and managing existing distribution lists with built-in search — showing how the unified interface handles both creation and management workflows.',
+                alt: 'Distribution List - Edit',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Distribution List - Populated List view.png',
-                alt: 'Distribution List - Populated List view',
-                caption: 'Distribution List - Populated List view: The final state showing a populated distribution list — demonstrating how the unified system makes list management clear and accessible.',
+                alt: 'Distribution List - Populated',
                 sensitive: true,
               },
             ],
           },
           {
             title: 'Access List',
-            description: 'Access list management unified into the same modal-based workflow — one mental model instead of five.',
+            description: 'One mental model for all list types.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/Access List starting point.png',
-                alt: 'Access List starting point',
-                caption: 'V3: Access List starting point — completing the unified creation model. All three asset types (schedules, distribution lists, access lists) now follow the same pattern.',
+                alt: 'Access List - Start',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Access List - Add new members.png',
-                alt: 'Access List - Add new members',
-                caption: 'Access List - Add new members: Creating new access list members follows the same unified modal pattern, making access management consistent with other RC workflows.',
+                alt: 'Access List - Add new',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Access List - Add existing members - populated.png',
-                alt: 'Access List - Add existing members',
-                caption: 'Access List - Add existing members: Selecting existing members to add to an access list — showing how the unified interface handles member selection and management.',
+                alt: 'Access List - Add existing',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/Access List - Current List+context menu options.png',
-                alt: 'Access List - Current List',
-                caption: 'Access List - Current List: Managing existing access lists with context menu options — demonstrating how access control is now clear and accessible, replacing hidden legacy controls.',
+                alt: 'Access List - Current',
                 sensitive: true,
               },
             ],
           },
           {
             title: 'RC Explorer',
-            description: 'Explorer as filtered view — RC Explorer became a filtered view of RC assets. This pattern could scale to ALL asset types on the platform.',
+            description: 'Filtered view pattern — scalable to all asset types.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
                 alt: 'ReportCaster Explorer',
-                caption: 'ReportCaster Explorer: Explorer as filtered view — the big architectural idea. RC Explorer became a filtered view of RC assets inside the workspace. This pattern could scale to ALL asset types on the platform — a major architectural win that leadership recognized as "the pattern we should use for everything."',
                 sensitive: true,
               },
               {
                 src: '/images/case-study/ReportCaster/RC Explorer - filter view for different types of RC assets.png',
                 alt: 'RC Explorer - Filter view',
-                caption: 'RC Explorer - Filter view: The filtered view pattern in action — showing how users can filter by different types of RC assets (schedules, distribution lists, access lists), demonstrating how this architectural approach scales across all asset types.',
                 sensitive: true,
               },
             ],
           },
           {
             title: 'RC Admin',
-            description: 'Admin capabilities surfaced and accessible — fifth subsystem unified into the main interface.',
+            description: 'Fifth subsystem surfaced.',
             images: [
               {
                 src: '/images/case-study/ReportCaster/ReportCaster Status (Admin).png',
-                alt: 'ReportCaster Status (Admin)',
-                caption: 'ReportCaster Status (Admin): Admin capabilities surfaced and accessible — no longer hidden in legacy menus. The fifth subsystem unified into the main interface.',
+                alt: 'ReportCaster Admin',
                 sensitive: true,
               },
             ],
