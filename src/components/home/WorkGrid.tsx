@@ -14,7 +14,7 @@ const caseStudies = [
     subtitle: '50yr Legacy → Modern Hub',
     metric: '5→1',
     metricLabel: 'unified system',
-    description: 'Modernized a 50-year-old platform\'s scheduler powering 20M+ schedules weekly. Unified 5 legacy subsystems into one coherent experience.',
+    description: 'I modernized a 50-year-old scheduler powering 20M+ schedules weekly—unifying 5 legacy subsystems into one coherent experience.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     fileName: 'legacy_scheduler_refactor.js',
     accentColor: 'var(--accent-amber)',
@@ -26,7 +26,7 @@ const caseStudies = [
     subtitle: 'Black Box → Guided Flow',
     metric: '12→8',
     metricLabel: 'step workflow',
-    description: 'Transformed complex 12-step ML training into a guided 4-step visual workflow. Dead-ends → clear guidance.',
+    description: 'I transformed a fragmented 12-step ML process into a guided 4-step workflow. No more dead-ends—just clear guidance.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     fileName: 'ml_wizard_pipeline.py',
     accentColor: 'var(--accent-teal)',
@@ -38,7 +38,7 @@ const caseStudies = [
     subtitle: '3 Tools → 1 Hub',
     metric: '3',
     metricLabel: 'workflows owned',
-    description: 'Unified 3 DSML tools into one Hub plugin with a custom Discover page—featuring tutorials, documentation, and tool descriptions.',
+    description: 'I unified 3 scattered DSML tools into one Hub—with a Discover page featuring tutorials, docs, and everything users need to get started.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
     accentColor: 'var(--accent-violet)',
@@ -68,7 +68,7 @@ export default function WorkGrid() {
           </h2>
 
           <p className="text-slate-600 text-lg leading-relaxed mb-6">
-            I led the UX modernization of{' '}
+            I shaped the product direction of{' '}
             <a
               href="https://www.ibi.com/products/ibi-webfocus"
               target="_blank"
@@ -77,7 +77,7 @@ export default function WorkGrid() {
             >
               ibi™ WebFOCUS®
             </a>
-            —an enterprise analytics platform powering 20M+ schedules weekly across hundreds of global organizations.
+            —an enterprise analytics platform powering 20M+ schedules weekly across hundreds of global organizations. I led the UX modernization of its core workflows, earned trust from veteran engineers, and created patterns that scaled across the platform.
           </p>
 
           {/* Skimmer hint */}

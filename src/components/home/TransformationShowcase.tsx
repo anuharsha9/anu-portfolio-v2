@@ -71,7 +71,7 @@ export default function TransformationShowcase() {
             <span className="text-[var(--accent-teal)]">Modern in 18 months.</span>
           </h2>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Modernizing WebFOCUS DSML capabilities and enterprise scheduling—from fragmented legacy tools to unified, intelligent workflows.
+            I modernized WebFOCUS's core workflows—taking fragmented legacy tools and unifying them into coherent, intelligent experiences.
           </p>
         </motion.div>
 
