@@ -23,7 +23,7 @@ const testimonials = [
 
 export default function GrowthStory() {
   return (
-    <section className="bg-slate-50 py-16 md:py-24 border-y border-slate-200">
+    <section className="bg-slate-900 py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
         {/* Section Header */}
         <motion.div
@@ -36,7 +36,7 @@ export default function GrowthStory() {
           <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
             // TRUST_NETWORK
           </span>
-          <h2 className="font-serif text-slate-900 text-3xl md:text-4xl">
+          <h2 className="font-serif text-white text-3xl md:text-4xl">
             What leaders say
           </h2>
         </motion.div>
@@ -50,7 +50,7 @@ export default function GrowthStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm relative"
+              className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-slate-700 relative"
             >
               {/* Large decorative quote */}
               <span 
@@ -61,20 +61,20 @@ export default function GrowthStory() {
               </span>
 
               {/* Quote */}
-              <blockquote className="relative z-10 font-serif text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+              <blockquote className="relative z-10 font-serif text-slate-200 text-lg md:text-xl leading-relaxed mb-6">
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
 
               {/* Attribution */}
-              <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+              <div className="flex items-center gap-4 pt-4 border-t border-slate-700">
                 <div 
                   className="w-1 h-12 rounded-full"
                   style={{ backgroundColor: testimonial.accentColor }}
                 />
                 <div>
-                  <p className="font-semibold text-slate-900">{testimonial.name}</p>
+                  <p className="font-semibold text-white">{testimonial.name}</p>
                   <p className="text-sm" style={{ color: testimonial.accentColor }}>{testimonial.role}</p>
-                  <p className="text-xs text-slate-500">{testimonial.company}</p>
+                  <p className="text-xs text-slate-400">{testimonial.company}</p>
                 </div>
               </div>
             </motion.div>
@@ -93,7 +93,7 @@ export default function GrowthStory() {
             href="https://medium.com/@anu.anuja/i-always-thought-i-wasnt-good-enough-until-ibi-webfocus-made-me-someone-new-e1a769f15621"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-mono text-sm text-slate-500 hover:text-[var(--accent-teal)] transition-colors"
+            className="inline-flex items-center gap-2 font-mono text-sm text-slate-400 hover:text-[var(--accent-teal)] transition-colors"
           >
             <span>Read my full story</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
