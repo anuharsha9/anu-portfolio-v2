@@ -699,8 +699,8 @@ export default function HeroSplit() {
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-800">
               {[
                 { value: '50+', label: 'Projects Across Career' },
-                { value: '$16.5B', label: 'Enterprise Platform' },
-                { value: '100M+', label: 'Users Worldwide' },
+                { value: '25M+', label: 'Users on WebFOCUS' },
+                { value: 'Fortune 500', label: 'Enterprise Clients', isText: true },
                 { value: 'Best-in-Class 2025', label: 'Dresner Award', isText: true },
               ].map((metric, index) => (
                 <motion.div
