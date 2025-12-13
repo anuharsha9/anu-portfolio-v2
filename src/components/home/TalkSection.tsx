@@ -25,6 +25,11 @@ export default function TalkSection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center space-y-10"
         >
+          {/* Role Targeting */}
+          <p className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest mb-4">
+            Seeking Principal Product Designer / Principal UX Designer roles
+          </p>
+
           {/* Headline - Large, Serif, White */}
           <h2 className="font-serif text-slate-50 text-3xl md:text-4xl lg:text-5xl leading-tight">
             Ready to build clarity?
@@ -110,6 +115,9 @@ export default function TalkSection() {
           <p className="text-slate-500 text-sm font-mono">
             Designed in Figma. Built with Cursor. © 2025
           </p>
+
+          {/* Safe area for iPhone home indicator */}
+          <div className="h-safe-area-inset-bottom" />
         </motion.div>
       </div>
     </section>

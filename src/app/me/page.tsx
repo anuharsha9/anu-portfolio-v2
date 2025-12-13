@@ -221,10 +221,55 @@ export default function AboutPage() {
               ))}
             </div>
 
-            {/* Curated 5 Testimonials Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* Featured - VP of Product Management (Vijay Raman) */}
+            <div>
+              {recommendations.filter(r => r.name === 'Vijay Raman').map((review) => (
+                <motion.div
+                  key={review.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
+                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-amber-500/50 transition-all">
+                    <div className="absolute top-6 right-8 text-amber-500/10 text-6xl font-serif leading-none hidden md:block">&ldquo;</div>
+
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-mono uppercase tracking-wider">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        VP of Product Management
+                      </span>
+                    </div>
+
+                    <blockquote className="font-serif text-white text-lg md:text-xl leading-relaxed mb-4 relative z-10">
+                      &ldquo;{review.quote}&rdquo;
+                    </blockquote>
+
+                    <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-800">
+                      <div>
+                        <p className="font-semibold text-white">{review.name}</p>
+                        <p className="font-mono text-amber-400 text-sm">{review.role}</p>
+                        <p className="text-slate-500 text-xs mt-1">{review.company}</p>
+                      </div>
+                      <div className="text-right max-w-[200px] hidden md:block">
+                        <p className="text-slate-500 text-xs leading-relaxed italic">
+                          {review.relationship}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Curated 4 Testimonials Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
               {recommendations
-                .filter(r => ['Marcus Horbach, Ph.D.', 'Vijay Raman', 'Yingchun Chen', 'Karishma Khadge', 'Anita George'].includes(r.name))
+                .filter(r => ['Marcus Horbach, Ph.D.', 'Yingchun Chen', 'Karishma Khadge', 'Anita George'].includes(r.name))
                 .map((review, index) => {
                   const isDataScience = review.role.toLowerCase().includes('data') || review.role.toLowerCase().includes('scientist')
                   const isEngineering = review.role.toLowerCase().includes('engineer') || review.role.toLowerCase().includes('software')

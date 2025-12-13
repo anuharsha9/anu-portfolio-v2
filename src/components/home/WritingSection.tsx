@@ -65,17 +65,20 @@ export default function WritingSection() {
                 {article.title}
               </h3>
 
-              {/* Read indicator */}
-              <div className="flex items-center gap-2 text-slate-500 group-hover:text-[var(--accent-teal)] transition-colors">
-                <span className="font-mono text-xs">Read</span>
-                <svg
-                  className="w-4 h-4 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              {/* Read indicator with time */}
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-slate-600">{article.readTime} read</span>
+                <div className="flex items-center gap-2 text-slate-500 group-hover:text-[var(--accent-teal)] transition-colors">
+                  <span className="font-mono text-xs">Read</span>
+                  <svg
+                    className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
               </div>
             </motion.a>
           ))}

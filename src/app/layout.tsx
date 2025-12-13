@@ -94,6 +94,8 @@ export default function RootLayout({
         {/* Favicon - Signature Logo */}
         <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Preload hero gears SVG for faster initial load */}
+        <link rel="preload" href="/assets/brain-gears.svg" as="fetch" crossOrigin="anonymous" />
         {/* Font optimization: preconnect and font-display swap for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

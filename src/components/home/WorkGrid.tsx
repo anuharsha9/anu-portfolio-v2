@@ -14,7 +14,7 @@ const caseStudies = [
     subtitle: '50yr Legacy → Modern Hub',
     metric: '5→1',
     metricLabel: 'unified system',
-    description: 'I modernized a 50-year-old scheduler powering 20M+ schedules weekly—unifying 5 legacy subsystems into one coherent experience.',
+    description: 'I modernized a 50-year-old scheduler powering 20M+ schedules weekly. Reduced schedule creation from 5+ clicks to 2.',
     image: '/images/case-study/ReportCaster/ReportCaster Explorer.png',
     fileName: 'legacy_scheduler_refactor.js',
     accentColor: 'var(--accent-amber)',
@@ -26,7 +26,7 @@ const caseStudies = [
     subtitle: 'Black Box → Guided Flow',
     metric: '12→8',
     metricLabel: 'step workflow',
-    description: 'I transformed a fragmented 12-step ML process into a guided 4-step workflow. No more dead-ends—just clear guidance.',
+    description: 'I transformed a fragmented ML process into a guided 4-step workflow. 5/5 SMEs found the entry point without help.',
     image: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
     fileName: 'ml_wizard_pipeline.py',
     accentColor: 'var(--accent-teal)',
@@ -38,7 +38,7 @@ const caseStudies = [
     subtitle: '3 Tools → 1 Hub',
     metric: '3',
     metricLabel: 'workflows owned',
-    description: 'I unified 3 scattered DSML tools into one Hub—with a Discover page featuring tutorials, docs, and everything users need to get started.',
+    description: 'I unified 3 invisible DSML tools into one Hub. NLQ adoption increased 25% after launch.',
     image: '/images/case-study/iq-plugin/Final Look.png',
     fileName: 'iq_hub_unified_view.tsx',
     accentColor: 'var(--accent-violet)',
@@ -78,6 +78,11 @@ export default function WorkGrid() {
               ibi™ WebFOCUS®
             </a>
             —an enterprise analytics platform powering 20M+ schedules weekly. I modernized its core workflows and created patterns that scaled across the platform.
+          </p>
+
+          {/* Design Philosophy */}
+          <p className="text-slate-500 text-sm italic mb-4">
+            &ldquo;Chaos is just undocumented architecture.&rdquo;
           </p>
 
           {/* Skimmer hint */}
