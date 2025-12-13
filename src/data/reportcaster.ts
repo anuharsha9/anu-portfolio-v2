@@ -154,29 +154,14 @@ export const reportcasterCaseStudy: CaseStudyData = {
   // UX PRINCIPLES (Public)
   // ----------------------------
   uxPrinciples: {
-    title: 'UX principles behind the ReportCaster redesign',
-    intro: 'Underneath the architecture work, the redesign was guided by established UX principles and heuristics:',
+    title: 'Design Principles Applied',
     principles: [
-      {
-        title: 'Cognitive Load Theory: Reduce mental overhead, preserve functionality',
-        description:
-          'Applied cognitive load principles to remove unnecessary branching, repeated decisions, and hidden rules while maintaining the full power of a legacy system. Users get simplicity without losing capability.',
-      },
-      {
-        title: 'Mental Models: One consistent system model',
-        description:
-          'Unified five fragmented subsystems (schedules, distribution, access, Explorer, Admin) into one coherent mental model. Every interaction reinforces a single, predictable pattern aligned with user expectations.',
-      },
-      {
-        title: 'User Control & Freedom: Predictable, reversible workflows',
-        description:
-          'Users always know where they are, what happens next, and how to safely undo actions. Applied Nielsen\'s heuristic for user control through clear navigation, visible state, and reversible operations.',
-      },
-      {
-        title: 'Match Between System & Real World: Legacy behavior preserved, logic clarified',
-        description:
-          'Respected existing workflows customers relied on (bursting, retention, blackout rules) while making legacy logic visible and explainable. Applied Nielsen\'s heuristic to match user mental models rather than forcing new ones.',
-      },
+      { title: 'Cognitive Load Reduction', description: '' },
+      { title: 'Unified Mental Model', description: '' },
+      { title: 'User Control & Freedom', description: '' },
+      { title: 'Match System to Real World', description: '' },
+      { title: 'Progressive Disclosure', description: '' },
+      { title: 'Error Prevention', description: '' },
     ],
   },
   // ----------------------------

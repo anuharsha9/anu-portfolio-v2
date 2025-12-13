@@ -129,29 +129,14 @@ export const iqPluginCaseStudy: CaseStudyData = {
   // UX PRINCIPLES (Public)
   // ----------------------------
   uxPrinciples: {
-    title: 'Design Principles',
-    intro: 'The rules that governed every decision across all three features.',
+    title: 'Design Principles Applied',
     principles: [
-      {
-        title: 'Pattern Parity',
-        description:
-          'Learn NLQ, know Insights, know Predict. Same navigation, same data selection, same error handling. Interaction cost stays constant.',
-      },
-      {
-        title: 'Progressive Disclosure',
-        description:
-          'Business users get guided paths. Power users get advanced controls. Same interface, different depths. Complexity exists but hides until needed.',
-      },
-      {
-        title: 'Cognitive Offloading',
-        description:
-          'The system does the thinking. Tooltips surface before users need them. Tutorials live inside the interface. Nobody has to guess.',
-      },
-      {
-        title: 'One Click Away',
-        description:
-          'Every DSML feature accessible from Hub homepage. No hunting through menus. No switching contexts. One click to any workflow.',
-      },
+      { title: 'Pattern Parity', description: '' },
+      { title: 'Progressive Disclosure', description: '' },
+      { title: 'Cognitive Offloading', description: '' },
+      { title: 'One Click Away', description: '' },
+      { title: 'Responsive First', description: '' },
+      { title: 'Contextual Help', description: '' },
     ],
   },
   // ----------------------------

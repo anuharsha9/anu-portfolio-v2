@@ -151,29 +151,14 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
   // UX PRINCIPLES (Public)
   // ----------------------------
   uxPrinciples: {
-    title: 'Architectural Directives',
-    intro: 'Defining the immutable rules required to move ML from a "Black Box" to a "Glass Box".',
+    title: 'Design Principles Applied',
     principles: [
-      {
-        title: 'The Glass Box Invariant.',
-        description:
-          'The system must never execute "Magic." Every automated decision (e.g., auto-cleaning data) must be surfaced, logged, and reversible by the user. Explainability first.',
-      },
-      {
-        title: 'The Tunnel Invariant.',
-        description:
-          'Complex ML workflows must be serialized. Branching logic is permitted *internal* to a step, but the macro-flow must remain a rigid 1-2-3-4 linear tunnel to prevent abandonment. Linear constancy.',
-      },
-      {
-        title: 'The Guardrail Invariant.',
-        description:
-          'Validation occurs *upstream.* The system shall not permit the user to proceed to "Training" if the dataset contains fatal errors (e.g., NaN values). Fail fast, fail early. Error preemption.',
-      },
-      {
-        title: 'The Pulse Invariant.',
-        description:
-          'Long-running ML processes (>5s) must provide deterministic feedback. A spinning loader is insufficient; the system must broadcast "Training... Validating... Scoring..." status updates. System state visibility.',
-      },
+      { title: 'Explainability First', description: '' },
+      { title: 'Linear Flow (No Branching)', description: '' },
+      { title: 'Upstream Validation', description: '' },
+      { title: 'System State Visibility', description: '' },
+      { title: 'Progressive Disclosure', description: '' },
+      { title: 'Dual Experience (Guided + Advanced)', description: '' },
     ],
   },
   // ----------------------------
