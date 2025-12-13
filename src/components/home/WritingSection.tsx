@@ -5,13 +5,13 @@ import { articleLinks } from '@/data/home'
 
 export default function WritingSection() {
   return (
-    <section className="bg-slate-900 py-16 md:py-24 relative overflow-hidden">
+    <section className="bg-slate-50 py-16 md:py-24 relative overflow-hidden border-t border-slate-200">
       {/* Subtle grid background */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
@@ -30,12 +30,12 @@ export default function WritingSection() {
           </span>
 
           {/* Headline */}
-          <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl mb-4">
+          <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl mb-4">
             Lessons that demanded to be shared.
           </h2>
 
           {/* Subhead */}
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             The pivots, the breakthroughs, the lessons that shaped how I design — they find their way onto the page.
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ export default function WritingSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-[var(--accent-teal)]/50 hover:bg-slate-800/80 transition-all duration-300"
+              className="group bg-white border border-slate-200 rounded-xl p-6 hover:border-[var(--accent-teal)]/50 hover:shadow-lg transition-all duration-300"
             >
               {/* Topic Tag */}
               <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--accent-teal)] block mb-3">
@@ -60,14 +60,14 @@ export default function WritingSection() {
               </span>
 
               {/* Title */}
-              <h3 className="font-serif text-white text-lg md:text-xl leading-snug mb-4 group-hover:text-[var(--accent-teal)] transition-colors">
+              <h3 className="font-serif text-slate-900 text-lg md:text-xl leading-snug mb-4 group-hover:text-[var(--accent-teal)] transition-colors">
                 {article.title}
               </h3>
 
               {/* Read indicator with time */}
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-slate-600">{article.readTime} read</span>
-                <div className="flex items-center gap-2 text-slate-500 group-hover:text-[var(--accent-teal)] transition-colors">
+                <span className="font-mono text-xs text-slate-500">{article.readTime} read</span>
+                <div className="flex items-center gap-2 text-slate-400 group-hover:text-[var(--accent-teal)] transition-colors">
                   <span className="font-mono text-xs">Read</span>
                   <svg
                     className="w-4 h-4 group-hover:translate-x-1 transition-transform"
@@ -95,7 +95,7 @@ export default function WritingSection() {
             href="https://medium.com/@anu.anuja"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 text-slate-400 hover:text-[var(--accent-teal)] transition-colors group"
+            className="inline-flex items-center gap-3 text-slate-500 hover:text-[var(--accent-teal)] transition-colors group"
           >
             <span className="font-mono text-sm">More articles on Medium</span>
             <svg

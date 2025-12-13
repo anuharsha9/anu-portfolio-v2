@@ -42,13 +42,13 @@ export default function Home() {
       {/* 1. HERO - Dark, dramatic, gears as the centerpiece */}
       <HeroSplit />
 
-      {/* 2. WORK - Show the work immediately */}
-      <WorkGrid />
-
-      {/* 3. TRANSFORMATION - The scroll-stopper before/after */}
+      {/* 2. TRANSFORMATION - The scroll-stopper before/after */}
       <TransformationShowcase />
 
-      {/* 4. ARCHIVE - Past Work (before testimonials) */}
+      {/* 3. WORK - Case studies */}
+      <WorkGrid />
+
+      {/* 4. ARCHIVE - Past Work */}
       <CollapsibleWorkArchive />
 
       {/* 5. QUOTE - Leadership testimonials */}
