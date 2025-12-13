@@ -203,7 +203,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                   </Link>
 
                   <a
-                    href="/resume.html"
+                    href="/assets/Anuja Harsha Nimmagadda - Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
@@ -215,9 +215,9 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                         ? 'text-[var(--accent-teal)] border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 hover:bg-[var(--accent-teal)]/10 focus-visible:outline-[var(--accent-teal)]'
                         : 'text-white border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 hover:bg-white/10 focus-visible:outline-white'
                     }`}
-                    aria-label="View Resume"
+                    aria-label="Download Resume PDF"
                   >
-                    View Resume
+                    Resume (PDF)
                   </a>
                 </div>
 

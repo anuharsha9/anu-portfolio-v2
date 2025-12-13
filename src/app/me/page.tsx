@@ -152,12 +152,12 @@ export default function AboutPage() {
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 4: SOCIAL PROOF (Curated 6)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection id="social-proof" className="bg-slate-950 py-20 md:py-24 relative overflow-hidden">
+      <MotionSection id="social-proof" className="bg-slate-50 py-20 md:py-24 relative overflow-hidden border-t border-slate-200">
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
             backgroundSize: '40px 40px',
           }}
         />
@@ -168,10 +168,10 @@ export default function AboutPage() {
               <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
                 // TRUST_NETWORK
               </span>
-              <h2 className="font-serif text-white text-3xl md:text-4xl leading-tight">
+              <h2 className="font-serif text-slate-900 text-3xl md:text-4xl leading-tight">
                 Voices from the Trenches
               </h2>
-              <p className="text-slate-400 text-base leading-relaxed">
+              <p className="text-slate-600 text-base leading-relaxed">
                 Engineers, PMs, data scientists, and leaders I&apos;ve partnered with.
               </p>
             </div>
@@ -187,12 +187,11 @@ export default function AboutPage() {
                   transition={{ duration: 0.6 }}
                   className="relative group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
-                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-purple-500/50 transition-all">
+                  <div className="relative bg-white border border-slate-200 rounded-2xl p-6 md:p-8 hover:border-purple-500/50 hover:shadow-lg transition-all">
                     <div className="absolute top-6 right-8 text-purple-500/10 text-6xl font-serif leading-none hidden md:block">&ldquo;</div>
 
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-400 text-xs font-mono uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 text-purple-600 text-xs font-mono uppercase tracking-wider">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
@@ -200,59 +199,14 @@ export default function AboutPage() {
                       </span>
                     </div>
 
-                    <blockquote className="font-serif text-white text-lg md:text-xl leading-relaxed mb-4 relative z-10">
+                    <blockquote className="font-serif text-slate-700 text-lg md:text-xl leading-relaxed mb-4 relative z-10">
                       &ldquo;{review.quote}&rdquo;
                     </blockquote>
 
-                    <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-800">
+                    <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-100">
                       <div>
-                        <p className="font-semibold text-white">{review.name}</p>
-                        <p className="font-mono text-purple-400 text-sm">{review.role}</p>
-                        <p className="text-slate-500 text-xs mt-1">{review.company}</p>
-                      </div>
-                      <div className="text-right max-w-[200px] hidden md:block">
-                        <p className="text-slate-500 text-xs leading-relaxed italic">
-                          {review.relationship}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Featured - VP of Product Management (Vijay Raman) */}
-            <div>
-              {recommendations.filter(r => r.name === 'Vijay Raman').map((review) => (
-                <motion.div
-                  key={review.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50" />
-                  <div className="relative bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-2xl p-6 md:p-8 hover:border-amber-500/50 transition-all">
-                    <div className="absolute top-6 right-8 text-amber-500/10 text-6xl font-serif leading-none hidden md:block">&ldquo;</div>
-
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-mono uppercase tracking-wider">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                        </svg>
-                        VP of Product Management
-                      </span>
-                    </div>
-
-                    <blockquote className="font-serif text-white text-lg md:text-xl leading-relaxed mb-4 relative z-10">
-                      &ldquo;{review.quote}&rdquo;
-                    </blockquote>
-
-                    <div className="flex items-start justify-between gap-4 pt-4 border-t border-slate-800">
-                      <div>
-                        <p className="font-semibold text-white">{review.name}</p>
-                        <p className="font-mono text-amber-400 text-sm">{review.role}</p>
+                        <p className="font-semibold text-slate-900">{review.name}</p>
+                        <p className="font-mono text-purple-600 text-sm">{review.role}</p>
                         <p className="text-slate-500 text-xs mt-1">{review.company}</p>
                       </div>
                       <div className="text-right max-w-[200px] hidden md:block">
@@ -278,11 +232,11 @@ export default function AboutPage() {
 
                   const accentColor = isDataScience ? 'purple' : isEngineering ? 'teal' : isProduct ? 'amber' : isCustomer ? 'emerald' : 'slate'
                   const colorClasses = {
-                    purple: { border: 'hover:border-purple-500/50', text: 'text-purple-400', glow: 'from-purple-500/10' },
-                    teal: { border: 'hover:border-[var(--accent-teal)]/50', text: 'text-[var(--accent-teal)]', glow: 'from-[var(--accent-teal)]/10' },
-                    amber: { border: 'hover:border-amber-500/50', text: 'text-amber-400', glow: 'from-amber-500/10' },
-                    emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-400', glow: 'from-emerald-500/10' },
-                    slate: { border: 'hover:border-slate-500/50', text: 'text-slate-400', glow: 'from-slate-500/10' },
+                    purple: { border: 'hover:border-purple-500/50', text: 'text-purple-600', bg: 'bg-purple-50' },
+                    teal: { border: 'hover:border-[var(--accent-teal)]/50', text: 'text-[var(--accent-teal)]', bg: 'bg-teal-50' },
+                    amber: { border: 'hover:border-amber-500/50', text: 'text-amber-600', bg: 'bg-amber-50' },
+                    emerald: { border: 'hover:border-emerald-500/50', text: 'text-emerald-600', bg: 'bg-emerald-50' },
+                    slate: { border: 'hover:border-slate-500/50', text: 'text-slate-600', bg: 'bg-slate-100' },
                   }
                   const colors = colorClasses[accentColor as keyof typeof colorClasses]
 
@@ -295,8 +249,7 @@ export default function AboutPage() {
                       transition={{ duration: 0.5, delay: index * 0.08 }}
                       className="group relative"
                     >
-                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.glow} to-transparent rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity`} />
-                      <div className={`relative bg-slate-900/60 backdrop-blur-sm border border-slate-800 rounded-xl p-5 ${colors.border} transition-all h-full flex flex-col`}>
+                      <div className={`relative bg-white border border-slate-200 rounded-xl p-5 ${colors.border} hover:shadow-lg transition-all h-full flex flex-col`}>
 
                         <div className="mb-3">
                           <span className={`font-mono ${colors.text} text-xs uppercase tracking-widest`}>
@@ -304,14 +257,14 @@ export default function AboutPage() {
                           </span>
                         </div>
 
-                        <blockquote className="font-serif text-slate-200 text-sm leading-relaxed mb-4 flex-grow">
+                        <blockquote className="font-serif text-slate-700 text-sm leading-relaxed mb-4 flex-grow">
                           &ldquo;{review.quote}&rdquo;
                         </blockquote>
 
-                        <div className="pt-3 border-t border-slate-800/50">
+                        <div className="pt-3 border-t border-slate-100">
                           <div className="flex items-center justify-between">
-                            <p className="font-semibold text-white text-sm">{review.name}</p>
-                            <p className="text-slate-600 text-xs">{review.company}</p>
+                            <p className="font-semibold text-slate-900 text-sm">{review.name}</p>
+                            <p className="text-slate-500 text-xs">{review.company}</p>
                           </div>
                         </div>
                       </div>
@@ -326,19 +279,19 @@ export default function AboutPage() {
                 href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm"
+                className="inline-flex items-center gap-2 text-slate-500 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm min-h-[44px]"
               >
                 <span>More on LinkedIn</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
-              <span className="text-slate-700">·</span>
+              <span className="text-slate-300">·</span>
               <a
                 href="https://adplist.org/mentors/anuja-harsha-nimmagadda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-400 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm"
+                className="inline-flex items-center gap-2 text-slate-500 hover:text-[var(--accent-teal)] transition-colors font-medium text-sm min-h-[44px]"
               >
                 <span>ADPList Reviews</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -405,22 +358,22 @@ export default function AboutPage() {
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 7: CONTACT (Simplified)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection className="bg-slate-100 py-12 md:py-16">
+      <MotionSection className="bg-slate-100 py-12 md:py-16 pb-safe">
         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center space-y-4">
           <h3 className="font-serif text-slate-900 text-xl md:text-2xl">
             Let&apos;s connect.
           </h3>
 
           <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-sm md:text-base">
-            <a href="mailto:anujanimmagadda@gmail.com" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
+            <a href="mailto:anujanimmagadda@gmail.com" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors min-h-[44px] flex items-center">
               anujanimmagadda@gmail.com
             </a>
-            <span className="text-slate-400">·</span>
-            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
+            <span className="text-slate-400 hidden md:inline">·</span>
+            <a href="https://www.linkedin.com/in/anu159" target="_blank" rel="noopener noreferrer" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors min-h-[44px] flex items-center">
               LinkedIn
             </a>
-            <span className="text-slate-400">·</span>
-            <a href="tel:+17813547394" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors">
+            <span className="text-slate-400 hidden md:inline">·</span>
+            <a href="tel:+17813547394" className="text-slate-700 font-mono hover:text-[var(--accent-teal)] transition-colors min-h-[44px] flex items-center">
               +1 781-354-7394
             </a>
           </div>
@@ -428,6 +381,9 @@ export default function AboutPage() {
           <p className="text-slate-400 text-xs pt-4">
             Designed in Figma. Built with Cursor + AI. © 2025
           </p>
+          
+          {/* Safe area for iPhone home indicator */}
+          <div className="h-safe-area-inset-bottom" />
         </div>
       </MotionSection>
     </main>
