@@ -70,7 +70,7 @@ export default function TalkSection() {
             </a>
 
             <a
-              href="/assets/Anuja-Nimmagadda-Resume-2025.pdf"
+              href="/assets/Anuja Harsha Nimmagadda - Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-50/20 text-slate-50 font-medium text-sm hover:bg-slate-50/10 hover:border-slate-50/40 transition-all duration-300"
