@@ -698,14 +698,14 @@ export default function HeroSplit() {
           <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-800">
               {[
-                { value: '50+', label: 'Projects Across Career' },
-                { value: '25M+', label: 'Users on WebFOCUS' },
-                { value: 'Fortune 500', label: 'Enterprise Clients', isText: true },
-                { value: 'Best-in-Class 2025', label: 'Dresner Award', isText: true },
+                { value: '50+', label: 'Projects Across Career', source: 'Work archive & portfolio' },
+                { value: '25M+', label: 'Users on WebFOCUS', source: 'MartechCube, 2022', sourceUrl: 'https://www.martechcube.com/ibi-webfocus-wins-2022-best-product-for-business-intelligence/' },
+                { value: 'Fortune 500', label: 'Enterprise Clients', isText: true, source: 'IBM, Nestlé, Cigna, Humana & more — 6sense.com', sourceUrl: 'https://6sense.com/tech/data-analysis/webfocus-market-share' },
+                { value: 'Best-in-Class 2025', label: 'Dresner Award', isText: true, source: 'Dresner Advisory Services', sourceUrl: 'https://www.ibi.com/press-releases/2025/ibi-webfocus-named-best-in-class-in-dresner-advisory-services-2025-industry-excellence-awards' },
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  className="py-3 sm:py-5 md:py-6 px-1.5 sm:px-2 md:px-4 text-center"
+                  className="py-3 sm:py-5 md:py-6 px-1.5 sm:px-2 md:px-4 text-center relative group cursor-default"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
@@ -721,6 +721,27 @@ export default function HeroSplit() {
                   <div className="font-mono text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-slate-500 mt-0.5 sm:mt-1 leading-tight">
                     {metric.label}
                   </div>
+                  {/* Subtle source tooltip - appears on hover */}
+                  {metric.source && (
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto whitespace-nowrap z-50">
+                      {metric.sourceUrl ? (
+                        <a 
+                          href={metric.sourceUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="font-mono text-[10px] text-slate-400 hover:text-[var(--accent-teal)] transition-colors pointer-events-auto"
+                        >
+                          Source: {metric.source} ↗
+                        </a>
+                      ) : (
+                        <span className="font-mono text-[10px] text-slate-400">
+                          Source: {metric.source}
+                        </span>
+                      )}
+                      {/* Tooltip arrow */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800" />
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
