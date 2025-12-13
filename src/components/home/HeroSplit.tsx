@@ -698,10 +698,10 @@ export default function HeroSplit() {
           <div className="max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-800">
               {[
-                { value: '50yr', label: 'Legacy System Modernized' },
-                { value: '20M+', label: 'Schedules Supported Weekly' },
-                { value: 'Reduced Complexity', label: 'Across Core Workflows', isText: true },
-                { value: 'Validated', label: 'with SMEs, Engineering, and Support', isText: true },
+                { value: '50+', label: 'Projects Across Career' },
+                { value: '$16.5B', label: 'Enterprise Platform' },
+                { value: '100M+', label: 'Users Worldwide' },
+                { value: 'Best-in-Class 2025', label: 'Dresner Award', isText: true },
               ].map((metric, index) => (
                 <motion.div
                   key={metric.label}
