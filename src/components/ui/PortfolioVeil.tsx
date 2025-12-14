@@ -8,28 +8,38 @@ import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
 const VEIL_SESSION_KEY = 'portfolio_veil_dismissed'
 
 export default function PortfolioVeil() {
-  const [isVisible, setIsVisible] = useState(true)
-  const [isExiting, setIsExiting] = useState(false)
+  const [showVeil, setShowVeil] = useState(true)
+  const [shouldRender, setShouldRender] = useState(true)
   const [hasMounted, setHasMounted] = useState(false)
 
   // Check if veil was already dismissed in this session
   useEffect(() => {
     setHasMounted(true)
+    
+    // Allow ?veil=reset to force show the veil for testing
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('veil') === 'reset') {
+      sessionStorage.removeItem(VEIL_SESSION_KEY)
+      return
+    }
+    
     const dismissed = sessionStorage.getItem(VEIL_SESSION_KEY)
     if (dismissed === 'true') {
-      setIsVisible(false)
+      setShowVeil(false)
+      setShouldRender(false)
     }
   }, [])
 
   const handleEnter = useCallback(() => {
-    setIsExiting(true)
     // Store in session so it doesn't show again during same session
     sessionStorage.setItem(VEIL_SESSION_KEY, 'true')
+    // Trigger exit animation
+    setShowVeil(false)
+  }, [])
 
-    // Allow animation to complete before fully hiding
-    setTimeout(() => {
-      setIsVisible(false)
-    }, 1000) // Match the exit animation duration
+  const handleAnimationComplete = useCallback(() => {
+    // Fully remove from DOM after animation completes
+    setShouldRender(false)
   }, [])
 
   // Don't render during SSR to avoid hydration mismatch
@@ -39,29 +49,28 @@ export default function PortfolioVeil() {
     )
   }
 
-  // Already dismissed
-  if (!isVisible) {
+  // Already dismissed - don't render anything
+  if (!shouldRender) {
     return null
   }
 
   return (
-    <AnimatePresence>
-      {isVisible && (
+    <AnimatePresence mode="wait" onExitComplete={handleAnimationComplete}>
+      {showVeil && (
         <motion.div
           key="portfolio-veil"
           className="fixed inset-0 z-[9998] bg-white overflow-y-auto"
-          initial={{ opacity: 1 }}
+          initial={{ opacity: 1, y: 0 }}
           exit={{
             opacity: 0,
-            scale: 1.05,
-            filter: 'blur(10px)',
+            y: '-100%',
           }}
           transition={{
-            duration: 1,
-            ease: [0.22, 1, 0.36, 1],
+            duration: 1.2,
+            ease: [0.76, 0, 0.24, 1], // Smooth ease-in-out
           }}
           style={{
-            pointerEvents: isExiting ? 'none' : 'auto',
+            pointerEvents: showVeil ? 'auto' : 'none',
           }}
         >
           {/* Main Content Container */}
@@ -145,7 +154,7 @@ export default function PortfolioVeil() {
                 >
                   <button
                     onClick={handleEnter}
-                    disabled={isExiting}
+                    disabled={!showVeil}
                     className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--accent-teal-800)] text-white text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span>Enter my Portfolio</span>
