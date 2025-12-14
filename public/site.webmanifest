@@ -4,13 +4,13 @@
   "description": "Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX",
   "icons": [
     {
-      "src": "/images/favicon-192x192.png",
+      "src": "/brand/signature/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/favicon-512x512.png",
+      "src": "/brand/signature/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -29,14 +29,14 @@
       "short_name": "Work",
       "description": "View case studies",
       "url": "/#work-overview",
-      "icons": [{ "src": "/images/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/brand/signature/favicon-192x192.png", "sizes": "192x192" }]
     },
     {
       "name": "About",
       "short_name": "About",
       "description": "Learn about Anuja",
       "url": "/me",
-      "icons": [{ "src": "/images/favicon-192x192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/brand/signature/favicon-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

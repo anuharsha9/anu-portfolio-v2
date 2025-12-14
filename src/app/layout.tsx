@@ -93,6 +93,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         {/* Favicon - Signature Logo */}
         <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/brand/signature/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/brand/signature/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/brand/signature/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* Preload hero gears SVG for faster initial load */}
         <link rel="preload" href="/assets/brain-gears.svg" as="fetch" crossOrigin="anonymous" />
