@@ -50,7 +50,7 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
   }))
 
   return (
-    <div className={`w-full py-16 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
+    <div className={`w-full py-10 md:py-12 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -76,8 +76,8 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
                     key={stage.id}
                     onClick={() => setActiveStage(index)}
                     className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${activeStage === index
-                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
+                      ? 'bg-[var(--accent-teal)] text-white shadow-md'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'
                       }`}
                   >
                     <span className={`font-mono font-bold ${activeStage === index ? 'text-white' : 'text-slate-300'}`}>
@@ -97,8 +97,8 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
                 key={stage.id}
                 onClick={() => setActiveStage(index)}
                 className={`w-full text-left p-4 rounded-xl border transition-all ${activeStage === index
-                    ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] shadow-sm'
-                    : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] shadow-sm'
+                  : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50'
                   }`}
               >
                 <div className="flex items-start gap-3">

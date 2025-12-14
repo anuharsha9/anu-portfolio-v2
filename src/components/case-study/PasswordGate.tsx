@@ -91,8 +91,8 @@ export default function PasswordGate({
   }
 
   return (
-    <section id="password-gate" className="surface-dark py-20 md:py-32 border-t border-white/5">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
+    <section id="password-gate" className="surface-dark py-12 md:py-16 border-t border-white/5">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-16 xl:px-8">
         <div className="max-w-2xl mx-auto text-center space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -135,7 +135,9 @@ export default function PasswordGate({
             className="space-y-4"
           >
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+              <label htmlFor="password-gate-input" className="sr-only">Password</label>
               <input
+                id="password-gate-input"
                 type="password"
                 value={password}
                 onChange={(e) => {
@@ -143,6 +145,7 @@ export default function PasswordGate({
                   setError('')
                 }}
                 placeholder="Enter password"
+                aria-label="Enter password to unlock case study"
                 className="px-6 py-3 rounded-full border border-white/20 bg-white/5 text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 transition-colors flex-1 max-w-md"
                 autoFocus
               />

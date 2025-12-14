@@ -162,7 +162,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                     : 'bg-white border-slate-300'
                     } z-10 flex items-center justify-center`}>
                     {isSuccess && (
-                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg aria-hidden="true" className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     )}
@@ -430,7 +430,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                   >
                     {/* Extensibility Node */}
                     <div className="absolute left-2 md:left-6 w-5 h-5 rounded-full bg-violet-100 border-2 border-violet-500 z-10 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg aria-hidden="true" className="w-3 h-3 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
@@ -488,7 +488,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                   >
                     {/* Validation Node */}
                     <div className="absolute left-2 md:left-6 w-5 h-5 rounded-full bg-emerald-100 border-2 border-emerald-500 z-10 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg aria-hidden="true" className="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>

@@ -6,19 +6,19 @@ import { ReactNode } from 'react'
 interface DesignFrameworkSectionProps {
   // Framework letter (D, E, S, I, G, N)
   letter: string
-  
+
   // Section title (e.g., "Discover Deeply")
   title: string
-  
+
   // TL;DR summary
   tldr?: string
-  
+
   // Methodologies/capabilities - will be rendered as [Tag] format
   methodologies?: string[]
-  
+
   // Section ID for navigation
   sectionId?: string
-  
+
   // Children content
   children?: ReactNode
 }
@@ -46,7 +46,7 @@ export default function DesignFrameworkSection({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="py-12 md:py-16 lg:py-20"
+      className="py-8 md:py-10 lg:py-12"
     >
       {/* Section Header */}
       <div className="space-y-6 relative mb-8 md:mb-12">
@@ -56,7 +56,7 @@ export default function DesignFrameworkSection({
           <span className="absolute -left-2 -top-4 text-[120px] md:text-[160px] font-serif font-bold text-slate-100 select-none pointer-events-none leading-none z-0">
             {letter}
           </span>
-          
+
           {/* Section Title - On top of watermark */}
           <div className="relative z-10 pt-8">
             {/* Small framework indicator */}
@@ -66,7 +66,7 @@ export default function DesignFrameworkSection({
               </span>
               <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
             </div>
-            
+
             {/* Section Title */}
             <h2 className="text-slate-900 text-3xl md:text-4xl lg:text-5xl font-serif leading-tight tracking-tight">
               {title}
@@ -93,8 +93,8 @@ export default function DesignFrameworkSection({
               // CAPABILITIES:
             </span>
             {methodologies.map((method, index) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="text-slate-500 text-xs font-mono uppercase tracking-widest"
               >
                 [{toTagFormat(method)}]

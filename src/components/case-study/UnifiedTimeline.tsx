@@ -95,7 +95,7 @@ export default function UnifiedTimeline({
     }))
 
   return (
-    <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+    <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="space-y-8">
         {/* Header */}
         <div className="space-y-3">

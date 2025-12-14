@@ -62,7 +62,7 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
   }))
 
   return (
-    <div className={`w-full py-16 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
+    <div className={`w-full py-10 md:py-12 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -73,7 +73,7 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
             Three Workflows. Three Entry Points.
           </h3>
           <p className="text-slate-600 max-w-2xl mx-auto">
-            Before IQ Plugin unified them, I designed each of these workflows independently. 
+            Before IQ Plugin unified them, I designed each of these workflows independently.
             NLQ and Insights are shipping now. ML launches 2026.
           </p>
         </div>
@@ -107,7 +107,7 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
               </div>
 
               {/* Image */}
-              <div 
+              <div
                 className="relative aspect-[4/3] bg-slate-100 cursor-pointer overflow-hidden"
                 onClick={() => openLightbox(allImages, index)}
               >

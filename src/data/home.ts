@@ -18,13 +18,13 @@ export interface ArticleLink {
 export const featuredCaseStudies: FeaturedCaseStudy[] = [
   {
     slug: 'reportcaster',
-    title: 'ReportCaster: redesigning a legacy enterprise scheduler',
+    title: 'Modernizing a 50-Year-Old Enterprise Scheduler',
     summary:
       'Owning the end-to-end UX modernization of a 50-year-old scheduling tool — turning scattered workflows into a clear, unified scheduling experience used by millions of enterprise reports.',
-    impact: 'Unified 5 subsystems, eliminated tab sprawl, reduced support load.',
+    impact: 'Unified 5 subsystems, eliminated tab sprawl, streamlined workflows.',
     tags: ['Enterprise UX', 'Legacy modernization', 'Architecture'],
     image: '/images/case-study/ReportCaster/rc-cover.png',
-    ctaText: 'View ReportCaster case study',
+    ctaText: 'View case study',
   },
   {
     slug: 'ml-functions',

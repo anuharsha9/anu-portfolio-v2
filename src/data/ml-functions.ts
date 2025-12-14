@@ -118,8 +118,9 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
       summary: 'I embedded weekly with the Principal Data Scientist for over six months. I spent months understanding the domain before I designed anything.',
-      body: '', // Removed - context established by hero, STAR, and VitalSigns components
-      // Note: revealsPoints and images removed - now handled by MLPersonalChallenge component
+      body: `I came in with zero ML background. That could have been a liability — instead, I made it an advantage. I enrolled in MIT's AI/ML product design certification and embedded weekly with our Principal Data Scientist for over six months.
+
+By the time I started designing, I understood the domain deeply enough to challenge assumptions and ask the right questions.`,
     },
     {
       id: 'section-02',
@@ -155,7 +156,9 @@ The confusion matrix screen alone went through 10+ iterations. Our Principal DS 
       index: 'G',
       title: 'Grow Through Constraints: Earning Trust & Leading the Team',
       summary: 'I collaborated with 30-year veteran engineers over six months. At the same time, I was leading ReportCaster and the DSML Hub.',
-      body: '', // Narrative removed - flow goes directly to visual components
+      body: `The dual-experience approach emerged from engineering constraints. We couldn't rebuild the advanced mode — it had to coexist with the new guided flow. What felt like a limitation became a feature: experts got their power, newcomers got guidance.
+
+I led this while simultaneously owning ReportCaster and IQ Plugin. Cross-project pattern sharing meant solutions in one project accelerated the others.`,
     },
     {
       id: 'section-06',

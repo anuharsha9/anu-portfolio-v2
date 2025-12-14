@@ -146,24 +146,24 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
         <div className="flex items-start gap-4">
           {/* Lock Icon */}
           <span className="text-2xl flex-shrink-0">🔒</span>
-          
+
           <div className="flex-1 space-y-2">
             {/* Headline */}
             <h4 className="font-serif text-[var(--text-heading)] text-lg font-semibold">
               {bannerTitle}
             </h4>
-            
+
             {/* Description */}
             <p className="text-[var(--text-body)] text-sm leading-relaxed">
               Detailed artifacts and sensitive diagrams are available for authorized reviewers.
             </p>
-            
+
             {/* Ghost Button */}
-            <button 
-              onClick={() => setShowPasswordModal(true)} 
+            <button
+              onClick={() => setShowPasswordModal(true)}
               className="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm font-medium text-[var(--accent-teal)] border border-[var(--accent-teal)]/30 rounded-lg hover:bg-[var(--accent-teal-soft)] transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
               </svg>
               Enter Password
@@ -180,7 +180,7 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
 
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="relative bg-white rounded-2xl border-2 border-slate-200 p-8 max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
                 <button onClick={() => setShowPasswordModal(false)} className="absolute top-4 right-4 text-slate-500 hover:text-slate-900 transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg aria-hidden="true" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
@@ -194,7 +194,9 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
 
                   <form onSubmit={handleUnlock} className="space-y-4">
                     <div>
+                      <label htmlFor="locked-content-password" className="sr-only">Password</label>
                       <input
+                        id="locked-content-password"
                         type="password"
                         value={inputPassword}
                         onChange={(e) => {
@@ -209,13 +211,15 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
                           }
                         }}
                         placeholder="Enter password"
+                        aria-label="Enter password to unlock content"
+                        aria-describedby={error ? 'password-error' : undefined}
                         className={`w-full px-4 py-3 rounded-lg border-2 transition-colors bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none ${error ? 'border-red-400' : success ? 'border-green-400' : 'border-slate-200 focus:border-[var(--accent-teal)]'}`}
                         autoFocus
                         disabled={success}
                       />
                       {error && (
-                        <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-red-500 flex items-center gap-2">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <motion.p id="password-error" role="alert" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-red-500 flex items-center gap-2">
+                          <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                           {error}
@@ -223,7 +227,7 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
                       )}
                       {success && (
                         <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-sm text-green-500 flex items-center gap-2">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                           Password correct! Unlocking content...

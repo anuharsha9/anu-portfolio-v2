@@ -191,13 +191,13 @@ export const typography = {
 
 export const spacing = {
   // Section padding
-  section: 'py-12 md:py-16 lg:py-24',
-  sectionCompact: 'py-8 md:py-12 lg:py-16',
+  section: 'py-10 md:py-12 lg:py-16',
+  sectionCompact: 'py-6 md:py-8 lg:py-10',
 
   // Container
   container: 'px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16',
-  containerMax: 'max-w-[1200px] mx-auto',
-  containerFull: 'max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16',
+  containerMax: 'max-w-[1440px] mx-auto',
+  containerFull: 'max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16',
 
   // Component spacing
   stack: {
@@ -273,7 +273,7 @@ export const components = {
   // Button styles
   button: {
     primary: 'bg-accent-teal text-white px-6 py-3 rounded-lg font-medium transition-colors hover:bg-accent-teal-700',
-    secondary: 'bg-black/5 text-[#111111] px-6 py-3 rounded-lg font-medium transition-colors hover:bg-black/10',
+    secondary: 'bg-black/5 text-slate-900 px-6 py-3 rounded-lg font-medium transition-colors hover:bg-black/10',
     ghost: 'text-accent-teal hover:text-accent-teal-700 transition-colors',
   },
 } as const

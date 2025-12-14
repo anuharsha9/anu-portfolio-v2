@@ -43,18 +43,8 @@ export default function TransformationShowcase() {
   const handleEnd = () => setIsDragging(false)
 
   return (
-    <section className="bg-slate-900 py-20 md:py-28 relative overflow-hidden">
-      {/* Subtle grid background */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
+    <section className="py-10 md:py-14 relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,14 +53,11 @@ export default function TransformationShowcase() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10 md:mb-14"
         >
-          <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
-            // TRANSFORMATION
-          </span>
-          <h2 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
+          <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
             50 years of legacy.<br />
             <span className="text-[var(--accent-teal)]">Modern in 18 months.</span>
           </h2>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
             I modernized WebFOCUS's core workflows—taking fragmented legacy tools and unifying them into coherent, intelligent experiences.
           </p>
         </motion.div>
@@ -84,7 +71,7 @@ export default function TransformationShowcase() {
         >
           <div
             ref={containerRef}
-            className="w-full aspect-[16/10] max-h-[600px] relative overflow-hidden rounded-xl border border-slate-700 shadow-2xl select-none cursor-ew-resize"
+            className="w-full aspect-[16/10] max-h-[720px] relative overflow-hidden rounded-xl border border-slate-200 shadow-2xl select-none cursor-ew-resize"
             onMouseMove={handleMouseMove}
             onMouseUp={handleEnd}
             onMouseLeave={handleEnd}
@@ -154,12 +141,12 @@ export default function TransformationShowcase() {
 
             {/* Labels on sides */}
             <div className="absolute bottom-4 left-4 z-20">
-              <span className="bg-slate-900/90 backdrop-blur-sm text-slate-300 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-700">
+              <span className="bg-white/90 backdrop-blur-sm text-slate-600 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
                 LEGACY
               </span>
             </div>
             <div className="absolute bottom-4 right-4 z-20">
-              <span className="bg-[var(--accent-teal)]/90 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full">
+              <span className="bg-[var(--accent-teal)]/90 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-sm">
                 MODERN
               </span>
             </div>
@@ -176,7 +163,7 @@ export default function TransformationShowcase() {
               href="https://www.youtube.com/watch?v=NvNFN6sz41M"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/80 text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
+              className="inline-flex items-center gap-2 bg-[var(--accent-teal-800)] hover:bg-[var(--accent-teal-900)] text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
             >
               <Play className="w-4 h-4" />
               <span>Watch Demo</span>
@@ -185,30 +172,30 @@ export default function TransformationShowcase() {
             <div className="flex items-center gap-4">
               <Link
                 href="/work/reportcaster"
-                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
               >
                 <span>ReportCaster</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <span className="text-slate-600">·</span>
+              <span className="text-slate-300">·</span>
               <Link
                 href="/work/ml-functions"
-                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
               >
                 <span>ML Functions</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <span className="text-slate-600">·</span>
+              <span className="text-slate-300">·</span>
               <Link
                 href="/work/iq-plugin"
-                className="inline-flex items-center gap-2 text-[var(--accent-teal)] hover:text-white text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
               >
                 <span>DSML Hub</span>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>

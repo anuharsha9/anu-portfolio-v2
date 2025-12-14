@@ -26,7 +26,7 @@ export default function IQPluginArchitecture({ isLightBackground = true }: IQPlu
 
   return (
     <div className="bg-[var(--bg-light)]">
-      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12">
+      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-12">
         {/* System Convergence Diagram */}
         <div className="bg-slate-50/50 border border-slate-200 rounded-2xl p-8 md:p-12 space-y-12">
 

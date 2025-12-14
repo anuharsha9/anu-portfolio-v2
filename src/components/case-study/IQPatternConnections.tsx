@@ -9,7 +9,7 @@ interface IQPatternConnectionsProps {
 
 // SVG Icons for pattern schematics
 const UnifiedHubIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Central hub */}
     <circle cx="24" cy="24" r="8" fill="currentColor" fillOpacity="0.1" />
     {/* Connecting spokes */}
@@ -26,7 +26,7 @@ const UnifiedHubIcon = () => (
 )
 
 const DatasetSelectionIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Database icon */}
     <ellipse cx="24" cy="12" rx="16" ry="6" />
     <path d="M8 12v12c0 3.3 7.2 6 16 6s16-2.7 16-6V12" />
@@ -38,7 +38,7 @@ const DatasetSelectionIcon = () => (
 )
 
 const ResponsiveUIIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Desktop frame */}
     <rect x="4" y="8" width="24" height="16" rx="2" />
     <line x1="4" y1="20" x2="28" y2="20" />

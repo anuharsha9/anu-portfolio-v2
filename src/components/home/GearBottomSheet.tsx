@@ -48,18 +48,18 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
                 onClose()
               }
             }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 rounded-t-3xl overflow-hidden max-h-[85vh]"
+            className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl overflow-hidden max-h-[85vh] shadow-2xl"
             style={{ touchAction: 'none' }}
           >
             {/* Drag Handle */}
             <div className="flex justify-center pt-3 pb-2">
-              <div className="w-10 h-1 bg-slate-600 rounded-full" />
+              <div className="w-10 h-1 bg-slate-300 rounded-full" />
             </div>
 
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -69,14 +69,14 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
             <div className="px-5 pb-8 pt-2">
               {/* Thought Quote */}
               <div className="mb-4">
-                <p className="text-slate-400 text-sm italic leading-relaxed">
+                <p className="text-slate-500 text-sm italic leading-relaxed">
                   "{gear.thought}"
                 </p>
               </div>
 
               {/* Preview Image */}
               {gear.image && (
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-5 border border-slate-700">
+                <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-5 border border-slate-200">
                   <Image
                     src={gear.image}
                     alt={gear.title}
@@ -85,19 +85,19 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
                     sizes="100vw"
                   />
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent" />
                 </div>
               )}
 
               {/* Title & Insight */}
               <div className="space-y-2 mb-6">
-                <h3 
-                  className="text-white text-xl font-serif font-medium"
+                <h3
+                  className="text-slate-900 text-xl font-serif font-medium"
                   style={{ color: gear.accentColor }}
                 >
                   {gear.title}
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-slate-600 text-sm leading-relaxed">
                   {gear.insight}
                 </p>
               </div>
@@ -115,7 +115,7 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
 
               {/* Case Study Badge */}
               {gear.caseStudy && gear.caseStudy !== 'me' && (
-                <p className="text-center text-slate-500 text-xs mt-4 font-mono uppercase tracking-wider">
+                <p className="text-center text-slate-400 text-xs mt-4 font-mono uppercase tracking-wider">
                   // {gear.caseStudy.replace('-', '_').toUpperCase()}
                 </p>
               )}

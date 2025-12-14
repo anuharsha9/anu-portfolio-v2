@@ -551,7 +551,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           {/* Center - Arrow */}
           <div className="flex items-center justify-center md:flex-shrink-0">
             <div className="w-12 h-12 rounded-full bg-white border border-amber-300 flex items-center justify-center shadow-sm">
-              <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </div>

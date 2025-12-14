@@ -192,12 +192,12 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
   const summaryColor = isLightBackground ? 'text-slate-600' : 'text-slate-300'
 
   return (
-    <div className="w-full py-12 md:py-16">
+    <div className="w-full py-10 md:py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
+        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest block mb-4">
           // WORKFLOWS_OWNED
@@ -211,7 +211,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
         </p>
       </motion.div>
 
-      <div className="max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
         {features.map((feature, index) => (
           <FeatureCard
             key={index}
@@ -227,7 +227,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-12"
+        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-12"
       >
         <div className={`rounded-xl p-6 ${isLightBackground ? 'bg-slate-100' : 'bg-slate-800'}`}>
           <div className="flex items-start gap-3">

@@ -61,7 +61,7 @@ export default function IQWorkflowComparison({ isLightBackground = false }: IQWo
   ]
 
   return (
-    <div className={`w-full py-16 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
+    <div className={`w-full py-10 md:py-12 ${isLightBackground ? 'bg-white' : 'bg-slate-50'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-12">

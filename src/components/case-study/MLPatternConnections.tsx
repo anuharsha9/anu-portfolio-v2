@@ -9,7 +9,7 @@ interface MLPatternConnectionsProps {
 
 // SVG Icons for pattern schematics
 const GuidedFlowIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Connecting line */}
     <line x1="6" y1="24" x2="42" y2="24" />
     {/* Step 1 - filled */}
@@ -29,7 +29,7 @@ const GuidedFlowIcon = () => (
 )
 
 const ContextMenuIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Background window */}
     <rect x="4" y="8" width="32" height="28" rx="2" />
     {/* Context menu overlay */}
@@ -42,7 +42,7 @@ const ContextMenuIcon = () => (
 )
 
 const PluginIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Browser extension icon shape */}
     <rect x="8" y="8" width="32" height="32" rx="4" />
     {/* Plugin connector */}

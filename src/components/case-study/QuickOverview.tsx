@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { QuickOverview as QuickOverviewType } from '@/types/caseStudy'
-import ScopeOfPractice from './ScopeOfPractice'
 // Note: ImpactMetricsChart removed - now using VitalSigns strip at top of page
+// Note: ScopeOfPractice and MyRole removed - leadership info now in VitalSigns
 
 interface QuickOverviewProps {
   data: QuickOverviewType
@@ -70,51 +70,6 @@ export default function QuickOverview({ data, heroSubtitle, caseStudySlug }: Qui
               </p>
             </div>
           </div>
-        </motion.div>
-      )}
-
-      {/* 2. Scope of Practice - High-Fidelity Grid */}
-      {data.scopeOfPractice && data.scopeOfPractice.length > 0 ? (
-        <ScopeOfPractice cards={data.scopeOfPractice} credentials={data.credentials} />
-      ) : data.myRole && (
-        /* Fallback to old bullet list if no scopeOfPractice data */
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200"
-        >
-          {/* Header */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-[var(--accent-teal)] flex-shrink-0"></div>
-            <div className="h-px flex-1 bg-slate-200"></div>
-            <div className="h-px w-8 bg-[var(--accent-teal)]"></div>
-          </div>
-
-          <h3 className="text-[var(--accent-teal)] text-lg md:text-xl font-serif font-semibold mb-6">My role</h3>
-
-          {/* Dynamic Role Content - Parse sentences into bullets */}
-          <ul className="space-y-3">
-            {data.myRole.split('. ').filter(s => s.trim()).map((sentence, i) => (
-              <li key={i} className="flex items-start gap-3 text-slate-700 text-sm md:text-base leading-relaxed">
-                <span className="text-slate-400 mt-1 flex-shrink-0">•</span>
-                <span>{sentence.trim().replace(/\.$/, '')}.</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* Credentials Badge */}
-          {data.credentials && (
-            <div className="pt-6 mt-6 border-t border-slate-200">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-teal)]/10 border border-[var(--accent-teal)]/30">
-                <svg className="w-4 h-4 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
-                <span className="text-[var(--accent-teal)] text-sm font-semibold">{data.credentials}</span>
-              </div>
-            </div>
-          )}
         </motion.div>
       )}
 

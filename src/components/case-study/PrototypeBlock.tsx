@@ -35,7 +35,7 @@ export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightB
   const t = getTheme(true)
 
   return (
-    <MotionSection id="prototype" className={`py-16 md:py-24 ${t.bgAlt} border-t ${t.border}`}>
+    <MotionSection id="prototype" className={`py-10 md:py-14 ${t.bgAlt} border-t ${t.border}`}>
       <div className="space-y-8">
         {prototypeMedia.multiBeforeAfter ? (
           <MultiBeforeAfterVideo before={prototypeMedia.multiBeforeAfter.before} after={prototypeMedia.multiBeforeAfter.after} isLightBackground={true} comparisonNotes={prototypeMedia.multiBeforeAfter.comparisonNotes} password={password} caseStudySlug={caseStudySlug} />
@@ -60,7 +60,7 @@ export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightB
               <h3 className={`${t.text} text-2xl font-serif font-semibold`}>Video Walkthrough</h3>
               <p className={`${t.textMuted} text-base max-w-2xl mx-auto`}>This is an actual video walkthrough created and narrated by me. Watch to see how the final design works in practice.</p>
             </div>
-            <div className="max-w-[1200px] mx-auto">
+            <div className="max-w-[1440px] mx-auto">
               <div className={`relative w-full aspect-video rounded-2xl border-2 ${t.borderAccent} ${t.bg} overflow-hidden shadow-xl`}>
                 <CustomVideoPlayer src={prototypeMedia.videoUrl} className="rounded-2xl" />
               </div>
@@ -74,7 +74,7 @@ export default function PrototypeBlock({ prototypeMedia, caseStudySlug, isLightB
               <h3 className={`${t.text} text-2xl font-serif font-semibold`}>Video Walkthrough</h3>
               <p className={`${t.textMuted} text-base max-w-2xl mx-auto`}>Watch the walkthrough to see how the final design works in practice.</p>
             </div>
-            <div className="max-w-[1200px] mx-auto">
+            <div className="max-w-[1440px] mx-auto">
               <div className={`relative w-full aspect-video rounded-2xl border-2 ${t.borderAccent} ${t.bg} overflow-hidden shadow-xl`}>
                 <iframe src={prototypeMedia.videoEmbedUrl} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="Video Walkthrough" />
               </div>

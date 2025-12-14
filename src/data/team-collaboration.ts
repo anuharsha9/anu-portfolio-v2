@@ -1,146 +1,110 @@
 import { TeamCollaborationData } from '@/components/case-study/TeamCollaboration'
 
 export const reportcasterTeamCollaboration: TeamCollaborationData = {
-  sectionTag: 'ALIGNMENT_&_LEADERSHIP',
-  title: 'How I Aligned and Led the Team',
-  subtitle: 'Building shared understanding across engineering, PM, QA, and design—without a PM for the first phase.',
+  sectionTag: 'LEADERSHIP',
+  title: 'Onboarded 2 Designers. Stayed the Knowledge Hub.',
+  subtitle: 'No PM for the first phase. I filled the gaps.',
   columns: [
     {
-      title: 'Stakeholder Alignment',
+      title: 'Alignment',
       items: [
-        'Built workflow diagrams everyone aligned around',
-        'Created phased modernization strategy to reduce risk',
-        'Walked teams through narrative walkthroughs',
-        'Presented early IA to design leadership',
+        'Workflow diagrams as shared language',
+        'Phased modernization to reduce risk',
+        'Early IA to design leadership',
       ],
     },
     {
-      title: 'Unblocking Teams',
+      title: 'Unblocking',
       items: [
-        'Translated undocumented behaviors into UX decisions',
-        'Managed trade-offs when legacy limits prevented ideal states',
-        'Settled feasibility disagreements',
-        'Created low-fi prototypes for engineering validation',
+        'Translated legacy into UX decisions',
+        'Managed trade-offs with engineering',
+        'Lo-fi prototypes for validation',
       ],
     },
     {
-      title: 'Knowledge Transfer',
+      title: 'Handoff',
       items: [
-        'Mentored new designer on the project',
-        'Handed off clear documentation, flows, and rationale',
-        'Stayed involved to review builds and adjust details',
-        'Remained knowledge hub for all RC decisions',
-      ],
-    },
-    {
-      title: 'Cross-functional Sessions',
-      items: [
-        'Architect + Engineering alignment',
-        'PM + Design + QA reviews',
-        'Support + SME feedback loops',
-        'Design leadership presentations',
+        'Onboarded 2 designers mid-project',
+        'Documentation, flows, and rationale',
+        'Remained knowledge hub after transition',
       ],
     },
   ],
   highlight: {
     label: 'ENGINEERING_FEEDBACK',
-    text: '"From the start, she impressed everyone with how quickly she grasped all aspects of a highly intricate system and translated that understanding into a clear, modern, and user-centered design." — Yingchun Chen, Principal System Software Engineer',
+    text: '"She impressed everyone with how quickly she grasped all aspects of a highly intricate system." — Yingchun Chen, Principal System Software Engineer',
   },
 }
 
 export const mlFunctionsTeamCollaboration: TeamCollaborationData = {
-  sectionTag: 'CROSS_FUNCTIONAL_BRIDGE',
-  title: 'How I Led and Aligned the Team',
-  subtitle: 'Navigating a PM change, onboarding new stakeholders, and earning trust through delivery.',
+  sectionTag: 'LEADERSHIP',
+  title: 'Navigated PM Change. Earned DS Trust.',
+  subtitle: 'Weekly syncs with Principal Data Scientist. 10+ iterations on the confusion matrix alone.',
   columns: [
     {
-      title: 'Data Science Partnership',
+      title: 'DS Partnership',
       items: [
         '1:1s with Principal Data Scientist',
-        'Translated ML concepts into UX decisions',
-        'Used Explainability redesign as proof of capability',
-        'Weekly UX + ML syncs established',
+        'ML concepts → UX decisions',
+        'Weekly UX + ML syncs',
       ],
     },
     {
-      title: 'PM Onboarding',
+      title: 'PM Transition',
       items: [
-        'PM changed midway through project',
-        'Introduced new PM to engineers',
-        'Explained Reporting Server architecture',
-        'Used early flows as shared language',
-      ],
-    },
-    {
-      title: 'Cross-functional Sessions',
-      items: [
-        'Engineering + DS + PM + Design unified',
-        'Shared Figma for async alignment',
-        'Screen-reviewed design reviews',
-        'QA collaboration for edge cases',
+        'PM changed mid-project',
+        'Onboarded new PM to engineers',
+        'Early flows as shared language',
       ],
     },
     {
       title: 'Trust Earned',
       items: [
-        'Principal DS became strongest advocate',
-        'Directors validated judgment calls',
-        'Became trusted for ML + RC simultaneously',
-        'Leadership greenlit approach early',
+        'Principal DS became advocate',
+        'Owned ML + RC simultaneously',
+        'Leadership greenlit early',
       ],
     },
   ],
   highlight: {
     label: 'DS_FEEDBACK',
-    text: '"Anuja turned one of our most complex, opaque ML flows into an experience our users can finally understand and trust." — Principal Data Scientist',
+    text: '"Anuja turned one of our most complex ML flows into an experience users can finally understand." — Principal Data Scientist',
   },
 }
 
 export const iqPluginTeamCollaboration: TeamCollaborationData = {
-  sectionTag: 'ORCHESTRATING_ALIGNMENT',
-  title: 'How I Led and Aligned the Team',
-  subtitle: 'Meetings didn\'t exist in the right shape—I created them. My role shifted from "designer on IQ" to "primary owner of the DSML experience."',
+  sectionTag: 'LEADERSHIP',
+  title: 'Owned All Three DSML Workflows.',
+  subtitle: 'Meetings didn\'t exist—I created them. Role shifted from "designer on IQ" to DSML experience owner.',
   columns: [
     {
-      title: 'Orchestrating Collaboration',
+      title: 'Orchestration',
       items: [
-        '1:1s with Principal Data Scientist',
-        'Small-group working sessions (PM + engineers + DS)',
-        'Regular weekly team meetings',
-        'Initiated contact with Hub PM who wasn\'t looped in',
+        'Created the collaboration structure',
+        'Looped in Hub PM who wasn\'t connected',
+        'Weekly syncs with Principal DS',
       ],
     },
     {
-      title: 'Making Complexity Visible',
+      title: 'Visibility',
       items: [
-        'Created workflow diagrams for invisible complexity',
-        'Recorded videos showing broken flows',
-        'Wrote documentation as shared reference',
-        'Made trade-offs explicit and reviewable',
+        'Workflow diagrams for complexity',
+        'Videos showing broken flows',
+        'Trade-offs made explicit',
       ],
     },
     {
-      title: 'Navigating Team Dynamics',
+      title: 'Role Shift',
       items: [
-        'Engineers with 20-30 years in product',
-        'Lead architect who needed active steering',
-        'Quiet but critical Director of Engineering',
-        'PM with vision but not detail depth',
-      ],
-    },
-    {
-      title: 'Shifting Role',
-      items: [
-        'Started as "designer on IQ"',
-        'Became primary DSML experience owner',
-        'Influence matched or exceeded PM on UX',
-        'Owned NLQ, Insights, AND the Hub unification',
+        'Designer on IQ → DSML owner',
+        'NLQ + Insights + Hub unification',
+        'Influence matched PM on UX',
       ],
     },
   ],
   highlight: {
     label: 'PM_FEEDBACK',
-    text: '"Her design thinking workshops and prototype walkthroughs often became the foundation for key product decisions, driving clarity and alignment across cross-functional teams." — Karishma Khadge, Senior Product Manager',
+    text: '"Her prototype walkthroughs became the foundation for key product decisions." — Karishma Khadge, Senior Product Manager',
   },
 }
 

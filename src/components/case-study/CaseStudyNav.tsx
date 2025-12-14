@@ -25,20 +25,27 @@ export default function CaseStudyNav() {
     return '000'
   }
 
+  // Short names for nav
+  const getShortTitle = (slug: string) => {
+    if (slug === 'reportcaster') return 'Scheduler'
+    if (slug === 'ml-functions') return 'ML'
+    if (slug === 'iq-plugin') return 'DSML'
+    return slug
+  }
+
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+    <div className="flex items-center justify-center gap-2">
       {allCaseStudies.map((cs) => {
         const isActive = cs.slug === currentSlug
-        const shortTitle = cs.title.split(':')[0].trim()
-        
+
         return (
           <Link
             key={cs.slug}
             href={`/work/${cs.slug}`}
             className={`
-              group flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300
-              ${isActive 
-                ? 'bg-[var(--accent-teal)] border-[var(--accent-teal)] text-white shadow-md' 
+              group flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 rounded-full border transition-all duration-300
+              ${isActive
+                ? 'bg-[var(--accent-teal)] border-[var(--accent-teal)] text-white shadow-md'
                 : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
               }
             `}
@@ -50,19 +57,19 @@ export default function CaseStudyNav() {
             `}>
               {getSystemId(cs.slug)}
             </span>
-            
+
             {/* Divider */}
             <span className={`
               w-px h-3
               ${isActive ? 'bg-white/30' : 'bg-slate-200'}
             `} />
-            
+
             {/* Title */}
             <span className={`
               text-sm font-medium
               ${isActive ? 'text-white' : 'text-slate-700 group-hover:text-slate-900'}
             `}>
-              {shortTitle}
+              {getShortTitle(cs.slug)}
             </span>
           </Link>
         )

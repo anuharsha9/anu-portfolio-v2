@@ -95,14 +95,14 @@ export default function HeroMeta({
   return (
     <>
       <motion.header
-        className="relative min-h-[70vh] xs:min-h-[75vh] sm:min-h-[80vh] flex items-center py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 bg-white"
+        className="relative min-h-[60vh] sm:min-h-[65vh] flex items-center py-6 sm:py-8 md:py-10 bg-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
 
 
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           {/* Case Study Navigation - Above Blueprint */}
           <div className="text-center mb-6 md:mb-8">
             <CaseStudyNav />
@@ -115,7 +115,7 @@ export default function HeroMeta({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="bg-slate-50 rounded-3xl border border-slate-200 p-6 md:p-8 lg:p-12 mx-0 md:mx-4 shadow-sm"
+            className="bg-slate-50 rounded-2xl border border-slate-200 p-6 md:p-8 lg:p-12 mx-0 md:mx-4 shadow-sm"
           >
             {/* 2-Column Grid: Text Left (45%), Laptop Right (55%) */}
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12 xl:gap-16 items-center">
@@ -213,7 +213,7 @@ export default function HeroMeta({
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-slate-500 hover:text-[var(--accent-teal)] transition-colors text-sm font-mono"
                     >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                       <span>{dataSheetLabel || 'View Data Sheet'}</span>
@@ -237,7 +237,7 @@ export default function HeroMeta({
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-slate-500 hover:text-[var(--accent-teal)] transition-colors text-sm font-mono"
                       >
-                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                         <span>{link.label}</span>
@@ -303,36 +303,14 @@ export default function HeroMeta({
               )}
             </div>
 
-            {/* Project Meta Strip - Inside the card */}
-            <div className="mt-8 pt-6 border-t border-slate-200">
-              <div className="flex flex-wrap items-center gap-6 md:gap-10 text-sm">
-                {/* Role */}
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
-                    Role:
-                  </span>
-                  <span className="font-medium text-slate-700">{role}</span>
-                </div>
-
-                <div className="hidden md:block w-px h-4 bg-slate-200"></div>
-
-                {/* Company */}
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
-                    Company:
-                  </span>
-                  <span className="font-medium text-slate-700">{company}</span>
-                </div>
-
-                <div className="hidden md:block w-px h-4 bg-slate-200"></div>
-
-                {/* Timeframe */}
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
-                    Timeline:
-                  </span>
-                  <span className="font-medium text-slate-700">{timeframe}</span>
-                </div>
+            {/* Project Meta Strip - Compact single line */}
+            <div className="mt-6 pt-4 border-t border-slate-200">
+              <div className="flex items-center gap-3 text-xs md:text-sm text-slate-600">
+                <span>{role}</span>
+                <span className="text-slate-300">·</span>
+                <span>{company}</span>
+                <span className="text-slate-300">·</span>
+                <span>{timeframe}</span>
               </div>
             </div>
           </motion.div>

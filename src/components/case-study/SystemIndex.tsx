@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
 interface Project {
@@ -62,83 +61,57 @@ export default function SystemIndex({ currentId }: SystemIndexProps) {
 
   return (
     <section
-      className="w-full bg-slate-950 py-16 md:py-24 border-t border-slate-900"
+      className="w-full bg-slate-950 py-10 md:py-12 border-t border-slate-900"
       aria-labelledby="system-index-heading"
     >
-      <div className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 md:mb-16"
-        >
-          <span className="font-mono text-slate-500 text-xs tracking-widest uppercase mb-3 block">
-            // SYSTEM_INDEX
-          </span>
+      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        {/* Header - Inline with cards */}
+        <div className="flex items-center justify-between mb-6">
           <h2
             id="system-index-heading"
-            className="text-2xl md:text-3xl lg:text-4xl font-serif text-white"
+            className="text-lg md:text-xl font-serif text-white"
           >
             Explore Other Architectures
           </h2>
-        </motion.div>
+          <span className="font-mono text-slate-600 text-xs tracking-widest uppercase hidden sm:block">
+            // SYSTEM_INDEX
+          </span>
+        </div>
 
-        {/* Cards Grid - 2 Column */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {otherProjects.map((project, index) => (
-            <motion.div
+        {/* Cards Grid - 2 Column, Compact */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {otherProjects.map((project) => (
+            <Link
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+              href={project.link}
+              className={`
+                group relative bg-slate-900 border border-slate-800 p-5 rounded-xl overflow-hidden
+                transition-all duration-300 ${project.hoverColor}
+                hover:bg-slate-800/50
+                focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
+                flex items-center gap-4
+              `}
             >
-              <Link
-                href={project.link}
-                className={`
-                  group relative bg-slate-900 border border-slate-800 p-8 md:p-10 rounded-xl overflow-hidden
-                  transition-all duration-300 ${project.hoverColor}
-                  hover:shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:shadow-slate-900/50
-                  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
-                  h-full flex flex-col min-h-[280px]
-                `}
-              >
-                {/* Subtle gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Content */}
-                <div className="relative z-10 flex-1">
-                  {/* Tag */}
-                  <span className={`font-mono text-xs tracking-widest uppercase ${project.tagColor}`}>
-                    {project.tag}
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-2xl md:text-3xl font-serif text-white mt-4 mb-2 group-hover:text-white/90 transition-colors">
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-lg font-serif text-white group-hover:text-white/90 transition-colors">
                     {project.title}
                   </h3>
-
-                  {/* Subtitle */}
-                  <p className="font-mono text-xs text-slate-500 uppercase tracking-widest mb-4">
-                    {project.subtitle}
-                  </p>
-
-                  {/* Hook */}
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    {project.hook}
-                  </p>
+                  <span className={`font-mono text-[10px] tracking-widest uppercase ${project.tagColor}`}>
+                    {project.tag.replace('[SYS_ID: ', '').replace(']', '')}
+                  </span>
                 </div>
+                <p className="text-slate-400 text-sm leading-relaxed line-clamp-2">
+                  {project.hook}
+                </p>
+              </div>
 
-                {/* Arrow Icon - Bottom Right */}
-                <div className="relative z-10 flex justify-end mt-6">
-                  <ArrowRight
-                    className={`w-8 h-8 text-slate-700 ${project.arrowColor} transition-all duration-300 group-hover:translate-x-1`}
-                  />
-                </div>
-              </Link>
-            </motion.div>
+              {/* Arrow Icon */}
+              <ArrowRight
+                className={`w-5 h-5 text-slate-600 ${project.arrowColor} transition-all duration-300 group-hover:translate-x-1 flex-shrink-0`}
+              />
+            </Link>
           ))}
         </div>
       </div>

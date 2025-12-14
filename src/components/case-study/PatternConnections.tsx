@@ -9,7 +9,7 @@ interface PatternConnectionsProps {
 
 // SVG Icons for pattern schematics
 const ModalFlowIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Outer rectangle (background) */}
     <rect x="4" y="8" width="40" height="32" rx="2" />
     {/* Inner modal rectangle (centered overlay) */}
@@ -23,7 +23,7 @@ const ModalFlowIcon = () => (
 )
 
 const StepperIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Connecting line */}
     <line x1="8" y1="24" x2="40" y2="24" />
     {/* Step 1 - filled */}
@@ -40,7 +40,7 @@ const StepperIcon = () => (
 )
 
 const FilterViewIcon = () => (
-  <svg className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
+  <svg aria-hidden="true" className="w-12 h-12 text-slate-400" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5">
     {/* Main container */}
     <rect x="4" y="8" width="40" height="32" rx="2" />
     {/* Sidebar */}

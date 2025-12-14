@@ -27,7 +27,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
       transition={{ duration: 0.5, delay: 0.3 }}
       className={`w-full border-y border-slate-200 bg-slate-50/50 ${className}`}
     >
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         {/* Desktop: 4 columns with dividers, 2 rows if needed */}
         <div className="hidden lg:block">
           {/* Row 1 */}
@@ -264,12 +264,6 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
               )}
             </>
           )}
-        </div>
-        {/* Footnote for metrics */}
-        <div className="text-center py-2 border-t border-slate-200/50">
-          <p className="text-[9px] text-slate-400 font-mono">
-            Validated through continuous SME, engineering, and support reviews
-          </p>
         </div>
       </div>
     </motion.div>

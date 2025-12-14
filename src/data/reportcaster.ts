@@ -2,7 +2,7 @@ import { CaseStudyData } from '@/types/caseStudy'
 
 export const reportcasterCaseStudy: CaseStudyData = {
   slug: 'reportcaster',
-  heroTitle: 'REPORTCASTER',
+  heroTitle: 'Modernizing a 50-Year-Old Enterprise Scheduler',
   heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
   heroSubtitle:
     'When I joined, this project was waiting in the pipeline. I asked to take it on. I spent months documenting a system that had never been fully mapped — and the architecture I created became "the pattern for everything."',
@@ -122,16 +122,18 @@ export const reportcasterCaseStudy: CaseStudyData = {
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
       summary: 'Asked to be assigned to a deferred project waiting in the pipeline. Built structure from scratch with only sandbox access and tribal knowledge.',
-      // Note: Body and images removed - replaced by SystemArchaeology component for visual impact
-      body: '',
+      body: `I asked to take on this project when I joined. It had been waiting in the pipeline, and I wanted to understand it deeply. I documented the entire system, created the UX architecture, and eventually handed it off to two designers after establishing the foundation.
+
+There was no onboarding deck, no design file, no documented history. Just a sandbox environment and the tribal knowledge of engineers who had worked on it for decades. I spent the first weeks just listening, mapping, and asking questions that revealed how little was actually written down.`,
     },
     {
       id: 'section-02',
       index: 'E',
       title: 'Empathize with the Ecosystem: Understanding Users and Constraints',
       summary: 'Built relationships with support lead and team. Gained access to private internal tickets and historical insights. Anchored redesign on pain customers actually voiced.',
-      // Note: Body content replaced by EmpathizeStrategyGrid component for visual impact
-      body: '',
+      body: `Enterprise security policies blocked direct access to end users. No interviews, no usability tests, no direct feedback loops. This is the reality of B2B enterprise design—you often can't talk to the people using your product.
+
+I found another way. I embedded myself in support calls, built relationships with the support lead, and gained access to years of internal tickets. I discovered that users were hacking the UI just to get their jobs done—creating workarounds for problems the system was never designed to solve.`,
     },
     {
       id: 'section-03',
@@ -154,13 +156,9 @@ Navigate through V1, V2, and V3 below to see how each approach evolved and why t
       v1Data: {
         id: 'version-1',
         title: 'Version 1: Independent Product',
-        body: `My first instinct: match the platform's existing pattern. Designer, Data Flows, and other complex tools each had their own dedicated tab. ReportCaster, given its size and complexity, fit that pattern perfectly.
+        body: `I designed V1 as a standalone product matching existing platform patterns — dedicated scheduling, explorer, and admin in one place.
 
-I designed V1 as a standalone product — one unified place with dedicated scheduling, explorer, and admin. It was beautiful, seamless, and looked exactly like the rest of the product.
-
-But it was rejected. "Leadership wants all workflows to be centralized in the hub to increase adoption."
-
-That was a fair constraint — not a design flaw. They liked the experience, but not the fact that it was outside the hub. So I moved on.`,
+Rejected: "Leadership wants all workflows centralized in the hub." Fair constraint. I moved on.`,
         images: [
           {
             src: '/images/case-study/ReportCaster/RC - V1.3 - Independent version - Home.png',
@@ -187,17 +185,9 @@ That was a fair constraint — not a design flaw. They liked the experience, but
       v2Data: {
         id: 'version-2',
         title: 'Version 2: Plugin Integration',
-        body: `After V1 was rejected, I pivoted. If independence wasn't viable, the next logical step was a plugin.
+        body: `I built a hub-friendly plugin with integrated navigation and consolidated subsystems. This was my favorite version.
 
-The platform had custom plugins already — everything was migrating into the hub. So I thought: "If the reason V1 was rejected is 'it's outside the hub,' then bring RC inside as a plugin."
-
-I built a hub-friendly plugin with fully integrated navigation, consolidated subsystems, and future-proof IA. I loved this version the most.
-
-Again — it worked. But it was rejected. "Too much engineering effort. Too big of an addition this year."
-
-This was a different constraint: not strategic (like V1), but resourcing. The plugin architecture was sound, but it would have required more engineering time than was available.
-
-So I had two rejections. Instead of fighting, I reframed the problem from scratch.`,
+Rejected: "Too much engineering effort this year." Different constraint — resourcing, not strategy. Two rejections. Time to reframe from scratch.`,
         images: [
           {
             src: '/images/case-study/ReportCaster/RC Hub Integration V2.1 - Home - Create new schedule context menu.png',
@@ -224,19 +214,11 @@ So I had two rejections. Instead of fighting, I reframed the problem from scratc
       v3Data: {
         id: 'version-3',
         title: 'Version 3: The Breakthrough (Platform-native Design)',
-        body: `After V2 was rejected, I reframed the problem: instead of asking "Where should RC live?" I asked "How does the platform WANT workflows to behave?"
+        body: `Reframed: "How does the platform WANT workflows to behave?" Every major workflow starts in the + menu. That's platform architecture, not just UI.
 
-That's when I saw it: every major workflow starts in the plus (+) menu. This wasn't UI — it was platform architecture.
+**Aha moment:** If RC is a creation workflow, why not initiate from + menu? Modals worked within legacy FOCUS code without a rewrite. Constraint became advantage.
 
-Aha moment — the + menu insight: If ReportCaster is fundamentally a creation workflow, why isn't it initiated from the + menu?
-
-I designed modal-based creation flows that matched platform conventions. Conversations with the lead architect revealed the Home page was essentially filtered views of assets — I proposed treating RC Explorer as a filtered view, a pattern that could scale to all asset types.
-
-**Technical constraints:** RC was built on legacy FOCUS code with no React or JavaScript. Modals were the right choice because they worked within existing platform infrastructure without requiring a complete rewrite.
-
-This constraint became an advantage — it forced me to design WITH the platform, not against it.
-
-Final solution: Scheduling and lists → modals from + menu. Explorer → filtered RC view in Home. Admin → surfaced in management center.`,
+**Final solution:** Scheduling → modals from + menu. Explorer → filtered view in Home. Admin → management center.`,
         subsections: [
           {
             title: 'Schedule Dialog',
@@ -373,21 +355,17 @@ Final solution: Scheduling and lists → modals from + menu. Explorer → filter
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Aligning and Leading the Team',
-      body: `With the architecture locked, execution began. The challenge: I was redesigning ML Functions simultaneously — two major enterprise systems at once.
+      body: `I was redesigning ML Functions simultaneously — two major enterprise systems at once. This taught me to prioritize ruthlessly: architecture first, polish second.
 
-I iterated through multiple versions of my own design — rebuilding the approach after each round because a cosmetic refresh wasn't enough. The goal was structural clarity.
-
-This taught me to prioritize ruthlessly — architecture first, polish second. I learned to delegate by identifying what only I could do (UX architecture, cross-functional alignment) versus what could be handed off to other designers.
-
-The team could execute because they understood the "why" behind every decision, not just the "what." I onboarded 2 designers mid-project and remained the knowledge hub even after transitioning to other work.`,
+I onboarded 2 designers mid-project and remained the knowledge hub even after transitioning. The team could execute because they understood the "why" behind every decision.`,
     },
     {
       id: 'section-06',
       index: 'N',
       title: 'Navigate Forward: Shipping Impact and Reflection',
-      // Note: Body content replaced by NavigateForwardContent component for better visual hierarchy
-      // Note: Before/After comparison moved to ImpactDiff component in CaseStudyLayout
-      body: '',
+      body: `The request was for a visual refresh. I delivered a foundational system architecture. What started as "make it look better" became "document, unify, and future-proof a 50-year-old system."
+
+This section covers what shipped, how it was received, and the honest reflection on what I'd do differently.`,
     },
   ],
   // ----------------------------

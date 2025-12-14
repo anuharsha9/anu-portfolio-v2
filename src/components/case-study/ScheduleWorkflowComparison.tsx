@@ -87,7 +87,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
             <div className="relative min-h-[420px] bg-[var(--bg-tertiary)] rounded-xl p-4 border border-[var(--border-primary)] overflow-hidden">
               {/* Background Pattern */}
               <div className="absolute inset-0 opacity-5">
-                <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <svg aria-hidden="true" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <pattern id="chaos-grid" width="20" height="20" patternUnits="userSpaceOnUse">
                       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" strokeWidth="0.5" />
@@ -163,7 +163,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
             {/* Header */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <svg className="w-4 h-4 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-4 h-4 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="font-mono text-xs uppercase tracking-widest text-[var(--accent-teal)]">

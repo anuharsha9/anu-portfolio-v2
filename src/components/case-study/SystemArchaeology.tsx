@@ -103,7 +103,7 @@ export default function SystemArchaeology({ isLightBackground = true, caseStudyS
             {/* Hover Overlay */}
             <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-colors duration-300 flex items-center justify-center">
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-2">
-                <svg className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                 </svg>
               </div>
@@ -130,31 +130,16 @@ export default function SystemArchaeology({ isLightBackground = true, caseStudyS
       className="space-y-10"
     >
       {/* THE NARRATIVE: Challenge Block - PUBLIC */}
-      <div className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-8 rounded-r-xl">
-        {/* Tag */}
-        <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-3 block">
-          // CHALLENGE: UNDOCUMENTED_LEGACY
+      <div className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-6 rounded-r-xl">
+        <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-2 block">
+          // UNDOCUMENTED_LEGACY
         </span>
-
-        {/* Headline */}
-        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl mb-4">
-          The Archaeological Dig.
+        <h3 className="font-serif text-slate-900 text-xl md:text-2xl mb-3">
+          50-year-old black box. Zero documentation.
         </h3>
-
-        {/* Body - Discovery/System Understanding */}
-        <p className="text-slate-700 text-base md:text-lg leading-relaxed mb-4">
-          ReportCaster wasn&apos;t just a deferred project; it was a <strong className="text-slate-900">50-year-old black box</strong>. With zero documentation and the original engineers long gone, I had to reverse-engineer the system logic from code, sandboxes, and tribal knowledge.
+        <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+          Project deferred for years — I asked for it. Reverse-engineered the system from sandboxes, tribal knowledge, and the customer support lead who was the real SME. Weeks of discovery before any design.
         </p>
-
-        {/* LP-aligned: OWNERSHIP + DIVE DEEP */}
-        <div className="mt-6 space-y-4 text-slate-700 text-base leading-relaxed">
-          <p>
-            <strong className="text-slate-900">The project had been deferred for years</strong> — too massive and complicated to prioritize. I happened to join at the right time and asked to be assigned. What others saw as daunting, I saw as a massive opportunity.
-          </p>
-          <p>
-            I worked directly with the one SME who knew the historical logic — and <strong className="text-slate-900">spent weeks understanding the full architecture before designing</strong>. I dug into decades-old workflows, edge cases, and inconsistencies. I treated the system like a mystery to solve, not a spec to follow.
-          </p>
-        </div>
       </div>
 
       {/* THE EVIDENCE GRID: Legacy Audit Files - LOCKED */}

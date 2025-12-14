@@ -101,12 +101,12 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
   const summaryColor = isLightBackground ? 'text-slate-600' : 'text-slate-300'
 
   return (
-    <div className="w-full py-12 md:py-16">
+    <div className="w-full py-10 md:py-12">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
+        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
       >
         <span className="font-mono text-xs text-[var(--accent-violet)] uppercase tracking-widest block mb-4">
           // ARCHITECTURE_BLUEPRINT
@@ -119,7 +119,7 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
         </p>
       </motion.div>
 
-      <div className="max-w-[1400px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 md:grid-cols-2 gap-6">
         {blueprintItems.map((item, index) => (
           <BlueprintItem
             key={index}
@@ -135,7 +135,7 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-12"
+        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mt-12"
       >
         <div className="bg-slate-900 rounded-xl p-6">
           <div className="flex items-start gap-3">
@@ -143,8 +143,8 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
               &gt; DESIGN_PRINCIPLE:
             </span>
             <p className="text-slate-300 text-sm leading-relaxed">
-              Every architectural decision optimized for <span className="text-[var(--accent-violet)] font-medium">pattern consistency</span>. 
-              Same navigation logic, same data selection flow, same error handling—regardless of which feature you're using. 
+              Every architectural decision optimized for <span className="text-[var(--accent-violet)] font-medium">pattern consistency</span>.
+              Same navigation logic, same data selection flow, same error handling—regardless of which feature you're using.
               Learn one workflow, know them all.
             </p>
           </div>

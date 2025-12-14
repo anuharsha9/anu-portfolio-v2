@@ -74,14 +74,14 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8 }}
-      className="bg-slate-950 py-16 md:py-24 -mx-4 xs:-mx-5 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
+      className="bg-slate-950 py-10 md:py-14 -mx-4 xs:-mx-5 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
     >
-      <div className="max-w-[1200px] mx-auto space-y-10">
+      <div className="max-w-[1440px] mx-auto space-y-10">
         {/* ============================================
             HEADER (The Hook)
             ============================================ */}
@@ -99,7 +99,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           </motion.div>
 
           {/* Headline */}
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -110,7 +110,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           </motion.h2>
 
           {/* Subhead */}
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -121,7 +121,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           </motion.p>
 
           {/* Pro Video Control Toggle */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -130,31 +130,28 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           >
             <button
               onClick={() => setActiveVideo('before')}
-              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                activeVideo === 'before'
-                  ? 'bg-slate-800 text-white shadow-lg'
-                  : 'text-slate-500 hover:text-white'
-              }`}
+              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeVideo === 'before'
+                ? 'bg-slate-800 text-white shadow-lg'
+                : 'text-slate-500 hover:text-white'
+                }`}
             >
               Before
             </button>
             <button
               onClick={() => setActiveVideo('both')}
-              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                activeVideo === 'both'
-                  ? 'bg-slate-800 text-white shadow-lg'
-                  : 'text-slate-500 hover:text-white'
-              }`}
+              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeVideo === 'both'
+                ? 'bg-slate-800 text-white shadow-lg'
+                : 'text-slate-500 hover:text-white'
+                }`}
             >
               Side-by-Side
             </button>
             <button
               onClick={() => setActiveVideo('after')}
-              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                activeVideo === 'after'
-                  ? 'bg-slate-800 text-white shadow-lg'
-                  : 'text-slate-500 hover:text-white'
-              }`}
+              className={`px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeVideo === 'after'
+                ? 'bg-slate-800 text-white shadow-lg'
+                : 'text-slate-500 hover:text-white'
+                }`}
             >
               After
             </button>
@@ -164,7 +161,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
         {/* ============================================
             VIDEO STAGE (The Monitors)
             ============================================ */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -172,9 +169,8 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           className="bg-slate-900/50 rounded-2xl p-4 md:p-6 lg:p-8 border border-slate-800"
         >
           <div
-            className={`grid gap-6 ${
-              activeVideo === 'both' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 max-w-4xl mx-auto'
-            }`}
+            className={`grid gap-6 ${activeVideo === 'both' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 max-w-4xl mx-auto'
+              }`}
           >
             {/* BEFORE Video */}
             {(activeVideo === 'before' || activeVideo === 'both') && (
@@ -193,7 +189,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
                   {!isBeforeVideoPublic && !isUnlocked ? (
                     /* Locked State */
                     <div className="absolute inset-0 bg-slate-900">
-                      <div 
+                      <div
                         className="absolute inset-0 opacity-20"
                         style={{
                           backgroundImage: `
@@ -209,7 +205,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center space-y-3">
                           <div className="w-16 h-16 mx-auto rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg aria-hidden="true" className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                           </div>
@@ -257,7 +253,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
                     <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
                       <div className="text-center space-y-3">
                         <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 border border-[var(--accent-teal)]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <svg className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg aria-hidden="true" className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                           </svg>
                         </div>
@@ -328,7 +324,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
           ============================================ */}
       {showPasswordModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="bg-slate-900 rounded-2xl p-8 max-w-md w-full border border-slate-700 shadow-2xl"
@@ -336,7 +332,7 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
             <div className="space-y-6">
               <div className="text-center space-y-2">
                 <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 flex items-center justify-center mb-4">
-                  <svg className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg aria-hidden="true" className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
@@ -346,15 +342,18 @@ export default function BeforeAfterVideo({ before, after, isLightBackground = fa
                 </p>
               </div>
               <form onSubmit={(e) => { e.preventDefault(); handleUnlock() }} className="space-y-4">
+                <label htmlFor="video-password-input" className="sr-only">Password</label>
                 <input
+                  id="video-password-input"
                   type="password"
                   value={passwordInput}
                   onChange={(e) => { setPasswordInput(e.target.value); setPasswordError('') }}
                   placeholder="Enter password"
+                  aria-label="Enter password to unlock video"
                   className="w-full px-4 py-3 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-[var(--accent-teal)]/50 focus:ring-2 focus:ring-[var(--accent-teal)]/20 transition-all"
                   autoFocus
                 />
-                {passwordError && <p className="text-red-400 text-sm">{passwordError}</p>}
+                {passwordError && <p role="alert" className="text-red-400 text-sm">{passwordError}</p>}
                 <div className="flex gap-3">
                   <button
                     type="button"

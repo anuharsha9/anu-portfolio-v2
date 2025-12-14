@@ -5,9 +5,9 @@ import { reportcasterCaseStudy } from '@/data/reportcaster'
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
 export const metadata: Metadata = {
-  title: 'ReportCaster: Redesigning a 50-Year-Old Enterprise Scheduler',
+  title: 'Modernizing a 50-Year-Old Enterprise Scheduler',
   description:
-    'How I redesigned ReportCaster, a 40-year-old enterprise scheduling tool, unifying 5 scattered subsystems and eliminating tab sprawl. A case study in legacy system modernization and enterprise UX.',
+    'How I redesigned ReportCaster, a 50-year-old enterprise scheduling tool, unifying 5 scattered subsystems and eliminating tab sprawl. A case study in legacy system modernization and enterprise UX.',
   keywords: [
     'ReportCaster',
     'Enterprise UX',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'System Redesign',
   ],
   openGraph: {
-    title: 'ReportCaster: Redesigning a 50-Year-Old Enterprise Scheduler | Anuja Harsha',
+    title: 'Modernizing a 50-Year-Old Enterprise Scheduler | Anuja Harsha',
     description:
       'How I redesigned ReportCaster, unifying 5 scattered subsystems and eliminating tab sprawl. A case study in legacy system modernization.',
     url: `${siteUrl}/work/reportcaster/`,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ReportCaster: Redesigning a 50-Year-Old Enterprise Scheduler',
+    title: 'Modernizing a 50-Year-Old Enterprise Scheduler',
     description:
       'How I redesigned ReportCaster, unifying 5 scattered subsystems and eliminating tab sprawl.',
     images: ['/images/case-study/ReportCaster/rc-cover.png'],

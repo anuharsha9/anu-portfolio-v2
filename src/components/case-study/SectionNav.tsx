@@ -138,7 +138,7 @@ export default function SectionNav({ sections }: SectionNavProps) {
           }}
         >
           {/* Tab Links - Centered */}
-          <div className="flex items-center justify-center gap-6 md:gap-8 px-4 md:px-8 h-full min-w-max max-w-[1200px] mx-auto">
+          <div className="flex items-center justify-center gap-6 md:gap-8 px-4 md:px-8 h-full min-w-max max-w-[1440px] mx-auto">
             {sections.map((section) => {
               const isActive = activeSection === section.id
               const rawFirstWord = section.title.split(' ')[0]

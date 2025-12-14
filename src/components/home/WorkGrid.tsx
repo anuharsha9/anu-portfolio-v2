@@ -50,24 +50,19 @@ export default function WorkGrid() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section id="work-overview" className="bg-slate-50 py-16 md:py-24">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Section Header with WebFOCUS Context */}
+    <section id="work-overview" className="pt-10 pb-12 md:pt-12 md:pb-16">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+        {/* Visually hidden heading for accessibility - maintains heading hierarchy */}
+        <h2 className="sr-only">Featured Case Studies</h2>
+
+        {/* Context - no heading, just the explanation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-center mb-12 md:mb-16"
+          className="max-w-2xl mb-8 md:mb-10"
         >
-          <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest block mb-4">
-            // RECENT_WORK
-          </span>
-
-          <h2 className="font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl mb-6">
-            Modernizing WebFOCUS
-          </h2>
-
-          <p className="text-slate-600 text-lg leading-relaxed mb-6">
+          <p className="text-slate-600 text-lg leading-relaxed mb-4">
             I shaped the product direction of{' '}
             <a
               href="https://www.ibi.com/products/ibi-webfocus"
@@ -77,10 +72,8 @@ export default function WorkGrid() {
             >
               ibi™ WebFOCUS®
             </a>
-            —an enterprise analytics platform powering 20M+ schedules weekly. I modernized its core workflows and created patterns that scaled across the platform.
+            —an enterprise analytics platform powering 25M+ users. I modernized its core workflows and created patterns that scaled across the platform.
           </p>
-
-          {/* Skimmer hint */}
           <p className="text-slate-500 text-sm">
             Start with <Link href="/work/reportcaster" className="text-[var(--accent-teal)] hover:underline font-medium">ReportCaster</Link> — the flagship transformation.
           </p>
@@ -118,8 +111,8 @@ export default function WorkGrid() {
                     {/* Locked Badge - Overlay on terminal */}
                     {study.locked && (
                       <div className="absolute top-9 right-4 z-10">
-                        <div className="bg-slate-900/80 backdrop-blur-sm rounded-full p-2">
-                          <Lock className="w-4 h-4 text-white" />
+                        <div className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-md">
+                          <Lock className="w-4 h-4 text-slate-500" />
                         </div>
                       </div>
                     )}

@@ -101,21 +101,25 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'D',
       title: 'Discover: The Strategic Problem',
       summary: 'WebFOCUS had three powerful data science tools — but nobody could find them. This started as a concept in the annual roadmap. I took it from idea to shipped architecture.',
-      // Components: IQBusinessCase, then IQWorkflowsBuilt + IQNLQInsightsShowcase showing what I owned
+      body: `WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping. None were legacy. They just weren't visible. Users didn't know they existed because each lived in a different corner of the platform.
+
+I owned all three workflows simultaneously and unified them into one discoverable DSML Hub.`,
     },
     {
       id: 'section-02',
       index: 'E',
       title: 'Empathize: Who We\'re Building For',
       summary: 'We were building for business users, not just BI experts. The challenge was making data science accessible without hiding its power.',
-      // Components: IQPersonaCards (locked)
+      body: `Two primary personas: data scientists who needed depth and control, and business users who needed simplicity and guidance. They had completely different mental models — but we needed one entry point for both.
+
+The solution was layered disclosure: approachable on the surface, powerful underneath.`,
     },
     {
       id: 'section-03',
       index: 'S',
       title: 'Simplify: The Architecture',
       summary: 'I unified three entry points into one. I defined the architecture before any tickets existed, ensured pattern parity across all features, and made everything responsive.',
-      // Components: IQPluginArchitecture, IQArchitectureBlueprint (locked), IQEvolution (locked)
+      body: `Mockups first — tickets followed. Pattern parity across all three features. Fully responsive. No new infrastructure; built within existing Hub ecosystem.`,
     },
     {
       id: 'section-04',
@@ -130,7 +134,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
       index: 'G',
       title: 'Grow: Constraints & Decisions',
       summary: 'I built within the existing Hub ecosystem — no new infrastructure required. I defined the architecture and base screens, then handed off to two designers.',
-      // Components: IQEmptyStateShowcase
+      body: `Handed off to two designers after establishing clear patterns. The Hub ecosystem constraint became an advantage: faster development, familiar patterns.`,
     },
     {
       id: 'section-06',

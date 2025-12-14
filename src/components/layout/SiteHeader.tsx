@@ -70,10 +70,11 @@ export default function SiteHeader() {
         position: 'fixed',
       }}
     >
-      <nav className="max-w-[1200px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]">
+      <nav className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]">
         {/* Logo - positioned absolutely on the left */}
         <Link
           href="/"
+          aria-label="Go to homepage"
           className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
         >
           <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[var(--accent-teal)] transition-all duration-300">
@@ -119,7 +120,7 @@ export default function SiteHeader() {
           {/* Let's Talk - Primary CTA */}
           <Link
             href="/#lets-talk"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-teal)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-700)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
           >
             <span>Let&apos;s Talk</span>
           </Link>

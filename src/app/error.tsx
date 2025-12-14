@@ -19,26 +19,26 @@ export default function Error({
   }, [error])
 
   return (
-    <main className="min-h-screen surface-dark flex items-center justify-center px-6">
+    <main className="min-h-screen bg-slate-50 flex items-center justify-center px-6">
       <div className="max-w-2xl mx-auto text-center space-y-8">
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <div className="w-16 h-16">
-            <SignatureLogo className="w-full h-full text-white" />
+            <SignatureLogo className="w-full h-full text-slate-900" />
           </div>
         </div>
 
         {/* Error Text */}
         <div className="space-y-4">
-          <h1 className="text-6xl md:text-8xl font-serif text-white font-bold">500</h1>
-          <h2 className="text-2xl md:text-3xl font-serif text-white/80">
+          <h1 className="text-6xl md:text-8xl font-serif text-slate-900 font-bold">500</h1>
+          <h2 className="text-2xl md:text-3xl font-serif text-slate-700">
             Something went wrong
           </h2>
-          <p className="text-white/60 text-base md:text-lg max-w-md mx-auto leading-relaxed">
+          <p className="text-slate-500 text-base md:text-lg max-w-md mx-auto leading-relaxed">
             We encountered an unexpected error. Please try again or return to the homepage.
           </p>
           {error.digest && (
-            <p className="text-white/40 text-xs font-mono mt-2">
+            <p className="text-slate-400 text-xs font-mono mt-2">
               Error ID: {error.digest}
             </p>
           )}
@@ -48,10 +48,11 @@ export default function Error({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
           <button
             onClick={reset}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal)]/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
             aria-label="Try again"
           >
             <svg
+              aria-hidden="true"
               className="w-4 h-4"
               fill="none"
               stroke="currentColor"
@@ -68,9 +69,10 @@ export default function Error({
           </button>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium transition-all duration-300 hover:border-white/40 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 text-slate-700 text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400"
           >
             <svg
+              aria-hidden="true"
               className="w-4 h-4"
               fill="none"
               stroke="currentColor"

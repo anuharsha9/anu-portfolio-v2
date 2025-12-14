@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
 import HeroSplit from '@/components/home/HeroSplit'
+import ImpactMetrics from '@/components/home/ImpactMetrics'
 import WorkGrid from '@/components/home/WorkGrid'
 import TransformationShowcase from '@/components/home/TransformationShowcase'
 import GrowthStory from '@/components/home/GrowthStory'
 import WritingSection from '@/components/home/WritingSection'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TalkSection from '@/components/home/TalkSection'
+import ScrollGear from '@/components/ui/ScrollGear'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
@@ -38,27 +40,19 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
-      {/* 1. HERO - Dark, dramatic, gears as the centerpiece */}
+    <main className="bg-white relative overflow-hidden">
+      {/* Content */}
       <HeroSplit />
-
-      {/* 2. WORK - Case studies (Light) */}
+      <ImpactMetrics />
       <WorkGrid />
-
-      {/* 3. TRANSFORMATION - Before/after slider (Dark - creates rhythm) */}
       <TransformationShowcase />
-
-      {/* 4. ARCHIVE - Past Work (White - subtle difference from slate-50) */}
       <CollapsibleWorkArchive />
-
-      {/* 5. QUOTE - Leadership testimonials (Light slate-50) */}
       <GrowthStory />
-
-      {/* 6. WRITING - Articles & thought leadership (Dark - creates rhythm) */}
       <WritingSection />
-
-      {/* 7. CONTACT - CTA (Dark) */}
       <TalkSection />
-    </>
+
+      {/* Scroll-linked rotating gear - branded progress indicator */}
+      <ScrollGear />
+    </main>
   )
 }
