@@ -8,6 +8,7 @@ import WritingSection from '@/components/home/WritingSection'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TalkSection from '@/components/home/TalkSection'
 import ScrollGear from '@/components/ui/ScrollGear'
+import PortfolioVeil from '@/components/ui/PortfolioVeil'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
@@ -40,19 +41,24 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="bg-white relative overflow-hidden">
-      {/* Content */}
-      <HeroSplit />
-      <ImpactMetrics />
-      <WorkGrid />
-      <TransformationShowcase />
-      <CollapsibleWorkArchive />
-      <GrowthStory />
-      <WritingSection />
-      <TalkSection />
+    <>
+      {/* Portfolio Veil - covers the page until user clicks "Enter my Portfolio" */}
+      <PortfolioVeil />
 
-      {/* Scroll-linked rotating gear - branded progress indicator */}
-      <ScrollGear />
-    </main>
+      <main className="bg-white relative overflow-hidden">
+        {/* Content */}
+        <HeroSplit />
+        <ImpactMetrics />
+        <WorkGrid />
+        <TransformationShowcase />
+        <CollapsibleWorkArchive />
+        <GrowthStory />
+        <WritingSection />
+        <TalkSection />
+
+        {/* Scroll-linked rotating gear - branded progress indicator */}
+        <ScrollGear />
+      </main>
+    </>
   )
 }

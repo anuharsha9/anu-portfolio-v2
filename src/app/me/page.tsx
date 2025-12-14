@@ -14,7 +14,7 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white relative overflow-hidden">
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 1: THE INVITATION
-          Video-first. Personal. "53 seconds. That's all I ask."
+          Video-first. Personal. "52 seconds. That's all I ask."
       ═══════════════════════════════════════════════════════════════════════ */}
       <MotionSection id="profile" className="py-12 md:py-16 lg:py-20 relative overflow-hidden min-h-screen flex items-center">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
@@ -42,7 +42,7 @@ export default function AboutPage() {
 
             {/* Main headline */}
             <h1 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
-              53 seconds.<br />
+              52 seconds.<br />
               <span className="text-slate-500">That&apos;s all I ask.</span>
             </h1>
 
@@ -62,7 +62,7 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <span className="font-mono text-[var(--accent-teal)] text-[10px] tracking-widest">
-                    53s
+                    52s
                   </span>
                 </div>
 
