@@ -15,7 +15,7 @@ export default function AboutPage() {
           SECTION 1: THE INVITATION
           Video-first. Personal. "53 seconds. That's all I ask."
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection id="profile" className="bg-slate-900 py-20 md:py-28 lg:py-36 relative overflow-hidden">
+      <MotionSection id="profile" className="bg-slate-900 py-12 md:py-16 lg:py-20 relative overflow-hidden min-h-screen flex items-center">
         {/* Subtle grid background */}
         <div
           className="absolute inset-0 opacity-[0.02]"
@@ -31,7 +31,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center space-y-8"
+            className="text-center space-y-5"
           >
             {/* Pre-headline */}
             <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
@@ -39,28 +39,28 @@ export default function AboutPage() {
             </span>
 
             {/* Main headline */}
-            <h1 className="font-serif text-white text-4xl md:text-5xl lg:text-6xl leading-tight">
+            <h1 className="font-serif text-white text-3xl md:text-4xl lg:text-5xl leading-tight">
               53 seconds.<br />
               <span className="text-slate-400">That&apos;s all I ask.</span>
             </h1>
 
-            {/* Video - THE HERO */}
-            <div className="max-w-lg mx-auto">
-              <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
+            {/* Video - THE HERO (compact) */}
+            <div className="max-w-sm mx-auto">
+              <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden shadow-2xl">
                 {/* Window Header Bar */}
-                <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-700">
-                  <div className="flex items-center gap-3">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="flex items-center justify-between px-3 py-2 bg-slate-900/90 border-b border-slate-700">
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-1">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
                     </div>
-                    <span className="font-mono text-slate-500 text-xs">
+                    <span className="font-mono text-slate-500 text-[10px]">
                       meet_anuja.mp4
                     </span>
                   </div>
-                  <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest">
-                    [PERSONAL_INTRO]
+                  <span className="font-mono text-[var(--accent-teal)] text-[10px] tracking-widest">
+                    53s
                   </span>
                 </div>
 
@@ -73,16 +73,16 @@ export default function AboutPage() {
             </div>
 
             {/* Post-video hook */}
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-400 text-base max-w-xl mx-auto leading-relaxed">
               I&apos;m a Principal Product Designer who builds, not just designs.<br />
               <span className="text-white font-medium">This portfolio is my proof.</span>
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <Link
                 href="/#work-overview"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal)] text-white font-medium hover:bg-[var(--accent-teal-700)] transition-all hover:scale-105 shadow-lg"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--accent-teal)] text-white text-sm font-medium hover:bg-[var(--accent-teal-700)] transition-all hover:scale-105 shadow-lg"
               >
                 <span>See the Work</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,20 +91,49 @@ export default function AboutPage() {
               </Link>
               <a
                 href="mailto:anujanimmagadda@gmail.com"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-600 text-white font-medium hover:border-slate-400 hover:bg-slate-800/50 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-600 text-white text-sm font-medium hover:border-slate-400 hover:bg-slate-800/50 transition-all"
               >
                 <span>Let&apos;s Talk</span>
               </a>
             </div>
 
+            {/* Built with AI - Side Project */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="pt-8 space-y-4"
+            >
+              <p className="text-slate-500 text-sm">
+                This portfolio is my AI side project — designed and shipped in 30 days.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {[
+                  { name: 'Cursor', icon: '⌨️' },
+                  { name: 'Claude', icon: '🧠' },
+                  { name: 'v0', icon: '▲' },
+                  { name: 'Figma', icon: '🎨' },
+                  { name: 'Vercel', icon: '●' },
+                ].map((tool) => (
+                  <span
+                    key={tool.name}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-mono hover:border-[var(--accent-teal)]/50 hover:text-white transition-colors"
+                  >
+                    <span>{tool.icon}</span>
+                    <span>{tool.name}</span>
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Personal Signature */}
             <motion.div
-              className="pt-12 flex flex-col items-center gap-2"
+              className="pt-4 flex flex-col items-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5, duration: 0.8 }}
             >
-              <div className="w-14 h-14 text-slate-500 hover:text-[var(--accent-teal)] transition-colors duration-500">
+              <div className="w-10 h-10 text-slate-600 hover:text-[var(--accent-teal)] transition-colors duration-500">
                 <AnimatedSignatureLogo
                   className="w-full h-full"
                   duration={10000}
