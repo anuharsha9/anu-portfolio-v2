@@ -1,8 +1,5 @@
 'use client'
 
-import Link from 'next/link'
-import { ExternalLink } from 'lucide-react'
-
 interface FrameworkPrinciple {
   letter: string
   title: string
@@ -35,13 +32,6 @@ export default function FrameworkMatrix({
         <h2 className="text-slate-900 text-xl md:text-2xl font-serif">
           D.E.S.I.G.N. Framework Applied
         </h2>
-        <Link
-          href="/me#design-framework"
-          className="inline-flex items-center gap-1.5 text-[var(--accent-teal)] hover:text-[var(--accent-teal-700)] text-xs font-mono uppercase tracking-widest transition-colors duration-200 group"
-        >
-          <span>Full framework</span>
-          <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-        </Link>
       </div>
 
       {/* The Matrix Grid */}
