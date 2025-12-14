@@ -27,19 +27,12 @@ const MotionSection = forwardRef<HTMLElement, MotionSectionProps>(
         <motion.section
           ref={ref}
           id={id}
-          className={`${className || ''} motion-section-hidden`}
-          style={{
-            ...style,
-            willChange: 'opacity, transform', // GPU acceleration
-            backfaceVisibility: 'hidden', // Prevent flickering
-            // Don't set opacity/visibility here - let CSS and variants handle it
-          }}
+          className={className || ''}
+          style={style}
           variants={sectionReveal}
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig}
-        // Prevent re-triggering on scroll - let Framer Motion handle visibility
-        // Removed direct DOM manipulation to prevent conflicts
         >
           {children}
         </motion.section>

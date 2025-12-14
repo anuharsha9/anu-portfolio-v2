@@ -879,31 +879,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Optimize motion sections and prevent flickering - CRITICAL FIX */
+/* Optimize motion sections for GPU acceleration */
 section[data-framer-component],
-[data-framer-name],
-.motion-section-hidden {
+[data-framer-name] {
   will-change: opacity, transform;
-  transform: translateZ(0);
-  /* Force GPU layer */
   backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* CRITICAL: Ensure motion sections start hidden to prevent flash */
-/* Motion sections start hidden - but let Framer Motion control visibility */
-.motion-section-hidden {
-  /* Don't force hidden with !important - let Framer Motion variants control it */
-  /* Framer Motion will handle opacity and visibility via variants */
-}
-
-/* CRITICAL: All motion.div elements start hidden - but let Framer Motion control it */
-/* Removed !important to prevent conflicts with Framer Motion state management */
-[data-framer-component][data-initial="hidden"],
-motion.div[data-initial="hidden"],
-motion.section[data-initial="hidden"] {
-  opacity: 0;
-  visibility: hidden;
 }
 
 /* Loading screen gear animation */
