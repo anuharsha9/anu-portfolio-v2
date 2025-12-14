@@ -30,13 +30,16 @@ aws s3 sync out/ s3://anujaharsha.com/ \
   --exclude "*.txt" \
   --exclude "*.json"
 
-# Upload HTML files with no cache
-aws s3 sync out/ s3://anujaharsha.com/ \
-  --region us-east-1 \
-  --cache-control "public, max-age=0, must-revalidate" \
-  --content-type "text/html" \
-  --include "*.html" \
-  --exclude "*"
+# Upload HTML files with no cache (use find to handle nested directories)
+echo "📄 Uploading HTML files..."
+find out -name "*.html" -type f | while read -r file; do
+  # Get relative path from out/
+  relative_path="${file#out/}"
+  aws s3 cp "$file" "s3://anujaharsha.com/$relative_path" \
+    --region us-east-1 \
+    --cache-control "public, max-age=0, must-revalidate" \
+    --content-type "text/html"
+done
 
 # Upload sitemap and robots.txt
 if [ -f "out/sitemap.xml" ]; then
