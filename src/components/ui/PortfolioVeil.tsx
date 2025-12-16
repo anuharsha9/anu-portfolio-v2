@@ -59,7 +59,7 @@ export default function PortfolioVeil() {
       {showVeil && (
         <motion.div
           key="portfolio-veil"
-          className="fixed inset-0 z-[9998] bg-white overflow-y-auto"
+          className="fixed inset-0 z-[9998] bg-white overflow-hidden"
           initial={{ opacity: 1, y: 0 }}
           exit={{
             opacity: 0,
@@ -74,7 +74,7 @@ export default function PortfolioVeil() {
           }}
         >
           {/* Main Content Container */}
-          <div className="min-h-screen flex items-center justify-center py-12 md:py-16 lg:py-20 relative overflow-hidden">
+          <div className="h-screen flex items-center justify-center py-6 md:py-8 relative overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
