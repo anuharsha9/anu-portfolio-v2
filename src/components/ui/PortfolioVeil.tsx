@@ -144,11 +144,8 @@ export default function PortfolioVeil() {
                   </div>
                 </div>
 
-                {/* Text block - narrative flow */}
-                <div className="max-w-4xl mx-auto mb-4 space-y-2">
-                  <p className="text-slate-600 text-base leading-relaxed">
-                    Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
-                  </p>
+                {/* Text block - story beats */}
+                <div className="max-w-4xl mx-auto mb-5">
                   <p className="text-slate-700 text-base whitespace-nowrap">
                     <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
                     <span className="mx-3 text-slate-300">·</span>
