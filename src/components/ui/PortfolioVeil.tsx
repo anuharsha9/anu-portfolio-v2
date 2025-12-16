@@ -122,8 +122,8 @@ export default function PortfolioVeil() {
                   <span className="text-slate-500">That&apos;s all I ask.</span>
                 </h1>
 
-                {/* Video - Constrained height on mobile */}
-                <div className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm mx-auto mb-4 sm:mb-5">
+                {/* Video - Balanced size on mobile */}
+                <div className="w-full max-w-[260px] sm:max-w-xs md:max-w-sm mx-auto mb-4 sm:mb-5">
                   <div className="relative bg-white border border-slate-200 rounded-lg sm:rounded-xl overflow-hidden shadow-lg sm:shadow-xl">
                     {/* Window Header Bar */}
                     <div className="flex items-center justify-between px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-100 border-b border-slate-200">
