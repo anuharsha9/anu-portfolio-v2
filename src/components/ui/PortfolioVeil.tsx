@@ -116,8 +116,8 @@ export default function PortfolioVeil() {
                   </div>
                 </motion.div>
 
-                {/* Main headline - Compact on mobile */}
-                <h1 className="font-serif text-slate-900 text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight mb-2 sm:mb-4">
+                {/* Main headline */}
+                <h1 className="font-serif text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight mb-2 sm:mb-4">
                   52 seconds.<br />
                   <span className="text-slate-500">That&apos;s all I ask.</span>
                 </h1>
