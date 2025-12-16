@@ -105,7 +105,7 @@ export default function PortfolioVeil() {
                 </h1>
 
                 {/* Video - THE HERO (compact) */}
-                <div className="max-w-[340px] mx-auto mb-5">
+                <div className="max-w-sm mx-auto mb-5">
                   <div className="relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xl">
                     {/* Window Header Bar */}
                     <div className="flex items-center justify-between px-3 py-2 bg-slate-100 border-b border-slate-200">
