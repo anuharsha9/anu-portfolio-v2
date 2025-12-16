@@ -30,6 +30,18 @@ export default function PortfolioVeil() {
     }
   }, [])
 
+  // Hide body scroll when veil is visible
+  useEffect(() => {
+    if (showVeil && shouldRender) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [showVeil, shouldRender])
+
   const handleEnter = useCallback(() => {
     // Store in session so it doesn't show again during same session
     sessionStorage.setItem(VEIL_SESSION_KEY, 'true')
