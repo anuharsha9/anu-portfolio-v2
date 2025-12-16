@@ -97,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         {/* Viewport meta for responsive design */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
@@ -110,7 +110,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         {/* Preload critical assets for faster LCP */}
         <link rel="preload" href="/assets/brain-gears.svg" as="fetch" crossOrigin="anonymous" />
-        <link rel="preload" href="/videos/intro-video.mp4" as="video" type="video/mp4" />
         {/* Font optimization: preconnect and font-display swap for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
