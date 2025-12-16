@@ -76,6 +76,16 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' },
+    ],
+  },
   other: {
     'google-fonts': 'Inter Tight',
   },
@@ -91,14 +101,16 @@ export default function RootLayout({
       <head>
         {/* Viewport meta for responsive design */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
-        {/* Favicon - Signature Logo */}
+        {/* Favicon - Multiple formats for best compatibility */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/brand/signature/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/brand/signature/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/brand/signature/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        {/* Preload hero gears SVG for faster initial load */}
+        {/* Preload critical assets for faster LCP */}
         <link rel="preload" href="/assets/brain-gears.svg" as="fetch" crossOrigin="anonymous" />
+        <link rel="preload" href="/videos/intro-video.mp4" as="video" type="video/mp4" />
         {/* Font optimization: preconnect and font-display swap for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
