@@ -105,21 +105,21 @@ export default function PortfolioVeil() {
                 </h1>
 
                 {/* Video - THE HERO (compact) */}
-                <div className="max-w-[280px] mx-auto mb-5">
+                <div className="max-w-[340px] mx-auto mb-5">
                   <div className="relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xl">
                     {/* Window Header Bar */}
-                    <div className="flex items-center justify-between px-2.5 py-1.5 bg-slate-100 border-b border-slate-200">
-                      <div className="flex items-center gap-1.5">
+                    <div className="flex items-center justify-between px-3 py-2 bg-slate-100 border-b border-slate-200">
+                      <div className="flex items-center gap-2">
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 rounded-full bg-red-400" />
-                          <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                          <div className="w-2 h-2 rounded-full bg-green-400" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                         </div>
-                        <span className="font-mono text-slate-500 text-[9px]">
+                        <span className="font-mono text-slate-500 text-[10px]">
                           meet_anuja.mp4
                         </span>
                       </div>
-                      <span className="font-mono text-[var(--accent-teal)] text-[9px] tracking-widest">
+                      <span className="font-mono text-[var(--accent-teal)] text-[10px] tracking-widest">
                         52s
                       </span>
                     </div>

@@ -25,3 +25,4 @@ const MotionDiv = forwardRef<HTMLDivElement, MotionDivProps>(
 MotionDiv.displayName = 'MotionDiv'
 
 export default MotionDiv
+

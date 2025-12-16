@@ -40,3 +40,4 @@ for (const file of files) {
 }
 
 console.log('\n✅ Cleanup complete')
+
