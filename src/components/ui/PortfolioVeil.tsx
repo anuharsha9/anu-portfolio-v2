@@ -84,12 +84,12 @@ export default function PortfolioVeil() {
               >
                 {/* Logo mark at top */}
                 <motion.div
-                  className="mb-6 flex justify-center"
+                  className="mb-4 flex justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <div className="w-12 h-12 text-[var(--accent-teal)]">
+                  <div className="w-10 h-10 text-[var(--accent-teal)]">
                     <AnimatedSignatureLogo
                       className="w-full h-full"
                       duration={10000}
@@ -99,27 +99,27 @@ export default function PortfolioVeil() {
                 </motion.div>
 
                 {/* Main headline */}
-                <h1 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+                <h1 className="font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl leading-tight mb-4">
                   52 seconds.<br />
                   <span className="text-slate-500">That&apos;s all I ask.</span>
                 </h1>
 
                 {/* Video - THE HERO (compact) */}
-                <div className="max-w-sm mx-auto mb-8">
+                <div className="max-w-[280px] mx-auto mb-5">
                   <div className="relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xl">
                     {/* Window Header Bar */}
-                    <div className="flex items-center justify-between px-3 py-2 bg-slate-100 border-b border-slate-200">
-                      <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between px-2.5 py-1.5 bg-slate-100 border-b border-slate-200">
+                      <div className="flex items-center gap-1.5">
                         <div className="flex gap-1">
-                          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                          <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                          <div className="w-2 h-2 rounded-full bg-red-400" />
+                          <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                          <div className="w-2 h-2 rounded-full bg-green-400" />
                         </div>
-                        <span className="font-mono text-slate-500 text-[10px]">
+                        <span className="font-mono text-slate-500 text-[9px]">
                           meet_anuja.mp4
                         </span>
                       </div>
-                      <span className="font-mono text-[var(--accent-teal)] text-[10px] tracking-widest">
+                      <span className="font-mono text-[var(--accent-teal)] text-[9px] tracking-widest">
                         52s
                       </span>
                     </div>
@@ -133,7 +133,7 @@ export default function PortfolioVeil() {
                 </div>
 
                 {/* Text block - narrative flow */}
-                <div className="max-w-4xl mx-auto mb-6 space-y-3">
+                <div className="max-w-4xl mx-auto mb-4 space-y-2">
                   <p className="text-slate-600 text-base leading-relaxed">
                     Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
                   </p>
@@ -151,7 +151,7 @@ export default function PortfolioVeil() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="mb-8"
+                  className="mb-5"
                 >
                   <div className="flex flex-wrap items-center justify-center gap-2">
                     {[
@@ -181,12 +181,12 @@ export default function PortfolioVeil() {
                   <button
                     onClick={handleEnter}
                     disabled={!showVeil}
-                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[var(--accent-teal-800)] text-white text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium hover:bg-[var(--accent-teal-900)] transition-all hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span>Enter my Portfolio</span>
                     <motion.svg
                       aria-hidden="true"
-                      className="w-5 h-5"
+                      className="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
