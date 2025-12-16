@@ -29,7 +29,7 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
             onClick={onClose}
           />
 
@@ -48,7 +48,7 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
                 onClose()
               }
             }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl overflow-hidden max-h-[85vh] shadow-2xl"
+            className="fixed bottom-0 left-0 right-0 z-[9999] bg-white rounded-t-3xl overflow-hidden max-h-[85vh] shadow-2xl"
             style={{ touchAction: 'none' }}
           >
             {/* Drag Handle */}

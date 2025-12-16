@@ -343,8 +343,16 @@ export default function HeroSplit() {
           const overlay = gearGroup.querySelector<SVGCircleElement>('.gear-hover-overlay')
           const listeners: { element: Element; type: string; handler: EventListener }[] = []
 
-          // Click handler to navigate to the gear's linked content
-          const handleClick = () => {
+          // Click handler to navigate to the gear's linked content (desktop only)
+          const handleClick = (e: Event) => {
+            // On mobile, we use the bottom sheet instead of direct navigation
+            const isMobile = window.matchMedia('(max-width: 1023px)').matches
+            if (isMobile) {
+              e.preventDefault()
+              e.stopPropagation()
+              return // Bottom sheet handles mobile taps
+            }
+            
             const gearData = GEAR_INSPECTOR[gearId]
             if (gearData?.link) {
               router.push(gearData.link)
@@ -353,8 +361,8 @@ export default function HeroSplit() {
 
           // Mobile tap handler - open bottom sheet
           const handleTap = (e: Event) => {
-            // Don't call preventDefault() to avoid passive listener warning
             e.stopPropagation()
+            e.preventDefault() // Prevent click event from also firing
 
             // Check if we're on mobile (no hover capability)
             const isMobile = window.matchMedia('(max-width: 1023px)').matches
