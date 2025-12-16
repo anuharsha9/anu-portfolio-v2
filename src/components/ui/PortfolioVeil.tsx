@@ -84,12 +84,12 @@ export default function PortfolioVeil() {
               >
                 {/* Logo mark at top */}
                 <motion.div
-                  className="mb-4 flex justify-center"
+                  className="mb-3 flex justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <div className="w-10 h-10 text-[var(--accent-teal)]">
+                  <div className="w-12 h-12 text-[var(--accent-teal)]">
                     <AnimatedSignatureLogo
                       className="w-full h-full"
                       duration={10000}
@@ -99,7 +99,7 @@ export default function PortfolioVeil() {
                 </motion.div>
 
                 {/* Main headline */}
-                <h1 className="font-serif text-slate-900 text-2xl md:text-3xl lg:text-4xl leading-tight mb-4">
+                <h1 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
                   52 seconds.<br />
                   <span className="text-slate-500">That&apos;s all I ask.</span>
                 </h1>
