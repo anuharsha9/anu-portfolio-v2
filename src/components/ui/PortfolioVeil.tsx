@@ -133,15 +133,15 @@ export default function PortfolioVeil() {
                 </div>
 
                 {/* Text block - narrative flow */}
-                <div className="max-w-2xl mx-auto mb-6 space-y-4">
+                <div className="max-w-4xl mx-auto mb-6 space-y-3">
                   <p className="text-slate-600 text-base leading-relaxed">
                     Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
                   </p>
-                  <p className="text-slate-700 text-sm md:text-base">
+                  <p className="text-slate-700 text-base whitespace-nowrap">
                     <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
-                    <span className="mx-2 text-slate-300">·</span>
+                    <span className="mx-3 text-slate-300">·</span>
                     <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
-                    <span className="mx-2 text-slate-300">·</span>
+                    <span className="mx-3 text-slate-300">·</span>
                     <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
                   </p>
                 </div>
