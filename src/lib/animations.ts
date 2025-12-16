@@ -81,13 +81,15 @@ export const fadeInDown = {
 export const sectionReveal = {
   hidden: { 
     opacity: 0, 
-    y: 16, // Reduced for smoother animation
+    y: 20, // Reduced from 32 for smoother animation
+    visibility: 'hidden' as const, // Ensure hidden state
   },
   visible: {
     opacity: 1,
     y: 0,
+    visibility: 'visible' as const, // Ensure visible state
     transition: { 
-      duration: 0.4, // Faster to reduce perceived flicker
+      duration: 0.5, // Faster for smoother feel
       ease: appleEase.standard,
     },
   },
