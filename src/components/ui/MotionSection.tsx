@@ -1,7 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { sectionReveal } from '@/lib/animations'
 import { ReactNode, forwardRef } from 'react'
 
 interface MotionSectionProps {
@@ -11,48 +9,28 @@ interface MotionSectionProps {
   style?: React.CSSProperties
 }
 
+/**
+ * MotionSection - Now a simple section wrapper without animations
+ * 
+ * The scroll-reveal animations were causing flickering issues during hydration.
+ * Content is now visible immediately, which is better for:
+ * - Performance (no JavaScript required for visibility)
+ * - SEO (content is visible to crawlers)
+ * - Accessibility (content doesn't depend on animations)
+ * - User experience (no flashing/flickering)
+ */
 const MotionSection = forwardRef<HTMLElement, MotionSectionProps>(
   ({ id, className, children, style }, ref) => {
-    // Optimized viewport config to prevent flickering
-    // once: true ensures animation only triggers once
-    // amount: 0.1 provides better threshold for mobile detection
-    const viewportConfig = {
-      once: true, // Critical: only animate once
-      amount: 0.1, // 10% of element must be visible (lower for mobile)
-      margin: '0px 0px -100px 0px' // Trigger earlier to ensure mobile visibility
-    }
-
-    try {
-      return (
-        <motion.section
-          ref={ref}
-          id={id}
-          className={className || ''}
-          style={style}
-          variants={sectionReveal}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-        >
-          {children}
-        </motion.section>
-      )
-    } catch (error) {
-      // Fallback to regular section with CSS animation if framer-motion fails
-      if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-        console.warn('MotionSection: Falling back to regular section due to error:', error)
-      }
-      return (
-        <section
-          ref={ref}
-          id={id}
-          className={`${className || ''} animate-section-reveal`}
-          style={{ ...style, opacity: 1, visibility: 'visible' }}
-        >
-          {children}
-        </section>
-      )
-    }
+    return (
+      <section
+        ref={ref}
+        id={id}
+        className={className || ''}
+        style={style}
+      >
+        {children}
+      </section>
+    )
   }
 )
 

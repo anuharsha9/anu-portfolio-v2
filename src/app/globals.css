@@ -879,11 +879,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Optimize motion sections for GPU acceleration */
+/* Optimize framer motion elements */
 section[data-framer-component],
 [data-framer-name] {
   will-change: opacity, transform;
+  transform: translateZ(0);
   backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Loading screen gear animation */
