@@ -57,7 +57,7 @@ export default function PortfolioVeil() {
   // Don't render during SSR to avoid hydration mismatch
   if (!hasMounted) {
     return (
-      <div className="fixed inset-0 z-[9998] bg-white" />
+      <div className="fixed inset-0 z-[10001] bg-white" />
     )
   }
 
@@ -71,7 +71,7 @@ export default function PortfolioVeil() {
       {showVeil && (
         <motion.div
           key="portfolio-veil"
-          className="fixed inset-0 z-[9998] bg-white overflow-hidden"
+          className="fixed inset-0 z-[10001] bg-white overflow-hidden"
           initial={{ opacity: 1, y: 0 }}
           exit={{
             opacity: 0,
