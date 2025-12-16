@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "predev": "rm -rf .next || true",
-    "dev": "next dev",
+    "dev": "next dev -H 127.0.0.1",
+    "dev:turbo": "next dev -H 127.0.0.1 --turbopack",
+    "dev:stable": "rm -rf .next && NEXT_TURBOPACK=0 next dev -H 127.0.0.1",
     "dev:clean": "rm -rf .next && next dev -H 127.0.0.1",
     "dev:restart": "pkill -f 'next dev' || true; sleep 2; rm -rf .next && next dev -H 127.0.0.1",
     "clean:all": "rm -rf .next out node_modules/.cache .turbo",

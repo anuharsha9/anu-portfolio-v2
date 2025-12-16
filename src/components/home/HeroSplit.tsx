@@ -519,7 +519,7 @@ export default function HeroSplit() {
 
         {/* Glow effect behind gears */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[900px] h-[900px] bg-[var(--accent-teal)]/10 rounded-full blur-[150px]" />
+          <div className="w-[750px] h-[750px] bg-[var(--accent-teal)]/10 rounded-full blur-[150px]" />
         </div>
 
         {/* Main Content Container - Centered Layout */}
@@ -528,7 +528,7 @@ export default function HeroSplit() {
 
             {/* Centered Gears - THE HERO */}
             <motion.div
-              className="relative w-[480px] sm:w-[600px] md:w-[720px] lg:w-[900px] xl:w-[1000px] max-w-full mx-auto"
+              className="relative w-[400px] sm:w-[500px] md:w-[600px] lg:w-[750px] xl:w-[850px] max-w-full mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
