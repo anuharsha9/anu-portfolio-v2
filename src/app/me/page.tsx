@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
 import MotionSection from '@/components/ui/MotionSection'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
@@ -75,42 +74,25 @@ export default function AboutPage() {
             </div>
 
             {/* Text block - narrative flow */}
-            <div className="max-w-xl mx-auto mb-6 space-y-2">
-              <p className="text-slate-500 text-sm">
-                Designed and built entirely in Cursor — my AI side project, shipped in 30 days.
-              </p>
+            <div className="max-w-2xl mx-auto mb-6 space-y-4">
               <p className="text-slate-600 text-base leading-relaxed">
-                I&apos;m a Principal Product Designer who builds, not just designs.
+                Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
               </p>
-              <p className="text-slate-900 font-medium">
-                This portfolio is my proof.
+              <p className="text-slate-700 text-sm md:text-base">
+                <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
+                <span className="mx-2 text-slate-300">·</span>
+                <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
+                <span className="mx-2 text-slate-300">·</span>
+                <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
               </p>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-              <Link
-                href="/#work-overview"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium hover:bg-[var(--accent-teal-900)] transition-all hover:scale-105 shadow-lg"
-              >
-                <span>See the Work</span>
-                <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </Link>
-              <a
-                href="mailto:anujanimmagadda@gmail.com"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-300 text-slate-700 text-sm font-medium hover:border-slate-400 hover:bg-slate-50 transition-all"
-              >
-                <span>Let&apos;s Talk</span>
-              </a>
             </div>
 
             {/* Tool pills */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mb-8"
             >
               <div className="flex flex-wrap items-center justify-center gap-2">
                 {[
@@ -129,6 +111,23 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
+            </motion.div>
+
+            {/* CTA - Let's Talk */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <a
+                href="mailto:anujanimmagadda@gmail.com"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[var(--accent-teal-800)] text-white text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all hover:scale-105 shadow-lg"
+              >
+                <span>Let&apos;s Talk</span>
+                <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </a>
             </motion.div>
           </motion.div>
         </div>

@@ -352,7 +352,7 @@ export default function HeroSplit() {
               e.stopPropagation()
               return // Bottom sheet handles mobile taps
             }
-            
+
             const gearData = GEAR_INSPECTOR[gearId]
             if (gearData?.link) {
               router.push(gearData.link)

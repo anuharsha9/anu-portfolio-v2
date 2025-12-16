@@ -15,14 +15,14 @@ export default function PortfolioVeil() {
   // Check if veil was already dismissed in this session
   useEffect(() => {
     setHasMounted(true)
-    
+
     // Allow ?veil=reset to force show the veil for testing
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('veil') === 'reset') {
       sessionStorage.removeItem(VEIL_SESSION_KEY)
       return
     }
-    
+
     const dismissed = sessionStorage.getItem(VEIL_SESSION_KEY)
     if (dismissed === 'true') {
       setShowVeil(false)
@@ -133,24 +133,50 @@ export default function PortfolioVeil() {
                 </div>
 
                 {/* Text block - narrative flow */}
-                <div className="max-w-xl mx-auto mb-6 space-y-2">
-                  <p className="text-slate-500 text-sm">
-                    Designed and built entirely in Cursor — my AI side project, shipped in 30 days.
-                  </p>
+                <div className="max-w-2xl mx-auto mb-6 space-y-4">
                   <p className="text-slate-600 text-base leading-relaxed">
-                    I&apos;m a Principal Product Designer who builds, not just designs.
+                    Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
                   </p>
-                  <p className="text-slate-900 font-medium">
-                    This portfolio is my proof.
+                  <p className="text-slate-700 text-sm md:text-base">
+                    <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
+                    <span className="mx-2 text-slate-300">·</span>
+                    <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
+                    <span className="mx-2 text-slate-300">·</span>
+                    <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
                   </p>
                 </div>
 
-                {/* CTA - Enter Portfolio */}
+                {/* Tool pills */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
                   className="mb-8"
+                >
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {[
+                      { name: 'Cursor', desc: 'IDE' },
+                      { name: 'Claude', desc: 'AI' },
+                      { name: 'GPT', desc: 'AI' },
+                      { name: 'Gemini', desc: 'AI' },
+                      { name: 'AWS', desc: 'Deploy' },
+                    ].map((tool) => (
+                      <span
+                        key={tool.name}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-mono hover:border-[var(--accent-teal)]/50 hover:text-slate-900 transition-colors"
+                      >
+                        <span className="text-slate-900">{tool.name}</span>
+                        <span className="text-slate-400 text-[10px]">{tool.desc}</span>
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* CTA - Enter Portfolio */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
                 >
                   <button
                     onClick={handleEnter}
@@ -176,31 +202,6 @@ export default function PortfolioVeil() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </motion.svg>
                   </button>
-                </motion.div>
-
-                {/* Tool pills */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                >
-                  <div className="flex flex-wrap items-center justify-center gap-2">
-                    {[
-                      { name: 'Cursor', desc: 'IDE' },
-                      { name: 'Claude', desc: 'AI' },
-                      { name: 'GPT', desc: 'AI' },
-                      { name: 'Gemini', desc: 'AI' },
-                      { name: 'AWS', desc: 'Deploy' },
-                    ].map((tool) => (
-                      <span
-                        key={tool.name}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-mono hover:border-[var(--accent-teal)]/50 hover:text-slate-900 transition-colors"
-                      >
-                        <span className="text-slate-900">{tool.name}</span>
-                        <span className="text-slate-400 text-[10px]">{tool.desc}</span>
-                      </span>
-                    ))}
-                  </div>
                 </motion.div>
               </motion.div>
             </div>
