@@ -100,14 +100,14 @@ export default function PortfolioVeil() {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="text-center"
               >
-                {/* Logo mark at top - Smaller on mobile */}
+                {/* Logo mark at top */}
                 <motion.div
-                  className="mb-1.5 sm:mb-3 flex justify-center"
+                  className="mb-2 sm:mb-3 flex justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <div className="w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 text-[var(--accent-teal)]">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 text-[var(--accent-teal)]">
                     <AnimatedSignatureLogo
                       className="w-full h-full"
                       duration={10000}
@@ -117,27 +117,24 @@ export default function PortfolioVeil() {
                 </motion.div>
 
                 {/* Main headline */}
-                <h1 className="font-serif text-slate-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight mb-2 sm:mb-4">
+                <h1 className="font-serif text-slate-900 text-[26px] sm:text-3xl md:text-4xl lg:text-5xl leading-tight mb-3 sm:mb-4">
                   52 seconds.<br />
                   <span className="text-slate-500">That&apos;s all I ask.</span>
                 </h1>
 
-                {/* Video - Smaller on mobile to fit screen */}
-                <div className="w-full max-w-[240px] sm:max-w-xs md:max-w-sm mx-auto mb-3 sm:mb-5">
+                {/* Video - Constrained height on mobile */}
+                <div className="w-full max-w-[200px] sm:max-w-xs md:max-w-sm mx-auto mb-4 sm:mb-5">
                   <div className="relative bg-white border border-slate-200 rounded-lg sm:rounded-xl overflow-hidden shadow-lg sm:shadow-xl">
-                    {/* Window Header Bar - Minimal on mobile */}
-                    <div className="flex items-center justify-between px-2 sm:px-3 py-1 sm:py-2 bg-slate-100 border-b border-slate-200">
-                      <div className="flex items-center gap-1 sm:gap-2">
+                    {/* Window Header Bar */}
+                    <div className="flex items-center justify-between px-2 sm:px-3 py-1.5 sm:py-2 bg-slate-100 border-b border-slate-200">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
                         <div className="flex gap-0.5 sm:gap-1">
-                          <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400" />
-                          <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-400" />
-                          <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400" />
+                          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400" />
+                          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-yellow-400" />
+                          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-400" />
                         </div>
-                        <span className="font-mono text-slate-500 text-[7px] sm:text-[10px] hidden xs:inline">
-                          meet_anuja.mp4
-                        </span>
                       </div>
-                      <span className="font-mono text-[var(--accent-teal)] text-[8px] sm:text-[10px] tracking-wider">
+                      <span className="font-mono text-[var(--accent-teal)] text-[9px] sm:text-[10px] tracking-wider">
                         52s
                       </span>
                     </div>
@@ -150,25 +147,25 @@ export default function PortfolioVeil() {
                   </div>
                 </div>
 
-                {/* Story beats - Single line on mobile too */}
-                <div className="max-w-sm sm:max-w-xl md:max-w-4xl mx-auto mb-2.5 sm:mb-5">
-                  <p className="text-slate-700 text-xs sm:text-sm md:text-base">
-                    <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">Portfolio.</span>
+                {/* Story beats - Fuller text */}
+                <div className="max-w-sm sm:max-w-xl md:max-w-4xl mx-auto mb-3 sm:mb-5">
+                  <p className="text-slate-700 text-[13px] sm:text-sm md:text-base leading-relaxed">
+                    <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio.</span>
                     <span className="mx-1.5 sm:mx-2 md:mx-3 text-slate-300">·</span>
-                    <span className="text-slate-900 font-medium">Discovery?</span> <span className="text-slate-500">AI.</span>
+                    <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
                     <span className="mx-1.5 sm:mx-2 md:mx-3 text-slate-300">·</span>
-                    <span className="text-slate-900 font-medium">Result?</span> <span className="text-slate-500">This.</span>
+                    <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">This.</span>
                   </p>
                 </div>
 
-                {/* Tool pills - Hidden on very small screens, compact otherwise */}
+                {/* Tool pills - Always visible */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="mb-3 sm:mb-5 hidden xs:block"
+                  className="mb-4 sm:mb-5"
                 >
-                  <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
+                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
                     {[
                       { name: 'Cursor' },
                       { name: 'Claude' },
@@ -177,7 +174,7 @@ export default function PortfolioVeil() {
                     ].map((tool) => (
                       <span
                         key={tool.name}
-                        className="inline-flex items-center px-2 sm:px-3 py-0.5 sm:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-[9px] sm:text-xs font-mono"
+                        className="inline-flex items-center px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-[10px] sm:text-xs font-mono"
                       >
                         {tool.name}
                       </span>
