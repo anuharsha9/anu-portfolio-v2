@@ -8,10 +8,10 @@
     "dev:turbo": "next dev -H 127.0.0.1 --turbopack",
     "dev:stable": "rm -rf .next && NEXT_TURBOPACK=0 next dev -H 127.0.0.1",
     "dev:clean": "rm -rf .next && next dev -H 127.0.0.1",
-    "dev:restart": "pkill -f 'next dev' || true; sleep 2; rm -rf .next && next dev -H 127.0.0.1",
+    "dev:restart": "pkill -f 'next dev' || true; sleep 2; rm -rf .next && npm run dev:stable",
     "clean:all": "rm -rf .next out node_modules/.cache .turbo",
     "build": "next build",
-    "prebuild": "rm -rf .next out node_modules/.cache .turbo || true && node scripts/generate-sitemap.js",
+    "prebuild": "pkill -f 'next dev' 2>/dev/null || true; rm -rf .next out node_modules/.cache .turbo || true && node scripts/generate-sitemap.js",
     "postbuild": "node scripts/generate-resume-pdf.js",
     "build:clean": "npm run clean:all && npm run build",
     "build:fresh": "npm run clean:all && node scripts/generate-sitemap.js && next build && node scripts/generate-resume-pdf.js",
@@ -20,7 +20,8 @@
     "lint": "next lint",
     "clean": "rm -rf .next",
     "clean:full": "bash scripts/clean-build.sh",
-    "deploy:s3": "bash scripts/deploy-s3.sh"
+    "deploy:s3": "bash scripts/deploy-s3.sh",
+    "ship": "npm run build && git add -A && git commit -m 'deploy' && git push origin main && aws s3 sync out s3://anujaharsha.com --delete --region us-east-1 && aws cloudfront create-invalidation --distribution-id E1RKSKYEABLX6E --paths '/*' --region us-east-1"
   },
   "dependencies": {
     "framer-motion": "^11.15.0",
