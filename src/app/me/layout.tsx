@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'profile',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Anuja Harsha Nimmagadda - Principal UX Designer',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: 'About Anuja Harsha Nimmagadda | Principal UX Designer',
     description:
       'Principal UX Designer with 13+ years of experience transforming complex enterprise systems into intuitive experiences.',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/og-image.png'],
   },
   alternates: {
     canonical: `${siteUrl}/me/`,

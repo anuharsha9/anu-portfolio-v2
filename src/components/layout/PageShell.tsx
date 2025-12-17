@@ -8,6 +8,9 @@ import ReadingProgress from '@/components/case-study/ReadingProgress'
 import BackToTop from '@/components/navigation/BackToTop'
 import URLHashSync from '@/components/navigation/URLHashSync'
 import { ErrorBoundary } from '@/components/error/ErrorBoundary'
+import PageTransition from '@/components/transitions/PageTransition'
+import PortfolioVeil from '@/components/ui/PortfolioVeil'
+import CustomCursor from '@/components/ui/CustomCursor'
 
 interface PageShellProps {
   children: ReactNode
@@ -16,13 +19,19 @@ interface PageShellProps {
 export default function PageShell({ children }: PageShellProps) {
   return (
     <ErrorBoundary>
+      {/* Custom cursor for desktop - instant movement, matches system speed */}
+      <CustomCursor />
+      {/* Veil rendered outside of PageTransition to preserve fixed positioning */}
+      <PortfolioVeil />
       <SkipToContent />
       <ReadingProgress />
       <SiteHeader />
       <URLHashSync />
-      <main id="main-content">
-        {children}
-      </main>
+      <PageTransition>
+        <main id="main-content">
+          {children}
+        </main>
+      </PageTransition>
       <BackToTop />
       <SiteFooter />
     </ErrorBoundary>

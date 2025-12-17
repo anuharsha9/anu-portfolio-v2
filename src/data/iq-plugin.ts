@@ -12,9 +12,9 @@ export const iqPluginCaseStudy: CaseStudyData = {
   },
   role: 'Principal Product Designer (Full Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: 'Spring 2024 – Present | Shipping 2027',
+  timeframe: 'Spring 2024 – Spring 2025 | Shipping 2027',
   status: {
-    label: 'IN_ENGINEERING (TARGET_RELEASE: 2027)',
+    label: 'In Engineering — Shipping 2027',
     variant: 'shipping' as const,
   },
   scope: [
@@ -30,29 +30,29 @@ export const iqPluginCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'Data Science Adoption — Quick Impact Overview',
     subtitle: 'From scattered features to unified DSML Hub',
-    leadershipSummary: 'I owned all three DSML workflows at the same time — NLQ, Insights, and the DSML Hub. This went from a roadmap concept to shipped architecture, and I handed it off to two designers after establishing the foundation.',
+    leadershipSummary: 'NLQ, Insights, and ML — three workflows, one owner. Took this from a roadmap concept to shipped architecture, then enabled two designers to build on the foundation.',
     whatTheSystemWas:
-      'WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping, none were legacy. But they were invisible. Buried in different menus, different entry points. Users didn\'t know they existed.',
+      'WebFOCUS had three powerful data science features — NLQ (ask questions in plain English), Insights (auto-generated visualizations), and ML (predictive model training). All shipping, none legacy. But they were invisible — buried in different menus with different entry points. Users didn\'t know they existed.',
     myRole:
-      'I owned all three workflows end-to-end. Made them responsive, ensured pattern parity across all of them, and unified them into a single discoverable hub.',
+      'End-to-end ownership: made all three workflows responsive, established consistent interaction patterns, and unified them into a single discoverable hub.',
     scopeOfPractice: [],
     impactMetrics: [
       { label: 'Workflows owned', value: '3 simultaneously' },
-      { label: 'Entry points unified', value: '3 → 1' },
+      { label: 'Entry points integrated', value: '3 → 1 Hub' },
       { label: 'NLQ adoption', value: '+25%' },
       { label: 'Designers enabled', value: '2 (1 junior, 1 senior)' },
     ],
     star: {
       situation: 'Three powerful data science features existed but were scattered across the platform. Different entry points, different patterns, low adoption. Users didn\'t know they were there.',
       task: 'Unify them into one discoverable experience. Make data science accessible without hiding it.',
-      action: 'I owned all three workflows simultaneously. Defined the architecture and base screens, ensured pattern parity, and made everything responsive.',
-      result: 'Unified three entry points into one. NLQ and Insights are live in production. DSML Hub shipping 2027.',
+      action: 'Defined the architecture and base screens for all three. Established consistent interaction patterns and made everything responsive.',
+      result: 'Integrated three features into the Hub — no extra space, everything inside. NLQ and Insights live in production. DSML Hub shipping 2027.',
     },
     technologies: [],
     keyAchievements: [
       '3 entry points → 1 unified DSML Hub',
       '3 workflows owned simultaneously',
-      'Full pattern parity across all features',
+      'Consistent interaction patterns across all features',
       'From annual roadmap concept → shipped architecture',
       'Enabled 2 designers with architecture and base screens',
       'NLQ + Insights live in 9.3.6. DSML Hub shipping 2027',
@@ -84,7 +84,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
   uxPrinciples: {
     title: 'Design Principles Applied',
     principles: [
-      { title: 'Pattern Parity', description: '' },
+      { title: 'Unified Entry Point', description: '' },
       { title: 'Progressive Disclosure', description: '' },
       { title: 'Cognitive Offloading', description: '' },
       { title: 'One Click Away', description: '' },
@@ -100,48 +100,82 @@ export const iqPluginCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover: The Strategic Problem',
-      summary: 'WebFOCUS had three powerful data science tools — but nobody could find them. This started as a concept in the annual roadmap. I took it from idea to shipped architecture.',
-      body: `WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping. None were legacy. They just weren't visible. Users didn't know they existed because each lived in a different corner of the platform.
+      summary: 'Three powerful features existed — but nobody could find them. Customer feedback confirmed: visibility was the problem.',
+      body: `WebFOCUS had three data science features:
+• **NLQ** — Natural Language Query: ask questions against your data in plain English ("Which product sold most last quarter?")
+• **Insights** — Auto-generates visualizations and patterns from your dataset
+• **ML** — Train predictive models: classification, regression, time-series forecasting, anomaly detection
 
-I owned all three workflows simultaneously and unified them into one discoverable DSML Hub.`,
+All shipping. None legacy. The problem? They weren't visible. NLQ was buried in Explore Data. Insights was hidden in a submenu. ML lived in a completely separate context.
+
+**How I discovered this:** Customer feedback from support reps, PMs, and leadership all pointed to the same issue — users didn't know these features existed. The problem wasn't quality; it was discoverability.`,
     },
     {
       id: 'section-02',
       index: 'E',
       title: 'Empathize: Who We\'re Building For',
-      summary: 'We were building for business users, not just BI experts. The challenge was making data science accessible without hiding its power.',
-      body: `Two primary personas: data scientists who needed depth and control, and business users who needed simplicity and guidance. They had completely different mental models — but we needed one entry point for both.
+      summary: 'Data scientists needed depth. Business users needed simplicity. One entry point had to serve both.',
+      body: `Two primary personas with conflicting needs:
+• **Data scientists** wanted depth, control, and advanced configuration options
+• **Business users** wanted simplicity, guidance, and quick answers without technical complexity
 
-The solution was layered disclosure: approachable on the surface, powerful underneath.`,
+They had completely different mental models — but we needed one entry point for both. The solution was layered disclosure: approachable on the surface for business users, powerful underneath for data scientists.`,
     },
     {
       id: 'section-03',
       index: 'S',
       title: 'Simplify: The Architecture',
-      summary: 'I unified three entry points into one. I defined the architecture before any tickets existed, ensured pattern parity across all features, and made everything responsive.',
-      body: `Mockups first — tickets followed. Pattern parity across all three features. Fully responsive. No new infrastructure; built within existing Hub ecosystem.`,
+      summary: 'Integrated three scattered entry points into the Hub. Already owned all three — integration felt natural.',
+      body: `I defined the architecture before any tickets existed. The PM wrote tickets after seeing my mockups — that's how I operated throughout.
+
+**Why integration was natural:** I already owned all three features. NLQ, Insights, and ML were mine. When the DSML Hub opportunity came, the hard work was already done — I understood every workflow, every edge case, every user pain point.
+
+Key architectural decisions:
+• Smart integration into the Hub — no extra space, everything inside
+• One DSML Hub as the single entry point
+• Consistent interaction patterns across NLQ, Insights, and ML
+• Fully responsive — works on any screen size
+• No new infrastructure; built within existing Hub ecosystem
+
+This meant faster development and familiar patterns for engineering.`,
     },
     {
       id: 'section-04',
       index: 'I',
       title: 'Iterate: Before & After',
-      summary: 'Same features, but better together. Drag the sliders to see the transformation.',
-      body: 'Drag the sliders to see the transformation.',
-      // Components: IQIterationLog, IQWorkflowComparison
+      summary: 'Same features, transformed experience. Three separate tools became one cohesive hub.',
+      body: `The transformation wasn't about changing features — it was about changing how users find and access them.
+
+**Before:** Three separate entry points, three different mental models, three chances for users to give up.
+**After:** One DSML Hub, consistent patterns, one learning curve.
+
+Drag the sliders to see the transformation.`,
     },
     {
       id: 'section-05',
       index: 'G',
       title: 'Grow: Constraints & Decisions',
-      summary: 'I built within the existing Hub ecosystem — no new infrastructure required. I defined the architecture and base screens, then handed off to two designers.',
-      body: `Handed off to two designers after establishing clear patterns. The Hub ecosystem constraint became an advantage: faster development, familiar patterns.`,
+      summary: 'Fought for features, lost some battles. Built within constraints, enabled two designers to continue.',
+      body: `**What got rejected:** A lot. I fought for a navigation bar in IQ — eventually won. Built a "Get Started" panel that got scrapped after significant effort (we integrated it better elsewhere). Pushed for more IQ features on the Hub homepage — rejected due to engineering resources.
+
+The Hub ecosystem constraint became an advantage: familiar patterns meant faster development and easier adoption. After establishing the architecture and base screens, I handed off to two designers (one junior, one senior). They executed confidently because the foundation was clear.
+
+**What I'd do differently:** I wanted to add proper tutorials and onboarding flows — never got full green light. I envisioned NLQ as a chat interface for WebFOCUS itself (step-by-step workflow guidance), and I wanted to connect ReportCaster and IQ (schedule generated insights automatically). These remain opportunities for the platform.`,
     },
     {
       id: 'section-06',
       index: 'N',
       title: 'Navigate: Impact',
-      summary: 'NLQ and Insights are live in production now. ML Functions ships in 2026. The DSML Hub unifies everything in 2027.',
-      body: 'NLQ and Insights are live now in 9.3.6. ML Functions redesign ships 2026. DSML Hub unifies everything in 2027.',
+      summary: 'NLQ adoption +25%. Insights live. DSML Hub shipping 2027.',
+      body: `**What's live now (9.3.6):**
+• NLQ with +25% adoption increase
+• Insights with auto-generated visualizations
+
+**What's shipping:**
+• ML Functions redesign → 2026
+• Unified DSML Hub → 2027
+
+The +25% NLQ adoption increase came from making the feature discoverable — not from changing the feature itself. Visibility was the problem. Visibility was the solution.`,
     },
   ],
   // ----------------------------
@@ -206,27 +240,27 @@ The solution was layered disclosure: approachable on the surface, powerful under
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'WebFOCUS had three powerful data science tools — but nobody could find them. The problem wasn\'t quality. It was visibility.',
+        description: 'Three powerful DSML tools existed — but nobody could find them. The problem wasn\'t quality; it was visibility.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'I designed for both data scientists and business users. Different needs, same entry point.',
+        description: 'Data scientists needed depth. Business users needed simplicity. One entry point had to serve both.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: 'I unified three scattered entry points into one. Consistent patterns everywhere. All features fully responsive.',
+        description: 'Three scattered entry points → integrated into the Hub. No extra space — smart integration inside existing patterns.',
       },
       {
         letter: 'I',
         title: 'Iterate with Inclusion',
-        description: 'I brought mockups first — tickets followed. I collaborated with the PM to define the architecture together.',
+        description: 'Mockups first — tickets followed. Architecture defined collaboratively with PM.',
       },
       {
         letter: 'G',
         title: 'Grow Through Constraints',
-        description: 'I built within the existing Hub ecosystem. No new infrastructure — just smart integration with what was already there.',
+        description: 'Built within the Hub ecosystem. No new infrastructure — smart integration with existing patterns.',
       },
       {
         letter: 'N',
@@ -242,9 +276,9 @@ The solution was layered disclosure: approachable on the surface, powerful under
     heading: 'Impact',
     bullets: [
       '3 entry points → 1 unified DSML Hub',
-      '3 workflows owned simultaneously',
-      'Full pattern parity across all features',
-      'Handed off to 2 designers',
+      '+25% NLQ adoption from improved discoverability',
+      'Consistent interaction patterns across all features',
+      'Enabled 2 designers with architecture + base screens',
       'NLQ + Insights live in 9.3.6. DSML Hub shipping 2027',
     ],
   },
@@ -261,7 +295,7 @@ The solution was layered disclosure: approachable on the surface, powerful under
       index: 'D',
       title: 'Discover: The Strategic Problem',
       summary: 'Not broken. Just invisible.',
-      body: 'WebFOCUS had three data science features — NLQ, Insights, and ML. They were all shipping. None were legacy. They just weren\'t visible. NLQ and Insights were buried in menus. ML lived in a completely separate context. Users didn\'t know they existed. I owned all three workflows and unified them into one DSML Hub.',
+      body: 'NLQ buried in menus. Insights hard to find. ML in a completely separate context. Three powerful features — none discoverable. The solution: one unified DSML Hub.',
     },
   ],
   // ----------------------------

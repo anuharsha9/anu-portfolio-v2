@@ -13,13 +13,13 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
   const { openLightbox } = useLightbox()
 
   const oldImage = {
-    src: '/images/case-study/ml-functions/Legacy Explanability UI.png',
+    src: '/images/case-study/ml-functions/Legacy Explainability UI.png',
     alt: 'Reference explainability visualization from external tool - what the Principal Data Scientist wanted recreated',
     caption: '// REF_IMAGE: External explainability tool our Data Scientist wanted me to recreate for WebFOCUS'
   }
 
   const newImage = {
-    src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
+    src: '/images/case-study/ml-functions/6. Run Model - Explainability Popup.png',
     alt: 'New explainability UI designed for WebFOCUS ML workflow',
     caption: '// NEW_DESIGN: Custom explainability visualization I created for WebFOCUS'
   }
@@ -49,7 +49,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
 
       {/* The Story Container */}
       <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl overflow-hidden">
-        
+
         {/* The Challenge Brief */}
         <div className="bg-[var(--accent-blue-50)] border-b border-[var(--accent-blue-100)] p-6 md:p-8">
           <div className="flex items-start gap-4">
@@ -61,7 +61,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
                 // THE_CHALLENGE
               </span>
               <p className="text-slate-800 text-base md:text-lg leading-relaxed mt-2">
-                My Principal Data Scientist handed me a screenshot from an external tool and said: 
+                My Principal Data Scientist handed me a screenshot from an external tool and said:
                 <span className="font-serif italic text-[var(--accent-blue-700)]"> "This is the explainability visualization I need in WebFOCUS. Can you figure it out?"</span>
               </p>
             </div>
@@ -71,9 +71,9 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
         {/* Before / After Comparison */}
         <div className="p-6 md:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
+
             {/* BEFORE - Reference Image */}
-            <motion.div 
+            <motion.div
               className="space-y-4"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -86,8 +86,8 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
                 </span>
                 <span className="font-mono text-xs text-red-500">LEGACY_TOOL</span>
               </div>
-              
-              <div 
+
+              <div
                 className="relative aspect-[4/3] bg-slate-100 rounded-xl overflow-hidden border-2 border-dashed border-slate-300 cursor-pointer group"
                 onClick={() => openLightbox(oldImage, allImages, 0)}
               >
@@ -103,7 +103,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
                   External Tool
                 </div>
               </div>
-              
+
               <p className="font-mono text-[11px] text-slate-500 leading-relaxed">
                 {oldImage.caption}
               </p>
@@ -115,7 +115,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             </div>
 
             {/* AFTER - New Design */}
-            <motion.div 
+            <motion.div
               className="space-y-4"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -128,8 +128,8 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
                 </span>
                 <span className="font-mono text-xs text-[var(--accent-teal)]">WEBFOCUS_NATIVE</span>
               </div>
-              
-              <div 
+
+              <div
                 className="relative aspect-[4/3] bg-slate-100 rounded-xl overflow-hidden border-2 border-[var(--accent-teal)] cursor-pointer group shadow-lg"
                 onClick={() => openLightbox(newImage, allImages, 1)}
               >
@@ -145,7 +145,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
                   New Design
                 </div>
               </div>
-              
+
               <p className="font-mono text-[11px] text-slate-500 leading-relaxed">
                 {newImage.caption}
               </p>

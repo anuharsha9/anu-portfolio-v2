@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState, useMemo, memo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -38,6 +38,7 @@ const GearsSvgContainer = memo(function GearsSvgContainer({
 export default function HeroSplit() {
   const router = useRouter()
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const heroRef = useRef<HTMLElement>(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
   const [activeGear, setActiveGear] = useState<GearInspectorItem | null>(null)
   const [hasInteracted, setHasInteracted] = useState(false)
@@ -46,6 +47,15 @@ export default function HeroSplit() {
   const [mobileGear, setMobileGear] = useState<GearInspectorItem | null>(null)
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const [svgContent, setSvgContent] = useState<string>('')
+
+  // Parallax effect for hero section
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start']
+  })
+  const gearsY = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, 50])
+  const glowScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.3])
 
   // Load SVG inline so Turbopack (no SVGR) can manipulate DOM
   // Strip width/height so SVG scales to container (like SVGR did)
@@ -504,6 +514,7 @@ export default function HeroSplit() {
   return (
     <>
       <section
+        ref={heroRef}
         id="hero"
         className="bg-white relative min-h-screen flex items-center overflow-hidden"
       >
@@ -517,21 +528,29 @@ export default function HeroSplit() {
           }}
         />
 
-        {/* Glow effect behind gears */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[750px] h-[750px] bg-[var(--accent-teal)]/10 rounded-full blur-[150px]" />
-        </div>
+        {/* Glow effect behind gears - with parallax */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ y: glowY }}
+        >
+          <motion.div
+            className="w-[750px] h-[750px] bg-[var(--accent-teal)]/10 rounded-full blur-[150px]"
+            style={{ scale: glowScale }}
+          />
+        </motion.div>
+
 
         {/* Main Content Container - Centered Layout */}
         <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
           <div className="flex flex-col items-center justify-center min-h-screen py-8 pb-20">
 
-            {/* Centered Gears - THE HERO */}
+            {/* Centered Gears - THE HERO - with subtle parallax */}
             <motion.div
               className="relative w-[400px] sm:w-[500px] md:w-[600px] lg:w-[750px] xl:w-[850px] max-w-full mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              style={{ y: gearsY }}
             >
               <GearsSvgContainer svgContent={svgContent} containerRef={containerRef} />
 
@@ -541,9 +560,8 @@ export default function HeroSplit() {
                   <motion.div
                     className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3, delay: hasInteracted ? 0.15 : 1.5 }}
+                    animate={{ opacity: 1, transition: { duration: 0.3, delay: hasInteracted ? 0.1 : 1.5 } }}
+                    exit={{ opacity: 0, transition: { duration: 0.15, delay: 0 } }}
                   >
                     <div className="text-center">
                       <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">

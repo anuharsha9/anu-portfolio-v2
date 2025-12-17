@@ -8,7 +8,6 @@ import WritingSection from '@/components/home/WritingSection'
 import CollapsibleWorkArchive from '@/components/home/CollapsibleWorkArchive'
 import TalkSection from '@/components/home/TalkSection'
 import ScrollGear from '@/components/ui/ScrollGear'
-import PortfolioVeil from '@/components/ui/PortfolioVeil'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Anuja Harsha Nimmagadda - Principal Product Designer',
@@ -35,30 +34,22 @@ export const metadata: Metadata = {
     title: 'Anuja Harsha Nimmagadda | Principal Product Designer',
     description:
       'Principal Product Designer specializing in design systems architecture, legacy modernization, and AI-driven workflows.',
-    images: ['/images/og-image.jpg'],
+    images: ['/images/og-image.png'],
   },
 }
 
 export default function Home() {
   return (
-    <>
-      {/* Portfolio Veil - covers the page until user clicks "Enter my Portfolio" */}
-      <PortfolioVeil />
-
-      <main className="bg-white relative overflow-hidden">
-        {/* Content */}
-        <HeroSplit />
-        <ImpactMetrics />
-        <WorkGrid />
-        <TransformationShowcase />
-        <CollapsibleWorkArchive />
-        <GrowthStory />
-        <WritingSection />
-        <TalkSection />
-
-        {/* Scroll-linked rotating gear - branded progress indicator */}
-        <ScrollGear />
-      </main>
-    </>
+    <div className="bg-white relative overflow-hidden">
+      <HeroSplit />
+      <ImpactMetrics />
+      <WorkGrid />
+      <TransformationShowcase />
+      <CollapsibleWorkArchive />
+      <GrowthStory />
+      <WritingSection />
+      <TalkSection />
+      <ScrollGear />
+    </div>
   )
 }

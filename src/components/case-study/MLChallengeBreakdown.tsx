@@ -36,7 +36,7 @@ export default function MLChallengeBreakdown({ isLightBackground = true }: MLCha
     {
       code: '// 02_HIDDEN_COMPLEXITY',
       title: 'Hidden Configuration',
-      screenshot: '/images/case-study/ml-functions/Legacy Train Model Resuls UI.png',
+      screenshot: '/images/case-study/ml-functions/Legacy Train Model Results UI.png',
       screenshotAlt: 'Legacy ML interface with hyperparameters hidden in context menus',
       painPoints: [
         'x Hyperparameters buried in right-click menus',

@@ -1,13 +1,16 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
+import { WordReveal, GradientText } from '@/components/ui/AnimatedText'
 
 const VEIL_SESSION_KEY = 'portfolio_veil_dismissed'
 
 export default function PortfolioVeil() {
+  const pathname = usePathname()
   const [showVeil, setShowVeil] = useState(true)
   const [shouldRender, setShouldRender] = useState(true)
   const [hasMounted, setHasMounted] = useState(false)
@@ -15,6 +18,13 @@ export default function PortfolioVeil() {
   // Check if veil was already dismissed in this session
   useEffect(() => {
     setHasMounted(true)
+
+    // Only show veil on homepage
+    if (pathname !== '/') {
+      setShowVeil(false)
+      setShouldRender(false)
+      return
+    }
 
     // Allow ?veil=reset to force show the veil for testing
     const urlParams = new URLSearchParams(window.location.search)
@@ -28,7 +38,7 @@ export default function PortfolioVeil() {
       setShowVeil(false)
       setShouldRender(false)
     }
-  }, [])
+  }, [pathname])
 
   // Hide body scroll when veil is visible
   useEffect(() => {
@@ -86,9 +96,9 @@ export default function PortfolioVeil() {
           }}
         >
           {/* Main Content Container - Mobile-first, fits iPhone 15 Pro */}
-          <div 
-            className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 relative overflow-hidden"
-            style={{ 
+          <div
+            className="h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 relative overflow-hidden"
+            style={{
               paddingTop: 'max(env(safe-area-inset-top), 16px)',
               paddingBottom: 'max(env(safe-area-inset-bottom), 16px)'
             }}
@@ -102,12 +112,12 @@ export default function PortfolioVeil() {
               >
                 {/* Logo mark at top */}
                 <motion.div
-                  className="mb-2 sm:mb-3 md:mb-4 flex justify-center"
+                  className="mb-1 sm:mb-2 md:mb-3 flex justify-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 text-[var(--accent-teal)]">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-14 lg:h-14 text-[var(--accent-teal)]">
                     <AnimatedSignatureLogo
                       className="w-full h-full"
                       duration={10000}
@@ -116,14 +126,16 @@ export default function PortfolioVeil() {
                   </div>
                 </motion.div>
 
-                {/* Main headline */}
-                <h1 className="font-serif text-slate-900 text-[26px] sm:text-3xl md:text-5xl lg:text-6xl leading-tight mb-3 sm:mb-4 md:mb-6">
-                  52 seconds.<br />
-                  <span className="text-slate-500">That&apos;s all I ask.</span>
+                {/* Main headline with word reveal */}
+                <h1 className="font-serif text-slate-900 text-[22px] sm:text-2xl md:text-4xl lg:text-5xl leading-tight mb-1.5 sm:mb-2 md:mb-4">
+                  <WordReveal text="52 seconds." delay={300} stagger={100} /><br />
+                  <span className="text-slate-500">
+                    <WordReveal text="That's all I ask." delay={600} stagger={80} />
+                  </span>
                 </h1>
 
-                {/* Video - 260px mobile, larger on desktop */}
-                <div className="w-full max-w-[260px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-4 sm:mb-5 md:mb-6">
+                {/* Video - Compact on all screens */}
+                <div className="w-full max-w-[180px] sm:max-w-[240px] md:max-w-sm lg:max-w-md mx-auto mb-2 sm:mb-3 md:mb-4">
                   <div className="relative bg-white border border-slate-200 rounded-lg sm:rounded-xl overflow-hidden shadow-lg sm:shadow-xl md:shadow-2xl">
                     {/* Window Header Bar */}
                     <div className="flex items-center justify-between px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 bg-slate-100 border-b border-slate-200">
@@ -150,12 +162,15 @@ export default function PortfolioVeil() {
                   </div>
                 </div>
 
-                {/* Story beats - Fuller text */}
-                <div className="max-w-sm sm:max-w-xl md:max-w-4xl mx-auto mb-3 sm:mb-5 md:mb-6">
-                  <p className="text-slate-700 text-[13px] sm:text-sm md:text-base lg:text-lg leading-relaxed">
+                {/* Story beats - with gradient accent */}
+                <div className="max-w-sm sm:max-w-xl md:max-w-4xl mx-auto mb-2 sm:mb-3 md:mb-4">
+                  <p className="text-slate-700 text-[12px] sm:text-sm md:text-base lg:text-lg leading-relaxed">
                     <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio.</span>
                     <span className="mx-1.5 sm:mx-2 md:mx-3 text-slate-300">·</span>
-                    <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
+                    <span className="text-slate-900 font-medium">The discovery?</span>{' '}
+                    <GradientText gradient="from-[var(--accent-teal)] to-[var(--accent-violet)]" className="font-medium">
+                      Cursor + AI.
+                    </GradientText>
                     <span className="mx-1.5 sm:mx-2 md:mx-3 text-slate-300">·</span>
                     <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">This.</span>
                   </p>
@@ -166,9 +181,9 @@ export default function PortfolioVeil() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="mb-4 sm:mb-5 md:mb-6"
+                  className="mb-3 sm:mb-4 md:mb-5"
                 >
-                  <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 md:gap-3">
+                  <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 md:gap-2">
                     {[
                       { name: 'Cursor' },
                       { name: 'Claude' },
@@ -177,7 +192,7 @@ export default function PortfolioVeil() {
                     ].map((tool) => (
                       <span
                         key={tool.name}
-                        className="inline-flex items-center px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-[10px] sm:text-xs md:text-sm font-mono"
+                        className="inline-flex items-center px-2 sm:px-2.5 md:px-3 py-0.5 sm:py-1 md:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-[9px] sm:text-[10px] md:text-xs font-mono"
                       >
                         {tool.name}
                       </span>
@@ -194,7 +209,7 @@ export default function PortfolioVeil() {
                   <button
                     onClick={handleEnter}
                     disabled={!showVeil}
-                    className="group inline-flex items-center justify-center gap-2 w-full xs:w-auto px-5 sm:px-6 md:px-8 py-3 sm:py-3 md:py-4 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-sm md:text-base font-medium hover:bg-[var(--accent-teal-900)] active:scale-[0.98] transition-all sm:hover:scale-105 shadow-lg md:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-xs sm:text-sm md:text-base font-medium hover:bg-[var(--accent-teal-900)] active:scale-[0.98] transition-all sm:hover:scale-105 shadow-lg md:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span>Enter my Portfolio</span>
                     <motion.svg

@@ -128,8 +128,8 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
         },
         {
           src: '/images/case-study/iq-plugin/IQ - Predict Data - Run Model - explanability.png',
-          alt: 'IQ Predict Data - Explanability',
-          caption: 'Explanability: Making ML decisions transparent',
+          alt: 'IQ Predict Data - Explainability',
+          caption: 'Explainability: Making ML decisions transparent',
           figNumber: 'FIG_03E',
         },
       ],

@@ -174,7 +174,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
       index: '06',
       label: 'Key Interactions',
       icon: <Sparkles className="w-4 h-4" />,
-      title: 'The Confusion Matrix & Explanability',
+      title: 'The Confusion Matrix & Explainability',
       description: 'The confusion matrix went through 10+ iterations with our domain expert. Balanced DS priorities (metrics, accuracy) with UX priorities (clarity, scan-ability).',
       isKey: true,
       quote: {
@@ -195,9 +195,9 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
           figNumber: 'FIG_20',
         },
         {
-          src: '/images/case-study/ml-functions/6. Run Model -  Explanability Popup.png',
-          alt: 'Explanability Popup',
-          caption: 'Explanability: Making ML trustworthy',
+          src: '/images/case-study/ml-functions/6. Run Model - Explainability Popup.png',
+          alt: 'Explainability Popup',
+          caption: 'Explainability: Making ML trustworthy',
           figNumber: 'FIG_21',
         },
       ],

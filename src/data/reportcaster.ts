@@ -3,7 +3,7 @@ import { CaseStudyData } from '@/types/caseStudy'
 export const reportcasterCaseStudy: CaseStudyData = {
   slug: 'reportcaster',
   heroTitle: 'Modernizing a 50-Year-Old Enterprise Scheduler',
-  heroSubheading: 'A 50-year-old satisfyer, untouched by UX—until now',
+  heroSubheading: 'A 50-year-old workhorse, untouched by UX—until now',
   heroSubtitle:
     'When I joined, this project was waiting in the pipeline. I asked to take it on. I spent months documenting a system that had never been fully mapped — and the architecture I created became "the pattern for everything."',
   coverImage: {
@@ -12,7 +12,7 @@ export const reportcasterCaseStudy: CaseStudyData = {
   },
   role: 'UX Lead / UX Owner (End-to-End Ownership)',
   company: 'Cloud Software Group — WebFOCUS',
-  timeframe: 'Sept 2022 – Nov 2023 | Shipped April 2024',
+  timeframe: 'Sept 2022 – Nov 2023, Jan 2025 | Shipped April 2024',
   status: {
     label: 'Live in Production',
     variant: 'live' as const,
@@ -30,32 +30,32 @@ export const reportcasterCaseStudy: CaseStudyData = {
   quickOverview: {
     title: 'ReportCaster — Quick Impact Overview',
     subtitle: 'Enterprise scheduling system modernization',
-    leadershipSummary: 'I asked to take on this project when I joined. It had been waiting in the pipeline, and I wanted to understand it deeply. I documented the entire system, created the UX architecture, and eventually handed it off to two designers after establishing the foundation.',
+    leadershipSummary: 'This project had been waiting in the pipeline when I joined — I volunteered to take it on. Over 14 months, I mapped the entire system, defined the UX architecture, and built the foundation that two designers later built upon.',
     whatTheSystemWas:
       'A 50-year-old scheduling engine powering 20M+ weekly jobs. It worked — but it was undocumented, fragmented across five subsystems, and ready for modernization.',
     myRole:
       'I owned this end-to-end: from research and system documentation, through architecture and design, to team handoff.',
     scopeOfPractice: [],
     impactMetrics: [
-      { label: 'Subsystems unified', value: '5 → 1' },
-      { label: 'Clicks to create schedule', value: '5+ → 2' },
+      { label: 'Subsystems integrated', value: '5 → 1 Hub' },
+      { label: 'Clicks to create schedule', value: '4 → 2' },
       { label: 'Weekly schedules impacted', value: '20M+' },
-      { label: 'Multi-tab sprawl', value: 'Eliminated' },
+      { label: 'Explorer access', value: '2 → 1 click' },
     ],
     star: {
       situation: 'A 50-year-old scheduling system with five fragmented subsystems and no documentation. It powered 20M+ weekly schedules but needed modernization.',
       task: 'Modernize the system while preserving what worked. Document what had never been documented.',
-      action: 'I asked to take this on. Embedded myself in support calls to understand real pain points. Iterated through three architectural directions before finding the right approach.',
-      result: 'Unified five subsystems into one. Reduced schedule creation from 5+ clicks to 2. Shipped April 2024.',
+      action: 'Volunteered for the project. Embedded myself in support calls to understand real pain points. Explored three architectural directions before finding the right approach.',
+      result: 'Integrated five subsystems into the Hub — no extra space, smart integration. Reduced schedule creation from 4 clicks to 2. Shipped April 2024.',
     },
     technologies: [],
     keyAchievements: [
-      '5 subsystems → 1 unified mental model',
-      '5+ clicks → 2 clicks for schedule creation',
+      '5 subsystems → 1 Hub (smart integration)',
+      '4 clicks → 2 clicks for schedule/list creation',
+      '2 clicks → 1 click for Explorer access',
       '20M+ weekly schedules impacted',
-      'Documented 50-year-old system end-to-end',
       '3 architectural directions before finding the right approach',
-      'Shipped April 2024 — featured on public YouTube demos',
+      'Shipped April 2024 — live in production',
     ],
     // Public demo URL removed - legacy link no longer available
     dataSheetUrl: 'https://www.ibi.com/content/dam/ibi/documents/data-sheet/webfocus-report-caster-data-sheet.pdf',
@@ -121,10 +121,10 @@ export const reportcasterCaseStudy: CaseStudyData = {
       id: 'section-01',
       index: 'D',
       title: 'Discover Deeply: How I Landed the Project',
-      summary: 'Asked to be assigned to a deferred project waiting in the pipeline. Built structure from scratch with only sandbox access and tribal knowledge.',
-      body: `I asked to take on this project when I joined. It had been waiting in the pipeline, and I wanted to understand it deeply. I documented the entire system, created the UX architecture, and eventually handed it off to two designers after establishing the foundation.
+      summary: 'Volunteered for a deferred project with no documentation. Built structure from scratch using only sandbox access and tribal knowledge.',
+      body: `No onboarding deck. No design file. No documented history. Just a sandbox environment and the tribal knowledge of engineers who had worked on it for decades.
 
-There was no onboarding deck, no design file, no documented history. Just a sandbox environment and the tribal knowledge of engineers who had worked on it for decades. I spent the first weeks just listening, mapping, and asking questions that revealed how little was actually written down.`,
+I spent the first weeks listening, mapping, and asking questions that revealed how little was actually written down. I documented the entire system, created the UX architecture, and eventually handed it off to two designers after establishing the foundation.`,
     },
     {
       id: 'section-02',
@@ -149,9 +149,14 @@ This became a detective story. I pieced together the system from fragments: hund
       id: 'section-04',
       index: 'I',
       title: 'Iterate with Inclusion: Three Architectural Approaches',
-      body: `After mapping the system and identifying the five subsystems, I explored three architectural directions before finding the solution that balanced everything. Each version taught me something different about platform constraints, user needs, and engineering realities.
+      summary: 'Three directions before finding the right one. Each rejection taught me something about platform constraints.',
+      body: `After mapping the system and identifying the five subsystems (Schedules, Distribution Lists, Access Lists, Explorer, Admin), I explored three architectural directions before finding the solution that balanced everything.
 
-Navigate through V1, V2, and V3 below to see how each approach evolved and why the final modal-based architecture emerged as the solution.`,
+**V1: Independent Product** → Rejected. "Leadership wants all workflows centralized in the hub."
+**V2: Hub Plugin** → Rejected. "Too much engineering effort this year."
+**V3: Modal-based Architecture** → Shipped. Platform-native design that worked within existing code.
+
+Each rejection taught me something different about platform constraints, user needs, and engineering realities.`,
       // Store V1, V2, V3 data for the VersionIteration component
       v1Data: {
         id: 'version-1',
@@ -355,7 +360,8 @@ Rejected: "Too much engineering effort this year." Different constraint — reso
       id: 'section-05',
       index: 'G',
       title: 'Grow Through Constraints: Aligning and Leading the Team',
-      body: `I was redesigning ML Functions simultaneously — two major enterprise systems at once. This taught me to prioritize ruthlessly: architecture first, polish second.
+      summary: 'Owned three major projects simultaneously. Onboarded 2 designers and remained the knowledge hub.',
+      body: `I was redesigning ML Functions and IQ Plugin simultaneously — three major enterprise systems at once. This taught me to prioritize ruthlessly: architecture first, polish second.
 
 I onboarded 2 designers mid-project and remained the knowledge hub even after transitioning. The team could execute because they understood the "why" behind every decision.`,
     },
@@ -363,9 +369,21 @@ I onboarded 2 designers mid-project and remained the knowledge hub even after tr
       id: 'section-06',
       index: 'N',
       title: 'Navigate Forward: Shipping Impact and Reflection',
+      summary: 'Requested: visual refresh. Delivered: foundational system architecture.',
       body: `The request was for a visual refresh. I delivered a foundational system architecture. What started as "make it look better" became "document, unify, and future-proof a 50-year-old system."
 
-This section covers what shipped, how it was received, and the honest reflection on what I'd do differently.`,
+**What shipped (April 2024):**
+• 5 subsystems → 1 unified mental model
+• 4 → 2 clicks for schedule/list creation
+• 2 → 1 click for Explorer access
+• Live in production, featured in public demos
+
+**What I'd do differently:**
+• Push harder for direct user research earlier — even in enterprise, there are ways
+• Document architectural decisions in real-time, not retrospectively
+• Build design system components as I go, not after
+
+The architecture I created became the reference pattern for other modernization projects in the org.`,
     },
   ],
   // ----------------------------
@@ -381,7 +399,7 @@ This section covers what shipped, how it was received, and the honest reflection
         title: 'Legacy RC Workflow',
         videoUrl: '/videos/rc-old-workflow.mp4', // 5 min video of old RC UI workflow
         videoPoster: '/images/case-study/ReportCaster/rc-old-workflow-poster.jpg',
-        description: 'The old fragmented workflow: multiple disconnected interfaces, 4–6 clicks to create a schedule, hidden functionality in legacy menus. Note: The legacy workflow video is under NDA and requires password access to view.',
+        description: 'The old fragmented workflow: multiple disconnected interfaces, 4 clicks to create a schedule, hidden functionality in legacy menus. Note: The legacy workflow video is under NDA and requires password access to view.',
         sensitive: true,
       },
       after: {
@@ -393,16 +411,16 @@ This section covers what shipped, how it was received, and the honest reflection
       },
       comparisonNotes: {
         before: [
-          'Multiple disconnected interfaces',
-          '4–6 clicks to create a schedule',
+          'Five disconnected subsystems',
+          '4 clicks to create schedule/lists',
+          '2 clicks to access Explorer',
           'Hidden functionality in legacy menus',
-          'No unified mental model',
         ],
         after: [
           'Unified modal-based workflow',
-          '2 clicks to create a schedule (+ menu → create schedule)',
-          'All functionality accessible',
-          'One coherent system',
+          '2 clicks to create schedule/lists',
+          '1 click to access Explorer',
+          'All functionality accessible from Hub',
         ],
       },
     },
@@ -418,17 +436,17 @@ This section covers what shipped, how it was received, and the honest reflection
       {
         letter: 'D',
         title: 'Discover Deeply',
-        description: 'I asked to take on this project when I joined. I spent weeks understanding the full architecture before I started designing.',
+        description: 'Volunteered for a deferred project with no documentation. Spent weeks mapping the full architecture before designing.',
       },
       {
         letter: 'E',
         title: 'Empathize with the Ecosystem',
-        description: 'I embedded myself in support meetings to hear real customer pain. I discovered users were hacking the UI just to get their jobs done.',
+        description: 'No direct user access, so I embedded in support calls. Found customers creating workarounds for problems the system never solved.',
       },
       {
         letter: 'S',
         title: 'Simplify the Chaos',
-        description: 'I unified five fragmented subsystems into one coherent mental model. One experience instead of five.',
+        description: 'Integrated five fragmented subsystems into the Hub. No extra space — smart integration that lives inside existing patterns.',
       },
       {
         letter: 'I',
@@ -453,10 +471,10 @@ This section covers what shipped, how it was received, and the honest reflection
   impactSummary: {
     heading: 'Shipping impact at a glance',
     bullets: [
-      '5 subsystems → 1 unified mental model',
-      '5+ clicks → 2 clicks for schedule creation',
+      '5 subsystems → 1 Hub (smart integration)',
+      '4 → 2 clicks for schedules and lists',
+      '2 → 1 click for Explorer access',
       '20M+ weekly schedules impacted',
-      'Architecture became "the pattern for everything"',
       'Shipped April 2024 — live in production',
     ],
   },

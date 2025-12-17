@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
+import EasterEgg from '@/components/ui/EasterEgg'
 import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 import { useScrollManager } from '@/hooks/useScrollManager'
 import MobileMenu from './MobileMenu'
@@ -72,19 +73,23 @@ export default function SiteHeader() {
     >
       <nav className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]">
         {/* Logo - positioned absolutely on the left */}
-        <Link
-          href="/"
-          aria-label="Go to homepage"
-          className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16 flex items-center transition-colors group"
-        >
-          <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[var(--accent-teal)] transition-all duration-300">
-            <AnimatedSignatureLogo
-              className="w-full h-full"
-              duration={16000}
-              pauseDuration={2000}
-            />
-          </div>
-        </Link>
+        <div className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16">
+          <EasterEgg clicksRequired={5}>
+            <Link
+              href="/"
+              aria-label="Go to homepage"
+              className="flex items-center transition-colors group"
+            >
+              <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[var(--accent-teal)] transition-all duration-300">
+                <AnimatedSignatureLogo
+                  className="w-full h-full"
+                  duration={16000}
+                  pauseDuration={2000}
+                />
+              </div>
+            </Link>
+          </EasterEgg>
+        </div>
 
         {/* Centered Navigation Links */}
         <div className="flex items-center gap-4 md:gap-6">
