@@ -1,7 +1,7 @@
 #!/bin/bash
 # Start Next.js dev server on port 3000
 
-cd /Users/anu/Work/anu-portfolio
+cd "$(dirname "$0")"
 
 # Kill any existing Next.js processes
 echo "Killing existing Next.js processes..."

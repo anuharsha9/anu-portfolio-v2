@@ -12,7 +12,6 @@ import UXPrinciples from './UXPrinciples'
 import SectionBlock from './SectionBlock'
 import PrototypeBlock from './PrototypeBlock'
 import PasswordGate from './PasswordGate'
-import CaseStudySignatureBadge from '@/components/brand/CaseStudySignatureBadge'
 import SignatureLogo from '@/components/brand/SignatureLogo'
 import SectionDivider from '@/components/brand/SectionDivider'
 import SocialShareButtons from '@/components/sharing/SocialShareButtons'
@@ -1701,15 +1700,6 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
             {/* Let's Talk CTA */}
             <LetsTalkCTA />
-
-            {/* Case Study Signature Badge - Compact footer */}
-            <div className="surface-light py-6 border-t border-slate-100">
-              <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <div className="flex justify-center">
-                  <CaseStudySignatureBadge />
-                </div>
-              </div>
-            </div>
           </>
         )
       }
