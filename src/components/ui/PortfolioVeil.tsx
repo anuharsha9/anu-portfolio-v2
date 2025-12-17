@@ -109,7 +109,7 @@ export default function PortfolioVeil() {
               </motion.div>
 
               {/* Headline */}
-              <h1 className="font-serif text-slate-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-2 md:mb-3">
+              <h1 className="font-serif text-slate-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-5 md:mb-8">
                 <WordReveal text="52 seconds." delay={300} stagger={100} /><br />
                 <span className="text-slate-500">
                   <WordReveal text="That's all I ask." delay={600} stagger={80} />
@@ -117,7 +117,7 @@ export default function PortfolioVeil() {
               </h1>
 
               {/* Video - Takes up available space */}
-              <div className="w-full flex justify-center mb-2 md:mb-3">
+              <div className="w-full flex justify-center mb-4 md:mb-6">
                 <div className="w-auto h-[55vh] md:h-[58vh] aspect-[9/16] relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xl">
                   {/* Window Header Bar */}
                   <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-slate-100/95 backdrop-blur-sm border-b border-slate-200 z-10">
@@ -142,7 +142,7 @@ export default function PortfolioVeil() {
               </div>
 
               {/* Story beats */}
-              <p className="text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed mb-2 md:mb-3">
+              <p className="text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 md:mb-5">
                 <span className="text-slate-900 font-medium">The goal?</span>{' '}
                 <span className="text-slate-500">A portfolio.</span>
                 <span className="mx-2 md:mx-3 text-slate-300">·</span>
@@ -160,15 +160,22 @@ export default function PortfolioVeil() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="mb-3 md:mb-4"
+                className="mb-5 md:mb-6"
               >
                 <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-2">
-                  {['Cursor', 'Claude', 'GPT', 'AWS'].map((tool) => (
+                  {[
+                    { name: 'Cursor', desc: 'IDE' },
+                    { name: 'Claude', desc: 'AI' },
+                    { name: 'GPT', desc: 'AI' },
+                    { name: 'Gemini', desc: 'AI' },
+                    { name: 'AWS', desc: 'Deploy' },
+                  ].map((tool) => (
                     <span
-                      key={tool}
-                      className="inline-flex items-center px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs md:text-sm font-mono"
+                      key={tool.name}
+                      className="inline-flex items-center gap-1 md:gap-1.5 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs md:text-sm font-mono"
                     >
-                      {tool}
+                      <span className="text-slate-900">{tool.name}</span>
+                      <span className="text-slate-400 text-[10px] md:text-xs">{tool.desc}</span>
                     </span>
                   ))}
                 </div>

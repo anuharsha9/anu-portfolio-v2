@@ -55,7 +55,6 @@ This portfolio demonstrates end-to-end ownership of complex UX projects at enter
 - ♿ **Accessible** – WCAG 2.1 AA compliance considerations
 - 🔍 **SEO Optimized** – Structured data, sitemaps, and meta tags
 - 🎬 **Interactive Case Studies** – Rich media, before/after comparisons, and workflow visualizations
-- 📄 **Resume Generation** – Automated PDF generation from HTML
 - 🌐 **PWA Ready** – Service worker for offline capabilities
 
 ## Getting Started

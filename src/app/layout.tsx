@@ -103,7 +103,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
         {/* Favicon - Multiple formats for best compatibility */}
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" type="image/svg+xml" href="/brand/signature/signature-icon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/anuja-sign.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

@@ -1,23 +1,16 @@
 #!/bin/bash
 
-# Safe Build & Deploy Script - Stops dev server first to prevent 500 errors
+# Build & Deploy Script - Runs alongside dev server
 # Usage: ./build-and-deploy.sh
 
 set -e  # Exit on any error
 
-echo "🛑 Stopping dev server (if running)..."
-pkill -f "next dev" || true
-sleep 2
-
 echo "🧹 Cleaning build directories..."
 cd /Users/anu/Work/anu-portfolio-exploration
-rm -rf .next out node_modules/.cache .turbo
+rm -rf out node_modules/.cache .turbo
 
 echo "📦 Building production site..."
 NODE_ENV=production npx next build
-
-echo "📄 Generating resume PDF..."
-node scripts/generate-resume-pdf.js
 
 echo "🚀 Deploying to S3..."
 # Upload static assets with long cache
@@ -66,6 +59,3 @@ aws cloudfront create-invalidation \
 echo ""
 echo "✅ Deployment complete!"
 echo "🌐 Your site will be live at https://anujaharsha.com in 1-3 minutes"
-echo ""
-echo "💡 To restart dev server, run:"
-echo "   cd /Users/anu/Work/anu-portfolio-exploration && rm -rf .next && npm run dev"
