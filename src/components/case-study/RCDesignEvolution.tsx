@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useLightbox } from '@/contexts/LightboxContext'
 import { Calendar, Clock, Mail, Users, FolderTree, Settings } from 'lucide-react'
+import AutoSequenceDataViewer from './AutoSequenceDataViewer'
 
 interface RCDesignEvolutionProps {
   isLightBackground?: boolean
@@ -451,72 +452,16 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                     )}
                   </div>
 
-                  {/* Desktop: Grid Display */}
-                  <div className={`hidden md:grid gap-6 ${activeTabData.images.length === 1
-                    ? 'grid-cols-1'
-                    : activeTabData.images.length === 2
-                      ? 'grid-cols-2'
-                      : activeTabData.images.length <= 4
-                        ? 'grid-cols-2'
-                        : 'grid-cols-2 xl:grid-cols-3'
-                    }`}>
-                    {activeTabData.images.map((img, i) => {
-                      const galleryImages = activeTabData.images.map(image => ({
-                        src: image.src,
-                        alt: image.alt,
-                        caption: `// ${image.figNumber}: ${image.caption}`
-                      }))
-
-                      return (
-                        <div
-                          key={i}
-                          className="group cursor-pointer"
-                          onClick={() => openLightbox(
-                            { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
-                            galleryImages,
-                            i
-                          )}
-                          role="button"
-                          tabIndex={0}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                              e.preventDefault()
-                              openLightbox(
-                                { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
-                                galleryImages,
-                                i
-                              )
-                            }
-                          }}
-                          aria-label={`View ${img.alt} in fullscreen`}
-                        >
-                          <div className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-50 group-hover:shadow-lg group-hover:border-[var(--accent-teal-300)] transition-all duration-300">
-                            <div className="relative aspect-[4/3]">
-                              <Image
-                                src={img.src}
-                                alt={img.alt}
-                                fill
-                                className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
-                                sizes="(max-width: 1200px) 50vw, 40vw"
-                              />
-                              {/* Hover Overlay */}
-                              <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300 flex items-center justify-center">
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5 shadow-lg">
-                                    <span className="font-mono text-[10px] text-slate-600 uppercase tracking-widest">
-                                      Click to expand
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <p className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mt-3">
-                            {`// ${img.figNumber}: ${img.caption}`}
-                          </p>
-                        </div>
-                      )
-                    })}
+                  {/* Desktop: Auto-Playing Sequence Viewer (Replaces Grid) */}
+                  <div className="hidden md:block">
+                    <AutoSequenceDataViewer
+                      images={activeTabData.images.map(img => ({
+                        src: img.src,
+                        alt: img.alt, // Use alt text for accessibility
+                        caption: `// ${img.figNumber}: ${img.caption}` // Pass caption for potential use
+                      }))}
+                      title={activeTabData.title}
+                    />
                   </div>
                 </motion.div>
               )}
