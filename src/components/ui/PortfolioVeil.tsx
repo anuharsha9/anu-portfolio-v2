@@ -55,6 +55,8 @@ export default function PortfolioVeil() {
 
   const handleEnter = useCallback(() => {
     sessionStorage.setItem(VEIL_SESSION_KEY, 'true')
+    // Scroll to top to ensure hero section is visible
+    window.scrollTo(0, 0)
     setShowVeil(false)
   }, [])
 

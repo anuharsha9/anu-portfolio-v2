@@ -660,7 +660,7 @@ export default function HeroSplit() {
               </h1>
 
               {/* Professional Title */}
-              <p className="text-[var(--accent-teal)] font-mono text-xs xs:text-sm sm:text-base md:text-lg tracking-wide leading-relaxed max-w-3xl">
+              <p className="text-[var(--accent-teal)] font-mono text-xs xs:text-sm sm:text-base md:text-lg tracking-wide leading-relaxed md:whitespace-nowrap">
                 Principal Product Designer · AI-Driven · Enterprise Systems Architect
               </p>
 
