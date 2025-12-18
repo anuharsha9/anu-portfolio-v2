@@ -424,7 +424,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-slate-400 text-xs pt-4">
-            Designed and built with Cursor.
+            Engineered and orchestrated with AI agents.
           </p>
 
           {/* Safe area for iPhone home indicator */}

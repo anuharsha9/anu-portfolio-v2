@@ -108,7 +108,7 @@ export default function TalkSection() {
 
           {/* Copyright - Low contrast gray */}
           <p className={`${t.textDim} text-sm font-mono`}>
-            Designed and built with Cursor.
+            Engineered and orchestrated with AI agents.
           </p>
 
           {/* Safe area for iPhone home indicator */}

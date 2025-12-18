@@ -128,7 +128,7 @@ export default function SiteFooter() {
             <span className={`hidden md:inline ${t.monitor.border}`}>·</span>
             <div className="flex items-center gap-space-3">
               <p className={`${t.monitor.textDim} text-xs md:text-sm`} suppressHydrationWarning>
-                Designed and built with Cursor.
+                Engineered and orchestrated with AI agents.
               </p>
             </div>
           </div>
