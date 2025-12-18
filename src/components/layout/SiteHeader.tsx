@@ -9,6 +9,7 @@ import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 import { useScrollManager } from '@/hooks/useScrollManager'
 import MobileMenu from './MobileMenu'
 import CaseStudiesDropdown from './CaseStudiesDropdown'
+import Magnetic from '@/components/ui/Magnetic'
 import { getTheme, spacing } from '@/lib/design-system'
 
 export default function SiteHeader() {
@@ -107,57 +108,63 @@ export default function SiteHeader() {
             />
 
             {/* Me */}
-            <Link
-              href="/me"
-              className={`font-sans font-medium transition-colors relative ${isAboutPage
-                ? t.text
-                : `${t.textMuted} hover:${t.text}`
-                }`}
-            >
-              Me
-              {/* Active indicator dot */}
-              {isAboutPage && (
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--accent-teal)]" />
-              )}
-            </Link>
+            <Magnetic>
+              <Link
+                href="/me"
+                className={`block font-sans font-medium transition-colors relative px-2 py-1 ${isAboutPage
+                  ? t.text
+                  : `${t.textMuted} hover:${t.text}`
+                  }`}
+              >
+                Me
+                {/* Active indicator dot */}
+                {isAboutPage && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[var(--accent-teal)]" />
+                )}
+              </Link>
+            </Magnetic>
           </div>
         </div>
 
         {/* Right Side CTAs */}
         <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-space-3">
           {/* Let's Talk - Primary CTA */}
-          <Link
-            href="/#lets-talk"
-            className="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
-          >
-            <span>Let&apos;s Talk</span>
-          </Link>
+          <Magnetic strength={40}>
+            <Link
+              href="/#lets-talk"
+              className="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
+            >
+              <span>Let&apos;s Talk</span>
+            </Link>
+          </Magnetic>
 
           {/* Resume - Secondary CTA */}
-          <a
-            href="/assets/Anuja Harsha Nimmagadda - Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackResumeDownload()}
-            className={`inline-flex items-center gap-space-1.5 px-space-4 py-space-2 rounded-full border ${t.borderSecondary} ${t.textMuted} text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:${t.bgAccent} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]`}
-            aria-label="Download Resume PDF"
-          >
-            <span>Resume</span>
-            <svg
-              className="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <Magnetic strength={20}>
+            <a
+              href="/assets/Anuja Harsha Nimmagadda - Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackResumeDownload()}
+              className={`inline-flex items-center gap-space-1.5 px-space-4 py-space-2 rounded-full border ${t.borderSecondary} ${t.textMuted} text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:${t.bgAccent} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]`}
+              aria-label="Download Resume PDF"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
-          </a>
+              <span>Resume</span>
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </a>
+          </Magnetic>
         </div>
 
         {/* Mobile Menu */}
