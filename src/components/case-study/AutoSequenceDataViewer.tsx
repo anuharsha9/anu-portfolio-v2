@@ -129,7 +129,7 @@ export default function AutoSequenceDataViewer({ images, title }: AutoSequenceDa
 
             {/* Lightbox Portal */}
             {isLightboxOpen && typeof window !== 'undefined' && createPortal(
-                <div className="fixed inset-0 z-[9999] bg-black/95 flex flex-col items-center justify-center p-4 sm:p-8 backdrop-blur-sm">
+                <div className="fixed inset-0 z-[10001] bg-black/95 flex flex-col items-center justify-center p-4 sm:p-8 backdrop-blur-sm">
                     {/* Close Button */}
                     <button
                         onClick={() => setIsLightboxOpen(false)}
