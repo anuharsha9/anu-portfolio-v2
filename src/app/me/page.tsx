@@ -42,7 +42,7 @@ export default function AboutPage() {
             {/* Main headline */}
             <h1 className="font-serif text-slate-900 text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight mb-4 sm:mb-6 px-4">
               52 seconds.<br />
-              <span className="text-slate-500">That&apos;s all I ask.</span>
+              <span className="text-slate-600">That&apos;s all I ask.</span>
             </h1>
 
             {/* Video - THE HERO (compact) */}
