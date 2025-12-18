@@ -67,7 +67,7 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
         {/* Header */}
         <div className="text-center mb-12">
           <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest mb-3 block">
-            // FOUNDATION: WHAT_I_BUILT
+            {'// FOUNDATION: WHAT_I_BUILT'}
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-slate-900 mb-4">
             Three Workflows. Three Entry Points.

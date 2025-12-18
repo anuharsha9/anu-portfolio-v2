@@ -15,7 +15,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div>
               <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
-                // PROJECT_OUTCOME
+                {'// PROJECT_OUTCOME'}
               </span>
               <h3 className="font-serif text-xl md:text-2xl text-slate-900 mt-1">
                 From Visual Refresh to System Architecture
@@ -65,7 +65,7 @@ export default function NavigateForwardContent({ isLightBackground = true }: Nav
       {/* Customer Recognition - Standalone highlight */}
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 text-center">
         <span className="font-mono text-[var(--accent-teal)] text-xs uppercase tracking-widest">
-          // CUSTOMER_RECOGNITION
+          {'// CUSTOMER_RECOGNITION'}
         </span>
         <blockquote className="mt-4 mb-4">
           <p className="font-serif text-2xl md:text-3xl text-white italic leading-relaxed">

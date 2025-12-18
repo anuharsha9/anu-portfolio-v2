@@ -252,7 +252,8 @@ export interface CaseStudyData {
         title: string
         videos: {
           title: string
-          videoUrl: string
+          videoUrl?: string
+          videoEmbedUrl?: string
           videoPoster?: string
           description?: string
         }[]
@@ -262,6 +263,7 @@ export interface CaseStudyData {
         videoUrl: string
         videoPoster?: string
         description?: string
+        sensitive?: boolean
       }
       comparisonNotes?: {
         before: string[]

@@ -282,7 +282,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-          // V3_MODAL_ARCHITECTURE
+          {'// V3_MODAL_ARCHITECTURE'}
         </span>
         <h3 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl">
           The Final System: Modal-Based Workflows
@@ -300,7 +300,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
             <div className="px-4 pt-4 pb-2">
               <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-                // SUBSYSTEM_INDEX
+                {'// SUBSYSTEM_INDEX'}
               </span>
             </div>
             <div className="overflow-x-auto scrollbar-hide">
@@ -329,7 +329,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           {/* Desktop Sidebar - File Tree */}
           <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
             <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
-              // SUBSYSTEM_INDEX
+              {'// SUBSYSTEM_INDEX'}
             </span>
 
             <nav className="space-y-1">
@@ -436,7 +436,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                                 </div>
                               </div>
                               <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
-                                // {img.figNumber}: {img.caption}
+                                {`// ${img.figNumber}: ${img.caption}`}
                               </p>
                             </div>
                           )
@@ -512,7 +512,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
                             </div>
                           </div>
                           <p className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mt-3">
-                            // {img.figNumber}: {img.caption}
+                            {`// ${img.figNumber}: ${img.caption}`}
                           </p>
                         </div>
                       )
@@ -537,7 +537,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           {/* Left - The Problem */}
           <div className="flex-1 space-y-3">
             <span className="font-mono text-xs text-red-600 uppercase tracking-widest">
-              // LEGACY_PAIN
+              {'// LEGACY_PAIN'}
             </span>
             <h4 className="font-serif text-xl text-slate-900">
               30 Years of Checkbox Chaos
@@ -560,7 +560,7 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
           {/* Right - The Solution */}
           <div className="flex-1 space-y-3">
             <span className="font-mono text-xs text-emerald-600 uppercase tracking-widest">
-              // NATURAL_LANGUAGE
+              {'// NATURAL_LANGUAGE'}
             </span>
             <h4 className="font-serif text-xl text-slate-900">
               Human-Readable Summaries

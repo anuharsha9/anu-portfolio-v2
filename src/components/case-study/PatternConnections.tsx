@@ -59,7 +59,7 @@ const FilterViewIcon = () => (
 
 export default function PatternConnections({ isLightBackground = true }: PatternConnectionsProps) {
   const patterns = [
-    { 
+    {
       id: 'modal',
       patternName: 'MODAL_CREATION_FLOW',
       Icon: ModalFlowIcon,
@@ -68,7 +68,7 @@ export default function PatternConnections({ isLightBackground = true }: Pattern
       reusedIn: null,
       link: null,
     },
-    { 
+    {
       id: 'stepper',
       patternName: 'GUIDED_STEPPER_UI',
       Icon: StepperIcon,
@@ -77,7 +77,7 @@ export default function PatternConnections({ isLightBackground = true }: Pattern
       reusedIn: 'ML Functions',
       link: '/work/ml-functions',
     },
-    { 
+    {
       id: 'filter',
       patternName: 'EXPLORER_FILTER_VIEW',
       Icon: FilterViewIcon,
@@ -146,7 +146,7 @@ export default function PatternConnections({ isLightBackground = true }: Pattern
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-12 shadow-sm">
       <div className="space-y-10">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -156,7 +156,7 @@ export default function PatternConnections({ isLightBackground = true }: Pattern
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // PATTERN_LIBRARY
+            {'// PATTERN_LIBRARY'}
           </span>
           <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
             Patterns That Became Reusable

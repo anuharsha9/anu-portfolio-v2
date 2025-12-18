@@ -48,7 +48,7 @@ export default function IQValidationSources({ isLightBackground = false }: IQVal
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // IMPACT_ASSESSMENT
+          {'// IMPACT_ASSESSMENT'}
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
           Strategic Outcomes
@@ -78,7 +78,7 @@ export default function IQValidationSources({ isLightBackground = false }: IQVal
 
               {/* Tag */}
               <span className={`font-mono text-[10px] ${outcome.tagColor} uppercase tracking-widest mb-3`}>
-                // {outcome.tag}
+                {'// '}{outcome.tag}
               </span>
 
               {/* Headline */}

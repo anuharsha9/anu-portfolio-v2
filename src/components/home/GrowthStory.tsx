@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { getTheme, spacing } from '@/lib/design-system'
 
 const testimonials = [
   {
@@ -22,38 +23,39 @@ const testimonials = [
 ]
 
 export default function GrowthStory() {
+  const t = getTheme(true)
   return (
-    <section className="py-10 md:py-12">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+    <section className="py-section-mobile md:py-section-tablet">
+      <div className={`${spacing.containerFull}`}>
         {/* Staggered testimonials - asymmetric layout */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 md:items-start">
+        <div className="flex flex-col md:flex-row gap-space-6 md:gap-space-8 md:items-start">
           {/* First testimonial - larger, no offset */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 relative hover:shadow-lg hover:border-slate-300 transition-all group md:flex-[1.2]"
+            className={`${t.bgAlt} border ${t.border} rounded-2xl p-space-6 md:p-space-8 relative hover:shadow-lg hover:border-slate-300 transition-all group md:flex-[1.2]`}
           >
             <div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={{ background: `radial-gradient(circle at 50% 50%, ${testimonials[0].accentColor}10 0%, transparent 70%)` }}
             />
             <span
-              className="absolute top-4 right-6 text-6xl md:text-8xl font-serif leading-none select-none pointer-events-none opacity-10"
+              className="absolute top-space-4 right-space-6 text-6xl md:text-8xl font-serif leading-none select-none pointer-events-none opacity-10"
               style={{ color: testimonials[0].accentColor }}
             >
               &ldquo;
             </span>
-            <blockquote className="relative z-10 font-serif text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+            <blockquote className={`relative z-10 font-serif ${t.textSecondary} text-lg md:text-xl leading-relaxed mb-space-6`}>
               &ldquo;{testimonials[0].quote}&rdquo;
             </blockquote>
-            <div className="relative z-10 flex items-center gap-4 pt-4 border-t border-slate-100">
+            <div className={`relative z-10 flex items-center gap-space-4 pt-space-4 border-t ${t.borderSubtle}`}>
               <div className="w-1 h-12 rounded-full" style={{ backgroundColor: testimonials[0].accentColor }} />
               <div>
-                <p className="font-semibold text-slate-900">{testimonials[0].name}</p>
+                <p className={`font-semibold ${t.text}`}>{testimonials[0].name}</p>
                 <p className="text-sm" style={{ color: testimonials[0].accentColor }}>{testimonials[0].role}</p>
-                <p className="text-xs text-slate-500">{testimonials[0].company}</p>
+                <p className={`text-xs ${t.textMuted}`}>{testimonials[0].company}</p>
               </div>
             </div>
           </motion.div>
@@ -64,7 +66,7 @@ export default function GrowthStory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 relative hover:shadow-lg hover:border-slate-300 transition-all group md:flex-[0.8] md:mt-12"
+            className={`${t.bgAlt} border ${t.border} rounded-2xl p-space-5 md:p-space-6 relative hover:shadow-lg hover:border-slate-300 transition-all group md:flex-[0.8] md:mt-space-12`}
           >
             <div
               className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -76,13 +78,13 @@ export default function GrowthStory() {
             >
               &ldquo;
             </span>
-            <blockquote className="relative z-10 font-serif text-slate-700 text-base md:text-lg leading-relaxed mb-4">
+            <blockquote className={`relative z-10 font-serif ${t.textSecondary} text-base md:text-lg leading-relaxed mb-space-4`}>
               &ldquo;{testimonials[1].quote}&rdquo;
             </blockquote>
-            <div className="relative z-10 flex items-center gap-3 pt-3 border-t border-slate-100">
+            <div className={`relative z-10 flex items-center gap-space-3 pt-space-3 border-t ${t.borderSubtle}`}>
               <div className="w-1 h-10 rounded-full" style={{ backgroundColor: testimonials[1].accentColor }} />
               <div>
-                <p className="font-semibold text-slate-900 text-sm">{testimonials[1].name}</p>
+                <p className={`font-semibold ${t.text} text-sm`}>{testimonials[1].name}</p>
                 <p className="text-xs" style={{ color: testimonials[1].accentColor }}>{testimonials[1].role}</p>
               </div>
             </div>
@@ -95,11 +97,11 @@ export default function GrowthStory() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 md:mt-10"
+          className="mt-space-8 md:mt-space-10"
         >
           <a
             href="/me#social-proof"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white hover:bg-[var(--accent-teal)] transition-colors group"
+            className={`inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full ${t.monitor.bg} text-white hover:bg-[var(--accent-teal)] transition-colors group`}
           >
             <span className="font-mono text-xs">See more testimonials</span>
             <svg aria-hidden="true" className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

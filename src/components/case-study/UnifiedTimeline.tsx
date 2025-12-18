@@ -33,8 +33,8 @@ interface UnifiedTimelineProps {
   accentColor?: 'teal' | 'amber' | 'violet'
 }
 
-export default function UnifiedTimeline({ 
-  phases, 
+export default function UnifiedTimeline({
+  phases,
   header = {
     tag: '// PROJECT_EVOLUTION',
     title: 'Project Timeline',
@@ -122,7 +122,7 @@ export default function UnifiedTimeline({
           <div className="space-y-0">
             {phases.map((phase, index) => {
               const imageIndex = allImages.findIndex(img => img.src === phase.image?.src)
-              
+
               return (
                 <motion.div
                   key={phase.id}
@@ -168,13 +168,12 @@ export default function UnifiedTimeline({
                         {/* Status Badge */}
                         <div className="flex items-center gap-2">
                           <span className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${getStatusTextColor(phase.status)}`}>
-                            <span className={`w-1.5 h-1.5 rounded-full ${
-                              phase.status === 'IN_PROGRESS' 
-                                ? 'bg-amber-500 animate-pulse' 
+                            <span className={`w-1.5 h-1.5 rounded-full ${phase.status === 'IN_PROGRESS'
+                                ? 'bg-amber-500 animate-pulse'
                                 : phase.status === 'REJECTED'
                                   ? 'bg-red-400'
                                   : 'bg-emerald-500'
-                            }`}></span>
+                              }`}></span>
                             STATUS: {phase.status}
                           </span>
                         </div>
@@ -182,9 +181,13 @@ export default function UnifiedTimeline({
 
                       {/* Image */}
                       {phase.image && (
-                        <div 
+                        <div
                           className="relative aspect-video rounded-lg overflow-hidden border border-slate-200 bg-slate-100 cursor-pointer group/img hover:shadow-lg transition-all duration-300"
-                          onClick={() => openLightbox(phase.image!.src, phase.image!.alt, phase.image?.caption || phase.title, allImages, imageIndex)}
+                          onClick={() => openLightbox({
+                            src: phase.image!.src,
+                            alt: phase.image!.alt,
+                            caption: phase.image?.caption || phase.title
+                          }, allImages, imageIndex)}
                         >
                           <Image
                             src={phase.image.src}

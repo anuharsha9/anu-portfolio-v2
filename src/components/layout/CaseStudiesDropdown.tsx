@@ -120,7 +120,7 @@ export default function CaseStudiesDropdown({ className = '', onNavigate }: Case
             {/* Header */}
             <div className="px-4 py-3 border-b border-slate-100 bg-slate-50">
               <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest">
-                // CASE_STUDIES
+                {'// CASE_STUDIES'}
               </span>
             </div>
 

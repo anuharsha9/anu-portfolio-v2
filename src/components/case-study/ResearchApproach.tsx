@@ -83,7 +83,7 @@ export default function ResearchApproach({ data, accentColor = 'teal' }: Researc
         className="text-center space-y-3"
       >
         <span className={`font-mono text-xs tracking-widest uppercase ${accent.tag}`}>
-          // {sectionTag}
+          {'// '}{sectionTag}
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
           {title}

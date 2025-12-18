@@ -8,6 +8,8 @@ import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
 import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 import { getCaseStudyData } from '@/lib/getCaseStudyData'
 
+import { getTheme, spacing } from '@/lib/design-system'
+
 interface MobileMenuProps {
   isLandingPage?: boolean
   isLightBackground?: boolean
@@ -16,7 +18,7 @@ interface MobileMenuProps {
 export default function MobileMenu({ isLandingPage = false, isLightBackground = false }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
-  const isLight = isLightBackground
+  const t = getTheme(true)
 
   // Simple scroll prevention - just overflow hidden, no position changes
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
           {!isOpen && (
             <motion.button
               onClick={toggleMenu}
-              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 relative pointer-events-auto -mr-1"
+              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 relative pointer-events-auto -mr-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-teal)] focus-visible:ring-offset-2 rounded-md"
               style={{ zIndex: 10003 }}
               aria-label="Open menu"
               aria-expanded={isOpen}
@@ -77,9 +79,9 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
-              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
-              <span className={`w-6 h-[2.5px] rounded-full ${isLight ? 'bg-slate-800' : 'bg-white'}`} />
+              <span className="w-6 h-[2.5px] rounded-full bg-slate-900" />
+              <span className="w-6 h-[2.5px] rounded-full bg-slate-900" />
+              <span className="w-6 h-[2.5px] rounded-full bg-slate-900" />
             </motion.button>
           )}
         </AnimatePresence>
@@ -110,9 +112,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
 
             {/* Menu Panel - Full Screen Overlay - above header */}
             <motion.div
-              className={`fixed inset-0 lg:hidden flex flex-col ${
-                isLight ? 'bg-white text-slate-900' : 'bg-[var(--bg-dark)] text-white'
-              }`}
+              className={`fixed inset-0 lg:hidden flex flex-col ${t.bg} ${t.text}`}
               style={{
                 height: '100vh',
                 maxHeight: '100vh',
@@ -132,23 +132,19 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header - Centered */}
-              <div className={`p-8 flex-shrink-0 text-center border-b ${isLight ? 'border-slate-200' : 'border-refined-dark'}`}>
+              <div className={`p-8 flex-shrink-0 text-center border-b ${t.borderSubtle}`}>
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex-1"></div>
                   <div className="w-12 h-12 mx-auto">
                     <AnimatedSignatureLogo
-                      className={`w-full h-full ${isLight ? 'text-slate-900' : 'text-white'}`}
+                      className={`w-full h-full ${t.text}`}
                       duration={16000}
                       pauseDuration={2000}
                     />
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className={`w-8 h-8 flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                      isLight
-                        ? 'text-slate-500 hover:text-slate-900 focus-visible:outline-slate-900'
-                        : 'text-white/70 hover:text-white focus-visible:outline-white'
-                    }`}
+                    className={`w-8 h-8 flex items-center justify-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${t.textSecondary} hover:${t.text} focus-visible:outline-slate-900`}
                     aria-label="Close menu"
                   >
                     <svg aria-hidden="true" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -159,33 +155,25 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                 <Link
                   href="/"
                   onClick={() => setIsOpen(false)}
-                  className={`text-xl font-serif font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                    isLight
-                      ? 'text-slate-900 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                      : 'text-white hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                  }`}
+                  className={`text-xl font-serif font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${t.text} hover:text-[var(--accent-teal)] focus-visible:outline-slate-900`}
                 >
                   Anuja Harsha Nimmagadda
                 </Link>
-                <p className={`${isLight ? 'text-slate-500' : 'text-white/60'} text-sm mt-2`}>Principal UX Designer</p>
+                <p className={`${t.textSecondary} text-sm mt-2`}>Principal UX Designer</p>
               </div>
 
               {/* Navigation Links - Scrollable */}
               <nav className="flex-1 overflow-y-auto overflow-x-hidden p-8 space-y-2" style={{ minHeight: 0 }} aria-label="Main navigation">
                 {/* Main Navigation */}
                 <div className="mb-8">
-                  <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs uppercase tracking-wider mb-4 px-2`}>
+                  <p className={`${t.textDim} text-xs uppercase tracking-wider mb-4 px-2`}>
                     Navigation
                   </p>
 
                   <Link
                     href="/#work-overview"
                     onClick={() => setIsOpen(false)}
-                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                      isLight
-                        ? 'text-slate-900 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                        : 'text-white hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                    }`}
+                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${t.text} hover:${t.bgAccent} hover:text-[var(--accent-teal)] focus-visible:outline-slate-900`}
                   >
                     Work
                   </Link>
@@ -193,11 +181,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                   <Link
                     href="/me"
                     onClick={() => setIsOpen(false)}
-                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                      isLight
-                        ? 'text-slate-900 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                        : 'text-white hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                    }`}
+                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${t.text} hover:${t.bgAccent} hover:text-[var(--accent-teal)] focus-visible:outline-slate-900`}
                   >
                     Me
                   </Link>
@@ -210,11 +194,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                       trackResumeDownload()
                       setIsOpen(false)
                     }}
-                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 border-2 mt-4 ${
-                      isLight
-                        ? 'text-[var(--accent-teal)] border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 hover:bg-[var(--accent-teal)]/10 focus-visible:outline-[var(--accent-teal)]'
-                        : 'text-white border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/10 hover:bg-white/10 focus-visible:outline-white'
-                    }`}
+                    className={`block px-6 py-4 rounded-lg text-lg font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 border-2 mt-4 ${t.textAccent} border-[var(--accent-teal)]/50 bg-[var(--accent-teal)]/5 hover:bg-[var(--accent-teal)]/10 focus-visible:outline-[var(--accent-teal)]`}
                     aria-label="Download Resume PDF"
                   >
                     Resume (PDF)
@@ -224,7 +204,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                 {/* Case Study Sections - only show on case study pages */}
                 {isOnCaseStudyPage && caseStudySections && (
                   <div>
-                    <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs uppercase tracking-wider mb-4 px-2`}>
+                    <p className={`${t.textDim} text-xs uppercase tracking-wider mb-4 px-2`}>
                       Case Study Sections
                     </p>
                     {caseStudySections.map((section) => (
@@ -232,11 +212,7 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
                         key={section.href}
                         href={section.href}
                         onClick={() => setIsOpen(false)}
-                        className={`block px-6 py-3 rounded-lg text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
-                          isLight
-                            ? 'text-slate-700 hover:bg-slate-100 hover:text-[var(--accent-teal)] focus-visible:outline-slate-900'
-                            : 'text-white/80 hover:bg-white/10 hover:text-[var(--accent-teal)] focus-visible:outline-white'
-                        }`}
+                        className={`block px-6 py-3 rounded-lg text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${t.textSecondary} hover:${t.bgAccent} hover:text-[var(--accent-teal)] focus-visible:outline-slate-900`}
                       >
                         {section.label}
                       </Link>
@@ -246,8 +222,8 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
               </nav>
 
               {/* Footer */}
-              <div className={`p-6 border-t flex-shrink-0 ${isLight ? 'border-slate-200' : 'border-refined-dark'}`}>
-                <p className={`${isLight ? 'text-slate-400' : 'text-white/40'} text-xs text-center`} suppressHydrationWarning>
+              <div className={`p-6 border-t flex-shrink-0 ${t.borderSubtle}`}>
+                <p className={`${t.textDim} text-xs text-center`} suppressHydrationWarning>
                   © {new Date().getFullYear()}
                 </p>
               </div>
@@ -258,4 +234,5 @@ export default function MobileMenu({ isLandingPage = false, isLightBackground = 
     </>
   )
 }
+
 

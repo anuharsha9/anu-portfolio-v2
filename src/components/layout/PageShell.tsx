@@ -28,7 +28,7 @@ export default function PageShell({ children }: PageShellProps) {
       <SiteHeader />
       <URLHashSync />
       <PageTransition>
-        <main id="main-content">
+        <main id="main-content" className="relative">
           {children}
         </main>
       </PageTransition>

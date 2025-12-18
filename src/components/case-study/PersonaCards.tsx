@@ -31,10 +31,10 @@ export default function PersonaCards({ isLightBackground = true }: PersonaCardsP
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <span className="font-mono text-slate-400 text-xs tracking-widest uppercase">
-          // USER_PERSONAS
+          {'// USER_PERSONAS'}
         </span>
       </div>
-      
+
       <h3 className="text-slate-900 text-lg md:text-xl font-serif font-semibold mb-2">
         User Personas
       </h3>

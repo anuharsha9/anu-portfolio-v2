@@ -53,7 +53,7 @@ const ResponsiveUIIcon = () => (
 
 export default function IQPatternConnections({ isLightBackground = false }: IQPatternConnectionsProps) {
   const patterns = [
-    { 
+    {
       id: 'unified-hub',
       patternName: 'UNIFIED_DSML_HUB',
       Icon: UnifiedHubIcon,
@@ -62,7 +62,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
       reusedIn: null,
       link: null,
     },
-    { 
+    {
       id: 'dataset-selection',
       patternName: 'CONTEXTUAL_DATA_SELECTION',
       Icon: DatasetSelectionIcon,
@@ -71,7 +71,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
       inheritsFrom: 'ML Functions',
       link: '/work/ml-functions',
     },
-    { 
+    {
       id: 'responsive',
       patternName: 'RESPONSIVE_WORKFLOW_UI',
       Icon: ResponsiveUIIcon,
@@ -140,7 +140,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-12 shadow-sm">
       <div className="space-y-10">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -150,7 +150,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-violet)] text-xs tracking-widest uppercase">
-            // PATTERN_LIBRARY
+            {'// PATTERN_LIBRARY'}
           </span>
           <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
             Patterns That Unified the Platform

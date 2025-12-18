@@ -44,7 +44,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
 
   return (
     <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] overflow-hidden shadow-sm">
-      
+
       {/* System Map Image with Overlay */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -61,7 +61,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
           className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
         />
-        
+
         {/* Click to Explore Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
@@ -73,14 +73,14 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
         {/* Caption */}
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg">
           <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-wider">
-            // SYSTEM_MAP
+            {'// SYSTEM_MAP'}
           </span>
         </div>
       </motion.div>
 
       {/* Content Section */}
       <div className="p-8 md:p-12 space-y-8">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,7 +90,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // SYSTEM_AUDIT
+            {'// SYSTEM_AUDIT'}
           </span>
           <h3 className="text-[var(--text-heading)] text-xl md:text-2xl font-serif">
             What I Mapped: The Complete System
@@ -128,7 +128,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
                     {cat.category}
                   </h4>
                 </div>
-                
+
                 {/* Items */}
                 <div className="space-y-3">
                   {cat.items.map((item, j) => (
@@ -164,7 +164,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
               <svg aria-hidden="true" className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-        </div>
+            </div>
 
             {/* Terminal Output */}
             <div className="flex-1">
@@ -173,7 +173,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
                 <span className="text-amber-400">SYSTEM_STATUS:</span>{' '}
                 This mapping produced the first complete mental model in RC&apos;s 50-year history — a foundation that enabled the unified architecture.
               </p>
-              
+
               {/* Additional Terminal Lines */}
               <div className="mt-3 pt-3 border-t border-slate-700/50 space-y-1">
                 <p className="font-mono text-xs text-slate-400">
@@ -188,9 +188,9 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
                   <span className="text-slate-500">&gt;</span>{' '}
                   <span className="text-emerald-400">knowledge_transfer_status:</span>{' '}
                   <span className="text-emerald-300">COMPLETE</span>
-          </p>
-        </div>
-      </div>
+                </p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

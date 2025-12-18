@@ -120,7 +120,7 @@ export default function CustomCursor() {
         <div
           className="w-3 h-3 rounded-full"
           style={{
-            backgroundColor: isPointer ? 'var(--accent-teal)' : '#1e293b',
+            backgroundColor: isPointer ? 'var(--accent-teal)' : 'var(--text-heading)',
             transform: `scale(${dotScale})`,
             transition: 'transform 0.15s ease, background-color 0.15s ease',
           }}
@@ -139,7 +139,7 @@ export default function CustomCursor() {
         <div
           className="w-8 h-8 rounded-full border-2"
           style={{
-            borderColor: isPointer ? 'var(--accent-teal)' : '#94a3b8',
+            borderColor: isPointer ? 'var(--accent-teal)' : 'var(--text-muted)',
             transform: `scale(${ringScale})`,
             transition: 'transform 0.2s ease, border-color 0.15s ease',
           }}

@@ -37,7 +37,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
       {/* Section Header */}
       <div className="text-center space-y-3">
         <span className="inline-block font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest bg-[var(--accent-teal-50)] px-3 py-1.5 rounded-full">
-          // TRUST_EARNED
+          {'// TRUST_EARNED'}
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif leading-tight">
           The Explainability Deep Dive
@@ -58,11 +58,11 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             </div>
             <div>
               <span className="font-mono text-[10px] text-[var(--accent-blue-700)] uppercase tracking-widest">
-                // THE_CHALLENGE
+                {'// THE_CHALLENGE'}
               </span>
               <p className="text-slate-800 text-base md:text-lg leading-relaxed mt-2">
                 My Principal Data Scientist handed me a screenshot from an external tool and said:
-                <span className="font-serif italic text-[var(--accent-blue-700)]"> "This is the explainability visualization I need in WebFOCUS. Can you figure it out?"</span>
+                <span className="font-serif italic text-[var(--accent-blue-700)]"> &quot;This is the explainability visualization I need in WebFOCUS. Can you figure it out?&quot;</span>
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             >
               <div className="flex items-center gap-3">
                 <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-1 rounded">
-                  // REFERENCE_INPUT
+                  {'// REFERENCE_INPUT'}
                 </span>
                 <span className="font-mono text-xs text-red-500">LEGACY_TOOL</span>
               </div>
@@ -124,7 +124,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             >
               <div className="flex items-center gap-3">
                 <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest bg-[var(--accent-teal-50)] px-2 py-1 rounded">
-                  // MY_SOLUTION
+                  {'// MY_SOLUTION'}
                 </span>
                 <span className="font-mono text-xs text-[var(--accent-teal)]">WEBFOCUS_NATIVE</span>
               </div>
@@ -181,7 +181,7 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             <Quote className="w-8 h-8 text-[var(--accent-teal)] flex-shrink-0 opacity-50" />
             <div className="space-y-4">
               <p className="text-slate-200 text-base md:text-lg font-serif italic leading-relaxed">
-                "The other designers I worked with before didn't really understand what they were doing—they just gave designs. But you sat with us, talked to us, and actually understood what you were designing for. Once you got the whole picture, then you designed this. That's why I like working with you. That's why I trust you."
+                &quot;The other designers I worked with before didn&apos;t really understand what they were doing—they just gave designs. But you sat with us, talked to us, and actually understood what you were designing for. Once you got the whole picture, then you designed this. That&apos;s why I like working with you. That&apos;s why I trust you.&quot;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-px h-8 bg-[var(--accent-teal)]"></div>
@@ -205,10 +205,10 @@ export default function MLExplainabilityHighlight({ isLightBackground = true }: 
             </div>
             <div>
               <span className="font-mono text-[10px] text-emerald-700 uppercase tracking-widest">
-                // OUTCOME
+                {'// OUTCOME'}
               </span>
               <p className="text-slate-800 text-base leading-relaxed mt-2">
-                <strong>Understanding before designing:</strong> I didn't just take requirements and push pixels. I sat with the data scientists, learned the domain, and understood <em>why</em> explainability mattered before designing <em>how</em> to show it. This approach—earning trust through genuine understanding—unlocked the opportunity to redesign the entire ML training workflow from scratch.
+                <strong>Understanding before designing:</strong> I didn&apos;t just take requirements and push pixels. I sat with the data scientists, learned the domain, and understood <em>why</em> explainability mattered before designing <em>how</em> to show it. This approach—earning trust through genuine understanding—unlocked the opportunity to redesign the entire ML training workflow from scratch.
               </p>
             </div>
           </div>

@@ -52,7 +52,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // STAKEHOLDER_MAP
+            {'// STAKEHOLDER_MAP'}
           </span>
           <h3 className="text-[var(--text-heading)] text-2xl md:text-3xl font-serif">
             Onboarding 9 Stakeholder Groups
@@ -87,7 +87,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
                 {/* Cluster Header */}
                 <div className="flex items-center gap-2">
                   <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-                    // {cluster.header}
+                    {`// ${cluster.header}`}
                   </span>
                 </div>
 
@@ -118,7 +118,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
         >
           <div className="text-center">
             <span className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-widest">
-              // PROCESS_FLOW
+              {'// PROCESS_FLOW'}
             </span>
             <h4 className="text-[var(--text-heading)] text-lg font-serif mt-2">
               Onboarding Activities
@@ -183,7 +183,7 @@ export default function TeamOnboardingProcess({ isLightBackground = true }: Team
           {/* Content */}
           <div className="relative z-10">
             <div className="font-mono text-xs text-emerald-400 uppercase tracking-widest mb-3">
-              // TRANSFORMATION_RESULT
+              {'// TRANSFORMATION_RESULT'}
             </div>
             <p className="text-white text-base md:text-lg leading-relaxed">
               Engineers who initially intimidated me became collaborators I respected — and who respected me.

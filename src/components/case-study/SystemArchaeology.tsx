@@ -132,7 +132,7 @@ export default function SystemArchaeology({ isLightBackground = true, caseStudyS
       {/* THE NARRATIVE: Challenge Block - PUBLIC */}
       <div className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-6 rounded-r-xl">
         <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-2 block">
-          // UNDOCUMENTED_LEGACY
+          {'// UNDOCUMENTED_LEGACY'}
         </span>
         <h3 className="font-serif text-slate-900 text-xl md:text-2xl mb-3">
           50-year-old black box. Zero documentation.

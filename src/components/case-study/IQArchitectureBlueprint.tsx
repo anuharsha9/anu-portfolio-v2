@@ -30,7 +30,7 @@ const BlueprintItem = ({ imageSrc, altText, label, caption, isLightBackground, s
     >
       <div className={`px-4 py-3 border-b ${borderColor} ${isLightBackground ? 'bg-slate-50' : 'bg-slate-900'}`}>
         <span className={`font-mono text-[10px] uppercase tracking-widest ${labelColor}`}>
-          // {label}
+          {'// '}{label}
         </span>
       </div>
       <div
@@ -109,7 +109,7 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
         className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
       >
         <span className="font-mono text-xs text-[var(--accent-violet)] uppercase tracking-widest block mb-4">
-          // ARCHITECTURE_BLUEPRINT
+          {'// ARCHITECTURE_BLUEPRINT'}
         </span>
         <h2 className={`text-3xl md:text-4xl font-serif ${titleColor} mb-4`}>
           Building the System
@@ -144,7 +144,7 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
             </span>
             <p className="text-slate-300 text-sm leading-relaxed">
               Every architectural decision optimized for <span className="text-[var(--accent-violet)] font-medium">pattern consistency</span>.
-              Same navigation logic, same data selection flow, same error handling—regardless of which feature you're using.
+              Same navigation logic, same data selection flow, same error handling—regardless of which feature you&apos;re using.
               Learn one workflow, know them all.
             </p>
           </div>

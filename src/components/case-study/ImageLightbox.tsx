@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 
@@ -229,7 +230,7 @@ export default function ImageLightbox({
             {/* Technical Label - Hidden on mobile for cleaner look */}
             <div className="flex items-center gap-4">
               <span className="hidden md:inline font-mono text-[11px] text-slate-500 uppercase tracking-widest">
-                // SYSTEM_INSPECTION
+                {'// SYSTEM_INSPECTION'}
               </span>
               {hasNavigation && (
                 <span className="font-mono text-xs text-slate-400">
@@ -329,10 +330,13 @@ export default function ImageLightbox({
                 )}
 
                 {/* The Image - using img tag for natural sizing */}
-                <img
+                <Image
                   id="lightbox-image"
                   src={imageSrc}
                   alt={imageAlt}
+                  width={1600}
+                  height={1200}
+                  unoptimized
                   className={`transition-all duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'} ${isZoomed
                     ? 'max-w-none max-h-none w-auto h-auto'
                     : 'max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] max-h-[80vh] w-auto h-auto object-contain'

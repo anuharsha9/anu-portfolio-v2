@@ -125,7 +125,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
         className="text-center space-y-3"
       >
         <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-          // DESIGN_EVOLUTION
+          {'// DESIGN_EVOLUTION'}
         </span>
         <h3 className="text-[var(--text-heading)] text-2xl md:text-3xl font-serif">
           The Iteration Journey
@@ -452,7 +452,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                       {/* Future Integrations Grid */}
                       <div className="bg-white/60 rounded-lg p-4 border border-violet-100 mb-4">
                         <p className="font-mono text-violet-600 text-xs uppercase tracking-wider mb-3">
-                          // FUTURE_INTEGRATIONS
+                          {'// FUTURE_INTEGRATIONS'}
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {version.extensibility.futureIntegrations.map((item: string, idx: number) => (
@@ -467,7 +467,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                       {/* Design Principle */}
                       <div className="bg-slate-900 rounded-lg p-4">
                         <p className="font-mono text-violet-400 text-xs uppercase tracking-wider mb-2">
-                          // DESIGN_PRINCIPLE
+                          {'// DESIGN_PRINCIPLE'}
                         </p>
                         <p className="text-slate-300 text-sm leading-relaxed">
                           {version.extensibility.principle}
@@ -509,7 +509,7 @@ export default function VersionIteration({ v1, v2, v3, isLightBackground = true 
                       <div className="bg-white/60 rounded-lg p-4 border border-emerald-100">
                         <p className="text-slate-600 text-sm leading-relaxed">
                           <span className="font-mono text-emerald-600 text-xs uppercase tracking-wider block mb-2">
-                            // DESIGN_INSTINCT
+                            {'// DESIGN_INSTINCT'}
                           </span>
                           {version.validation.insight}
                         </p>

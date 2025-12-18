@@ -39,6 +39,8 @@
    /* slate-600 */
    --text-muted: #64748b;
    /* slate-500 */
+   --text-dim: #94a3b8;
+   /* slate-400 */
 
    /* Legacy support - remap to light theme values */
    --text-primary-dark: #0f172a;
@@ -131,6 +133,16 @@
    /* red-600 */
    --color-info: #078B9C;
    /* teal accent - WCAG AA compliant */
+
+   /* Semantic Surfaces (Light Theme) */
+   --bg-success: #ecfdf5;
+   /* emerald-50 */
+   --bg-warning: #fffbeb;
+   /* amber-50 */
+   --bg-error: #fef2f2;
+   /* red-50 */
+   --bg-info: #f0f9ff;
+   /* sky-50 - softer than teal for bg */
 
    /* ============================================
      BORDER COLORS - Subtle, clean lines
@@ -301,4 +313,22 @@
    --gear-color-highlight: #f1f5f9;
    /* slate-100 */
    --gear-shadow: rgba(0, 0, 0, 0.1);
+
+   /* ============================================
+     TECHNICAL DARK THEME - For "The Monitors" / Video Stage
+     Used when displaying high-tech/director commentary sections
+     ============================================ */
+   --bg-monitor: #020617;
+   /* slate-950 */
+   --bg-monitor-alt: #0f172a;
+   /* slate-900 */
+   --bg-monitor-surface: rgba(15, 23, 42, 0.5);
+   /* slate-900/50 */
+   --border-monitor: #1e293b;
+   /* slate-800 */
+   --text-monitor: #ffffff;
+   --text-monitor-muted: #94a3b8;
+   /* slate-400 */
+   --text-monitor-dim: #64748b;
+   /* slate-500 */
 }

@@ -177,7 +177,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
         className="text-center space-y-4"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-          // DESIGN_ITERATION_LOG
+          {'// DESIGN_ITERATION_LOG'}
         </span>
         <h3 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl">
           System Inspection: The Design Artifacts
@@ -195,7 +195,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
           <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
             <div className="px-4 pt-4 pb-2">
               <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-                // PILLAR_INDEX
+                {'// PILLAR_INDEX'}
               </span>
             </div>
             <div className="overflow-x-auto scrollbar-hide">
@@ -224,7 +224,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
           {/* Desktop Sidebar - File Tree */}
           <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
             <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
-              // PILLAR_INDEX
+              {'// PILLAR_INDEX'}
             </span>
 
             <nav className="space-y-1">
@@ -271,7 +271,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest">
-                        // {activeTabData.specCaption}
+                        {'// '}{activeTabData.specCaption}
                       </span>
                     </div>
                     <h4 className="font-serif text-2xl md:text-3xl text-slate-900 mb-3">
@@ -323,7 +323,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
                                 </div>
                               </div>
                               <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
-                                // {img.figNumber}: {img.caption}
+                                {'// '}{img.figNumber}: {img.caption}
                               </p>
                             </div>
                           )
@@ -388,7 +388,7 @@ export default function IQIterationLog({ isLightBackground = false }: IQIteratio
                             </div>
                           </div>
                           <p className="font-mono text-[10px] text-slate-400 uppercase tracking-widest mt-2.5">
-                            // {img.figNumber}: {img.caption}
+                            {'// '}{img.figNumber}: {img.caption}
                           </p>
                         </div>
                       )

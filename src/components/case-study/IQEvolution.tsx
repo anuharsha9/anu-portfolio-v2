@@ -55,7 +55,7 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
         {/* Header */}
         <div className="text-center mb-12">
           <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest mb-3 block">
-            // DESIGN_EVOLUTION
+            {'// DESIGN_EVOLUTION'}
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-slate-900 mb-4">
             From Concept to Production
@@ -113,7 +113,7 @@ export default function IQEvolution({ isLightBackground = false }: IQEvolutionPr
                       className={`font-mono text-[9px] uppercase tracking-widest block mb-1 ${activeStage === index ? 'text-[var(--accent-teal)]' : 'text-slate-400'
                         }`}
                     >
-                      // {stage.label}
+                      {'// '}{stage.label}
                     </span>
                     <h4
                       className={`font-serif text-sm ${activeStage === index ? 'text-slate-900' : 'text-slate-600'

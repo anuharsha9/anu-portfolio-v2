@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
 import AnimatedSignatureLogo from '@/components/brand/AnimatedSignatureLogo'
 import { WordReveal, GradientText } from '@/components/ui/AnimatedText'
+import { getTheme, spacing } from '@/lib/design-system'
 
 const VEIL_SESSION_KEY = 'portfolio_veil_dismissed'
 
@@ -61,9 +62,11 @@ export default function PortfolioVeil() {
     setShouldRender(false)
   }, [])
 
+  const t = getTheme(true)
+
   // Don't render during SSR to avoid hydration mismatch
   if (!hasMounted) {
-    return <div className="fixed inset-0 z-[10001] bg-white" />
+    return <div className={`fixed inset-0 z-[10001] ${t.bgAlt}`} />
   }
 
   // Already dismissed - don't render anything
@@ -76,7 +79,7 @@ export default function PortfolioVeil() {
       {showVeil && (
         <motion.div
           key="portfolio-veil"
-          className="fixed inset-0 z-[10001] bg-white overflow-hidden"
+          className={`fixed inset-0 z-[10001] ${t.bgAlt} overflow-hidden`}
           initial={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: '-100%' }}
           transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
@@ -84,7 +87,7 @@ export default function PortfolioVeil() {
         >
           {/* Full viewport container - everything must fit */}
           <div
-            className="h-[100dvh] w-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-8"
+            className={`h-[100dvh] w-full flex flex-col items-center justify-center ${spacing.container}`}
             style={{
               paddingTop: 'env(safe-area-inset-top, 0px)',
               paddingBottom: 'env(safe-area-inset-bottom, 0px)'
@@ -98,7 +101,7 @@ export default function PortfolioVeil() {
             >
               {/* Logo */}
               <motion.div
-                className="mb-1 flex justify-center"
+                className="mb-space-1 flex justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
@@ -109,25 +112,25 @@ export default function PortfolioVeil() {
               </motion.div>
 
               {/* Headline */}
-              <h1 className="font-serif text-slate-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-5 md:mb-8">
+              <h1 className={`font-serif ${t.text} text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-space-5 md:mb-space-8`}>
                 <WordReveal text="52 seconds." delay={300} stagger={100} /><br />
-                <span className="text-slate-500">
+                <span className={`${t.textMuted} opacity-60`}>
                   <WordReveal text="That's all I ask." delay={600} stagger={80} />
                 </span>
               </h1>
 
               {/* Video - Takes up available space */}
-              <div className="w-full flex justify-center mb-4 md:mb-6">
-                <div className="w-auto h-[55vh] md:h-[58vh] aspect-[9/16] relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xl">
+              <div className="w-full flex justify-center mb-space-4 md:mb-space-6">
+                <div className={`w-auto h-[55vh] md:h-[58vh] aspect-[9/16] relative ${t.bgAlt} border ${t.border} rounded-xl overflow-hidden shadow-2xl`}>
                   {/* Window Header Bar */}
-                  <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-slate-100/95 backdrop-blur-sm border-b border-slate-200 z-10">
-                    <div className="flex items-center gap-2">
-                      <div className="flex gap-1.5">
+                  <div className={`absolute top-0 left-0 right-0 flex items-center justify-between px-space-3 py-space-2 ${t.bg}/95 backdrop-blur-sm border-b ${t.border} z-10`}>
+                    <div className="flex items-center gap-space-2">
+                      <div className="flex gap-space-1.5">
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-400" />
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-400" />
                         <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-400" />
                       </div>
-                      <span className="font-mono text-slate-500 text-[10px] md:text-xs hidden sm:inline">
+                      <span className={`font-mono ${t.textMuted} text-[10px] md:text-xs hidden sm:inline`}>
                         meet_anuja.mp4
                       </span>
                     </div>
@@ -142,17 +145,17 @@ export default function PortfolioVeil() {
               </div>
 
               {/* Story beats */}
-              <p className="text-slate-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 md:mb-5">
-                <span className="text-slate-900 font-medium">The goal?</span>{' '}
-                <span className="text-slate-500">A portfolio.</span>
-                <span className="mx-2 md:mx-3 text-slate-300">·</span>
-                <span className="text-slate-900 font-medium">The discovery?</span>{' '}
+              <p className={`${t.text} text-sm sm:text-base md:text-lg leading-relaxed mb-space-4 md:mb-space-5`}>
+                <span className={`font-medium`}>The goal?</span>{' '}
+                <span className={`${t.textMuted}`}>A portfolio.</span>
+                <span className={`mx-2 md:mx-3 ${t.textMuted} opacity-30`}>·</span>
+                <span className={`font-medium`}>The discovery?</span>{' '}
                 <GradientText gradient="from-[var(--accent-teal)] to-[var(--accent-violet)]" className="font-medium">
                   Cursor + AI.
                 </GradientText>
-                <span className="mx-2 md:mx-3 text-slate-300">·</span>
-                <span className="text-slate-900 font-medium">The result?</span>{' '}
-                <span className="text-slate-500">This.</span>
+                <span className={`mx-2 md:mx-3 ${t.textMuted} opacity-30`}>·</span>
+                <span className={`font-medium`}>The result?</span>{' '}
+                <span className={`${t.textMuted}`}>This.</span>
               </p>
 
               {/* Tool pills */}
@@ -160,9 +163,9 @@ export default function PortfolioVeil() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
-                className="mb-5 md:mb-6"
+                className="mb-space-5 md:mb-space-6"
               >
-                <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-2">
+                <div className="flex flex-wrap items-center justify-center gap-space-1.5 md:gap-space-2">
                   {[
                     { name: 'Cursor', desc: 'IDE' },
                     { name: 'Claude', desc: 'AI' },
@@ -172,10 +175,10 @@ export default function PortfolioVeil() {
                   ].map((tool) => (
                     <span
                       key={tool.name}
-                      className="inline-flex items-center gap-1 md:gap-1.5 px-3 md:px-4 py-1 md:py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs md:text-sm font-mono"
+                      className={`inline-flex items-center gap-space-1 md:gap-space-1.5 px-space-3 md:px-space-4 py-space-1 md:py-space-1.5 rounded-full ${t.bg} border ${t.borderSubtle} ${t.textMuted} text-xs md:text-sm font-mono`}
                     >
-                      <span className="text-slate-900">{tool.name}</span>
-                      <span className="text-slate-400 text-[10px] md:text-xs">{tool.desc}</span>
+                      <span className={`${t.text}`}>{tool.name}</span>
+                      <span className={`${t.textMuted} opacity-60 text-[10px] md:text-xs`}>{tool.desc}</span>
                     </span>
                   ))}
                 </div>
@@ -190,7 +193,7 @@ export default function PortfolioVeil() {
                 <button
                   onClick={handleEnter}
                   disabled={!showVeil}
-                  className="group inline-flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm md:text-base font-medium hover:bg-[var(--accent-teal-900)] active:scale-[0.98] transition-all hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`group inline-flex items-center justify-center gap-space-2 px-space-5 md:px-space-6 py-space-3 md:py-space-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm md:text-base font-medium hover:bg-[var(--accent-teal-900)] active:scale-[0.98] transition-all hover:scale-105 shadow-xl disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   <span>Enter my Portfolio</span>
                   <motion.svg

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { X, ArrowRight } from 'lucide-react'
 import { GearInspectorItem } from '@/data/gear-inspector'
+import { getTheme, spacing } from '@/lib/design-system'
 
 interface GearBottomSheetProps {
   gear: GearInspectorItem | null
@@ -17,6 +18,7 @@ interface GearBottomSheetProps {
  * iOS-style sheet that slides up when tapping a gear
  */
 export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomSheetProps) {
+  const t = getTheme(true)
   if (!gear) return null
 
   return (
@@ -48,35 +50,35 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
                 onClose()
               }
             }}
-            className="fixed bottom-0 left-0 right-0 z-[9999] bg-white rounded-t-3xl overflow-hidden max-h-[85vh] shadow-2xl"
+            className={`fixed bottom-0 left-0 right-0 z-[9999] ${t.bgAlt} rounded-t-3xl overflow-hidden max-h-[85vh] shadow-2xl`}
             style={{ touchAction: 'none' }}
           >
             {/* Drag Handle */}
-            <div className="flex justify-center pt-3 pb-2">
-              <div className="w-10 h-1 bg-slate-300 rounded-full" />
+            <div className="flex justify-center pt-space-3 pb-space-2">
+              <div className={`w-10 h-1 ${t.border} rounded-full`} />
             </div>
 
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
+              className={`absolute top-space-4 right-space-4 w-8 h-8 flex items-center justify-center rounded-full ${t.bg} ${t.textMuted} hover:${t.text} transition-colors`}
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Content */}
-            <div className="px-5 pb-8 pt-2">
+            <div className="px-space-5 pb-space-8 pt-space-2">
               {/* Thought Quote */}
-              <div className="mb-4">
-                <p className="text-slate-500 text-sm italic leading-relaxed">
-                  "{gear.thought}"
+              <div className="mb-space-4">
+                <p className={`${t.textMuted} text-sm italic leading-relaxed`}>
+                  &quot;{gear.thought}&quot;
                 </p>
               </div>
 
               {/* Preview Image */}
               {gear.image && (
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-5 border border-slate-200">
+                <div className={`relative w-full aspect-video rounded-xl overflow-hidden mb-space-5 border ${t.border}`}>
                   <Image
                     src={gear.image}
                     alt={gear.title}
@@ -90,14 +92,14 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
               )}
 
               {/* Title & Insight */}
-              <div className="space-y-2 mb-6">
+              <div className="space-y-space-2 mb-space-6">
                 <h3
-                  className="text-slate-900 text-xl font-serif font-medium"
+                  className={`font-serif text-xl font-medium`}
                   style={{ color: gear.accentColor }}
                 >
                   {gear.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className={`${t.textSecondary} text-sm leading-relaxed`}>
                   {gear.insight}
                 </p>
               </div>
@@ -106,7 +108,7 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
               <Link
                 href={gear.link}
                 onClick={onClose}
-                className="flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl text-white font-medium transition-all active:scale-[0.98]"
+                className="flex items-center justify-center gap-space-2 w-full py-space-3.5 px-space-6 rounded-xl text-white font-medium transition-all active:scale-[0.98]"
                 style={{ backgroundColor: gear.accentColor }}
               >
                 <span>{gear.linkLabel}</span>
@@ -115,8 +117,8 @@ export default function GearBottomSheet({ gear, isOpen, onClose }: GearBottomShe
 
               {/* Case Study Badge */}
               {gear.caseStudy && gear.caseStudy !== 'me' && (
-                <p className="text-center text-slate-400 text-xs mt-4 font-mono uppercase tracking-wider">
-                  // {gear.caseStudy.replace('-', '_').toUpperCase()}
+                <p className={`text-center ${t.textDim} text-xs mt-space-4 font-mono uppercase tracking-widest`}>
+                  {`// ${gear.caseStudy.replace('-', '_').toUpperCase()}`}
                 </p>
               )}
             </div>

@@ -29,10 +29,10 @@ export default function UXPrinciples({
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <span className="font-mono text-slate-400 text-xs tracking-widest uppercase">
-          // {systemTag}
+          {'// '}{systemTag}
         </span>
       </div>
-      
+
       <h3 className="text-slate-900 text-lg md:text-xl font-serif font-semibold mb-4">
         {title}
       </h3>

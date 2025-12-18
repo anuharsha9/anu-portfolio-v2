@@ -35,7 +35,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-[var(--accent-violet)] uppercase tracking-widest">
-          // BUSINESS_CONTEXT
+          {'// BUSINESS_CONTEXT'}
         </span>
         <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>
           Why IQ Plugin Exists
@@ -58,7 +58,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
         <div className="bg-slate-50 p-6 md:p-8 border-b md:border-b-0 md:border-r border-slate-200">
           <div className="space-y-5">
             <span className="font-mono text-[10px] text-red-500 uppercase tracking-widest">
-              // THE_PROBLEM
+              {'// THE_PROBLEM'}
             </span>
             <h4 className="text-slate-900 text-xl font-serif font-semibold">
               Scattered & Hidden
@@ -83,7 +83,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
               </div>
               <div className="flex items-start gap-2">
                 <span className="text-red-400 text-sm mt-0.5">×</span>
-                <p className="text-slate-600 text-sm">Users didn't know these capabilities existed</p>
+                <p className="text-slate-600 text-sm">Users didn&apos;t know these capabilities existed</p>
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
         <div className="bg-white p-6 md:p-8">
           <div className="space-y-5">
             <span className="font-mono text-[10px] text-emerald-600 uppercase tracking-widest">
-              // THE_SOLUTION
+              {'// THE_SOLUTION'}
             </span>
             <h4 className="text-slate-900 text-xl font-serif font-semibold">
               Unified IQ Hub
@@ -134,7 +134,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
         className="space-y-4"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block text-center">
-          // BUSINESS_DRIVERS
+          {'// BUSINESS_DRIVERS'}
         </span>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -171,7 +171,7 @@ export default function IQBusinessCase({ isLightBackground = false }: IQBusiness
             &gt; STRATEGIC_OUTCOME:
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            Three features unified. One-click discoverability. <span className="text-[var(--accent-violet)] font-medium">A DSML hub</span> that 
+            Three features unified. One-click discoverability. <span className="text-[var(--accent-violet)] font-medium">A DSML hub</span> that
             positions WebFOCUS competitively in the AI-driven BI market. NLQ & Insights shipping now. ML Functions in 2026. IQ Plugin brings it all together in 2027.
           </p>
         </div>

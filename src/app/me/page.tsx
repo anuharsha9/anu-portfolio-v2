@@ -15,7 +15,7 @@ export default function AboutPage() {
           SECTION 1: THE INVITATION
           Video-first. Personal. "52 seconds. That's all I ask."
       ═══════════════════════════════════════════════════════════════════════ */}
-      <MotionSection id="profile" className="py-12 md:py-16 lg:py-20 relative overflow-hidden min-h-screen flex items-center">
+      <MotionSection id="profile" className="py-16 sm:py-20 md:py-24 lg:py-28 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,13 +40,13 @@ export default function AboutPage() {
             </motion.div>
 
             {/* Main headline */}
-            <h1 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+            <h1 className="font-serif text-slate-900 text-2xl xs:text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight mb-4 sm:mb-6 px-4">
               52 seconds.<br />
               <span className="text-slate-500">That&apos;s all I ask.</span>
             </h1>
 
             {/* Video - THE HERO (compact) */}
-            <div className="max-w-sm mx-auto mb-8">
+            <div className="max-w-[280px] xs:max-w-[320px] sm:max-w-sm mx-auto mb-6 sm:mb-8 px-4">
               <div className="relative bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xl">
                 {/* Window Header Bar */}
                 <div className="flex items-center justify-between px-3 py-2 bg-slate-100 border-b border-slate-200">
@@ -74,15 +74,15 @@ export default function AboutPage() {
             </div>
 
             {/* Text block - narrative flow */}
-            <div className="max-w-4xl mx-auto mb-6 space-y-3">
-              <p className="text-slate-600 text-base leading-relaxed">
+            <div className="max-w-4xl mx-auto mb-4 sm:mb-6 space-y-3 px-4">
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
               </p>
-              <p className="text-slate-700 text-base whitespace-nowrap">
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
                 <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
-                <span className="mx-3 text-slate-300">·</span>
+                <span className="mx-2 sm:mx-3 text-slate-300">·</span>
                 <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
-                <span className="mx-3 text-slate-300">·</span>
+                <span className="mx-2 sm:mx-3 text-slate-300">·</span>
                 <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="mb-8"
+              className="mb-6 sm:mb-8 px-4"
             >
               <div className="flex flex-wrap items-center justify-center gap-2">
                 {[
@@ -137,7 +137,7 @@ export default function AboutPage() {
           SECTION 3: THE TRANSFORMATION
           "WebFOCUS transformed me."
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-10 md:py-14 relative overflow-hidden">
+      <MotionSection animate={true} className="py-10 md:py-14 relative overflow-hidden">
         {/* Subtle gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-teal-50/30" />
 
@@ -219,12 +219,12 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 4: SOCIAL PROOF (Curated 6)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section id="social-proof" className="py-10 md:py-14 relative overflow-hidden">
+      <MotionSection animate={true} id="social-proof" className="py-10 md:py-14 relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
           <div className="space-y-10">
             <div className="max-w-2xl">
@@ -349,12 +349,12 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 6: THE HUMAN (Compact)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-10 md:py-14">
+      <MotionSection animate={true} className="py-10 md:py-14">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
 
@@ -398,12 +398,12 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 7: CONTACT (Simplified)
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-10 md:py-14 pb-safe">
+      <MotionSection animate={true} className="py-10 md:py-14 pb-safe">
         <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 text-center space-y-6">
           <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
             Let&apos;s connect.
@@ -424,13 +424,13 @@ export default function AboutPage() {
           </div>
 
           <p className="text-slate-400 text-xs pt-4">
-            Designed in Figma. Built with Cursor + AI. © 2025
+            Designed and built with Cursor.
           </p>
 
           {/* Safe area for iPhone home indicator */}
           <div className="h-safe-area-inset-bottom" />
         </div>
-      </section>
+      </MotionSection>
 
       {/* Scroll-linked rotating gear */}
       <ScrollGear />

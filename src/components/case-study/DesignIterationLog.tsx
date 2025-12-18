@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useLightbox } from '@/contexts/LightboxContext'
 import { MousePointer, Workflow, Layout, BarChart3, Sparkles } from 'lucide-react'
+import { getTheme } from '@/lib/design-system'
 
 interface DesignIterationLogProps {
   isLightBackground?: boolean
@@ -35,6 +36,7 @@ interface Tab {
 }
 
 export default function DesignIterationLog({ isLightBackground = false }: DesignIterationLogProps) {
+  const t = getTheme(true)
   const [activeTab, setActiveTab] = useState('01_ENTRY_POINTS')
   const { openLightbox } = useLightbox()
 
@@ -215,26 +217,26 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
         viewport={{ once: true }}
         className="text-center space-y-4"
       >
-        <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-          // DESIGN_ITERATION_LOG
+        <span className={`font-mono text-xs ${t.textAccent} uppercase tracking-widest`}>
+          {'// DESIGN_ITERATION_LOG'}
         </span>
-        <h3 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl">
+        <h3 className={`font-serif ${t.text} text-3xl md:text-4xl lg:text-5xl`}>
           System Inspection: The Design Artifacts
         </h3>
-        <p className="text-slate-500 text-lg max-w-3xl mx-auto leading-relaxed">
+        <p className={`${t.textMuted} text-lg max-w-3xl mx-auto leading-relaxed`}>
           Navigate through the key design deliverables that emerged from 6–8 months of cross-functional iteration.
         </p>
       </motion.div>
 
       {/* IDE Layout - Large Feature Display */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
+      <div className={`${t.bgAlt} border ${t.border} rounded-2xl overflow-hidden shadow-lg`}>
         <div className="flex flex-col lg:flex-row">
 
           {/* Mobile Tabs - Horizontal Scrollable Pills */}
-          <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
+          <div className={`lg:hidden border-b ${t.border} bg-[var(--bg-tertiary)]/30`}>
             <div className="px-4 pt-4 pb-2">
-              <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-                // ITERATION_LOG
+              <span className={`font-mono text-xs ${t.textMuted} opacity-60 uppercase tracking-widest`}>
+                {'// ITERATION_LOG'}
               </span>
             </div>
             <div className="overflow-x-auto scrollbar-hide">
@@ -246,11 +248,11 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                     className={`
                       flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200
                       ${activeTab === tab.id
-                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'}
+                        ? `${t.bgAccent === 'bg-[var(--accent-teal-soft)]' ? 'bg-[var(--accent-teal)]' : t.bgAccent} text-white shadow-md`
+                        : `${t.bgAlt} ${t.textMuted} border ${t.border} hover:border-[var(--border-secondary)]`}
                     `}
                   >
-                    <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
+                    <span className={activeTab === tab.id ? 'text-white' : t.textMuted}>
                       {tab.icon}
                     </span>
                     <span>{tab.label}</span>
@@ -261,9 +263,9 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
           </div>
 
           {/* Desktop Sidebar - File Tree */}
-          <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
-            <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
-              // ITERATION_LOG
+          <div className={`hidden lg:block w-[22%] border-r ${t.border} p-6 bg-[var(--bg-tertiary)]/30`}>
+            <span className={`font-mono text-xs ${t.textMuted} opacity-60 uppercase tracking-widest block mb-6`}>
+              {'// ITERATION_LOG'}
             </span>
 
             <nav className="space-y-1">
@@ -308,20 +310,20 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                 >
                   {/* Content Header */}
                   <div className="mb-10">
-                    <h4 className="font-serif text-3xl md:text-4xl text-slate-900 mb-3">
+                    <h4 className={`font-serif text-3xl md:text-4xl ${t.text} mb-3`}>
                       {activeTabData.title}
                     </h4>
-                    <p className="text-slate-500 text-base leading-relaxed max-w-3xl">
+                    <p className={`${t.textMuted} text-base leading-relaxed max-w-3xl`}>
                       {activeTabData.description}
                     </p>
 
                     {/* Quote Block */}
                     {activeTabData.quote && (
-                      <div className="mt-6 bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-4 rounded-r-lg">
-                        <p className="font-serif italic text-lg text-slate-700 mb-2">
+                      <div className={`mt-6 ${t.bgAccent} border-l-4 ${t.borderAccent === 'border-[var(--accent-teal)]/30' ? 'border-[var(--accent-teal)]' : t.borderAccent} p-4 rounded-r-lg`}>
+                        <p className={`font-serif italic text-lg ${t.text} opacity-80 mb-2`}>
                           &quot;{activeTabData.quote.text}&quot;
                         </p>
-                        <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
+                        <span className={`font-mono text-xs ${t.textAccent} uppercase tracking-widest`}>
                           — {activeTabData.quote.attribution}
                         </span>
                       </div>
@@ -369,7 +371,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                                 </div>
                               </div>
                               <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
-                                // {img.figNumber}: {img.caption}
+                                {'// '}{img.figNumber}: {img.caption}
                               </p>
                             </div>
                           )
@@ -434,7 +436,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
                             </div>
                           </div>
                           <p className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mt-3">
-                            // {img.figNumber}: {img.caption}
+                            {'// '}{img.figNumber}: {img.caption}
                           </p>
                         </div>
                       )
@@ -453,7 +455,7 @@ export default function DesignIterationLog({ isLightBackground = false }: Design
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-slate-900 rounded-xl p-6"
+        className={`${t.monitor.bg} rounded-xl p-6`}
       >
         <div className="flex items-start gap-3">
           <span className="font-mono text-sm text-emerald-400 flex-shrink-0">

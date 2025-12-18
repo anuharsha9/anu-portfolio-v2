@@ -46,7 +46,7 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // ARCHITECTURAL_DECISION_RECORDS
+          {'// ARCHITECTURAL_DECISION_RECORDS'}
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
           Architectural Decision Records (ADR)
@@ -69,7 +69,7 @@ export default function IQChallengesBreakdown({ isLightBackground = false }: IQC
           >
             {/* Tag */}
             <span className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-4">
-              // {decision.tag}
+              {'// '}{decision.tag}
             </span>
 
             {/* Headline */}

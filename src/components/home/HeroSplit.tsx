@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import VideoModal from '@/components/video/VideoModal'
 import GearBottomSheet from '@/components/home/GearBottomSheet'
 import { GEAR_INSPECTOR, GearInspectorItem } from '@/data/gear-inspector'
+import { getTheme, spacing } from '@/lib/design-system'
 
 const GEAR_IDS = Object.keys(GEAR_INSPECTOR)
 
@@ -37,6 +38,7 @@ const GearsSvgContainer = memo(function GearsSvgContainer({
  */
 export default function HeroSplit() {
   const router = useRouter()
+  const t = getTheme(true)
   const containerRef = useRef<HTMLDivElement | null>(null)
   const heroRef = useRef<HTMLElement>(null)
   const [showVideoModal, setShowVideoModal] = useState(false)
@@ -474,7 +476,7 @@ export default function HeroSplit() {
     return () => {
       if (cleanup) cleanup()
     }
-  }, [])
+  }, [router])
 
   // Click outside to close the hover card
   useEffect(() => {
@@ -541,12 +543,12 @@ export default function HeroSplit() {
 
 
         {/* Main Content Container - Centered Layout */}
-        <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
-          <div className="flex flex-col items-center justify-center min-h-screen py-8 pb-20">
+        <div className={`${spacing.containerFull} relative z-10`}>
+          <div className="flex flex-col items-center justify-center min-h-screen py-12 sm:py-16 md:py-20 pb-16 sm:pb-20">
 
             {/* Centered Gears - THE HERO - with subtle parallax */}
             <motion.div
-              className="relative w-[400px] sm:w-[500px] md:w-[600px] lg:w-[750px] xl:w-[850px] max-w-full mx-auto"
+              className="relative w-[320px] xs:w-[380px] sm:w-[480px] md:w-[600px] lg:w-[860px] xl:w-[980px] max-w-full mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -563,15 +565,15 @@ export default function HeroSplit() {
                     animate={{ opacity: 1, transition: { duration: 0.3, delay: hasInteracted ? 0.1 : 1.5 } }}
                     exit={{ opacity: 0, transition: { duration: 0.15, delay: 0 } }}
                   >
-                    <div className="text-center">
-                      <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
+                    <div className="text-center px-4">
+                      <p className={`${t.textSecondary} text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed`}>
                         <span className="hidden lg:block">
                           Hover &amp; click on the rotating gears<br />
-                          <span className="text-slate-300">to explore my portfolio</span>
+                          <span className={t.textMuted}>to explore my portfolio</span>
                         </span>
                         <span className="lg:hidden">
                           Tap on the rotating gears<br />
-                          <span className="text-slate-300">to explore my portfolio</span>
+                          <span className={t.textMuted}>to explore my portfolio</span>
                         </span>
                       </p>
                     </div>
@@ -613,13 +615,13 @@ export default function HeroSplit() {
                       <Link
                         href={activeGear.link}
                         data-gear-card
-                        className="block p-4 max-w-[300px] rounded-2xl backdrop-blur-md bg-slate-900/70 border border-white/10 shadow-2xl lg:backdrop-blur-none lg:bg-transparent lg:border-transparent lg:shadow-none text-center"
+                        className={`block p-space-4 max-w-[300px] rounded-2xl backdrop-blur-md bg-slate-900/70 border border-white/10 shadow-2xl lg:backdrop-blur-none lg:bg-transparent lg:border-transparent lg:shadow-none text-center`}
                       >
-                        <div className="space-y-2">
-                          <p className="text-white/90 lg:text-slate-500 text-sm sm:text-base leading-relaxed">
+                        <div className="space-y-space-2">
+                          <p className={`text-white/95 lg:text-slate-900 text-sm sm:text-base leading-relaxed font-medium`}>
                             {activeGear.thought}
                           </p>
-                          <p className="text-white/50 lg:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                          <p className={`text-white/70 lg:text-slate-600 text-xs sm:text-sm leading-relaxed`}>
                             {activeGear.insight}
                           </p>
                           {/* CTA */}
@@ -647,26 +649,26 @@ export default function HeroSplit() {
 
             {/* Text Content - Below Gears */}
             <motion.div
-              className="flex flex-col items-center text-center space-y-5 mt-8 lg:mt-10"
+              className={`flex flex-col items-center text-center space-y-4 sm:space-y-5 mt-6 sm:mt-8 lg:mt-10 px-4`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Main Headline */}
-              <h1 className="font-serif text-slate-900 leading-[1.1] tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+              <h1 className={`font-serif ${t.text} leading-[1.15] tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-4xl`}>
                 Designing through the <span className="text-[var(--accent-teal)]">complexity.</span>
               </h1>
 
               {/* Professional Title */}
-              <p className="text-[var(--accent-teal)] font-mono text-sm sm:text-base md:text-lg tracking-wide">
+              <p className="text-[var(--accent-teal)] font-mono text-xs xs:text-sm sm:text-base md:text-lg tracking-wide leading-relaxed max-w-3xl">
                 Principal Product Designer · AI-Driven · Enterprise Systems Architect
               </p>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4 w-full max-w-md">
                 <a
                   href="#work-overview"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white font-medium hover:bg-[var(--accent-teal-900)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
                   onClick={(e) => {
                     e.preventDefault()
                     const section = document.getElementById('work-overview')
@@ -683,18 +685,18 @@ export default function HeroSplit() {
 
                 <button
                   onClick={() => setShowVideoModal(true)}
-                  className="group inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-full border border-slate-300 text-slate-700 font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300"
+                  className={`w-full sm:w-auto group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border ${t.borderSecondary} ${t.textSecondary} text-sm sm:text-base font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300`}
                 >
-                  <span className="relative flex h-5 w-5">
+                  <span className="relative flex h-4 w-4 sm:h-5 sm:w-5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-teal)] opacity-75"></span>
-                    <span className="relative inline-flex items-center justify-center rounded-full h-5 w-5 bg-[var(--accent-teal)]">
-                      <svg aria-hidden="true" className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <span className="relative inline-flex items-center justify-center rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-[var(--accent-teal)]">
+                      <svg aria-hidden="true" className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </span>
                   </span>
                   <span>Watch Intro</span>
-                  <span className="font-mono text-[10px] text-slate-400 uppercase tracking-wider hidden sm:inline">
+                  <span className={`font-mono text-[10px] ${t.textMuted} uppercase tracking-widest hidden sm:inline`}>
                     20s
                   </span>
                 </button>
@@ -707,13 +709,13 @@ export default function HeroSplit() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
+          className="absolute bottom-space-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-space-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.5 }}
         >
           <motion.div
-            className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center pt-2"
+            className={`w-6 h-10 border-2 ${t.borderSecondary} rounded-full flex justify-center pt-2`}
             animate={{ y: [0, 5, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           >

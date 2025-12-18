@@ -8,33 +8,33 @@ interface MLRecommendationsProps {
 
 export default function MLRecommendations({ isLightBackground = false }: MLRecommendationsProps) {
   const recommendations = [
-    { 
-      name: 'Marcus Horbach', 
+    {
+      name: 'Marcus Horbach',
       tag: '[DOMAIN_EXPERT]',
-      role: 'Principal Data Scientist', 
-      company: 'Cloud Software Group', 
-      quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive and has greatly contributed to the success of our products. Her design solutions are rooted in a deep understanding of the purpose of the product, always leading to clean designs and products that are a genuine joy to use.' 
+      role: 'Principal Data Scientist',
+      company: 'Cloud Software Group',
+      quote: 'The clarity of her designs, in spite of the underlying data science and machine learning complexity, is impressive and has greatly contributed to the success of our products. Her design solutions are rooted in a deep understanding of the purpose of the product, always leading to clean designs and products that are a genuine joy to use.'
     },
-    { 
-      name: 'Karishma Khadge', 
+    {
+      name: 'Karishma Khadge',
       tag: '[PRODUCT_STRATEGY]',
-      role: 'Senior Product Manager', 
-      company: 'Cloud Software Group', 
-      quote: 'Anuja led UX design initiatives with remarkable creativity, empathy, and precision. She consistently demonstrated a deep understanding of user-centered design and the ability to translate complex product requirements into intuitive and visually engaging experiences. What truly stands out is her collaborative spirit and problem-solving mindset.' 
+      role: 'Senior Product Manager',
+      company: 'Cloud Software Group',
+      quote: 'Anuja led UX design initiatives with remarkable creativity, empathy, and precision. She consistently demonstrated a deep understanding of user-centered design and the ability to translate complex product requirements into intuitive and visually engaging experiences. What truly stands out is her collaborative spirit and problem-solving mindset.'
     },
-    { 
-      name: 'Vijay Raman', 
+    {
+      name: 'Vijay Raman',
       tag: '[EXECUTIVE_LEADERSHIP]',
-      role: 'VP of Product Management', 
-      company: 'Cloud Software Group', 
-      quote: 'Anuja made a significant impact modernizing UX across our legacy enterprise products. She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams. Anuja is bold in her ideas and consistently proactive in turning complex problems into practical, user-centered solutions.' 
+      role: 'VP of Product Management',
+      company: 'Cloud Software Group',
+      quote: 'Anuja made a significant impact modernizing UX across our legacy enterprise products. She brings a rare combination of strategic thinking, design intuition, and the ability to work seamlessly across product, engineering, and business teams. Anuja is bold in her ideas and consistently proactive in turning complex problems into practical, user-centered solutions.'
     },
-    { 
-      name: 'Anita George', 
+    {
+      name: 'Anita George',
       tag: '[CUSTOMER_PROXY]',
-      role: 'Principal Account Technology Strategist', 
-      company: 'Cloud Software Group', 
-      quote: "During a User Acceptance Test session, Anuja observed me navigating the screen, asking targeted questions about my workflow choices and tracking my visual focus. I was highly impressed with Anuja's approach. Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels." 
+      role: 'Principal Account Technology Strategist',
+      company: 'Cloud Software Group',
+      quote: "During a User Acceptance Test session, Anuja observed me navigating the screen, asking targeted questions about my workflow choices and tracking my visual focus. I was highly impressed with Anuja's approach. Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels."
     },
   ]
 
@@ -48,7 +48,7 @@ export default function MLRecommendations({ isLightBackground = false }: MLRecom
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // CROSS_FUNCTIONAL_EVIDENCE
+          {'// CROSS_FUNCTIONAL_EVIDENCE'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Validation from Cross-Functional Team
@@ -61,7 +61,7 @@ export default function MLRecommendations({ isLightBackground = false }: MLRecom
       {/* Testimonial Cards - 2x2 Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {recommendations.map((r, i) => (
-          <motion.div 
+          <motion.div
             key={i}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,12 +87,12 @@ export default function MLRecommendations({ isLightBackground = false }: MLRecom
               <span className="font-mono text-[10px] uppercase tracking-widest text-blue-600 block mb-1">
                 {r.tag}
               </span>
-              
+
               {/* Author Name */}
               <p className="font-sans font-bold text-slate-900">
                 {r.name}
               </p>
-              
+
               {/* Title */}
               <p className="font-sans text-xs text-slate-500">
                 {r.role}, {r.company}
@@ -115,7 +115,7 @@ export default function MLRecommendations({ isLightBackground = false }: MLRecom
             &gt; VALIDATION:
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            Four perspectives, one conclusion: <span className="text-emerald-400 font-medium">design clarity at the intersection of complexity</span>. 
+            Four perspectives, one conclusion: <span className="text-emerald-400 font-medium">design clarity at the intersection of complexity</span>.
             From domain experts validating technical accuracy to customer proxies confirming usability — the cross-functional evidence confirms systemic improvement.
           </p>
         </div>

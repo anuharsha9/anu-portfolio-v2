@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { getTheme } from '@/lib/design-system'
 
 interface AhaMomentProps {
@@ -11,7 +12,14 @@ export default function AhaMoment({ children, isLightBackground = false }: AhaMo
   const t = getTheme(isLightBackground)
 
   return (
-    <div className={`${t.bgAccent} rounded-lg border-l-4 p-6 my-6 shadow-sm`} style={{ borderLeftColor: t.accentVar, borderLeftWidth: '4px' }}>
+    <motion.div
+      className={`${t.bgAccent} rounded-lg border-l-4 p-6 my-6 shadow-sm`}
+      style={{ borderLeftColor: t.accentVar, borderLeftWidth: '4px' }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 mt-1">
           <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ backgroundColor: `${t.accentVar}20` }}>
@@ -24,6 +32,6 @@ export default function AhaMoment({ children, isLightBackground = false }: AhaMo
         </div>
         <p className={`${t.text} text-base md:text-lg leading-relaxed italic`}>{children}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }

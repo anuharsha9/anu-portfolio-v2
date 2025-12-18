@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="bg-white relative overflow-hidden">
+    <div className="bg-white relative overflow-clip">
       <HeroSplit />
       <ImpactMetrics />
       <WorkGrid />

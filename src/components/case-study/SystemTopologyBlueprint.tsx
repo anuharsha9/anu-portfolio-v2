@@ -12,12 +12,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
   const { openLightbox } = useLightbox()
 
   const blueprints = {
-    wireframes: {
-      src: '/images/case-study/ml-functions/Machine learning functions-handdrawn-wireframes.png',
-      alt: 'Hand-drawn wireframes - Early ideation sketches for ML workflow',
-      caption: '// FIG_00: EARLY_IDEATION',
-      note: 'Hand-drawn wireframes capturing initial thoughts, exploring different approaches, and mapping out the user journey before moving to digital tools.',
-    },
+    // wireframes removed - moved to ProcessArtifactViewer
     master: {
       src: '/images/case-study/ml-functions/1. ML UI Structure.png',
       alt: 'ML UI Structure - How the redesign fits into WebFOCUS shell',
@@ -45,7 +40,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
   }
 
   const allImages = [
-    blueprints.wireframes,
+    // blueprints.wireframes,
     blueprints.master,
     blueprints.flowchart1,
     blueprints.flowchart2,
@@ -63,68 +58,23 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
       {/* Section Header - Centered */}
       <div className="space-y-4 text-center">
         <span className="inline-block font-mono text-xs text-[var(--accent-blue)] uppercase tracking-widest">
-          // ARTIFACT_SET: ARCHITECTURE_MAPS
+          {'// ARTIFACT_SET: ARCHITECTURE_MAPS'}
         </span>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif leading-tight">
           System Topology & Logic
         </h3>
         <p className="text-slate-600 text-base leading-relaxed max-w-3xl mx-auto">
-          Before designing pixels, I mapped the physical constraints of the WebFOCUS platform. 
-          These blueprints defined how the new ML wizard would inherit responsive behaviors 
+          Before designing pixels, I mapped the physical constraints of the WebFOCUS platform.
+          These blueprints defined how the new ML wizard would inherit responsive behaviors
           from the existing 3rd-level navigation system.
         </p>
       </div>
 
-      {/* Early Ideation - Hand-Drawn Wireframes */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="bg-white border border-slate-200 rounded-xl overflow-hidden"
-      >
-        <div className="bg-slate-50 border-b border-slate-200 px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs text-amber-600 uppercase tracking-widest">
-              // PHASE_00: EARLY_IDEATION
-            </span>
-          </div>
-          <span className="font-mono text-[10px] text-slate-400">
-            Hand-drawn exploration
-          </span>
-        </div>
-        <div 
-          className="relative aspect-[16/9] cursor-zoom-in group bg-white"
-          onClick={() => openLightbox(blueprints.wireframes, allImages, 0)}
-        >
-          <Image
-            src={blueprints.wireframes.src}
-            alt={blueprints.wireframes.alt}
-            fill
-            className="object-contain p-6 group-hover:scale-[1.02] transition-transform duration-300"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full font-mono text-xs text-slate-600 shadow-sm">
-              Click to inspect wireframes
-            </span>
-          </div>
-        </div>
-        <div className="bg-slate-50 border-t border-slate-200 p-4">
-          <span className="font-mono text-xs text-slate-500 block mb-1">
-            {blueprints.wireframes.caption}
-          </span>
-          <p className="text-slate-600 text-sm leading-relaxed">
-            {blueprints.wireframes.note}
-          </p>
-        </div>
-      </motion.div>
-
       {/* Blueprint Grid - Technical Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Column - Master Spec (spans 2 columns on large screens) */}
-        <motion.div 
+        <motion.div
           className="lg:col-span-2"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -133,7 +83,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
         >
           <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden h-full">
             {/* Blueprint Image */}
-            <div 
+            <div
               className="relative aspect-[16/10] cursor-zoom-in group"
               onClick={() => openLightbox(blueprints.master, allImages, 1)}
             >
@@ -164,7 +114,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
         </motion.div>
 
         {/* Right Column - Logic Stack */}
-        <motion.div 
+        <motion.div
           className="flex flex-col gap-6"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -173,7 +123,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
         >
           {/* Card 1 - Information Architecture */}
           <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex-1">
-            <div 
+            <div
               className="relative aspect-[4/3] cursor-zoom-in group"
               onClick={() => openLightbox(blueprints.flowchart1, allImages, 2)}
             >
@@ -195,7 +145,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
 
           {/* Card 2 - Logic Branching */}
           <div className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden flex-1">
-            <div 
+            <div
               className="relative aspect-[4/3] cursor-zoom-in group"
               onClick={() => openLightbox(blueprints.flowchart2, allImages, 3)}
             >
@@ -225,7 +175,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
         transition={{ duration: 0.5, delay: 0.3 }}
         className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden"
       >
-        <div 
+        <div
           className="relative aspect-[21/9] cursor-zoom-in group"
           onClick={() => openLightbox(blueprints.systemMap, allImages, 4)}
         >
@@ -252,7 +202,7 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
             </p>
           </div>
           <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest hidden md:block">
-            // FULL_WIDTH_SPEC
+            {'// FULL_WIDTH_SPEC'}
           </span>
         </div>
       </motion.div>
@@ -269,11 +219,11 @@ export default function SystemTopologyBlueprint({ isLightBackground = true }: Sy
           <span className="font-mono text-emerald-400 text-sm">&gt;</span>
           <div>
             <span className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest block mb-2">
-              // SYSTEM_INSIGHT
+              {'// SYSTEM_INSIGHT'}
             </span>
             <p className="font-mono text-sm text-slate-300 leading-relaxed">
-              These architecture maps weren't just documentation—they became the shared language 
-              between UX, Engineering, and Data Science. Every design decision could be traced 
+              These architecture maps weren&apos;t just documentation—they became the shared language
+              between UX, Engineering, and Data Science. Every design decision could be traced
               back to a constraint identified in these blueprints.
             </p>
           </div>

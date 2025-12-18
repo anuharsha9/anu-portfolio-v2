@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { GripVertical, Play } from 'lucide-react'
 import Link from 'next/link'
+import { getTheme, spacing } from '@/lib/design-system'
 
 /**
  * TransformationShowcase - A dramatic before/after slider for the landing page
@@ -42,23 +43,25 @@ export default function TransformationShowcase() {
   const handleStart = () => setIsDragging(true)
   const handleEnd = () => setIsDragging(false)
 
+  const t = getTheme(true)
+
   return (
-    <section className="py-10 md:py-14 relative overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
+    <section className="py-section-mobile md:py-section-tablet relative overflow-hidden">
+      <div className={`${spacing.containerFull} relative z-10`}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-space-10 md:mb-space-14"
         >
-          <h2 className="font-serif text-slate-900 text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
+          <h2 className={`font-serif ${t.text} text-3xl md:text-4xl lg:text-5xl leading-tight mb-space-4`}>
             50 years of legacy.<br />
             <span className="text-[var(--accent-teal)]">Modern in 18 months.</span>
           </h2>
-          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
-            I modernized WebFOCUS's core workflows—taking fragmented legacy tools and unifying them into coherent, intelligent experiences.
+          <p className={`${t.textSecondary} text-base md:text-lg max-w-2xl mx-auto`}>
+            I modernized WebFOCUS&apos;s core workflows—taking fragmented legacy tools and unifying them into coherent, intelligent experiences.
           </p>
         </motion.div>
 
@@ -71,7 +74,7 @@ export default function TransformationShowcase() {
         >
           <div
             ref={containerRef}
-            className="w-full aspect-[16/10] max-h-[720px] relative overflow-hidden rounded-xl border border-slate-200 shadow-2xl select-none cursor-ew-resize"
+            className={`w-full aspect-[16/10] max-h-[720px] relative overflow-hidden rounded-xl border ${t.border} shadow-2xl select-none cursor-ew-resize`}
             onMouseMove={handleMouseMove}
             onMouseUp={handleEnd}
             onMouseLeave={handleEnd}
@@ -79,16 +82,16 @@ export default function TransformationShowcase() {
             onTouchEnd={handleEnd}
           >
             {/* Browser Bar Header */}
-            <div className="absolute top-0 left-0 right-0 z-20 bg-slate-950 text-slate-500 text-xs font-mono py-3 px-4 flex justify-between items-center border-b border-slate-800">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-1.5">
+            <div className={`absolute top-0 left-0 right-0 z-20 ${t.monitor.bg} ${t.monitor.textDim} text-xs font-mono py-space-3 px-space-4 flex justify-between items-center border-b ${t.monitor.border}`}>
+              <div className="flex items-center gap-space-3">
+                <div className="flex gap-space-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
                   <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
                 </div>
-                <span className="text-slate-600">reportcaster_legacy.exe</span>
+                <span className={`${t.monitor.textDim}`}>reportcaster_legacy.exe</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-space-3">
                 <span className="text-slate-600">reportcaster_modern.tsx</span>
                 <div className="flex gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-teal)]"></span>
@@ -140,21 +143,21 @@ export default function TransformationShowcase() {
             </div>
 
             {/* Labels on sides */}
-            <div className="absolute bottom-4 left-4 z-20">
-              <span className="bg-white/90 backdrop-blur-sm text-slate-600 text-xs font-mono px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
+            <div className="absolute bottom-space-4 left-space-4 z-20">
+              <span className={`bg-white/90 backdrop-blur-sm ${t.textMuted} text-xs font-mono px-space-3 py-space-1.5 rounded-full border ${t.border} shadow-sm`}>
                 LEGACY
               </span>
             </div>
-            <div className="absolute bottom-4 right-4 z-20">
-              <span className="bg-[var(--accent-teal)]/90 backdrop-blur-sm text-white text-xs font-mono px-3 py-1.5 rounded-full shadow-sm">
+            <div className="absolute bottom-space-4 right-space-4 z-20">
+              <span className="bg-[var(--accent-teal)]/90 backdrop-blur-sm text-white text-xs font-mono px-space-3 py-space-1.5 rounded-full shadow-sm">
                 MODERN
               </span>
             </div>
           </div>
 
           {/* Instruction + CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8">
-            <p className="text-slate-500 text-sm font-mono">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-space-6 mt-space-8">
+            <p className={`${t.textMuted} text-sm font-mono`}>
               {'<'} Drag to compare {'>'}
             </p>
 
@@ -163,36 +166,36 @@ export default function TransformationShowcase() {
               href="https://www.youtube.com/watch?v=NvNFN6sz41M"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[var(--accent-teal-800)] hover:bg-[var(--accent-teal-900)] text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
+              className={`inline-flex items-center gap-space-2 bg-[var(--accent-teal-800)] hover:bg-[var(--accent-teal-900)] text-white text-sm font-medium px-space-4 py-space-2 rounded-full transition-colors`}
             >
               <Play className="w-4 h-4" />
               <span>Watch Demo</span>
             </a>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-space-4">
               <Link
                 href="/work/reportcaster"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
+                className={`inline-flex items-center gap-space-2 ${t.textSecondary} hover:text-[var(--accent-teal)] text-sm font-medium transition-colors`}
               >
                 <span>ReportCaster</span>
                 <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <span className="text-slate-300">·</span>
+              <span className={`${t.textDim} opacity-40`}>·</span>
               <Link
                 href="/work/ml-functions"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
+                className={`inline-flex items-center gap-space-2 ${t.textSecondary} hover:text-[var(--accent-teal)] text-sm font-medium transition-colors`}
               >
                 <span>ML Functions</span>
                 <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <span className="text-slate-300">·</span>
+              <span className={`${t.textDim} opacity-40`}>·</span>
               <Link
                 href="/work/iq-plugin"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-[var(--accent-teal)] text-sm font-medium transition-colors"
+                className={`inline-flex items-center gap-space-2 ${t.textSecondary} hover:text-[var(--accent-teal)] text-sm font-medium transition-colors`}
               >
                 <span>DSML Hub</span>
                 <svg aria-hidden="true" className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

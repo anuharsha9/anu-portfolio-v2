@@ -183,7 +183,14 @@ export default function WorkflowPrototype({ title, description, steps, workflowT
         </div>
 
         <div className="relative mb-6">
-          <div className={`relative w-full rounded-[10px] overflow-hidden border ${t.border} ${imageShadow} ${imageOutline} cursor-pointer hover:opacity-90 transition-opacity`} onClick={() => openLightbox(currentStepData.src, currentStepData.alt, currentStepData.caption)}>
+          <div
+            className={`relative w-full rounded-[10px] overflow-hidden border ${t.border} ${imageShadow} ${imageOutline} cursor-pointer hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--accent-teal)] focus:ring-offset-2`}
+            onClick={() => openLightbox(currentStepData.src, currentStepData.alt, currentStepData.caption)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(currentStepData.src, currentStepData.alt, currentStepData.caption) } }}
+            tabIndex={0}
+            role="button"
+            aria-label={`View ${currentStepData.alt} in fullscreen`}
+          >
             <Image src={currentStepData.src} alt={currentStepData.alt} width={1200} height={800} className="w-full h-auto object-contain bg-white/5" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px" priority={currentStep === 0} />
           </div>
 

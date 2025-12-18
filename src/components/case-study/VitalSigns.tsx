@@ -41,7 +41,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                 className="py-6 px-5 text-center"
               >
                 <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                  // {metric.label}
+                  {`// ${metric.label}`}
                 </div>
                 <div className={`text-2xl xl:text-3xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                   {metric.value}
@@ -64,7 +64,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                   className="py-6 px-5 text-center"
                 >
                   <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                    // {metric.label}
+                    {`// ${metric.label}`}
                   </div>
                   <div className={`text-2xl xl:text-3xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                     {metric.value}
@@ -90,7 +90,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                 className="py-5 px-4 text-center"
               >
                 <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                  // {metric.label}
+                  {`// ${metric.label}`}
                 </div>
                 <div className={`text-xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                   {metric.value}
@@ -111,7 +111,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                 className="py-5 px-4 text-center"
               >
                 <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                  // {metric.label}
+                  {`// ${metric.label}`}
                 </div>
                 <div className={`text-xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                   {metric.value}
@@ -134,7 +134,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                     className="py-5 px-4 text-center"
                   >
                     <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                      // {metric.label}
+                      {`// ${metric.label}`}
                     </div>
                     <div className={`text-xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                       {metric.value}
@@ -155,7 +155,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                     className="py-5 px-4 text-center"
                   >
                     <div className="font-mono text-[9px] uppercase tracking-widest text-slate-400 mb-1.5">
-                      // {metric.label}
+                      {`// ${metric.label}`}
                     </div>
                     <div className={`text-xl font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                       {metric.value}
@@ -182,7 +182,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                 className="py-4 px-3 text-center"
               >
                 <div className="font-mono text-[8px] uppercase tracking-widest text-slate-400 mb-1">
-                  // {metric.label}
+                  {`// ${metric.label}`}
                 </div>
                 <div className={`text-lg font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                   {metric.value}
@@ -204,7 +204,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                   className="py-4 px-3 text-center"
                 >
                   <div className="font-mono text-[8px] uppercase tracking-widest text-slate-400 mb-1">
-                    // {metric.label}
+                    {`// ${metric.label}`}
                   </div>
                   <div className={`text-lg font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                     {metric.value}
@@ -228,7 +228,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                     className="py-4 px-3 text-center"
                   >
                     <div className="font-mono text-[8px] uppercase tracking-widest text-slate-400 mb-1">
-                      // {metric.label}
+                      {`// ${metric.label}`}
                     </div>
                     <div className={`text-lg font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                       {metric.value}
@@ -250,7 +250,7 @@ export default function VitalSigns({ metrics, className = '' }: VitalSignsProps)
                       className="py-4 px-3 text-center"
                     >
                       <div className="font-mono text-[8px] uppercase tracking-widest text-slate-400 mb-1">
-                        // {metric.label}
+                        {`// ${metric.label}`}
                       </div>
                       <div className={`text-lg font-serif font-semibold ${metric.color || 'text-[var(--accent-teal)]'}`}>
                         {metric.value}
@@ -332,13 +332,13 @@ export const iqPluginVitalSigns = [
   {
     label: 'PATTERN_PARITY',
     value: 'Full',
-    context: 'Same UI Across All 3',
+    context: 'Same Structure Across All 3',
     color: 'text-emerald-600',
   },
   {
     label: 'RESPONSIVE',
-    value: 'All 3',
-    context: 'Every Feature, Every Size',
+    value: '2 of 3',
+    context: 'NLQ + Insights Fully Responsive',
   },
   {
     label: 'PERSONAS',

@@ -1,7 +1,7 @@
 'use client'
-
 import { motion } from 'framer-motion'
 import AnimatedCounter from '@/components/ui/AnimatedCounter'
+import { getTheme, spacing } from '@/lib/design-system'
 
 const metrics = [
   {
@@ -45,15 +45,16 @@ function GearIcon({ className }: { className?: string }) {
 }
 
 export default function ImpactMetrics() {
+  const t = getTheme(true)
   return (
-    <section className="py-10 md:py-12">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+    <section className="py-section-mobile md:py-section-tablet">
+      <div className={`${spacing.containerFull}`}>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-space-4 md:gap-space-6"
         >
           {metrics.map((metric, index) => (
             <motion.div
@@ -65,10 +66,10 @@ export default function ImpactMetrics() {
               className="group relative"
             >
               {/* Card */}
-              <div className="relative bg-white border border-slate-200 rounded-2xl p-5 md:p-6 text-center hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+              <div className={`relative ${t.bgAlt} border ${t.border} rounded-2xl p-space-5 md:p-space-6 text-center hover:border-slate-300 hover:shadow-lg transition-all duration-300`}>
                 {/* Rotating Gear Accent */}
                 <motion.div
-                  className="mx-auto mb-4 w-10 h-10 md:w-12 md:h-12 text-[var(--accent-teal)]/60"
+                  className="mx-auto mb-space-4 w-10 h-10 md:w-12 md:h-12 text-[var(--accent-teal)]/60"
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 20 + index * 5,
@@ -80,7 +81,7 @@ export default function ImpactMetrics() {
                 </motion.div>
 
                 {/* Value */}
-                <div className={`font-mono font-bold text-slate-900 mb-1 ${metric.isText
+                <div className={`font-mono font-bold ${t.text} mb-space-1 ${metric.isText
                   ? 'text-base md:text-lg'
                   : 'text-2xl md:text-3xl'
                   }`}>
@@ -92,25 +93,25 @@ export default function ImpactMetrics() {
                 </div>
 
                 {/* Label */}
-                <p className="font-mono text-[10px] md:text-xs text-slate-500 uppercase tracking-wider">
+                <p className={`font-mono text-[10px] md:text-xs ${t.textMuted} uppercase tracking-widest`}>
                   {metric.label}
                 </p>
 
                 {/* Source tooltip on hover */}
                 {metric.source && (
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto z-10">
-                    <div className="bg-white border border-slate-200 rounded-lg shadow-lg px-3 py-2 whitespace-nowrap">
+                  <div className="absolute -bottom-space-2 left-1/2 -translate-x-1/2 translate-y-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto z-10">
+                    <div className={`${t.bg} border ${t.border} rounded-lg shadow-lg px-space-3 py-space-2 whitespace-nowrap`}>
                       {metric.sourceUrl ? (
                         <a
                           href={metric.sourceUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-mono text-[10px] text-slate-500 hover:text-[var(--accent-teal)] transition-colors"
+                          className={`font-mono text-[10px] ${t.textMuted} hover:text-[var(--accent-teal)] transition-colors`}
                         >
                           Source: {metric.source} ↗
                         </a>
                       ) : (
-                        <span className="font-mono text-[10px] text-slate-500">
+                        <span className={`font-mono text-[10px] ${t.textMuted}`}>
                           Source: {metric.source}
                         </span>
                       )}

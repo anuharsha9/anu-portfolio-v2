@@ -9,6 +9,7 @@ import { trackResumeDownload } from '@/components/analytics/GoogleAnalytics'
 import { useScrollManager } from '@/hooks/useScrollManager'
 import MobileMenu from './MobileMenu'
 import CaseStudiesDropdown from './CaseStudiesDropdown'
+import { getTheme, spacing } from '@/lib/design-system'
 
 export default function SiteHeader() {
   const pathname = usePathname()
@@ -59,9 +60,11 @@ export default function SiteHeader() {
     setHasShadow(hasScrolled)
   }, [isLandingPage, isCaseStudyPage])
 
+  const t = getTheme(true)
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 transition-all duration-500 ${isVisible
+      className={`fixed top-0 left-0 right-0 w-full ${t.bgAlt}/95 backdrop-blur-md border-b ${t.border} transition-all duration-500 ${isVisible
         ? 'opacity-100 translate-y-0 h-auto'
         : 'opacity-0 -translate-y-full pointer-events-none invisible h-0 overflow-hidden'
         } ${hasShadow ? 'shadow-sm' : ''}`}
@@ -71,7 +74,7 @@ export default function SiteHeader() {
         position: 'fixed',
       }}
     >
-      <nav className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4 sm:py-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]">
+      <nav className={`${spacing.containerFull} py-space-4 flex items-center justify-center relative min-h-[56px] sm:min-h-[60px]`}>
         {/* Logo - positioned absolutely on the left */}
         <div className="absolute left-4 xs:left-5 sm:left-6 md:left-8 lg:left-12 xl:left-16">
           <EasterEgg clicksRequired={5}>
@@ -80,7 +83,7 @@ export default function SiteHeader() {
               aria-label="Go to homepage"
               className="flex items-center transition-colors group"
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 text-slate-900 group-hover:text-[var(--accent-teal)] transition-all duration-300">
+              <div className={`w-10 h-10 sm:w-11 sm:h-11 ${t.text} group-hover:text-[var(--accent-teal)] transition-all duration-300`}>
                 <AnimatedSignatureLogo
                   className="w-full h-full"
                   duration={16000}
@@ -92,14 +95,14 @@ export default function SiteHeader() {
         </div>
 
         {/* Centered Navigation Links */}
-        <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-space-4 md:gap-space-6">
           {/* Desktop Navigation - Work, Me */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-space-6">
             {/* Work - with dropdown */}
             <CaseStudiesDropdown
               className={`font-sans font-medium transition-colors ${isLandingPage
-                ? 'text-slate-900'
-                : 'text-slate-600 hover:text-slate-900'
+                ? t.text
+                : `${t.textMuted} hover:${t.text}`
                 }`}
             />
 
@@ -107,8 +110,8 @@ export default function SiteHeader() {
             <Link
               href="/me"
               className={`font-sans font-medium transition-colors relative ${isAboutPage
-                ? 'text-slate-900'
-                : 'text-slate-600 hover:text-slate-900'
+                ? t.text
+                : `${t.textMuted} hover:${t.text}`
                 }`}
             >
               Me
@@ -121,11 +124,11 @@ export default function SiteHeader() {
         </div>
 
         {/* Right Side CTAs */}
-        <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-3">
+        <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-space-3">
           {/* Let's Talk - Primary CTA */}
           <Link
             href="/#lets-talk"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
+            className="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
           >
             <span>Let&apos;s Talk</span>
           </Link>
@@ -136,7 +139,7 @@ export default function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackResumeDownload()}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]"
+            className={`inline-flex items-center gap-space-1.5 px-space-4 py-space-2 rounded-full border ${t.borderSecondary} ${t.textMuted} text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:${t.bgAccent} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]`}
             aria-label="Download Resume PDF"
           >
             <span>Resume</span>

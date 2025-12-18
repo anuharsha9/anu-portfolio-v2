@@ -27,7 +27,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
 
   // Click reduction metrics as hero numbers
   const clickMetrics = [
-    { 
+    {
       task: 'Create Schedule',
       icon: (
         <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,7 +38,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
       oldClicks: '5+',
       newClicks: '2'
     },
-    { 
+    {
       task: 'Access Explorer',
       icon: (
         <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
       oldClicks: '3',
       newClicks: '1'
     },
-    { 
+    {
       task: 'View Job Log',
       icon: (
         <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
       oldClicks: 'New tab',
       newClicks: 'Modal'
     },
-    { 
+    {
       task: 'Access Admin',
       icon: (
         <svg aria-hidden="true" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,21 +76,21 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
 
   // Validation sources
   const validations = [
-    { 
-      icon: '👥', 
-      title: 'Internal Feedback', 
+    {
+      icon: '👥',
+      title: 'Internal Feedback',
       quote: 'Engineers and PMs who had never understood RC could now explain it to others.',
       source: 'Engineering Team'
     },
-    { 
-      icon: '💬', 
-      title: 'Customer Feedback', 
+    {
+      icon: '💬',
+      title: 'Customer Feedback',
       quote: 'Long-time enterprise customer praised the redesign and said he was excited for what was coming next.',
       source: 'Enterprise Customer'
     },
-    { 
-      icon: '🎯', 
-      title: 'Support Team', 
+    {
+      icon: '🎯',
+      title: 'Support Team',
       quote: 'Fewer "how do I..." questions and more "can I do..." questions — a shift from confusion to capability.',
       source: 'Support Analytics'
     },
@@ -108,7 +108,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
   return (
     <div className="bg-[var(--bg-secondary)] rounded-2xl border border-[var(--border-primary)] p-8 md:p-12 shadow-sm">
       <div className="space-y-12">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -118,7 +118,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // IMPACT_METRICS
+            {'// IMPACT_METRICS'}
           </span>
           <h3 className="text-[var(--text-heading)] text-2xl md:text-3xl font-serif">
             Entry Points, Workflows & Validation
@@ -150,17 +150,17 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
               <div className="text-[var(--border-secondary)] mb-3 flex justify-center">
                 {item.icon}
               </div>
-              
+
               {/* Hero Reduction */}
               <div className="font-mono font-bold text-3xl md:text-4xl text-[var(--accent-teal)] leading-none">
                 {item.reduction}
               </div>
-              
+
               {/* Task */}
               <p className="text-[var(--text-heading)] text-sm font-medium mt-2">
                 {item.task}
               </p>
-              
+
               {/* Before/After */}
               <div className="flex items-center justify-center gap-2 mt-3 text-xs">
                 <span className="text-[var(--text-muted)] line-through">{item.oldClicks}</span>
@@ -182,7 +182,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
+
             {/* BEFORE: Scattered */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -196,7 +196,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
                   ⚠ SCATTERED
                 </span>
               </div>
-              
+
               <div className="relative space-y-2">
                 {entryPoints.old.map((p, i) => (
                   <motion.div
@@ -232,7 +232,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
                   UNIFIED
                 </span>
               </div>
-              
+
               <div className="bg-[var(--accent-teal-50)] rounded-xl p-4 border-2 border-[var(--accent-teal)]/30 space-y-2">
                 {entryPoints.new.map((p, i) => (
                   <motion.div
@@ -263,7 +263,7 @@ export default function ImpactVisual({ isLightBackground = true }: ImpactVisualP
             className="text-center space-y-2"
           >
             <span className="font-mono text-xs text-[var(--text-muted)] uppercase tracking-widest">
-              // VALIDATION_SOURCES
+              {'// VALIDATION_SOURCES'}
             </span>
             <h4 className="text-[var(--text-heading)] text-xl font-serif">
               Feedback Confirms Impact

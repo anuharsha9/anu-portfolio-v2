@@ -74,7 +74,7 @@ export default function SystemIndex({ currentId }: SystemIndexProps) {
             Explore Other Architectures
           </h2>
           <span className="font-mono text-slate-600 text-xs tracking-widest uppercase hidden sm:block">
-            // SYSTEM_INDEX
+            {'// SYSTEM_INDEX'}
           </span>
         </div>
 

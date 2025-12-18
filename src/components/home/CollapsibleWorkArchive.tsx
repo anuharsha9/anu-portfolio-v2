@@ -1,6 +1,8 @@
 'use client'
 
-import Image from 'next/image'
+import { motion } from 'framer-motion'
+import ImageWithSkeleton from '@/components/ui/ImageWithSkeleton'
+import { getTheme, spacing } from '@/lib/design-system'
 
 interface ArchiveProject {
   title: string
@@ -24,63 +26,85 @@ const archiveProjects: ArchiveProject[] = [
 ]
 
 export default function CollapsibleWorkArchive() {
+  const t = getTheme(true)
   return (
-    <section id="work-archive" className="py-10 md:py-12">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
-        <div className="space-y-6">
+    <section id="work-archive" className="py-section-mobile md:py-section-tablet">
+      <div className={`${spacing.containerFull}`}>
+        <div className="space-y-space-6">
           {/* Header with clear count */}
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
-            <h2 className="font-serif text-slate-900 text-xl md:text-2xl">
+          <motion.div
+            className="flex flex-col sm:flex-row sm:items-baseline gap-space-2 sm:gap-space-4 mb-space-2"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className={`font-serif ${t.text} text-xl md:text-2xl`}>
               A Decade of Work
             </h2>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center justify-center px-2.5 py-1 bg-slate-100 text-slate-700 font-mono text-xs rounded-full font-medium">
+            <div className="flex items-center gap-space-3">
+              <span className={`inline-flex items-center justify-center px-space-2.5 py-space-1 ${t.bg} ${t.textSecondary} font-mono text-xs rounded-full font-medium`}>
                 8 case studies
               </span>
-              <span className="text-slate-400">·</span>
-              <span className="font-mono text-slate-500 text-xs">
+              <span className={`${t.textMuted} opacity-40`}>·</span>
+              <span className={`font-mono ${t.textMuted} text-xs`}>
                 2012–2022
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Grid of Project Cards - Clean cards with image + text below */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {archiveProjects.map((project) => (
-              <a
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-space-4">
+            {archiveProjects.map((project, index) => (
+              <motion.a
                 key={project.title}
                 href={project.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300 hover:-translate-y-1"
+                className={`group ${t.bgAlt} border ${t.border} rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-teal)] focus-visible:ring-offset-2`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -4 }}
+                viewport={{ once: true, margin: '-20px' }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.05,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                style={{
+                  willChange: 'transform, opacity',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
+                }}
               >
                 {/* Image container - clean, no overlay */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-50">
-                  <Image
+                <div className={`relative aspect-[4/3] overflow-hidden ${t.bg}`}>
+                  <ImageWithSkeleton
                     src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    skeletonClassName="rounded-t-xl"
                   />
                 </div>
 
                 {/* Text below image - clean typography */}
-                <div className="p-4 border-t border-slate-100">
-                  <div className="flex items-start justify-between gap-2">
+                <div className={`p-space-4 border-t ${t.borderSubtle}`}>
+                  <div className="flex items-start justify-between gap-space-2">
                     <div>
-                      <p className="text-slate-900 font-medium text-sm leading-tight group-hover:text-[var(--accent-teal)] transition-colors">
+                      <p className={`${t.text} font-medium text-sm leading-tight group-hover:text-[var(--accent-teal)] transition-colors`}>
                         {project.title}
                       </p>
-                      <p className="text-slate-500 font-mono text-[10px] mt-1">
+                      <p className={`${t.textMuted} font-mono text-[10px] mt-space-1`}>
                         {project.year}
                       </p>
                     </div>
-                    <svg aria-hidden="true" className="w-4 h-4 text-slate-400 group-hover:text-[var(--accent-teal)] group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg aria-hidden="true" className={`w-4 h-4 ${t.textMuted} opacity-60 group-hover:text-[var(--accent-teal)] group-hover:opacity-100 group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-0.5`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </div>
                 </div>
-              </a>
+              </motion.a>
             ))}
           </div>
         </div>

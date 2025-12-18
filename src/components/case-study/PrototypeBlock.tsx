@@ -20,7 +20,7 @@ interface PrototypeBlockProps {
       comparisonNotes?: { before: string[]; after: string[] }
     }
     multiBeforeAfter?: {
-      before: { title: string; videos: { title: string; videoUrl: string; videoPoster?: string; description?: string }[] }
+      before: { title: string; videos: { title: string; videoUrl?: string; videoEmbedUrl?: string; videoPoster?: string; description?: string }[] }
       after: { title: string; videoUrl: string; videoPoster?: string; description?: string }
       comparisonNotes?: { before: string[]; after: string[] }
     }

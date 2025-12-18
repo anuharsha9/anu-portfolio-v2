@@ -50,7 +50,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // CORE_WORKFLOW: SCHEDULE_CREATION
+            {'// CORE_WORKFLOW: SCHEDULE_CREATION'}
           </span>
           <h4 className="text-[var(--text-heading)] text-xl md:text-2xl font-serif">
             Entry Point: 5+ Clicks → 2 Clicks
@@ -111,7 +111,7 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                       transform: `translateX(${chaosPositions[idx]?.x || 0}px) translateY(${chaosPositions[idx]?.y || 0}px)`,
                     }}
                     className={`relative bg-white border rounded-lg p-3 shadow-sm transition-all duration-200 ${item.isNewTab
-                      ? 'border-[var(--color-warning)] bg-amber-50'
+                      ? 'border-[var(--color-warning)] bg-[var(--bg-warning)]'
                       : 'border-[var(--border-primary)]'
                       }`}
                   >
@@ -186,10 +186,10 @@ export default function ScheduleWorkflowComparison({ isLightBackground = true }:
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
                     whileHover={{ scale: 1.02, x: 4 }}
-                    className={`border-2 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 ${item.isNote ? 'bg-slate-50 border-slate-200' : 'bg-white border-[var(--accent-teal)]/40'}`}
+                    className={`border-2 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200 ${item.isNote ? 'bg-[var(--bg-tertiary)] border-[var(--border-primary)]' : 'bg-white border-[var(--accent-teal)]/40'}`}
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-mono font-bold flex-shrink-0 ${item.isNote ? 'bg-slate-300' : 'bg-[var(--accent-teal)]'}`}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-mono font-bold flex-shrink-0 ${item.isNote ? 'bg-[var(--border-secondary)]' : 'bg-[var(--accent-teal)]'}`}>
                         {item.isNote ? '…' : idx + 1}
                       </div>
                       <div className="flex-1">

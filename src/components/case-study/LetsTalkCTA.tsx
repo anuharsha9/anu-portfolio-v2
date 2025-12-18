@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 interface LetsTalkCTAProps {
   className?: string
@@ -32,7 +33,13 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
 
   // Compact card variant
   return (
-    <section className={`${className} py-8 md:py-10`}>
+    <motion.section
+      className={`${className} py-8 md:py-10`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 bg-slate-50 rounded-xl border border-slate-200">
           <p className="text-slate-600 text-sm md:text-base">
@@ -59,6 +66,6 @@ export default function LetsTalkCTA({ className = '', variant = 'card' }: LetsTa
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

@@ -46,7 +46,7 @@ export default function IQEmptyStateShowcase({ isLightBackground = false }: IQEm
         {/* Header */}
         <div className="text-center mb-12">
           <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest mb-3 block">
-            // UX_DECISION: EMPTY_STATES
+            {'// UX_DECISION: EMPTY_STATES'}
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-slate-900 mb-4">
             Intuitive Empty States for Guidance
@@ -71,7 +71,7 @@ export default function IQEmptyStateShowcase({ isLightBackground = false }: IQEm
               {/* Header */}
               <div className="bg-slate-50 border-b border-slate-200 px-4 py-2">
                 <span className="font-mono text-[9px] text-slate-400 uppercase tracking-wider">
-                  // {state.label}
+                  {'// '}{state.label}
                 </span>
               </div>
 
@@ -107,8 +107,8 @@ export default function IQEmptyStateShowcase({ isLightBackground = false }: IQEm
             {`>`} DESIGN_PRINCIPLE:
           </span>
           <p className="font-mono text-sm text-slate-300 max-w-2xl mx-auto">
-            "The best onboarding happens in context. Every empty state is a teaching moment—
-            show users what's possible, not just what's missing."
+            &quot;The best onboarding happens in context. Every empty state is a teaching moment—
+            show users what&apos;s possible, not just what&apos;s missing.&quot;
           </p>
         </motion.div>
       </div>

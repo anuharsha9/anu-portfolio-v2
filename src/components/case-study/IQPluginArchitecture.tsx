@@ -33,7 +33,7 @@ export default function IQPluginArchitecture({ isLightBackground = true }: IQPlu
           {/* Header */}
           <div className="text-center space-y-2">
             <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-              // SYSTEM_CONVERGENCE
+              {'// SYSTEM_CONVERGENCE'}
             </span>
             <h3 className={`${t.text} text-2xl md:text-3xl font-serif`}>
               From Silos to Platform
@@ -47,7 +47,7 @@ export default function IQPluginArchitecture({ isLightBackground = true }: IQPlu
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <span className="font-mono text-red-600 text-[10px] uppercase tracking-widest">
-                // STATE_01: FRAGMENTED_SILOS
+                {'// STATE_01: FRAGMENTED_SILOS'}
               </span>
             </div>
 
@@ -103,7 +103,7 @@ export default function IQPluginArchitecture({ isLightBackground = true }: IQPlu
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <span className="font-mono text-emerald-600 text-[10px] uppercase tracking-widest">
-                // STATE_02: UNIFIED_PLATFORM
+                {'// STATE_02: UNIFIED_PLATFORM'}
               </span>
             </div>
 

@@ -19,27 +19,27 @@ interface LearningMethod {
 
 export default function MLKnowledgeGapSystem({ isLightBackground = true }: MLKnowledgeGapSystemProps) {
   const methods: LearningMethod[] = [
-    { 
+    {
       id: '01',
-      method: 'MIT Professional Certificate', 
+      method: 'MIT Professional Certificate',
       description: 'Product Design for Machine Learning & AI',
       highlight: 'MIT xPRO, Boston',
-      details: ['ML product lifecycle', 'Design for AI systems', 'Responsible ML practices'], 
-      icon: GraduationCap 
+      details: ['ML product lifecycle', 'Design for AI systems', 'Responsible ML practices'],
+      icon: GraduationCap
     },
-    { 
+    {
       id: '02',
-      method: 'Weekly DS Embedding', 
+      method: 'Weekly DS Embedding',
       description: 'Constant collaboration with Principal Data Scientist',
-      details: ['Model training logic', 'Evaluation metrics', 'Domain expertise transfer'], 
-      icon: UserCheck 
+      details: ['Model training logic', 'Evaluation metrics', 'Domain expertise transfer'],
+      icon: UserCheck
     },
-    { 
+    {
       id: '03',
-      method: 'AI-Accelerated Learning', 
+      method: 'AI-Accelerated Learning',
       description: 'Filled knowledge gaps in real-time',
-      details: ['Concept clarification', 'Technical terminology', 'Quick domain ramp-up'], 
-      icon: Bot 
+      details: ['Concept clarification', 'Technical terminology', 'Quick domain ramp-up'],
+      icon: Bot
     },
   ]
 
@@ -54,7 +54,7 @@ export default function MLKnowledgeGapSystem({ isLightBackground = true }: MLKno
       {/* HEADER: Concise Challenge */}
       <div className="bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-6 rounded-t-xl">
         <span className="font-mono text-xs text-[var(--accent-teal-700)] uppercase tracking-widest">
-          // CHALLENGE: ZERO_ML_KNOWLEDGE
+          {'// CHALLENGE: ZERO_ML_KNOWLEDGE'}
         </span>
         <p className="mt-3 text-slate-700 text-lg leading-relaxed">
           I entered this project knowing nothing about machine learning. <strong className="text-slate-900">So I got obsessed.</strong>
@@ -79,27 +79,27 @@ export default function MLKnowledgeGapSystem({ isLightBackground = true }: MLKno
                 <div className="flex items-center justify-between mb-4">
                   <IconComponent className="w-8 h-8 text-[var(--accent-teal)]" />
                   <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest">
-                    // {m.id}
+                    {'// '}{m.id}
                   </span>
                 </div>
-                
+
                 {/* Method Name */}
                 <h4 className="font-serif text-lg text-slate-900 mb-1">
                   {m.method}
                 </h4>
-                
+
                 {/* Highlight Badge */}
                 {m.highlight && (
                   <span className="inline-block font-mono text-[10px] text-[var(--accent-teal)] bg-[var(--accent-teal-50)] px-2 py-1 rounded mb-3">
                     {m.highlight}
                   </span>
                 )}
-                
+
                 {/* Description */}
                 <p className="text-slate-600 text-sm leading-relaxed mb-4">
                   {m.description}
                 </p>
-                
+
                 {/* Details */}
                 <div className="space-y-1.5 pt-3 border-t border-slate-200">
                   {m.details.map((d, j) => (

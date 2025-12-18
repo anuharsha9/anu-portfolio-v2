@@ -18,7 +18,7 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // USER_RESEARCH_STRATEGY
+          {'// USER_RESEARCH_STRATEGY'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Gathering Insights Without Direct Access
@@ -43,12 +43,12 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
             <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center">
               <Ban className="w-6 h-6 text-amber-600" />
             </div>
-            
+
             {/* Headline */}
             <h4 className="font-mono text-sm text-amber-700 uppercase tracking-wider">
-              // CONSTRAINT: NO_DIRECT_ACCESS
+              {'// CONSTRAINT: NO_DIRECT_ACCESS'}
             </h4>
-            
+
             {/* Body */}
             <p className="text-slate-700 text-base leading-relaxed">
               Enterprise security policy blocked direct access to end users. I could not interview the actual people using the tool.
@@ -57,7 +57,7 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
             {/* Impact List */}
             <div className="pt-4 border-t border-amber-200 space-y-2">
               <span className="font-mono text-[10px] text-amber-600 uppercase tracking-widest">
-                // BLOCKED_METHODS
+                {'// BLOCKED_METHODS'}
               </span>
               <ul className="space-y-1.5">
                 <li className="font-mono text-xs text-slate-600 flex items-start gap-2">
@@ -90,12 +90,12 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
             <div className="w-12 h-12 rounded-xl bg-[var(--accent-teal-100)] flex items-center justify-center">
               <Users className="w-6 h-6 text-[var(--accent-teal)]" />
             </div>
-            
+
             {/* Headline */}
             <h4 className="font-mono text-sm text-[var(--accent-teal-700)] uppercase tracking-wider">
-              // STRATEGY: THE_PROXY_NETWORK
+              {'// STRATEGY: THE_PROXY_NETWORK'}
             </h4>
-            
+
             {/* Body */}
             <p className="text-slate-700 text-base leading-relaxed">
               Talked to everyone I could — support reps, technical staff, and data scientist friends outside work. If they touched ML, I picked their brain.
@@ -104,7 +104,7 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
             {/* Strategy List */}
             <div className="pt-4 border-t border-[var(--accent-teal-200)] space-y-2">
               <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest">
-                // PROXY_SOURCES
+                {'// PROXY_SOURCES'}
               </span>
               <ul className="space-y-1.5">
                 <li className="font-mono text-xs text-slate-600 flex items-start gap-2">
@@ -139,7 +139,7 @@ export default function MLUserAccessStrategy({ isLightBackground = true }: MLUse
       >
         <div className="flex items-start gap-3">
           <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
-            // INSIGHT
+            {'// INSIGHT'}
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
             The proxy network revealed patterns that direct interviews might have missed: <span className="text-emerald-400 font-medium">support tickets exposed the real friction points</span> — not what users said they wanted, but where they actually got stuck.

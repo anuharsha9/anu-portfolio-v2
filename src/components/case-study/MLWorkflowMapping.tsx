@@ -9,21 +9,21 @@ interface MLWorkflowMappingProps {
 
 export default function MLWorkflowMapping({ isLightBackground = false }: MLWorkflowMappingProps) {
   const mappedAreas = [
-    { 
-      area: 'Data Selection', 
-      items: ['How users selected data', 'Data flow integration', 'Dataset compatibility'] 
+    {
+      area: 'Data Selection',
+      items: ['How users selected data', 'Data flow integration', 'Dataset compatibility']
     },
-    { 
-      area: 'Training Configuration', 
-      items: ['How they configured training', 'Hyperparameter access', 'Model type selection'] 
+    {
+      area: 'Training Configuration',
+      items: ['How they configured training', 'Hyperparameter access', 'Model type selection']
     },
-    { 
-      area: 'Model Execution', 
-      items: ['How models ran (or failed)', 'Tiny toolbar play icon', 'Hidden execution states'] 
+    {
+      area: 'Model Execution',
+      items: ['How models ran (or failed)', 'Tiny toolbar play icon', 'Hidden execution states']
     },
-    { 
-      area: 'Results Interpretation', 
-      items: ['How results were interpreted', 'Confusing error messages', 'Unclear model outputs'] 
+    {
+      area: 'Results Interpretation',
+      items: ['How results were interpreted', 'Confusing error messages', 'Unclear model outputs']
     },
   ]
 
@@ -45,7 +45,7 @@ export default function MLWorkflowMapping({ isLightBackground = false }: MLWorkf
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // WORKFLOW_MAPPING
+          {'// WORKFLOW_MAPPING'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Mapping the Existing Black-Box Workflow
@@ -140,11 +140,11 @@ export default function MLWorkflowMapping({ isLightBackground = false }: MLWorkf
       >
         <div className="flex items-start gap-3">
           <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
-            // INSIGHT
+            {'// INSIGHT'}
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating, 
-            <span className="text-emerald-400 font-medium"> a new user trying to adopt ML for the first time has almost no chance.</span> 
+            Even after I understood it, I found it frustrating and unintuitive. If a designer who knows the system finds it irritating,
+            <span className="text-emerald-400 font-medium"> a new user trying to adopt ML for the first time has almost no chance.</span>
             That realization directly pushed me toward inventing a guided, step-based workflow.
           </p>
         </div>

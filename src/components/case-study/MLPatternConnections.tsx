@@ -57,7 +57,7 @@ const PluginIcon = () => (
 
 export default function MLPatternConnections({ isLightBackground = false }: MLPatternConnectionsProps) {
   const patterns = [
-    { 
+    {
       id: 'guided',
       patternName: 'GUIDED_STEPPER_UI',
       Icon: GuidedFlowIcon,
@@ -66,7 +66,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
       reusedIn: null,
       link: null,
     },
-    { 
+    {
       id: 'context',
       patternName: 'CONTEXT_ENTRY_POINTS',
       Icon: ContextMenuIcon,
@@ -75,7 +75,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
       reusedIn: 'ReportCaster',
       link: '/work/reportcaster',
     },
-    { 
+    {
       id: 'plugin',
       patternName: 'UNIFIED_TOOL_HUB',
       Icon: PluginIcon,
@@ -144,7 +144,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-12 shadow-sm">
       <div className="space-y-10">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -154,7 +154,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            // PATTERN_LIBRARY
+            {'// PATTERN_LIBRARY'}
           </span>
           <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
             Patterns That Became Reusable

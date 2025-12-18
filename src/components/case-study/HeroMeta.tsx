@@ -184,7 +184,7 @@ export default function HeroMeta({
                       <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-full px-3 py-1.5">
                         <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
                         <span className="font-mono text-xs text-amber-700 uppercase tracking-wider">
-                          // STATUS: {status.label.toUpperCase().replace(/\s+/g, '_')}
+                          {'// STATUS: '}{status.label.toUpperCase().replace(/\s+/g, '_')}
                         </span>
                       </div>
                     ) : (
@@ -304,7 +304,7 @@ export default function HeroMeta({
             </div>
 
             {/* Project Meta Strip - Compact single line */}
-            <div className="mt-6 pt-4 border-t border-slate-200">
+            <div className="mt-6 pt-4 border-t border-slate-200 space-y-4">
               <div className="flex items-center gap-3 text-xs md:text-sm text-slate-600">
                 <span>{role}</span>
                 <span className="text-slate-300">·</span>
@@ -312,6 +312,21 @@ export default function HeroMeta({
                 <span className="text-slate-300">·</span>
                 <span>{timeframe}</span>
               </div>
+
+              {/* Social Share Buttons */}
+              {shareUrl && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  <SocialShareButtons
+                    title={heroTitle}
+                    url={shareUrl}
+                    description={heroSubtitle}
+                  />
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </div>

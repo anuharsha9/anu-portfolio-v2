@@ -3,11 +3,13 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import SignatureLogo from '@/components/brand/SignatureLogo'
+import { getTheme, spacing } from '@/lib/design-system'
 
 export default function SiteFooter() {
   const pathname = usePathname()
   const router = useRouter()
   const currentYear = new Date().getFullYear()
+  const t = getTheme(true)
 
   const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
@@ -42,25 +44,25 @@ export default function SiteFooter() {
   }
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800">
-      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 sm:py-8">
+    <footer className={`${t.monitor.bg} border-t ${t.monitor.border}`}>
+      <div className={`${spacing.containerFull} py-space-6 sm:py-space-8`}>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
           {/* Signature & Name */}
           <Link
             href="/"
-            className="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity duration-300 group"
+            className="flex items-center gap-space-3 md:gap-space-4 hover:opacity-80 transition-opacity duration-300 group"
           >
             <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
-              <SignatureLogo className="w-full h-full text-slate-50 group-hover:text-[var(--accent-teal)] transition-colors duration-300" />
+              <SignatureLogo className={`w-full h-full ${t.monitor.text} group-hover:text-[var(--accent-teal)] transition-colors duration-300`} />
             </div>
-            <span className="text-slate-50 font-medium text-sm md:text-base group-hover:text-[var(--accent-teal)] transition-colors duration-300">
+            <span className={`${t.monitor.text} font-medium text-sm md:text-base group-hover:text-[var(--accent-teal)] transition-colors duration-300`}>
               Anuja Harsha Nimmagadda
             </span>
           </Link>
 
           <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
             {/* Navigation Links */}
-            <nav className="hidden md:flex flex-wrap items-center justify-center gap-6">
+            <nav className="hidden md:flex flex-wrap items-center justify-center gap-space-6">
               <Link
                 href="/#work-overview"
                 onClick={(e) => {
@@ -71,7 +73,7 @@ export default function SiteFooter() {
                     router.push('/#work-overview')
                   }
                 }}
-                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
+                className={`${t.monitor.textMuted} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
               >
                 Work
               </Link>
@@ -83,26 +85,26 @@ export default function SiteFooter() {
                     router.push('/me')
                   }
                 }}
-                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
+                className={`${t.monitor.textMuted} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
               >
                 About Me
               </Link>
               <Link
                 href="/#lets-talk"
                 onClick={(e) => handleSectionClick(e, 'lets-talk')}
-                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium"
+                className={`${t.monitor.textMuted} hover:text-[var(--accent-teal)] transition-colors duration-300 text-sm font-medium`}
               >
                 Contact
               </Link>
             </nav>
 
             {/* Social Icons */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-space-4">
               <a
                 href="https://www.linkedin.com/in/anu159"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300"
+                className={`${t.monitor.textMuted} hover:text-[var(--accent-teal)] transition-colors duration-300`}
                 aria-label="LinkedIn"
               >
                 <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -113,7 +115,7 @@ export default function SiteFooter() {
                 href="https://medium.com/@anu.anuja"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-[var(--accent-teal)] transition-colors duration-300"
+                className={`${t.monitor.textMuted} hover:text-[var(--accent-teal)] transition-colors duration-300`}
                 aria-label="Medium"
               >
                 <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -123,10 +125,10 @@ export default function SiteFooter() {
             </div>
 
             {/* Separator & Copyright */}
-            <span className="hidden md:inline text-slate-700">·</span>
-            <div className="flex items-center gap-3">
-              <p className="text-slate-400 text-xs md:text-sm" suppressHydrationWarning>
-                Designed in Figma. Built with Cursor. © {currentYear}
+            <span className={`hidden md:inline ${t.monitor.border}`}>·</span>
+            <div className="flex items-center gap-space-3">
+              <p className={`${t.monitor.textDim} text-xs md:text-sm`} suppressHydrationWarning>
+                Designed and built with Cursor.
               </p>
             </div>
           </div>

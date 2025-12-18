@@ -67,7 +67,7 @@ const FeatureCard = ({ title, description, icon: Icon, iconColor, screens, demoL
               className="w-[200px] flex-shrink-0"
             >
               <span className={`font-mono text-[9px] uppercase tracking-widest ${labelColor} block mb-2`}>
-                // {screen.label}
+                {'// '}{screen.label}
               </span>
               <div
                 className="relative aspect-video rounded-lg overflow-hidden cursor-pointer group"
@@ -100,7 +100,7 @@ const FeatureCard = ({ title, description, icon: Icon, iconColor, screens, demoL
             className={`${bgColor} p-3`}
           >
             <span className={`font-mono text-[9px] uppercase tracking-widest ${labelColor} block mb-2`}>
-              // {screen.label}
+              {'// '}{screen.label}
             </span>
             <div
               className="relative aspect-video rounded-lg overflow-hidden cursor-pointer group"
@@ -200,7 +200,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
         className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest block mb-4">
-          // WORKFLOWS_OWNED
+          {'// WORKFLOWS_OWNED'}
         </span>
         <h2 className={`text-3xl md:text-4xl font-serif ${titleColor} mb-4`}>
           NLQ & Insights: The Foundation
@@ -234,12 +234,12 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
             <Layout size={20} className="text-[var(--accent-teal)] flex-shrink-0 mt-0.5" />
             <div>
               <span className={`font-mono text-xs uppercase tracking-widest block mb-2 ${isLightBackground ? 'text-slate-500' : 'text-slate-400'}`}>
-                // PATTERN_PARITY
+                {'// PATTERN_PARITY'}
               </span>
               <p className={`text-sm leading-relaxed ${summaryColor}`}>
                 Same empty state patterns. Same data selection flow. Same error handling. Same responsive breakpoints.
                 When I built NLQ and Insights, I designed them as a <span className="font-medium text-[var(--accent-teal)]">system</span>—knowing
-                they'd eventually live together. IQ Plugin is the result.
+                they&apos;d eventually live together. IQ Plugin is the result.
               </p>
             </div>
           </div>

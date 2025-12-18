@@ -18,7 +18,7 @@ export default function EmpathizeStrategyGrid({ isLightBackground = true }: Empa
         className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-6 md:p-8 rounded-r-xl"
       >
         <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-4 block">
-          // CUSTOMER_OBSESSION
+          {'// CUSTOMER_OBSESSION'}
         </span>
 
         <h3 className="font-serif text-slate-900 text-xl md:text-2xl mb-4">

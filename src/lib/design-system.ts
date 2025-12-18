@@ -30,6 +30,13 @@ export const cssVars = {
   textDark: 'var(--text-primary-dark)',
   textMutedLight: 'var(--text-muted-light)',
   textMutedDark: 'var(--text-muted-dark)',
+
+  // Monitor technical theme
+  monitorBg: 'var(--bg-monitor)',
+  monitorBgAlt: 'var(--bg-monitor-alt)',
+  monitorBorder: 'var(--border-monitor)',
+  monitorText: 'var(--text-monitor)',
+  monitorTextMuted: 'var(--text-monitor-muted)',
 } as const
 
 // =============================================================================
@@ -42,6 +49,7 @@ const TEXT = {
   heading: 'text-[var(--text-heading)]',    // slate-900
   body: 'text-[var(--text-body)]',          // slate-600
   muted: 'text-[var(--text-muted)]',        // slate-500
+  dim: 'text-[var(--text-dim)]',            // slate-400
   accent: 'text-[var(--accent-teal)]',
   // Legacy aliases
   light: 'text-[var(--text-primary)]',      // slate-900
@@ -100,7 +108,9 @@ const DIVIDER = {
 export interface Theme {
   // Text
   text: string
+  textSecondary: string
   textMuted: string
+  textDim: string
   textAccent: string
 
   // Backgrounds
@@ -110,6 +120,8 @@ export interface Theme {
 
   // Borders
   border: string
+  borderSecondary: string
+  borderSubtle: string
   borderAccent: string
 
   // Surfaces & Dividers
@@ -122,6 +134,17 @@ export interface Theme {
 
   // Context
   isLight: boolean
+
+  // Technical Monitor Theme (Dark)
+  monitor: {
+    bg: string
+    bgAlt: string
+    bgSurface: string
+    border: string
+    text: string
+    textMuted: string
+    textDim: string
+  }
 }
 
 /**
@@ -138,7 +161,9 @@ export function getTheme(isLight: boolean = true): Theme {
   // Always use light theme (Architect aesthetic)
   return {
     text: TEXT.heading,           // slate-900
-    textMuted: TEXT.body,         // slate-600
+    textSecondary: TEXT.body,     // slate-600
+    textMuted: TEXT.muted,        // slate-500
+    textDim: TEXT.dim,            // slate-400
     textAccent: TEXT.accent,      // teal
 
     bg: BG.primary,               // slate-50
@@ -146,6 +171,8 @@ export function getTheme(isLight: boolean = true): Theme {
     bgAccent: BG.accent.light,    // teal soft
 
     border: BORDER.primary,       // slate-200
+    borderSecondary: BORDER.secondary, // slate-300
+    borderSubtle: BORDER.subtle,  // slate-100
     borderAccent: BORDER.accent.light,
 
     divider: DIVIDER.primary,     // slate-200
@@ -154,6 +181,17 @@ export function getTheme(isLight: boolean = true): Theme {
 
     accentVar: cssVars.accent,
     isLight: true,
+
+    // Technical Monitor Theme (Dark)
+    monitor: {
+      bg: 'bg-[var(--bg-monitor)]',
+      bgAlt: 'bg-[var(--bg-monitor-alt)]',
+      bgSurface: 'bg-[var(--bg-monitor-surface)]',
+      border: 'border-[var(--border-monitor)]',
+      text: 'text-[var(--text-monitor)]',
+      textMuted: 'text-[var(--text-monitor-muted)]',
+      textDim: 'text-[var(--text-monitor-dim)]',
+    }
   }
 }
 
@@ -177,7 +215,7 @@ export const typography = {
   bodySmall: 'text-sm md:text-base leading-relaxed',
 
   // Labels & captions
-  label: 'text-xs font-mono uppercase tracking-wider',
+  label: 'text-xs font-mono uppercase tracking-widest',
   caption: 'text-xs leading-relaxed',
 
   // Emphasis
@@ -190,29 +228,29 @@ export const typography = {
 // =============================================================================
 
 export const spacing = {
-  // Section padding
-  section: 'py-10 md:py-12 lg:py-16',
-  sectionCompact: 'py-6 md:py-8 lg:py-10',
+  // Section padding (Vertical Rhythm)
+  section: 'py-section-mobile md:py-section-tablet lg:py-section-desktop',
+  sectionCompact: 'py-space-8 md:py-space-12 lg:py-space-16',
 
   // Container
-  container: 'px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16',
+  container: 'px-space-4 xs:px-space-5 sm:px-space-6 md:px-space-8 lg:px-space-12 xl:px-space-16',
   containerMax: 'max-w-[1440px] mx-auto',
-  containerFull: 'max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16',
+  containerFull: 'max-w-[1440px] mx-auto px-space-4 xs:px-space-5 sm:px-space-6 md:px-space-8 lg:px-space-12 xl:px-space-16',
 
   // Component spacing
   stack: {
-    xs: 'space-y-2',
-    sm: 'space-y-4',
-    md: 'space-y-6',
-    lg: 'space-y-8',
-    xl: 'space-y-12',
+    xs: 'space-y-space-2',
+    sm: 'space-y-space-4',
+    md: 'space-y-space-6',
+    lg: 'space-y-space-8',
+    xl: 'space-y-space-12',
   },
 
   gap: {
-    xs: 'gap-2',
-    sm: 'gap-4',
-    md: 'gap-6',
-    lg: 'gap-8',
+    xs: 'gap-space-2',
+    sm: 'gap-space-4',
+    md: 'gap-space-6',
+    lg: 'gap-space-8',
   },
 } as const
 

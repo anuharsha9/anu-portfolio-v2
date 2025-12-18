@@ -88,7 +88,7 @@ export default function MLChallengeBreakdown({ isLightBackground = true }: MLCha
         <div className="inline-flex items-center gap-2 bg-red-50 border border-red-200 rounded-full px-4 py-2">
           <span className="w-2 h-2 rounded-full bg-red-500"></span>
           <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-            // SYSTEM_AUDIT
+            {'// SYSTEM_AUDIT'}
           </span>
         </div>
         <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
@@ -99,7 +99,7 @@ export default function MLChallengeBreakdown({ isLightBackground = true }: MLCha
         </p>
       </motion.div>
 
-      {/* Audit Cards Grid - 2x2 */}
+      {/* Audit Cards Grid - Locked */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {auditCards.map((card, index) => (
           <motion.div

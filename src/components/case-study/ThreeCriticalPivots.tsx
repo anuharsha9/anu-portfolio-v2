@@ -23,12 +23,12 @@ interface Pivot {
 
 export default function ThreeCriticalPivots({ isLightBackground = false }: ThreeCriticalPivotsProps) {
   const pivots: Pivot[] = [
-    { 
-      number: '01', 
-      title: 'Split Train vs Run', 
+    {
+      number: '01',
+      title: 'Split Train vs Run',
       icon: Layers,
-      before: 'Unified Train+Run experience mixing two mental models', 
-      after: 'Separate tabs for distinct mental models: Create vs Apply', 
+      before: 'Unified Train+Run experience mixing two mental models',
+      after: 'Separate tabs for distinct mental models: Create vs Apply',
       reason: 'We were mixing two different mental models — creating models vs applying them. Splitting them simplified both UX and implementation.',
       schematic: {
         before: (
@@ -50,12 +50,12 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
         ),
       }
     },
-    { 
-      number: '02', 
-      title: 'Remove Data Flow from ML UI', 
+    {
+      number: '02',
+      title: 'Remove Data Flow from ML UI',
       icon: LayoutGrid,
-      before: 'Engineering wanted data flow visible inside ML UI', 
-      after: 'Data flow accessible elsewhere, ML UI stays focused', 
+      before: 'Engineering wanted data flow visible inside ML UI',
+      after: 'Data flow accessible elsewhere, ML UI stays focused',
       reason: 'After training models hundreds of times myself, I concluded the data flow was adding noise and risking users losing progress.',
       schematic: {
         before: (
@@ -76,12 +76,12 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
         ),
       }
     },
-    { 
-      number: '03', 
-      title: 'Model Cards vs Tables', 
+    {
+      number: '03',
+      title: 'Model Cards vs Tables',
       icon: CreditCard,
-      before: 'Legacy UI used tables for everything, including models', 
-      after: 'Model cards for better scanning and comparison', 
+      before: 'Legacy UI used tables for everything, including models',
+      after: 'Model cards for better scanning and comparison',
       reason: 'Despite initial pushback, cards became the primary way to choose a model, with tables reserved for dense tabular data like training logs.',
       schematic: {
         before: (
@@ -112,7 +112,7 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          // DESIGN_PIVOTS
+          {'// DESIGN_PIVOTS'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Three Critical Design Pivots
@@ -172,7 +172,7 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
               {/* Rationale Footer - Code Comment Style */}
               <div className="mt-auto pt-4 border-t border-slate-100">
                 <p className="font-mono text-xs text-slate-500 leading-relaxed">
-                  <span className="text-slate-400">// RATIONALE:</span> {p.reason}
+                  <span className="text-slate-400">{'// RATIONALE:'}</span> {p.reason}
                 </p>
               </div>
             </motion.div>
@@ -190,10 +190,10 @@ export default function ThreeCriticalPivots({ isLightBackground = false }: Three
       >
         <div className="flex items-start gap-3">
           <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest flex-shrink-0">
-            // BREAKTHROUGH
+            {'// BREAKTHROUGH'}
           </span>
           <p className="text-slate-300 text-sm leading-relaxed">
-            These pivots weren&apos;t just UX decisions — they were <span className="text-emerald-400 font-medium">architectural choices</span> that simplified implementation while improving user experience. The structured guided flow emerged from our domain expert&apos;s answer to 
+            These pivots weren&apos;t just UX decisions — they were <span className="text-emerald-400 font-medium">architectural choices</span> that simplified implementation while improving user experience. The structured guided flow emerged from our domain expert&apos;s answer to
             <span className="text-emerald-400 font-medium"> &quot;What do you absolutely need?&quot;</span> → problem type, target, predictors, hyperparameters.
           </p>
         </div>

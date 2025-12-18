@@ -66,7 +66,7 @@ export default function IQWorkflowComparison({ isLightBackground = false }: IQWo
         {/* Header */}
         <div className="text-center mb-12">
           <span className="font-mono text-[10px] text-[var(--accent-teal)] uppercase tracking-widest mb-3 block">
-            // BEFORE_AFTER: WORKFLOW_COMPARISON
+            {'// BEFORE_AFTER: WORKFLOW_COMPARISON'}
           </span>
           <h3 className="font-serif text-2xl md:text-3xl text-slate-900 mb-4">
             Current vs. IQ Plugin

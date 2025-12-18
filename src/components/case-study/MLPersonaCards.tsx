@@ -31,10 +31,10 @@ export default function MLPersonaCards({ isLightBackground = false }: MLPersonaC
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <span className="font-mono text-slate-400 text-xs tracking-widest uppercase">
-          // USER_PERSONAS
+          {'// USER_PERSONAS'}
         </span>
       </div>
-      
+
       <h3 className="text-slate-900 text-lg md:text-xl font-serif font-semibold mb-2">
         User Personas
       </h3>
@@ -49,11 +49,10 @@ export default function MLPersonaCards({ isLightBackground = false }: MLPersonaC
             key={i}
             className="flex items-start gap-3 p-3 bg-white border border-slate-200 rounded-lg"
           >
-            <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider flex-shrink-0 ${
-              p.type === 'TECHNICAL' 
-                ? 'bg-[var(--accent-teal-50)] border border-[var(--accent-teal-200)] text-[var(--accent-teal)]' 
+            <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider flex-shrink-0 ${p.type === 'TECHNICAL'
+                ? 'bg-[var(--accent-teal-50)] border border-[var(--accent-teal-200)] text-[var(--accent-teal)]'
                 : 'bg-emerald-50 border border-emerald-200 text-emerald-600'
-            }`}>
+              }`}>
               {p.type}
             </span>
             <div>

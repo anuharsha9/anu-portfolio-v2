@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Volume2 } from 'lucide-react'
 import CustomVideoPlayer from '@/components/video/CustomVideoPlayer'
+import { getTheme } from '@/lib/design-system'
 
 interface VideoItem {
   title: string
@@ -37,6 +38,7 @@ const YouTubeEmbed = ({ url, className = '' }: { url: string; className?: string
 )
 
 export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, password = 'anu-access', caseStudySlug = 'default' }: MultiBeforeAfterVideoProps) {
+  const t = getTheme(true)
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [passwordInput, setPasswordInput] = useState('')
@@ -82,7 +84,7 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8 }}
-      className="bg-slate-950 py-10 md:py-14 -mx-4 xs:-mx-5 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
+      className={`${t.monitor.bg} py-10 md:py-14 -mx-4 xs:-mx-5 sm:-mx-6 md:-mx-8 lg:-mx-12 xl:-mx-16 px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16`}
     >
       <div className="max-w-[1440px] mx-auto space-y-10">
         {/* ============================================
@@ -118,7 +120,7 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-slate-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+            className={`${t.monitor.textMuted} text-base md:text-lg leading-relaxed max-w-2xl mx-auto`}
           >
             Narrated walkthrough of the fragmented legacy workflows vs. the unified modern experience.
           </motion.p>
@@ -132,7 +134,7 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="bg-slate-900/50 rounded-2xl p-4 md:p-6 lg:p-8 border border-slate-800"
+          className={`${t.monitor.bgSurface} rounded-2xl p-4 md:p-6 lg:p-8 border ${t.monitor.border}`}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* BEFORE - Multiple Videos */}
@@ -149,20 +151,23 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                       <p className="text-slate-500 text-xs leading-relaxed">{video.description}</p>
                     )}
                     <div
-                      className="relative w-full aspect-video rounded-lg border-4 border-slate-800 overflow-hidden shadow-2xl shadow-red-900/20 cursor-pointer group"
-                      onClick={handleVideoClick}
+                      className={`relative w-full aspect-video rounded-lg border-4 ${t.monitor.border} overflow-hidden shadow-2xl shadow-red-900/20 ${!video.videoUrl || (video.videoEmbedUrl && isYouTubeUrl(video.videoEmbedUrl)) ? '' : 'cursor-pointer group'}`}
+                      onClick={video.videoEmbedUrl && isYouTubeUrl(video.videoEmbedUrl) ? undefined : handleVideoClick}
                     >
-                      {!isUnlocked ? (
-                        /* Locked State */
+                      {/* YouTube embeds are always unlocked (public videos) */}
+                      {video.videoEmbedUrl && isYouTubeUrl(video.videoEmbedUrl) ? (
+                        <YouTubeEmbed url={video.videoEmbedUrl} className="rounded-none" />
+                      ) : !isUnlocked ? (
+                        /* Locked State - Only for self-hosted videos */
                         <div className="absolute inset-0 bg-slate-900">
                           <div
                             className="absolute inset-0 opacity-20"
                             style={{
                               backgroundImage: `
-                                linear-gradient(45deg, #334155 25%, transparent 25%),
-                                linear-gradient(-45deg, #334155 25%, transparent 25%),
-                                linear-gradient(45deg, transparent 75%, #334155 75%),
-                                linear-gradient(-45deg, transparent 75%, #334155 75%)
+                                linear-gradient(45deg, var(--border-monitor) 25%, transparent 25%),
+                                linear-gradient(-45deg, var(--border-monitor) 25%, transparent 25%),
+                                linear-gradient(45deg, transparent 75%, var(--border-monitor) 75%),
+                                linear-gradient(-45deg, transparent 75%, var(--border-monitor) 75%)
                               `,
                               backgroundSize: '16px 16px',
                               backgroundPosition: '0 0, 0 8px, 8px -8px, -8px 0px',
@@ -170,23 +175,18 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                           />
                           <div className="absolute inset-0 flex items-center justify-center">
                             <div className="text-center space-y-2">
-                              <div className="w-10 h-10 mx-auto rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <svg aria-hidden="true" className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <div className={`w-10 h-10 mx-auto rounded-full ${t.monitor.bgAlt} border ${t.monitor.border} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                                <svg aria-hidden="true" className={`w-5 h-5 ${t.monitor.textMuted}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
                               </div>
-                              <p className="text-slate-400 text-xs font-medium">Click to unlock</p>
+                              <p className={`${t.monitor.textDim} text-xs font-medium`}>Click to unlock</p>
                             </div>
                           </div>
                         </div>
-                      ) : (
-                        // Check if it's a YouTube embed URL or regular video
-                        video.videoEmbedUrl && isYouTubeUrl(video.videoEmbedUrl) ? (
-                          <YouTubeEmbed url={video.videoEmbedUrl} className="rounded-none" />
-                        ) : video.videoUrl ? (
-                          <CustomVideoPlayer src={video.videoUrl} className="rounded-none" />
-                        ) : null
-                      )}
+                      ) : video.videoUrl ? (
+                        <CustomVideoPlayer src={video.videoUrl} className="rounded-none" />
+                      ) : null}
                     </div>
                   </div>
                 ))}
@@ -200,22 +200,22 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                 <h3 className="text-white text-lg font-serif font-semibold">{after.title}</h3>
               </div>
               {after.description && (
-                <p className="text-slate-400 text-sm leading-relaxed">{after.description}</p>
+                <p className={`${t.monitor.textMuted} text-sm leading-relaxed`}>{after.description}</p>
               )}
               <div
-                className="relative w-full aspect-video rounded-lg border-4 border-slate-800 overflow-hidden shadow-2xl shadow-blue-900/20 cursor-pointer group"
+                className={`relative w-full aspect-video rounded-lg border-4 ${t.monitor.border} overflow-hidden shadow-2xl shadow-blue-900/20 cursor-pointer group`}
                 onClick={handleVideoClick}
               >
                 {!isUnlocked ? (
-                  <div className="absolute inset-0 bg-slate-900 flex items-center justify-center">
+                  <div className={`absolute inset-0 ${t.monitor.bgAlt} flex items-center justify-center`}>
                     <div className="text-center space-y-3">
-                      <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 border border-[var(--accent-teal)]/30 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <svg aria-hidden="true" className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className={`w-16 h-16 mx-auto rounded-full ${t.bgAccent} border ${t.borderAccent} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                        <svg aria-hidden="true" className={`w-8 h-8 ${t.textAccent}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       </div>
-                      <p className="text-slate-300 text-sm font-medium">Password Required</p>
-                      <p className="text-slate-500 text-xs">Click to unlock unified workflow</p>
+                      <p className={`${t.monitor.text} text-sm font-medium`}>Password Required</p>
+                      <p className={`${t.monitor.textDim} text-xs`}>Click to unlock unified workflow</p>
                     </div>
                   </div>
                 ) : (
@@ -234,20 +234,20 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
               KEY DIFFERENCES (Dark Theme Specs)
               ============================================ */}
           {comparisonNotes && (
-            <div className="mt-8 pt-8 border-t border-slate-800">
-              <h4 className="text-white font-serif text-lg font-semibold mb-6 text-center">
+            <div className={`mt-8 pt-8 border-t ${t.monitor.border}`}>
+              <h4 className={`${t.monitor.text} font-serif text-lg font-semibold mb-6 text-center`}>
                 Key Differences
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Before Column */}
-                <div className="bg-slate-900 rounded-xl p-5 border border-slate-800">
+                <div className={`${t.monitor.bgAlt} rounded-xl p-5 border ${t.monitor.border}`}>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
                     <span className="text-red-400 text-xs font-mono uppercase tracking-widest font-semibold">
                       Before
                     </span>
                   </div>
-                  <ul className="text-slate-300 text-sm space-y-2.5">
+                  <ul className={`${t.monitor.text} text-sm space-y-2.5`}>
                     {comparisonNotes.before.map((note, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <span className="text-red-400 mt-0.5 font-bold">•</span>
@@ -258,14 +258,14 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                 </div>
 
                 {/* After Column */}
-                <div className="bg-slate-900 rounded-xl p-5 border border-slate-800">
+                <div className={`${t.monitor.bgAlt} rounded-xl p-5 border ${t.monitor.border}`}>
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                     <span className="text-emerald-400 text-xs font-mono uppercase tracking-widest font-semibold">
                       After
                     </span>
                   </div>
-                  <ul className="text-slate-300 text-sm space-y-2.5">
+                  <ul className={`${t.monitor.text} text-sm space-y-2.5`}>
                     {comparisonNotes.after.map((note, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <span className="text-emerald-400 mt-0.5 font-bold">•</span>
@@ -288,17 +288,17 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-slate-900 rounded-2xl p-8 max-w-md w-full border border-slate-700 shadow-2xl"
+            className={`${t.monitor.bgAlt} rounded-2xl p-8 max-w-md w-full border ${t.monitor.border} shadow-2xl`}
           >
             <div className="space-y-6">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[var(--accent-teal)]/10 flex items-center justify-center mb-4">
-                  <svg aria-hidden="true" className="w-8 h-8 text-[var(--accent-teal)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className={`w-16 h-16 mx-auto rounded-full ${t.bgAccent} flex items-center justify-center mb-4`}>
+                  <svg aria-hidden="true" className={`w-8 h-8 ${t.textAccent}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
-                <h3 className="text-white text-2xl font-serif font-semibold">Unlock Videos</h3>
-                <p className="text-slate-400 text-sm">
+                <h3 className={`${t.monitor.text} text-2xl font-serif font-semibold`}>Unlock Videos</h3>
+                <p className={`${t.monitor.textMuted} text-sm`}>
                   Enter the password to view the actual video walkthroughs.
                 </p>
               </div>
@@ -311,7 +311,7 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                   onChange={(e) => { setPasswordInput(e.target.value); setPasswordError('') }}
                   placeholder="Enter password"
                   aria-label="Enter password to unlock videos"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-700 bg-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-[var(--accent-teal)]/50 focus:ring-2 focus:ring-[var(--accent-teal)]/20 transition-all"
+                  className={`w-full px-4 py-3 rounded-lg border ${t.monitor.border} ${t.monitor.bgSurface} ${t.monitor.text} placeholder:${t.monitor.textDim} focus:outline-none focus:border-[var(--accent-teal)]/50 focus:ring-2 focus:ring-[var(--accent-teal)]/20 transition-all`}
                   autoFocus
                 />
                 {passwordError && <p role="alert" className="text-red-400 text-sm">{passwordError}</p>}
@@ -319,13 +319,13 @@ export default function MultiBeforeAfterVideo({ before, after, comparisonNotes, 
                   <button
                     type="button"
                     onClick={() => { setShowPasswordModal(false); setPasswordInput(''); setPasswordError('') }}
-                    className="flex-1 px-4 py-3 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors"
+                    className={`flex-1 px-4 py-3 rounded-lg border ${t.monitor.border} ${t.monitor.textMuted} hover:${t.monitor.bgAlt} transition-colors`}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-3 rounded-lg bg-[var(--accent-teal)] text-white hover:bg-[var(--accent-teal)]/90 transition-colors font-medium"
+                    className={`flex-1 px-4 py-3 rounded-lg ${t.textAccent === 'text-[var(--accent-teal)]' ? 'bg-[var(--accent-teal)]' : 'bg-slate-700'} text-white hover:opacity-90 transition-colors font-medium`}
                   >
                     Unlock
                   </button>

@@ -9,56 +9,56 @@ interface LayeredDisclosureVisualProps {
 
 export default function LayeredDisclosureVisual({ isLightBackground = false }: LayeredDisclosureVisualProps) {
   const layers = [
-    { 
+    {
       level: 'Default Experience',
       tag: '// LEVEL_01: DEFAULT',
-      user: 'Non-technical users', 
+      user: 'Non-technical users',
       icon: User,
       features: [
-        'Guided, safe, error-proof flow', 
-        'Clear steps, clear terminology', 
-        'Tooltips, wizards, onboarding text', 
-        'Inline explanations', 
+        'Guided, safe, error-proof flow',
+        'Clear steps, clear terminology',
+        'Tooltips, wizards, onboarding text',
+        'Inline explanations',
         'Progressive disclosure'
       ]
     },
-    { 
+    {
       level: 'Advanced Controls',
       tag: '// LEVEL_02: ADVANCED',
-      user: 'Technical users', 
+      user: 'Technical users',
       icon: Sliders,
       features: [
-        'Expandable sections for parameters', 
-        'Ability to adjust algorithms', 
-        'Feature selection options', 
+        'Expandable sections for parameters',
+        'Ability to adjust algorithms',
+        'Feature selection options',
         'Training configuration'
       ]
     },
-    { 
+    {
       level: 'Expert Mode',
       tag: '// LEVEL_03: EXPERT',
-      user: 'Data scientists', 
+      user: 'Data scientists',
       icon: Code,
       features: [
-        'Full control available but not required', 
-        'Advanced tuning options', 
-        'Hyperparameter presets', 
+        'Full control available but not required',
+        'Advanced tuning options',
+        'Hyperparameter presets',
         'All within the same unified experience'
       ]
     },
   ]
 
   const safetyChecks = [
-    'Incompatible datasets blocked early (Step 1)', 
-    'Inline warnings in plain language', 
-    'Standardized error patterns from design system', 
+    'Incompatible datasets blocked early (Step 1)',
+    'Inline warnings in plain language',
+    'Standardized error patterns from design system',
     'Users always have a way out: go back, change input, or safely cancel'
   ]
 
   const backlog = [
-    'Auto-suggesting best model type based on dataset', 
-    'Deep hyperparameter presets and advanced tuning', 
-    'Unified Train+Run single-screen concept', 
+    'Auto-suggesting best model type based on dataset',
+    'Deep hyperparameter presets and advanced tuning',
+    'Unified Train+Run single-screen concept',
     'Heavier onboarding overlays / carousels'
   ]
 
@@ -72,7 +72,7 @@ export default function LayeredDisclosureVisual({ isLightBackground = false }: L
         className="text-center space-y-2"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest">
-          // CONFIGURATION_MATRIX
+          {'// CONFIGURATION_MATRIX'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Balancing Model Control with Simplicity
@@ -87,8 +87,8 @@ export default function LayeredDisclosureVisual({ isLightBackground = false }: L
         {layers.map((l, i) => {
           const IconComponent = l.icon
           return (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -135,7 +135,7 @@ export default function LayeredDisclosureVisual({ isLightBackground = false }: L
           <div className="flex items-center gap-2 mb-3">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span className="font-mono text-[10px] text-emerald-700 uppercase tracking-widest">
-              // SAFETY_CHECKS
+              {'// SAFETY_CHECKS'}
             </span>
           </div>
           <ul className="space-y-2">
@@ -157,7 +157,7 @@ export default function LayeredDisclosureVisual({ isLightBackground = false }: L
           className="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-5"
         >
           <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest block mb-3">
-            // POST_LAUNCH_ROADMAP
+            {'// POST_LAUNCH_ROADMAP'}
           </span>
           <ul className="space-y-2">
             {backlog.map((item, i) => (

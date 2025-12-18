@@ -36,17 +36,17 @@ interface MarketAnalysisProps {
   sectionTag?: string
   title: string
   subtitle?: string
-  
+
   // Data
   competitors: Competitor[]
   ourSolution: OurSolution
-  
+
   // For matrix mode
   featureColumns?: { key: string; label: string }[]
-  
+
   // Footer insight
   insight?: Insight
-  
+
   // Styling
   accentColor?: 'teal' | 'amber' | 'violet'
   displayMode?: 'cards' | 'matrix'
@@ -65,7 +65,7 @@ export default function MarketAnalysis({
   displayMode = 'cards',
   isLightBackground = true,
 }: MarketAnalysisProps) {
-  
+
   // Accent color classes
   const accentClasses = {
     teal: {
@@ -96,7 +96,7 @@ export default function MarketAnalysis({
       textAccent: 'text-violet-600',
     },
   }
-  
+
   const accent = accentClasses[accentColor]
 
   const CheckIcon = () => (
@@ -123,7 +123,7 @@ export default function MarketAnalysis({
       >
         <div className="flex items-center gap-3">
           <span className={`font-mono text-xs tracking-widest uppercase ${accent.tag}`}>
-            // {sectionTag}
+            {'// '}{sectionTag}
           </span>
           <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
         </div>
@@ -155,7 +155,7 @@ export default function MarketAnalysis({
                 <div className="space-y-3">
                   {competitor.tag && (
                     <span className="font-mono text-[9px] text-slate-400 uppercase tracking-widest block">
-                      // {competitor.tag}
+                      {'// '}{competitor.tag}
                     </span>
                   )}
                   <div>
@@ -193,7 +193,7 @@ export default function MarketAnalysis({
               {/* Left: Name & Headline */}
               <div className="space-y-2">
                 <span className={`font-mono text-[10px] ${accent.textAccent} uppercase tracking-widest block`}>
-                  // {ourSolution.tag}
+                  {'// '}{ourSolution.tag}
                 </span>
                 <h4 className="text-slate-900 text-xl md:text-2xl font-serif font-semibold">
                   {ourSolution.name}
@@ -207,7 +207,7 @@ export default function MarketAnalysis({
                   </p>
                 )}
               </div>
-              
+
               {/* Right: Differentiators Grid */}
               <div className={`grid grid-cols-2 gap-3 p-4 rounded-lg ${accent.bgLight}`}>
                 {ourSolution.differentiators.map((diff, i) => (
@@ -236,7 +236,7 @@ export default function MarketAnalysis({
                   Platform
                 </th>
                 {featureColumns?.map((col) => (
-                  <th 
+                  <th
                     key={col.key}
                     className="text-center py-4 px-4 font-mono text-xs uppercase tracking-widest text-slate-400"
                   >
@@ -257,9 +257,8 @@ export default function MarketAnalysis({
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`border-b border-slate-200 ${
-                    index % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'
-                  }`}
+                  className={`border-b border-slate-200 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'
+                    }`}
                 >
                   <td className="py-4 px-4">
                     <span className="font-semibold text-slate-900">{competitor.name}</span>

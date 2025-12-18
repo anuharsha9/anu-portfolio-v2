@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
 import PageShell from '@/components/layout/PageShell'
@@ -6,6 +7,24 @@ import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import StructuredData from '@/components/structured-data/StructuredData'
 import LoadingScreen from '@/components/loading/LoadingScreen'
 import { LightboxProvider } from '@/contexts/LightboxContext'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-serif',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+})
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://anujaharsha.com'
 
@@ -86,9 +105,6 @@ export const metadata: Metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180' },
     ],
   },
-  other: {
-    'google-fonts': 'Inter Tight',
-  },
 }
 
 export default function RootLayout({
@@ -97,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* Viewport meta for responsive design */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
@@ -110,15 +126,8 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         {/* Preload critical assets for faster LCP */}
         <link rel="preload" href="/assets/brain-gears.svg" as="fetch" crossOrigin="anonymous" />
-        {/* Font optimization: preconnect and font-display swap for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} font-sans antialiased`} suppressHydrationWarning>
         <LoadingScreen />
         <Suspense fallback={null}>
           <GoogleAnalytics />
