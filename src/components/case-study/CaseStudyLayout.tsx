@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useCaseStudyAccess } from '@/hooks/useCaseStudyAccess'
 import { CaseStudyData } from '@/types/caseStudy'
 import MotionSection from '@/components/ui/MotionSection'
 import QuickOverview from './QuickOverview'
@@ -242,33 +243,25 @@ interface CaseStudyLayoutProps {
 }
 
 export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
-  // Initialize based on passwordGate - if passwordGate exists, start locked (false)
-  // If no passwordGate, start unlocked (true)
-  // FOR IQ PLUGIN: Always start locked, only unlock via useEffect after checking sessionStorage
-  const [showPasswordContent, setShowPasswordContent] = useState(() => {
-    // Always start locked if passwordGate exists (especially for IQ Plugin)
-    if (data.passwordGate) {
-      // IQ Plugin: Always start locked, never check sessionStorage in initial state
-      if (data.slug === 'iq-plugin') {
-        return false
-      }
-      // Other case studies: Check sessionStorage on client side
-      if (typeof window !== 'undefined') {
-        try {
-          const storageKey = `case-study-unlocked-${data.slug}`
-          const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-          const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-          return !!(globalUnlocked || caseUnlocked)
-        } catch (e) {
-          return false
-        }
-      }
-      // On server side, always start locked
-      return false
-    }
-    // No password gate, always show content
-    return true
+  const {
+    isUnlocked: showPasswordContent,
+    unlock,
+    validatePassword,
+    shouldRedirectToPrototype,
+    clearRedirectFlag
+  } = useCaseStudyAccess({
+    slug: data.slug,
+    passwordGate: data.passwordGate
   })
+
+  // Password state for IQ Plugin inline input
+  const [iqPassword, setIqPassword] = useState('')
+  const [iqError, setIqError] = useState('')
+
+  // Password state for ML and RC case studies
+  const [mlRcPassword, setMlRcPassword] = useState('')
+  const [mlRcError, setMlRcError] = useState('')
+
   const pathname = usePathname()
 
   // Scroll to top when case study loads or pathname changes
@@ -279,112 +272,22 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
     })
   }, [pathname, data.slug])
 
-  // Check if case study is already unlocked in sessionStorage
-  // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
+  // Handle redirect to prototype if needed
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (data.passwordGate) {
-        const storageKey = `case-study-unlocked-${data.slug}`
-        const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
-
-        // IQ Plugin requires its own specific unlock (doesn't respect global unlock)
-        if (data.slug === 'iq-plugin') {
-          setShowPasswordContent(caseUnlocked)
-        } else {
-          // Other case studies respect both global and case-specific unlock
-          const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-          setShowPasswordContent(globalUnlocked || caseUnlocked)
+    if (showPasswordContent && shouldRedirectToPrototype) {
+      clearRedirectFlag()
+      // Wait a bit for content to render, then scroll to prototype
+      setTimeout(() => {
+        const prototypeSection = document.getElementById('prototype')
+        if (prototypeSection) {
+          prototypeSection.scrollIntoView({ behavior: 'smooth' })
         }
-      } else {
-        // If no password gate, always show content
-        setShowPasswordContent(true)
-      }
-
-      // Update ML/RC unlock status
-      if (data.slug === 'ml-functions' || data.slug === 'reportcaster') {
-        const storageKey = 'portfolio-globally-unlocked'
-        const caseKey = `case-study-unlocked-${data.slug}`
-        const globalUnlocked = sessionStorage.getItem(storageKey) === 'true'
-        const caseUnlocked = sessionStorage.getItem(caseKey) === 'true'
-        setMlRcUnlocked(globalUnlocked || caseUnlocked)
-      }
+      }, 300)
     }
-  }, [data.slug, data.passwordGate])
-
-  // Listen for unlock events for ML/RC
-  useEffect(() => {
-    if ((data.slug === 'ml-functions' || data.slug === 'reportcaster') && typeof window !== 'undefined') {
-      const handleUnlock = () => {
-        const storageKey = 'portfolio-globally-unlocked'
-        const caseKey = `case-study-unlocked-${data.slug}`
-        const globalUnlocked = sessionStorage.getItem(storageKey) === 'true'
-        const caseUnlocked = sessionStorage.getItem(caseKey) === 'true'
-        setMlRcUnlocked(globalUnlocked || caseUnlocked)
-      }
-
-      window.addEventListener('storage', handleUnlock)
-      window.addEventListener('portfolio-unlocked', handleUnlock)
-
-      // Poll less frequently for better performance (reduced from 500ms to 2000ms)
-      const interval = setInterval(handleUnlock, 2000)
-
-      return () => {
-        window.removeEventListener('storage', handleUnlock)
-        window.removeEventListener('portfolio-unlocked', handleUnlock)
-        clearInterval(interval)
-      }
-    }
-  }, [data.slug])
-
-  // Password state for IQ Plugin inline input
-  const [iqPassword, setIqPassword] = useState('')
-  const [iqError, setIqError] = useState('')
-
-  // Password state for ML and RC case studies
-  const [mlRcPassword, setMlRcPassword] = useState('')
-  const [mlRcError, setMlRcError] = useState('')
-  // Always start as false to avoid hydration mismatch - useEffect will set correct value
-  const [mlRcUnlocked, setMlRcUnlocked] = useState(false)
-
-  // Track if user should be redirected to prototype after unlock
-  const [shouldRedirectToPrototype, setShouldRedirectToPrototype] = useState(false)
-
-  // Check for redirect-to-prototype flag on mount
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const shouldRedirect = sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'
-      setShouldRedirectToPrototype(shouldRedirect)
-    }
-  }, [data.slug])
+  }, [showPasswordContent, shouldRedirectToPrototype, clearRedirectFlag])
 
   const handlePasswordCorrect = () => {
-    if (typeof window !== 'undefined') {
-      const storageKey = `case-study-unlocked-${data.slug}`
-
-      // IQ Plugin only sets its own unlock (doesn't set global unlock)
-      if (data.slug === 'iq-plugin') {
-        sessionStorage.setItem(storageKey, 'true')
-      } else {
-        // Other case studies set both global unlock and case-specific unlock
-        sessionStorage.setItem('portfolio-globally-unlocked', 'true')
-        sessionStorage.setItem(storageKey, 'true')
-      }
-
-      // Check if user wants to go to prototype after unlocking
-      const redirectToPrototype = sessionStorage.getItem(`redirect-to-prototype-${data.slug}`) === 'true'
-      if (redirectToPrototype) {
-        // Clear the flag
-        sessionStorage.removeItem(`redirect-to-prototype-${data.slug}`)
-        // Wait a bit for content to render, then scroll to prototype
-        setTimeout(() => {
-          const prototypeSection = document.getElementById('prototype')
-          if (prototypeSection) {
-            prototypeSection.scrollIntoView({ behavior: 'smooth' })
-          }
-        }, 300)
-      }
-    }
-    setShowPasswordContent(true)
+    unlock()
   }
 
   const handleIqPasswordSubmit = (e?: React.FormEvent) => {
@@ -392,12 +295,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       e.preventDefault()
     }
 
-    const trimmedPassword = iqPassword.trim().toLowerCase()
-    const correctPassword = data.passwordGate?.password || 'anu-access'
-
-    if (trimmedPassword === correctPassword.toLowerCase()) {
+    if (validatePassword(iqPassword)) {
       setIqError('')
-      handlePasswordCorrect()
+      unlock()
     } else {
       setIqError('Incorrect password. Please try again.')
     }
@@ -408,12 +308,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
       e.preventDefault()
     }
 
-    const trimmedPassword = mlRcPassword.trim().toLowerCase()
-    const correctPassword = 'anu-access'
-
-    if (trimmedPassword === correctPassword.toLowerCase()) {
+    if (validatePassword(mlRcPassword)) {
       setMlRcError('')
-      handlePasswordCorrect()
+      unlock()
     } else {
       setMlRcError('Incorrect password. Please try again.')
     }
@@ -687,7 +584,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
           PASSWORD UNLOCK SECTION FOR ML AND RC (Before Quick Overview)
           ============================================ */}
       {
-        (data.slug === 'ml-functions' || data.slug === 'reportcaster') && !mlRcUnlocked && (
+        (data.slug === 'ml-functions' || data.slug === 'reportcaster') && !showPasswordContent && (
           <MotionSection className="surface-light py-8 md:py-12">
             <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full">
               <div className="max-w-2xl mx-auto space-y-6">

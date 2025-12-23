@@ -33,6 +33,47 @@
   }
 }
 
+/* ============================================
+   CUSTOM SCROLLBAR & SELECTION
+   ============================================ */
+
+/* Selection Style */
+::selection {
+  background-color: var(--accent-light);
+  color: white;
+}
+
+/* Webkit Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 12px;
+  /* Slightly wider to make the teal visible */
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-teal);
+  /* Teal color */
+  border-radius: 6px;
+  border: 3px solid var(--bg-primary);
+  /* Padding effect */
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent-teal-dark);
+  /* Darker teal on hover */
+}
+
+/* Firefox Scrollbar support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-teal) var(--bg-primary);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -464,7 +505,7 @@
   will-change: transform, opacity, filter;
   backface-visibility: hidden;
   cursor: pointer;
-  transition: filter 0.15s ease-out;
+  transition: filter var(--duration-fast) ease-out;
 }
 
 /* Gears visibility is controlled by animation forwards fill - no base opacity override */
@@ -490,7 +531,7 @@
   will-change: transform, opacity, filter;
   backface-visibility: hidden;
   cursor: pointer;
-  transition: filter 0.15s ease-out;
+  transition: filter var(--duration-fast) ease-out;
 }
 
 /* Main gears hover glow effect - subtle for light background */
@@ -498,7 +539,7 @@
 #brain-gears-copy #main-gears>[id^="gear-"]:hover,
 #brain-gears #main-gears>.gear-main--active,
 #brain-gears-copy #main-gears>.gear-main--active {
-  filter: drop-shadow(0 0 12px rgba(11, 162, 181, 0.25)) drop-shadow(0 0 20px rgba(11, 162, 181, 0.15));
+  filter: drop-shadow(0 0 12px rgba(7, 139, 156, 0.25)) drop-shadow(0 0 20px rgba(7, 139, 156, 0.15));
 }
 
 /* Main gears: fade in with rotation (2s) */
@@ -610,7 +651,7 @@
 /* Glow effect for active/hovered main gears - subtle for light background */
 .gears-dark-theme #brain-gears #main-gears>.gear-main--active,
 .gears-dark-theme #brain-gears-copy #main-gears>.gear-main--active {
-  filter: drop-shadow(0 0 14px rgba(11, 162, 181, 0.3)) drop-shadow(0 0 24px rgba(11, 162, 181, 0.2)) !important;
+  filter: drop-shadow(0 0 14px rgba(7, 139, 156, 0.3)) drop-shadow(0 0 24px rgba(7, 139, 156, 0.2)) !important;
 }
 
 /* Performance optimizations for rotating gears */
@@ -643,14 +684,14 @@
 /* Main gears hover - CSS hover effect for desktop */
 #brain-gears #main-gears>[id^="gear-"]:hover,
 #brain-gears-copy #main-gears>[id^="gear-"]:hover {
-  filter: drop-shadow(0 0 12px rgba(11, 162, 181, 0.25)) drop-shadow(0 0 20px rgba(11, 162, 181, 0.15));
+  filter: drop-shadow(0 0 12px rgba(7, 139, 156, 0.25)) drop-shadow(0 0 20px rgba(7, 139, 156, 0.15));
   cursor: pointer;
 }
 
 /* Teal glow on active gears - applied via JS class */
 #brain-gears #main-gears>.gear-main--active,
 #brain-gears-copy #main-gears>.gear-main--active {
-  filter: drop-shadow(0 0 12px rgba(11, 162, 181, 0.25)) drop-shadow(0 0 20px rgba(11, 162, 181, 0.15)) !important;
+  filter: drop-shadow(0 0 12px rgba(7, 139, 156, 0.25)) drop-shadow(0 0 20px rgba(7, 139, 156, 0.15)) !important;
 }
 
 /* Hover lines - hidden by default */
@@ -998,7 +1039,7 @@ motion.div[data-visible="true"] {
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(11, 162, 181, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(7, 139, 156, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   filter: blur(60px);
   pointer-events: none;
@@ -1075,7 +1116,7 @@ motion.div[data-visible="true"] {
    ============================================ */
 
 .gradient-text-teal {
-  background: linear-gradient(135deg, #0BA2B5 0%, #14b8a6 50%, #0BA2B5 100%);
+  background: linear-gradient(135deg, #078B9C 0%, #14b8a6 50%, #078B9C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1083,11 +1124,11 @@ motion.div[data-visible="true"] {
 
 .gradient-text-shimmer {
   background: linear-gradient(90deg,
-      #0BA2B5 0%,
+      #078B9C 0%,
       #14b8a6 25%,
       #5eead4 50%,
       #14b8a6 75%,
-      #0BA2B5 100%);
+      #078B9C 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

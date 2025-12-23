@@ -9,8 +9,10 @@ import VideoModal from '@/components/video/VideoModal'
 import GearBottomSheet from '@/components/home/GearBottomSheet'
 import { GEAR_INSPECTOR, GearInspectorItem } from '@/data/gear-inspector'
 import { getTheme, spacing } from '@/lib/design-system'
+import Magnetic from '@/components/ui/Magnetic'
 
 const GEAR_IDS = Object.keys(GEAR_INSPECTOR)
+
 
 // Memoized SVG container to prevent re-renders when activeGear state changes
 const GearsSvgContainer = memo(function GearsSvgContainer({
@@ -544,11 +546,11 @@ export default function HeroSplit() {
 
         {/* Main Content Container - Centered Layout */}
         <div className={`${spacing.containerFull} relative z-10`}>
-          <div className="flex flex-col items-center justify-center min-h-screen py-12 sm:py-16 md:py-20 pb-16 sm:pb-20">
+          <div className="flex flex-col items-center justify-center min-h-screen py-12 sm:py-16 md:py-12 pb-16 sm:pb-20 lg:py-10">
 
             {/* Centered Gears - THE HERO - with subtle parallax */}
             <motion.div
-              className="relative w-[320px] xs:w-[380px] sm:w-[480px] md:w-[600px] lg:w-[860px] xl:w-[980px] max-w-full mx-auto"
+              className="relative w-[320px] xs:w-[380px] sm:w-[480px] md:w-[600px] lg:w-[640px] xl:w-[700px] 2xl:w-[980px] max-w-full mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -649,13 +651,13 @@ export default function HeroSplit() {
 
             {/* Text Content - Below Gears */}
             <motion.div
-              className={`flex flex-col items-center text-center space-y-4 sm:space-y-5 mt-6 sm:mt-8 lg:mt-10 px-4`}
+              className={`flex flex-col items-center text-center space-y-4 sm:space-y-5 mt-6 sm:mt-8 lg:mt-6 px-4`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Main Headline */}
-              <h1 className={`font-serif ${t.text} leading-[1.15] tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-4xl`}>
+              <h1 className={`font-serif ${t.text} leading-[1.15] tracking-tight text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl max-w-4xl`}>
                 Designing through the <span className="text-[var(--accent-teal)]">complexity.</span>
               </h1>
 
@@ -666,40 +668,44 @@ export default function HeroSplit() {
 
               {/* CTAs */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4 w-full max-w-md">
-                <a
-                  href="#work-overview"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const section = document.getElementById('work-overview')
-                    if (section) {
-                      section.scrollIntoView({ behavior: 'smooth' })
-                    }
-                  }}
-                >
-                  <span>See the Work</span>
-                  <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
+                <Magnetic>
+                  <a
+                    href="#work-overview"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const section = document.getElementById('work-overview')
+                      if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' })
+                      }
+                    }}
+                  >
+                    <span>See the Work</span>
+                    <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </a>
+                </Magnetic>
 
-                <button
-                  onClick={() => setShowVideoModal(true)}
-                  className={`w-full sm:w-auto group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border ${t.borderSecondary} ${t.textSecondary} text-sm sm:text-base font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300`}
-                >
-                  <span className="relative flex h-4 w-4 sm:h-5 sm:w-5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-teal)] opacity-75"></span>
-                    <span className="relative inline-flex items-center justify-center rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-[var(--accent-teal)]">
-                      <svg aria-hidden="true" className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                <Magnetic>
+                  <button
+                    onClick={() => setShowVideoModal(true)}
+                    className={`w-full sm:w-auto group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border ${t.borderSecondary} ${t.textSecondary} text-sm sm:text-base font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300`}
+                  >
+                    <span className="relative flex h-4 w-4 sm:h-5 sm:w-5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-teal)] opacity-75"></span>
+                      <span className="relative inline-flex items-center justify-center rounded-full h-4 w-4 sm:h-5 sm:w-5 bg-[var(--accent-teal)]">
+                        <svg aria-hidden="true" className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
                     </span>
-                  </span>
-                  <span>Watch Intro</span>
-                  <span className={`font-mono text-[10px] ${t.textMuted} uppercase tracking-widest hidden sm:inline`}>
-                    20s
-                  </span>
-                </button>
+                    <span>Watch Intro</span>
+                    <span className={`font-mono text-[10px] ${t.textMuted} uppercase tracking-widest hidden sm:inline`}>
+                      20s
+                    </span>
+                  </button>
+                </Magnetic>
               </div>
 
             </motion.div>

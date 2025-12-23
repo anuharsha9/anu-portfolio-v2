@@ -1,30 +1,35 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface MagneticProps {
     children: React.ReactNode
-    strength?: number // How strong the pull is (higher = stronger pull)
+    className?: string
+    strength?: number // How strong the pull is (higher = moves further)
 }
 
-export default function Magnetic({ children, strength = 30 }: MagneticProps) {
+export default function Magnetic({
+    children,
+    className = '',
+    strength = 0.5
+}: MagneticProps) {
     const ref = useRef<HTMLDivElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })
 
-    const handleMouse = (e: React.MouseEvent) => {
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { clientX, clientY } = e
         const { height, width, left, top } = ref.current?.getBoundingClientRect() || { height: 0, width: 0, left: 0, top: 0 }
 
+        // Calculate distance from center
         const middleX = clientX - (left + width / 2)
         const middleY = clientY - (top + height / 2)
 
-        // Check if we are "close enough" to trigger effect
-        // We only want to trigger if somewhat close to center relative to size
-        setPosition({ x: middleX / (100 / strength), y: middleY / (100 / strength) })
+        // Apply strength factor
+        setPosition({ x: middleX * strength, y: middleY * strength })
     }
 
-    const reset = () => {
+    const handleMouseLeave = () => {
         setPosition({ x: 0, y: 0 })
     }
 
@@ -33,10 +38,16 @@ export default function Magnetic({ children, strength = 30 }: MagneticProps) {
     return (
         <motion.div
             ref={ref}
-            onMouseMove={handleMouse}
-            onMouseLeave={reset}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
             animate={{ x, y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+            transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 15,
+                mass: 0.1
+            }}
+            className={className}
         >
             {children}
         </motion.div>

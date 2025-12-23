@@ -293,31 +293,42 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
       {/* IDE Layout - Large Feature Display */}
       {/* Streaming Platform Layout - Modern Tabs + Full Screen Viewer */}
       <div className="space-y-8">
-        {/* 1. Top Navigation Pills */}
-        <div className="flex items-center justify-center">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide max-w-full px-4 snap-x">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`
-                  flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 snap-center
-                  ${activeTab === tab.id
-                    ? 'bg-[var(--accent-teal)] text-white shadow-md transform scale-105'
-                    : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'}
-                `}
-              >
-                <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
-                  {tab.icon}
-                </span>
-                <span>{tab.label}</span>
-                {tab.id === '02_RECURRENCE' && activeTab !== tab.id && (
-                  <span className="ml-1 flex-shrink-0 bg-amber-100 text-amber-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
-                    Key
+        {/* 1. Top Navigation Pills - Mobile Optimized */}
+        <div className="relative group">
+          {/* Fade gradients to indicate scrollability */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none md:hidden" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none md:hidden" />
+
+          <div className="flex items-center justify-start md:justify-center overflow-x-auto pb-4 scrollbar-hide px-4 -mx-4 md:mx-0 snap-x">
+            <div className="flex gap-2 min-w-min">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
+                    flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 snap-center
+                    ${activeTab === tab.id
+                      ? 'bg-[var(--accent-teal)] text-white shadow-md transform scale-105'
+                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'}
+                  `}
+                >
+                  <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
+                    {tab.icon}
                   </span>
-                )}
-              </button>
-            ))}
+                  <span>{tab.label}</span>
+                  {tab.id === '02_RECURRENCE' && activeTab !== tab.id && (
+                    <span className="ml-1 flex-shrink-0 bg-amber-100 text-amber-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
+                      Key
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Scroll Hint */}
+          <div className="md:hidden flex justify-center mt-2 opacity-40 text-[10px] uppercase tracking-widest font-mono text-slate-500">
+            &larr; Swipe to explore tabs &rarr;
           </div>
         </div>
 

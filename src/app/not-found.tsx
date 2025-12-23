@@ -6,96 +6,84 @@ import { motion } from 'framer-motion'
 import { getTheme } from '@/lib/design-system'
 import Magnetic from '@/components/ui/Magnetic'
 
+// Custom 404 Page - "The Void" Concept
 export default function NotFound() {
-  const t = getTheme(false) // Force dark mode/system mode look
-
   return (
-    <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center relative overflow-hidden text-center px-4">
-      {/* Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#070B14] via-transparent to-[#070B14]/80" />
+    <div className="min-h-screen bg-[#070B14] flex flex-col items-center justify-center relative overflow-hidden text-center px-4 selection:bg-[var(--accent-teal)] selection:text-white">
+      {/* Background: Subtle animated noise/grain could be good here if we had the asset, but CSS grid is safe */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
 
-      <div className="relative z-10 flex flex-col items-center max-w-2xl mx-auto">
+      {/* Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent-teal)]/5 rounded-full blur-[120px] pointer-events-none" />
 
-        {/* The Jammed Gears */}
-        <div className="relative w-64 h-64 mb-12">
-          {/* Working Gear */}
+      <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+
+        {/* The "404" Graphic */}
+        <div className="relative font-mono font-bold text-[12rem] md:text-[16rem] leading-none tracking-tighter text-transparent select-none">
+          <span className="bg-clip-text bg-gradient-to-b from-white/20 to-white/0" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}>404</span>
+
+          {/* Floating Element in the center */}
           <motion.div
-            className="absolute top-0 right-10"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          >
-            <Image
-              src="/assets/gear-contact.svg"
-              width={100}
-              height={100}
-              alt=""
-              className="opacity-50 invert"
-            />
-          </motion.div>
-
-          {/* Jammed Gear - Shaking */}
-          <motion.div
-            className="absolute bottom-4 left-10"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-40 md:h-40 border border-[var(--accent-teal)] rounded-full flex items-center justify-center"
             animate={{
-              rotate: [0, 2, -2, 1, 0],
-              x: [0, 1, -1, 0]
+              rotate: 360,
+              scale: [1, 1.1, 1]
             }}
             transition={{
-              duration: 0.2,
-              repeat: Infinity,
-              repeatDelay: 1
+              rotate: { duration: 20, ease: "linear", repeat: Infinity },
+              scale: { duration: 4, ease: "easeInOut", repeat: Infinity }
             }}
           >
-            <Image
-              src="/assets/gear-contact.svg"
-              width={120}
-              height={120}
-              alt=""
-              className="opacity-80 invert text-red-500"
-              style={{ filter: 'invert(1) drop-shadow(0 0 10px rgba(220, 38, 38, 0.5))' }}
-            />
+            <div className="w-2 h-2 bg-[var(--accent-teal)] rounded-full shadow-[0_0_20px_var(--accent-teal)]" />
+            {/* Orbiting element */}
+            <motion.div
+              className="absolute w-full h-full"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 border border-white/50 rounded-full bg-[#070B14]" />
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Glitch Tech Text */}
-        <h1 className="font-mono text-8xl md:text-9xl font-bold text-white mb-2 tracking-tighter opacity-90">
-          <span className="inline-block">4</span>
-          <motion.span
-            className="inline-block"
-            animate={{ opacity: [1, 0.5, 1, 0.8, 1] }}
-            transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
-          >0</motion.span>
-          <span className="inline-block">4</span>
-        </h1>
-
-        <div className="space-y-2 mb-12 font-mono text-sm md:text-base">
-          <p className="text-red-400">
-            <span className="mr-2">&gt;</span>ERROR: SYSTEM_JAMMED
-          </p>
-          <p className="text-slate-400">
-            <span className="mr-2">&gt;</span>AGENT_CONNECTION_LOST
-          </p>
-          <p className="text-slate-500">
-            <span className="mr-2">&gt;</span>Orchestration failed at sector [PAGE_NOT_FOUND]
+        {/* Narrative Text */}
+        <div className="space-y-6 mt-[-40px] md:mt-[-60px]">
+          <h2 className="font-serif text-3xl md:text-4xl text-white">
+            System coordinates invalid.
+          </h2>
+          <p className="text-slate-400 max-w-md mx-auto text-sm md:text-base leading-relaxed">
+            The page you requested has been moved, deleted, or never existed in this dimension.
           </p>
         </div>
 
-        {/* Magnetic Reboot Button */}
-        <Magnetic strength={50}>
-          <Link
-            href="/"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-medium text-sm md:text-base overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              INITIATE_SYSTEM_REBOOT
-            </span>
-            <div className="absolute inset-0 bg-[var(--accent-teal)] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-          </Link>
-        </Magnetic>
+        {/* Action Buttons */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
+          <Magnetic strength={30}>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--accent-teal)] text-white rounded-full font-medium text-sm transition-all hover:bg-[var(--accent-teal-dark)] hover:shadow-[0_0_30px_rgba(7,139,156,0.3)]"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+              Return to Base
+            </Link>
+          </Magnetic>
+
+          <Magnetic strength={20}>
+            <Link
+              href="/#work-overview"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-medium text-sm transition-all hover:bg-white/10 backdrop-blur-sm"
+            >
+              Explore Case Studies
+            </Link>
+          </Magnetic>
+        </div>
+
+        {/* Technical Footer */}
+        <div className="absolute bottom-12 left-0 w-full text-center">
+          <p className="font-mono text-[10px] text-slate-600 uppercase tracking-widest">
+            ERROR_CODE: 404_NOT_FOUND // PATH: {typeof window !== 'undefined' ? window.location.pathname : 'UNKNOWN'}
+          </p>
+        </div>
 
       </div>
     </div>
