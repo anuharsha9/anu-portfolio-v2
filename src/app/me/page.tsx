@@ -75,15 +75,15 @@ export default function AboutPage() {
 
             {/* Text block - narrative flow */}
             <div className="max-w-4xl mx-auto mb-4 sm:mb-6 space-y-3 px-4">
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Principal Product Designer with 13 years of experience. I don&apos;t just design screens; I orchestrate products.
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed lg:whitespace-nowrap">
+                Principal Product Designer with 13 years of experience. I specialize in <span className="text-slate-900 font-semibold">untangling the world&apos;s most complex enterprise systems</span>.
               </p>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                <span className="text-slate-900 font-medium">The Mission?</span> <span className="text-slate-500">Build a production-grade app in 4 weeks with zero coding team.</span>
+                <span className="text-slate-900 font-medium">The Mission?</span> <span className="text-slate-500">Build a high-performance portfolio website in 4 weeks with zero coding team.</span>
                 <br className="hidden sm:block" />
                 <span className="text-slate-900 font-medium">The Strategy?</span> <span className="text-slate-500">Treating AI as a specialized engineering team.</span>
                 <br className="hidden sm:block" />
-                <span className="text-slate-900 font-medium">The Result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
+                <span className="text-slate-900 font-medium">The Result?</span> <span className="text-slate-500">Version 5.0 is live. Delivered an MVP in week 1.</span>
               </p>
             </div>
 
@@ -131,6 +131,48 @@ export default function AboutPage() {
               </a>
             </motion.div>
           </motion.div>
+        </div>
+      </MotionSection>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          SECTION 2.5: IMPACT GRID (ENTERPRISE PRINCIPAL)
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <MotionSection animate={true} className="pb-10 md:pb-14">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Metric 1: Velocity */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group">
+              <div className="text-[var(--accent-teal)] font-mono text-xs uppercase tracking-widest mb-4">
+                01_Velocity
+              </div>
+              <h3 className="font-serif text-2xl text-slate-900 mb-2">1 Architect. 6 Weeks. 5 Versions.</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Deployed a functional MVP in 7 days. Iterated through 5 full architectural pivots to reach this level of fidelity. I don&apos;t get stuck; I deliver.
+              </p>
+            </div>
+
+            {/* Metric 2: Legacy */}
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl group">
+              <div className="text-[var(--accent-teal)] font-mono text-xs uppercase tracking-widest mb-4">
+                02_Modernization
+              </div>
+              <h3 className="font-serif text-2xl text-white mb-2">13 Years of Complexity Untangled.</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Specializing in enterprise-scale digital transformation. Bridging the gap between 50-year-old legacy systems and modern AI/ML user experiences.
+              </p>
+            </div>
+
+            {/* Metric 3: Orchestration */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all group">
+              <div className="text-[var(--accent-teal)] font-mono text-xs uppercase tracking-widest mb-4">
+                03_Orchestration
+              </div>
+              <h3 className="font-serif text-2xl text-slate-900 mb-2">Design-Engineering Bridge.</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Architected a custom Design Token system to ensure pixel-perfect consistency across a multi-agent automated build. I speak the language of code.
+              </p>
+            </div>
+          </div>
         </div>
       </MotionSection>
 
