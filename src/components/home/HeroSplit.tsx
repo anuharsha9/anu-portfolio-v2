@@ -671,7 +671,7 @@ export default function HeroSplit() {
                 <Magnetic>
                   <a
                     href="#work-overview"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-base font-medium hover:bg-[var(--accent-teal-900)] transition-all duration-300 hover:scale-105 shadow-lg shadow-[var(--accent-teal)]/25"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[var(--accent-teal-800)] text-white text-sm sm:text-base font-medium hover:bg-[var(--accent-teal-900)] transition-colors duration-300 shadow-lg shadow-[var(--accent-teal)]/25"
                     onClick={(e) => {
                       e.preventDefault()
                       const section = document.getElementById('work-overview')
@@ -690,7 +690,7 @@ export default function HeroSplit() {
                 <Magnetic>
                   <button
                     onClick={() => setShowVideoModal(true)}
-                    className={`w-full sm:w-auto group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border ${t.borderSecondary} ${t.textSecondary} text-sm sm:text-base font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-all duration-300`}
+                    className={`w-full sm:w-auto group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border ${t.borderSecondary} ${t.textSecondary} text-sm sm:text-base font-medium hover:border-[var(--accent-teal)] hover:bg-[var(--accent-teal)]/10 transition-[background-color,border-color] duration-300`}
                   >
                     <span className="relative flex h-4 w-4 sm:h-5 sm:w-5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent-teal)] opacity-75"></span>

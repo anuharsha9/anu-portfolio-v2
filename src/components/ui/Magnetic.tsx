@@ -14,18 +14,20 @@ export default function Magnetic({
     className = '',
     strength = 0.5
 }: MagneticProps) {
-    const ref = useRef<HTMLDivElement>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
     const [position, setPosition] = useState({ x: 0, y: 0 })
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const { clientX, clientY } = e
-        const { height, width, left, top } = ref.current?.getBoundingClientRect() || { height: 0, width: 0, left: 0, top: 0 }
+        const container = containerRef.current
+        if (!container) return
 
-        // Calculate distance from center
+        const { height, width, left, top } = container.getBoundingClientRect()
+
+        // Calculate distance from the static container's center
         const middleX = clientX - (left + width / 2)
         const middleY = clientY - (top + height / 2)
 
-        // Apply strength factor
         setPosition({ x: middleX * strength, y: middleY * strength })
     }
 
@@ -36,20 +38,25 @@ export default function Magnetic({
     const { x, y } = position
 
     return (
-        <motion.div
-            ref={ref}
+        <div
+            ref={containerRef}
+            className={`relative flex items-center justify-center ${className}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            animate={{ x, y }}
-            transition={{
-                type: "spring",
-                stiffness: 150,
-                damping: 15,
-                mass: 0.1
-            }}
-            className={className}
+            style={{ padding: '30px', margin: '-30px' }} // Substantial hit area without affecting layout
         >
-            {children}
-        </motion.div>
+            <motion.div
+                animate={{ x, y }}
+                transition={{
+                    type: "spring",
+                    stiffness: 150,
+                    damping: 15,
+                    mass: 0.1,
+                    restDelta: 0.001
+                }}
+            >
+                {children}
+            </motion.div>
+        </div>
     )
 }

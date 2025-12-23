@@ -129,23 +129,23 @@ export default function SiteHeader() {
         {/* Right Side CTAs */}
         <div className="absolute right-4 xs:right-5 sm:right-6 md:right-8 lg:right-12 xl:right-16 hidden lg:flex items-center gap-space-3">
           {/* Let's Talk - Primary CTA */}
-          <Magnetic strength={40}>
+          <Magnetic strength={0.4}>
             <Link
               href="/#lets-talk"
-              className="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-all duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
+              className="inline-flex items-center gap-space-2 px-space-4 py-space-2 rounded-full bg-[var(--accent-teal-800)] text-white text-sm font-medium transition-[background-color] duration-300 hover:bg-[var(--accent-teal-900)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)] shadow-sm"
             >
               <span>Let&apos;s Talk</span>
             </Link>
           </Magnetic>
 
           {/* Resume - Secondary CTA */}
-          <Magnetic strength={20}>
+          <Magnetic strength={0.2}>
             <a
               href="/assets/Anuja Harsha Nimmagadda - Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackResumeDownload()}
-              className={`inline-flex items-center gap-space-1.5 px-space-4 py-space-2 rounded-full border ${t.borderSecondary} ${t.textMuted} text-sm font-medium transition-all duration-300 hover:border-slate-400 hover:${t.bgAccent} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]`}
+              className={`inline-flex items-center gap-space-1.5 px-space-4 py-space-2 rounded-full border ${t.borderSecondary} ${t.textMuted} text-sm font-medium transition-[background-color,border-color,color] duration-300 hover:border-slate-400 hover:${t.bgAccent} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-teal)]`}
               aria-label="Download Resume PDF"
             >
               <span>Resume</span>

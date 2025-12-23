@@ -58,7 +58,7 @@ export default function NotFound() {
 
         {/* Action Buttons */}
         <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
-          <Magnetic strength={30}>
+          <Magnetic strength={0.3}>
             <Link
               href="/"
               className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--accent-teal)] text-white rounded-full font-medium text-sm transition-all hover:bg-[var(--accent-teal-dark)] hover:shadow-[0_0_30px_rgba(7,139,156,0.3)]"
@@ -68,7 +68,7 @@ export default function NotFound() {
             </Link>
           </Magnetic>
 
-          <Magnetic strength={20}>
+          <Magnetic strength={0.2}>
             <Link
               href="/#work-overview"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 text-white rounded-full font-medium text-sm transition-all hover:bg-white/10 backdrop-blur-sm"
