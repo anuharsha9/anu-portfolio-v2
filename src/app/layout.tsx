@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: '%s | Anuja Harsha Nimmagadda',
   },
   description:
-    'Principal UX Designer specializing in enterprise design, legacy modernization, and AI/ML UX. Transforming complex systems into intuitive experiences at scale. 13+ years designing for WebFOCUS, ReportCaster, and enterprise analytics platforms.',
+    'Principal UX Designer with 13+ years experience. Modernizing enterprise systems and AI/ML UX through multi-agent AI orchestration. Designed in Figma, built with Next.js, and refined with Antigravity & Cursor.',
   keywords: [
     'UX Designer',
     'Principal UX Designer',
@@ -50,6 +50,10 @@ export const metadata: Metadata = {
     'Machine Learning UX',
     'WebFOCUS',
     'ReportCaster',
+    'AI Orchestration',
+    'Antigravity AI',
+    'Cursor IDE',
+    'Multi-Agent Workflow',
     'Anuja Harsha',
     'Anuja Nimmagadda',
   ],

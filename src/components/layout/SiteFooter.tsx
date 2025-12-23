@@ -79,7 +79,7 @@ export default function SiteFooter() {
 
             <div className="flex items-center gap-space-3 md:hidden xl:flex">
               <p className={`${t.monitor.textDim} text-[10px] uppercase tracking-wider opacity-50`} suppressHydrationWarning>
-                Engineered with AI Agents
+                Designed by Anuja. Orchestrated via Multi-Agent AI.
               </p>
             </div>
           </div>

@@ -76,14 +76,14 @@ export default function AboutPage() {
             {/* Text block - narrative flow */}
             <div className="max-w-4xl mx-auto mb-4 sm:mb-6 space-y-3 px-4">
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                Principal Product Designer with 13 years of experience designing with vision, craft, and systems thinking.
+                Principal Product Designer with 13 years of experience. I don&apos;t just design screens; I orchestrate products.
               </p>
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed">
-                <span className="text-slate-900 font-medium">The goal?</span> <span className="text-slate-500">A portfolio website.</span>
-                <span className="mx-2 sm:mx-3 text-slate-300">·</span>
-                <span className="text-slate-900 font-medium">The discovery?</span> <span className="text-slate-500">Cursor + AI.</span>
-                <span className="mx-2 sm:mx-3 text-slate-300">·</span>
-                <span className="text-slate-900 font-medium">The result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
+                <span className="text-slate-900 font-medium">The Mission?</span> <span className="text-slate-500">Build a production-grade app in 4 weeks with zero coding team.</span>
+                <br className="hidden sm:block" />
+                <span className="text-slate-900 font-medium">The Strategy?</span> <span className="text-slate-500">Treating AI as a specialized engineering team.</span>
+                <br className="hidden sm:block" />
+                <span className="text-slate-900 font-medium">The Result?</span> <span className="text-slate-500">You&apos;re looking at it.</span>
               </p>
             </div>
 
@@ -96,18 +96,19 @@ export default function AboutPage() {
             >
               <div className="flex flex-wrap items-center justify-center gap-2">
                 {[
-                  { name: 'Cursor', desc: 'IDE' },
-                  { name: 'Claude', desc: 'AI' },
-                  { name: 'GPT', desc: 'AI' },
-                  { name: 'Gemini', desc: 'AI' },
-                  { name: 'AWS', desc: 'Deploy' },
+                  { name: 'ChatGPT', desc: 'Strategy & Data' },
+                  { name: 'Claude', desc: 'Architecture' },
+                  { name: 'Gemini', desc: 'Visual Polish' },
+                  { name: 'Cursor', desc: 'Build Engine' },
+                  { name: 'Antigravity', desc: 'Advanced Logic' },
+                  { name: 'AWS', desc: 'Global Scale' },
                 ].map((tool) => (
                   <span
                     key={tool.name}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-mono hover:border-[var(--accent-teal)]/50 hover:text-slate-900 transition-colors"
                   >
                     <span className="text-slate-900">{tool.name}</span>
-                    <span className="text-slate-400 text-[10px]">{tool.desc}</span>
+                    <span className="text-[var(--accent-teal)] text-[10px] tracking-tight">{tool.desc}</span>
                   </span>
                 ))}
               </div>
@@ -424,7 +425,7 @@ export default function AboutPage() {
           </div>
 
           <p className="text-slate-400 text-xs pt-4">
-            Engineered and orchestrated with AI agents.
+            Designed by Anuja. Orchestrated via Multi-Agent AI.
           </p>
 
           {/* Safe area for iPhone home indicator */}
@@ -434,6 +435,6 @@ export default function AboutPage() {
 
       {/* Scroll-linked rotating gear */}
       <ScrollGear />
-    </main>
+    </main >
   )
 }
