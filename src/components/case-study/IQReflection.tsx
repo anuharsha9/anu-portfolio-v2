@@ -57,11 +57,11 @@ export default function IQReflection({ isLightBackground = true }: IQReflectionP
                     <div className="flex items-center gap-2 mb-3">
                         <span className="text-amber-500 text-xl">↩</span>
                         <span className="font-mono text-amber-700 text-xs uppercase tracking-wide font-bold">
-                            What I'd push harder for
+                            What I&apos;d push harder for
                         </span>
                     </div>
                     <p className="text-slate-700 text-sm leading-relaxed">
-                        Proper tutorials and onboarding flows. I fought for a "Get Started" panel that got scrapped after significant effort. I wanted to scaffold the experience for first-time users more effectively.
+                        Proper tutorials and onboarding flows. I fought for a &quot;Get Started&quot; panel that got scrapped after significant effort. I wanted to scaffold the experience for first-time users more effectively.
                     </p>
                 </div>
 
@@ -70,7 +70,7 @@ export default function IQReflection({ isLightBackground = true }: IQReflectionP
                     <div className="flex items-center gap-2 mb-3">
                         <span className="text-[var(--accent-teal)] text-xl">→</span>
                         <span className="font-mono text-[var(--accent-teal-700)] text-xs uppercase tracking-wide font-bold">
-                            What I'd do next
+                            What I&apos;d do next
                         </span>
                     </div>
                     <p className="text-slate-700 text-sm leading-relaxed">

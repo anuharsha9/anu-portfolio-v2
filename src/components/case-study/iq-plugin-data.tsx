@@ -137,9 +137,9 @@ export const iqFooterContent = {
     label: '> VALIDATION_OUTCOME:',
     text: (
         <>
-            User testing confirmed that the "Unified Hub" architecture successfully abstracted the complexity.{' '}
+            User testing confirmed that the &quot;Unified Hub&quot; architecture successfully abstracted the complexity.{' '}
             <span className="text-emerald-400 font-medium">Non-technical users could execute NLQ queries without training</span>, while{' '}
-            <span className="text-emerald-400 font-medium">Data Scientists accepted the "Predict" wizard as a valid accelerator</span>.
+            <span className="text-emerald-400 font-medium">Data Scientists accepted the &quot;Predict&quot; wizard as a valid accelerator</span>.
         </>
     ),
 }

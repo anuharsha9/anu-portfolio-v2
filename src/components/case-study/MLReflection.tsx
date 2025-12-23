@@ -50,7 +50,7 @@ export default function MLReflection({ isLightBackground = true }: MLReflectionP
                         </div>
                     </div>
                     <p className="text-slate-600 text-sm leading-relaxed italic">
-                        &ldquo;During a User Acceptance Test session, Anuja observed me navigating the screen. I was highly impressed with Anuja's approach. Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels.&rdquo;
+                        &ldquo;During a User Acceptance Test session, Anuja observed me navigating the screen. I was highly impressed with Anuja&apos;s approach. Her design was clean, intuitive, and clearly addressed the needs of users across different skill levels.&rdquo;
                     </p>
                 </div>
             </div>
@@ -68,7 +68,7 @@ export default function MLReflection({ isLightBackground = true }: MLReflectionP
                     <div className="flex items-center gap-2 mb-3">
                         <span className="text-amber-500 text-xl">↩</span>
                         <span className="font-mono text-amber-700 text-xs uppercase tracking-wide font-bold">
-                            What I'd do differently
+                            What I&apos;d do differently
                         </span>
                     </div>
                     <p className="text-slate-700 text-sm leading-relaxed">
@@ -87,7 +87,7 @@ export default function MLReflection({ isLightBackground = true }: MLReflectionP
                     <div className="flex items-center gap-2 mb-3">
                         <span className="text-[var(--accent-teal)] text-xl">→</span>
                         <span className="font-mono text-[var(--accent-teal-700)] text-xs uppercase tracking-wide font-bold">
-                            What I'd do next
+                            What I&apos;d do next
                         </span>
                     </div>
                     <p className="text-slate-700 text-sm leading-relaxed">

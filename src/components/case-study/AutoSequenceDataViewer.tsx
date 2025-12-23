@@ -63,7 +63,7 @@ export default function AutoSequenceDataViewer({ images, title, externalIndex, o
 
         window.addEventListener('keydown', handleKeyDown)
         return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [isLightboxOpen, images.length])
+    }, [isLightboxOpen, images.length, setCurrentIndex])
 
     // Prevent body scroll when lightbox is open
     useEffect(() => {
