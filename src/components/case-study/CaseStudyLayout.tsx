@@ -900,6 +900,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               </MotionSection>
             )}
 
+            {/* IQ Plugin Project Timeline - Outside Discover Section */}
+            {data.slug === 'iq-plugin' && (
+              <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                <IQPluginTimeline isLightBackground={true} />
+              </MotionSection>
+            )}
+
             {/* D.E.S.I.G.N. Framework Matrix - surface-light */}
             {data.frameworkConnection && (
               <MotionSection id="framework-connection" className="surface-light py-8 md:py-10">
@@ -945,12 +952,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
               </MotionSection>
             )}
 
-            {/* IQ Plugin Project Timeline - Outside Discover Section */}
-            {data.slug === 'iq-plugin' && (
-              <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                <IQPluginTimeline isLightBackground={true} />
-              </MotionSection>
-            )}
+
 
             {/* Public Sections - if explicitly defined */}
             {data.publicSections &&
