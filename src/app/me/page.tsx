@@ -444,6 +444,34 @@ export default function AboutPage() {
       </MotionSection>
 
       {/* ═══════════════════════════════════════════════════════════════════════
+          SECTION 6.5: COLOPHON
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <MotionSection animate={true} className="py-12 border-t border-slate-100">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-3">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Typography</span>
+              <p className="text-slate-600 text-xs font-serif leading-relaxed">
+                Set in <span className="text-slate-900">Playfair Display</span> for headers, <span className="text-slate-900">Inter</span> for interface components, and <span className="text-slate-900">JetBrains Mono</span> for technical data points.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Environment</span>
+              <p className="text-slate-600 text-xs leading-relaxed">
+                Architected with <span className="text-slate-900">Next.js 14</span> and <span className="text-slate-900">Framer Motion</span>. Styled with <span className="text-slate-900">Tailwind CSS</span>. Deployed on <span className="text-slate-900">AWS CloudFront</span>.
+              </p>
+            </div>
+            <div className="space-y-3">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Orchestration</span>
+              <p className="text-slate-600 text-xs leading-relaxed">
+                Designed in <span className="text-slate-900">Figma</span>. Engineered via human-directed orchestration of <span className="text-slate-900">ChatGPT</span>, <span className="text-slate-900">Claude</span>, <span className="text-slate-900">Gemini</span>, <span className="text-slate-900">Cursor</span>, and <span className="text-slate-900">Antigravity</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </MotionSection>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           SECTION 7: CONTACT (Simplified)
       ═══════════════════════════════════════════════════════════════════════ */}
       <MotionSection animate={true} className="py-10 md:py-14 pb-safe">

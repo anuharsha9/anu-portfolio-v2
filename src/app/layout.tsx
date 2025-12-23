@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: siteUrl,
     siteName: 'Anuja Harsha Nimmagadda',
-    title: 'Anuja Harsha Nimmagadda | Principal UX Designer',
+    title: 'Anuja Harsha | Principal Designer & AI Orchestrator',
     description:
       'Principal UX Designer with 13+ years experience. Modernizing enterprise systems and AI/ML UX through multi-agent AI orchestration.',
     images: [
@@ -73,13 +73,13 @@ export const metadata: Metadata = {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Anuja Harsha Nimmagadda - Principal UX Designer',
+        alt: 'Anuja Harsha | Principal Designer & AI Orchestrator',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Anuja Harsha Nimmagadda | Principal UX Designer',
+    title: 'Anuja Harsha | Principal Designer & AI Orchestrator',
     description:
       'Principal UX Designer with 13+ years experience. Modernizing enterprise systems and AI/ML UX through multi-agent AI orchestration.',
     images: ['/images/og-image.png'],
