@@ -1001,41 +1001,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                 (data.slug === 'ml-functions' && section.id === 'section-06') ||
                 (data.slug === 'iq-plugin' && section.id === 'section-06')
 
-              // Resolve title from Framework Mapping if available
-              // This restores the "Adjusted Titles" (D.E.S.I.G.N.) designated by the User
-              let resolvedTitle = section.title
-              if (data.frameworkConnection && data.frameworkConnection.principles) {
-                // Find principle matching this section
-                const principles = data.frameworkConnection.principles
-                let matchingPrinciple = null
 
-                if (data.slug === 'reportcaster') {
-                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
-                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
-                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
-                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
-                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
-                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
-                } else if (data.slug === 'ml-functions') {
-                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
-                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
-                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
-                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
-                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
-                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
-                } else if (data.slug === 'iq-plugin') {
-                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
-                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
-                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
-                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
-                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
-                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
-                }
-
-                if (matchingPrinciple) {
-                  resolvedTitle = matchingPrinciple.title
-                }
-              }
 
               // All sections are light now
               let sectionBg = 'surface-light'
@@ -1058,7 +1024,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           {/* Section Header - Letter badges removed for senior energy */}
                           <div className="space-y-4 mb-8">
                             <h2 className={`${sectionBg === 'surface-light' ? 'text-slate-900' : 'text-white'} text-3xl md:text-4xl font-serif leading-snug tracking-tight`}>
-                              {resolvedTitle}
+                              {section.title}
                             </h2>
                             {section.summary && (
                               <div className={`${sectionBg === 'surface-light' ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-4 md:p-5`}>
@@ -1132,7 +1098,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                               isLightBackground={sectionBg === 'surface-light'}
                             >
                               <SectionBlock
-                                section={{ ...section, title: resolvedTitle }}
+                                section={section}
                                 isLightBackground={sectionBg === 'surface-light'}
                                 caseStudySlug={data.slug}
                                 isUnlocked={showPasswordContent}
@@ -1175,7 +1141,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                             </LockedContent>
                           ) : (
                             <SectionBlock
-                              section={{ ...section, title: resolvedTitle }}
+                              section={section}
                               isLightBackground={sectionBg === 'surface-light'}
                               caseStudySlug={data.slug}
                               isUnlocked={showPasswordContent}

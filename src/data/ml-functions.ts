@@ -116,7 +116,7 @@ export const mlFunctionsCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'Discover Deeply: How I Landed the Project',
+      title: 'Discover Deeply: How I Earned the Project',
       summary: 'Turned a knowledge gap into an advantage. MIT certified. Months learning before designing.',
       body: `Zero ML background could have been a liability — instead, it became an advantage. I enrolled in MIT's AI/ML product design certification and embedded weekly with our Principal Data Scientist.
 
