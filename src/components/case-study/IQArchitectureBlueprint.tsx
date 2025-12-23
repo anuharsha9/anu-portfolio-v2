@@ -109,7 +109,7 @@ export default function IQArchitectureBlueprint({ isLightBackground = true }) {
         className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
       >
         <span className="font-mono text-xs text-[var(--accent-violet)] uppercase tracking-widest block mb-4">
-          {'// ARCHITECTURE_BLUEPRINT'}
+          {'// SYSTEM_ARCHITECTURE'}
         </span>
         <h2 className={`text-3xl md:text-4xl font-serif ${titleColor} mb-4`}>
           Building the System

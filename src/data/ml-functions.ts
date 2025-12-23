@@ -168,29 +168,6 @@ I led this while simultaneously owning ReportCaster and IQ Plugin. Cross-project
       body: `5/5 SMEs found the entry point without help. Dead-ends → clear guidance. Design demos to 150-200 person business unit earned leadership support.
 
 The patterns I developed here — structured flows, upstream validation, right-click entry, dual-experience — became the foundation for IQ Plugin and platform-wide AI strategy.`,
-      beforeAfter: {
-        before: {
-          src: '/images/case-study/ml-functions/Legacy Train Model Results UI.png',
-          alt: 'Legacy Train Model Results UI - Before redesign',
-          caption: 'Before: Legacy Train Model Results UI with fragmented workflow, hidden states, and confusing "results not generated" errors',
-          sensitive: true,
-        },
-        after: {
-          src: '/images/case-study/ml-functions/11. Train Model Workflow - Confusion Matrix.png',
-          alt: 'Train Model Workflow - Confusion Matrix - After redesign',
-          caption: 'After: New Confusion Matrix screen with clear hierarchy, scannable metrics, and guided interpretation — the screen that received highest praise from the Principal Data Scientist',
-          sensitive: true,
-        },
-        beforeLabel: 'Before',
-        afterLabel: 'After',
-      },
-      images: [
-        {
-          src: '/images/case-study/ml-functions/ml-functions-reflections.jpg',
-          alt: 'Portrait: transforming ML complexity into accessible design',
-          caption: 'Transforming ML complexity into accessible design. This project reinforced my belief: power means nothing without accessibility.',
-        },
-      ],
     },
   ],
   // ----------------------------

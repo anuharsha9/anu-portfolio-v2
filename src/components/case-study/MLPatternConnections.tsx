@@ -101,7 +101,7 @@ export default function MLPatternConnections({ isLightBackground = false }: MLPa
         </div>
 
         {/* Pattern Name (Hero) */}
-        <h4 className="font-mono text-sm uppercase tracking-widest text-[var(--accent-teal)] mb-3">
+        <h4 className="font-mono text-sm uppercase tracking-widest text-[var(--accent-teal)] mb-3 break-words hyphens-auto">
           {pattern.patternName}
         </h4>
 

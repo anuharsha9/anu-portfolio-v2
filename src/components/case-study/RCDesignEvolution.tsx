@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
-import { useLightbox } from '@/contexts/LightboxContext'
 import { Calendar, Clock, Mail, Users, FolderTree, Settings } from 'lucide-react'
 import AutoSequenceDataViewer from './AutoSequenceDataViewer'
 
@@ -34,7 +32,6 @@ interface Tab {
 
 export default function RCDesignEvolution({ isLightBackground = false }: RCDesignEvolutionProps) {
   const [activeTab, setActiveTab] = useState('01_SCHEDULE_DIALOG')
-  const { openLightbox } = useLightbox()
 
   const tabs: Tab[] = [
     {
@@ -294,180 +291,80 @@ export default function RCDesignEvolution({ isLightBackground = false }: RCDesig
       </motion.div>
 
       {/* IDE Layout - Large Feature Display */}
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg">
-        <div className="flex flex-col lg:flex-row">
-
-          {/* Mobile Tabs - Horizontal Scrollable Pills */}
-          <div className="lg:hidden border-b border-slate-200 bg-slate-50/30">
-            <div className="px-4 pt-4 pb-2">
-              <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-                {'// SUBSYSTEM_INDEX'}
-              </span>
-            </div>
-            <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex gap-2 px-4 pb-4 min-w-max">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`
-                      flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200
-                      ${activeTab === tab.id
-                        ? 'bg-[var(--accent-teal)] text-white shadow-md'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:border-slate-300'}
-                    `}
-                  >
-                    <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
-                      {tab.icon}
-                    </span>
-                    <span>{tab.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop Sidebar - File Tree */}
-          <div className="hidden lg:block w-[22%] border-r border-slate-200 p-6 bg-slate-50/30">
-            <span className="font-mono text-xs text-slate-400 uppercase tracking-widest block mb-6">
-              {'// SUBSYSTEM_INDEX'}
-            </span>
-
-            <nav className="space-y-1">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`
-                    w-full text-left py-4 px-4 border-l-2 transition-all duration-200 rounded-r-lg flex items-center gap-3
-                    ${activeTab === tab.id
-                      ? 'border-[var(--accent-teal)] bg-[var(--accent-teal-50)] text-slate-900'
-                      : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-900'}
-                  `}
-                >
-                  <span className={`flex-shrink-0 ${activeTab === tab.id ? 'text-[var(--accent-teal)]' : 'text-slate-400'}`}>
-                    {tab.icon}
+      {/* Streaming Platform Layout - Modern Tabs + Full Screen Viewer */}
+      <div className="space-y-8">
+        {/* 1. Top Navigation Pills */}
+        <div className="flex items-center justify-center">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide max-w-full px-4 snap-x">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`
+                  flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 snap-center
+                  ${activeTab === tab.id
+                    ? 'bg-[var(--accent-teal)] text-white shadow-md transform scale-105'
+                    : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'}
+                `}
+              >
+                <span className={activeTab === tab.id ? 'text-white' : 'text-slate-400'}>
+                  {tab.icon}
+                </span>
+                <span>{tab.label}</span>
+                {tab.id === '02_RECURRENCE' && activeTab !== tab.id && (
+                  <span className="ml-1 flex-shrink-0 bg-amber-100 text-amber-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
+                    Key
                   </span>
-                  <div className="flex-1 min-w-0">
-                    <span className="font-mono text-xs opacity-50 mr-2">{tab.index}</span>
-                    <span className="font-sans font-medium text-sm">{tab.label}</span>
-                  </div>
-                  {tab.id === '02_RECURRENCE' && (
-                    <span className="flex-shrink-0 bg-amber-100 text-amber-700 text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded">
-                      Key
-                    </span>
-                  )}
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          {/* Preview Pane - The Stage */}
-          <div className="flex-1 p-4 md:p-6 lg:p-10 min-h-[400px] lg:min-h-[700px]">
-            <AnimatePresence mode="wait">
-              {activeTabData && (
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Content Header */}
-                  <div className="mb-6 lg:mb-10">
-                    <h4 className="font-serif text-2xl md:text-3xl lg:text-4xl text-slate-900 mb-2 md:mb-3">
-                      {activeTabData.title}
-                    </h4>
-                    <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-3xl">
-                      {activeTabData.description}
-                    </p>
-
-                    {/* Highlight Block (for Recurrence) */}
-                    {activeTabData.highlight && (
-                      <div className="mt-4 md:mt-6 bg-amber-50 border-l-4 border-amber-400 p-3 md:p-4 rounded-r-lg">
-                        <span className="font-mono text-[10px] md:text-xs text-amber-700 uppercase tracking-widest block mb-1 md:mb-2">
-                          {activeTabData.highlight.label}
-                        </span>
-                        <p className="font-serif italic text-sm md:text-lg text-slate-700">
-                          {activeTabData.highlight.text}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Mobile: Horizontal Scroll Images */}
-                  <div className="md:hidden -mx-4 px-4">
-                    <div className="overflow-x-auto scrollbar-hide">
-                      <div className="flex gap-4 min-w-max pb-4">
-                        {activeTabData.images.map((img, i) => {
-                          const galleryImages = activeTabData.images.map(image => ({
-                            src: image.src,
-                            alt: image.alt,
-                            caption: `// ${image.figNumber}: ${image.caption}`
-                          }))
-
-                          return (
-                            <div
-                              key={i}
-                              className="group cursor-pointer w-[280px] flex-shrink-0"
-                              onClick={() => openLightbox(
-                                { src: img.src, alt: img.alt, caption: `// ${img.figNumber}: ${img.caption}` },
-                                galleryImages,
-                                i
-                              )}
-                              role="button"
-                              tabIndex={0}
-                              aria-label={`View ${img.alt} in fullscreen`}
-                            >
-                              <div className="rounded-xl border border-slate-200 shadow-sm overflow-hidden bg-slate-50">
-                                <div className="relative aspect-[4/3]">
-                                  <Image
-                                    src={img.src}
-                                    alt={img.alt}
-                                    fill
-                                    className="object-cover object-top"
-                                    sizes="280px"
-                                  />
-                                  {/* Tap hint */}
-                                  <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm">
-                                    <span className="font-mono text-[9px] text-slate-500 uppercase tracking-wider">
-                                      Tap to expand
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                              <p className="font-mono text-[10px] text-slate-400 uppercase tracking-wider mt-2 line-clamp-2">
-                                {`// ${img.figNumber}: ${img.caption}`}
-                              </p>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                    {/* Scroll hint */}
-                    {activeTabData.images.length > 1 && (
-                      <p className="text-center text-slate-400 text-xs mt-1">
-                        ← Swipe to see more →
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Desktop: Auto-Playing Sequence Viewer (Replaces Grid) */}
-                  <div className="hidden md:block">
-                    <AutoSequenceDataViewer
-                      images={activeTabData.images.map(img => ({
-                        src: img.src,
-                        alt: img.alt, // Use alt text for accessibility
-                        caption: `// ${img.figNumber}: ${img.caption}` // Pass caption for potential use
-                      }))}
-                      title={activeTabData.title}
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                )}
+              </button>
+            ))}
           </div>
         </div>
+
+        {/* 2. Content Stage */}
+        <AnimatePresence mode="wait">
+          {activeTabData && (
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6"
+            >
+              {/* Feature Title & Description (Centered) */}
+              <div className="text-center max-w-3xl mx-auto space-y-3">
+                <h4 className="font-serif text-2xl md:text-3xl text-slate-900">
+                  {activeTabData.title}
+                </h4>
+                <p className="text-slate-500 leading-relaxed">
+                  {activeTabData.description}
+                </p>
+                {/* Highlight Block (for Recurrence) */}
+                {activeTabData.highlight && (
+                  <div className="inline-block mt-2 bg-amber-50 border border-amber-200 px-4 py-2 rounded-lg">
+                    <span className="font-mono text-[10px] text-amber-700 uppercase tracking-widest mr-2">
+                      {activeTabData.highlight.label}:
+                    </span>
+                    <span className="font-serif italic text-sm text-slate-700">
+                      {activeTabData.highlight.text}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* The Viewer */}
+              <AutoSequenceDataViewer
+                images={activeTabData.images.map(img => ({
+                  src: img.src,
+                  alt: img.alt,
+                  caption: `// ${img.figNumber}: ${img.caption}`
+                }))}
+                title={activeTabData.title}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Recurrence Highlight - Natural Language Summary */}

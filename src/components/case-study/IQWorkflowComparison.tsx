@@ -1,9 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { useLightbox } from '@/contexts/LightboxContext'
+import ImpactDiff from './ImpactDiff'
 
 interface IQWorkflowComparisonProps {
   isLightBackground?: boolean
@@ -22,8 +20,6 @@ interface ComparisonData {
 }
 
 export default function IQWorkflowComparison({ isLightBackground = false }: IQWorkflowComparisonProps) {
-  const { openLightbox } = useLightbox()
-
   const comparisons: ComparisonData[] = [
     {
       id: 'nlq',
@@ -77,137 +73,40 @@ export default function IQWorkflowComparison({ isLightBackground = false }: IQWo
         </div>
 
         {/* Comparison Sliders */}
-        <div className="space-y-12">
+        <div className="space-y-16">
           {comparisons.map((comparison) => (
-            <ComparisonSlider
+            <motion.div
               key={comparison.id}
-              data={comparison}
-              openLightbox={openLightbox}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="space-y-6"
+            >
+              {/* Comparison Title & Metric */}
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 px-1">
+                <h4 className="font-serif text-xl text-slate-900">
+                  {comparison.title}
+                </h4>
+                <div className="font-mono text-xs text-[var(--accent-teal)] border-l-2 border-[var(--accent-teal)] pl-3">
+                  {comparison.insight}
+                </div>
+              </div>
+
+              {/* The Styled Impact Slider */}
+              <ImpactDiff
+                beforeImage={comparison.beforeImage}
+                afterImage={comparison.afterImage}
+                beforeLabel={comparison.beforeLabel}
+                afterLabel={comparison.afterLabel}
+                beforeAlt={comparison.beforeAlt}
+                afterAlt={comparison.afterAlt}
+                isLightBackground={true} // Always light inside this container for now
+              />
+            </motion.div>
           ))}
         </div>
       </div>
     </div>
   )
 }
-
-interface ComparisonSliderProps {
-  data: ComparisonData
-  openLightbox: (images: { src: string; alt: string }[], startIndex: number) => void
-}
-
-function ComparisonSlider({ data, openLightbox }: ComparisonSliderProps) {
-  const [sliderPosition, setSliderPosition] = useState(50)
-  const [isDragging, setIsDragging] = useState(false)
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width))
-    setSliderPosition((x / rect.width) * 100)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width))
-    setSliderPosition((x / rect.width) * 100)
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-lg"
-    >
-      {/* Title Bar */}
-      <div className="bg-slate-900 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-          <span className="font-mono text-xs text-white/90">{data.title}</span>
-        </div>
-        <span className="font-mono text-[10px] text-slate-400">{data.insight}</span>
-      </div>
-
-      {/* Labels */}
-      <div className="flex justify-between px-4 py-2 bg-slate-50 border-b border-slate-200">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-red-500" />
-          <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
-            {data.beforeLabel}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider">
-            {data.afterLabel}
-          </span>
-          <div className="w-2 h-2 rounded-full bg-emerald-500" />
-        </div>
-      </div>
-
-      {/* Slider Container */}
-      <div
-        className="relative aspect-[16/9] cursor-ew-resize select-none overflow-hidden"
-        onMouseMove={handleMouseMove}
-        onMouseDown={() => setIsDragging(true)}
-        onMouseUp={() => setIsDragging(false)}
-        onMouseLeave={() => setIsDragging(false)}
-        onTouchMove={handleTouchMove}
-      >
-        {/* Before Image (Full width, clipped) */}
-        <div className="absolute inset-0">
-          <Image
-            src={data.beforeImage}
-            alt={data.beforeAlt}
-            fill
-            className="object-cover object-center"
-            onClick={() => openLightbox([{ src: data.beforeImage, alt: data.beforeAlt }], 0)}
-          />
-        </div>
-
-        {/* After Image (Clipped by slider) */}
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
-        >
-          <Image
-            src={data.afterImage}
-            alt={data.afterAlt}
-            fill
-            className="object-cover object-center"
-            onClick={() => openLightbox([{ src: data.afterImage, alt: data.afterAlt }], 0)}
-          />
-        </div>
-
-        {/* Slider Line */}
-        <div
-          className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10"
-          style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-        >
-          {/* Slider Handle */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-xl flex items-center justify-center border-2 border-slate-200">
-            <svg
-              className="w-5 h-5 text-slate-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-

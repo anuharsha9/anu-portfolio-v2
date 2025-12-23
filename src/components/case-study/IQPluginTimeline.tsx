@@ -43,7 +43,7 @@ export default function IQPluginTimeline({ isLightBackground = false }: IQPlugin
     <UnifiedTimeline
       phases={phases}
       header={{
-        tag: '// STRATEGIC_RELEASE_LOG',
+        tag: '// PROJECT_TIMELINE',
         title: 'Project Evolution',
         subtitle: 'From strategic definition to engineering handoff — four phases that transformed IQ from concept to platform.'
       }}

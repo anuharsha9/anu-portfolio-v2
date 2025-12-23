@@ -21,7 +21,6 @@ export const iqPluginCaseStudy: CaseStudyData = {
     'Product Vision',
     'Systems Thinking',
     'Cross-functional Leadership',
-    'Platform Architecture',
     'Team Enablement',
   ],
   // ----------------------------
@@ -99,7 +98,7 @@ export const iqPluginCaseStudy: CaseStudyData = {
     {
       id: 'section-01',
       index: 'D',
-      title: 'Discover: The Strategic Problem',
+      title: 'Discover Deeply: From Roadmap Concept to Strategic Definition',
       summary: 'Three powerful features existed — but nobody could find them. Customer feedback confirmed: visibility was the problem.',
       body: `WebFOCUS had three data science features:
 • **NLQ** — Natural Language Query: ask questions against your data in plain English ("Which product sold most last quarter?")
@@ -113,7 +112,7 @@ All shipping. None legacy. The problem? They weren't visible. NLQ was buried in 
     {
       id: 'section-02',
       index: 'E',
-      title: 'Empathize: Who We\'re Building For',
+      title: 'Empathize with the Ecosystem: Bridging the Gap Between Personas',
       summary: 'Data scientists needed depth. Business users needed simplicity. One entry point had to serve both.',
       body: `Two primary personas with conflicting needs:
 • **Data scientists** wanted depth, control, and advanced configuration options
@@ -124,7 +123,7 @@ They had completely different mental models — but we needed one entry point fo
     {
       id: 'section-03',
       index: 'S',
-      title: 'Simplify: The Architecture',
+      title: 'Simplify the Chaos: Mapping and Unifying the System',
       summary: 'Integrated three scattered entry points into the Hub. Already owned all three — integration felt natural.',
       body: `I defined the architecture before any tickets existed. The PM wrote tickets after seeing my mockups — that's how I operated throughout.
 
@@ -142,7 +141,7 @@ This meant faster development and familiar patterns for engineering.`,
     {
       id: 'section-04',
       index: 'I',
-      title: 'Iterate: Before & After',
+      title: 'Iterate with Inclusion: The Evolution of a Unified Hub',
       summary: 'Same features, transformed experience. Three separate tools became one cohesive hub.',
       body: `The transformation wasn't about changing features — it was about changing how users find and access them.
 
@@ -154,7 +153,7 @@ Drag the sliders to see the transformation.`,
     {
       id: 'section-05',
       index: 'G',
-      title: 'Grow: Constraints & Decisions',
+      title: 'Grow Through Constraints: Strategic Ownership at Scale',
       summary: 'Fought for features, lost some battles. Built within constraints, enabled two designers to continue.',
       body: `**What got rejected:** A lot. I fought for a navigation bar in IQ — eventually won. Built a "Get Started" panel that got scrapped after significant effort (we integrated it better elsewhere). Pushed for more IQ features on the Hub homepage — rejected due to engineering resources.
 
@@ -165,7 +164,7 @@ The Hub ecosystem constraint became an advantage: familiar patterns meant faster
     {
       id: 'section-06',
       index: 'N',
-      title: 'Navigate: Impact',
+      title: 'Navigate Forward: Adoption, Impact, and Future',
       summary: 'NLQ adoption +25%. Insights live. DSML Hub shipping 2027.',
       body: `**What's live now (9.3.6):**
 • NLQ with +25% adoption increase
@@ -289,15 +288,10 @@ The +25% NLQ adoption increase came from making the feature discoverable — not
   // ----------------------------
   // PUBLIC SECTIONS (visible without password)
   // ----------------------------
-  publicSections: [
-    {
-      id: 'section-01',
-      index: 'D',
-      title: 'Discover: The Strategic Problem',
-      summary: 'Not broken. Just invisible.',
-      body: 'NLQ buried in menus. Insights hard to find. ML in a completely separate context. Three powerful features — none discoverable. The solution: one unified DSML Hub.',
-    },
-  ],
+  // ----------------------------
+  // PUBLIC SECTIONS (visible without password)
+  // ----------------------------
+  publicSections: [],
   // ----------------------------
   // NO PASSWORD GATE - Section 01 is public, sections 02-06 are locked via LockedContent
   // ----------------------------

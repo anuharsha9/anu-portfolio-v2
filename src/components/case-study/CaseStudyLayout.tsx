@@ -29,6 +29,7 @@ import { researchApproachData } from '@/data/research-approach'
 import { teamCollaborationData } from '@/data/team-collaboration'
 import DesignSystemShowcase from './DesignSystemShowcase'
 import ScrollGear from '@/components/ui/ScrollGear'
+import { iqTabs, iqFooterContent } from '@/components/case-study/iq-plugin-data'
 // RetrospectiveCard and EvolutionSplit removed - personal growth content now on /me page
 
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
@@ -156,6 +157,14 @@ const MLPersonaCards = dynamic(() => import('./MLPersonaCards'), {
   loading: () => <LoadingSpinner />
 })
 const MLRecommendations = dynamic(() => import('./MLRecommendations'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const MLReflection = dynamic(() => import('./MLReflection'), {
+  ssr: false,
+  loading: () => <LoadingSpinner />
+})
+const IQReflection = dynamic(() => import('./IQReflection'), {
   ssr: false,
   loading: () => <LoadingSpinner />
 })
@@ -877,6 +886,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
         (showPasswordContent || !data.passwordGate) && (
           <>
 
+            {/* ReportCaster Timeline - Moved Outside Discover */}
+            {data.slug === 'reportcaster' && (
+              <MotionSection className="surface-light py-8 md:py-10">
+                <ReportCasterTimeline isLightBackground={true} />
+              </MotionSection>
+            )}
+
+            {/* ML Functions Timeline - Moved Outside Discover */}
+            {data.slug === 'ml-functions' && (
+              <MotionSection className="surface-light py-8 md:py-10">
+                <MLFunctionsTimeline isLightBackground={true} />
+              </MotionSection>
+            )}
+
             {/* D.E.S.I.G.N. Framework Matrix - surface-light */}
             {data.frameworkConnection && (
               <MotionSection id="framework-connection" className="surface-light py-8 md:py-10">
@@ -919,6 +942,13 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     })()}
                   />
                 </div>
+              </MotionSection>
+            )}
+
+            {/* IQ Plugin Project Timeline - Outside Discover Section */}
+            {data.slug === 'iq-plugin' && (
+              <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                <IQPluginTimeline isLightBackground={true} />
               </MotionSection>
             )}
 
@@ -971,6 +1001,42 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                 (data.slug === 'ml-functions' && section.id === 'section-06') ||
                 (data.slug === 'iq-plugin' && section.id === 'section-06')
 
+              // Resolve title from Framework Mapping if available
+              // This restores the "Adjusted Titles" (D.E.S.I.G.N.) designated by the User
+              let resolvedTitle = section.title
+              if (data.frameworkConnection && data.frameworkConnection.principles) {
+                // Find principle matching this section
+                const principles = data.frameworkConnection.principles
+                let matchingPrinciple = null
+
+                if (data.slug === 'reportcaster') {
+                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
+                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
+                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
+                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
+                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
+                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
+                } else if (data.slug === 'ml-functions') {
+                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
+                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
+                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
+                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
+                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
+                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
+                } else if (data.slug === 'iq-plugin') {
+                  if (section.id === 'section-01') matchingPrinciple = principles.find(p => p.letter === 'D')
+                  else if (section.id === 'section-02') matchingPrinciple = principles.find(p => p.letter === 'E')
+                  else if (section.id === 'section-03') matchingPrinciple = principles.find(p => p.letter === 'S')
+                  else if (section.id === 'section-04') matchingPrinciple = principles.find(p => p.letter === 'I')
+                  else if (section.id === 'section-05') matchingPrinciple = principles.find(p => p.letter === 'G')
+                  else if (section.id === 'section-06') matchingPrinciple = principles.find(p => p.letter === 'N')
+                }
+
+                if (matchingPrinciple) {
+                  resolvedTitle = matchingPrinciple.title
+                }
+              }
+
               // All sections are light now
               let sectionBg = 'surface-light'
 
@@ -992,7 +1058,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           {/* Section Header - Letter badges removed for senior energy */}
                           <div className="space-y-4 mb-8">
                             <h2 className={`${sectionBg === 'surface-light' ? 'text-slate-900' : 'text-white'} text-3xl md:text-4xl font-serif leading-snug tracking-tight`}>
-                              {section.title}
+                              {resolvedTitle}
                             </h2>
                             {section.summary && (
                               <div className={`${sectionBg === 'surface-light' ? 'bg-[var(--accent-teal)]/10' : 'bg-[var(--accent-teal)]/20'} p-4 md:p-5`}>
@@ -1039,6 +1105,12 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                             <div className="mt-16 pt-12 border-t border-slate-200">
                               <RCDesignEvolution isLightBackground={sectionBg === 'surface-light'} />
                             </div>
+
+                            {/* Impact Metrics & Validation - Moved from Section 06 */}
+                            <div className="mt-16 pt-12 border-t border-slate-200">
+                              <ImpactVisual isLightBackground={sectionBg === 'surface-light'} />
+                            </div>
+
                           </div>
                         </div>
                       </MotionSection>
@@ -1060,7 +1132,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                               isLightBackground={sectionBg === 'surface-light'}
                             >
                               <SectionBlock
-                                section={section}
+                                section={{ ...section, title: resolvedTitle }}
                                 isLightBackground={sectionBg === 'surface-light'}
                                 caseStudySlug={data.slug}
                                 isUnlocked={showPasswordContent}
@@ -1103,7 +1175,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                             </LockedContent>
                           ) : (
                             <SectionBlock
-                              section={section}
+                              section={{ ...section, title: resolvedTitle }}
                               isLightBackground={sectionBg === 'surface-light'}
                               caseStudySlug={data.slug}
                               isUnlocked={showPasswordContent}
@@ -1151,6 +1223,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
 
                   {/* System Mapping Breakdown - Inside Section 03 (S - Simplify) - ReportCaster only - NOW PUBLIC */}
                   {section.id === 'section-03' && data.slug === 'reportcaster' && (
+                    <>
+                      {/* Process Artifacts "The War Room" - Moved to Section 03 */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <ProcessArtifactViewer
+                            artifacts={reportCasterArtifacts}
+                            pdfUrl="/assets/rc-sketchbook.pdf"
+                          />
+                        </div>
+                      </MotionSection>
+                    </>
+                  )}
+
+                  {section.id === 'section-03' && data.slug === 'reportcaster' && (
                     <MotionSection className={`${sectionBg} py-section-mobile md:py-section-tablet lg:py-section-desktop`}>
                       <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <SystemMappingBreakdown isLightBackground={sectionBg === 'surface-light'} />
@@ -1158,37 +1244,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </MotionSection>
                   )}
 
-                  {/* ReportCaster Timeline - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
-                  {section.id === 'section-01' && data.slug === 'reportcaster' && (
-                    <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                      <ReportCasterTimeline isLightBackground={true} />
-                    </MotionSection>
-                  )}
-
-                  {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
-                  {/* Note: Narrative content is public; only legacy images are locked inside SystemArchaeology */}
-                  {section.id === 'section-01' && data.slug === 'reportcaster' && (
-                    <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <SystemArchaeology isLightBackground={true} caseStudySlug={data.slug} />
-                      </div>
-                    </MotionSection>
-                  )}
-
-                  {/* Process Artifacts "The War Room" - Inside Section 01 (Discover Deeply) */}
-                  {section.id === 'section-01' && data.slug === 'reportcaster' && (
-                    <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <ProcessArtifactViewer
-                          artifacts={reportCasterArtifacts}
-                          pdfUrl="/assets/rc-sketchbook.pdf"
-                        />
-                      </div>
-                    </MotionSection>
-                  )}
-
-                  {/* Process Artifacts "The System Blueprint" - Inside Section 01 for ML Functions */}
-                  {section.id === 'section-01' && data.slug === 'ml-functions' && (
+                  {/* Process Artifacts "The System Blueprint" - Moved to Section 03 for ML Functions */}
+                  {section.id === 'section-03' && data.slug === 'ml-functions' && (
                     <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                       <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                         <ProcessArtifactViewer
@@ -1201,19 +1258,23 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </MotionSection>
                   )}
 
-                  {/* Process Artifacts "The Idea Lab" - Inside Section 01 for IQ Plugin */}
-                  {section.id === 'section-01' && data.slug === 'iq-plugin' && (
+
+
+                  {/* Discovery Visual - Inside Section 01 (D - Discover Deeply) - ReportCaster only */}
+                  {/* Note: Narrative content is public; only legacy images are locked inside SystemArchaeology */}
+                  {section.id === 'section-01' && data.slug === 'reportcaster' && (
                     <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                       <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <ProcessArtifactViewer
-                          artifacts={iqArtifacts}
-                          title="The Idea Lab"
-                          description="3 products in 1 plugin. From napkin sketches to high-fidelity wireframes, mapping out how Natural Language, Insights, and Analysis would coexist."
-                        // pdfUrl optional/omitted
-                        />
+                        <SystemArchaeology isLightBackground={true} caseStudySlug={data.slug} />
                       </div>
                     </MotionSection>
                   )}
+
+
+
+
+
+
 
 
                   {/* Insert Research Approach, Strategy Grid, Research Methods and Persona Cards - ReportCaster Section 02 */}
@@ -1249,12 +1310,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </>
                   )}
 
-                  {/* ML Functions Timeline - Inside Section 01 */}
-                  {section.id === 'section-01' && data.slug === 'ml-functions' && (
-                    <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                      <MLFunctionsTimeline isLightBackground={true} />
-                    </MotionSection>
-                  )}
+
 
                   {/* ML Functions Visuals - Section 01 (Discover) */}
                   {section.id === 'section-01' && data.slug === 'ml-functions' && (
@@ -1382,47 +1438,55 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {/* IQ Plugin Visuals - Section 04 (Iterate with Inclusion) */}
                   {section.id === 'section-04' && data.slug === 'iq-plugin' && (
                     <>
-                      {/* Design Evolution - Moved from Section 03 for consistency */}
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                      {/* Design Evolution - Section 04 (Iterate) */}
+                      <MotionSection className="surface-light py-0">
                         <LockedContent
                           password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view design evolution"
                           isLightBackground={true}
+                          className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
                         >
                           <IQEvolution isLightBackground={true} />
                         </LockedContent>
                       </MotionSection>
-                      {/* Iteration Log */}
+
+                      {/* Empty State Showcase - Intuitive First Impression (Reordered) */}
+                      <MotionSection className="surface-light py-0">
+                        <LockedContent
+                          password={data.passwordGate?.password || 'anu-access'}
+                          caseStudySlug={data.slug}
+                          unlockMessage="Password required to view empty states"
+                          isLightBackground={true}
+                          className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
+                        >
+                          <IQEmptyStateShowcase isLightBackground={true} />
+                        </LockedContent>
+                      </MotionSection>
+
+                      {/* System Inspection (Artifacts) - Updated Component */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <LockedContent
-                            isUnlocked={showPasswordContent}
                             password={data.passwordGate?.password || 'anu-access'}
                             caseStudySlug={data.slug}
-                            unlockMessage="Password required to view system iteration log"
+                            unlockMessage="Password required to view design specifications"
                             isLightBackground={true}
                           >
-                            <IQIterationLog isLightBackground={true} />
+                            <DesignIterationLog
+                              isLightBackground={true}
+                              tabs={iqTabs}
+                              footerContent={iqFooterContent}
+                            />
                           </LockedContent>
                         </div>
                       </MotionSection>
+                      {/* Iteration Log */}
+
                     </>
                   )}
 
-                  {/* IQ Plugin Workflow Comparison - Section 04 (After Iteration Log) */}
-                  {section.id === 'section-04' && data.slug === 'iq-plugin' && (
-                    <MotionSection className="surface-light py-0">
-                      <LockedContent
-                        password={data.passwordGate?.password || 'anu-access'}
-                        caseStudySlug={data.slug}
-                        unlockMessage="Password required to view workflow comparison"
-                        isLightBackground={true}
-                      >
-                        <IQWorkflowComparison isLightBackground={true} />
-                      </LockedContent>
-                    </MotionSection>
-                  )}
+
 
                   {/* ReportCaster Visuals - Section 05 (G - Grow Through Constraints) */}
                   {section.id === 'section-05' && data.slug === 'reportcaster' && (
@@ -1431,6 +1495,33 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <TeamCollaboration data={teamCollaborationData['reportcaster']} accentColor="amber" />
+                        </div>
+                      </MotionSection>
+                    </>
+                  )}
+
+                  {/* IQ Plugin Visuals - Section 05 (G - Grow) */}
+                  {section.id === 'section-05' && data.slug === 'iq-plugin' && (
+                    <>
+                      {/* Leadership / Team Collaboration */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <TeamCollaboration data={teamCollaborationData['iq-plugin']} accentColor="violet" />
+                        </div>
+                      </MotionSection>
+
+                      {/* Architectural Decision Records (Moved from Section 04) */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <LockedContent
+                            isUnlocked={showPasswordContent}
+                            password="access"
+                            caseStudySlug={data.slug}
+                            unlockMessage="Password required to view architectural decisions"
+                            isLightBackground={true}
+                          >
+                            <IQChallengesBreakdown isLightBackground={true} />
+                          </LockedContent>
                         </div>
                       </MotionSection>
                     </>
@@ -1445,6 +1536,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           <MLExplainabilityHighlight isLightBackground={true} />
                         </div>
                       </MotionSection>
+
+
 
                       {/* Team Collaboration - Unified Component */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
@@ -1463,10 +1556,8 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                   {section.id === 'section-06' && data.slug === 'reportcaster' && (
                     <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                       <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <NavigateForwardContent isLightBackground={true} />
-
-                        {/* Impact Diff - Visual Before/After Slider */}
-                        <div className="mt-16">
+                        {/* Impact Diff - Visual Before/After Comparison */}
+                        <div className="mb-16">
                           <div className="text-center mb-8">
                             <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase block mb-2">
                               {'// VISUAL_DIFF'}
@@ -1483,30 +1574,20 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                             isLightBackground={true}
                           />
                         </div>
+
+                        <NavigateForwardContent isLightBackground={true} />
                       </div>
                     </MotionSection>
                   )}
 
 
                   {/* Insert Impact Visual after Section 06 - ReportCaster only */}
-                  {section.id === 'section-06' && data.slug === 'reportcaster' && (
-                    <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                      <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                        <ImpactVisual isLightBackground={true} />
-                      </div>
-                    </MotionSection>
-                  )}
 
-                  {/* ML Functions Visuals - Section 06 (N - Navigate) */}
+
+                  {/* ML Functions Visuals - Section 06 (N - Navigate / Retrospective) */}
                   {section.id === 'section-06' && data.slug === 'ml-functions' && (
                     <>
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <MLImpactMetrics isLightBackground={true} />
-                        </div>
-                      </MotionSection>
-
-                      {/* Impact Diff - Visual Before/After Slider */}
+                      {/* Visual Diff - Legacy vs Redesigned Workflow */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <div className="text-center mb-8">
@@ -1527,9 +1608,38 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                         </div>
                       </MotionSection>
 
+                      {/* Visual Diff - Legacy vs Redesigned Results */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <MLRecommendations isLightBackground={true} />
+                          <ImpactDiff
+                            beforeImage="/images/case-study/ml-functions/Legacy Train Model Results UI.png"
+                            afterImage="/images/case-study/ml-functions/8. Train Model Workflow - Compare Models.png"
+                            beforeAlt="Before: Legacy Results - fragmented table"
+                            afterAlt="After: New Comparison View - visualized metrics"
+                            beforeLabel="// LEGACY"
+                            afterLabel="// REDESIGN"
+                            isLightBackground={true}
+                          />
+                        </div>
+                      </MotionSection>
+                      {/* 1. Strategic Outcomes (Impact Metrics) */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <MLImpactMetrics isLightBackground={true} />
+                        </div>
+                      </MotionSection>
+
+                      {/* 2. Reflection (Testimonials + What I'd Do Next) */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <MLReflection isLightBackground={true} />
+                        </div>
+                      </MotionSection>
+
+                      {/* 3. Patterns That Became Reusable */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <MLPatternConnections isLightBackground={true} />
                         </div>
                       </MotionSection>
                     </>
@@ -1547,25 +1657,9 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     </>
                   )}
 
-                  {/* ML Functions Visuals - Section 06 (N - Navigate) */}
-                  {/* Note: This content is now part of section-06 body */}
-                  {data.slug === 'ml-functions' && section.id === 'section-06' && (
-                    <>
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <MLPatternConnections isLightBackground={true} />
-                        </div>
-                      </MotionSection>
-                    </>
-                  )}
-
                   {/* IQ Plugin - Section 01 (D - System Diagnosis) */}
                   {section.id === 'section-01' && data.slug === 'iq-plugin' && (
                     <>
-                      {/* Project Timeline - Consistent with RC and ML (moved from Section 06) */}
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <IQPluginTimeline isLightBackground={true} />
-                      </MotionSection>
                       {/* 1. The Problem First (PUBLIC) */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -1598,12 +1692,29 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           <IQPersonaCards isLightBackground={true} />
                         </div>
                       </MotionSection>
+                      {/* Competitive Positioning - Moved from Section 06 */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <MarketAnalysis {...iqPluginMarketAnalysis} isLightBackground={true} />
+                        </div>
+                      </MotionSection>
                     </>
                   )}
 
                   {/* IQ Plugin - Section 03 (S - Architectural Convergence) */}
                   {section.id === 'section-03' && data.slug === 'iq-plugin' && (
                     <>
+                      {/* Process Artifacts "The Idea Lab" - Moved to Simplify Section */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <ProcessArtifactViewer
+                            artifacts={iqArtifacts}
+                            title="The Idea Lab"
+                            description="3 products in 1 plugin. From napkin sketches to high-fidelity wireframes, mapping out how Natural Language, Insights, and Analysis would coexist."
+                          />
+                        </div>
+                      </MotionSection>
+
                       {/* System Convergence Diagram */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <IQPluginArchitecture isLightBackground={true} />
@@ -1615,6 +1726,7 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                           caseStudySlug={data.slug}
                           unlockMessage="Password required to view architecture blueprint"
                           isLightBackground={true}
+                          className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
                         >
                           <IQArchitectureBlueprint isLightBackground={true} />
                         </LockedContent>
@@ -1652,60 +1764,42 @@ export default function CaseStudyLayout({ data }: CaseStudyLayoutProps) {
                     )}
 
                   {/* IQ Plugin Visuals - Section 05 (G - Architectural Decision Records) */}
-                  {section.id === 'section-05' && data.slug === 'iq-plugin' && (
+
+
+                  {/* IQ Plugin Visuals - Section 06 (N - Navigate / Retrospective) */}
+                  {section.id === 'section-06' && data.slug === 'iq-plugin' && (
                     <>
-                      {/* Team Collaboration - Unified Component */}
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <TeamCollaboration data={teamCollaborationData['iq-plugin']} accentColor="violet" />
-                        </div>
-                      </MotionSection>
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <LockedContent
-                            isUnlocked={showPasswordContent}
-                            password="access"
-                            caseStudySlug={data.slug}
-                            unlockMessage="Password required to view architectural decisions"
-                            isLightBackground={true}
-                          >
-                            <IQChallengesBreakdown isLightBackground={true} />
-                          </LockedContent>
-                        </div>
-                      </MotionSection>
-                      {/* Empty State Showcase - UX Decisions */}
+                      {/* Workflow Comparison - Moved to Section 06 (Navigate) */}
                       <MotionSection className="surface-light py-0">
                         <LockedContent
                           password={data.passwordGate?.password || 'anu-access'}
                           caseStudySlug={data.slug}
-                          unlockMessage="Password required to view empty states"
+                          unlockMessage="Password required to view workflow comparison"
                           isLightBackground={true}
+                          className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16"
                         >
-                          <IQEmptyStateShowcase isLightBackground={true} />
+                          <IQWorkflowComparison isLightBackground={true} />
                         </LockedContent>
                       </MotionSection>
-                    </>
-                  )}
 
-                  {/* IQ Plugin Visuals - Section 06 (N - Strategic Outcomes) */}
-                  {section.id === 'section-06' && data.slug === 'iq-plugin' && (
-                    <>
-                      {/* Competitive Positioning */}
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <MarketAnalysis {...iqPluginMarketAnalysis} isLightBackground={true} />
-                        </div>
-                      </MotionSection>
-                      {/* Pattern Connections - Consistent with RC and ML */}
-                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
-                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                          <IQPatternConnections isLightBackground={true} />
-                        </div>
-                      </MotionSection>
-                      {/* Validation Sources */}
+                      {/* 1. Strategic Outcomes (Validation Sources) */}
                       <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
                         <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
                           <IQValidationSources isLightBackground={true} />
+                        </div>
+                      </MotionSection>
+
+                      {/* 2. Reflection (Testimonials + What I'd Do Next) */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <IQReflection isLightBackground={true} />
+                        </div>
+                      </MotionSection>
+
+                      {/* 3. Pattern Connections - Consistent with RC and ML */}
+                      <MotionSection className="surface-light py-section-mobile md:py-section-tablet lg:py-section-desktop">
+                        <div className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+                          <IQPatternConnections isLightBackground={true} />
                         </div>
                       </MotionSection>
                     </>

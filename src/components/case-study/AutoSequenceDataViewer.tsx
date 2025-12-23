@@ -17,10 +17,25 @@ interface ImageItem {
 interface AutoSequenceDataViewerProps {
     images: ImageItem[]
     title?: string
+    externalIndex?: number
+    onIndexChange?: (index: number) => void
 }
 
-export default function AutoSequenceDataViewer({ images, title }: AutoSequenceDataViewerProps) {
-    const [currentIndex, setCurrentIndex] = useState(0)
+export default function AutoSequenceDataViewer({ images, title, externalIndex, onIndexChange }: AutoSequenceDataViewerProps) {
+    const [internalIndex, setInternalIndex] = useState(0)
+    const isControlled = typeof externalIndex === 'number'
+
+    const currentIndex = isControlled ? externalIndex : internalIndex
+
+    const setCurrentIndex = useCallback((newIndex: number | ((prev: number) => number)) => {
+        if (isControlled && onIndexChange) {
+            const next = typeof newIndex === 'function' ? newIndex(externalIndex) : newIndex
+            onIndexChange(next)
+        } else {
+            setInternalIndex(newIndex)
+        }
+    }, [isControlled, externalIndex, onIndexChange])
+
     const [isPlaying, setIsPlaying] = useState(true)
     const [isLightboxOpen, setIsLightboxOpen] = useState(false)
     const t = getTheme(false)
@@ -34,7 +49,7 @@ export default function AutoSequenceDataViewer({ images, title }: AutoSequenceDa
         }, 2000) // 2 seconds per slide
 
         return () => clearInterval(interval)
-    }, [isPlaying, isLightboxOpen, images.length])
+    }, [isPlaying, isLightboxOpen, images.length, setCurrentIndex])
 
     // Key navigation for lightbox
     useEffect(() => {

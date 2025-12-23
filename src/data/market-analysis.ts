@@ -1,51 +1,39 @@
 // Unified Market Analysis Data for all 3 case studies
 
 export const reportCasterMarketAnalysis = {
-  sectionTag: 'COMPETITIVE_LANDSCAPE',
-  title: 'Market Position Analysis',
+  sectionTag: 'COMPETITIVE_ANALYSIS',
+  title: 'Feature Comparison Matrix',
   subtitle: 'Comparing ReportCaster against enterprise scheduling competitors to identify differentiation opportunities.',
-  displayMode: 'cards' as const,
+  displayMode: 'matrix' as const,
   accentColor: 'amber' as const,
+  featureColumns: [
+    { key: 'consumerEase', label: 'Consumer Ease?' },
+    { key: 'deepCustomization', label: 'Deep Customization?' },
+    { key: 'visualBuilder', label: 'Visual Builder?' },
+  ],
   competitors: [
     {
-      name: 'Microsoft Power Automate',
-      tag: 'STATUS: CONSUMER_FOCUSED',
-      headline: 'Easy but Limited',
-      painPoints: [
-        'Easy to use for basic workflow automation',
-        'Wide integration options with various platforms',
-        'Limited customization for complex workflows',
-        'May not meet needs of advanced users',
-      ],
+      name: 'Power Automate',
+      features: { consumerEase: true, deepCustomization: false, visualBuilder: true },
+      note: 'Easy for basic tasks, but limited for complex enterprise needs.',
     },
     {
-      name: 'Tableau Scheduler',
-      tag: 'STATUS: DASHBOARD_CENTRIC',
-      headline: 'Visual but Constrained',
-      painPoints: [
-        'Specializes in dashboard automation',
-        'Excellent for visual analytics tasks',
-        'Performance issues with large datasets',
-        'Limited functionality outside of dashboards',
-      ],
+      name: 'Tableau',
+      features: { consumerEase: true, deepCustomization: false, visualBuilder: false },
+      note: 'Good for dashboards, but rigid scheduling options.',
     },
     {
       name: 'Qlik NPrinting',
-      tag: 'STATUS: HIGH_COMPLEXITY',
-      headline: 'Powerful but Overwhelming',
-      painPoints: [
-        'Advanced scheduling for complex needs',
-        'Highly customizable to fit specific requirements',
-        'Too complex for non-technical users',
-        'Requires steep learning curve to master',
-      ],
+      features: { consumerEase: false, deepCustomization: true, visualBuilder: false },
+      note: 'Powerful engine, but requires steep technical learning curve.',
     },
   ],
   ourSolution: {
     name: 'ReportCaster (Redesign)',
     tag: 'STRATEGY: UNIFIED_SIMPLICITY',
-    headline: 'Enterprise Power, Consumer Simplicity.',
-    body: 'We unified 5 disparate tools into one cohesive workflow. Same advanced capabilities, but accessible to both BI Developers and Reporting Gurus.',
+    headline: 'Power Meets Simplicity.',
+    features: { consumerEase: true, deepCustomization: true, visualBuilder: true },
+    note: 'Enterprise-grade scheduling with consumer-grade usability.',
     differentiators: [
       'Serves wide range of users without bias',
       'Simplifies workflows for new and experienced users',
@@ -107,48 +95,39 @@ export const mlFunctionsMarketAnalysis = {
 }
 
 export const iqPluginMarketAnalysis = {
-  sectionTag: 'MARKET_INTELLIGENCE',
-  title: 'The Market Gap Analysis',
+  sectionTag: 'COMPETITIVE_ANALYSIS',
+  title: 'Feature Comparison Matrix',
   subtitle: 'Competitors were forcing users to choose between "Technical Depth" and "Ease of Use." We identified a third lane.',
-  displayMode: 'cards' as const,
+  displayMode: 'matrix' as const,
   accentColor: 'violet' as const,
+  featureColumns: [
+    { key: 'guidedUx', label: 'Guided UX?' },
+    { key: 'noCode', label: 'No-Code?' },
+    { key: 'platformNative', label: 'Platform Native?' },
+  ],
   competitors: [
     {
       name: 'Power BI',
-      tag: 'STATUS: HIGH_FRICTION',
-      headline: 'Deep but Daunting',
-      painPoints: [
-        'Azure ML requires technical expertise',
-        'Configuration complexity deters business users',
-        'Learning curve measured in weeks',
-      ],
+      features: { guidedUx: false, noCode: false, platformNative: true },
+      note: 'Deep but daunting. Azure ML requires expertise.',
     },
     {
       name: 'Tableau',
-      tag: 'STATUS: HIGH_FRICTION',
-      headline: 'Powerful but Scripted',
-      painPoints: [
-        'Python/R integrations require coding',
-        'Business analysts locked out of ML features',
-        'High barrier to entry for non-programmers',
-      ],
+      features: { guidedUx: false, noCode: false, platformNative: false },
+      note: 'Powerful but scripted. External Python/R needed.',
     },
     {
       name: 'Qlik',
-      tag: 'STATUS: USABILITY_DEBT',
-      headline: 'Feature-Rich but Frustrating',
-      painPoints: [
-        'Predictive capabilities buried in menus',
-        'Inconsistent UX across features',
-        'Users abandon before finding value',
-      ],
+      features: { guidedUx: false, noCode: false, platformNative: true },
+      note: 'Feature-rich but frustrating. Buried in menus.',
     },
   ],
   ourSolution: {
     name: 'WebFOCUS DSML',
     tag: 'STRATEGY: GUIDED_COMPLEXITY',
     headline: 'The Third Lane.',
-    body: 'While competitors optimized for "Technical Depth," we optimized for "Guidance." We didn\'t lower the ceiling; we raised the floor.',
+    features: { guidedUx: true, noCode: true, platformNative: true },
+    note: 'Feature-rich like leaders, approachable for beginners.',
     differentiators: [
       'Progressive disclosure for all skill levels',
       'Same power, better pathways',

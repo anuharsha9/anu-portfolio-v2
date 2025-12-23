@@ -130,14 +130,16 @@ export default function SystemArchaeology({ isLightBackground = true, caseStudyS
       className="space-y-10"
     >
       {/* THE NARRATIVE: Challenge Block - PUBLIC */}
-      <div className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-6 rounded-r-xl">
-        <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-2 block">
-          {'// UNDOCUMENTED_LEGACY'}
-        </span>
-        <h3 className="font-serif text-slate-900 text-xl md:text-2xl mb-3">
+      <div className="text-center space-y-4">
+        <div className="inline-flex items-center justify-center gap-2">
+          <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest">
+            {'// UNDOCUMENTED_LEGACY'}
+          </span>
+        </div>
+        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl max-w-4xl mx-auto">
           50-year-old black box. Zero documentation.
         </h3>
-        <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+        <p className="text-slate-700 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
           Project deferred for years — I asked for it. Reverse-engineered the system from sandboxes, tribal knowledge, and the customer support lead who was the real SME. Weeks of discovery before any design.
         </p>
       </div>

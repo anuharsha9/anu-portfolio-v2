@@ -119,19 +119,18 @@ export default function MarketAnalysis({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="space-y-3"
+        className="space-y-3 text-center"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-center gap-3">
           <span className={`font-mono text-xs tracking-widest uppercase ${accent.tag}`}>
             {'// '}{sectionTag}
           </span>
-          <div className="h-px flex-1 bg-slate-200 max-w-[100px]"></div>
         </div>
-        <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
+        <h3 className="text-slate-900 text-2xl md:text-3xl font-serif max-w-4xl mx-auto">
           {title}
         </h3>
         {subtitle && (
-          <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-3xl">
+          <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
             {subtitle}
           </p>
         )}

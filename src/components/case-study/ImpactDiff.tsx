@@ -10,6 +10,8 @@ interface ImpactDiffProps {
   afterImage: string
   beforeAlt?: string
   afterAlt?: string
+  beforeLabel?: string
+  afterLabel?: string
   isLightBackground?: boolean
 }
 
@@ -18,6 +20,8 @@ export default function ImpactDiff({
   afterImage = '/images/case-study/ReportCaster/unified-scheduler.png',
   beforeAlt = 'Legacy ReportCaster interface',
   afterAlt = 'Unified ReportCaster interface',
+  beforeLabel = '// LEGACY',
+  afterLabel = '// MODERN',
   isLightBackground = true,
 }: ImpactDiffProps) {
   const [sliderPosition, setSliderPosition] = useState(50)
@@ -78,11 +82,11 @@ export default function ImpactDiff({
           {/* Left Label */}
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-500"></span>
-            <span>{'// LEGACY'}</span>
+            <span>{beforeLabel}</span>
           </div>
           {/* Right Label */}
           <div className="flex items-center gap-2">
-            <span>{'// MODERN'}</span>
+            <span>{afterLabel}</span>
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
           </div>
         </div>

@@ -15,17 +15,19 @@ export default function EmpathizeStrategyGrid({ isLightBackground = true }: Empa
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.25 }}
-        className="bg-[var(--accent-blue-soft)] border-l-4 border-[var(--accent-blue)] p-6 md:p-8 rounded-r-xl"
+        className="text-center space-y-6"
       >
-        <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest mb-4 block">
-          {'// CUSTOMER_OBSESSION'}
-        </span>
+        <div className="inline-flex items-center justify-center gap-2">
+          <span className="font-mono text-[var(--accent-blue)] text-xs uppercase tracking-widest">
+            {'// CUSTOMER_OBSESSION'}
+          </span>
+        </div>
 
-        <h3 className="font-serif text-slate-900 text-xl md:text-2xl mb-4">
+        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl max-w-4xl mx-auto">
           I Embedded Myself in Customer Support.
         </h3>
 
-        <div className="space-y-4 text-slate-700 text-sm md:text-base leading-relaxed">
+        <div className="space-y-4 text-slate-700 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
           <p>
             <strong className="text-slate-900">I didn&apos;t wait for permission.</strong> I joined the customer support team lead&apos;s meetings — multiple times over the course of a month. I interviewed <strong className="text-slate-900">every single person on the team</strong>. I asked tough questions. I grilled them. I wanted to understand the real pain, not sanitized summaries.
           </p>

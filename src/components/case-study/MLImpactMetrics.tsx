@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { TrendingUp, ShieldCheck, Layout, Users } from 'lucide-react'
 
 interface MLImpactMetricsProps {
   isLightBackground?: boolean
@@ -9,38 +10,46 @@ interface MLImpactMetricsProps {
 export default function MLImpactMetrics({ isLightBackground = false }: MLImpactMetricsProps) {
   const outcomes = [
     {
-      tag: '// BUSINESS_IMPACT',
+      tag: 'OUTCOME_01: BUSINESS_IMPACT',
       tagColor: 'text-[var(--accent-teal)]',
-      metric: 'Demo-Ready',
+      headline: 'Demo-Ready at Scale',
       body: 'For the first time, ML was stable enough for 200+ person org-wide demos. Sales engineering could finally showcase the capability confidently.',
-      borderColor: 'border-l-[var(--accent-teal)]'
+      icon: TrendingUp,
+      iconBg: 'bg-[var(--accent-teal-50)]',
+      iconColor: 'text-[var(--accent-teal)]',
     },
     {
-      tag: '// RELIABILITY',
+      tag: 'OUTCOME_02: RELIABILITY',
       tagColor: 'text-emerald-600',
-      metric: 'Zero Abandonment',
-      body: 'Eliminating dead-end errors didn\'t just save clicks; it stopped users from quitting. All SME testers completed the full workflow.',
-      borderColor: 'border-l-emerald-500'
+      headline: 'Zero Abandonment',
+      body: "Eliminating dead-end errors didn't just save clicks; it stopped users from quitting. All SME testers completed the full workflow.",
+      icon: ShieldCheck,
+      iconBg: 'bg-emerald-100',
+      iconColor: 'text-emerald-600',
     },
     {
-      tag: '// SCALABILITY',
+      tag: 'OUTCOME_03: SCALABILITY',
       tagColor: 'text-purple-600',
-      metric: '1 Core Pattern',
+      headline: '1 Core Pattern',
       body: 'The 4-step guided flow pattern was so robust it was directly inherited by the IQ Plugin, reducing future design/dev time.',
-      borderColor: 'border-l-purple-500'
+      icon: Layout,
+      iconBg: 'bg-purple-100',
+      iconColor: 'text-purple-600',
     },
     {
-      tag: '// MARKET_EXPANSION',
+      tag: 'OUTCOME_04: MARKET_EXPANSION',
       tagColor: 'text-amber-600',
-      metric: 'New User Tier',
+      headline: 'New User Tier',
       body: 'Lowering the technical barrier allowed Business Analysts to self-serve, expanding the addressable market beyond just Data Scientists.',
-      borderColor: 'border-l-amber-500'
+      icon: Users,
+      iconBg: 'bg-amber-100',
+      iconColor: 'text-amber-600',
     },
   ]
 
   return (
-    <div className="space-y-10">
-      {/* Section Header */}
+    <div className="space-y-8">
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -48,7 +57,7 @@ export default function MLImpactMetrics({ isLightBackground = false }: MLImpactM
         className="text-center space-y-3"
       >
         <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          {'// BUSINESS_OUTCOMES'}
+          {'// IMPACT_METRICS'}
         </span>
         <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
           Impact & Validation
@@ -60,31 +69,39 @@ export default function MLImpactMetrics({ isLightBackground = false }: MLImpactM
 
       {/* Outcome Cards - 2x2 Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {outcomes.map((o, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className={`bg-white border border-slate-200 ${o.borderColor} border-l-4 rounded-r-xl p-6 md:p-8 hover:shadow-lg transition-all duration-300`}
-          >
-            {/* Tag */}
-            <span className={`font-mono text-[10px] ${o.tagColor} uppercase tracking-widest block mb-4`}>
-              {o.tag}
-            </span>
+        {outcomes.map((o, i) => {
+          const IconComponent = o.icon
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white border border-slate-200 p-6 md:p-8 rounded-xl h-full flex flex-col hover:shadow-lg hover:border-slate-300 transition-all duration-300"
+            >
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl ${o.iconBg} flex items-center justify-center mb-4`}>
+                <IconComponent className={`w-6 h-6 ${o.iconColor}`} />
+              </div>
 
-            {/* Metric - Large Serif */}
-            <h4 className="font-serif text-3xl md:text-4xl text-slate-900 mb-4">
-              {o.metric}
-            </h4>
+              {/* Tag */}
+              <span className={`font-mono text-[10px] ${o.tagColor} uppercase tracking-widest mb-3`}>
+                {'// '}{o.tag}
+              </span>
 
-            {/* Body */}
-            <p className="text-slate-600 text-sm leading-relaxed">
-              {o.body}
-            </p>
-          </motion.div>
-        ))}
+              {/* Headline */}
+              <h4 className="text-slate-900 text-lg font-serif font-semibold mb-3">
+                {o.headline}
+              </h4>
+
+              {/* Body */}
+              <p className="text-slate-600 text-sm leading-relaxed">
+                {o.body}
+              </p>
+            </motion.div>
+          )
+        })}
       </div>
 
       {/* System Outcome Footer */}
@@ -93,7 +110,7 @@ export default function MLImpactMetrics({ isLightBackground = false }: MLImpactM
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-slate-900 rounded-xl p-6"
+        className="bg-slate-900 rounded-xl p-6 md:p-8 mt-12"
       >
         <div className="flex items-start gap-3">
           <span className="font-mono text-sm text-emerald-400 flex-shrink-0">

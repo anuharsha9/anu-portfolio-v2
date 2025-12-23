@@ -81,7 +81,7 @@ export default function TeamCollaboration({ data, accentColor = 'teal' }: TeamCo
       </motion.div>
 
       {/* Grid of Collaboration Areas */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 ${columns.length > 2 ? 'lg:grid-cols-4' : ''} gap-6`}>
+      <div className={`grid grid-cols-1 md:grid-cols-2 ${columns.length === 3 ? 'lg:grid-cols-3' : columns.length >= 4 ? 'lg:grid-cols-4' : ''} gap-6`}>
         {columns.map((column, i) => {
           const IconComponent = iconMap[i % 6]
           return (

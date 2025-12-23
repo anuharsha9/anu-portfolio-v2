@@ -90,7 +90,7 @@ export default function SystemMappingBreakdown({ isLightBackground = true }: Sys
           className="text-center space-y-3"
         >
           <span className="font-mono text-[var(--accent-teal)] text-xs tracking-widest uppercase">
-            {'// SYSTEM_AUDIT'}
+            {'// SYSTEM_ARCHITECTURE'}
           </span>
           <h3 className="text-[var(--text-heading)] text-xl md:text-2xl font-serif">
             What I Mapped: The Complete System

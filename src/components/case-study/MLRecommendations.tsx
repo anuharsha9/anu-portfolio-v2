@@ -6,7 +6,7 @@ interface MLRecommendationsProps {
   isLightBackground?: boolean
 }
 
-export default function MLRecommendations({ isLightBackground = false }: MLRecommendationsProps) {
+export default function MLRecommendations({ isLightBackground = false, showHeader = true }: MLRecommendationsProps & { showHeader?: boolean }) {
   const recommendations = [
     {
       name: 'Marcus Horbach',
@@ -41,22 +41,24 @@ export default function MLRecommendations({ isLightBackground = false }: MLRecom
   return (
     <div className="space-y-10">
       {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center space-y-3"
-      >
-        <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
-          {'// CROSS_FUNCTIONAL_EVIDENCE'}
-        </span>
-        <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
-          Validation from Cross-Functional Team
-        </h3>
-        <p className="text-slate-600 text-base max-w-3xl mx-auto">
-          Verified testimonials from key stakeholders across domain expertise, product strategy, executive leadership, and customer-facing roles.
-        </p>
-      </motion.div>
+      {showHeader && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-3"
+        >
+          <span className="font-mono text-xs text-slate-400 uppercase tracking-widest">
+            {'// CROSS_FUNCTIONAL_EVIDENCE'}
+          </span>
+          <h3 className="font-serif text-slate-900 text-2xl md:text-3xl">
+            Validation from Cross-Functional Team
+          </h3>
+          <p className="text-slate-600 text-base max-w-3xl mx-auto">
+            Verified testimonials from key stakeholders across domain expertise, product strategy, executive leadership, and customer-facing roles.
+          </p>
+        </motion.div>
+      )}
 
       {/* Testimonial Cards - 2x2 Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

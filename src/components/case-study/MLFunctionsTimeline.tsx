@@ -67,9 +67,9 @@ export default function MLFunctionsTimeline({ isLightBackground = true }: MLFunc
     <UnifiedTimeline
       phases={phases}
       header={{
-        tag: '// DESIGN_SPRINT_LOG',
-        title: 'Design Evolution',
-        subtitle: 'Four phases that transformed a black-box script into a guided Glass Box wizard.'
+        tag: '// PROJECT_TIMELINE',
+        title: 'Project Evolution',
+        subtitle: 'From a "rejected" V1 to a patent-pending ML system, spanning 12 months of pivot and persistence.'
       }}
       footer={{
         tag: 'CURRENT_STATE:',

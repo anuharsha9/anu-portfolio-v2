@@ -13,9 +13,11 @@ interface LockedContentProps {
   caseStudySlug?: string
   unlockMessage?: string
   isLightBackground?: boolean
+  fullWidth?: boolean
+  className?: string
 }
 
-export default function LockedContent({ children, isUnlocked: propIsUnlocked, onUnlock, password = 'anu-access', caseStudySlug = 'default', unlockMessage = 'Password required to view internal discovery details', isLightBackground = false }: LockedContentProps) {
+export default function LockedContent({ children, isUnlocked: propIsUnlocked, onUnlock, password = 'anu-access', caseStudySlug = 'default', unlockMessage = 'Password required to view internal discovery details', isLightBackground = false, fullWidth = false, className = '' }: LockedContentProps) {
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [inputPassword, setInputPassword] = useState('')
   const [error, setError] = useState('')
@@ -40,12 +42,8 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
       const storageKey = `case-study-unlocked-${caseStudySlug}`
       const caseUnlocked = sessionStorage.getItem(storageKey) === 'true'
 
-      if (caseStudySlug === 'iq-plugin') {
-        setIsUnlocked(caseUnlocked)
-      } else {
-        const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
-        setIsUnlocked(globalUnlocked || caseUnlocked)
-      }
+      const globalUnlocked = sessionStorage.getItem('portfolio-globally-unlocked') === 'true'
+      setIsUnlocked(globalUnlocked || caseUnlocked)
     }
 
     checkUnlockStatus()
@@ -91,14 +89,10 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
       if (typeof window !== 'undefined') {
         const storageKey = `case-study-unlocked-${caseStudySlug}`
 
-        if (caseStudySlug === 'iq-plugin') {
-          sessionStorage.setItem(storageKey, 'true')
-        } else {
-          sessionStorage.setItem('portfolio-globally-unlocked', 'true')
-          sessionStorage.setItem(storageKey, 'true')
-          window.dispatchEvent(new CustomEvent('case-study-unlocked', { detail: { slug: caseStudySlug } }))
-          window.dispatchEvent(new CustomEvent('portfolio-unlocked'))
-        }
+        sessionStorage.setItem('portfolio-globally-unlocked', 'true')
+        sessionStorage.setItem(storageKey, 'true')
+        window.dispatchEvent(new CustomEvent('case-study-unlocked', { detail: { slug: caseStudySlug } }))
+        window.dispatchEvent(new CustomEvent('portfolio-unlocked'))
       }
 
       setTimeout(() => {
@@ -141,33 +135,41 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
 
   return (
     <>
-      {/* Locked Insight Banner - Inline callout style */}
-      <div className="bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-4 my-8 rounded-r-lg">
-        <div className="flex items-start gap-4">
-          {/* Lock Icon */}
-          <span className="text-2xl flex-shrink-0">🔒</span>
+      {/* Locked Insight Banner */}
+      <div
+        className={
+          fullWidth
+            ? `w-full bg-[var(--accent-teal-50)] border-y border-[var(--accent-teal-100)] py-12 my-12 ${className}`
+            : `bg-[var(--accent-teal-50)] border-l-4 border-[var(--accent-teal)] p-4 my-8 rounded-lg ${className}`
+        }
+      >
+        <div className={fullWidth ? 'max-w-6xl mx-auto px-4 sm:px-6' : ''}>
+          <div className="flex items-start gap-4">
+            {/* Lock Icon */}
+            <span className="text-2xl flex-shrink-0">🔒</span>
 
-          <div className="flex-1 space-y-2">
-            {/* Headline */}
-            <h4 className="font-serif text-[var(--text-heading)] text-lg font-semibold">
-              {bannerTitle}
-            </h4>
+            <div className="flex-1 space-y-2">
+              {/* Headline */}
+              <h4 className="font-serif text-[var(--text-heading)] text-lg font-semibold">
+                {bannerTitle}
+              </h4>
 
-            {/* Description */}
-            <p className="text-[var(--text-body)] text-sm leading-relaxed">
-              Detailed artifacts and sensitive diagrams are available for authorized reviewers.
-            </p>
+              {/* Description */}
+              <p className="text-[var(--text-body)] text-sm leading-relaxed">
+                Detailed artifacts and sensitive diagrams are available for authorized reviewers.
+              </p>
 
-            {/* Ghost Button */}
-            <button
-              onClick={() => setShowPasswordModal(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm font-medium text-[var(--accent-teal)] border border-[var(--accent-teal)]/30 rounded-lg hover:bg-[var(--accent-teal-soft)] transition-colors"
-            >
-              <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-              </svg>
-              Enter Password
-            </button>
+              {/* Ghost Button */}
+              <button
+                onClick={() => setShowPasswordModal(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 mt-2 text-sm font-medium text-[var(--accent-teal)] border border-[var(--accent-teal)]/30 rounded-lg hover:bg-[var(--accent-teal-soft)] transition-colors"
+              >
+                <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                </svg>
+                Enter Password
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -189,7 +191,7 @@ export default function LockedContent({ children, isUnlocked: propIsUnlocked, on
                   <div className="text-center space-y-2">
                     <h3 className="text-slate-900 text-2xl font-serif">Unlock Content</h3>
                     <p className="text-slate-600 text-sm">Enter password to view sensitive content</p>
-                    {caseStudySlug !== 'iq-plugin' && <p className="text-[var(--accent-teal)] text-xs font-medium mt-2">✓ Unlocking this section will unlock all protected content across the entire website</p>}
+                    <p className="text-[var(--accent-teal)] text-xs font-medium mt-2">✓ Unlocking this section will unlock all protected content across the entire website</p>
                   </div>
 
                   <form onSubmit={handleUnlock} className="space-y-4">

@@ -97,7 +97,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
         </div>
 
         {/* Pattern Name (Hero) */}
-        <h4 className="font-mono text-sm uppercase tracking-widest text-[var(--accent-violet)] mb-3">
+        <h4 className="font-mono text-sm uppercase tracking-widest text-[var(--accent-violet)] mb-3 break-words hyphens-auto">
           {pattern.patternName}
         </h4>
 
@@ -153,7 +153,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
             {'// PATTERN_LIBRARY'}
           </span>
           <h3 className="text-slate-900 text-2xl md:text-3xl font-serif">
-            Patterns That Unified the Platform
+            Patterns That Became Reusable
           </h3>
           <p className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto">
             Architectural patterns that brought NLQ, Insights, and ML under one roof.
@@ -176,7 +176,7 @@ export default function IQPatternConnections({ isLightBackground = false }: IQPa
           className="bg-slate-900 rounded-xl p-6"
         >
           <div className="font-mono text-sm">
-            <span className="text-purple-400">&gt; PLATFORM_UNIFICATION:</span>
+            <span className="text-purple-400">&gt; SYSTEM_EFFICIENCY:</span>
             <p className="text-slate-300 mt-2 leading-relaxed">
               The IQ Plugin isn&apos;t just a feature — it&apos;s the foundation for how WebFOCUS approaches DSML capabilities. One hub, three engines, infinite possibilities.
             </p>

@@ -175,4 +175,3 @@ export default function IQWorkflowsBuilt({ isLightBackground = false }: IQWorkfl
     </div>
   )
 }
-

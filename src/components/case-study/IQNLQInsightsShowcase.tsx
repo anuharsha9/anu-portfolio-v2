@@ -197,7 +197,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12"
+        className="max-w-[1440px] mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-12 xl:px-16 mb-12 text-center"
       >
         <span className="font-mono text-xs text-[var(--accent-teal)] uppercase tracking-widest block mb-4">
           {'// WORKFLOWS_OWNED'}
@@ -205,7 +205,7 @@ export default function IQNLQInsightsShowcase({ isLightBackground = true }) {
         <h2 className={`text-3xl md:text-4xl font-serif ${titleColor} mb-4`}>
           NLQ & Insights: The Foundation
         </h2>
-        <p className={`text-lg ${summaryColor} max-w-3xl`}>
+        <p className={`text-lg ${summaryColor} max-w-3xl mx-auto`}>
           Before IQ Plugin unified everything, I designed and owned these workflows end-to-end.
           Both are shipping now in WebFOCUS 9.3.6—fully responsive, with consistent patterns that made the IQ Plugin integration seamless.
         </p>

@@ -95,9 +95,9 @@ export default function ReportCasterTimeline({ isLightBackground = false }: Repo
     <UnifiedTimeline
       phases={phases}
       header={{
-        tag: '// PROJECT_EVOLUTION',
-        title: 'Project Timeline',
-        subtitle: 'From volunteer ownership to shipped product—8 phases of legacy modernization.'
+        tag: '// PROJECT_TIMELINE',
+        title: 'Project Evolution',
+        subtitle: 'From legacy constraints to a shipped modern platform — a 12-month journey of persistence.'
       }}
       footer={{
         tag: 'CURRENT_STATE:',

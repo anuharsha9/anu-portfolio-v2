@@ -138,7 +138,7 @@ I found another way. I embedded myself in support calls, built relationships wit
     {
       id: 'section-03',
       index: 'S',
-      title: 'Simplify the Chaos: Mapping and Unifying the System',
+      title: 'Simplify the Chaos: Mapping and Integrating the Architecture',
       summary: 'Mapped and unified five fragmented subsystems into one coherent mental model. Prioritized patterns, clarified undocumented rules, and made complexity digestible for everyone.',
       body: `After accepting the project, I faced the reality: there was no onboarding, no spec, no design file, no historical rationale. Just: "Here's the sandbox. Figure it out."
 
@@ -359,7 +359,7 @@ Rejected: "Too much engineering effort this year." Different constraint — reso
     {
       id: 'section-05',
       index: 'G',
-      title: 'Grow Through Constraints: Aligning and Leading the Team',
+      title: 'Grow Through Constraints: Aligning the Team Within the Ecosystem',
       summary: 'Owned three major projects simultaneously. Onboarded 2 designers and remained the knowledge hub.',
       body: `I was redesigning ML Functions and IQ Plugin simultaneously — three major enterprise systems at once. This taught me to prioritize ruthlessly: architecture first, polish second.
 
